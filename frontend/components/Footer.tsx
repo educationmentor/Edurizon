@@ -31,7 +31,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between gap-[8vw] md:gap-[0vw] pb-[5vw]">
           {/* Logo and Contact Info */}
           <div className="flex flex-col w-full md:w-[20.1875vw] gap-[4vw] font-medium">
-            <Image width={40} height={40} className="h-auto w-[20vw] md:w-[5.25vw]" src="assets/Images/Icons/EdurizonFinalLogo.svg" alt="Edurizon Logo" />
+            <Image width={40} height={40} className="h-auto w-[20vw] md:w-[5.25vw]" src="/assets/Images/Icons/EdurizonFinalLogo.svg" alt="Edurizon Logo" />
             <div>
             <div className="flex flex-row gap-[2vw] md:gap-[1vw]">
                 <Image width={40} height={40} className='h-[5vw] md:h-[1.25vw] w-[3.5vw] md:w-[.875vw]' src="/assets/Images/Icons/locationIcon.svg" alt="Location Icon" />

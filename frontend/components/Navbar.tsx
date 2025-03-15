@@ -22,7 +22,7 @@ const Navbar = () => {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
-    { name: "Study Destinations", href: "#", dropdown: true , borderTop: true },
+    { name: "Study Destinations", href: "/studyDestinations", dropdown: true , borderTop: true },
     { name: "College Predictor", href: "https://college-predictor-nine.vercel.app/", external: true },
     { name: "Budget Calculator", href: "#" },
     { name: "Services", href: "#" , borderTop: true },
@@ -32,15 +32,15 @@ const Navbar = () => {
   
 
   const studyDestinations = [
-    "Russia",
-    "USA",
-    "UK",
-    "Canada",
-    "Australia",
-    "Germany",
-    "France",
-    "New Zealand",
-    "Singapore",
+    {name:"Russia", href:"/studyDestinations/russia"},
+    {name:"USA", href:"/studyDestinations/#"},
+    {name:"UK", href:"/studyDestinations/#"},
+    {name:"Canada", href:"/studyDestinations/#"},
+    {name:"Australia", href:"/studyDestinations/#"},
+    {name:"Germany", href:"/studyDestinations/#"},
+    {name:"France", href:"/studyDestinations/#"},
+    {name:"New Zealand", href:"/studyDestinations/#"},
+    {name:"Singapore", href:"/studyDestinations/#"},
   ];
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Navbar = () => {
   return (
     <nav
     className={`${
-      router.asPath === "/" ? "absolute" : "relative"
+      router.asPath === "/" || router.asPath==="/#" ? "absolute" : "relative"
     } px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
   >
     <div className="flex items-center  text-regularText text-black dark:text-white w-full">
@@ -67,7 +67,7 @@ const Navbar = () => {
         
           <Image 
           height={40} width={40}
-            src="assets/Images/Icons/EdurizonFinalLogo.svg"
+            src="/assets/Images/Icons/EdurizonFinalLogo.svg"
             alt="Edurizon Logo"
             className="w-[17.75vw] md:w-[5vw] h-[14vw] md:h-[3.875vw]"
           />
@@ -93,6 +93,7 @@ const Navbar = () => {
                   }}
                 >
                   <button>
+                    <TransitionLink href={item.href}>
                     <motion.div>
                       {item.name}
                       <div
@@ -101,6 +102,7 @@ const Navbar = () => {
                         }`}
                       />
                     </motion.div>
+                    </TransitionLink>
                   </button>
                   {dropdownVisible && (
                     <motion.div
@@ -111,11 +113,11 @@ const Navbar = () => {
                     >
                       <ul className="py-2">
                         {studyDestinations.map((destination, i) => (
-                          <TransitionLink key={i} href={destination.toLowerCase()}>
+                          <TransitionLink key={i} href={destination.href}>
                             <li
                               className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-all duration-300"
                             >
-                              {destination}
+                              {destination.name}
                             </li>
                           </TransitionLink>
                         ))}
@@ -165,7 +167,7 @@ const Navbar = () => {
             btnTitle="Apply Now"
           />
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <Image src="assets/Images/Icons/menuIcon.svg" width="40" height="40" alt="menuIcon" className="md:hidden w-[8vw] h-[8vw]" />
+            <Image src="/assets/Images/Icons/menuIcon.svg" width="40" height="40" alt="menuIcon" className="md:hidden w-[8vw] h-[8vw]" />
           </button>
         </div>
         </div>
@@ -191,15 +193,16 @@ const Navbar = () => {
         </button>
         </div>
         
-        <ul className=' text-regularTextPhone'>
+        <div className=' text-regularTextPhone'>
           {menuItems.map((item, index) => (
-            <TransitionLink key={index} href={item.href} onClick={() => setIsMenuOpen(false)}>
-            <li className="mx-[4vw] py-[4vw]" style={item.borderTop ? {borderTop: '1.5px solid #cac4d0'} : {}}>
-              <span>{item.name}</span>
-            </li>
-            </TransitionLink>
+            
+            <div className="mx-[4vw] py-[4vw] " style={item.borderTop ? {borderTop: '1.5px solid #cac4d0'} : {}}>
+              <TransitionLink key={index} href={item.href} >
+              <span onClick={() => setIsMenuOpen(false)}>{item.name}</span>
+              </TransitionLink>
+            </div>
           ))}
-        </ul>
+        </div>
           <div className='flex justify-center mt-[2vw]'>
             <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Sign Up' btnWidth={0}/>
           </div>

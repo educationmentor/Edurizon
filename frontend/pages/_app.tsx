@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/context/themeContext";
 import Head from "next/head";
+import {GoogleAnalytics} from '@next/third-parties/google'
 
 // ✅ Load Navbar and Footer Only When Needed
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
@@ -44,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="description" content="Your Website Description Here" />
         <title>Edurizon Private Limited</title>
+        
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <style>{`
         
@@ -73,6 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <>
             {!shouldExcludeLayout && <Navbar />}
             <Component {...pageProps} />
+            <GoogleAnalytics gaId="GTM-KTQM74PP"/>
             <div id='footer'>
             {!shouldExcludeLayout && <Footer />}</div>
           </>
