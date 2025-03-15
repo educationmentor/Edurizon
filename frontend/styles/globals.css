@@ -37,6 +37,11 @@ body{
   filter: blur(12px);
 }
 
+.page-transition-mobile{
+  opacity: .5;
+  transition-timing-function: ease-in-out;
+}
+
 /* Define your gradient variables */
 :root {
   --gradient-light: linear-gradient(180deg, #fef0e6, #ffffff);

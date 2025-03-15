@@ -1,9 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-
 import Image from "next/image";
 
-import placeholder from '../../public/assets/Images/landingPage/associatedUniversity.png'
 const logosData = [
     {  alt: "SF", src: "/assets/Images/universities/university1.png" },
     {  alt: "Jimmy Choo",src: "/assets/Images/universities/university2.png"},
@@ -38,7 +36,7 @@ const AssociatedUniversitiesSection = () => {
                 <Slider className="w-full"  ref={slider} {...settings}>   
                         {logosData.map((logo, index) => (
                         <div key={index} className="flex relative justify-center items-center">
-                        <img src={logo.src} alt={logo.alt} className="max-h-full object-contain" style={{height:`${6}vw`}} />
+                        <Image height={60} width={60} src={logo.src} alt={logo.alt} className="max-h-full w-auto h-[6vw] object-contain"  />
                         </div>
                     ))}
                 </Slider>
