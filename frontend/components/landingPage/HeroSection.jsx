@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import bgImage from '../../public/assets/Images/landingPage/homeBackground.png';
-import bgDarkImg from '../../public/assets/Images/landingPage/darkBg.png';
+import React from 'react';
 import Image from 'next/image';
 import { IconButton, TitleButton } from '@/components/Buttons';
 import ConsultationForm from '@/components/ConsultationForm';
 
 //Images Imports
-import NorthEastIcon from '../../public/assets/Images/Icons/NorthEastIcon.svg';
 import DummyStudent1 from '../../public/assets/Images/landingPage/DummyStudent1.png';
 import DummyStudent2 from '../../public/assets/Images/landingPage/DummyStudent2.png';
 import DummyStudent3 from '../../public/assets/Images/landingPage/DummyStudent3.png';
@@ -74,13 +71,9 @@ const HeroSection = () => {
             />
           </div>
         </div>
-
       </div>
-      {showConsultationForm && (
-        <ConsultationForm onClose={() => setShowConsultationForm(false)} />
-      )}
-    </div>
-  );
-};
-
-export default HeroSection;
+      </>
+    );
+  };
+  
+  export default HeroSection;

@@ -5,7 +5,6 @@ import ConsultationForm from '@/components/ConsultationForm';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //Images Imports
-import ApplyNowIcon from '../../public/assets/Images/Icons/ApplyNowIcon.svg';
 import DummyStudent1 from '../../public/assets/Images/landingPage/DummyStudent1.png';
 import DummyStudent2 from '../../public/assets/Images/landingPage/DummyStudent2.png';
 import DummyStudent3 from '../../public/assets/Images/landingPage/DummyStudent3.png';
@@ -54,7 +53,7 @@ const CTASection = () => {
                 <ConsultationForm onClose={() => setShowConsultationForm(false)} />
             )}
             <ToastContainer position="top-right" autoClose={5000} />
-        </>
+        </div>
     );
 };
 
