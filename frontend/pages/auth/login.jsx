@@ -5,6 +5,7 @@ import LoginImg from '../../public/assets/Images/loginImg.png';
 import LoginImgDark from '../../public/assets/Images/landingPage/whyChoseUsDark.png';
 import OtpLogin from '../../components/OtpLogin';
 import { TransitionLink } from '../../utils/TransitionLink';
+import { setAuth } from '../../utils/auth';
 
 const Login = () => {
   const router = useRouter();
@@ -66,7 +67,6 @@ const Login = () => {
             <div className='flex w-[30vw] items-center'>
               <div className='w-full h-min border-dimgrayLightChosen border-[1px] border-solid' />
               <span className='mx-[1vw] text-dimgrayChosen dark:text-gray-300 font-medium text-regularText font-poppins'>OR</span>
-              <div className='w-full h-min border-dimgrayLightChosen border-[1px] border-solid' />
             </div>
             <div className='w-[30vw]'>
               <p className='text-regularText font-poppins text-dimgrayChosen dark:text-gray-300 text-center'>
@@ -85,5 +85,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

@@ -166,7 +166,12 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             });
             
             if (response.data.status === "success") {
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                // Store user data and token separately for clearer access
+                const userData = {
+                    ...response.data.user,
+                    token: `Bearer ${response.data.token}` // Add Bearer prefix when storing
+                };
+                localStorage.setItem('user', JSON.stringify(userData));
                 toast.success('Login successful! Redirecting...');
                 
                 const userRole = response.data.user?.role || 'student';
@@ -182,6 +187,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             }
         } catch (error) {
             handleError(error);
+                        // Around line 180-200 in verifyOtp function:
             if (axios.isAxiosError(error) && error.response?.data?.alreadyVerified) {
                 const userData = localStorage.getItem('user');
                 if (userData) {
@@ -192,11 +198,8 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                     } else if (userRole === 'admin') {
                         router.push('/admin');
                     } else {
-                        router.push('/'); // Redirect to home page for students
+                        router.push('/studentDashboard'); // Changed from '/' to '/studentDashboard'
                     }
-                } else {
-                    setErrorMessage('Session expired. Please request a new OTP.');
-                    setOtpSent(false);
                 }
             }
         } finally {

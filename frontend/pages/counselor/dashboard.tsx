@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ScheduleMeetingModal from '@/components/ScheduleMeetingModal';
 
 interface Meeting {
   _id: string;
@@ -45,10 +46,11 @@ const CounselorDashboard = () => {
   const [pendingRequests, setPendingRequests] = useState<ConsultationRequest[]>([]);
   const [acceptedRequests, setAcceptedRequests] = useState<ConsultationRequest[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectedRequestId, setSelectedRequestId] = useState<string | null>(null);
 
   // Check authentication on mount and setup interval to check token expiry
   useEffect(() => {
-    // Clear any existing user tokens to prevent conflicts
+    // Only clear user tokens, not counselor tokens
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     
@@ -202,17 +204,16 @@ const CounselorDashboard = () => {
         return;
       }
 
-      const response = await axios.post(
-        `http://localhost:5001/api/consultation/accept/${requestId}`,
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/accept/${requestId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Update local state
-      setPendingRequests(prev => prev.filter(req => req._id !== requestId));
-      setAcceptedRequests(prev => [...prev, response.data.data]);
-      
-      toast.success('Consultation request accepted successfully');
+      if (response.data.success) {
+        setSelectedRequestId(requestId);
+        setShowScheduleModal(true);
+      }
     } catch (error: any) {
       console.error('Failed to accept request:', error);
       if (error.response?.status === 401) {
@@ -225,6 +226,21 @@ const CounselorDashboard = () => {
         toast.error('Failed to accept consultation request. Please try again.');
       }
     }
+  };
+
+  const handleScheduled = (meetingTime: string, googleMeetLink: string) => {
+    // Update the accepted requests list with the new meeting details
+    setAcceptedRequests(prev => prev.map(req => 
+      req._id === selectedRequestId
+        ? { ...req, meetingTime, googleMeetLink }
+        : req
+    ));
+    
+    // Remove from pending requests
+    setPendingRequests(prev => prev.filter(req => req._id !== selectedRequestId));
+    
+    setSelectedRequestId(null);
+    setShowScheduleModal(false);
   };
 
   if (loading) {
@@ -351,6 +367,17 @@ const CounselorDashboard = () => {
         </div>
       </div>
 
+      {showScheduleModal && selectedRequestId && (
+        <ScheduleMeetingModal
+          requestId={selectedRequestId}
+          onClose={() => {
+            setSelectedRequestId(null);
+            setShowScheduleModal(false);
+          }}
+          onScheduled={handleScheduled}
+        />
+      )}
+      
       <ToastContainer />
     </div>
   );

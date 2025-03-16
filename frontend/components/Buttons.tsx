@@ -32,7 +32,7 @@ export const IconButton: React.FC<IconButtonProps> = ({ onClick = () => {}, clas
     };
   })
   return (
-        <button onClick={()=>{onClick}}
+        <button onClick={onClick}
             style={(screenWidth ?? 0) > 768 ? { width: `${btnWidth}vw`, height: `${btnHeight}vw`, padding: `${padding}vw`, borderRadius: `${btnRadius}vw` } : { width: `${btnWidthPhone}vw`, height: `${btnHeightPhone}vw`, padding: `${paddingPhone}vw`, borderRadius: `${btnRadiusPhone}vw` }}
             className={`bg-transparent mr-0 pr-0 border-orangeChosen border-[1px] border-solid  flex justify-end items-center rounded-full text-orangeChosen ${className}`}> 
             <p className='text-center  pr-[.625vw]  font-poppins'>{btnTitle}</p>
@@ -53,10 +53,10 @@ interface TitleButtonProps {
 }
 
   
-  export const TitleButton:React.FC<TitleButtonProps> = ({ onClick={}, className = '', btnTitle, btnWidth, btnHeight,btnRadius, className2='' }) => {
+  export const TitleButton:React.FC<TitleButtonProps> = ({ onClick, className = '', btnTitle, btnWidth, btnHeight,btnRadius, className2='' }) => {
     return (
         <button
-        onClick={()=>{onClick}}
+        onClick={onClick}
         className={`group bg-orangeChosen dark:bg-orangeChosen  text-white  ${className}`}
         style={{
           width: `${btnWidth}vw`,

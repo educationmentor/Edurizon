@@ -29,17 +29,28 @@ const CounselorRegister = () => {
     
     setLoginLoading(true);
     try {
+      // Clear any existing tokens to prevent conflicts
+      localStorage.clear();
+
       // Login with the generated credentials
       const response = await axios.post('http://localhost:5001/api/counselor/login', {
         username: credentials.username,
         password: credentials.password
       });
 
-      // Store the token
-      localStorage.setItem('counselorToken', response.data.token);
-      
-      // Redirect to dashboard
-      router.push('/counselor/dashboard');
+      if (response.data.token) {
+        // Store the token and counselor data
+        localStorage.setItem('counselorToken', response.data.token);
+        localStorage.setItem('counselorData', JSON.stringify({
+          name: response.data.counselor.name || response.data.counselor.username,
+          role: 'counselor'
+        }));
+        
+        // Redirect to dashboard
+        router.push('/counselor/dashboard');
+      } else {
+        throw new Error('No token received');
+      }
     } catch (err: any) {
       console.error('Login error:', err);
       toast.error('Failed to access dashboard. Please save your credentials and use the login page.');

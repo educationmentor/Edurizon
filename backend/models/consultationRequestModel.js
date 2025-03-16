@@ -28,7 +28,7 @@ const consultationRequestSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending', 'accepted', 'completed'],
+      enum: ['pending', 'accepted', 'scheduled', 'completed'],
       default: 'pending'
     },
     acceptedBy: {

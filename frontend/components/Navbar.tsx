@@ -5,9 +5,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Image  from 'next/image';
 import {motion} from 'framer-motion';
-import NotificationPopup from './NotificationPopup';
-
-//importing images
 import EdurizonLogo from '../public/assets/Images/EdurizonLogo.svg'
 import ApplyNowIcon from '../public/assets/Images/Icons/ApplyNowIcon.svg'
 import { IconButton, TitleButton } from './Buttons';
@@ -48,33 +45,45 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    // Check both user and counselor login status
-    const userData = localStorage.getItem('user');
-    const counselorToken = localStorage.getItem('counselorToken');
-    const counselorData = localStorage.getItem('counselorData');
-    
-    // If counselor is logged in, use counselor data and clear any user data
-    if (counselorToken && counselorData) {
-      const counselor = JSON.parse(counselorData);
-      localStorage.removeItem('user'); // Clear any existing user data
-      localStorage.removeItem('token');
-      setIsLoggedIn(true);
-      setUserName(counselor.name); // Use full counselor name
-      setUserType('counselor');
-    } 
-    // If only user data exists, use user data
-    else if (userData) {
-      const user = JSON.parse(userData);
-      setIsLoggedIn(true);
-      setUserName(user.name.split(' ')[0]); // Get first name for students
-      setUserType('user');
-    } 
-    // Not logged in
-    else {
-      setIsLoggedIn(false);
-      setUserName('');
-      setUserType(null);
-    }
+    const checkAuthStatus = () => {
+      try {
+        const userData = localStorage.getItem('user');
+        const counselorToken = localStorage.getItem('counselorToken');
+        
+        if (userData) {
+          const user = JSON.parse(userData);
+          setIsLoggedIn(true);
+          // Get first name only
+          const firstName = (user.user?.name || user.name || '').split(' ')[0];
+          setUserName(firstName);
+          setUserType('user');
+        } else if (counselorToken) {
+          const counselorData = localStorage.getItem('counselorData');
+          const counselor = counselorData ? JSON.parse(counselorData) : {};
+          setIsLoggedIn(true);
+          setUserName(counselor.name || '');
+          setUserType('counselor');
+        } else {
+          setIsLoggedIn(false);
+          setUserType(null);
+          setUserName('');
+        }
+      } catch (error) {
+        console.error('Error checking auth status:', error);
+        setIsLoggedIn(false);
+        setUserType(null);
+        setUserName('');
+      }
+    };
+
+    // Check auth status immediately
+    checkAuthStatus();
+
+    // Set up an interval to check auth status periodically
+    const interval = setInterval(checkAuthStatus, 5000); // Check every 5 seconds
+
+    // Clean up interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   const handleLogout = () => {
@@ -182,10 +191,8 @@ const Navbar = () => {
           </motion.div>
         </button>
 
-        {isLoggedIn && userType === 'counselor' && <NotificationPopup />}
-        
         {isLoggedIn ? (
-          <div className="relative">
+          <div className="relative flex items-center gap-4">
             <button
               className="flex items-center gap-2 hover:text-orangeChosen transition-colors"
               onMouseEnter={() => setUserDropdownVisible(true)}
@@ -197,9 +204,16 @@ const Navbar = () => {
               </svg>
               {userDropdownVisible && (
                 <div className="absolute right-0 mt-8 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
-                  {userType === 'counselor' && (
+                  {userType === 'counselor' ? (
                     <button
                       onClick={() => router.push('/counselor/dashboard')}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Dashboard
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => router.push('/studentDashboard')}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       Dashboard
