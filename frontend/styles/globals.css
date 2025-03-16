@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 
-/* Custom scrollbar hide styles */
-/* Works in modern browsers */
-html, body {
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-html::-webkit-scrollbar, body::-webkit-scrollbar {
+ /* Hide scrollbar for Chrome, Safari and Edge */
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+
+ html {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
 
 
 .dark body{
@@ -33,102 +37,27 @@ body{
   filter: blur(12px);
 }
 
-/* Poppins font */
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
+.page-transition-mobile{
+  opacity: .5;
+  transition-timing-function: ease-in-out;
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
+/* Define your gradient variables */
+:root {
+  --gradient-light: linear-gradient(180deg, #fef0e6, #ffffff);
+  --gradient-dark: linear-gradient(180deg, #000000, #000000);
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
+/* Set gradient for light mode */
+.gradient-bg {
+  background: var(--gradient-light);
+  transition: background 0.3s ease-in-out;
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+/* When dark mode class is activated (Tailwind's dark mode) */
+.dark .gradient-bg {
+  background: var(--gradient-dark);
 }
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../public/assets/Fonts/Poppins/Poppins-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-
-
-/* Poppins font */
-
-
-@font-face {
-  font-family: 'Helvetica';
-  src: url('../public/assets/Fonts/Helvetica/helvetica-light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Helvetica';
-  src: url('../public/assets/Fonts/Helvetica/Helvetica.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Helvetica';
-  src: url('../public/assets/Fonts/Helvetica/Helvetica-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Helvetica';
-  src: url('../public/assets/Fonts/Helvetica/Helvetica-Black.otf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-
 
 
 @layer base {
