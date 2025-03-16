@@ -15,16 +15,7 @@ module.exports = {
       animation: {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
       },
-  		fontFamily: {
-  			poppins: [
-  				'Poppins',
-  				'sans-serif'
-  			],
-  			helvetica: [
-  				'Helvetica',
-  				'sans-serif'
-  			]
-  		},
+  		
   		fontSize: {
   			testimonial: 'clamp(42px,5.5vw,90px)',
   			h0Text: 'clamp(36px,4vw,80px)',
@@ -44,7 +35,7 @@ module.exports = {
   			h3TextPhone: 'clamp(24px,10vw,52px)',
   			h4TextPhone: 'clamp(20px,8vw,48px)',
   			h5TextPhone: 'clamp(16px,6vw,44px)',
-  			h6TextPhone: 'clamp(14px,4.5vw,24px)',
+  			h6TextPhone: 'clamp(14px,5vw,24px)',
   			mediumTextPhone: 'clamp(12px, 4.25vw, 24px)',
   			regularTextPhone: 'clamp(12px, 4vw, 18px)',
   			smallTextPhone: 'clamp(10px, 3.5vw, 16px)',
@@ -59,6 +50,7 @@ module.exports = {
   			peachpuff: 'rgba(255, 215, 195, 0.8)',
   			dimgrayChosen: 'rgba(102, 102, 102, 0.8)',
 			dimgrayLightChosen: "rgba(102, 102, 102, 0.25)",
+			borderGreyChosen:"#5B5B5B",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
