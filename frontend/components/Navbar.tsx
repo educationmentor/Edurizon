@@ -33,7 +33,7 @@ const Navbar = () => {
 
   const studyDestinations = [
     {name:"Russia", href:"/studyDestinations/study-mbbs-in-russia"},
-    {name:"USA", href:"../#"},
+    {name:"China", href:"/studyDestinations/study-mbbs-in-china"},
     {name:"UK", href:"../#"},
     {name:"Canada", href:"../#"},
     {name:"Australia", href:"../#"},
