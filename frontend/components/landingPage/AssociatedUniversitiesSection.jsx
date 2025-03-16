@@ -36,7 +36,7 @@ const AssociatedUniversitiesSection = () => {
                 <Slider className="w-full"  ref={slider} {...settings}>   
                         {logosData.map((logo, index) => (
                         <div key={index} className="flex relative justify-center items-center">
-                        <Image height={60} width={60} src={logo.src} alt={logo.alt} className="max-h-full w-auto h-[6vw] object-contain"  />
+                        <Image height={90} width={320} src={logo.src} alt={logo.alt} className="max-h-full w-auto h-[6vw] object-contain"  />
                         </div>
                     ))}
                 </Slider>

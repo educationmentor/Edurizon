@@ -1,5 +1,9 @@
 
 const RussiaData={
+    metaTitle:"Study MBBS in Russia 2024-25 | MCI/NMC-Approved Universities, Low Fees, Direct Admission & Scholarships | Edurizon",
+    metaDescription:"Secure your seat in Russia’s top MCI/NMC-approved medical universities for 2024-25. Affordable fees, no entrance exams, English-medium MBBS, and end-to-end admission support with Edurizon.",
+    metaKeywords:"Study MBBS in Russia, MBBS in Russia fees, MCI-approved universities in Russia, direct MBBS admission, scholarships for MBBS in Russia",
+    metaCanonical:"https://edurizon.in/studyDestinations/study-mbbs-in-russia", 
     countryName: "Russia",
     countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 50+ MCI/NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
     countryWhyChoseSection:{
@@ -16,7 +20,8 @@ const RussiaData={
         countryTotal:"₹24-42.5 lakhs",
         indiaTotal:"₹1.05-1.7 crore",
         description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-    countrySpecificSection2:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
+    countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
+    countrySpecificSection2:true,
     countryUniversities:[
         {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹4.5-5.5 Lakhs", gloablRanking:"QS #265 (2023)",highlights:["98% FMGE Pass Rate (2023)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
         {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
@@ -32,7 +37,7 @@ const RussiaData={
         medicalCost:"₹20,000-₹30,000 Lakhs",
         medicalDetail:"Mandatory for all students",
         miscellaneousCost:"₹10,000-20,000",
-        miscellaneousDetail:"Books,lab coats, local travel",
+        miscellaneousDetail:"Books, lab coats, local travel",
     },
     countryEligibilityStructure:{
         academicNote:["Recognized boards: CBSE, ICSE, State Boards, NIOS, or equivalent.","Appearing students (2024) can apply provisionally."],
@@ -43,18 +48,21 @@ const RussiaData={
         ageDetail:["Minimum 17 years as of December 31, 2024.","No upper age limit."],
         documentNote:["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."],
         documentDetail:["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."]
+    },
+    countrySpecificSection4:true,
+    countrySpecificSection5:true,
     }
 
-    }
 
 
 
+const ChinaData={
+
+}
 
 
 
+const countryNames = { "study-mbbs-in-russia":RussiaData, china:ChinaData}
 
-
-export const countryNames = { russia:RussiaData}
-
-
+export default countryNames;
 

@@ -11,7 +11,12 @@ const quickLinks = [{ name: "Home", href: "/" },
   { name: "About Us", href: "/aboutUs" },{ name: "Study Destination", href: "#" },
   { name: "Blog", href: "#" },{ name: "Blog", href: "#" },
   { name: "Contact Us", href: "#" },];
-const countries = ["Russia", "China", "Georgia", "Kazakhstan", "Bangladesh", "Nepal"];
+const countries = [ { name: "Russia", href: "/studyDestinations/study-mbbs-in-russia" },
+  { name: "China", href: "../#" },
+  { name: "Georgia", href: "../#" },
+  { name: "Kazakhstan", href: "../#" },
+  { name: "Bangladesh", href: "../#" },
+  { name: "Nepal", href: "../#" }];
 const services = ["Language Prep", "Shortlist Colleges", "Financial Planning", "SOP Review", "Start Now", "Visa Help", "Get a Counsellor"];
 
 const Footer = () => {
@@ -85,7 +90,8 @@ const Footer = () => {
           {/* Countries Abroad */}
           <div className="flex flex-col w-full md:w-[16.375vw] gap-[2vw] md:gap-[.75vw] font-normal">
             <p className="font-bold">Countries Abroad</p>
-            {countries.map((country, i) => <p key={i}>{country}</p>)}
+            {countries.map((country, i) => 
+            <TransitionLink key={i} href={country.href}><p >{country.name}</p></TransitionLink>)}
           </div>
 
           {/* Services */}

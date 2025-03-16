@@ -26,7 +26,7 @@ const CTASection = () => {
                         <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent4} />
                     </div>
                 </div>
-                <IconButton btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeightPhone={11} btnRadiusPhone={15} btnWidthPhone={55} iconWidthPhone={7.75} paddingPhone={1.75} btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={"assets/Images/Icons/ApplyNowIcon.svg"}/>
+                <IconButton btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeightPhone={11} btnRadiusPhone={15} btnWidthPhone={55} iconWidthPhone={7.75} paddingPhone={1.75} btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={"/assets/Images/Icons/ApplyNowIcon.svg"}/>
             </div>
         </div>
 
