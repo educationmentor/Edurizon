@@ -12,7 +12,7 @@ const quickLinks = [{ name: "Home", href: "/" },
   { name: "Blog", href: "#" },{ name: "Blog", href: "#" },
   { name: "Contact Us", href: "#" },];
 const countries = [ { name: "Russia", href: "/studyDestinations/study-mbbs-in-russia" },
-  { name: "China", href: "../#" },
+  { name: "China", href: "/studyDestinations/study-mbbs-in-china" },
   { name: "Georgia", href: "../#" },
   { name: "Kazakhstan", href: "../#" },
   { name: "Bangladesh", href: "../#" },

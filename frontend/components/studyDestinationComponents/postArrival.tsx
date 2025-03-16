@@ -114,7 +114,7 @@ const PostArrival = ({ }) => {
                             <span className="text-regularTextPhone md:text-regularText font-bold">
                             Emergency Assistance
                             </span>
-                            <p className="text-smallTextPhone md:text-regularTextt font-light">
+                            <p className="text-smallTextPhone md:text-regularText font-light">
                             Stay supported at all times with Edurizon’s 24/7 helpline, offering immediate aid for medical, legal, or administrative issues.
                             </p>
                         </div>
