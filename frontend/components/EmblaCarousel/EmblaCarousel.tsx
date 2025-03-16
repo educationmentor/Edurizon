@@ -19,7 +19,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides,emblaRef }) => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide,index) => (
-            <div className="embla__slide"  key={slide.title}>
+            <div className="embla__slide"  key={`${slide.title}-${index}`}>
               <div  className={`${index==5?"mr-[1.25vw]":""}`}>
                <Image style={{ height: "25vw",width:"20.25vw" }} src={slide.img} alt={slide.title} />
               </div>

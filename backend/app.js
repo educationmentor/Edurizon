@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const universityRoutes = require('./routes/universityRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
 const counselorRoutes = require('./routes/counselorRoutes');
+const consultationRoutes = require('./routes/consultationRoutes');
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/universities', universityRoutes);
 app.use('/api/meetings', meetingRoutes);
 app.use('/api/counselor', counselorRoutes);
+app.use('/api/consultation', consultationRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

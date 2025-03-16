@@ -67,7 +67,8 @@ const loginCounselor = async (req, res) => {
       token,
       counselor: {
         id: counselor._id,
-        username: counselor.username
+        username: counselor.username,
+        name: counselor.name
       }
     });
 
@@ -77,7 +78,32 @@ const loginCounselor = async (req, res) => {
   }
 };
 
+// Verify counselor token
+const verifyCounselor = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ valid: false });
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    // Check if counselor exists
+    const counselor = await User.findById(decoded.id);
+    if (!counselor || counselor.role !== 'counselor') {
+      return res.status(401).json({ valid: false });
+    }
+
+    res.json({ valid: true });
+  } catch (error) {
+    console.error('Token verification error:', error);
+    res.status(401).json({ valid: false });
+  }
+};
+
 module.exports = {
   registerCounselor,
-  loginCounselor
+  loginCounselor,
+  verifyCounselor
 }; 
