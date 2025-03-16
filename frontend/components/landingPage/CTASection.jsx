@@ -35,7 +35,7 @@ const CTASection = () => {
                         <Image className="w-[2.594vw] relative rounded-[50%] h-[2.594vw] object-cover ml-[-0.813vw]" alt="" src={DummyStudent4} />
                     </div>
                 </div>
-                <IconButton btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={ApplyNowIcon}/>
+                <IconButton btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={"/assets/Images/Icons/ApplyNowIcon.svg"}/>
             </div>
             {showConsultationForm && (
                 <ConsultationForm onClose={() => setShowConsultationForm(false)} />
