@@ -32,7 +32,7 @@ const StudentDashboard = () => {
         setError(null);
         
         const token = getAuthToken();
-        console.log('Auth Token:', token); // Debug log
+        console.log('Auth Token:', token);
 
         if (!token) {
           console.log('No auth token found, redirecting to login');
@@ -48,11 +48,17 @@ const StudentDashboard = () => {
           }
         });
 
-        console.log('Response:', response.data); // Debug log
-        setMeetings(response.data);
+        console.log('Response data:', response.data);
+        
+        // Filter only accepted and scheduled meetings
+        const scheduledMeetings = response.data.filter(
+          (meeting: Meeting) => meeting.status === 'scheduled' || meeting.status === 'accepted'
+        );
+        
+        setMeetings(scheduledMeetings);
       } catch (error) {
-        console.error('Error details:', error.response?.data); // Debug log
-        console.error('Error status:', error.response?.status); // Debug log
+        console.error('Error details:', error.response?.data);
+        console.error('Error status:', error.response?.status);
         console.error('Failed to fetch meetings:', error);
         
         setError('Failed to fetch meetings. Please try again later.');
@@ -69,6 +75,10 @@ const StudentDashboard = () => {
     };
 
     fetchMeetings();
+    
+    // Poll for updates every 30 seconds
+    const interval = setInterval(fetchMeetings, 30000);
+    return () => clearInterval(interval);
   }, [router]);
 
   const formatDate = (dateString: string) => {
@@ -119,6 +129,9 @@ const StudentDashboard = () => {
                       </p>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                         Time: {formatDate(meeting.meetingTime)}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Status: {meeting.status}
                       </p>
                     </div>
                     {meeting.googleMeetLink && (
