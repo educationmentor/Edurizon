@@ -19,7 +19,7 @@ const Breadcrumbs: React.FC = () => {
   };
 
   return (
-    <nav aria-label="breadcrumb" className=" text-black dark:text-white text-smallTextPhone md:text-regularText ">
+    <nav aria-label="breadcrumb" className=" text-black dark:text-white text-tinyTextPhone md:text-regularText ">
       <ul className="flex ">
         <li className="hover:underline ">
           <TransitionLink href="/" >

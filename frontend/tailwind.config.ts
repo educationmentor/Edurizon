@@ -50,6 +50,7 @@ module.exports = {
   			peachpuff: 'rgba(255, 215, 195, 0.8)',
   			dimgrayChosen: 'rgba(102, 102, 102, 0.8)',
 			dimgrayLightChosen: "rgba(102, 102, 102, 0.25)",
+			borderGreyChosen:"#5B5B5B",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

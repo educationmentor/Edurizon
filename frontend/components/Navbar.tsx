@@ -32,15 +32,15 @@ const Navbar = () => {
   
 
   const studyDestinations = [
-    {name:"Russia", href:"/studyDestinations/russia"},
-    {name:"USA", href:"/studyDestinations/#"},
-    {name:"UK", href:"/studyDestinations/#"},
-    {name:"Canada", href:"/studyDestinations/#"},
-    {name:"Australia", href:"/studyDestinations/#"},
-    {name:"Germany", href:"/studyDestinations/#"},
-    {name:"France", href:"/studyDestinations/#"},
-    {name:"New Zealand", href:"/studyDestinations/#"},
-    {name:"Singapore", href:"/studyDestinations/#"},
+    {name:"Russia", href:"/studyDestinations/study-mbbs-in-russia"},
+    {name:"USA", href:"../#"},
+    {name:"UK", href:"../#"},
+    {name:"Canada", href:"../#"},
+    {name:"Australia", href:"../#"},
+    {name:"Germany", href:"../#"},
+    {name:"France", href:"../#"},
+    {name:"New Zealand", href:"../#"},
+    {name:"Singapore", href:"../#"},
   ];
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Navbar = () => {
             className="w-[17.75vw] md:w-[5vw] h-[14vw] md:h-[3.875vw]"
           />
           </TransitionLink>
-          <div className="absolute top-[2vw] hidden dark:block left-0 [filter:blur(1.7vw)] rounded-[50%] bg-paleOrangeChosen w-[5.375vw] h-[1vw]" />
+          <div className="absolute top-[2vw]  hidden w-[5.375vw] dark:md:block left-0 [filter:blur(10vw)] md:[filter:blur(1.7vw)] rounded-[50%] bg-paleOrangeChosen md:h-[1vw]" />
         </div>
 
       <div className='flex gap-[3vw] items-center'>
@@ -93,7 +93,6 @@ const Navbar = () => {
                   }}
                 >
                   <button>
-                    <TransitionLink href={item.href}>
                     <motion.div>
                       {item.name}
                       <div
@@ -102,7 +101,6 @@ const Navbar = () => {
                         }`}
                       />
                     </motion.div>
-                    </TransitionLink>
                   </button>
                   {dropdownVisible && (
                     <motion.div
@@ -176,11 +174,11 @@ const Navbar = () => {
     <div className='md:hidden'>
     {isMenuOpen && (
     <div 
-      className="fixed top-0 left-0 w-full h-full bg-white opacity-50 transition-opacity duration-300"
+      className="fixed top-0 left-0 w-full h-full bg-white dark:bg-black opacity-50 transition-opacity duration-300"
       onClick={() => (setIsMenuOpen(false), setTransitionEnd(false))} // Closes menu when clicking outside
     ></div>
   )}
-    <div className={`fixed top-[14vw] w-[90vw] h-full px-[3vw] bg-[#f7f2fa] mt-[5vw] shadow-lg p-4 transition-all duration-300 transform ${
+    <div className={`fixed top-[14vw] w-[90vw] h-full px-[3vw] dark:text-black bg-[#f7f2fa] mt-[5vw] shadow-lg p-4 transition-all duration-300 transform ${
           isMenuOpen ? transitionEnd ? "right-0":"right-[2vw]" : "right-[-90vw]"}`} onTransitionEnd={() => isMenuOpen && setTimeout(() => setTransitionEnd(true), 10)} >
         <div className='flex justify-start gap-[3vw]'>
          <IconButton className='ml-auto text-smallTextPhone opacity-70  ' image='/assets/Images/Icons/ApplyNowIcon.svg' iconWidth={0} padding={0} btnWidth={0} btnTitle='Apply Now' btnRadius={0} btnRadiusPhone={15} btnHeight={0} iconWidthPhone={7.75} paddingPhone={1.75} btnWidthPhone={34} btnHeightPhone={11}/>
@@ -196,8 +194,8 @@ const Navbar = () => {
         <div className=' text-regularTextPhone'>
           {menuItems.map((item, index) => (
             
-            <div className="mx-[4vw] py-[4vw] " style={item.borderTop ? {borderTop: '1.5px solid #cac4d0'} : {}}>
-              <TransitionLink key={index} href={item.href} >
+            <div key={index} className="mx-[4vw] py-[4vw] " style={item.borderTop ? {borderTop: '1.5px solid #cac4d0'} : {}}>
+              <TransitionLink href={item.href} >
               <span onClick={() => setIsMenuOpen(false)}>{item.name}</span>
               </TransitionLink>
             </div>
