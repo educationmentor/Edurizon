@@ -1,51 +1,37 @@
+"use client"
+import React, { ReactNode } from "react"
+import Link, { LinkProps } from "next/link"
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
-interface TransitionLinkProps {
-  href: string;
-  children: React.ReactNode;
-  [key: string]: any;
+interface TransitionLinkProps extends LinkProps {
+    children: ReactNode;
+    href: string;
 }
 
-export const TransitionLink = ({ href, children, ...props }: TransitionLinkProps) => {
-  const router = useRouter();
-  const [width, setWidth] = useState<number>(0);
+function sleep(ms:number){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+}
 
-  useEffect(() => {
-    const updateWidth = () => setWidth(window.innerWidth);
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+export const TransitionLink = ({ href, children,...props }:TransitionLinkProps)=>{
+    const router = useRouter();
 
-  const handleTransition = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
+    const handleTransition = async(
+        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    )=>{
+        e.preventDefault();
 
-    document.body.classList.add("page-transition");
-    await new Promise((resolve) => setTimeout(resolve, 200));
+        const body =document.querySelector('body');
+        body?.classList.add('page-transition');
 
-    await router.push(href);
+        await sleep(200);
+        await router.push(href);
+        await sleep(200);
+        body?.classList.remove('page-transition');
+    }
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    document.body.classList.remove("page-transition");
-  };
 
-  const handleTransitionMobile = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
 
-    document.body.classList.add("page-transition-mobile");
-    await new Promise((resolve) => setTimeout(resolve, 150));
 
-    await router.push(href);
-
-    document.body.classList.remove("page-transition-mobile");
-  };
-
-  return (
-    <Link onClick={width > 768 ? handleTransition : handleTransitionMobile} href={href} {...props}>
-      {children}
-    </Link>
-  );
-};
+    return <Link onClick={handleTransition}
+     href={href} {...props}> {children} </Link>
+} 

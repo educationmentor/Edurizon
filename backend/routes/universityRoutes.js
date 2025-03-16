@@ -6,5 +6,3 @@ router.get('/mbbs', getMBBSUniversities);
 router.get('/:id', getUniversityById);
 
 module.exports = router;
-
-
