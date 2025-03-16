@@ -3,6 +3,10 @@ const { OAuth2 } = google.auth;
 const asyncHandler = require('express-async-handler');
 const Meeting = require('../models/meetingModel');
 const { v4: uuidv4 } = require('uuid');
+// const asyncHandler = require('express-async-handler');
+// const Meeting = require('../models/meetingModel');
+const ConsultationRequest = require('../models/consultationRequestModel');
+
 
 const oauth2Client = new OAuth2(
   process.env.GOOGLE_CLIENT_ID,
@@ -46,25 +50,52 @@ const createGoogleMeetLink = async (meeting) => {
 // @desc    Get all meetings for a user
 // @route   GET /api/meetings
 // @access  Private
-const getMeetings = asyncHandler(async (req, res) => {
-  let meetings;
-  
-  if (req.user.role === 'counselor') {
-    // Counselors can see meetings assigned to them or unassigned meetings
-    meetings = await Meeting.find({
-      $or: [
-        { counselor: req.user._id },
-        { counselor: null }
-      ]
-    }).populate('student', 'name email');
-  } else {
-    // Students can only see their own meetings
-    meetings = await Meeting.find({ student: req.user._id })
-      .populate('counselor', 'name email');
-  }
 
-  res.json(meetings);
+// @desc    Get all meetings for a user
+// @route   GET /api/meetings
+// @access  Private
+const getMeetings = asyncHandler(async (req, res) => {
+  console.log('Getting meetings for user:', req.user._id);
+  console.log('User role:', req.user.role);
+  
+  try {
+    if (req.user.role === 'counselor') {
+      console.log('Fetching meetings for counselor');
+      const meetings = await ConsultationRequest.find({
+        $or: [
+          { acceptedBy: req.user._id },
+          { status: 'pending' }
+        ]
+      })
+      .populate('acceptedBy', 'name email')
+      .sort({ createdAt: -1 });
+
+      console.log('Found counselor meetings:', meetings);
+      res.json(meetings);
+    } else {
+      console.log('Fetching meetings for student');
+      // Students can see their consultation requests
+      const meetings = await ConsultationRequest.find({ 
+        email: req.user.email,
+        status: { $in: ['accepted', 'scheduled'] }
+      })
+      .populate('acceptedBy', 'name email')
+      .sort({ createdAt: -1 });
+
+      console.log('Found student meetings:', meetings);
+      res.json(meetings);
+    }
+  } catch (error) {
+    console.error('Error fetching meetings:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching meetings',
+      error: error.message 
+    });
+  }
 });
+
+// Rest of your controller code...
 
 // @desc    Create a new meeting
 // @route   POST /api/meetings/create

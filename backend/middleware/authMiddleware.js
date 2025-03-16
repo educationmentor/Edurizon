@@ -17,20 +17,17 @@ const protect = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
     console.log('Token:', token);
 
-    if (!token) {
-      console.log('No token found');
-      return res.status(401).json({
-        success: false,
-        message: 'Not authorized, no token'
-      });
-    }
-
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log('Decoded token:', decoded);
 
       const user = await User.findById(decoded.id).select('-password');
-      console.log('Found user:', user);
+      console.log('Found user:', {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      });
 
       if (!user) {
         console.log('No user found with token ID');
