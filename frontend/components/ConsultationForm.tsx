@@ -30,21 +30,54 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/request`, formData);
+      const userData = localStorage.getItem('user');
+      if (!userData) {
+        toast.error('Please login to book a consultation');
+        setLoading(false);
+        return;
+      }
+
+      const user = JSON.parse(userData);
+      if (!user.email || !user.name || !user.token) {
+        toast.error('Session expired. Please login again.');
+        localStorage.removeItem('user');
+        setLoading(false);
+        return;
+      }
+
+      const requestData = {
+        ...formData,
+        email: user.email,
+        name: user.name,
+        status: 'pending'
+      };
+
+      console.log('Sending request with token:', user.token);
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/request`, 
+        requestData,
+        {
+          headers: {
+            'Authorization': user.token
+          }
+        }
+      );
+
       if (response.data.success) {
-        toast.success('Consultation request submitted successfully!');
+        toast.success('Consultation request submitted successfully! Check your notifications for updates.');
         onClose();
       }
     } catch (error: any) {
       console.error('Consultation request error:', error);
-      if (error.response) {
-        // Server responded with an error
+      if (error.response?.status === 401) {
+        toast.error('Your session has expired. Please login again.');
+        localStorage.removeItem('user');
+      } else if (error.response) {
         toast.error(error.response.data.message || 'Failed to submit consultation request');
       } else if (error.request) {
-        // Request was made but no response received
         toast.error('Unable to reach the server. Please check your internet connection.');
       } else {
-        // Something else happened
         toast.error('An error occurred while submitting your request.');
       }
     } finally {

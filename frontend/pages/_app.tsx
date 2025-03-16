@@ -12,10 +12,58 @@ import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ThemeProvider } from '@/context/themeContext';
+import axios from 'axios';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [isMobileView, setIsMobileView] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const userData = localStorage.getItem('user');
+        const counselorToken = localStorage.getItem('counselorToken');
+        const currentPath = router.pathname;
+
+        // Handle counselor routes
+        if (currentPath.includes('/counselor/dashboard')) {
+          if (!counselorToken) {
+            router.push('/counselor/login');
+          }
+        }
+        // Handle student routes
+        else if (currentPath.includes('/dashboard')) {
+          if (!userData) {
+            router.push('/login');
+          } else {
+            // Verify token validity with backend
+            try {
+              const response = await axios.get('http://localhost:5001/api/auth/verify', {
+                headers: {
+                  Authorization: `Bearer ${JSON.parse(userData).token}`
+                }
+              });
+              if (!response.data.valid) {
+                localStorage.removeItem('user');
+                router.push('/login');
+              }
+            } catch (error) {
+              console.error('Token verification failed:', error);
+              localStorage.removeItem('user');
+              router.push('/login');
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [router.pathname]);
 
   useEffect(() => {
     const checkViewportWidth = () => {
@@ -31,6 +79,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer
   const shouldExcludeLayout = excludedPaths.some((path) => router.pathname.includes(path));
   const isAdminRoute = router.pathname.includes('/');
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <ThemeProvider>

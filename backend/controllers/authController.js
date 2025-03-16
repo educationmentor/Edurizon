@@ -242,11 +242,11 @@ const verifyOtp = asyncHandler(async (req, res) => {
         // Set JWT as HTTP-only cookie with proper settings
         res.cookie('jwt', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
-            sameSite: 'lax', // Changed from 'strict' to 'lax' to allow cross-site requests
-            maxAge: 180 * 24 * 60 * 60 * 1000, // 180 days
-            path: '/', // Ensure cookie is available across the entire domain
-            domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN : 'localhost' // Set domain based on environment
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 180 * 24 * 60 * 60 * 1000,
+            path: '/',
+            domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN : 'localhost'
         });
 
         // Return user data and token
@@ -254,6 +254,7 @@ const verifyOtp = asyncHandler(async (req, res) => {
             status: "success",
             message: isRegistration ? "Registration successful" : "Login successful",
             alreadyVerified: true,
+            token,
             user: {
                 _id: user._id,
                 name: user.name,

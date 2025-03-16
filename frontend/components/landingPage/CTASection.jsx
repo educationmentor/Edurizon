@@ -39,7 +39,7 @@ const CTASection = () => {
                     </div>
                     <IconButton 
                         btnTitle={"Book Free Consultation"} 
-                        className='text-regularText leading-[120%] bg-white' 
+                        className='text-regularText leading-[120%] bg-white hover:bg-gray-100 transition-colors' 
                         btnHeight={3.875} 
                         btnWidth={15.375} 
                         btnRadius={7.1875} 

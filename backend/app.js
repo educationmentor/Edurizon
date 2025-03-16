@@ -8,6 +8,7 @@ const universityRoutes = require('./routes/universityRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
 const counselorRoutes = require('./routes/counselorRoutes');
 const consultationRoutes = require('./routes/consultationRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 
@@ -18,8 +19,10 @@ app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.1.2:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['set-cookie']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['Set-Cookie'],
+    preflightContinue: true,
+    optionsSuccessStatus: 204
 }));
 
 // Cookie parser middleware
@@ -34,6 +37,7 @@ app.use('/api/universities', universityRoutes);
 app.use('/api/meetings', meetingRoutes);
 app.use('/api/counselor', counselorRoutes);
 app.use('/api/consultation', consultationRoutes);
+app.use('/api/auth', authRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

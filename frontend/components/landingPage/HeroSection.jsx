@@ -69,7 +69,8 @@ const HeroSection = () => {
               btnHeight={2.75} 
               btnWidth={13.1875} 
               btnRadius={6.25}
-              onClick={handleConsultationClick} 
+              onClick={handleConsultationClick}
+              className="bg-orangeChosen text-white hover:bg-orange-600 transition-colors"
             />
           </div>
         </div>

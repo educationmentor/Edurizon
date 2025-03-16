@@ -9,17 +9,24 @@ const {
   getStudentRequests,
   getConsultations,
   updateConsultation,
-  getConsultationsByEmail
+  getConsultationsByEmail,
+  scheduleMeeting,
+  rejectRequest,
+  getStudentNotifications
 } = require('../controllers/consultationController');
+const auth = require('../middleware/auth');
 
 // Public routes
-router.post('/request', createConsultationRequest);
-router.get('/student', getConsultationsByEmail);
+router.post('/request', auth, createConsultationRequest);
+router.get('/student', auth, getStudentRequests);
+router.get('/notifications', auth, getStudentNotifications);
 
 // Counselor routes (protected)
 router.get('/pending', protect, getPendingRequests);
 router.get('/accepted', protect, getAcceptedRequests);
-router.post('/accept/:requestId', protect, acceptRequest);
+router.put('/accept/:requestId', protect, acceptRequest);
+router.put('/reject/:requestId', protect, rejectRequest);
+router.put('/schedule/:requestId', protect, scheduleMeeting);
 router.get('/', protect, getConsultations);
 router.put('/:consultationId', protect, updateConsultation);
 
