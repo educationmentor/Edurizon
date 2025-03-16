@@ -8,31 +8,68 @@ const CounselorLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  // Check if user is already logged in
+  // Check if counselor is already logged in
   useEffect(() => {
-    const token = localStorage.getItem('counselorToken');
-    if (token) {
-      router.push('/counselor/dashboard');
-    }
+    const checkAuth = async () => {
+      const counselorToken = localStorage.getItem('counselorToken');
+      
+      // If no token exists, allow access to login page
+      if (!counselorToken) {
+        return;
+      }
+
+      try {
+        // Verify token validity with backend
+        const response = await axios.get('http://localhost:5001/api/counselor/verify', {
+          headers: {
+            Authorization: `Bearer ${counselorToken}`
+          }
+        });
+
+        // If token is valid, redirect to dashboard
+        if (response.data.valid) {
+          router.push('/counselor/dashboard');
+        } else {
+          // If token is invalid, clear it
+          localStorage.removeItem('counselorToken');
+        }
+      } catch (error) {
+        // If verification fails, clear the token
+        localStorage.removeItem('counselorToken');
+      }
+    };
+
+    checkAuth();
   }, [router]);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      // Clear ALL existing tokens and data first
+      localStorage.clear(); // Clear everything to ensure a clean state
+      
       const response = await axios.post('http://localhost:5001/api/counselor/login', {
         username,
-        password,
+        password
       });
 
-      // Store token with short expiry
-      localStorage.setItem('counselorToken', response.data.token);
-      
-      toast.success('Login successful!');
-      router.push('/counselor/dashboard');
-    } catch (err: any) {
-      console.error('Login error:', err);
-      toast.error(err.response?.data?.message || 'Invalid credentials');
+      if (response.data.token) {
+        localStorage.setItem('counselorToken', response.data.token);
+        // Store counselor data for the navbar
+        localStorage.setItem('counselorData', JSON.stringify({
+          name: response.data.counselor.name || response.data.counselor.username,
+          role: 'counselor'
+        }));
+        router.push('/counselor/dashboard');
+      }
+    } catch (error: any) {
+      console.error('Login failed:', error);
+      toast.error(error.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +81,7 @@ const CounselorLogin = () => {
             Counselor Login
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="mb-4">
               <label htmlFor="username" className="block text-sm font-medium text-gray-300">
@@ -74,6 +111,7 @@ const CounselorLogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 appearance-none rounded relative block w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your password"
+                disabled={loading}
               />
             </div>
           </div>
@@ -82,8 +120,9 @@ const CounselorLogin = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={loading}
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </div>
         </form>

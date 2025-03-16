@@ -1,4 +1,3 @@
-
 import React,{useState,useCallback,useEffect} from "react";
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 
@@ -30,7 +29,14 @@ type PropType = {
 
 const Universities: React.FC<PropType> = ({autoScroll=true}) => {
     const OPTIONS: EmblaOptionsType = { dragFree: true,align:"start",containScroll: "trimSnaps",loop:true}
-    const slides = [{img:Russia,title:"Russia"},{img:UK,title:"UK"},{img:Georgia,title:"Georgia"},{img:Germany,title:"Germany"},{img:Georgia,title:"Georgia"},{img:Germany,title:"Germany"}];
+    const slides = [
+      { img: Russia, title: "Russia" },
+      { img: UK, title: "UK" },
+      { img: Georgia, title: "Georgia-1" },
+      { img: Germany, title: "Germany-1" },
+      { img: Georgia, title: "Georgia-2" },
+      { img: Germany, title: "Germany-2" }
+    ];
 
     const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
       const [scrollProgress, setScrollProgress] = useState(0);

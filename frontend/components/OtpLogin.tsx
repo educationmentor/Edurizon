@@ -1,12 +1,14 @@
 import PhoneInput from 'react-phone-input-2';
 import React, { FormEvent, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { TransitionLink } from '@/utils/TransitionLink';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Create axios instance with default config
 const api = axios.create({
-    baseURL: 'http://localhost:5001',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001',
     withCredentials: true
 });
 
@@ -16,17 +18,13 @@ interface OtpLoginProps {
     email?: string;
 }
 
-interface ErrorState {
-    type: 'error' | 'success' | 'info' | null;
-    message: string;
-}
-
 const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', email = '' }) => {
     const router = useRouter();
     const [phone, setPhone] = useState('');
     const [otp, setOtp] = useState('');
     const [otpSent, setOtpSent] = useState(false);
-    const [error, setError] = useState<ErrorState>({ type: null, message: '' });
+    const [errorMessage, setErrorMessage] = useState('');
+    const [devOtp, setDevOtp] = useState('');
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [resendTimer, setResendTimer] = useState(0);
@@ -68,34 +66,56 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
         return /^\d{6}$/.test(otp);
     };
 
-    const sendOtp = async () => {
-        // Reset error state
-        setError({ type: null, message: '' });
+    const handleError = (error: any) => {
+        if (axios.isAxiosError(error)) {
+            const axiosError = error as AxiosError<any>;
+            if (axiosError.response?.status === 404) {
+                if (isRegistration) {
+                    setErrorMessage('This phone number is already registered. Please login instead.');
+                } else {
+                    setErrorMessage('No user found with this phone number. Please register first.');
+                }
+            } else if (axiosError.response?.status === 400) {
+                setErrorMessage(axiosError.response.data?.message || 'Invalid request. Please check your details.');
+            } else if (axiosError.response?.status === 429) {
+                setErrorMessage('Too many attempts. Please try again later.');
+            } else {
+                setErrorMessage('Server error. Please try again later.');
+            }
+        } else {
+            setErrorMessage('An unexpected error occurred. Please try again.');
+        }
+    };
 
+    const sendOtp = async (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        setErrorMessage(''); // Clear any previous errors
+        setDevOtp(''); // Clear any previous dev OTP
+        
         // Validate phone
         if (!validatePhone(phone)) {
-            setError({ type: 'error', message: 'Please enter a valid phone number (at least 10 digits)' });
+            setErrorMessage('Please enter a valid phone number (at least 10 digits)');
             return;
         }
 
         // Validate registration fields
         if (isRegistration) {
-            if (!name.trim()) {
-                setError({ type: 'error', message: 'Please enter your name' });
+            if (!name?.trim()) {
+                setErrorMessage('Please enter your name');
                 return;
             }
-            if (!email.trim()) {
-                setError({ type: 'error', message: 'Please enter your email' });
+            if (!email?.trim()) {
+                setErrorMessage('Please enter your email');
                 return;
             }
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                setError({ type: 'error', message: 'Please enter a valid email address' });
+                setErrorMessage('Please enter a valid email address');
                 return;
             }
         }
 
-        setIsLoading(true);
         try {
+            setIsLoading(true);
             const response = await api.post('/api/users/send-otp', { 
                 phone: phone.toString(),
                 isRegistration,
@@ -104,53 +124,32 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             
             if (response.data.status === "success") {
                 setOtpSent(true);
-                setError({ 
-                    type: 'success', 
-                    message: response.data.otp 
-                        ? `OTP sent successfully! (Dev OTP: ${response.data.otp})` 
-                        : 'OTP sent successfully!'
-                });
+                setErrorMessage(''); // Clear any previous errors
+                if (response.data.otp) {
+                    setDevOtp(`Dev OTP: ${response.data.otp}`);
+                }
                 startResendTimer();
             }
-        } catch (error: any) {
-            console.error('OTP Error:', error);
-            const errorMessage = error.response?.data?.message || 'Failed to send OTP. Please try again later.';
-            
-            if (error.response?.status === 404) {
-                setError({ 
-                    type: 'error', 
-                    message: isRegistration 
-                        ? 'This phone number is already registered. Please login instead.'
-                        : 'No user found with this phone number. Please register first.'
-                });
-            } else if (error.response?.status === 400) {
-                setError({ 
-                    type: 'error', 
-                    message: errorMessage
-                });
-            } else {
-                setError({ 
-                    type: 'error', 
-                    message: 'Server error. Please try again later.'
-                });
-            }
+        } catch (error) {
+            handleError(error);
         } finally {
             setIsLoading(false);
         }
     };
 
-    const verifyOtp = async () => {
-        // Reset error state
-        setError({ type: null, message: '' });
+    const verifyOtp = async (e?: React.MouseEvent) => {
+        e?.preventDefault();
+        setErrorMessage(''); // Clear any previous errors
+        setDevOtp(''); // Clear dev OTP when verifying
 
         // Validate OTP
         if (!validateOtp(otp)) {
-            setError({ type: 'error', message: 'Please enter a valid 6-digit OTP' });
+            setErrorMessage('Please enter a valid 6-digit OTP');
             return;
         }
 
-        setIsLoading(true);
         try {
+            setIsLoading(true);
             const response = await api.post('/api/users/verify-otp', { 
                 phone: phone.toString(),
                 otp: otp.toString(),
@@ -168,7 +167,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             
             if (response.data.status === "success") {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                setError({ type: 'success', message: 'Login successful! Redirecting...' });
+                toast.success('Login successful! Redirecting...');
                 
                 const userRole = response.data.user?.role || 'student';
                 setTimeout(() => {
@@ -177,13 +176,13 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                     } else if (userRole === 'admin') {
                         router.push('/admin');
                     } else {
-                        router.push('/studentDashboard');
+                        router.push('/'); // Redirect to home page for students
                     }
                 }, 1000);
             }
-        } catch (error: any) {
-            console.error('Verify Error:', error);
-            if (error.response?.data?.alreadyVerified) {
+        } catch (error) {
+            handleError(error);
+            if (axios.isAxiosError(error) && error.response?.data?.alreadyVerified) {
                 const userData = localStorage.getItem('user');
                 if (userData) {
                     const user = JSON.parse(userData);
@@ -193,18 +192,12 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                     } else if (userRole === 'admin') {
                         router.push('/admin');
                     } else {
-                        router.push('/studentDashboard');
+                        router.push('/'); // Redirect to home page for students
                     }
                 } else {
-                    setError({ type: 'error', message: 'Session expired. Please request a new OTP.' });
+                    setErrorMessage('Session expired. Please request a new OTP.');
                     setOtpSent(false);
                 }
-            } else {
-                const errorMessage = error.response?.data?.message || 'Error verifying OTP. Please try again.';
-                setError({ 
-                    type: 'error', 
-                    message: errorMessage
-                });
             }
         } finally {
             setIsLoading(false);
@@ -216,7 +209,10 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             <PhoneInput
                 country={"in"}
                 value={phone}
-                onChange={(value) => setPhone(value)}
+                onChange={(value) => {
+                    setPhone(value);
+                    setErrorMessage(''); // Clear error when phone number changes
+                }}
                 containerStyle={{ width: "100%", maxWidth: "30vw" }}
                 inputStyle={{
                     width: "100%",
@@ -245,67 +241,65 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                 }}
                 disabled={isLoading}
             />
-            <input
-                type="text"
-                placeholder="Enter OTP"
-                value={otp}
-                className='w-[30vw] h-[3vw] font-poppins text-regularText text-black dark:text-white rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
-                onChange={(e) => setOtp(e.target.value)}
-                disabled={!otpSent || isLoading}
-                maxLength={6}
-            />
+            {otpSent && (
+                <input
+                    type="text"
+                    placeholder="Enter OTP"
+                    value={otp}
+                    onChange={(e) => {
+                        setOtp(e.target.value);
+                        setErrorMessage(''); // Only clear error message, not dev OTP
+                    }}
+                    className='w-[30vw] h-[3vw] font-poppins text-regularText text-black dark:text-white rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
+                    disabled={isLoading}
+                />
+            )}
+            <button
+                onClick={otpSent ? verifyOtp : sendOtp}
+                disabled={isLoading}
+                className={`w-[30vw] h-[3vw] font-poppins text-regularText text-white rounded-[6.25vw] ${isLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-orangeChosen hover:bg-orange-600'}`}
+            >
+                {isLoading ? 'Please wait...' : otpSent ? 'Verify OTP' : 'Send OTP'}
+            </button>
             
-            <div className='w-[30vw]'>
-                {!otpSent ? (
-                    <button 
-                        className={`bg-orangeChosen h-[3vw] w-[30vw] font-poppins text-regularText text-white rounded-[6.25vw] ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-orange-600 transition-colors'}`}
-                        onClick={sendOtp}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Sending...' : 'Send OTP'}
-                    </button>
-                ) : (
-                    <button 
-                        className={`bg-orangeChosen h-[3vw] w-[30vw] font-poppins text-regularText text-white rounded-[6.25vw] ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-orange-600 transition-colors'}`}
-                        onClick={verifyOtp}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Verifying...' : 'Verify OTP'}
-                    </button>
-                )}
-                
-                {error.message && (
-                    <p className={`mt-2 text-sm ${
-                        error.type === 'success' ? 'text-green-500' : 
-                        error.type === 'error' ? 'text-red-500' : 
-                        'text-blue-500'
-                    } text-right`}>
-                        {error.message}
-                    </p>
-                )}
-
-                {otpSent && !isLoading && (
-                    <div className='mt-2 text-right'>
-                        {resendTimer > 0 ? (
-                            <p className='text-sm text-gray-500'>
-                                Resend OTP in {resendTimer}s
-                            </p>
-                        ) : (
-                            <button 
-                                className='text-orangeChosen text-sm hover:underline'
-                                onClick={() => {
-                                    setOtpSent(false);
-                                    setOtp('');
-                                    setError({ type: null, message: '' });
-                                    sendOtp();
-                                }}
-                            >
-                                Resend OTP
-                            </button>
-                        )}
-                    </div>
-                )}
-            </div>
+            {/* Error and Dev OTP messages */}
+            {errorMessage && (
+                <p className="text-sm text-red-500 text-center">
+                    {errorMessage}
+                </p>
+            )}
+            {devOtp && (
+                <p className="text-sm text-green-500 text-center">
+                    {devOtp}
+                </p>
+            )}
+            
+            {otpSent && resendTimer > 0 && (
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+                    Resend OTP in {resendTimer} seconds
+                </p>
+            )}
+            {otpSent && resendTimer === 0 && (
+                <button
+                    onClick={sendOtp}
+                    disabled={isLoading}
+                    className="text-sm text-orangeChosen hover:text-orange-600 text-center"
+                >
+                    Resend OTP
+                </button>
+            )}
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme={isDarkMode ? "dark" : "light"}
+            />
         </div>
     );
 };
