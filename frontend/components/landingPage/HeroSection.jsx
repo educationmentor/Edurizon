@@ -14,8 +14,9 @@ const HeroSection = () => {
 
   const handleConsultationClick = () => {
     setShowConsultationForm(true);
+    console.log(showConsultationForm);
   };
-
+  console.log(showConsultationForm);
   return (
       <>
 
@@ -78,7 +79,11 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+        
       </div>
+      {showConsultationForm && (
+        <ConsultationForm onClose={() => setShowConsultationForm(false)} />
+      )}
       </>
   );
 };
