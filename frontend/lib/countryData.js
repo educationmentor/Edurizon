@@ -181,7 +181,7 @@ const ChinaData={
 
 
 
-const countryNames = { Russia:RussiaData, "study-mbbs-in-china":ChinaData}
+const countryNames = { "study-mbbs-in-russia":RussiaData, "study-mbbs-in-china":ChinaData}
 
 export default countryNames;
 

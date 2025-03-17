@@ -107,7 +107,7 @@ import WhyChoseUniversity from "@/components/studyDestinationComponents/whyChose
 import countryNames  from '@/lib/countryData';
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
+  const id  = "study-mbbs-in-china";
   console.log("Fetching data for:", id);
   const countryData = countryNames[id as keyof typeof countryNames];
   if (!countryData) {
