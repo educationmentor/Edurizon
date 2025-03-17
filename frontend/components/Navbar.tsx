@@ -41,6 +41,7 @@ const Navbar = () => {
     {name:"France", href:"../#"},
     {name:"New Zealand", href:"../#"},
     {name:"Singapore", href:"../#"},
+    {name:"Ukraine", href:"../#"},
   ];
 
   useEffect(() => {
