@@ -271,8 +271,7 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
           ))}
         </div>
           <div className='flex justify-center mt-[2vw]'>
-            hi
-            {/* <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Sign Up' btnWidth={0}/> */}
+            <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Sign Up' btnWidth={0}/>
           </div>
       </div>
       </div>
