@@ -15,21 +15,18 @@ interface University {
 }
 
 const Navbar = () => {
-  console.log('Rendering Navbar component');
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const [userType, setUserType] = useState<'user' | 'counselor' | null>(null);
 
-  console.log('Rendering Navbar component');
   const [hovered, setHovered] = useState(-1);
   const router = useRouter();
   const isMainPage = router.pathname === '/';
     const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [transitionEnd, setTransitionEnd] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  console.log(transitionEnd);
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
@@ -213,12 +210,52 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
                 
 {/* Action Buttons */}
         <div className="flex gap-[1vw] md:gap-[.5vw] items-center">
+
+        {isLoggedIn ? (
+            <div className="relative flex items-center gap-4">
+              <button
+                className="flex items-center gap-2 hover:text-orangeChosen transition-colors"
+                onMouseEnter={() => setUserDropdownVisible(true)}
+                onMouseLeave={() => setUserDropdownVisible(false)}
+              >
+                <span className="hidden md:block">Welcome, {userName}</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+                {userDropdownVisible && (
+                  <div className="absolute right-0 mt-8 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                    {userType === 'counselor' ? (
+                      <button
+                        onClick={() => router.push('/counselor/dashboard')}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        Dashboard
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => router.push('/studentDashboard')}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        Dashboard
+                      </button>
+                    )}
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </button>
+            </div>):
+
           <TransitionLink href="/login">
-          hi
-            {/* <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Sign Up" /> */}
-          </TransitionLink>
-        <IconButton 
-          onClick={() => {}} 
+            <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Sign Up" />
+          </TransitionLink>}
+          
+          
+          <IconButton onClick={() => {}} 
           className="text-smallTextPhone flex  md:hidden lg:flex md:text-smallText" 
           btnHeight={2.75} 
           btnWidth={9.0625} 
@@ -231,8 +268,9 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
                     btnRadiusPhone={15} 
           btnWidthPhone={36}
             image="/assets/Images/Icons/ApplyNowIcon.svg"
-            btnTitle="Apply Now"
-          />
+            btnTitle="Apply Now"/>
+          
+          
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <Image src="/assets/Images/Icons/menuIcon.svg" width="40" height="40" alt="menuIcon" className="md:hidden w-[8vw] h-[8vw]" />
           </button>

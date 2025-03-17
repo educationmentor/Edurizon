@@ -90,8 +90,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
   );
 };
 
-import countryNames  from '../../../lib/countryData';
-import Section2 from "../../../components/studyDestinationComponents/section2";
+import Section2 from "../../components/studyDestinationComponents/section2";
 import Section3 from "@/components/studyDestinationComponents/section3";
 import FeeStructure from "@/components/studyDestinationComponents/feeStructureTable";
 import EligibilityCriteria from "@/components/studyDestinationComponents/eligibilityCriteriaTable";
@@ -102,13 +101,20 @@ import Section4 from "@/components/studyDestinationComponents/section4";
 import Header from "@/components/studyDestinationComponents/headerComponent";
 import Head from "next/head";
 import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
-import ReasonsToStudy from "../../../components/studyDestinationComponents/reasonsToStudy";
+import ReasonsToStudy from "../../components/studyDestinationComponents/reasonsToStudy";
 import CostTable from "@/components/studyDestinationComponents/costTable";
 import WhyChoseUniversity from "@/components/studyDestinationComponents/whyChoseUniversity";
+import countryNames  from '@/lib/countryData';
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
+  console.log("Fetching data for:", id);
   const countryData = countryNames[id as keyof typeof countryNames];
+  if (!countryData) {
+    return <div>
+      Why not found
+      </div>
+  }
   return {
     props: { id,countryData },
   };

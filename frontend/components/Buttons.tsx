@@ -65,7 +65,7 @@ interface TitleButtonProps {
 }
 
   
-  export const TitleButton:React.FC<TitleButtonProps> = ({ onClick={}, className = '', btnTitle, btnWidth, btnHeight,btnRadius, className2='', btnWidthPhone, btnHeightPhone,btnRadiusPhone }) => {
+  export const TitleButton:React.FC<TitleButtonProps> = ({ onClick=()=>{}, className = '', btnTitle, btnWidth, btnHeight,btnRadius, className2='', btnWidthPhone, btnHeightPhone,btnRadiusPhone }) => {
     const [screenWidth, setScreenWidth] = useState<number | null>(null);
 
     useEffect(() => {
@@ -88,7 +88,7 @@ interface TitleButtonProps {
   
     return (
         <button
-        onClick={()=>{onClick}}
+        onClick={onClick}
         className={`group bg-orangeChosen dark:bg-orangeChosen  text-white  ${className}`}
         style={(screenWidth ?? 0) > 768 ? {
           width: `${btnWidth}vw`,
