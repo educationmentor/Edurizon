@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { baseUrl } from '@/lib/baseUrl';
 
 const ChatAndMeet = () => {
   const [meetLink, setMeetLink] = useState('');
@@ -16,7 +17,7 @@ const ChatAndMeet = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/meetings/${meetingId}`, {
+        const response = await axios.get(`${baseUrl}/api/meetings/${meetingId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

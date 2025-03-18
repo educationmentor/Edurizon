@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScheduleMeetingModal from '@/components/ScheduleMeetingModal';
+import { baseUrl } from '@/lib/baseUrl';
 
 interface Meeting {
   _id: string;
@@ -81,7 +82,7 @@ const CounselorDashboard = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:5001/api/meetings', {
+        const response = await axios.get(`${baseUrl}/api/meetings`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -114,10 +115,10 @@ const CounselorDashboard = () => {
       try {
         setError(null);
         const [pendingRes, acceptedRes] = await Promise.all([
-          axios.get('http://localhost:5001/api/consultation/pending', {
+          axios.get(`${baseUrl}/api/consultation/pending`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get('http://localhost:5001/api/consultation/accepted', {
+          axios.get(`${baseUrl}/api/consultation/accepted`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
@@ -159,7 +160,7 @@ const CounselorDashboard = () => {
       }
 
       await axios.put(
-        `http://localhost:5001/api/meetings/${selectedMeeting?._id}`,
+        `${baseUrl}/api/meetings/${selectedMeeting?._id}`,
         {
           status: 'Waiting',
           scheduledTime,
@@ -205,7 +206,7 @@ const CounselorDashboard = () => {
       }
 
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/accept/${requestId}`,
+        `${process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`}/api/consultation/accept/${requestId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

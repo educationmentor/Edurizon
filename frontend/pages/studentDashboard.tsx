@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getAuthToken, useAuth } from '../utils/auth';
 import { toast } from 'react-toastify';
+import { baseUrl } from '@/lib/baseUrl';
 
 interface Meeting {
   _id: string;
@@ -15,7 +16,7 @@ interface Meeting {
   googleMeetLink: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`;
 
 const StudentDashboard = () => {
   const [meetings, setMeetings] = useState<Meeting[]>([]);

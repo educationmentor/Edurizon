@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { baseUrl } from '@/lib/baseUrl';
 interface ScheduleMeetingModalProps {
   requestId: string;
   onClose: () => void;
@@ -41,7 +41,7 @@ const ScheduleMeetingModal: React.FC<ScheduleMeetingModalProps> = ({
       const meetingDateTime = new Date(`${selectedDate}T${selectedTime}`);
       
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/schedule/${requestId}`,
+        `${process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`}/api/consultation/schedule/${requestId}`,
         {
           meetingTime: meetingDateTime.toISOString()
         },
