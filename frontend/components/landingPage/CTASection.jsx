@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState,useEffect}  from 'react';
 import Image from 'next/image';
 import { IconButton} from '@/components/Buttons';
+import ConsultationForm from '@/components/ConsultationForm';
 //Images Imports
 import DummyStudent1 from '../../public/assets/Images/landingPage/DummyStudent1.png';
 import DummyStudent2 from '../../public/assets/Images/landingPage/DummyStudent2.png';
@@ -8,7 +9,24 @@ import DummyStudent3 from '../../public/assets/Images/landingPage/DummyStudent3.
 import DummyStudent4 from '../../public/assets/Images/landingPage/DummyStudent4.png';
 
 const CTASection = () => {
+    const [showConsultationForm, setShowConsultationForm] = useState(false);
+    
+      const handleConsultationClick = () => {
+        setShowConsultationForm(true);
+      };
+      useEffect(() => {
+            if (showConsultationForm) {
+              document.body.style.overflow = "hidden"; // Disable scrolling
+            } else {
+              document.body.style.overflow = "auto"; // Enable scrolling
+            }
+            return () => {
+              document.body.style.overflow = "auto"; // Cleanup on unmount
+            };
+          }, [showConsultationForm]);
     return (
+        <>
+         
         <div className="mx-[7.5vw] mb-[14.5vw] md:mb-[9vw] py-[10vw] md:py-0 px-[6vw] rounded-[10vw] md:rounded-[2.5vw] w-auto h-[52vw] md:h-[28.5625vw] text-white flex md:flex-row gap-[8.625vw] bg-orangeChosen" >
             <div className="hidden md:block w-[43.1875vw] my-auto">
                 <h2 className="text-h2Text font-bold leading-[120%] mb-[1vw]">Sign Up for free consultation and latest updates</h2>
@@ -26,9 +44,12 @@ const CTASection = () => {
                         <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent4} />
                     </div>
                 </div>
-                <IconButton btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeightPhone={11} btnRadiusPhone={15} btnWidthPhone={55} iconWidthPhone={7.75} paddingPhone={1.75} btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={"/assets/Images/Icons/ApplyNowIcon.svg"}/>
+                <IconButton onClick={handleConsultationClick} btnTitle={"Book Free Consultation"} className='text-regularText leading-[120%] bg-white' btnHeightPhone={11} btnRadiusPhone={15} btnWidthPhone={55} iconWidthPhone={7.75} paddingPhone={1.75} btnHeight={3.875} btnWidth={15.375} btnRadius={7.1875} padding={0.375} iconWidth={2.0625} image={"/assets/Images/Icons/ApplyNowIcon.svg"}/>
             </div>
         </div>
+        {showConsultationForm && (
+        <ConsultationForm onClose={() => setShowConsultationForm(false)} />
+      )}</>
 
     )
 }

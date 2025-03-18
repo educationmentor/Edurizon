@@ -23,7 +23,7 @@ const StudentDashboard = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   
-  useAuth('student');
+  // useAuth('student');
 
   useEffect(() => {
     const fetchMeetings = async () => {
@@ -57,17 +57,20 @@ const StudentDashboard = () => {
         
         setMeetings(scheduledMeetings);
       } catch (error) {
-        console.error('Error details:', error.response?.data);
-        console.error('Error status:', error.response?.status);
-        console.error('Failed to fetch meetings:', error);
-        
-        setError('Failed to fetch meetings. Please try again later.');
-        
         if (axios.isAxiosError(error)) {
+          console.error('Error details:', error.response?.data);
+          console.error('Error status:', error.response?.status);
+          console.error('Failed to fetch meetings:', error);
+          
+          setError('Failed to fetch meetings. Please try again later.');
+          
           if (error.response?.status === 401) {
             toast.error('Session expired. Please login again.');
             router.push('/auth/login');
           }
+        } else {
+          console.error('Failed to fetch meetings:', error);
+          setError('Failed to fetch meetings. Please try again later.');
         }
       } finally {
         setLoading(false);
