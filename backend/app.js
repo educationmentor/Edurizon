@@ -59,4 +59,8 @@ const startServer = async () => {
     }
 };
 
+app.get("/ping", (req, res) => {
+    res.json({ message: "Server is running!" });
+});
+
 startServer();
