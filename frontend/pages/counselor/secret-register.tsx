@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '@/lib/baseUrl';
 
 const CounselorRegister = () => {
   const [credentials, setCredentials] = useState<{ username: string; password: string } | null>(null);
@@ -13,7 +14,7 @@ const CounselorRegister = () => {
   const handleRegister = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5001/api/counselor/register', {});
+      const response = await axios.post(`${baseUrl}/api/counselor/register`, {});
       setCredentials(response.data.credentials);
       toast.success('Registration successful! Please save your credentials.');
     } catch (err: any) {
@@ -33,7 +34,7 @@ const CounselorRegister = () => {
       localStorage.clear();
 
       // Login with the generated credentials
-      const response = await axios.post('http://localhost:5001/api/counselor/login', {
+      const response = await axios.post(`${baseUrl}/api/counselor/login`, {
         username: credentials.username,
         password: credentials.password
       });

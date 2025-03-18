@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 import { TransitionLink } from '@/utils/TransitionLink';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '@/lib/baseUrl';
 
 // Create axios instance with default config
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`,
     withCredentials: true
 });
 
@@ -28,6 +29,27 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [resendTimer, setResendTimer] = useState(0);
+
+    const [screenWidth, setScreenWidth] = useState<number | null>(null);
+
+    useEffect(() => {
+      // Set initial width
+      setScreenWidth(window.innerWidth);
+  
+      // Handle window resize
+      const handleResize = () => {
+        setScreenWidth(window.innerWidth);
+      };
+  
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+  
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []); // Empty dependency array ensures this runs once on mount
+  
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -208,7 +230,8 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
     };
 
     return (
-        <div className='flex flex-col gap-[1.5vw]'>
+        <div className='flex flex-col gap-[3vw] md:gap-[1.5vw]'>
+            <div className='text-regularTextPhone md:text-regularText '>
             <PhoneInput
                 country={"in"}
                 value={phone}
@@ -216,24 +239,20 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                     setPhone(value);
                     setErrorMessage(''); // Clear error when phone number changes
                 }}
-                containerStyle={{ width: "100%", maxWidth: "30vw" }}
+                containerStyle={{ width: "100%", maxWidth: (screenWidth ?? 0) > 768 ? "30vw" : "100vw" }}
                 inputStyle={{
                     width: "100%",
-                    height: "3vw",
-                    fontSize: "clamp(12px, 1vw, 18px)",
-                    fontFamily: "poppins",
-                    borderRadius: "3.125vw",
-                    paddingLeft: "5vw",
+                    height: (screenWidth ?? 0) > 768 ? "3vw" : "12vw",
+                    borderRadius: (screenWidth ?? 0) > 768 ? "3.125vw" : "12.5vw",
+                    paddingLeft: (screenWidth ?? 0) > 768 ? "5vw" : "16vw",
                     backgroundColor: "transparent",
                     color: isDarkMode ? 'white' : 'black',
                     border: `1px solid ${isDarkMode ? 'white' : 'dimgray'}`,
                 }}
                 buttonStyle={{
                     width: "15%",
-                    height: "3vw",
-                    fontSize: "clamp(12px, 1vw, 18px)",
-                    fontFamily: "poppins",
-                    borderRadius: "3.125vw",
+                    height: (screenWidth ?? 0) > 768 ? "3vw" : "12vw",
+                    borderRadius: (screenWidth ?? 0) > 768 ? "3.125vw" : "15vw",
                     backgroundColor: "transparent",
                     border: "none",
                     cursor: "default",
@@ -244,6 +263,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                 }}
                 disabled={isLoading}
             />
+            </div>
             {otpSent && (
                 <input
                     type="text"
@@ -253,14 +273,14 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                         setOtp(e.target.value);
                         setErrorMessage(''); // Only clear error message, not dev OTP
                     }}
-                    className='w-[30vw] h-[3vw] font-poppins text-regularText text-black dark:text-white rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
+                    className='md:w-[30vw] h-[12vw] md:h-[3vw]  text-regularTextPhone md:text-regularText text-white rounded-[12.5vw] md:rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
                     disabled={isLoading}
                 />
             )}
             <button
                 onClick={otpSent ? verifyOtp : sendOtp}
                 disabled={isLoading}
-                className={`w-[30vw] h-[3vw] font-poppins text-regularText text-white rounded-[6.25vw] ${isLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-orangeChosen hover:bg-orange-600'}`}
+                className={`md:w-[30vw] h-[12vw] md:h-[3vw]  text-regularTextPhone md:text-regularText text-white rounded-[12.5vw] md:rounded-[6.25vw] ${isLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-orangeChosen hover:bg-orange-600'}`}
             >
                 {isLoading ? 'Please wait...' : otpSent ? 'Verify OTP' : 'Send OTP'}
             </button>

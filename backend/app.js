@@ -16,7 +16,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.1.2:3000'],
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.1.2:3000','http://edurizon.in','http://www.edurizon.in','https://edurizon.in','https://www.edurizon.in','https://edurizon-git-noddy-updated-utkarshs-projects-467c395b.vercel.app','https://edurizon-five.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
@@ -58,5 +58,9 @@ const startServer = async () => {
         process.exit(1);
     }
 };
+
+app.get("/ping", (req, res) => {
+    res.json({ message: "Server is running!" });
+});
 
 startServer();

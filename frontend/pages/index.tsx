@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import ThemeToggle from "../components/ThemeToggle";
 import Head from "next/head";
 import { IconButton } from "@/components/Buttons";
+import ConsultationForm from '@/components/ConsultationForm';
 
 // ✅ Critical Section (Load Hero Immediately with SSR)
 const HeroSection = dynamic(() => import("../components/landingPage/HeroSection"), { ssr: true });
@@ -19,6 +20,13 @@ const Home = () => {
   const [isHidden, setIsHidden] = useState(false);
   const freeConsultationRef = useRef(null);
   const ctaSectionRef = useRef(null);
+
+  const [showConsultationForm, setShowConsultationForm] = useState(false);
+
+  const handleConsultationClick = () => {
+    setShowConsultationForm(true);
+    console.log('Consultation Form Opened');
+  };
 
  useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,6 +49,17 @@ const Home = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+      if (showConsultationForm) {
+        document.body.style.overflow = "hidden"; // Disable scrolling
+      } else {
+        document.body.style.overflow = "auto"; // Enable scrolling
+      }
+      return () => {
+        document.body.style.overflow = "auto"; // Cleanup on unmount
+      };
+    }, [showConsultationForm]);
   return (
     <>
     
@@ -81,11 +100,13 @@ const Home = () => {
           </div>
           </a>
 
-          <IconButton btnWidth={13}  className="ml-[-0.5vw] hidden md:flex leading-[110%] text-regularText bg-orangeChosen text-white" btnTitle="Free Consultation" btnHeight={2.75} btnHeightPhone={0} btnRadius={6.25} btnRadiusPhone={0} btnWidthPhone={0} iconWidth={1.875} padding={.625} paddingPhone={0} image="assets/Images/Icons/NorthEastIconOrange.svg" iconWidthPhone={0} />
+          <IconButton btnWidth={13} onClick={handleConsultationClick}  className="ml-[-0.5vw] hidden md:flex leading-[110%] text-regularText bg-orangeChosen text-white" btnTitle="Free Consultation" btnHeight={2.75} btnHeightPhone={0} btnRadius={6.25} btnRadiusPhone={0} btnWidthPhone={0} iconWidth={1.875} padding={.625} paddingPhone={0} image="assets/Images/Icons/NorthEastIconOrange.svg" iconWidthPhone={0} />
         </div>
       </div>
-        
     </div>
+     {showConsultationForm && (
+            <ConsultationForm onClose={() => setShowConsultationForm(false)} />
+          )}
     </>
   );
 };

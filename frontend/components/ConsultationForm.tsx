@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {baseUrl} from '@/lib/baseUrl';
 interface ConsultationFormProps {
   onClose: () => void;
 }
@@ -55,7 +55,7 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
       console.log('Sending request with token:', user.token);
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/consultation/request`, 
+        `${process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`}/api/consultation/request`, 
         requestData,
         {
           headers: {

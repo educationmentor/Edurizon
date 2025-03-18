@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '@/lib/baseUrl';
 
 const CounselorLogin = () => {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const CounselorLogin = () => {
 
       try {
         // Verify token validity with backend
-        const response = await axios.get('http://localhost:5001/api/counselor/verify', {
+        const response = await axios.get(`${baseUrl}/api/counselor/verify`, {
           headers: {
             Authorization: `Bearer ${counselorToken}`
           }
@@ -51,7 +52,7 @@ const CounselorLogin = () => {
       // Clear ALL existing tokens and data first
       localStorage.clear(); // Clear everything to ensure a clean state
       
-      const response = await axios.post('http://localhost:5001/api/counselor/login', {
+      const response = await axios.post(`${baseUrl}/api/counselor/login`, {
         username,
         password
       });

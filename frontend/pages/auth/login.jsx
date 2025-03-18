@@ -54,28 +54,29 @@ const Login = () => {
 
   return (
     <div className='relative'>
-      <div className='h-screen w-full flex flex-row gap-[3.25vw] justify-between'>
-        <div className='w-[33.125vw] flex flex-col gap-[4vw] ml-[8.5vw] my-auto py-[3.375vw]'>
-          <div className='flex flex-col gap-[1vw]'>
-            <h3 className='font-helvetica leading-[120%] text-h3Text font-bold text-black dark:text-white'>
-              Welcome Back! <span className='text-orangeChosen'>Login</span> to Continue Your Journey
+      <div className='h-screen w-full flex flex-row md:gap-[3.25vw] justify-between '>
+        <div className='w-auto md:w-[33.125vw] flex flex-col gap-[4vw] mx-[6vw] md:mx-0 md:ml-[8.5vw] my-auto md:py-[3.375vw]'>
+          <div className='flex flex-col gap-[3vw] md:gap-[1vw]'>
+            <h3 className=' leading-[120%] text-h4TextPhone md:text-h3Text font-bold text-black dark:text-white'>
+              Unlock Your Study Abroad Dream Get Expert <span className='text-orangeChosen'>Guidance Today!</span>
             </h3>
-            <p className='font-poppins text-mediumText text-dimgrayChosen dark:text-gray-300 font-medium'>
-              Ready to explore opportunities? <span className='font-bold'>Let's get started.</span>
+            <p className='text-mediumTextPhone md:text-mediumText  text-dimgrayChosen dark:text-gray-300 font-medium'>
+              Want to start your abroad journey <span className='font-bold'>Lets Connect.</span>
             </p>
             <OtpLogin />
-            <div className='flex w-[30vw] items-center'>
-              <div className='w-full h-min border-dimgrayLightChosen border-[1px] border-solid' />
-              <span className='mx-[1vw] text-dimgrayChosen dark:text-gray-300 font-medium text-regularText font-poppins'>OR</span>
-            </div>
-            <div className='w-[30vw]'>
-              <p className='text-regularText font-poppins text-dimgrayChosen dark:text-gray-300 text-center'>
-                Don't have an account? <TransitionLink href='/auth/signup'><span className='text-orangeChosen'>Sign Up</span></TransitionLink> | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className='relative h-screen w-auto overflow-hidden'>
+            <div className='flex md:w-[30vw] items-center'>
+                          <div className='w-full h-min border-dimgrayLightChosen  border-[1px] border-solid' />
+                          <span className='mx-[1vw] text-dimgrayChosen dark:text-gray-300 font-medium text-regularTextPhone md:text-regularText '>OR</span>
+                          <div className='w-full h-min border-dimgrayLightChosen border-[1px] border-solid' />
+                        </div>
+                        <div className=' md:w-[30vw]'>
+                          <p className='text-regularTextPhone md:text-regularText text-dimgrayChosen dark:text-gray-300 text-center'>
+                            Already have an account? <TransitionLink href='/login'><span className='text-orangeChosen'>Login</span></TransitionLink> | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='relative h-screen w-auto overflow-hidden hidden md:block'>
           <Image className='w-[53.5vw] h-[56.25vw] object-contain block dark:hidden' src={LoginImg} alt='loginImage' />
           <Image className='w-[53.5vw] h-screen hidden dark:block' src={LoginImgDark} alt='loginImage' />
         </div>
