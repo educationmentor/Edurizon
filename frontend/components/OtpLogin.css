@@ -22,6 +22,21 @@
     scale: 1.7 !important;
     margin-left: 1vw !important; 
   }
+  /* For screens 768px and below */
+@media (max-width: 768px) {
+  .flag {
+    margin-top: 3vw !important; 
+    margin-bottom: auto;
+    margin-left: 10vw !important; /* Smaller margin */
+  }
+}
+
+/* For screens larger than 768px */
+@media (min-width: 769px) {
+  .flag {
+    margin-left: 1vw !important; /* Larger margin */
+  }
+}
   
   /* Disable hover and focus animation */
 .selected-flag:hover,

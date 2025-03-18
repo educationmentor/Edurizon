@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '@/lib/baseUrl';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ const LoginForm = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', {
+      const response = await axios.post(`${baseUrl}/api/users/login`, {
         username,
         password,
       });
@@ -37,7 +38,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       console.log('Registering:', { name, username, email, phone });
-      const response = await axios.post('http://localhost:5000/api/users/register', {
+      const response = await axios.post(`${baseUrl}/api/users/register`, {
         name,
         username,
         email,

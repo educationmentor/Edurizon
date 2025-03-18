@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Image from 'next/image';
 import { IconButton, TitleButton } from '@/components/Buttons';
 import ConsultationForm from '@/components/ConsultationForm';
@@ -14,9 +14,17 @@ const HeroSection = () => {
 
   const handleConsultationClick = () => {
     setShowConsultationForm(true);
-    console.log(showConsultationForm);
   };
-  console.log(showConsultationForm);
+  useEffect(() => {
+        if (showConsultationForm) {
+          document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+          document.body.style.overflow = "auto"; // Enable scrolling
+        }
+        return () => {
+          document.body.style.overflow = "auto"; // Cleanup on unmount
+        };
+      }, [showConsultationForm]);
   return (
       <>
 
