@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { baseUrl } from '@/lib/baseUrl';
 
 interface University {
   _id: string;
@@ -34,7 +35,7 @@ const UniversityDetails = ({ university }: { university: University }) => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/meetings/status/${university._id}`, {
+        const response = await axios.get(`${baseUrl}/api/meetings/status/${university._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -72,7 +73,7 @@ const UniversityDetails = ({ university }: { university: University }) => {
         return;
       }
 
-      const response = await axios.post('http://localhost:5000/api/meetings/create', {
+      const response = await axios.post(`${baseUrl}/api/meetings/create`, {
         universityId: university._id,
         ...formData,
       }, {
@@ -280,7 +281,7 @@ export async function getServerSideProps(context: { params: { id: any; }; }) {
   const { id } = context.params;
 
   try {
-    const response = await axios.get(`http://localhost:5000/api/universities/${id}`);
+    const response = await axios.get(`${baseUrl}/api/universities/${id}`);
     return {
       props: {
         university: response.data,

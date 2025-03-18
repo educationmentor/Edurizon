@@ -15,6 +15,7 @@ import { ThemeProvider } from "@/context/themeContext";
 import Head from "next/head";
 import {GoogleAnalytics} from '@next/third-parties/google'
 import axios from "axios";
+import { baseUrl } from "@/lib/baseUrl";
 
 // ✅ Load Navbar and Footer Only When Needed
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
@@ -45,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           } else {
             // Verify token validity with backend
             try {
-              const response = await axios.get('http://localhost:5001/api/auth/verify', {
+              const response = await axios.get(`${baseUrl}/api/auth/verify`, {
                 headers: {
                   Authorization: `Bearer ${JSON.parse(userData).token}`
                 }

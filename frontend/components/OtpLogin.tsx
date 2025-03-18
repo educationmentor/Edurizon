@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 import { TransitionLink } from '@/utils/TransitionLink';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '@/lib/baseUrl';
 
 // Create axios instance with default config
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`,
     withCredentials: true
 });
 
