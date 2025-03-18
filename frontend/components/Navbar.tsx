@@ -158,14 +158,17 @@ key={index}
           }}
         >
           <button>
+            <TransitionLink href={item.href}>
+              
             <motion.div>
               {item.name}
               <div
-className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
-hovered === index ? "w-full" : "w-0"
+                className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
+                hovered === index ? "w-full" : "w-0"
                         }`}
-/>
+                  />
             </motion.div>
+            </TransitionLink>
           </button>
           {dropdownVisible && (
             <motion.div
@@ -192,14 +195,14 @@ className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer tra
                 <button key={index} onClick={() => item.external && router.push(item.href)}>
                   <TransitionLink href={item.external ? "#" : item.href}>
           <motion.div
-onHoverStart={() => setHovered(index)}
-onHoverEnd={() => setHovered(-1)}
-                    >
-                      {item.name}
-            <div
-className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
-                          hovered === index ? "w-full" : "w-0"
-                        }`}
+              onHoverStart={() => setHovered(index)}
+              onHoverEnd={() => setHovered(-1)}
+                                  >
+                                    {item.name}
+                          <div
+              className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
+                                        hovered === index ? "w-full" : "w-0"
+                                      }`}
 />
               </motion.div>
                   </TransitionLink>
@@ -251,10 +254,10 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
             </div>):
 
           <TransitionLink href="/login">
-            <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Sign Up" />
+            <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Login" />
           </TransitionLink>}
           
-          
+          <TransitionLink href="/signup">
           <IconButton onClick={() => {}} 
           className="text-smallTextPhone flex  md:hidden lg:flex md:text-smallText" 
           btnHeight={2.75} 
@@ -269,7 +272,7 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
           btnWidthPhone={36}
             image="/assets/Images/Icons/ApplyNowIcon.svg"
             btnTitle="Apply Now"/>
-          
+          </TransitionLink>
           
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <Image src="/assets/Images/Icons/menuIcon.svg" width="40" height="40" alt="menuIcon" className="md:hidden w-[8vw] h-[8vw]" />
@@ -288,7 +291,11 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
     <div className={`fixed top-[14vw] w-[90vw] h-full px-[3vw] dark:text-black bg-[#f7f2fa] mt-[5vw] shadow-lg p-4 transition-all duration-300 transform ${
           isMenuOpen ? transitionEnd ? "right-0":"right-[2vw]" : "right-[-90vw]"}`} onTransitionEnd={() => isMenuOpen && setTimeout(() => setTransitionEnd(true), 10)} >
         <div className='flex justify-start gap-[3vw]'>
+          <div className='ml-auto'>
+        <TransitionLink href="/signup">
          <IconButton className='ml-auto text-smallTextPhone opacity-70  ' image='/assets/Images/Icons/ApplyNowIcon.svg' iconWidth={0} padding={0} btnWidth={0} btnTitle='Apply Now' btnRadius={0} btnRadiusPhone={15} btnHeight={0} iconWidthPhone={7.75} paddingPhone={1.75} btnWidthPhone={34} btnHeightPhone={11}/>
+        </TransitionLink>
+        </div>
         <button  className=" text-orangeChosen " onClick={() => (setIsMenuOpen(false),setTransitionEnd(false))}>
         <svg xmlns="http://www.w3.org/2000/svg" className='w-[6vw] h-[6vw]' viewBox="0 0 24 24" fill="none" stroke='#FF7500' 
           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
@@ -309,7 +316,7 @@ className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-
           ))}
         </div>
           <div className='flex justify-center mt-[2vw]'>
-            <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Sign Up' btnWidth={0}/>
+            <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Login' btnWidth={0}/>
           </div>
       </div>
       </div>

@@ -15,6 +15,7 @@ import Georgia from '../../public/assets/Images/CountryImages/Georgia.png';
 import Germany from '../../public/assets/Images/CountryImages/Germany.png';
 import { NextButton, PrevButton,usePrevNextButtons } from "../EmblaCarousel/EmblaCarouselArrowButtons";
 import { StaticImageData } from "next/image";
+import { TransitionLink } from "@/utils/TransitionLink";
 
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, align: "start", containScroll: "trimSnaps", loop: true };
@@ -113,6 +114,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
 
       {/* Explore Button */}
       <div className="mx-auto mt-[14vw] md:mt-[0vw]">
+        <TransitionLink href="/studyDestinations">
         <IconButton
           btnTitle="Explore All Destinations"
           className="font-medium text-smallTextPhone md:text-regularText"
@@ -128,6 +130,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
           iconWidth={2.1875}
           image="/assets/Images/Icons/NorthEastIcon.svg"
         />
+        </TransitionLink>
             </div>
         </div>
     );
