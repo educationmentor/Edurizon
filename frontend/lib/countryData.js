@@ -68,9 +68,9 @@ const RussiaData={
     countrySpecificSection2:true,
     countryUniversities:[
         {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹4.5-5.5 Lakhs", gloablRanking:"QS #265 (2023)",highlights:["98% FMGE Pass Rate (2023)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
-        {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
+        // {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
         {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["95% FMGE Pass Rate (2023)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
-        {universityName:"Perm State Medical University",location:"Perm",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["1:5 cadaver ratio (3D dissection labs)","Internships at Apollo Hospitals (India)","Hindi-speaking staff","Free airport pickup"]},
+        // {universityName:"Perm State Medical University",location:"Perm",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["1:5 cadaver ratio (3D dissection labs)","Internships at Apollo Hospitals (India)","Hindi-speaking staff","Free airport pickup"]},
         {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"₹3.5–4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
     ],
     countryFeeStructure:{
@@ -96,7 +96,7 @@ const RussiaData={
     countrySpecificSection4:true,
     whyChoseUniversity:{
         title:"Why Choose These Universities To Study MBBS in Russia?",
-        content:[["Budget-Friendly Options","> Crimea & Orenburg: Ideal for students seeking fees under ₹4.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
+        content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
         ["Specializations","> Kazan: Research & AI-driven medical training.","> Bashkir: Cardiology & robotic surgery.","> Orenburg: Rural healthcare & telemedicine."],
         ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
         imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
