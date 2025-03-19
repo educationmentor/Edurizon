@@ -74,26 +74,34 @@ const RussiaData={
         {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"₹3.5–4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
     ],
     countryFeeStructure:{
-        tuitionCost:"₹3.5–6.5 Lakhs",
-        tuitionDetail:"Varies by university ranking",
-        hostelCost:"₹1-2 Lakhs",
-        hostelDetail:"Shared room + Indian mess",
-        medicalCost:"₹20,000-₹30,000 Lakhs",
-        medicalDetail:"Mandatory for all students",
-        miscellaneousCost:"₹10,000-20,000",
-        miscellaneousDetail:"Books, lab coats, local travel",
+        title:"Fee Structure",
+        subTitle:"MBBS in Russia 2025-26: Detailed Cost Breakdown",
+        data:[["Expense","Annual Cost (INR)","Details"],
+        ["Tution Fees","₹3.5–6.5 Lakhs","Varies by university ranking"],
+        ["Hostel & Food","₹1-2 Lakhs","Shared room + Indian mess"],
+        ["Medical Insurance","₹₹20,000-₹30,000 Lakhs","Mandatory for all students"],
+        ["Miscellaneous","10,000-20,000","Books, lab coats, local travel"]
+        ],  
     },
-    countryEligibilityStructure:{
-        academicNote:["Recognized boards: CBSE, ICSE, State Boards, NIOS, or equivalent.","Appearing students (2024) can apply provisionally."],
-        academicDetail:["Class 12 (or equivalent) with Physics, Chemistry, Biology (PCB).","General Category: Minimum 50% aggregate in PCB.","SC/ST/OBC: Minimum 40% aggregate in PCB."],
-        neetNote:["As per NMC guidelines, NEET is compulsory for Indian students pursuing MBBS abroad."],
-        neetDetail:["NEET 2024 or 2025 scorecard is mandatory.","No minimum NEET percentile required."],
-        ageNote:["Birth certificate or Class 10 documents accepted for age proof."],
-        ageDetail:["Minimum 17 years as of December 31, 2024.","No upper age limit."],
-        documentNote:["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."],
-        documentDetail:["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."]
+    countryEligibilityStructure:[
+        ["Criteria","Details","Notes"],
+        [["Academic Qualification"],["Class 12 (or equivalent) with Physics, Chemistry, Biology (PCB).","General Category: Minimum 50% aggregate in PCB.","SC/ST/OBC: Minimum 40% aggregate in PCB."],["Recognized boards: CBSE, ICSE, State Boards, NIOS, or equivalent.","Appearing students (2024) can apply provisionally."]],
+        [["NEET Qualification"],["NEET 2024 or 2025 scorecard is mandatory.","No minimum NEET percentile required."],["As per NMC guidelines, NEET is compulsory for Indian students pursuing MBBS abroad."]],
+        [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],["Birth certificate or Class 10 documents accepted for age proof."]],
+        [["Required Documents"],["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
+    ],
+    keyHighlightsSection:{
+        title:"Key Highlights",
+        subTitle:"",
+        data:[
+            ["Parameter","Kazan","Bashkir","Orenburg"],
+            ["FMGE Passing Rate(2023)","98%","95%","85%"],
+            ["Years","Year 3","Year 3","Year 3"],
+            ["Indian Food Mess","Available","Available","Available"],
+            ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
+            ["Parameter","₹18,000","₹14,000","₹12,000"]
+        ]
     },
-    countrySpecificSection4:true,
     whyChoseUniversity:{
         title:"Why Choose These Universities To Study MBBS in Russia?",
         content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
@@ -166,9 +174,15 @@ const ChinaData={
             title: "Safe & Welcoming Environment",
             mobileTitle: "Safe & Welcoming Environment",
             description:
-                "Ranked among Asia’s safest countries, China offers a secure and inclusive environment for international students...",
+                "Ranked among Asia's safest countries, China offers a secure and inclusive environment for international students...",
             },
             ],
+    scholarshipSection:{
+        title:"Scholarships & Financial Aid",
+        content:[{title:"Chinese Government Scholarship (CSC)",description:"The CSC offers up to 100% tuition fee waivers for students with exceptional academic records. This scholarship significantly reduces the financial burden of pursuing medical education abroad."}
+            ,{title:"University Scholarships",description:"Many universities, including Jiangsu and Qingdao University, provide merit-based scholarships ranging from ₹50,000 to ₹2 lakhs per year. These awards recognize academic excellence and support talented students."},
+            {title:"Edurizon Scholarships", description:"Edurizon offers exclusive scholarships for students with 90% or higher in PCB. This initiative aims to reward high-performing students and encourage them to pursue their medical aspirations."}],
+    },
     whyChoseUniversity:{
         title:"Why Choose Edurizon for MBBS in China?",
         content:[["100% Admission Success: Guaranteed placement in MCI-approved universities."],
@@ -177,6 +191,31 @@ const ChinaData={
         ["FMGE/NExT Coaching: Partnered institutes offer discounted coaching programs to prepare students for licensing exams."]],
         imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
     },
+    countryEligibilityStructure:[
+        ["Criteria","Details"],
+        [["Academic Qualification"],["Applicants must have a minimum of 75% aggregate in Physics, Chemistry, and Biology (PCB) in Class 12. A strong academic foundation ensures students are prepared for the rigorous medical curriculum."]],
+        [["NEET Qualification"],["NEET qualification is mandatory for Indian students applying for the 2024 admission cycle. This ensures students meet the standardized criteria for medical education."]],
+        [["Age Limit"],["Students must be at least 17 years old by December 31 of the admission year to be eligible for admission."]],
+        [["Required Documents"],["Applicants must provide proof of medical fitness, demonstrating they are free from critical illnesses. This requirement ensures the well-being of students during their studies in China."]]
+    ],
+    countryFeeStructure:{
+        title:"Fee Structure of Top MCI-Approved Universities",
+        subTitle:"MBBS in China 2025-26: Detailed Cost Breakdown",
+        data:[["University","Tuition Fee (per year)","Hostel Fee (per year)"],
+        ["Shandong University","₹4.1 Lakhs","₹60,000"],
+        ["China Medical University","₹3.8 lakhs","₹55,000"],
+        ["Harbin Medical University","₹20,000–30,000","₹50,000"],
+        ],  
+    },
+    countryAdditionalCost:{
+        title:"Additional Costs",
+        subTitle:"",
+        data:[
+            ["Food","Health Insurance","Flight Tickets"],
+            ["₹15,000–20,000/month","₹10,000/year","₹30,000–50,000 (round trip)"]
+        ]
+    }
+
 }
 
 
