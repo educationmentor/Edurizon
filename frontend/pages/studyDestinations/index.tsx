@@ -1,32 +1,37 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {destinationData} from "@/lib/destinationData"
 import SearchIcon from '@mui/icons-material/Search';
 import ActionAreaCard from "@/components/studyDestinationComponents/studyDestinationCard";
 import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
+import { useRouter } from "next/router";
 
-const categories = ["View all", "Blogs", "Study Destinations", "Top MBBS Universities", "Under 20Lac", "Budget 20Lac - 40Lac", "Budget 40Lac - 60Lac"];
-
+const categoriesMap: Record<string, string> = {viewAll:"View all", blogs:"Blogs", Destination:"Study Destinations", universities:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
+const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;
 }
 
 const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProps) => {
-    const [selectedButton, setSelectedButton] = useState(0);
+    const router = useRouter();
+    // useEffect(() => {
+    //     setSelectedButton(0); // Select the first category by default
+    // }, [categoryDefault]);
+    categoryDefault = String(router.query.category);
+    const [selectedButton, setSelectedButton] = useState(categories.indexOf(categoryDefault));
 
-
-    const [selectedCategory, setSelectedCategory] = useState(categoryDefault);
+    const [selectedCategory, setSelectedCategory] = useState<string>(categoryDefault);
   
-    const handleCategoryChange = (category: React.SetStateAction<string>) => {
+    const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };
+    console.log(categoryDefault);
   
     // Filter blogs based on the selected category
-    const filteredBlogs = selectedCategory === "View all"
+    const filteredBlogs = selectedCategory === "viewAll"
       ? destinationData
       : destinationData.filter(destination => destination.category === selectedCategory);
     
-    console.log(filteredBlogs);
   
     return (
         <div className="mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] my-[60px] lg:my-[80px] xl:my-[120px]">
@@ -64,7 +69,7 @@ const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProp
             }`}
             onClick={() => setSelectedButton(index)}
           >
-            {name}
+            {categoriesMap[name]}
           </button>
         </div>
       ))}
