@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import LoginImg from '../public/assets/Images/loginImg.png';
-import LoginImgDark from '../public/assets/Images/landingPage/whyChoseUsDark.png';
 import OtpLogin from '../components/OtpLogin'
 import { TransitionLink } from '../utils/TransitionLink';
+import ThemeContext from '@/context/themeContext';
 
 const SignUp = () => {
   const router = useRouter();
@@ -13,6 +12,12 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const useTheme=()=>useContext(ThemeContext);
+    const { theme } = useTheme();
+    const imageSrc =
+    theme == "dark"?
+    "/assets/Images/auth/loginImgDark.webp":
+    "/assets/Images/auth/loginImg.webp";
 
   useEffect(() => {
     // Check if user is logged in
@@ -95,9 +100,8 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        <div className='relative h-screen w-auto overflow-hidden hidden md:block'>
-          <Image className='w-[53.5vw] h-[56.25vw] object-contain block dark:hidden' src={LoginImg} alt='whyChoseUs' />
-          <Image className='w-[53.5vw] h-screen hidden dark:block' src={LoginImgDark} alt='whyChoseUs' />
+        <div className='relative md:flex items-center h-screen w-auto overflow-hidden hidden'>
+          <Image width={1000} height={1000} className='w-[53.5vw] h-[45.25vw] object-contain ' src={imageSrc} alt='Imgae' />
         </div>
       </div>
     </div>

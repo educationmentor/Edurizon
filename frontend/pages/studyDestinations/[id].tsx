@@ -30,11 +30,22 @@ interface NewPageProps {
       gloablRanking:string;
       highlights:string[];
     }[];
-    countryFeeStructure:{[key:string]:string};
-    countryEligibilityStructure:{[key:string]:string[]};
-    countrySpecificSection4:boolean;
+    countryFeeStructure:{title:string;
+        subTitle:string;
+        data:string[][];};
+    countryEligibilityStructure:string[][][];
+    keyHighlightsSection:{title:string;
+        subTitle:string;
+        data:string[][];};
     whyChoseUniversity:{title:string;content:string[][];imageURL:string};
     countryReasonsToStudySection:{[key:string]:string}[];
+    scholarshipSection:{
+        title:string;
+        content:{[key:string]:string}[];
+    },
+    countryAdditionalCost:{title:string;
+        subTitle:string;
+        data:string[][];};
    };
 }
 
@@ -61,6 +72,9 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {/* Country Reasons To Study Destination */}
       {countryData.countryReasonsToStudySection&& <ReasonsToStudy id={id} name={countryData.countryName} content={countryData.countryReasonsToStudySection} />}
 
+      {/* Scholarship Section */}
+      {countryData.scholarshipSection && <ScholarshipSection id={id} data={countryData.scholarshipSection} />}
+      
       {/* Country Cost Data */}
       {countryData.countryCostData && <CostTable id={id} data={countryData.countryCostData} />}
       
@@ -73,7 +87,9 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {/* Country Universiteis */}
       {countryData.countryUniversities && <Universities id={id} data={countryData.countryUniversities} countryName={countryData.countryName} />}
 
-      {/* {countryData.countrySpecificSection4 && <Section4 id={id}/>} */}
+
+
+      {countryData.keyHighlightsSection && <UnlistedTable section2={"highlight"} content={countryData.keyHighlightsSection} id={id}/>}
 
       {countryData.whyChoseUniversity && <WhyChoseUniversity id={id} title={countryData.whyChoseUniversity.title} imageURL={countryData.whyChoseUniversity.imageURL} content={countryData.whyChoseUniversity.content}/>}
 
@@ -81,7 +97,9 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {countryData.countryEligibilityStructure && <EligibilityCriteria id={id} data={countryData.countryEligibilityStructure} countryName={countryData.countryName} />}
       
       {/* Country Fee Structure */}
-      {countryData.countryFeeStructure && <FeeStructure id={id} data={countryData.countryFeeStructure} /> }
+      {countryData.countryFeeStructure && <UnlistedTable section2={"feeStructure"} id={id} content={countryData.countryFeeStructure} />}
+      {/* Country Additional Cost */}
+     {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
       <PostArrival/>
       <CTASection/>
@@ -92,12 +110,10 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
 
 import Section2 from "../../components/studyDestinationComponents/section2";
 import Section3 from "@/components/studyDestinationComponents/section3";
-import FeeStructure from "@/components/studyDestinationComponents/feeStructureTable";
 import EligibilityCriteria from "@/components/studyDestinationComponents/eligibilityCriteriaTable";
 import Universities from "@/components/studyDestinationComponents/universitiesTable";
 import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import CTASection from "@/components/landingPage/CTASection";
-import Section4 from "@/components/studyDestinationComponents/section4";
 import Header from "@/components/studyDestinationComponents/headerComponent";
 import Head from "next/head";
 import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
@@ -105,6 +121,8 @@ import ReasonsToStudy from "../../components/studyDestinationComponents/reasonsT
 import CostTable from "@/components/studyDestinationComponents/costTable";
 import WhyChoseUniversity from "@/components/studyDestinationComponents/whyChoseUniversity";
 import countryNames  from '@/lib/countryData';
+import ScholarshipSection from "@/components/studyDestinationComponents/scholarshipSection";
+import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id  = context.params?.id;
