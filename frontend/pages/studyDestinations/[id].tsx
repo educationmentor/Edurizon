@@ -29,6 +29,7 @@ interface NewPageProps {
       annualFees:string;
       gloablRanking:string;
       highlights:string[];
+      href:string;
     }[];
     countryFeeStructure:{title:string;
         subTitle:string;
