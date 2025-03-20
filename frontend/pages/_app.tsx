@@ -16,6 +16,9 @@ import Head from "next/head";
 import {GoogleAnalytics} from '@next/third-parties/google'
 import axios from "axios";
 import { baseUrl } from "@/lib/baseUrl";
+import Script from "next/script";
+
+const GA_TRACKING_ID = "G-Z25NZ103DJ";
 
 // ✅ Load Navbar and Footer Only When Needed
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
@@ -114,6 +117,23 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}</style>
         
       </Head>
+       {/* Google Analytics */}
+       <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GA_TRACKING_ID}', {
+            page_path: window.location.pathname,
+          });
+        `}
+      </Script>
 
     <ThemeProvider>
       {isAdminRoute && isMobileView ? (
