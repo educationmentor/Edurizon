@@ -129,7 +129,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
           {!shouldExcludeLayout && <Navbar />}
           <Component {...pageProps} />
-            <GoogleAnalytics gaId="GTM-KTQM74PP"/>
+            <GoogleAnalytics gaId="G-Z25NZ103DJ"/>
             <div id='footer'>
             {!shouldExcludeLayout && <Footer />}</div>
         </>
