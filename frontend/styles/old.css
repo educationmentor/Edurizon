@@ -151,7 +151,7 @@ ul.points-three li::marker { color: #fec001; }
 .video-section a .play-button::before { content: ''; position: absolute; width: 60px; height: 60px; background-color: #fec001; border-radius: 50%; animation: pulse 1.5s infinite; }
 }
 .d-none{display:none!important}
-.img-fluid{max-width:100%;height:auto}
+
 
 
 .edu-videos { margin: 0 7.5px;}
