@@ -170,3 +170,4 @@ ul.points-three li::marker { color: #fec001; }
 .country-inner-banner .breadcrumb .breadcrumb-list .breadcrumb-group .breadcrumb-point { color: #777777; transition: ease-in-out all 0.2s;}
 .country-inner-banner .breadcrumb .breadcrumb-list .breadcrumb-group .breadcrumb-point:hover { color: #42bfbe;}
 .country-inner-banner .breadcrumb .breadcrumb-list .breadcrumb-group span { color: #fec001;}
+iframe { border: 2px solid #fec001; border-radius: 0 20px 0 20px;}

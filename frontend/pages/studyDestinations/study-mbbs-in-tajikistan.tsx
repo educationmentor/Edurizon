@@ -41,7 +41,7 @@ const NewPage=()=>{
             <div className="col-md-6 col-12">
          <div className="video-section  ">
             <a href="https://www.youtube.com/watch?v=BKBvVEY8OBE" data-fancybox="video-gallery-a">
-              <img src="https://i3.ytimg.com/vi/BKBvVEY8OBE/maxresdefault.jpg"  className="img-fluid" />
+              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/BKBvVEY8OBE/maxresdefault.jpg"  className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -51,7 +51,7 @@ const NewPage=()=>{
           <div className="col-md-6 col-12">
           <div className="video-section">
             <a href="https://www.youtube.com/watch?v=3pTAroofyS8" data-fancybox="video-gallery-a">
-              <img src="https://i3.ytimg.com/vi/3pTAroofyS8/maxresdefault.jpg"  className="img-fluid" />
+              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/3pTAroofyS8/maxresdefault.jpg"  className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -61,7 +61,7 @@ const NewPage=()=>{
           <div className="col-md-6 col-12">
           <div className="video-section">
           <a href="https://www.youtube.com/watch?v=DyOAGWuX0ew" data-fancybox="video-gallery-a">
-              <img src="https://i3.ytimg.com/vi/DyOAGWuX0ew/hqdefault.jpg" className="img-fluid" />
+              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/DyOAGWuX0ew/hqdefault.jpg" className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -75,7 +75,7 @@ const NewPage=()=>{
           </div>
           <div className="video-section w-1/4">
             <a href="https://www.youtube.com/watch?v=xE6PsPd62Xo" data-fancybox="video-gallery-a">
-              <img src="https://i3.ytimg.com/vi/xE6PsPd62Xo/maxresdefault.jpg" className="w-1/4 h-full" />
+              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/xE6PsPd62Xo/maxresdefault.jpg" className="w-1/4 h-full" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -85,7 +85,7 @@ const NewPage=()=>{
             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
               <div className="video-section-2">
                 <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/1.mp4"  data-fancybox="video-gallery">
-                  <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-1.png" className="img-fluid" />
+                  <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-1.png" className="img-fluid" />
                   <div className="play-button">
                     <div className="triangle"></div>
                   </div>
@@ -95,7 +95,7 @@ const NewPage=()=>{
             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
               <div className="video-section-2">
                 <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/2.mp4" data-fancybox="video-gallery">
-                  <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-2.png" className="img-fluid" />
+                  <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-2.png" className="img-fluid" />
                   <div className="play-button">
                     <div className="triangle"></div>
                   </div>
@@ -105,7 +105,7 @@ const NewPage=()=>{
             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
               <div className="video-section-2">
                 <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/3.mp4" data-fancybox="video-gallery">
-                  <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-3.png" className="img-fluid" />
+                  <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-3.png" className="img-fluid" />
                   <div className="play-button">
                     <div className="triangle"></div>
                   </div>
@@ -119,7 +119,7 @@ const NewPage=()=>{
               <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
                 <div className="video-section-2">
                   <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/4.mp4" data-fancybox="video-gallery">
-                    <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-4.png" className="img-fluid" />
+                    <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-4.png" className="img-fluid" />
                     <div className="play-button">
                       <div className="triangle"></div>
                     </div>
@@ -129,7 +129,7 @@ const NewPage=()=>{
               <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
                 <div className="video-section-2">
                   <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/5.mp4" data-fancybox="video-gallery">
-                    <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-5.png" className="img-fluid" />
+                    <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-5.png" className="img-fluid" />
                     <div className="play-button">
                       <div className="triangle"></div>
                     </div>
@@ -139,7 +139,7 @@ const NewPage=()=>{
               <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
                 <div className="video-section-2">
                   <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/6.mp4" data-fancybox="video-gallery">
-                    <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-6.png" className="img-fluid" />
+                    <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-6.png" className="img-fluid" />
                     <div className="play-button">
                       <div className="triangle"></div>
                     </div>
@@ -149,7 +149,7 @@ const NewPage=()=>{
               <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
                 <div className="video-section-2">
                   <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/7.mp4" data-fancybox="video-gallery">
-                    <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-7.png" className="img-fluid" />
+                    <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-7.png" className="img-fluid" />
                     <div className="play-button">
                       <div className="triangle"></div>
                     </div>
@@ -159,7 +159,7 @@ const NewPage=()=>{
               <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
                 <div className="video-section-2">
                   <a href="/assets/images/mbbs-in-tajikistan/tajik-national-university/8.mp4" data-fancybox="video-gallery">
-                    <img src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-8.png" className="img-fluid" />
+                    <Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-tajikistan/tajik-national-university/thumb-8.png" className="img-fluid" />
                     <div className="play-button">
                       <div className="triangle"></div>
                     </div>
