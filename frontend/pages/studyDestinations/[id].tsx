@@ -103,7 +103,6 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
      {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
       <PostArrival/>
-      <CTASection/>
     </div>
     </>
   );

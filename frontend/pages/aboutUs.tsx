@@ -11,7 +11,6 @@ const AboutUs = () => {
             <WhoWeAreSection/>
             <MessageFromMDSection/>
             <TeamsSection/>
-            <CTASection/>
         </div>;
     }
 
