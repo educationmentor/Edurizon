@@ -16,11 +16,20 @@ const Breadcrumbs: React.FC = () => {
     contact: "Contact Us",
     studyDestinations: "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
+    "study-mbbs-in-china": "Study MBBS in China",
     "kazan-federal-university": "Kazan Federal University",
     "study-in-uk":"Study in UK",
     "study-mbbs-in-bangladesh":"Study MBBS in Bangladesh",
     "study-mbbs-in-tajikistan":"Study MBBS in Tajikistan",
     "study-in-hungary":"Study in Hungary",
+    "study-mbbs-in-georgia":"Study MBBS in Georgia",
+    "study-mbbs-in-ukraine":"Study MBBS in Ukraine",
+    "study-in-germany":"Study in Germany",
+    "study-in-australia":"Study in Australia",
+    "study-mbbs-in-nepal":"Study MBBS in Nepal",
+    "study-mbbs-in-kazakhstan":"Study MBBS in Kazakhstan",
+    "study-mbbs-in-uzbekistan":"Study MBBS in Uzbekistan",
+
   };
 
   return (
