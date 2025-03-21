@@ -8,7 +8,7 @@ export const NewPage = () => {
     return(
         <div className="text-smallTextPhone md:text-smallText">
             <section className="country-inner-banner">
-                <div className="container pt-[4vw]">
+                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
                         <div className="heading">
@@ -16,7 +16,7 @@ export const NewPage = () => {
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
+                    <div className="hidden md:block col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
                         <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/bangladesh.png" className="img-fluid" />
                     </div>
                     </div>
@@ -160,11 +160,11 @@ export const NewPage = () => {
         </div>
         <div className="row">
           <div className="col-xl-12 ">
-            <div id="edurizon-videos" className="owl-carousel flex flex-row">
+            <div id="edurizon-videos" className="grid grid-cols-2 md:grid-cols-4">
               <div className="edu-videos">
                 <iframe
                   width="100%"
-                  height="250"
+                  className="h-[100px] md:h-[250px]"
                   src="https://www.youtube.com/embed/psO_4DIJlFY"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -173,7 +173,7 @@ export const NewPage = () => {
               <div className="edu-videos">
                 <iframe
                   width="100%"
-                  height="250"
+                  className="h-[100px] md:h-[250px]"
                   src="https://www.youtube.com/embed/uecmbVRw4b4"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -183,7 +183,7 @@ export const NewPage = () => {
               <div className="edu-videos">
                 <iframe
                   width="100%"
-                  height="250"
+                  className="h-[100px] md:h-[250px]"
                   src="https://www.youtube.com/embed/79nLuFGiEi8"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -193,7 +193,7 @@ export const NewPage = () => {
               <div className="edu-videos">
                 <iframe
                   width="100%"
-                  height="250"
+                  className="h-[100px] md:h-[250px]"
                   src="https://www.youtube.com/embed/E4VRgfuIzlw"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

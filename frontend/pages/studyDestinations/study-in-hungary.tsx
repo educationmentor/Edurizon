@@ -4,8 +4,8 @@ import Image from 'next/image';
 const Hungary=()=>{
     return(
         <div className='text-smallTextPhone md:text-smallText'>
-          <section className="country-inner-banner">
-                <div className="container pt-[4vw]">
+          <section className="country-inner-banner ">
+                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
                         <div className="heading">
@@ -13,7 +13,7 @@ const Hungary=()=>{
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
+                    <div className="col-xl-2 md:block hidden col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
                         <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/hungary.png" className="img-fluid" />
                     </div>
                     </div>

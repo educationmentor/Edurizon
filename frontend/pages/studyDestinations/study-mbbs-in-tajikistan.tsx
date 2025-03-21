@@ -5,7 +5,7 @@ const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText">
             <section className="country-inner-banner">
-                <div className="container pt-[4vw]">
+                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
                         <div className="heading">
@@ -13,7 +13,7 @@ const NewPage=()=>{
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
+                    <div className="hidden md:block col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
                         <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/tajikistan.png" className="img-fluid" />
                     </div>
                     </div>
@@ -37,11 +37,11 @@ const NewPage=()=>{
     <div className="row">
       <div className="col-xl-8 col-lg-8 col-md-8 col-12">
         <div className="immigrate-bg">
-            <div className="row mb-4 grid grid-cols-3 gap-[1vw]">
+            <div className="row mb-4 grid grid-cols-1 md:grid-cols-3 gap-[4vw] md:gap-[1vw]">
             <div className="col-md-6 col-12">
          <div className="video-section  ">
             <a href="https://www.youtube.com/watch?v=BKBvVEY8OBE" data-fancybox="video-gallery-a">
-              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/BKBvVEY8OBE/maxresdefault.jpg"  className="img-fluid" />
+              <img alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/BKBvVEY8OBE/maxresdefault.jpg"  className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -51,7 +51,7 @@ const NewPage=()=>{
           <div className="col-md-6 col-12">
           <div className="video-section">
             <a href="https://www.youtube.com/watch?v=3pTAroofyS8" data-fancybox="video-gallery-a">
-              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/3pTAroofyS8/maxresdefault.jpg"  className="img-fluid" />
+              <img alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/3pTAroofyS8/maxresdefault.jpg"  className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -61,7 +61,7 @@ const NewPage=()=>{
           <div className="col-md-6 col-12">
           <div className="video-section">
           <a href="https://www.youtube.com/watch?v=DyOAGWuX0ew" data-fancybox="video-gallery-a">
-              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/DyOAGWuX0ew/hqdefault.jpg" className="img-fluid" />
+              <img alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/DyOAGWuX0ew/hqdefault.jpg" className="img-fluid" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
@@ -73,15 +73,17 @@ const NewPage=()=>{
           <div className="heading">
             <h4  className="text-h5TextPhone md:text-h5Text">President Ramnath Kovind Visited Tajik National University</h4>
           </div>
-          <div className="video-section w-1/4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[4vw] md:gap-[1vw]">
+          <div className="video-section h-[180px] md:h-[230px] ">
             <a href="https://www.youtube.com/watch?v=xE6PsPd62Xo" data-fancybox="video-gallery-a">
-              <Image alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/xE6PsPd62Xo/maxresdefault.jpg" className="w-1/4 h-full" />
+              <img alt="georgia" width={100} height={100} src="https://i3.ytimg.com/vi/xE6PsPd62Xo/maxresdefault.jpg" className="" />
               <div className="play-button">
                 <div className="triangle"></div>
               </div>
             </a>
           </div>
-          <div className="row g-3 mt-4 grid grid-cols-3 gap-[1vw]">
+          </div>
+          <div className="row g-3 mt-4 grid grid-cols-1 md:grid-cols-3 gap-[4vw] md:gap-[1vw]">
             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
               <div className="video-section-2">
                 <a href="/assets/Images/mbbs-in-tajikistan/tajik-national-university/1.mp4"  data-fancybox="video-gallery">

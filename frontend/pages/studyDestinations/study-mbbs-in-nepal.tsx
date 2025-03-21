@@ -5,7 +5,7 @@ const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText">
                 <section className="country-inner-banner">
-                <div className="container pt-[4vw]">
+                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
                         <div className="heading">
@@ -13,7 +13,7 @@ const NewPage=()=>{
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
+                    <div className="hidden md:block col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
                         <Image alt="banglades flag" width={100} height={100}  src="/assets/Images/country-flag/nepal-flag.png" className="img-fluid" />
                     </div>
                     </div>
@@ -426,33 +426,33 @@ const NewPage=()=>{
                     <div className="heading">
                         <h3 className="text-h5TextPhone md:text-h5Text">Edurizon Pvt. Ltd. Student Reviews</h3>
                     </div>
-                    <div className="row  grid grid-cols-3 gap-[1vw]">
+                    <div className="row  grid grid-cols-2 md:grid-cols-4 gap-[1vw]">
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/psO_4DIJlFY" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/psO_4DIJlFY" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/uecmbVRw4b4" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/uecmbVRw4b4" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/79nLuFGiEi8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/79nLuFGiEi8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/GLeOo2O4t-8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/GLeOo2O4t-8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/mFQ-XUbRxFs" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/mFQ-XUbRxFs" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/7c1DZGDzQLw" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/7c1DZGDzQLw" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div> 
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div> 
                         <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/WJqGcMwJOP8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/WJqGcMwJOP8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                         </div>
                     </div>
                 </div>
