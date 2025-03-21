@@ -12,16 +12,16 @@ interface StudyDestinationsProps {
   categoryDefault: string;
 }
 
-const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProps) => {
+const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps) => {
     const router = useRouter();
     // useEffect(() => {
     //     setSelectedButton(0); // Select the first category by default
     // }, [categoryDefault]);
-    categoryDefault = String(router.query.category);
+    categoryDefault = String(router.query.category)==="undefined"?categoryDefault:String(router.query.category);
     const [selectedButton, setSelectedButton] = useState(categories.indexOf(categoryDefault));
 
     const [selectedCategory, setSelectedCategory] = useState<string>(categoryDefault);
-  
+    console.log(selectedCategory);
     const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };

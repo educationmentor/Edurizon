@@ -15,6 +15,8 @@ const Breadcrumbs: React.FC = () => {
     aboutUs: "About Us",
     contact: "Contact Us",
     studyDestinations: "Study Destinations",
+    "study-mbbs-in-russia": "Study MBBS in Russia",
+    "kazan-federal-university": "Kazan Federal University",
   };
 
   return (
@@ -26,6 +28,7 @@ const Breadcrumbs: React.FC = () => {
           </TransitionLink>
         </li>
         {pathSegments.map((segment, index) => {
+          console.log(segment);
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
@@ -37,6 +40,7 @@ const Breadcrumbs: React.FC = () => {
               {isLast ? (
                 <span className="font-semibold ">{breadcrumbNames[segment]??segment[0].toUpperCase()+segment.substring(1)}</span>
               ) : (
+
                 <div className="hover:underline">
                 <TransitionLink  href={href}>
                   {breadcrumbNames[segment]}
