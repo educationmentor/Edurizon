@@ -10,22 +10,22 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 5,40,000 / Year",
+      label: "Ruble 4,90,080 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
       text: "City & Province",
-      label: "Kazan, Russia",
+      label: "UFA, Russia",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
       text: "World Rank",
-      label: "396",
+      label: "Top 10 in Russia",
     },
     {
       icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",
       text: "Amazing Fact",
-      label: "FMGE Passing Ratio 2024 - 36.36%",
+      label: "Highest Practical Exposure",
     },
   ];
 
@@ -40,24 +40,23 @@ const feeStructure={
     subTitle:"Kazan Federal University Fees",
     data:[
         ["Expense", "Annual Cost"],
-        ["Tution Fees","4,93,740 Ruble"],
-        ["Hostel Fees","18,000 Ruble"],
-        ["Miscellaneous","10,000–20,000 Ruble"],
+        ["Tution Fees","4,90,080 Ruble"],
+        ["Hostel Fees","14,000 Ruble"],
     ]
 }
 
 const facts={
-    title:"Quick Facts Related to Kazan Federal University",
+    title:"Quick Facts Related to Bashkir Medical University",
     subTitle:"",
     data:[
         [],
-        ["Established In","1804"],
+        ["Established In","1909"],
         ["Recognition","NMC, WHO, ECFMG (USMLE), GMC (PLAB), AMEE"],
+        ["Fees","2,82,080 per year"],
         ["Medium of Teaching","1Fully English"],
         ["Course Duration","6 Years"],
         ["Indian students","Yes"],
-        ["Entrance Exam","Yes, Kazan Federal conducts entrance exams in respect of all international students, including Indians, every year."],
-        ["University Ranking","347"]
+        ["University Ranking","Top 10 in Russia"]
     ]
 }
 
@@ -80,10 +79,10 @@ const BashkirMedicalUniversity=()=>{
             <div className="flex flex-col items-center gap-[2vw]">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
-                <h1 className="text-h1Text font-bold">Kazan Federal University</h1>
+                <h1 className="text-h1Text font-bold">Bashkir Medical University</h1>
             </div>
             <p className="text-regularTexts text-center">
-            Are you dreaming of pursuing a career in medicine and becoming a skilled doctor? Look no further than Kazan Federal University in Russia - a prestigious institution with a rich history and a renowned medical program.
+            Established in 1932,Bashkir State Medical University located at Ufa is one of the top and leading institutions of Russia and the center of the medical and pharmaceutical sciences of the Republic of Bashkortostan.
             </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] justify-center">
@@ -102,14 +101,30 @@ const BashkirMedicalUniversity=()=>{
 
         <div className="mx-[12.5vw] my-[4vw]">
             <p className="text-regularText font-semibold leading-[150%] text-justify">
-            Kazan Federal University was established in the year 1804 and received the federal status in the year 2010. The University is located in Kazan and is one of the best government universities in Russia. The University has two branches one is located at Naberezhnye and the other is situated at Yelabuga. The main campus of the University is in downtown Kazan which consists of 16 institutes, 3 higher schools and 2 faculties and is just10 minutes away from Kazan Kremlin.<br/><br/>
-            The University offers variety of undergraduate and postgraduate programs and every year more than 50,000 students register themselves in different courses from across the world. The University also has a good arrangement of stay for students who come from outside of Kazan. It has a separate dormitory campus built in Universaide village which can accommodate about 12000 students with all facilities like laundry, beauty salon, sports equipment, medical centre, cafeteria and drug store.<br/><br/>
-            In 2014 Kazan Federal University celebrated its 210th anniversary. It is one of the oldest universities in Russia to achieve such a milestone. It is all due to its dedication and mission that it is considered the leading educational institution of today both in Russia and across the world.<br/><br/>
-            The University scholars and graduates are doing excellence around the world. It is all due to their endurance and efforts today Kazan Federal University has gained so much of fame and recognition around the world. Their perseverance and achievement has changed and impacted the country as well. The University has also contributed for the development of the country.<br/><br/>
-            Acknowledged as the dynamic and modern university Kazan Federal University also got an opportunity to participate in various government projects coordinated by the government of Russian Federation and improve its presence across the world in both research and educational centres. The University also worked in co ordinance with both international and local cooperation, work on boosting the regions human resource development, networking with academia and industry and also look after the progress of research and innovation centres in different field.<br/><br/>
-            The University has a huge contribution in the establishment of various world class research and teaching centres along with laboratories. The determination and participation of the university in projects like 5-100 solely intensifies its dedication and passion to reach the peak and make a name for one self.<br/><br/>
-            Whatever fame the university has earned till today it is all because of the right planning and execution. The university was able to rose to fame from a small traditional Institute to a Research University where all state-of-the-art and entrepreneurial activities are represented.<br/><br/>
+            Initially the University started with only one Faculty that is Faculty of General Medicine. But later in 1961, it extended itself to Faculty of pediatrics and Faculty of Preventive Medicine in 1970 which was later renamed to Faculty of Preventive Medicine and Microbiology. Two more faculties - Faculty of Dentistry and Faculty of Pharmacy were extended by 1976 -1981.<br/><br/>
+            The University receives a good number of medical enrollments from all over the world. The medical college at BSMU along with medicine also offers vocational secondary education in specialist of Nursing and Prosthetic Dentistry. Among 8000 medical students, more than 850 are International students from about 40 countries and 1000 are clinical residences and PHD Programs along with 7000 postgraduate professional trainings.<br/><br/>
+            Bashkir State Medical University is known for offering intense research work facilities for medical students along with simulation- based training for clinical residents and physicians which is equipped with state of the art simulators where they can enhance their practical skills in anesthesiology, resuscitation, neonatology, endoscopy, gynecology, obstetrics, and neurosurgery.<br/><br/>
+            The University has a variety of scientific infrastructure within the campus and that includes Cell Culture Laboratory, Central Scientific Research Laboratory, Vivarium, Scientific Research Institute Rehabilitation Medicine, Scientific Research Institute of Oncology and laboratory of experimental surgery. It has also cooperated with RUSNANO’S Pet Center for training specialist of nuclear medicine. The University has a large library for its medical students which can store about 527000 books and medicine and is counted as one of the best medical libraries in Russia.<br/><br/>
+            Bashkir State Medical University is also known to receive many accolades for training more than 700 Volunteers for winter Olympic and Paralympic Games in 2014 in Sochi. The University has also been awarded with the title of “Best Medical University” in Russia by the Russian National Public Organization “League of the Best”. The University has also been awarded with the title of “Best Medical University” in Russia by the Russian National Public Organization “League of the Best”.
             </p>
+            <br/>
+            <ul className="list-disc list-inside">
+                <li>
+                BSMU is amongst the top universities of the Russian Federation.
+                </li>
+                <li>
+                Government funded university.
+                </li>
+                <li>
+                Recognized by the leading medical council MCI
+                </li>
+                <li>
+                Recognized by WHO.
+                </li>
+                <li>
+                Recognized by Ministry of Healthcare and Ministry of Education and Science of the Russian Federation.
+                </li>
+            </ul>
         </div>
         <div className="grid grid-cols-2 gap-[5vw] mx-[12.5vw] my-[4vw]">
             <div className="flex flex-col gap-[2vw] justify-center">
@@ -163,7 +178,6 @@ const BashkirMedicalUniversity=()=>{
 
         </div>
         <PostArrival/>
-        <CTASection/>
     </div>
 }
 

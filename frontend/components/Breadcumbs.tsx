@@ -17,6 +17,10 @@ const Breadcrumbs: React.FC = () => {
     studyDestinations: "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
     "kazan-federal-university": "Kazan Federal University",
+    "study-in-uk":"Study in UK",
+    "study-mbbs-in-bangladesh":"Study MBBS in Bangladesh",
+    "study-mbbs-in-tajikistan":"Study MBBS in Tajikistan",
+    "study-in-hungary":"Study in Hungary",
   };
 
   return (

@@ -40,7 +40,7 @@ const feeStructure={
     subTitle:"Kazan Federal University Fees",
     data:[
         ["Expense", "Annual Cost"],
-        ["Tution Fees","4,93,740 Ruble"],
+        ["Tution Fees","5,40,740 Ruble"],
         ["Hostel Fees","18,000 Ruble"],
         ["Miscellaneous","10,000–20,000 Ruble"],
     ]
@@ -53,7 +53,7 @@ const facts={
         [],
         ["Established In","1804"],
         ["Recognition","NMC, WHO, ECFMG (USMLE), GMC (PLAB), AMEE"],
-        ["Medium of Teaching","1Fully English"],
+        ["Medium of Teaching","Fully English"],
         ["Course Duration","6 Years"],
         ["Indian students","Yes"],
         ["Entrance Exam","Yes, Kazan Federal conducts entrance exams in respect of all international students, including Indians, every year."],
@@ -163,7 +163,6 @@ const KazanFederalUniversity=()=>{
 
         </div>
         <PostArrival/>
-        <CTASection/>
     </div>
 }
 

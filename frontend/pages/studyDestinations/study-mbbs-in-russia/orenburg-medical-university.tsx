@@ -163,7 +163,6 @@ const OrenburgMedicalUniversity=()=>{
 
         </div>
         <PostArrival/>
-        <CTASection/>
     </div>
 }
 
