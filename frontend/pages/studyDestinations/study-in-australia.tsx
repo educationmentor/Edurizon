@@ -5,7 +5,7 @@ const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText">
             <section className="country-inner-banner">
-                <div className="container pt-[4vw]">
+                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
                         <div className="heading">
@@ -13,7 +13,7 @@ const NewPage=()=>{
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
+                    <div className="hidden md:block col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
                         <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/australia.jpg" className="img-fluid" />
                     </div>
                     </div>
@@ -1061,7 +1061,7 @@ const NewPage=()=>{
                         <h3 className="text-h5TextPhone md:text-h5Text">Tourism in Australia</h3>
                     </div>
                     <div className="australia-image">
-                        <Image alt="australia" width={100} height={100} src="/assets/Images/study-in-australia/tourism-in-australia.jpeg" className="img-fluid w-100 rounded" />
+                        <Image alt="australia" width={1920} height={1080} src="/assets/Images/study-in-australia/tourism-in-australia.jpeg" className="img-fluid w-100 rounded" />
                     </div>
                     <p>The Great Barrier Reef is located off the east coast of Queensland and is one of Australia's natural wonders and a World Heritage Site.</p>
                     <div className="heading">
@@ -1144,7 +1144,7 @@ const NewPage=()=>{
                 </div>
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
                     <div className="australia-image">
-                        <Image alt="australia" width={100} height={100} src="/assets/Images/study-in-australia/wine-grapes-in-barossa-valley-sa.jpeg" className="img-fluid w-100 rounded" />
+                        <Image alt="australia" width={1920} height={1080} src="/assets/Images/study-in-australia/wine-grapes-in-barossa-valley-sa.jpeg" className="img-fluid w-100 rounded" />
                     </div>
                     <p>Wine grapes in Barossa Valley, South Australia. The North Para River forms Barossa Valley, it is a major wine-producing region and a tourist destination.</p>
                     <p>One hundred kilometers (62 mi) north of Adelaide is one of Australia's oldest wine regions, the Clare Valley wine region, best known for its Riesling wines.</p>
@@ -1219,7 +1219,7 @@ const NewPage=()=>{
                         </table>
                     </div>
                     <div className="australia-image mt-4">
-                        <Image alt="australia" width={100} height={100} src="/assets/Images/study-in-australia/Twelve-Apostles-Princetown-Australia.jpg" className="img-fluid w-100 rounded" />
+                        <Image alt="australia" width={1920} height={1080} src="/assets/Images/study-in-australia/Twelve-Apostles-Princetown-Australia.jpg" className="img-fluid w-100 rounded" />
                     </div>
                     <p>The Twelve Apostles, the collection of limestone stacks off the shore of the Port Campbell National Park in Victoria.</p>
                 </div>
@@ -1236,7 +1236,7 @@ const NewPage=()=>{
                         <h3 className="text-h5TextPhone md:text-h5Text">UNESCO World Heritage Sites</h3>
                     </div>
                     <div className="australia-image">
-                        <Image  width={100} height={100}
+                        <Image  width={1920} height={1080}
                             src="/assets/Images/study-in-australia/Tae-Rak-channel-Budj-Bim.jpg"
                             className="img-fluid w-100 rounded"
                             title="Drone image of Tae Rak channel and holding pond at Budj Bim Cultural Landscape."
@@ -1299,7 +1299,7 @@ const NewPage=()=>{
                         <h3 className="text-h5TextPhone md:text-h5Text">Environment & Nature</h3>
                     </div>
                     <div className="australia-image">
-                        <Image alt=""  width={100} height={100} src="/assets/Images/study-in-australia/Cape-Hauy-stacks-Tasmania.jpg" className="img-fluid w-100 rounded" title="The 'Totem Pole' from the last lookout of the Cape Hauy Track, in Tasman National Park, Tasmania" />
+                        <Image alt=""  width={1920} height={1080} src="/assets/Images/study-in-australia/Cape-Hauy-stacks-Tasmania.jpg" className="img-fluid w-100 rounded" title="The 'Totem Pole' from the last lookout of the Cape Hauy Track, in Tasman National Park, Tasmania" />
                     </div>
                     <div className="heading">
                         <h4 className="pt-4 text-h6TextPhone md:text-h6Text"><a href="" target="_blank" className="col-blue">Department for Environment and Heritage, South Australia</a></h4>
@@ -1334,7 +1334,7 @@ const NewPage=()=>{
                     </div>
                     <p>The Pacific region's major intergovernmental organization charged with protecting and managing the environment and natural resources.</p>
                     <div className="australia-image mt-4">
-                        <Image alt="australia" width={100} height={100} src="/assets/Images/study-in-australia/weedy-sea-dragon.jpg" className="img-fluid w-100 rounded"  />
+                        <Image alt="australia" width={1920} height={1080} src="/assets/Images/study-in-australia/weedy-sea-dragon.jpg" className="img-fluid w-100 rounded"  />
                     </div>
                 </div>
             </div>
@@ -1351,7 +1351,7 @@ const NewPage=()=>{
                         <h3 className="text-h5TextPhone md:text-h5Text">Australia History</h3>
                     </div>
                     <div className="australia-image">
-                        <Image alt="australia" width={100} height={100} src="/assets/Images/study-in-australia/Captain-Cook-taking-Possession-of-Australia.jpg" className="img-fluid w-100 rounded" title="" />
+                        <Image alt="australia" width={1920} height={1080} src="/assets/Images/study-in-australia/Captain-Cook-taking-Possession-of-Australia.jpg" className="img-fluid w-100 rounded" title="" />
                     </div>
                     <div className="heading">
                         <h4 className="pt-4 text-h6TextPhone md:text-h6Text"><a href="" target="_blank" className="col-blue">Australia profile - Timeline</a></h4>
