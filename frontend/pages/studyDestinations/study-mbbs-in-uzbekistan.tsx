@@ -14,7 +14,7 @@ const NewPage=()=>{
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/images/country-flag/uzbekistan.png" className="img-fluid" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/uzbekistan.png" className="img-fluid" />
                     </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@ const NewPage=()=>{
                   <th scope="row">1.</th>
                   <td>
                     <a href="https://edurizon.in/andijan-state-medical-institute.php">
-                      <Image width={100} height={100} src="/assets/images/mbbs-in-uzbekistan/university-logo/andijan-state-medical-institute-logo.jpeg" className="img-fluid univ-logo-size" alt="Andijan State Medical Institute" title="Andijan State Medical Institute" />
+                      <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/andijan-state-medical-institute-logo.jpeg" className="img-fluid univ-logo-size" alt="Andijan State Medical Institute" title="Andijan State Medical Institute" />
                     </a>
                   </td>
                   <td>
@@ -122,7 +122,7 @@ const NewPage=()=>{
                   <th scope="row">2.</th>
                   <td>
                     <a href="https://edurizon.in/samarkand-state-medical-university.php">
-                      <Image width={100} height={100} src="/assets/images/mbbs-in-uzbekistan/university-logo/samarkand-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Samarkand State Medical University" title="Samarkand State Medical University" />
+                      <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/samarkand-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Samarkand State Medical University" title="Samarkand State Medical University" />
                     </a>
                   </td>
                   <td>
@@ -135,7 +135,7 @@ const NewPage=()=>{
                   <th scope="row">3.</th>
                   <td>
                     <a href="https://edurizon.in/fergana-state-medical-university.php">
-                      <Image width={100} height={100} src="/assets/images/mbbs-in-uzbekistan/university-logo/fergana-state-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
+                      <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/fergana-state-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
                     </a>
                   </td>
                   <td>
@@ -149,7 +149,7 @@ const NewPage=()=>{
                   <th scope="row">4.</th>
                   <td>
                     <a href="https://edurizon.in/tashkent-medical-academy.php">
-                      <Image width={100} height={100} src="/assets/images/mbbs-in-uzbekistan/university-logo/tashkent-medical-academy-logo.jpg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
+                      <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/tashkent-medical-academy-logo.jpg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
                     </a>
                   </td>
                   <td>

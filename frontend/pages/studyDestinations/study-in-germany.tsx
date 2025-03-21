@@ -13,7 +13,7 @@ const NewPage=()=>{
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/images/country-flag/german.png" className="img-fluid" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/german.png" className="img-fluid" />
                     </div>
                     </div>
                 </div>

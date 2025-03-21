@@ -15,7 +15,7 @@ const NewPage = () => {
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/images/country-flag/georgia-flag.jpeg" className="img-fluid" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/georgia-flag.jpeg" className="img-fluid" />
                     </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ const NewPage = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">1.</th>
-                                <td><Image width={100} height={100} src="/assets/images/mbbs-in-georgia/university-logo/ivane-javakhishvili-tbilisi-state-university-logo.png" className="img-fluid univ-logo-size" alt="Ivane Javakhishvili Tbilisi State University" title="Ivane Javakhishvili Tbilisi State University" /></td>
+                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/ivane-javakhishvili-tbilisi-state-university-logo.png" className="img-fluid univ-logo-size" alt="Ivane Javakhishvili Tbilisi State University" title="Ivane Javakhishvili Tbilisi State University" /></td>
                                 <td><b>Ivane Javakhishvili Tbilisi State University</b></td>
                                 <td>$6,000</td>
                                 <td>6 Years</td>
@@ -116,7 +116,7 @@ const NewPage = () => {
                             </tr>
                             <tr>
                                 <th scope="row">2.</th>
-                                <td><Image width={100} height={100} src="/assets/images/mbbs-in-georgia/university-logo/new-vision-nniversity-logo.png" className="img-fluid univ-logo-size" alt="New Vision University" title="New Vision University" /></td>
+                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/new-vision-nniversity-logo.png" className="img-fluid univ-logo-size" alt="New Vision University" title="New Vision University" /></td>
                                 <td><b>New Vision University</b></td>
                                 <td>$6,500</td>
                                 <td>6 Years</td>
@@ -125,7 +125,7 @@ const NewPage = () => {
                             </tr>
                             <tr>
                                 <th scope="row">3.</th>
-                                <td><Image  width={100} height={100} src="/assets/images/mbbs-in-georgia/university-logo/caucasus-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Caucasus University" title="Caucasus University" /></td>
+                                <td><Image  width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/caucasus-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Caucasus University" title="Caucasus University" /></td>
                                 <td><b>Caucasus University</b></td>
                                 <td>$5,000</td>
                                 <td>6 Years</td>
@@ -134,7 +134,7 @@ const NewPage = () => {
                             </tr>
                             <tr>
                                 <th scope="row">4.</th>
-                                <td><Image width={100} height={100} src="/assets/images/mbbs-in-georgia/university-logo/tbilisi-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Tbilisi State Medical University" title="Tbilisi State Medical University" /></td>
+                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/tbilisi-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Tbilisi State Medical University" title="Tbilisi State Medical University" /></td>
                                 <td><b>Tbilisi State Medical University</b></td>
                                 <td>$8,000</td>
                                 <td>6 Years</td>
@@ -143,7 +143,7 @@ const NewPage = () => {
                             </tr>
                             <tr>
                                 <th scope="row">5.</th>
-                                <td><Image width={100} height={100} src="/assets/images/mbbs-in-georgia/university-logo/david-tvildiani-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="David Tvildiani Medical University" title="David Tvildiani Medical University" /></td>
+                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/david-tvildiani-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="David Tvildiani Medical University" title="David Tvildiani Medical University" /></td>
                                 <td><b>David Tvildiani Medical University</b></td>
                                 <td>$8,000</td>
                                 <td>6 Years</td>

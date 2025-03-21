@@ -14,7 +14,7 @@ import Image from "next/image";
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/images/countryflag/ukraineflag2.png" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/countryflag/ukraineflag2.png" />
                     </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ import Image from "next/image";
                         <tbody>
                             <tr>
                                 <th scope="row">1.</th>
-                                <td><a href="https://edurizon.in/lviv-national-medical-university.php"><Image  width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/lviv-national-medical-university-logo.png"
+                                <td><a href="https://edurizon.in/lviv-national-medical-university.php"><Image  width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/lviv-national-medical-university-logo.png"
                                         className="img-fluid univ-logo-size"
                                         alt="Lviv National Medical University"
                                         title="Lviv National Medical University" /></a>
@@ -99,7 +99,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">2.</th>
-                                <td><a href="https://edurizon.in/ternopil-state-medical-university.php"><Image  width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/ternopil-state-medical-university-logo.jpeg"
+                                <td><a href="https://edurizon.in/ternopil-state-medical-university.php"><Image  width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/ternopil-state-medical-university-logo.jpeg"
                                         className="img-fluid univ-logo-size"
                                         alt="Ternopil State Medical University "
                                         title="Ternopil State Medical University" /></a>
@@ -111,7 +111,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">3.</th>
-                                <td><a href="https://edurizon.in/bogomolets-national-medical-university.php"><Image  width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/bogomolets-national-medical-university-logo.png"
+                                <td><a href="https://edurizon.in/bogomolets-national-medical-university.php"><Image  width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/bogomolets-national-medical-university-logo.png"
                                         className="img-fluid univ-logo-size"
                                         alt="Bogomolets National Medical University"
                                         title="Bogomolets National Medical University" /></a>
@@ -123,7 +123,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">4.</th>
-                                <td><a href="https://edurizon.in/vinnitsa-national-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/vinnitsa-national-medical-university-logo.png"
+                                <td><a href="https://edurizon.in/vinnitsa-national-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/vinnitsa-national-medical-university-logo.png"
                                         className="img-fluid univ-logo-size"
                                         alt="Vinnitsa National Medical University"
                                         title="Vinnitsa National Medical University" /></a>
@@ -135,7 +135,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">5.</th>
-                                <td><a href="https://edurizon.in/bukovinian-state-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/bukovinian-state-medical-university-logo.jpeg"
+                                <td><a href="https://edurizon.in/bukovinian-state-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/bukovinian-state-medical-university-logo.jpeg"
                                         className="img-fluid univ-logo-size"
                                         alt="Bukovinian State University"
                                         title="Bukovinian State University" /></a>
@@ -147,7 +147,7 @@ import Image from "next/image";
                             </tr>
                             {/* <!--<tr>
                                 <th scope="row">7.</th>
-                                <td><a href="#"><Image alt="georgia" width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/poltava-state-medical-university-logo.jpeg"
+                                <td><a href="#"><Image alt="georgia" width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/poltava-state-medical-university-logo.jpeg"
                                         className="img-fluid univ-logo-size"
                                         alt="Poltava State Medical University"
                                         title="Poltava State Medical University" /></a>
@@ -159,7 +159,7 @@ import Image from "next/image";
                             </tr>--> */}
                             <tr>
                                 <th scope="row">6.</th>
-                                <td><a href="https://edurizon.in/zaporozhye-state-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/zaporozhye-state-medical-university-logo.jpeg"
+                                <td><a href="https://edurizon.in/zaporozhye-state-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/zaporozhye-state-medical-university-logo.jpeg"
                                         className="img-fluid univ-logo-size"
                                         alt="Zaporozhye State Medical University"
                                         title="Zaporozhye State Medical University" /></a>
@@ -171,7 +171,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">7.</th>
-                                <td><a href="https://edurizon.in/kharkiv-national-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/kharkiv-national-medical-university-logo.png"
+                                <td><a href="https://edurizon.in/kharkiv-national-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/kharkiv-national-medical-university-logo.png"
                                         className="img-fluid univ-logo-size"
                                         alt="Kharkiv National Medical University"
                                         title="Kharkiv National Medical University" /></a>
@@ -183,7 +183,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">8.</th>
-                                <td><a href="https://edurizon.in/taras-shevchenko-national-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/taras-shevchenko-national-university-of-kyiv-logo.png"
+                                <td><a href="https://edurizon.in/taras-shevchenko-national-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/taras-shevchenko-national-university-of-kyiv-logo.png"
                                         className="img-fluid univ-logo-size"
                                         alt="Taras Shevchenko National University of Kyiv"
                                         title="Taras Shevchenko National University of Kyiv" /></a>
@@ -195,7 +195,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">9.</th>
-                                <td><a href="https://edurizon.in/ivano-frankivsk-national-medical-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/ivano-frankivsk-national-medical-university-logo.jpeg"
+                                <td><a href="https://edurizon.in/ivano-frankivsk-national-medical-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/ivano-frankivsk-national-medical-university-logo.jpeg"
                                         className="img-fluid univ-logo-size"
                                         alt="Ivano Frankivsk National Medical University"
                                         title="Ivano Frankivsk National Medical University" /></a>
@@ -207,7 +207,7 @@ import Image from "next/image";
                             </tr>
                             <tr>
                                 <th scope="row">10.</th>
-                                <td><a href="https://edurizon.in/sumy-state-university.php"><Image width={100} height={100} src="/assets/images/mbbs-in-ukraine/university-logo/sumy-state-university-logo.png" className="img-fluid univ-logo-size" alt="Sumy State University" title="Sumy State University" /></a></td>
+                                <td><a href="https://edurizon.in/sumy-state-university.php"><Image width={100} height={100} src="/assets/Images/mbbs-in-ukraine/university-logo/sumy-state-university-logo.png" className="img-fluid univ-logo-size" alt="Sumy State University" title="Sumy State University" /></a></td>
                                 <td><b><a href="https://edurizon.in/sumy-state-university.php">Sumy State University</a></b></td>
                                 <td>$4,400</td>
                                 <td>6 Years</td> 

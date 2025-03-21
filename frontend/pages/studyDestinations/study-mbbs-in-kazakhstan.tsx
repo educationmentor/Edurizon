@@ -14,7 +14,7 @@ const NewPage=()=>{
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/images/country-flag/kazakhstan-flag.png" className="img-fluid" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/kazakhstan-flag.png" className="img-fluid" />
                     </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ const NewPage=()=>{
                   <th scope="row">1.</th>
                   <td>
                     <a href="https://edurizon.in/kazakh-national-medical-university.php">
-                      <Image width={100} height={100} src="/assets/images/mbbs-in-kazakhstan/university-logo/kazakhstan-national-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Kazakhstan National Medical University" title="Kazakhstan National Medical University" />
+                      <Image width={100} height={100} src="/assets/Images/mbbs-in-kazakhstan/university-logo/kazakhstan-national-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Kazakhstan National Medical University" title="Kazakhstan National Medical University" />
                     </a>
                   </td>
                   <td>
@@ -140,7 +140,7 @@ const NewPage=()=>{
                 <th scope="row">2.</th>
                   <td>
                     <a href="https://edurizon.in/west-kazakhstan-medical-university.php">
-                      <Image  width={100} height={100} src="/assets/images/mbbs-in-kazakhstan/university-logo/west-kazakhstan-medical-university-logo.png" className="img-fluid univ-logo-size" alt="West Kazakhstan Medical University" title="West Kazakhstan Medical University" />
+                      <Image  width={100} height={100} src="/assets/Images/mbbs-in-kazakhstan/university-logo/west-kazakhstan-medical-university-logo.png" className="img-fluid univ-logo-size" alt="West Kazakhstan Medical University" title="West Kazakhstan Medical University" />
                     </a>
                   </td>
                   <td>
@@ -154,7 +154,7 @@ const NewPage=()=>{
                   <th scope="row">3.</th>
                   <td>
                     <Image  width={100} height={100}
-                      src="/assets/images/mbbs-in-kazakhstan/university-logo/al-farabi-kazakh-national-university-logo.jpeg"
+                      src="/assets/Images/mbbs-in-kazakhstan/university-logo/al-farabi-kazakh-national-university-logo.jpeg"
                       className="img-fluid univ-logo-size"
                       alt="Al-Farabi Kazakh National University"
                       title="Al-Farabi Kazakh National University"
@@ -167,7 +167,7 @@ const NewPage=()=>{
                 </tr>
                 <tr>
                   <th scope="row">4.</th>
-                  <td><Image width={100} height={100} src="/assets/images/mbbs-in-kazakhstan/university-logo/asthana-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Asthana Medical University" title="Asthana Medical University" /></td>
+                  <td><Image width={100} height={100} src="/assets/Images/mbbs-in-kazakhstan/university-logo/asthana-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Asthana Medical University" title="Asthana Medical University" /></td>
                   <td><b>Asthana Medical University</b></td>
                   <td>$3,200</td>
                   <td>5 Years</td>
@@ -175,7 +175,7 @@ const NewPage=()=>{
                 </tr>
                 <tr>
                   <th scope="row">5.</th>
-                  <td><Image  width={100} height={100} src="/assets/images/mbbs-in-kazakhstan/university-logo/semey-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Semey State Medical University" title="Semey State Medical University" /></td>
+                  <td><Image  width={100} height={100} src="/assets/Images/mbbs-in-kazakhstan/university-logo/semey-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Semey State Medical University" title="Semey State Medical University" /></td>
                   <td><b>Semey State Medical University</b></td>
                   <td>$3,100</td>
                   <td>5 Years</td>
@@ -183,7 +183,7 @@ const NewPage=()=>{
                 </tr>
                 <tr>
                   <th scope="row">6.</th>
-                  <td><Image width={100} height={100} src="/assets/images/mbbs-in-kazakhstan/university-logo/international-medical-school-logo.png" className="img-fluid univ-logo-size" alt="International Medical School" title="International Medical School" /></td>
+                  <td><Image width={100} height={100} src="/assets/Images/mbbs-in-kazakhstan/university-logo/international-medical-school-logo.png" className="img-fluid univ-logo-size" alt="International Medical School" title="International Medical School" /></td>
                   <td><b>International Medical School</b></td>
                   <td>$3,500</td>
                   <td>5 Years</td>
