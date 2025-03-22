@@ -2,7 +2,7 @@
 interface EligibilityCriteriaProps {
     id: string;
     countryName:string;
-    data:{[key:string]:string[]};
+    data:string[][][];
 }
 
 
@@ -18,61 +18,31 @@ const EligibilityCriteria = ({ id,data,countryName }: EligibilityCriteriaProps) 
           <table className="w-full border-collapse border border-black dark:border-borderGreyChosen ">
             <thead>
               <tr className="bg-linenChosen dark:text-black text-regularTextPhone md:text-mediumText text-center">
-                <th className="min-w-[200px] border font-semibold border-black dark:border-r-black dark:border-b-black   dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Criteria</th>
-                <th className="min-w-[200px] border font-semibold border-black dark:border-r-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Details</th>
-                <th className="min-w-[200px] border font-semibold border-black dark:border-r-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Notes</th>
-                
+                {data[0].map((highlight, index) => (
+                  <th key={index} className="min-w-[200px] border font-semibold border-black dark:border-r-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">{highlight}</th>
+                ))}
               </tr>
             </thead>
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
-              <tr >
-                <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] font-semibold">Academic Qualification</td>
-
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.academicDetail.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.academicNote.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-              </tr>
-
-              <tr >
-                <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] font-semibold">NEET Qualification</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.neetDetail.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.neetNote.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-              </tr>
-
-              <tr >
-                <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] font-semibold">Age Limit</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.ageDetail.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.ageNote.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-              </tr>
-
-              <tr >
-                <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] font-semibold">Required Documents</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.documentDetail.map((highlight, index) => (
-                  <li className="list-decimal " key={index}> {highlight}</li>
-                ))}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/3">
-                {data.documentNote.map((highlight, index) => (
-                  <li className=" list-none " key={index}>- {highlight}</li>
-                ))}</td>
-              </tr>
+        
+              {data.slice(1).map((row, i) => {
+                const width=row.length;
+                console.log(width);
+                return(
+                <tr key={i}>
+                  {row.map((highlight, index) => (
+                    <td key={index} className={`border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-[${100/width}%] ${index==0?"font-semibold bg-linenChosen":""}`}>
+                      {index!=0?
+                      (highlight.map((highlight, index) => (
+                        <li className=" list-none " key={index}>- {highlight}</li>
+                      ))
+                      ):(highlight)}
+                      </td>
+                  ))}
+                </tr>
+                )
+              })}
+              
             </tbody>
           </table>
           </div>

@@ -15,17 +15,38 @@ const Breadcrumbs: React.FC = () => {
     aboutUs: "About Us",
     contact: "Contact Us",
     studyDestinations: "Study Destinations",
+    "study-mbbs-in-russia": "Study MBBS in Russia",
+    "study-mbbs-in-china": "Study MBBS in China",
+    "kazan-federal-university": "Kazan Federal University",
+    "study-in-uk":"Study in UK",
+    "study-mbbs-in-bangladesh":"Study MBBS in Bangladesh",
+    "study-mbbs-in-tajikistan":"Study MBBS in Tajikistan",
+    "study-in-hungary":"Study in Hungary",
+    "study-mbbs-in-georgia":"Study MBBS in Georgia",
+    "study-mbbs-in-ukraine":"Study MBBS in Ukraine",
+    "study-in-germany":"Study in Germany",
+    "study-in-australia":"Study in Australia",
+    "study-mbbs-in-nepal":"Study MBBS in Nepal",
+    "study-mbbs-in-kazakhstan":"Study MBBS in Kazakhstan",
+    "study-mbbs-in-uzbekistan":"Study MBBS in Uzbekistan",
+    "bashkir-medical-university":"Bashkir Medical University",
+    "north-wester-state-medical-university":"North Western State Medical University",
+    "kazaan-federal-university":"Kazan Federal University",
+    "northern-state-medical-university":"Northern State Medical University",
+    "orenburg-medical-university":"Orenburg Medical University",
+    "petrozavodsk-state-university":"Petrozavodsk State University",
   };
 
   return (
     <nav aria-label="breadcrumb" className=" text-black dark:text-white text-tinyTextPhone md:text-regularText ">
-      <ul className="flex ">
+      <ul className="flex flex-wrap">
         <li className="hover:underline ">
           <TransitionLink href="/" >
-            Home
+          <p className="dark:text-white">Home</p>
           </TransitionLink>
         </li>
         {pathSegments.map((segment, index) => {
+          console.log(segment);
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
@@ -37,9 +58,12 @@ const Breadcrumbs: React.FC = () => {
               {isLast ? (
                 <span className="font-semibold ">{breadcrumbNames[segment]??segment[0].toUpperCase()+segment.substring(1)}</span>
               ) : (
-                <div className="hover:underline">
+
+                <div className="hover:underline dark:text-white">
                 <TransitionLink  href={href}>
+                  <p className="dark:text-white">
                   {breadcrumbNames[segment]}
+                  </p>
                 </TransitionLink>
                 </div> 
               )}

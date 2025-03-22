@@ -8,6 +8,7 @@ import DummyStudent1 from '../../public/assets/Images/landingPage/DummyStudent1.
 import DummyStudent2 from '../../public/assets/Images/landingPage/DummyStudent2.png';
 import DummyStudent3 from '../../public/assets/Images/landingPage/DummyStudent3.png';
 import DummyStudent4 from '../../public/assets/Images/landingPage/DummyStudent4.png';
+import { TransitionLink } from '@/utils/TransitionLink';
 
 const HeroSection = () => {
   const [showConsultationForm, setShowConsultationForm] = useState(false);
@@ -82,7 +83,9 @@ const HeroSection = () => {
 
 
             <div className='flex flex-col md:flex-row w-[54vw] md:w-[27.4375vw] gap-[4vw] md:gap-[1vw]'>
-              <IconButton btnTitle={"Explore Opportunities"} className='text-smallTextPhone md:text-smallText dark:text-white' btnHeightPhone={11} btnWidthPhone={52.5} btnRadiusPhone={17.5} paddingPhone={1.5} iconWidthPhone={8} btnHeight={3} btnWidth={13.1875} btnRadius={6.25} padding={0.375} iconWidth={1.9125} image={"/assets/Images/Icons/NorthEastIcon.svg"}/>
+              <TransitionLink href='/studyDestinations?category=viewAll' >
+              <IconButton  btnTitle={"Explore Opportunities"} className='text-smallTextPhone md:text-smallText dark:text-white' btnHeightPhone={11} btnWidthPhone={52.5} btnRadiusPhone={17.5} paddingPhone={1.5} iconWidthPhone={8} btnHeight={3} btnWidth={13.1875} btnRadius={6.25} padding={0.375} iconWidth={1.9125} image={"/assets/Images/Icons/NorthEastIcon.svg"}/>
+              </TransitionLink>
               <TitleButton onClick={handleConsultationClick} btnTitle={"Book Free Consultation"} btnHeight={3} btnHeightPhone={11} btnWidth={13.1875} btnWidthPhone={52.5} btnRadius={6.25} btnRadiusPhone={17.5} />
             </div>
           </div>

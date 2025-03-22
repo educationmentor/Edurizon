@@ -30,7 +30,7 @@ const Navbar = () => {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
-    { name: "Study Destinations", href: "/studyDestinations", dropdown: true , borderTop: true },
+    { name: "Study Destinations", href: "/studyDestinations?category=Destination", dropdown: true , borderTop: true },
     { name: "College Predictor", href: "https://college-predictor-nine.vercel.app/", external: true },
     { name: "Budget Calculator", href: "#" },
     { name: "Services", href: "#" , borderTop: true },
