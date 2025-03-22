@@ -1,32 +1,41 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {destinationData} from "@/lib/destinationData"
 import SearchIcon from '@mui/icons-material/Search';
 import ActionAreaCard from "@/components/studyDestinationComponents/studyDestinationCard";
 import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
+import { useRouter } from "next/router";
 
-const categories = ["View all", "Blogs", "Study Destinations", "Top MBBS Universities", "Under 20Lac", "Budget 20Lac - 40Lac", "Budget 40Lac - 60Lac"];
-
+const categoriesMap: Record<string, string> = {viewAll:"View all", blogs:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
+const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;
 }
 
-const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProps) => {
-    const [selectedButton, setSelectedButton] = useState(0);
+const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps) => {
+    const router = useRouter();
+    // useEffect(() => {
+    //     setSelectedButton(0); // Select the first category by default
+    // }, [categoryDefault]);
+    categoryDefault = String(router.query.category)==="undefined"?categoryDefault:String(router.query.category);
+    const [selectedButton, setSelectedButton] = useState(categories.indexOf(categoryDefault));
 
-
-    const [selectedCategory, setSelectedCategory] = useState(categoryDefault);
-  
-    const handleCategoryChange = (category: React.SetStateAction<string>) => {
+    const [selectedCategory, setSelectedCategory] = useState<string>(categoryDefault);
+    console.log(selectedCategory);
+    const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };
+    console.log(categoryDefault);
+    const [searchTerm, setSearchTerm] = useState("");
+
   
     // Filter blogs based on the selected category
-    const filteredBlogs = selectedCategory === "View all"
-      ? destinationData
-      : destinationData.filter(destination => destination.category === selectedCategory);
-    
-    console.log(filteredBlogs);
+    const filteredBlogs = selectedCategory === "viewAll"
+  ? destinationData.filter(destination => destination.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  : destinationData.filter(destination => 
+      destination.category === selectedCategory && 
+      destination.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
     return (
         <div className="mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] my-[60px] lg:my-[80px] xl:my-[120px]">
@@ -42,7 +51,8 @@ const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProp
         
         <div className="my-[20px] md:my-[30px] lg:my-[30px] xl:my-[40px] flex justify-center mx-auto  relative max-w-[320px] sm:max-w-[480px] md:max-w-[600px] lg:max-w-[720px]" >
           <div className="relative  border-none items-center  font-normal w-full ">
-            <TextField variant='standard' placeholder="Search" type='text' id='search'
+            <TextField variant='standard' placeholder="Search" type='text' id='search' value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
               className='input w-full justify-center px-[8px] pr-[8px] md:px-5 md:pr-12 border-none leading-[24px] text-[12px] md:text-[16px] h-[44px] md:h-[56px]  text-searchBarPurpleIcon bg-paleOrangeChosen rounded-full '
                 InputProps={{
                   startAdornment: ( <InputAdornment className='px-[20px] md:px-[30px] w-[15px] md:w-[20px] h-auto ' position="start"> <MenuIcon  /> </InputAdornment> ),
@@ -64,7 +74,7 @@ const StudyDestinations = ({ categoryDefault="View all" }: StudyDestinationsProp
             }`}
             onClick={() => setSelectedButton(index)}
           >
-            {name}
+            {categoriesMap[name]}
           </button>
         </div>
       ))}

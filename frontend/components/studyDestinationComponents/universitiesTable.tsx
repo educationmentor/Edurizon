@@ -1,3 +1,5 @@
+import { TransitionLink } from "@/utils/TransitionLink";
+
 interface UniversitiesProps {
     id: string;
     countryName:string;
@@ -7,6 +9,7 @@ interface UniversitiesProps {
         annualFees:string;
         gloablRanking:string;
         highlights:string[];
+        href:string;
       }[];
 }
 
@@ -30,7 +33,11 @@ const Universities = ({ id,data,countryName }: UniversitiesProps) => {
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
             {data.map((university, i) => (
               <tr key={i}>
-                <td className=" border dark:text-black bg-linenChosen border-black  dark:border-borderGreyChosen dark:border-r-black  dark:border-b-black px-[.75vw] py-[.625vw] font-semibold">{university.universityName}</td>
+                <td className=" border dark:text-black bg-linenChosen underline border-black  dark:border-borderGreyChosen dark:border-r-black  dark:border-b-black px-[.75vw] py-[.625vw] font-semibold">
+                <TransitionLink href={university.href}>
+                {university.universityName}
+                </TransitionLink></td>
+                
                 <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]  ">{university.location}</td>
                 <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">{university.annualFees}</td>
                 <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">{university.gloablRanking}</td>
