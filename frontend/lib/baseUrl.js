@@ -1,4 +1,1 @@
-const baseUrl= process.env.NEXT_PUBLIC_BASE_URL;
-console.log(baseUrl);
-
-export {baseUrl};
+export const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
