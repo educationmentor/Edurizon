@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
 import { useRouter } from "next/router";
 
-const categoriesMap: Record<string, string> = {viewAll:"View all", blogs:"Blogs", Destination:"Study Destinations", universities:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
+const categoriesMap: Record<string, string> = {viewAll:"View all", blogs:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
 const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;
@@ -26,12 +26,16 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
       setSelectedCategory(category);
     };
     console.log(categoryDefault);
+    const [searchTerm, setSearchTerm] = useState("");
+
   
     // Filter blogs based on the selected category
     const filteredBlogs = selectedCategory === "viewAll"
-      ? destinationData
-      : destinationData.filter(destination => destination.category === selectedCategory);
-    
+  ? destinationData.filter(destination => destination.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  : destinationData.filter(destination => 
+      destination.category === selectedCategory && 
+      destination.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
     return (
         <div className="mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] my-[60px] lg:my-[80px] xl:my-[120px]">
@@ -47,7 +51,8 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
         
         <div className="my-[20px] md:my-[30px] lg:my-[30px] xl:my-[40px] flex justify-center mx-auto  relative max-w-[320px] sm:max-w-[480px] md:max-w-[600px] lg:max-w-[720px]" >
           <div className="relative  border-none items-center  font-normal w-full ">
-            <TextField variant='standard' placeholder="Search" type='text' id='search'
+            <TextField variant='standard' placeholder="Search" type='text' id='search' value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
               className='input w-full justify-center px-[8px] pr-[8px] md:px-5 md:pr-12 border-none leading-[24px] text-[12px] md:text-[16px] h-[44px] md:h-[56px]  text-searchBarPurpleIcon bg-paleOrangeChosen rounded-full '
                 InputProps={{
                   startAdornment: ( <InputAdornment className='px-[20px] md:px-[30px] w-[15px] md:w-[20px] h-auto ' position="start"> <MenuIcon  /> </InputAdornment> ),

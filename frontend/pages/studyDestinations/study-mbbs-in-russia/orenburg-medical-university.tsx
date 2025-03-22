@@ -10,80 +10,39 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 5,40,000 / Year",
+      label: "Dollar 6,200 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
       text: "City & Province",
-      label: "Kazan, Russia",
+      label: "Orenburg, Russia",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
       text: "World Rank",
-      label: "396",
+      label: "WHO-Listed",
     },
     {
       icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",
       text: "Amazing Fact",
-      label: "FMGE Passing Ratio 2024 - 36.36%",
+      label: "Free Russian Language Course",
     },
   ];
-
-const why=["All 50,000 students who are studying and enjoying at the 2nd oldest university of Russia, Kazan Federal University knows the answer.",
-"A world of thoughts, ideas, diversity and culture can be discovered from students of Kazan Federal University which was once always considered as a bridge between the students of east and west. You will be able to grow, explore yourself more, identify your talent, ability and learn many things from the outside world apart from classroom teaching.",
-"Kazan Federal University is a top rated university in Russia with 215 years of experience in imparting quality education and research work in extensive field for its students.",
-"More than 3000 professors are employed for providing under graduated and graduate courses. Professors are highly qualified as most of them hold either a doctorate degree or some represent powerful scientific minds in and out of Russia across the world. The whole credit goes to them as under their leadership and supervision students have excelled and become strong leaders today both in industry and studies.",
-"Kazan Federal University has developed much from the last years. It has extended itself by including more research centers across the globe, well built infrastructure, 80 teaching world class laboratories, and 17 competitive research centers."]
-
-const feeStructure={
-    title:"Fee Structure",
-    subTitle:"Kazan Federal University Fees",
-    data:[
-        ["Expense", "Annual Cost"],
-        ["Tution Fees","4,93,740 Ruble"],
-        ["Hostel Fees","18,000 Ruble"],
-        ["Miscellaneous","10,000–20,000 Ruble"],
-    ]
-}
-
-const facts={
-    title:"Quick Facts Related to Kazan Federal University",
-    subTitle:"",
-    data:[
-        [],
-        ["Established In","1804"],
-        ["Recognition","NMC, WHO, ECFMG (USMLE), GMC (PLAB), AMEE"],
-        ["Medium of Teaching","1Fully English"],
-        ["Course Duration","6 Years"],
-        ["Indian students","Yes"],
-        ["Entrance Exam","Yes, Kazan Federal conducts entrance exams in respect of all international students, including Indians, every year."],
-        ["University Ranking","347"]
-    ]
-}
-
-const eligibility=[
-    
-        [["Criteria"],["Details"]],
-        [["Academic Qualification"],["Above 50% in 10+2, PCBE."]],
-        [["NEET Qualification"],["NEET Score - Just Qualify."]],
-        [["Age Limit"],["Age should be 17 years as on 31st December in the year of seeking admission."]],
-        [["University Exam"],["Qualify the university exam."]],
-]
 
 
 
 const OrenburgMedicalUniversity=()=>{
-    return <div>
+    return <div className="text-regularTextPhone md:text-regularText">
         <div className="relative h-auto w-full">
-        <Image src="/assets/Images/kazanFederalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
-        <div className="w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center mx-auto">
+        <Image src="/assets/Images/universities/russia/OrenburgStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
+        <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
-                <h1 className="text-h1Text font-bold">Kazan Federal University</h1>
+                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Orenburg Medical University</h1>
             </div>
             <p className="text-regularTexts text-center">
-            Are you dreaming of pursuing a career in medicine and becoming a skilled doctor? Look no further than Kazan Federal University in Russia - a prestigious institution with a rich history and a renowned medical program.
+            Embark on a journey toward a rewarding medical career at Far Eastern Federal University, a distinguished institution offering world-className medical education, research, and clinical practice.
             </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] justify-center">
@@ -93,76 +52,310 @@ const OrenburgMedicalUniversity=()=>{
                             md:py-[1.5vw] px-[3.875vw] md:px-[1.937vw] box-border gap-[1vw] text-center text-regularText text-black">
                   <Image src={item.icon}
                     alt={item.label} width={64} height={64} className="w-[8.5vw] h-[8.5vw] md:w-[4.25vw] md:h-[4.25vw] relative  overflow-hidden shrink-0" />
-                  <p className="text-center leading-[150%]"> {item.text} <br /><span className="font-semibold"> {item.label}</span></p>
+                  <p className="text-tinyTextPhone md:text-tinyText text-center leading-[150%]"> {item.text} <br /><span className="font-semibold"> {item.label}</span></p>
                 </div>
               ))}
             </div>
         </div>
         </div>
 
-        <div className="mx-[12.5vw] my-[4vw]">
-            <p className="text-regularText font-semibold leading-[150%] text-justify">
-            Kazan Federal University was established in the year 1804 and received the federal status in the year 2010. The University is located in Kazan and is one of the best government universities in Russia. The University has two branches one is located at Naberezhnye and the other is situated at Yelabuga. The main campus of the University is in downtown Kazan which consists of 16 institutes, 3 higher schools and 2 faculties and is just10 minutes away from Kazan Kremlin.<br/><br/>
-            The University offers variety of undergraduate and postgraduate programs and every year more than 50,000 students register themselves in different courses from across the world. The University also has a good arrangement of stay for students who come from outside of Kazan. It has a separate dormitory campus built in Universaide village which can accommodate about 12000 students with all facilities like laundry, beauty salon, sports equipment, medical centre, cafeteria and drug store.<br/><br/>
-            In 2014 Kazan Federal University celebrated its 210th anniversary. It is one of the oldest universities in Russia to achieve such a milestone. It is all due to its dedication and mission that it is considered the leading educational institution of today both in Russia and across the world.<br/><br/>
-            The University scholars and graduates are doing excellence around the world. It is all due to their endurance and efforts today Kazan Federal University has gained so much of fame and recognition around the world. Their perseverance and achievement has changed and impacted the country as well. The University has also contributed for the development of the country.<br/><br/>
-            Acknowledged as the dynamic and modern university Kazan Federal University also got an opportunity to participate in various government projects coordinated by the government of Russian Federation and improve its presence across the world in both research and educational centres. The University also worked in co ordinance with both international and local cooperation, work on boosting the regions human resource development, networking with academia and industry and also look after the progress of research and innovation centres in different field.<br/><br/>
-            The University has a huge contribution in the establishment of various world class research and teaching centres along with laboratories. The determination and participation of the university in projects like 5-100 solely intensifies its dedication and passion to reach the peak and make a name for one self.<br/><br/>
-            Whatever fame the university has earned till today it is all because of the right planning and execution. The university was able to rose to fame from a small traditional Institute to a Research University where all state-of-the-art and entrepreneurial activities are represented.<br/><br/>
-            </p>
-        </div>
-        <div className="grid grid-cols-2 gap-[5vw] mx-[12.5vw] my-[4vw]">
-            <div className="flex flex-col gap-[2vw] justify-center">
-                <h3 className="text-h3Text font-bold leading-[120%]">
-                    The City <br/> <span className="text-orangeChosen">Kazan</span>
-                </h3>
-                <p className="text-regularText leading-[150%] text-justify">
-                The history of Kazan situated in the center of Europe which is a multinational and multifessional city of Russia is filled with millennium past record. The university is very easily reachable by underground metro from the dormitory. The city is also well known around the world for many cultural events and international sport like universaide 2013 (world student games) FINA World Acquatics Championships 2015, International Classical Ballet and Opera Festivals, International Festival of Muslim Cinema and 21st FIFA World Cup (2018).
-                </p>
+        <section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg g-0">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">About Orenburg State Medical University</h3>
+                </div>
+                <p>Orenburg State Medical University (OrSMU), situated in the Russian city of Orenburg, is one of the best government medical schools in the country. It was founded in 1944. It provides courses leading to masters, doctorate, and bachelor's degrees in a variety of subject areas that are officially recognized as higher education degrees. The University satisfies every contemporary criterion and prerequisite set forth for graduate-level medical programs. For this reason, the most sought-after Russian medical school is Orenburg State Medical University, especially for Indian students hoping to pursue an MBBS in Russia. </p>
+                <p>In order to prepare the upcoming generation of doctors, researchers, and healthcare workers, Orenburg State Medical University offers top-notch educational programs. This university has produced numerous well-known experts in the medical profession. They are employed in public and private medical and preventive facilities, holding prominent roles in state governance frameworks, and resolving fundamental problems in the advancement of contemporary medicine. </p>
+                <p>Orenburg State Medical University works hard to give its students the greatest medical education possible in order to equip them to face problems down the road and graduate with the capacity to manage the obligations of the medical sector. </p> 
+                <p>More than 1200 Indian students are enrolled at Orenburg State Medical University's MBBS program right now.</p>    
             </div>
-            <Image src="/assets/Images/kazanFederalCity.webp" alt="Kazan Federal City" width={500} height={500} className="w-[32.375vw] h-auto" />
         </div>
+    </div>
+</section>
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row g-0">
+            <div className="immigrate-bg">
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div className="heading">
+                        <h3 className="text-h5TextPhone md:text-h5Text">Quick Facts of Orenburg State Medical University</h3>
+                    </div>
+                    <div className="table-responsive">
+                        <table className="table table-bordered table-striped align-middle">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Year of Establishment </th>
+                                    <td>1944</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Type</th>
+                                    <td>Government</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Course Duration</th>
+                                    <td>6 year (including 1 year internship)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Medium of Teaching</th>
+                                    <td>Fully English</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Eligibility</th>
+                                    <td>minimum 50% in Physics, Chemistry and Biology Aggregate</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NEET</th>
+                                    <td>Qualifying Marks</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Affiliation & Accreditation</th>
+                                    <td>Health Ministry Of Russian Federation</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Photos in Instagram</th>
+                                    <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">University &amp; Review videos</th>
+                                    <td><a href="https://www.youtube.com/c/EdurizonPvtLtd" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div className="px-[12.5vw] w-full bg-linenChosen grid grid-cols-2 items-center py-[4vw] gap-[2vw]  my-[4vw]">
-            <div className="flex flex-col gap-[2vw] justify-center">
-                <h2 className="text-h2Text font-bold leading-[120%]">Why MBBS in Kazan Federal University?</h2>
-                <ul className="list-disc pl-[2vw] text-regularText leading-[150%] text-justify">
-                    {why.map((item,index)=>(
-                        <li key={index} >{item}</li>
-                    ))}
+
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg g-0">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">City at a Glance</h3>
+                </div>
+                <ul className="points-two">
+                    <li>The administrative hub of Russia's Orenburg Oblast is Orenburg. </li>
+                    <li>Because of its location between Europe and Asia, the city is well-known. </li>
+                    <li>Large engineering industries that produce agricultural and heavy industrial machinery are present in modern Orenburg. </li>
+                    <li>The city serves as Orenburg Oblast's administrative hub. The city is near Kazakhstan's border. </li>
+                    <li>Orenburg has a very continental climate, with hot, dry summers and mildly chilly winters. </li>
+                    <li>The Holy Trinity Convent of Mercy, the Dead Sea in the Dessert, and the caravanserai are the top attractions in Orenburg.</li>
                 </ul>
             </div>
-            <Image src="/assets/Images/CountryBlogs/didYouKnow.png" alt="Did You Know" width={500} height={500} className="w-[30.5vw] h-auto mx-auto" />
         </div>
-        <div className=""> 
-        <UnlistedTable id="1" section2="fee" content={feeStructure}/>
-        </div>
-        <div>
-        <div className=" flex flex-col  mx-[12.5vw] gap-[2vw] py-[4vw] mb-[4vw]">
-            <div className="flex flex-col gap-[1vw]">
-            <h3 className="text-h5TextPhone md:text-h3Text text-center font-bold leading-[130%]">Kazan Federal University Entrance Exam</h3>
-            <p className="text-smallText text-center ">Kazan Federal Conducts entrance exams in respect to all international students, including Indians, every year.</p>
-            </div>
-            <div className="flex flex-col gap-[1vw]">
-                <h4 className="text-h4Text font-bold text-left">Kazan Federal University Entrance Exam Sample Paper</h4>
-                <ul className="text-regularText list-disc list-inside">
-                    <li>The subjects for the entrance exams are English & Biology.</li>
-                    <li>It is mandatory to get qualified in each subject.</li>
-                    <li>It is expected that, this year, qualifying marks will be lower as Chemistry subject has been exempted.</li>
+    </div>
+</section>
+
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg g-0">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">Recognitions of Orenburg State Medical University</h3>
+                    <p>Several reputable international organizations, including the following, have acknowledged Orenburg State Medical University:</p>
+                </div>
+                <ul className="points-two">
+                    <li>National Medical Commission (formerly known as the Medical Council of India); Canadian Medical Council; </li>
+                    <li>Russia's Ministry of Science and Higher Education; the Education Commission for Foreign Medical Graduates (ECFMG); the World Directory of Medical Schools (WDOMS); </li>
+                    <li>A member of the Foundation for International Medical Education and Research Advancement (FAIMER).</li>
                 </ul>
             </div>
         </div>
-        
-        <EligibilityCriteria id="1" data={eligibility} countryName="Kazan Federal University"/>
-        
+    </div>
+</section>
 
-        <div className="mb-[4vw]"> 
-        <UnlistedTable id="1" section2="fee" content={facts}/>
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg g-0">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">Faculties of Orenburg State Medical University</h3>
+                </div>
+                <ul className="points-three">
+                    <li>Eco biology.</li>
+                    <li>Theoretical and practical aspects of Biochemistry and Physiology.</li>
+                    <li>Morphology.</li>
+                    <li>Microbiology, Immunology.</li>
+                    <li>surgery.</li>
+                    <li>Pediatric surgery.</li>
+                    <li>Internal diseases.</li>
+                    <li>Side issues of clinical medicine (Eye diseases, Neurology, Dermatovenerology, Otorhinolaryngology).</li>
+                    <li>Gynaecology and Obstetrics.</li>
+                    <li>Topical issues of pediatric pathologies.</li>
+                    <li>Topical issues of pediatrics.</li>
+                    <li>The English and German languages.</li>
+                    <li>The Latin language.</li>
+                    <li>Philosophy.</li>
+                    <li>History of medicine, economic theory, sociology and pedagogics.</li>
+                    <li>Pharmacology and Pharmacy.</li>
+                    <li>Public health and General psychology.</li>
+                    <li>Stomatology.</li>
+                    <li>Clinical psychology and psychiatry.</li>
+                    <li>Biophysics and Mathematics.</li>
+                    <li>Topical issues of Hygiene.</li>
+                    <li>Epidemiology and Infectious diseases.</li>
+                </ul>
+            </div>
         </div>
+    </div>
+</section>
 
-
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg g-0">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">Why Choose Orenburg State Medical University for MBBS in Russia</h3>
+                </div>
+                <ul className="points-two">
+                    <li>Learners Here, more than 3,000 students and 1000 listeners are enrolled in the MBBS program.</li>
+                    <li>Standards For international students, the entrance requirements are simple: they just need to fulfill the academic requirements in order to be eligible for the NEET exam.</li>
+                    <li>Accepted by the NMC has approved the university's MBBS program.</li>
+                    <li>Additionally, this university received approval to improve clinical practice from a global medical body.</li>
+                    <li> Language: English is the medium of instruction for the university's medical program.</li>
+                </ul>
+            </div>
         </div>
-        <PostArrival/>
+    </div>
+</section>
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="row g-0">
+            <div className="immigrate-bg">
+              <div className="row">
+                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div className="heading">
+                        <h3 className="text-h5TextPhone md:text-h5Text">Fees Structure of Orenburg State Medical University</h3>
+                    </div>
+                    <div className="table-responsive">
+                        <table className="table table-bordered table-striped align-middle">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Tuition Fees</th>
+                                    <td>$6,200</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Hostel Fees</th>
+                                    <td>(Hostel Fee Included)</td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> 
+                  <div className="heading">
+              <h3 className="text-h5TextPhone md:text-h5Text">Other Charges which includes in</h3> 
+          </div>
+          <ul className="points-two"> 
+              <li>Visa, Medical Insurance, Biometric, Medical Checkup, Food, and Air Ticket will be extra charge.</li>
+          </ul>  
+          <p><b>Note: 1Dollar= 83 rupees (It can vary)</b></p>
+      </div>
+    </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+  <section className="inner-page-bg">
+    <div className="container">
+        <div className="row immigrate-bg">
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div className="heading">
+                    <h3 className="text-h5TextPhone md:text-h5Text">Orenburg State Medical University's Eligibility Standards</h3>
+                </div>
+                <p>This is the eligibility criteria for all applicants to the MBBS program at Orenburg State Medical University. The university has implemented a simplified admissions process for international applicants, making it very simple to gain admission. The full set of requirements for MBBS admission to OSMU is provided below.</p>
+                <ul className="points-two">
+                    <li>Learners Here, more than 3,000 students and 1000 listeners are enrolled in the MBBS program.</li>
+                    <li>Standards For international students, the entrance requirements are simple: they just need to fulfill the academic requirements in order to be eligible for the NEET exam.</li>
+                    <li>Accepted by the NMC has approved the university's MBBS program.</li>
+                    <li>Additionally, this university received approval to improve clinical practice from a global medical body.</li>
+                    <li> Language: English is the medium of instruction for the university's medical program.</li>
+                </ul>
+            </div>
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div className="heading">
+                <h3 className="pt-2  text-h5TextPhone md:text-h5Text">Academics</h3>
+                </div>
+                <ul className="points-two">
+                    <li>A minimum of 50% marks is required in the 12th className exam.</li>
+                    <li>40% marks are required for reserved category candidates.</li>
+                    <li>Physics, Chemistry, and Biology are compulsory subjects.</li>
+                </ul>
+                <div className="heading">
+                <h3 className="pt-2  text-h5TextPhone md:text-h5Text">Criteria</h3>
+                </div>
+                <ul className="points-two">
+                    <li>Candidates need to qualify for the NEET Exam to get admission to OSMU.</li>
+                </ul>
+                <div className="heading">
+                <h3 className="pt-2 text-h5TextPhone md:text-h5Text">Age</h3>
+                </div>
+                <ul className="points-two">
+                    <li>The minimum age required is 17; students completing 17 till 31 December of the admission year are also eligible.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="immigrate-bg">
+            <div className="row">
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
+                            <div className="heading">
+                        <h3 className="text-h5TextPhone md:text-h5Text">Documents Required for Orenburg State Medical University</h3>
+                    </div> 
+                    <ul className="points-two"> 
+                        <li>10TH/12TH Mark sheet.</li>
+                        <li>Passport size photos.</li>
+                        <li>NEET  Scorecard.</li>
+                        <li>Original Passport.</li>
+                        <li>HIV Report.</li>
+                        <li>Covid-19 Report(Negative).</li>
+                    </ul>  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section className="inner-page-bg">
+    <div className="container">
+        <div className="immigrate-bg">
+            <div className="row">
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
+                            <div className="heading">
+                        <h3 className="text-h5TextPhone md:text-h5Text">Student's life at Orenburg State Medical University</h3>
+                    </div> 
+                    <ul className="points-two"> 
+                        <li><b>Cultural Events:</b> For their international medical students, the university hosts dancing, music, and other cultural programs.</li>
+                        <li> <b>Campus Vibrant:</b> The University boasts a lively campus with top-notch amenities for offering a top-notch medical education alongside a comfortable lifestyle.</li>
+                        <li><b>Modern Classrooms:</b> To improve instruction, students are provided with state-of-the-art classrooms equipped with several amenities.</li>
+                        <li><b>Library:</b> It boasts a large, well-stocked library with both print and digital medical journals.</li>
+                        <li><b>Labs:</b> For improved clinical practice, a variety of medical laboratories are accessible.</li>
+                        <li><b>Hostel:</b> Both domestic and foreign medical students can find lodging at the OSMU.</li>
+                        <li><b>Mess:</b> Since the hostel mess provides a sample of the cuisine, medical students do not need to cook.</li>
+                        <li><b>Sports Club:</b> Students can play games in the sports club on campus at the university.</li>
+                    </ul>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="h-[4vw]"/>
+</section>
+
+
+        
     </div>
 }
 

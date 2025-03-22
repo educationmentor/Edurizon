@@ -75,12 +75,12 @@ const eligibility=[
 const KazanFederalUniversity=()=>{
     return <div>
         <div className="relative h-auto w-full">
-        <Image src="/assets/Images/kazanFederalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
-        <div className="w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center mx-auto">
+        <Image src="/assets/Images/universities/russia/KazanFederalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
+        <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
-                <h1 className="text-h1Text font-bold">Kazan Federal University</h1>
+                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Kazan Federal University</h1>
             </div>
             <p className="text-regularTexts text-center">
             Are you dreaming of pursuing a career in medicine and becoming a skilled doctor? Look no further than Kazan Federal University in Russia - a prestigious institution with a rich history and a renowned medical program.
@@ -93,7 +93,7 @@ const KazanFederalUniversity=()=>{
                             md:py-[1.5vw] px-[3.875vw] md:px-[1.937vw] box-border gap-[1vw] text-center text-regularText text-black">
                   <Image src={item.icon}
                     alt={item.label} width={64} height={64} className="w-[8.5vw] h-[8.5vw] md:w-[4.25vw] md:h-[4.25vw] relative  overflow-hidden shrink-0" />
-                  <p className="text-center leading-[150%]"> {item.text} <br /><span className="font-semibold"> {item.label}</span></p>
+                  <p className="text-tinyTextPhone md:text-tinyText text-center leading-[150%]"> {item.text} <br /><span className="font-semibold"> {item.label}</span></p>
                 </div>
               ))}
             </div>
