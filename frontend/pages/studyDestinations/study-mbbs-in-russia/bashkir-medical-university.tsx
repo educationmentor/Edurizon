@@ -114,7 +114,7 @@ const BashkirMedicalUniversity=()=>{
                     <div className="col-xl-12">
                         <div id="edurizon-videos" className="grid md:grid-cols-4 grid-cols-2 owl-carousel">
                             <div className="edu-videos">
-                                <iframe src="https://www.youtube.com/embed/0BF-kRVlX5E" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  width="100%" height="250"></iframe>
+                                <iframe src="https://www.youtube.com/embed/0BF-kRVlX5E" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  width="100%" className="h-[100px] md:h-[250px]"></iframe>
                             </div>
                             <div className="edu-videos">
                                 <iframe width="100%"  className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/XwVvd0DUWkg" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
