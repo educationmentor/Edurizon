@@ -62,6 +62,7 @@ export const destinationData =[
       href:"/studyDestinations/study-mbbs-in-russia/orenburg-medical-university",
       description:"Embark on a journey toward a rewarding medical career at Far Eastern Federal University, a distinguished institution offering world-class medical education, research, and clinical practice."
     },
+    
     {
       image:"/assets/Images/CountryBlogs/studyDestinationCard/PetrozavodskUniversity.webp",
       title:"Petrozavodsk State University",
