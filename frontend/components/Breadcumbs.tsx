@@ -29,15 +29,20 @@ const Breadcrumbs: React.FC = () => {
     "study-mbbs-in-nepal":"Study MBBS in Nepal",
     "study-mbbs-in-kazakhstan":"Study MBBS in Kazakhstan",
     "study-mbbs-in-uzbekistan":"Study MBBS in Uzbekistan",
-
+    "bashkir-medical-university":"Bashkir Medical University",
+    "north-wester-state-medical-university":"North Western State Medical University",
+    "kazaan-federal-university":"Kazan Federal University",
+    "northern-state-medical-university":"Northern State Medical University",
+    "orenburg-medical-university":"Orenburg Medical University",
+    "petrozavodsk-state-university":"Petrozavodsk State University",
   };
 
   return (
     <nav aria-label="breadcrumb" className=" text-black dark:text-white text-tinyTextPhone md:text-regularText ">
-      <ul className="flex ">
+      <ul className="flex flex-wrap">
         <li className="hover:underline ">
           <TransitionLink href="/" >
-            Home
+          <p className="dark:text-white">Home</p>
           </TransitionLink>
         </li>
         {pathSegments.map((segment, index) => {
@@ -54,9 +59,11 @@ const Breadcrumbs: React.FC = () => {
                 <span className="font-semibold ">{breadcrumbNames[segment]??segment[0].toUpperCase()+segment.substring(1)}</span>
               ) : (
 
-                <div className="hover:underline">
+                <div className="hover:underline dark:text-white">
                 <TransitionLink  href={href}>
+                  <p className="dark:text-white">
                   {breadcrumbNames[segment]}
+                  </p>
                 </TransitionLink>
                 </div> 
               )}

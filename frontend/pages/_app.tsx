@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         observer.unobserve(ctaSectionRef.current);
       }
     };
-  }, []);
+  }, [ctaSectionRef.current]);
 
   useEffect(() => {
       if (showConsultationForm) {
@@ -138,7 +138,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer
   const shouldExcludeLayout = excludedPaths.some((path) => router.pathname.includes(path));
   const isAdminRoute = useMemo(() => router.pathname.includes("/admin"), [router.pathname]);
-
+  console.log(isHidden);
   if (isLoading) {
     return <div>Loading...</div>;
   }
