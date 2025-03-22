@@ -3,25 +3,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ScheduleMeetingModal from '@/components/ScheduleMeetingModal';
 import { baseUrl } from '@/lib/baseUrl';
-
-interface Meeting {
-  _id: string;
-  university: {
-    name: string;
-  };
-  studentDetails: {
-    name: string;
-    email: string;
-    phone: string;
-    country: string;
-    course: string;
-  };
-  status: string;
-  jitsiUrl?: string;
-  scheduledTime?: string;
-}
+import MeetingScheduler from '@/components/MeetingScheduler';
 
 interface ConsultationRequest {
   _id: string;
@@ -31,230 +14,167 @@ interface ConsultationRequest {
   interestedCountry: string;
   homeCountry: string;
   interestedCourse: string;
-  status: 'pending' | 'accepted' | 'completed';
+  status: string;
   createdAt: string;
+  meetingTime?: string;
   googleMeetLink?: string;
+  acceptedBy?: {
+    _id: string;
+    name: string;
+  };
 }
 
 const CounselorDashboard = () => {
-  const [meetings, setMeetings] = useState<Meeting[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showScheduleModal, setShowScheduleModal] = useState(false);
-  const [showJoinModal, setShowJoinModal] = useState(false);
-  const [selectedMeeting, setSelectedMeeting] = useState<Meeting | null>(null);
-  const [scheduledTime, setScheduledTime] = useState('');
-  const router = useRouter();
   const [pendingRequests, setPendingRequests] = useState<ConsultationRequest[]>([]);
   const [acceptedRequests, setAcceptedRequests] = useState<ConsultationRequest[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [showScheduler, setShowScheduler] = useState(false);
   const [selectedRequestId, setSelectedRequestId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
-  // Check authentication on mount and setup interval to check token expiry
   useEffect(() => {
-    // Only clear user tokens, not counselor tokens
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    
-    const counselorToken = localStorage.getItem('counselorToken');
-    if (!counselorToken) {
-      router.push('/counselor/login');
-      return;
-    }
-
-    // Check token expiry every minute
-    const interval = setInterval(() => {
-      const counselorToken = localStorage.getItem('counselorToken');
-      if (!counselorToken) {
-        router.push('/counselor/login');
-      }
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, [router]);
-
-  // Fetch meetings with authentication
-  useEffect(() => {
-    const fetchMeetings = async () => {
+    const checkAuth = async () => {
       try {
         const token = localStorage.getItem('counselorToken');
+        
         if (!token) {
           router.push('/counselor/login');
           return;
         }
 
-        const response = await axios.get(`${baseUrl}/api/meetings`, {
+        // Use direct URL to avoid baseUrl issues
+        const apiUrl = baseUrl || 'http://localhost:5001';
+        const response = await axios.get(`${apiUrl}/api/counselor/verify`, {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         });
 
-        setMeetings(response.data);
-        setLoading(false);
-      } catch (error: any) {
-        console.error('Failed to fetch meetings:', error);
-        if (error.response?.status === 401) {
+        if (!response.data.valid) {
+          toast.error('Session expired. Please login again.');
           localStorage.removeItem('counselorToken');
           router.push('/counselor/login');
+          return;
         }
-        toast.error('Failed to fetch meetings');
-        setLoading(false);
-      }
-    };
 
-    fetchMeetings();
-  }, [router]);
-
-  useEffect(() => {
-    const token = localStorage.getItem('counselorToken');
-    if (!token) {
-      router.push('/counselor/login');
-      return;
-    }
-
-    const fetchRequests = async () => {
-      try {
-        setError(null);
-        const [pendingRes, acceptedRes] = await Promise.all([
-          axios.get(`${baseUrl}/api/consultation/pending`, {
-            headers: { Authorization: `Bearer ${token}` }
-          }),
-          axios.get(`${baseUrl}/api/consultation/accepted`, {
-            headers: { Authorization: `Bearer ${token}` }
-          })
-        ]);
-
-        setPendingRequests(pendingRes.data.data || []);
-        setAcceptedRequests(acceptedRes.data.data || []);
+        fetchRequests();
       } catch (error: any) {
-        console.error('Failed to fetch requests:', error);
+        console.error('Auth error:', error);
         if (error.response?.status === 401) {
           toast.error('Session expired. Please login again.');
           localStorage.removeItem('counselorToken');
           router.push('/counselor/login');
-        } else if (error.response?.status === 404) {
-          setError('Consultation service is currently unavailable');
-          toast.error('Consultation service is currently unavailable');
         } else {
-          setError('Failed to load consultation requests. Please try again later.');
-          toast.error('Failed to load consultation requests');
+          setError('Failed to verify authentication. Please try again later.');
         }
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRequests();
-    const interval = setInterval(fetchRequests, 30000); // Poll every 30 seconds
-
-    return () => clearInterval(interval);
+    checkAuth();
   }, [router]);
 
-  const handleScheduleMeeting = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const fetchRequests = async () => {
     try {
+      setError(null);
       const token = localStorage.getItem('counselorToken');
-      if (!token) {
-        router.push('/counselor/login');
-        return;
-      }
+      
+      // Use direct URL to avoid baseUrl issues
+      const apiUrl = baseUrl || 'http://localhost:5001';
+      const [pendingRes, acceptedRes] = await Promise.all([
+        axios.get(`${apiUrl}/api/consultation/pending`, {
+          headers: { Authorization: `Bearer ${token}` }
+        }),
+        axios.get(`${apiUrl}/api/consultation/accepted`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      ]);
 
-      await axios.put(
-        `${baseUrl}/api/meetings/${selectedMeeting?._id}`,
-        {
-          status: 'Waiting',
-          scheduledTime,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setMeetings(meetings.map((meeting) =>
-        meeting._id === selectedMeeting?._id
-          ? { ...meeting, status: 'Waiting', scheduledTime }
-          : meeting
-      ));
-
-      toast.success('Meeting scheduled successfully!');
-      setShowScheduleModal(false);
+      setPendingRequests(pendingRes.data.data || []);
+      setAcceptedRequests(acceptedRes.data.data || []);
     } catch (error: any) {
-      console.error('Failed to schedule meeting:', error);
+      console.error('Failed to fetch requests:', error);
       if (error.response?.status === 401) {
+        toast.error('Session expired. Please login again.');
         localStorage.removeItem('counselorToken');
         router.push('/counselor/login');
+      } else if (error.response?.status === 404) {
+        setError('Consultation service is currently unavailable');
+        toast.error('Consultation service is currently unavailable');
+      } else {
+        setError('Failed to load consultation requests. Please try again later.');
+        toast.error('Failed to load consultation requests');
       }
-      toast.error('Failed to schedule meeting');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('counselorToken');
-    router.push('/counselor/login');
-  };
-
   const handleAcceptRequest = async (requestId: string) => {
     try {
+      setLoading(true);
       const token = localStorage.getItem('counselorToken');
-      if (!token) {
-        router.push('/counselor/login');
-        return;
-      }
-
+      
+      // Use direct URL to avoid baseUrl issues
+      const apiUrl = baseUrl || 'http://localhost:5001';
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`}/api/consultation/accept/${requestId}`,
+        `${apiUrl}/api/consultation/accept/${requestId}`,
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       );
 
-      if (response.data.success) {
-        setSelectedRequestId(requestId);
-        setShowScheduleModal(true);
-      }
+      toast.success('Request accepted successfully!');
+      
+      // Update the lists
+      setPendingRequests(prev => prev.filter(req => req._id !== requestId));
+      setAcceptedRequests(prev => [...prev, response.data.data]);
+      
+      // Automatically open scheduler modal after accepting request
+      setSelectedRequestId(requestId);
+      setShowScheduler(true);
+      
     } catch (error: any) {
       console.error('Failed to accept request:', error);
       if (error.response?.status === 401) {
         toast.error('Session expired. Please login again.');
         localStorage.removeItem('counselorToken');
         router.push('/counselor/login');
-      } else if (error.response?.status === 404) {
-        toast.error('Request no longer available');
       } else {
-        toast.error('Failed to accept consultation request. Please try again.');
+        toast.error(error.response?.data?.message || 'Failed to accept request');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleScheduled = (meetingTime: string, googleMeetLink: string) => {
-    // Update the accepted requests list with the new meeting details
-    setAcceptedRequests(prev => prev.map(req => 
-      req._id === selectedRequestId
-        ? { ...req, meetingTime, googleMeetLink }
-        : req
-    ));
-    
-    // Remove from pending requests
-    setPendingRequests(prev => prev.filter(req => req._id !== selectedRequestId));
-    
-    setSelectedRequestId(null);
-    setShowScheduleModal(false);
+  const handleOpenScheduler = (requestId: string) => {
+    setSelectedRequestId(requestId);
+    setShowScheduler(true);
   };
 
-  if (loading) {
+  const handleScheduled = () => {
+    setShowScheduler(false);
+    setSelectedRequestId(null);
+    fetchRequests(); // Refresh the lists
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('counselorToken');
+    localStorage.removeItem('counselorData');
+    router.push('/counselor/login');
+    toast.info('You have been logged out');
+  };
+
+  if (loading && !error) {
     return (
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-              <p className="text-gray-600 dark:text-gray-400">Loading requests...</p>
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
   }
@@ -281,100 +201,126 @@ const CounselorDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-          Counselor Dashboard
-        </h1>
-
-        {/* Pending Requests Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-            Pending Consultation Requests
-          </h2>
-          {pendingRequests.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-center">No pending requests</p>
-            </div>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {pendingRequests.map((request) => (
-                <div
-                  key={request._id}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
-                >
-                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                    {request.name}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                    <p>Email: {request.email}</p>
-                    <p>Phone: {request.phone}</p>
-                    <p>Interested Country: {request.interestedCountry}</p>
-                    <p>Home Country: {request.homeCountry}</p>
-                    <p>Interested Course: {request.interestedCourse}</p>
-                    <p>Requested: {new Date(request.createdAt).toLocaleString()}</p>
-                  </div>
-                  <button
-                    onClick={() => handleAcceptRequest(request._id)}
-                    className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-                  >
-                    Accept Request
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Counselor Dashboard</h1>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+          >
+            Logout
+          </button>
         </div>
 
-        {/* Accepted Requests Section */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-            Accepted Consultations
-          </h2>
-          {acceptedRequests.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-center">No accepted requests</p>
-            </div>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {acceptedRequests.map((request) => (
-                <div
-                  key={request._id}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
-                >
-                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                    {request.name}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                    <p>Email: {request.email}</p>
-                    <p>Phone: {request.phone}</p>
-                    <p>Interested Country: {request.interestedCountry}</p>
-                    <p>Home Country: {request.homeCountry}</p>
-                    <p>Interested Course: {request.interestedCourse}</p>
-                    <p>Meeting Time: {new Date(request.createdAt).toLocaleString()}</p>
-                    {request.googleMeetLink && (
-                      <a
-                        href={request.googleMeetLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+        <div className="space-y-8">
+          {/* Pending Consultation Requests */}
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+              Pending Consultations
+            </h2>
+            {pendingRequests.length === 0 ? (
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <p className="text-gray-600 dark:text-gray-400 text-center">No pending requests</p>
+              </div>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {pendingRequests.map((request) => (
+                  <div
+                    key={request._id}
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+                  >
+                    <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
+                      {request.name}
+                    </h3>
+                    <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                      <p>Email: {request.email}</p>
+                      <p>Phone: {request.phone}</p>
+                      <p>Interested Country: {request.interestedCountry}</p>
+                      <p>Home Country: {request.homeCountry}</p>
+                      <p>Interested Course: {request.interestedCourse}</p>
+                      <p>Requested: {new Date(request.createdAt).toLocaleString()}</p>
+                    </div>
+                    <button
+                      onClick={() => handleAcceptRequest(request._id)}
+                      className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                      Accept Request
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Accepted Requests Section */}
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+              Accepted Consultations
+            </h2>
+            {acceptedRequests.length === 0 ? (
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <p className="text-gray-600 dark:text-gray-400 text-center">No accepted requests</p>
+              </div>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {acceptedRequests.map((request) => (
+                  <div
+                    key={request._id}
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+                  >
+                    <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
+                      {request.name}
+                    </h3>
+                    <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                      <p>Email: {request.email}</p>
+                      <p>Phone: {request.phone}</p>
+                      <p>Interested Country: {request.interestedCountry}</p>
+                      <p>Home Country: {request.homeCountry}</p>
+                      <p>Interested Course: {request.interestedCourse}</p>
+                      <p>Status: <span className="text-yellow-500 font-medium">Accepted</span></p>
+                      <p>Accepted At: {new Date(request.createdAt).toLocaleString()}</p>
+                    </div>
+                    {!request.meetingTime && (
+                      <button
+                        onClick={() => handleOpenScheduler(request._id)}
+                        className="mt-4 w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
                       >
-                        Join Meeting
-                      </a>
+                        Schedule Meeting
+                      </button>
+                    )}
+                    {request.meetingTime && (
+                      <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-md">
+                        <p className="text-blue-800 dark:text-blue-100 font-medium">Meeting Scheduled</p>
+                        <p className="text-sm text-blue-600 dark:text-blue-200">
+                          Time: {new Date(request.meetingTime).toLocaleString()}
+                        </p>
+                        {request.googleMeetLink && (
+                          <a
+                            href={request.googleMeetLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                          >
+                            Join Meeting
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {showScheduleModal && selectedRequestId && (
-        <ScheduleMeetingModal
-          requestId={selectedRequestId}
+      {showScheduler && selectedRequestId && (
+        <MeetingScheduler
+          isOpen={showScheduler}
           onClose={() => {
+            setShowScheduler(false);
             setSelectedRequestId(null);
-            setShowScheduleModal(false);
           }}
+          requestId={selectedRequestId}
           onScheduled={handleScheduled}
         />
       )}

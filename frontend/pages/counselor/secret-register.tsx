@@ -14,7 +14,9 @@ const CounselorRegister = () => {
   const handleRegister = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`${baseUrl}/api/counselor/register`, {});
+      // Use direct URL to avoid baseUrl issues
+      const apiUrl = baseUrl || 'http://localhost:5001';
+      const response = await axios.post(`${apiUrl}/api/counselor/register`, {});
       setCredentials(response.data.credentials);
       toast.success('Registration successful! Please save your credentials.');
     } catch (err: any) {
@@ -33,8 +35,10 @@ const CounselorRegister = () => {
       // Clear any existing tokens to prevent conflicts
       localStorage.clear();
 
+      // Use direct URL to avoid baseUrl issues
+      const apiUrl = baseUrl || 'http://localhost:5001';
       // Login with the generated credentials
-      const response = await axios.post(`${baseUrl}/api/counselor/login`, {
+      const response = await axios.post(`${apiUrl}/api/counselor/login`, {
         username: credentials.username,
         password: credentials.password
       });
@@ -95,7 +99,7 @@ const CounselorRegister = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex flex-col space-y-4">
               <button
                 onClick={handleGoToDashboard}
@@ -126,4 +130,4 @@ const CounselorRegister = () => {
   );
 };
 
-export default CounselorRegister; 
+export default CounselorRegister;

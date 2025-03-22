@@ -1,9 +1,10 @@
 const asyncHandler = require('express-async-handler');
 const ConsultationRequest = require('../models/consultationRequestModel');
-const { generateMeetLink, calendar } = require('../utils/googleMeet');
 const Consultation = require('../models/consultationModel');
 const User = require('../models/userModel');
 const Notification = require('../models/notificationModel');
+const { generateMeetLink, generateFallbackMeetLink } = require('../utils/googleMeet');
+const crypto = require('crypto');
 
 // @desc    Create a new consultation request
 // @route   POST /api/consultation/request
@@ -61,7 +62,7 @@ const getPendingRequests = asyncHandler(async (req, res) => {
 });
 
 // @desc    Accept a consultation request
-// @route   POST /api/consultation/accept/:requestId
+// @route   PUT /api/consultation/accept/:requestId
 // @access  Private (Counselor only)
 const acceptRequest = asyncHandler(async (req, res) => {
   try {
@@ -81,20 +82,9 @@ const acceptRequest = asyncHandler(async (req, res) => {
       });
     }
 
-    // Generate Google Meet link
-    let meetLink;
-    try {
-      meetLink = await generateMeetLink(request.name);
-    } catch (error) {
-      console.error('Failed to generate Meet link:', error);
-      // Fallback to a temporary link
-      meetLink = `https://meet.google.com/temp-${Date.now()}`;
-    }
-
-    // Update request status and details
+    // Update request status and counselor details
     request.status = 'accepted';
     request.acceptedBy = req.user._id;
-    request.googleMeetLink = meetLink;
     await request.save();
 
     // Create notification for the student
@@ -126,8 +116,10 @@ const acceptRequest = asyncHandler(async (req, res) => {
 // @access  Private (Counselor only)
 const getAcceptedRequests = asyncHandler(async (req, res) => {
   const requests = await ConsultationRequest.find({
-    status: 'accepted',
-    acceptedBy: req.user._id
+    $or: [
+      { status: 'accepted', acceptedBy: req.user._id },
+      { status: 'scheduled', acceptedBy: req.user._id }
+    ]
   }).sort({ createdAt: -1 });
 
   res.json({
@@ -157,7 +149,9 @@ const getStudentRequests = asyncHandler(async (req, res) => {
   });
 });
 
-// Create a new consultation request
+// @desc    Create a new consultation
+// @route   POST /api/consultation/create
+// @access  Private
 const createConsultation = asyncHandler(async (req, res) => {
   const { name, email, phone, preferredDate, preferredTime, message } = req.body;
 
@@ -184,7 +178,9 @@ const createConsultation = asyncHandler(async (req, res) => {
   });
 });
 
-// Get all consultation requests (for counselors)
+// @desc    Get all consultation requests (for counselors)
+// @route   GET /api/consultation
+// @access  Private (Counselor only)
 const getConsultations = asyncHandler(async (req, res) => {
   const consultations = await Consultation.find()
     .sort({ createdAt: -1 })
@@ -196,7 +192,9 @@ const getConsultations = asyncHandler(async (req, res) => {
   });
 });
 
-// Update consultation status (for counselors)
+// @desc    Update consultation status (for counselors)
+// @route   PUT /api/consultation/:consultationId
+// @access  Private (Counselor only)
 const updateConsultation = asyncHandler(async (req, res) => {
   const { consultationId } = req.params;
   const { status, counselorId } = req.body;
@@ -224,7 +222,9 @@ const updateConsultation = asyncHandler(async (req, res) => {
   });
 });
 
-// Get consultations by email (for students)
+// @desc    Get consultations by email (for students)
+// @route   GET /api/consultation/email
+// @access  Private
 const getConsultationsByEmail = asyncHandler(async (req, res) => {
   const { email } = req.query;
 
@@ -239,62 +239,71 @@ const getConsultationsByEmail = asyncHandler(async (req, res) => {
 });
 
 // @desc    Schedule a consultation meeting
-// @route   POST /api/consultation/schedule/:requestId
+// @route   PUT /api/consultation/schedule/:requestId
 // @access  Private (Counselor only)
 const scheduleMeeting = asyncHandler(async (req, res) => {
   const { meetingTime } = req.body;
-  const request = await ConsultationRequest.findById(req.params.requestId);
-
-  if (!request) {
-    res.status(404);
-    throw new Error('Consultation request not found');
-  }
-
-  if (request.status !== 'accepted') {
+  
+  if (!meetingTime) {
     res.status(400);
-    throw new Error('Request must be accepted before scheduling');
+    throw new Error('Meeting time is required');
   }
-
-  if (!request.acceptedBy.equals(req.user._id)) {
-    res.status(403);
-    throw new Error('Only the accepting counselor can schedule this meeting');
-  }
-
-  // Generate Google Meet link with the scheduled time
-  const event = {
-    summary: `Edurizon Consultation with ${request.name}`,
-    description: 'Consultation session for education counseling',
-    start: {
-      dateTime: meetingTime,
-      timeZone: 'UTC',
-    },
-    end: {
-      dateTime: new Date(new Date(meetingTime).getTime() + 3600000).toISOString(), // 1 hour meeting
-      timeZone: 'UTC',
-    },
-    conferenceData: {
-      createRequest: {
-        requestId: `edurizon-${Date.now()}`,
-        conferenceSolutionKey: { type: 'hangoutsMeet' }
-      }
-    }
-  };
-
+  
   try {
+    const request = await ConsultationRequest.findById(req.params.requestId);
+
+    if (!request) {
+      res.status(404);
+      throw new Error('Consultation request not found');
+    }
+
+    if (request.status !== 'accepted') {
+      res.status(400);
+      throw new Error('Request must be accepted before scheduling');
+    }
+
+    if (!request.acceptedBy.equals(req.user._id)) {
+      res.status(403);
+      throw new Error('Only the accepting counselor can schedule this meeting');
+    }
+
+    // Parse and format the meeting time correctly
+    const startTime = new Date(meetingTime);
+    // Set end time to be 1 hour after start time
+    const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
+    
+    // Create a calendar event with a Google Meet link
+    const event = {
+      summary: `Edurizon Consultation with ${request.name}`,
+      description: 'Consultation session for education counseling',
+      start: {
+        dateTime: startTime.toISOString(),
+        timeZone: 'UTC',
+      },
+      end: {
+        dateTime: endTime.toISOString(),
+        timeZone: 'UTC',
+      },
+      conferenceData: {
+        createRequest: {
+          requestId: `edurizon-${Date.now()}`,
+          conferenceSolutionKey: { type: 'hangoutsMeet' }
+        }
+      }
+    };
+
     let meetLink;
     try {
-      const response = await calendar.events.insert({
-        calendarId: 'primary',
-        resource: event,
-        conferenceDataVersion: 1
-      });
-      meetLink = response.data.hangoutLink;
+      // Try to generate a real Google Meet link via Calendar API
+      meetLink = await generateMeetLink(request.name, meetingTime);
     } catch (error) {
       console.error('Failed to create Google Meet event:', error);
-      // Fallback to temporary link for development/testing
-      meetLink = `https://meet.google.com/test-${Date.now()}`;
+      
+      // Generate a fallback link with crypto
+      meetLink = generateFallbackMeetLink();
     }
 
+    // Update the request with meeting details
     request.meetingTime = meetingTime;
     request.googleMeetLink = meetLink;
     request.status = 'scheduled';
@@ -316,8 +325,11 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     console.error('Failed to schedule meeting:', error);
-    res.status(500);
-    throw new Error('Failed to schedule meeting: ' + error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to schedule meeting',
+      error: error.message
+    });
   }
 });
 
@@ -405,9 +417,6 @@ const getStudentNotifications = asyncHandler(async (req, res) => {
     const allNotifications = [...requestNotifications, ...notifications]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-    console.log('Sending notifications for email:', email);
-    console.log('Total notifications:', allNotifications.length);
-
     res.json({
       success: true,
       data: allNotifications
@@ -467,4 +476,4 @@ module.exports = {
   scheduleMeeting,
   rejectRequest,
   getStudentNotifications,
-}; 
+};

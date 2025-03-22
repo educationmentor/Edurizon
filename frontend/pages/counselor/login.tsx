@@ -22,8 +22,10 @@ const CounselorLogin = () => {
       }
 
       try {
+        // Use direct URL to avoid baseUrl issues
+        const apiUrl = baseUrl || 'http://localhost:5001';
         // Verify token validity with backend
-        const response = await axios.get(`${baseUrl}/api/counselor/verify`, {
+        const response = await axios.get(`${apiUrl}/api/counselor/verify`, {
           headers: {
             Authorization: `Bearer ${counselorToken}`
           }
@@ -52,7 +54,11 @@ const CounselorLogin = () => {
       // Clear ALL existing tokens and data first
       localStorage.clear(); // Clear everything to ensure a clean state
       
-      const response = await axios.post(`${baseUrl}/api/counselor/login`, {
+      // Use direct URL to avoid baseUrl issues
+      const apiUrl = baseUrl || 'http://localhost:5001';
+      console.log('Making login request to:', `${apiUrl}/api/counselor/login`);
+      
+      const response = await axios.post(`${apiUrl}/api/counselor/login`, {
         username,
         password
       });
