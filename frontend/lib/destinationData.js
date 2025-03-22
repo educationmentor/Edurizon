@@ -52,7 +52,7 @@ export const destinationData =[
       image:"/assets/Images/CountryBlogs/studyDestinationCard/BaskhirStateUniversity.webp",
       title:"Baskhir State University",
       category:"University",
-      href:"/studyDestinations/study-mbbs-in-russia/baskhir-medical-university",
+      href:"/studyDestinations/study-mbbs-in-russia/bashkir-medical-university",
       description:"Planning to pursue medicine at a top-ranked university? Bashkir State Medical University is renowned for its academic strength, innovative research, and strong international medical collaborations."
     },
     {
