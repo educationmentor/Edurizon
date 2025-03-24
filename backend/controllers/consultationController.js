@@ -243,6 +243,7 @@ const getConsultationsByEmail = asyncHandler(async (req, res) => {
 // @access  Private (Counselor only)
 const scheduleMeeting = asyncHandler(async (req, res) => {
   const { meetingTime } = req.body;
+  const requestId = req.params.requestId;
   
   if (!meetingTime) {
     res.status(400);
@@ -250,7 +251,7 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
   }
   
   try {
-    const request = await ConsultationRequest.findById(req.params.requestId);
+    const request = await ConsultationRequest.findById(requestId);
 
     if (!request) {
       res.status(404);
@@ -271,7 +272,7 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
     const startTime = new Date(meetingTime);
     // Set end time to be 1 hour after start time
     const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-    
+
     // Create a calendar event with a Google Meet link
     const event = {
       summary: `Edurizon Consultation with ${request.name}`,
@@ -286,7 +287,7 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
       },
       conferenceData: {
         createRequest: {
-          requestId: `edurizon-${Date.now()}`,
+          requestId: `edurizon-${requestId}`, // Use consistent requestId
           conferenceSolutionKey: { type: 'hangoutsMeet' }
         }
       }
@@ -297,18 +298,19 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
       // Get counselor's email from req.user
       const counselorEmail = req.user.email;
       
-      // Try to generate a real Google Meet link via Calendar API with attendees
+      // Try to generate a real Google Meet link via Calendar API with attendees and requestId
       meetLink = await generateMeetLink(
         request.name,
         meetingTime,
         request.email,  // Student's email
-        counselorEmail  // Counselor's email
+        counselorEmail, // Counselor's email
+        requestId       // Pass requestId for consistent fallback
       );
     } catch (error) {
       console.error('Failed to create Google Meet event:', error);
       
-      // Generate a fallback link
-      meetLink = generateFallbackMeetLink();
+      // Generate a fallback link using requestId for consistency
+      meetLink = generateFallbackMeetLink(requestId);
     }
 
     // Update the request with meeting details
@@ -317,13 +319,23 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
     request.status = 'scheduled';
     await request.save();
 
-    // Create a notification for the student
+    // Create a notification for the student with the SAME link
     await Notification.create({
       userId: request.email,
       title: 'Consultation Meeting Scheduled',
       message: `Your consultation has been scheduled for ${new Date(meetingTime).toLocaleString()}`,
       type: 'consultation',
-      link: meetLink,
+      link: meetLink, // Use the same link as stored in the request
+      read: false
+    });
+
+    // Also create a notification for the counselor to ensure they have the same link
+    await Notification.create({
+      userId: req.user.email,
+      title: 'Meeting Scheduled',
+      message: `You have scheduled a consultation with ${request.name} for ${new Date(meetingTime).toLocaleString()}`,
+      type: 'consultation',
+      link: meetLink, // Same link as student
       read: false
     });
 
