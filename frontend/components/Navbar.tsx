@@ -24,9 +24,10 @@ const Navbar = () => {
   const [hovered, setHovered] = useState(-1);
   const router = useRouter();
   const isMainPage = router.pathname === '/';
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [transitionEnd, setTransitionEnd] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [studyDestinationHover, setStudyDestinationHover] = useState(0);
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
@@ -56,6 +57,23 @@ const Navbar = () => {
     {name:"Study in Hungary", href:"/studyDestinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
   ];
 
+  const topUniversitites=[
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+  ]
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden"; // Disable scrolling
@@ -179,39 +197,49 @@ key={index}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="w-[80vw]  mx-[10vw] left-0 absolute  bg-transparent  "
+              className="w-[80vw] h-[21.125vw]  mx-[10vw] left-0 absolute  bg-transparent"
             >
               <div className='flex flex-row w-full mt-2 py-[2vw] px-[2vw] h-full dark:bg-black bg-white rounded-[.875vw] border-gray-300 z-50 shadow-lg border'>
                     <div className='text-regularText font-bold min-h-full w-[13vw]  flex flex-col  justify-between py-[3.5vw] border-r-[1px] border-black'>
-                      <button className='text-left'>
-                        <h6 className='text-orangeChosen'>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
+                        <h6 className='text-black' style={{color:studyDestinationHover==0?"#FF7500":"black"}}>
                         Top Study Destinations
                         </h6>
                       </button>
-                      <button className='text-left'>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)} style={{color:studyDestinationHover==1?"#FF7500":"black"}} className='text-left'>
                         <h6>
                         MBBS at a Glance
                         </h6>
                       </button>
-                      <button className='text-left'>
-                        <h6>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
+                        <h6 style={{color:studyDestinationHover==2?"#FF7500":"black"}}>
                         Specific Courses
                         </h6>
                       </button>
                   </div>
                   <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1.125vw] gap-x-[1.75vw]">
-                      {studyDestinations.map((destination, i) => (
+                    {(studyDestinationHover ==0)?(studyDestinations.map((destination, i) => (
                         <TransitionLink key={i} href={destination.href}>
-                          <li
-      className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300"
-      >
-        <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
-      <h5 className='text-mediumText font-bold'>
-                            {destination.name}
-                            </h5>
+                          <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                              <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
+                              <h5 className='text-mediumText font-bold'>
+                              {destination.name}
+                              </h5>
                           </li>
                         </TransitionLink>
-                      ))}
+                      ))):(studyDestinationHover==1?(
+                        topUniversitites.map((destination, i) => (
+                          <TransitionLink key={i} href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
+                                <h5 className='text-mediumText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                        ))
+                      ):"HI") }
+                      
                     </ul>
 
              
