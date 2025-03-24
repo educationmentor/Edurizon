@@ -31,13 +31,13 @@ const MeetingScheduler: React.FC<MeetingSchedulerProps> = ({
     try {
       setLoading(true);
       const token = localStorage.getItem('counselorToken');
-      const apiUrl = baseUrl || 'http://localhost:5001';
+      // const apiUrl = baseUrl || 'http://localhost:5001';
       
       // Combine date and time into a single ISO string
       const dateTimeString = `${meetingDate}T${meetingTime}`;
       
       await axios.put(
-        `${apiUrl}/api/consultation/schedule/${requestId}`,
+        `${baseUrl}/api/consultation/schedule/${requestId}`,
         {
           meetingTime: dateTimeString
           // No need to send googleMeetLink - backend will generate it
