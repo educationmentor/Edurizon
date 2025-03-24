@@ -294,12 +294,20 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
 
     let meetLink;
     try {
-      // Try to generate a real Google Meet link via Calendar API
-      meetLink = await generateMeetLink(request.name, meetingTime);
+      // Get counselor's email from req.user
+      const counselorEmail = req.user.email;
+      
+      // Try to generate a real Google Meet link via Calendar API with attendees
+      meetLink = await generateMeetLink(
+        request.name,
+        meetingTime,
+        request.email,  // Student's email
+        counselorEmail  // Counselor's email
+      );
     } catch (error) {
       console.error('Failed to create Google Meet event:', error);
       
-      // Generate a fallback link with crypto
+      // Generate a fallback link
       meetLink = generateFallbackMeetLink();
     }
 
