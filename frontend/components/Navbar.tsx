@@ -24,15 +24,16 @@ const Navbar = () => {
   const [hovered, setHovered] = useState(-1);
   const router = useRouter();
   const isMainPage = router.pathname === '/';
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [transitionEnd, setTransitionEnd] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [studyDestinationHover, setStudyDestinationHover] = useState(0);
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
     { name: "Study Destinations", href: "/studyDestinations?category=Destination", dropdown: true , borderTop: true },
     { name: "College Predictor", href: "https://college-predictor-nine.vercel.app/", external: true },
-    { name: "Budget Calculator", href: "#" },
+    // { name: "Budget Calculator", href: "#" },
     { name: "Services", href: "#" , borderTop: true },
     { name: "Testimonials", href: "#" },
   ];
@@ -40,18 +41,39 @@ const Navbar = () => {
   
 
   const studyDestinations = [
-    {name:"Russia", href:"/studyDestinations/study-mbbs-in-russia"},
-    {name:"China", href:"/studyDestinations/study-mbbs-in-china"},
-    {name:"UK", href:"../#"},
-    {name:"Canada", href:"../#"},
-    {name:"Australia", href:"../#"},
-    {name:"Germany", href:"../#"},
-    {name:"France", href:"../#"},
-    {name:"New Zealand", href:"../#"},
-    {name:"Singapore", href:"../#"},
-    {name:"Ukraine", href:"../#"},
+    {name:"MBBS in Russia", href:"/studyDestinations/study-mbbs-in-russia",flag:"/assets/Images/country-flag/russia.png"},
+    {name:"Study in Germany", href:"/studyDestinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
+    {name:"MBBS in Bangladesh", href:"/studyDestinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
+    {name:"MBBS in Nepal", href:"/studyDestinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
+    {name:"Study in UK", href:"/studyDestinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
+    {name:"MBBS in Kazakhstan", href:"/studyDestinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
+    {name:"MBBS in Georgia", href:"/studyDestinations/study-mbbs-in-georgia",flag:"/assets/Images/country-flag/georgia.png"},
+    {name:"MBBS in Tajikistan", href:"/studyDestinations/study-mbbs-in-tajikistan",flag:"/assets/Images/country-flag/tajikistan.png"},
+    {name:"MBBS in China", href:"/studyDestinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
+    // {name:"Study in Kyrgyzstan", href:"../#",flag:"/assets/Images/country-flag/ireland.png"},
+    {name:"MBBS in Ukraine", href:"/studyDestinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
+    {name:"Study in Australia", href:"/studyDestinations/study-in-australia",flag:"/assets/Images/country-flag/australia.jpg"},
+    {name:"MBBS in Uzbekistan", href:"/studyDestinations/study-mbbs-in-uzbekistan",flag:"/assets/Images/country-flag/uzbekistan.png"},
+    {name:"Study in Hungary", href:"/studyDestinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
   ];
 
+  const topUniversitites=[
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+    {name:"",href:"",flag:"",},
+  ]
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden"; // Disable scrolling
@@ -123,10 +145,10 @@ const Navbar = () => {
     <nav
 className={`${
 router.asPath === "/" || router.asPath==="/#" ? "absolute" : "relative"
-} px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
+} px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
 >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
-      <div className="flex items-center justify-between w-full relative">
+      <div className="flex items-center justify-between w-full ">
           <div className="relative md:w-[5vw]">
           <TransitionLink href="/">
         
@@ -147,7 +169,7 @@ router.asPath === "/" || router.asPath==="/#" ? "absolute" : "relative"
               item.dropdown ? (
         <div
 key={index}
-          className="relative"
+          className=""
           onMouseEnter={() => {
             setHovered(index);
             setDropdownVisible(true);
@@ -160,7 +182,7 @@ key={index}
           <button>
             <TransitionLink href={item.href}>
               
-            <motion.div>
+            <motion.div className='dark:text-white'>
               {item.name}
               <div
                 className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
@@ -175,26 +197,60 @@ key={index}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute left-0 mt-2 w-48 dark:bg-black bg-white shadow-lg rounded-md border border-gray-300 z-50"
+              className="w-[80vw] h-[21.125vw]  mx-[10vw] left-0 absolute  bg-transparent"
             >
-              <ul className="py-2">
-                {studyDestinations.map((destination, i) => (
-                  <TransitionLink key={i} href={destination.href}>
-                    <li
-className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-all duration-300"
->
-                      {destination.name}
-                    </li>
-                  </TransitionLink>
-                ))}
-              </ul>
+              <div className='flex flex-row w-full mt-2 py-[2vw] px-[2vw] h-full dark:bg-black bg-white rounded-[.875vw] border-gray-300 z-50 shadow-lg border'>
+                    <div className='text-regularText font-bold min-h-full w-[13vw]  flex flex-col  justify-between py-[3.5vw] border-r-[1px] border-black'>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
+                        <h6 className='text-black' style={{color:studyDestinationHover==0?"#FF7500":"black"}}>
+                        Top Study Destinations
+                        </h6>
+                      </button>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)} style={{color:studyDestinationHover==1?"#FF7500":"black"}} className='text-left'>
+                        <h6>
+                        MBBS at a Glance
+                        </h6>
+                      </button>
+                      <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
+                        <h6 style={{color:studyDestinationHover==2?"#FF7500":"black"}}>
+                        Specific Courses
+                        </h6>
+                      </button>
+                  </div>
+                  <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1.125vw] gap-x-[1.75vw]">
+                    {(studyDestinationHover ==0)?(studyDestinations.map((destination, i) => (
+                        <TransitionLink key={i} href={destination.href}>
+                          <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                              <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
+                              <h5 className='text-mediumText font-bold'>
+                              {destination.name}
+                              </h5>
+                          </li>
+                        </TransitionLink>
+                      ))):(studyDestinationHover==1?(
+                        topUniversitites.map((destination, i) => (
+                          <TransitionLink key={i} href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
+                                <h5 className='text-mediumText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                        ))
+                      ):"HI") }
+                      
+                    </ul>
+
+             
+              </div>
             </motion.div>
           )}
         </div>
 ) : (
                 <button key={index} onClick={() => item.external && router.push(item.href)}>
                   <TransitionLink href={item.external ? "#" : item.href}>
-          <motion.div
+          <motion.div className='dark:text-white'
               onHoverStart={() => setHovered(index)}
               onHoverEnd={() => setHovered(-1)}
                                   >
