@@ -41,6 +41,9 @@ const generateMeetLink = async (studentName, meetingTime, studentEmail, counselo
     const startTime = new Date(meetingTime || Date.now());
     const endTime = new Date(startTime.getTime() + 3600000); // 1 hour later
     
+    // Use a consistent requestId to ensure the same meet link is generated
+    const consistentRequestId = requestId || `edurizon-${Date.now()}`;
+    
     const event = {
       summary: `Edurizon Consultation with ${studentName}`,
       description: 'Consultation session for education counseling',
@@ -54,7 +57,7 @@ const generateMeetLink = async (studentName, meetingTime, studentEmail, counselo
       },
       conferenceData: {
         createRequest: {
-          requestId: `edurizon-${Date.now()}`,
+          requestId: consistentRequestId, // Use the consistent ID here instead of a new timestamp
           conferenceSolutionKey: { type: 'hangoutsMeet' }
         }
       },
