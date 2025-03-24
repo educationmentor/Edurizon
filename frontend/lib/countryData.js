@@ -2,7 +2,7 @@
 const RussiaData={
     metaTitle:"Study MBBS in Russia 2024-25 | MCI/NMC-Approved Universities, Low Fees, Direct Admission & Scholarships | Edurizon",
     metaDescription:"Secure your seat in Russia’s top MCI/NMC-approved medical universities for 2024-25. Affordable fees, no entrance exams, English-medium MBBS, and end-to-end admission support with Edurizon.",
-    metaKeywords:"Study MBBS in Russia, MBBS in Russia fees, MCI-approved universities in Russia, direct MBBS admission, scholarships for MBBS in Russia",
+    metaKeywords:"Study MBBS in Russia",
     metaCanonical:"https://edurizon.in/studyDestinations/study-mbbs-in-russia", 
     countryName: "Russia",
     countryTitle1:"Study MBBS in Russia 2025-26",
@@ -118,7 +118,7 @@ const RussiaData={
 const ChinaData={
     metaTitle:"Study MBBS in China | Affordable MCI-Approved Medical Colleges | Edurizon",
     metaDescription:"Pursue your MBBS in China at top MCI & WHO-approved universities with affordable fees, English-medium programs, and global recognition. Learn about eligibility, scholarships, and admission guidance with Edurizon!",
-    metaKeywords:"MBBS in China, Study MBBS in China, MCI Approved Medical Colleges in China, Affordable MBBS in China, MBBS in China for Indian Students, WHO Approved Medical Universities China, MBBS Admission in China, Study Medicine in China, Low Cost MBBS in China, English Medium MBBS China, Edurizon MBBS China, MBBS China Eligibility, Scholarships for MBBS in China, MBBS in China Fees, MBBS Abroad, Best Medical Colleges in China",
+    metaKeywords:"Study MBBS in China",
     metaCanonical:"https://edurizon.in/studyDestinations/study-mbbs-in-china", 
     countryName: "China",
     countryDescription:"China has solidified its position as a premier destination for Indian students seeking high-quality, affordable MBBS education. With 50+ MCI (NMC)--approved medical universities, English-medium programs, and cutting-edge infrastructure, China offers a cost-effective pathway to a globally recognized medical degree. At Edurizon, we simplify your journey with comprehensive admission support, scholarship guidance, and post-arrival services, ensuring a seamless transition to your dream career.",
