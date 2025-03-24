@@ -19,10 +19,11 @@ const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 /**
  * Generate a working Google Meet link that doesn't require Calendar API
  * This creates a link using the "new meeting" flow that works instantly
+ * @param {string} requestId - Consultation request ID to create consistent link
  */
-const generateFallbackMeetLink = () => {
-  // Keep the working fallback mechanism
-  const roomName = `edurizon-${Date.now()}`;
+const generateFallbackMeetLink = (requestId) => {
+  // Use requestId for consistent room naming instead of timestamp
+  const roomName = `edurizon-${requestId || Date.now()}`;
   return `https://meet.google.com/new?hs=122&authuser=0&name=${encodeURIComponent(roomName)}`;
 };
 
@@ -32,9 +33,10 @@ const generateFallbackMeetLink = () => {
  * @param {string} meetingTime - ISO date string for the meeting time
  * @param {string} studentEmail - Email of the student (optional)
  * @param {string} counselorEmail - Email of the counselor (optional)
+ * @param {string} requestId - Consultation request ID for fallback consistency
  * @returns {Promise<string>} - The Google Meet link
  */
-const generateMeetLink = async (studentName, meetingTime, studentEmail, counselorEmail) => {
+const generateMeetLink = async (studentName, meetingTime, studentEmail, counselorEmail, requestId) => {
   try {
     const startTime = new Date(meetingTime || Date.now());
     const endTime = new Date(startTime.getTime() + 3600000); // 1 hour later
@@ -119,8 +121,8 @@ const generateMeetLink = async (studentName, meetingTime, studentEmail, counselo
   } catch (error) {
     console.error('Failed to generate Meet link through API:', error.message);
     console.log('Using fallback meeting link');
-    // Return the working fallback link method
-    return generateFallbackMeetLink();
+    // Use requestId for consistent fallback link
+    return generateFallbackMeetLink(requestId);
   }
 };
 
