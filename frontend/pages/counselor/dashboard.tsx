@@ -5,7 +5,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '@/lib/baseUrl';
 import MeetingScheduler from '@/components/MeetingScheduler';
-
 interface ConsultationRequest {
   _id: string;
   name: string;
@@ -44,8 +43,8 @@ const CounselorDashboard = () => {
         }
 
         // Use direct URL to avoid baseUrl issues
-        const apiUrl = baseUrl || 'http://localhost:5001';
-        const response = await axios.get(`${apiUrl}/api/counselor/verify`, {
+        // const apiUrl = baseUrl || 'http://localhost:5001';
+        const response = await axios.get(`${baseUrl}/api/counselor/verify`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -82,12 +81,12 @@ const CounselorDashboard = () => {
       const token = localStorage.getItem('counselorToken');
       
       // Use direct URL to avoid baseUrl issues
-      const apiUrl = baseUrl || 'http://localhost:5001';
+      // const apiUrl = baseUrl || 'http://localhost:5001';
       const [pendingRes, acceptedRes] = await Promise.all([
-        axios.get(`${apiUrl}/api/consultation/pending`, {
+        axios.get(`${baseUrl}/api/consultation/pending`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get(`${apiUrl}/api/consultation/accepted`, {
+        axios.get(`${baseUrl}/api/consultation/accepted`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -118,9 +117,9 @@ const CounselorDashboard = () => {
       const token = localStorage.getItem('counselorToken');
       
       // Use direct URL to avoid baseUrl issues
-      const apiUrl = baseUrl || 'http://localhost:5001';
+      // const apiUrl = baseUrl || 'http://localhost:5001';
       const response = await axios.put(
-        `${apiUrl}/api/consultation/accept/${requestId}`,
+        `${baseUrl}/api/consultation/accept/${requestId}`,
         {},
         {
           headers: {
