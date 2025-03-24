@@ -15,8 +15,8 @@ const CounselorRegister = () => {
     setLoading(true);
     try {
       // Use direct URL to avoid baseUrl issues
-      const apiUrl = baseUrl || 'http://localhost:5001';
-      const response = await axios.post(`${apiUrl}/api/counselor/register`, {});
+      // const apiUrl = baseUrl || 'http://localhost:5001';
+      const response = await axios.post(`${baseUrl}/api/counselor/register`, {});
       setCredentials(response.data.credentials);
       toast.success('Registration successful! Please save your credentials.');
     } catch (err: any) {
@@ -36,9 +36,9 @@ const CounselorRegister = () => {
       localStorage.clear();
 
       // Use direct URL to avoid baseUrl issues
-      const apiUrl = baseUrl || 'http://localhost:5001';
+      // const apiUrl = baseUrl || 'http://localhost:5001';
       // Login with the generated credentials
-      const response = await axios.post(`${apiUrl}/api/counselor/login`, {
+      const response = await axios.post(`${baseUrl}/api/counselor/login`, {
         username: credentials.username,
         password: credentials.password
       });
