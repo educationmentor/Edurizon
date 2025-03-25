@@ -269,7 +269,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                 <input
                     type="text"
                     placeholder="Enter OTP"
-                    value={"otp"}
+                    value={otp}
                     onChange={(e) => {
                         setOtp(e.target.value);
                         setErrorMessage(''); // Only clear error message, not dev OTP
