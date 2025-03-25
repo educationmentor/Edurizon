@@ -91,18 +91,18 @@ const RussiaData={
         [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],["Birth certificate or Class 10 documents accepted for age proof."]],
         [["Required Documents"],["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
-    keyHighlightsSection:{
-        title:"Key Highlights",
-        subTitle:"",
-        data:[
-            ["Parameter","Kazan","Bashkir","Orenburg"],
-            ["FMGE Passing Rate(2024)","68.42%","30.88%","43.4%"],
-            ["Years","Year 3","Year 3","Year 3"],
-            ["Indian Food Mess","Available","Available","Available"],
-            ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
-            ["Average Living Cost/Month","₹18,000","₹14,000","₹12,000"]
-        ]
-    },
+    // keyHighlightsSection:{
+    //     title:"Key Highlights",
+    //     subTitle:"",
+    //     data:[
+    //         ["Parameter","Kazan","Bashkir","Orenburg"],
+    //         ["FMGE Passing Rate(2024)","68.42%","30.88%","43.4%"],
+    //         ["Years","Year 3","Year 3","Year 3"],
+    //         ["Indian Food Mess","Available","Available","Available"],
+    //         ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
+    //         ["Average Living Cost/Month","₹18,000","₹14,000","₹12,000"]
+    //     ]
+    // },
     whyChoseUniversity:{
         title:"Why Choose These Universities To Study MBBS in Russia?",
         content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
