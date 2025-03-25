@@ -1,136 +1,72 @@
-const { google } = require('googleapis');
-const crypto = require('crypto');
-
-// Set up OAuth2 client with your credentials
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URI
-);
-
-// Set credentials from environment variables
-oauth2Client.setCredentials({
-  refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-  access_token: process.env.GOOGLE_ACCESS_TOKEN
-});
-
-const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+const { calendar, refreshGoogleToken } = require('./googleAuth');
 
 /**
- * Generate a working Google Meet link that doesn't require Calendar API
- * This creates a link using the "new meeting" flow that works instantly
- * @param {string} requestId - Consultation request ID to create consistent link
+ * Generate a Google Meet link using Google Calendar API
  */
-const generateFallbackMeetLink = (requestId) => {
-  // Use requestId for consistent room naming instead of timestamp
-  const roomName = `edurizon-${requestId || Date.now()}`;
-  return `https://meet.google.com/new?hs=122&authuser=0&name=${encodeURIComponent(roomName)}`;
-};
-
-/**
- * Generate a Google Meet link via Calendar API
- * @param {string} studentName - Name of the student for the meeting
- * @param {string} meetingTime - ISO date string for the meeting time
- * @param {string} studentEmail - Email of the student (optional)
- * @param {string} counselorEmail - Email of the counselor (optional)
- * @param {string} requestId - Consultation request ID for fallback consistency
- * @returns {Promise<string>} - The Google Meet link
- */
-const generateMeetLink = async (studentName, meetingTime, studentEmail, counselorEmail, requestId) => {
+async function generateMeetLinkViaAPI(requestId, meetingTime, counselorEmail, studentEmail, studentName) {
   try {
-    const startTime = new Date(meetingTime || Date.now());
-    const endTime = new Date(startTime.getTime() + 3600000); // 1 hour later
-    
-    // Use a consistent requestId to ensure the same meet link is generated
-    const consistentRequestId = requestId || `edurizon-${Date.now()}`;
-    
+    // Format meeting details
+    const meetingDate = new Date(meetingTime || Date.now());
+    const endTime = new Date(meetingDate.getTime() + 60 * 60 * 1000); // 1 hour meeting
+
+    console.log(`[MEET API] Creating calendar event for meeting ${requestId}`);
+
+    // Create event with conferencing data
     const event = {
-      summary: `Edurizon Consultation with ${studentName}`,
-      description: 'Consultation session for education counseling',
+      summary: 'Edurizon Consultation Meeting',
+      description: `Consultation meeting between counselor (${counselorEmail}) and student (${studentName || studentEmail})`,
       start: {
-        dateTime: startTime.toISOString(),
+        dateTime: meetingDate.toISOString(),
         timeZone: 'UTC',
       },
       end: {
         dateTime: endTime.toISOString(),
         timeZone: 'UTC',
       },
+      attendees: [
+        { email: counselorEmail },
+        { email: studentEmail }
+      ],
       conferenceData: {
         createRequest: {
-          requestId: consistentRequestId, // Use the consistent ID here instead of a new timestamp
-          conferenceSolutionKey: { type: 'hangoutsMeet' }
+          requestId: `edurizon-${requestId}`,
+          conferenceSolutionKey: {
+            type: 'hangoutsMeet'
+          }
         }
-      },
-      // Enforce access control
-      guestsCanModify: false,
-      guestsCanInviteOthers: false,
-      guestsCanSeeOtherGuests: false
-    };
-    
-    // Configure attendees to make counselor the host
-    event.attendees = [];
-    
-    if (studentEmail) {
-      event.attendees.push({
-        email: studentEmail,
-        responseStatus: 'accepted',
-        // Students are guests who need to knock
-        optional: false
-      });
-    }
-    
-    if (counselorEmail) {
-      event.attendees.push({
-        email: counselorEmail,
-        responseStatus: 'accepted',
-        // Mark the counselor as the organizer/host
-        organizer: true,
-        self: true
-      });
-    }
-
-    // Add conference data settings for entry control
-    if (!event.conferenceData) {
-      event.conferenceData = {};
-    }
-    
-    // Set conference parameters to require joining approval
-    event.conferenceData.conferenceDataVersion = 1;
-    event.conferenceData.entryPoints = [{
-      entryPointType: 'video',
-      uri: '',
-      label: 'meet.google.com',
-      pin: ''
-    }];
-    
-    // Configure explicit meeting access settings
-    event.conferenceData.conferenceProperties = {
-      allowedConferenceSolutionTypes: ['hangoutsMeet'],
-      autoEntryMode: 'RESTRICTED' // This forces the "knock to join" behavior
+      }
     };
 
-    // Log the request for debugging
-    console.log('Creating Calendar event with Meet conferencing');
-    
+    // Insert event and get Meet link
+    console.log(`[MEET API] Sending request to Google Calendar API`);
     const response = await calendar.events.insert({
       calendarId: 'primary',
       resource: event,
       conferenceDataVersion: 1,
-      sendUpdates: 'all' // Send email notifications to attendees
+      sendNotifications: true
     });
 
-    console.log('Successfully created Meet with access control settings');
-    return response.data.hangoutLink;
+    if (response.data && response.data.hangoutLink) {
+      const meetLink = response.data.hangoutLink;
+      console.log(`[MEET API] Successfully created Meet link: ${meetLink}`);
+      return meetLink;
+    } else {
+      throw new Error('No hangout link was returned from the API');
+    }
   } catch (error) {
-    console.error('Failed to generate Meet link through API:', error.message);
-    console.log('Using fallback meeting link');
-    // Use requestId for consistent fallback link
-    return generateFallbackMeetLink(requestId);
+    console.error(`[MEET API ERROR] Failed to create Meet link: ${error.message}`);
+
+    // Attempt to refresh the token and retry
+    if (error.message.includes('invalid_grant')) {
+      console.log('[MEET API] Attempting to refresh token and retry...');
+      await refreshGoogleToken();
+      return generateMeetLinkViaAPI(requestId, meetingTime, counselorEmail, studentEmail, studentName);
+    }
+
+    throw error;
   }
-};
+}
 
 module.exports = {
-  generateMeetLink,
-  calendar,
-  generateFallbackMeetLink
+  generateMeetLinkViaAPI
 };

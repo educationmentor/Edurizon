@@ -3,8 +3,8 @@ const ConsultationRequest = require('../models/consultationRequestModel');
 const Consultation = require('../models/consultationModel');
 const User = require('../models/userModel');
 const Notification = require('../models/notificationModel');
-const { generateMeetLink, generateFallbackMeetLink } = require('../utils/googleMeet');
-const crypto = require('crypto');
+// Fix the import path to match the existing file
+const { generateMeetLinkViaAPI, generateFallbackLink } = require('../utils/googleMeet');
 
 // @desc    Create a new consultation request
 // @route   POST /api/consultation/request
@@ -122,6 +122,16 @@ const getAcceptedRequests = asyncHandler(async (req, res) => {
     ]
   }).sort({ createdAt: -1 });
 
+  console.log(`[COUNSELOR REQUESTS] Found ${requests.length} accepted/scheduled requests for counselor ${req.user._id}`);
+
+  // Log only upcoming active meetings
+  const now = new Date();
+  for (const request of requests) {
+    if (request.status === 'scheduled' && new Date(request.meetingTime) > now && request.googleMeetLink) {
+      console.log(`[ACTIVE MEETING] Counselor view - Request ${request._id} link: ${request.googleMeetLink}`);
+    }
+  }
+
   res.json({
     success: true,
     data: requests
@@ -134,6 +144,8 @@ const getAcceptedRequests = asyncHandler(async (req, res) => {
 const getStudentRequests = asyncHandler(async (req, res) => {
   const { email } = req.query;
 
+  console.log(`[STUDENT REQUESTS] Getting requests for student email: ${email}`);
+
   if (!email) {
     res.status(400);
     throw new Error('Please provide student email');
@@ -143,11 +155,27 @@ const getStudentRequests = asyncHandler(async (req, res) => {
     .populate('acceptedBy', 'name email')
     .sort({ createdAt: -1 });
 
+  console.log(`[STUDENT REQUESTS] Found ${requests.length} requests for student email: ${email}`);
+  
+  // Log only upcoming active meetings
+  const now = new Date();
+  for (const request of requests) {
+    if (request.status === 'scheduled' && new Date(request.meetingTime) > now && request.googleMeetLink) {
+      console.log(`[ACTIVE MEETING] Student view - Request ${request._id} link: ${request.googleMeetLink}`);
+    }
+  }
+
   res.json({
     success: true,
     data: requests
   });
 });
+
+// Helper function to check if a link is valid
+function isValidGoogleMeetLink(link) {
+  if (!link) return false;
+  return link.startsWith('https://meet.google.com/');
+}
 
 // @desc    Create a new consultation
 // @route   POST /api/consultation/create
@@ -245,107 +273,89 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
   const { meetingTime } = req.body;
   const requestId = req.params.requestId;
   
+  console.log(`[SCHEDULING] Scheduling meeting for request: ${requestId}, time: ${meetingTime}`);
+  
   if (!meetingTime) {
-    res.status(400);
-    throw new Error('Meeting time is required');
+    return res.status(400).json({
+      success: false,
+      message: 'Meeting time is required'
+    });
   }
   
   try {
     const request = await ConsultationRequest.findById(requestId);
 
     if (!request) {
-      res.status(404);
-      throw new Error('Consultation request not found');
+      return res.status(404).json({
+        success: false,
+        message: 'Consultation request not found'
+      });
     }
 
     if (request.status !== 'accepted') {
-      res.status(400);
-      throw new Error('Request must be accepted before scheduling');
+      return res.status(400).json({
+        success: false,
+        message: 'Request must be accepted before scheduling'
+      });
     }
 
     if (!request.acceptedBy.equals(req.user._id)) {
-      res.status(403);
-      throw new Error('Only the accepting counselor can schedule this meeting');
+      return res.status(403).json({
+        success: false,
+        message: 'Only the accepting counselor can schedule this meeting'
+      });
     }
-
-    // Parse and format the meeting time correctly
-    const startTime = new Date(meetingTime);
-    // Set end time to be 1 hour after start time
-    const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-
-    // Create a calendar event with a Google Meet link
-    const event = {
-      summary: `Edurizon Consultation with ${request.name}`,
-      description: 'Consultation session for education counseling',
-      start: {
-        dateTime: startTime.toISOString(),
-        timeZone: 'UTC',
-      },
-      end: {
-        dateTime: endTime.toISOString(),
-        timeZone: 'UTC',
-      },
-      conferenceData: {
-        createRequest: {
-          requestId: `edurizon-${requestId}`, // Use consistent requestId
-          conferenceSolutionKey: { type: 'hangoutsMeet' }
-        }
-      }
-    };
-
-    let meetLink;
-    try {
-      // Get counselor's email from req.user
-      const counselorEmail = req.user.email;
-      
-      // Try to generate a real Google Meet link via Calendar API with attendees and requestId
-      meetLink = await generateMeetLink(
-        request.name,
-        meetingTime,
-        request.email,  // Student's email
-        counselorEmail, // Counselor's email
-        requestId       // Pass requestId for consistent fallback
-      );
-    } catch (error) {
-      console.error('Failed to create Google Meet event:', error);
-      
-      // Generate a fallback link using requestId for consistency
-      meetLink = generateFallbackMeetLink(requestId);
-    }
-
-    // Update the request with meeting details
+    
+    // Get counselor's email
+    const counselorEmail = req.user.email;
+    
+    // Use the Google Calendar API to create an actual Google Meet link
+    const meetLink = await generateMeetLinkViaAPI(
+      requestId, 
+      meetingTime,
+      counselorEmail,
+      request.email,
+      request.name
+    );
+    
+    console.log(`[SCHEDULING] Generated Google Meet link via API: ${meetLink} for requestId: ${requestId}`);
+    
+    // Store the link with the request
     request.meetingTime = meetingTime;
     request.googleMeetLink = meetLink;
     request.status = 'scheduled';
+    
+    // Save and verify the link was stored correctly
     await request.save();
-
-    // Create a notification for the student with the SAME link
+    
+    // Create notifications with the SAME link for both parties
+    // Notification for student
     await Notification.create({
       userId: request.email,
       title: 'Consultation Meeting Scheduled',
       message: `Your consultation has been scheduled for ${new Date(meetingTime).toLocaleString()}`,
       type: 'consultation',
-      link: meetLink, // Use the same link as stored in the request
+      link: meetLink,
       read: false
     });
 
-    // Also create a notification for the counselor to ensure they have the same link
+    // Notification for counselor
     await Notification.create({
-      userId: req.user.email,
+      userId: counselorEmail,
       title: 'Meeting Scheduled',
       message: `You have scheduled a consultation with ${request.name} for ${new Date(meetingTime).toLocaleString()}`,
       type: 'consultation',
-      link: meetLink, // Same link as student
+      link: meetLink, 
       read: false
     });
 
-    res.json({
+    return res.json({
       success: true,
       data: request
     });
   } catch (error) {
-    console.error('Failed to schedule meeting:', error);
-    res.status(500).json({
+    console.error('[SCHEDULING ERROR]', error);
+    return res.status(500).json({
       success: false,
       message: 'Failed to schedule meeting',
       error: error.message
@@ -495,5 +505,5 @@ module.exports = {
   getConsultationsByEmail,
   scheduleMeeting,
   rejectRequest,
-  getStudentNotifications,
+  getStudentNotifications
 };

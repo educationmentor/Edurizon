@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { getAuthToken, useAuth } from '../utils/auth';
+import { getAuthToken } from '../utils/auth';
 import { toast } from 'react-toastify';
 import { baseUrl } from '@/lib/baseUrl';
 
 interface Meeting {
   _id: string;
   status: string;
-  acceptedBy: {
+  acceptedBy?: {
     name: string;
     email: string;
   };
@@ -18,14 +18,19 @@ interface Meeting {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`;
 
+// Helper function to validate Google Meet links
+const isValidMeetLink = (link: string | undefined): boolean => {
+  if (!link) return false;
+  
+  // Accept any link from Google Meet
+  return link.startsWith('https://meet.google.com/');
+};
+
 const StudentDashboard = () => {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  
-  // useAuth('student');
-  // 
 
   useEffect(() => {
     const fetchMeetings = async () => {
@@ -34,34 +39,63 @@ const StudentDashboard = () => {
         setError(null);
         
         const token = getAuthToken();
-        console.log('Auth Token:', token);
-
+        
         if (!token) {
-          console.log('No auth token found, redirecting to login');
+          console.log('[STUDENT] No auth token found, redirecting to login');
+          router.push('/auth/login');
+          return;
+        }
+        
+        // Get user email from localStorage
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+          console.log('[STUDENT] No user data found');
           router.push('/auth/login');
           return;
         }
 
-        console.log('Making request to:', `${API_URL}/api/meetings`);
+        const user = JSON.parse(userData);
+        const email = user.email;
         
-        const response = await axios.get(`${API_URL}/api/meetings`, {
-          headers: {
-            Authorization: token
+        console.log('[STUDENT] Fetching meetings for:', email);
+        
+        const response = await axios.get(
+          `${API_URL}/api/consultation/student?email=${email}`, 
+          {
+            headers: {
+              Authorization: token
+            }
           }
-        });
-
-        console.log('Response data:', response.data);
-        
-        // Filter only accepted and scheduled meetings
-        const scheduledMeetings = response.data.filter(
-          (meeting: Meeting) => meeting.status === 'scheduled' || meeting.status === 'accepted'
         );
-        
-        setMeetings(scheduledMeetings);
+
+        if (response.data && response.data.data && Array.isArray(response.data.data)) {
+          // Only show scheduled/accepted meetings
+          const scheduledMeetings = response.data.data.filter(
+            (meeting: Meeting) => meeting.status === 'scheduled' || meeting.status === 'accepted'
+          );
+          
+          // Log only upcoming meetings with their links
+          const now = new Date();
+          const upcomingMeetings = scheduledMeetings.filter((meeting: Meeting) => {
+            return meeting.status === 'scheduled' && new Date(meeting.meetingTime) > now;
+          });
+          
+          if (upcomingMeetings.length > 0) {
+            console.log(`[STUDENT] Found ${upcomingMeetings.length} upcoming meetings`);
+            upcomingMeetings.forEach((meeting: Meeting) => {
+              console.log(`[STUDENT] Meeting ${meeting._id} link: ${meeting.googleMeetLink || 'NO LINK'}`);
+            });
+          }
+          
+          setMeetings(scheduledMeetings);
+        } else {
+          console.error('[STUDENT] Unexpected response format:', response.data);
+          setError('Received unexpected data format from server');
+        }
       } catch (error: any) {
-        console.error('Error details:', error.response?.data);
-        console.error('Error status:', error.response?.status);
-        console.error('Failed to fetch meetings:', error);
+        console.error('[STUDENT] Error details:', error.response?.data);
+        console.error('[STUDENT] Error status:', error.response?.status);
+        console.error('[STUDENT] Failed to fetch meetings:', error);
         
         setError('Failed to fetch meetings. Please try again later.');
         
@@ -85,6 +119,21 @@ const StudentDashboard = () => {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString();
+  };
+
+  // Open Google Meet in a new window with proper config
+  const joinMeeting = (meetLink: string) => {
+    // Open in a new window with features that make it more reliable
+    window.open(
+      meetLink, 
+      '_blank',
+      'noopener,noreferrer,resizable=yes,status=yes,location=yes,toolbar=yes,menubar=yes'
+    );
+    
+    // Also copy to clipboard as a backup
+    navigator.clipboard.writeText(meetLink)
+      .then(() => toast.info('Meet link copied to clipboard as backup'))
+      .catch(() => console.error('Failed to copy link'));
   };
 
   if (loading) {
@@ -136,16 +185,30 @@ const StudentDashboard = () => {
                         Status: {meeting.status}
                       </p>
                     </div>
-                    {meeting.googleMeetLink && (
-                      <a
-                        href={meeting.googleMeetLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        Join Meeting
-                      </a>
-                    )}
+                    
+                    {meeting.googleMeetLink && isValidMeetLink(meeting.googleMeetLink) ? (
+                      <div className="flex flex-col space-y-2">
+                        <button
+                          onClick={() => joinMeeting(meeting.googleMeetLink)}
+                          className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                          Join Meeting
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(meeting.googleMeetLink);
+                            toast.success('Meeting link copied to clipboard');
+                          }}
+                          className="inline-flex items-center justify-center px-3 py-1 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                          Copy Link
+                        </button>
+                      </div>
+                    ) : meeting.status === 'scheduled' ? (
+                      <span className="text-sm text-amber-600 dark:text-amber-400 px-3 py-1 bg-amber-100 dark:bg-amber-900 rounded-md">
+                        Meeting link will be available soon
+                      </span>
+                    ) : null}
                   </div>
                 </div>
               ))}
