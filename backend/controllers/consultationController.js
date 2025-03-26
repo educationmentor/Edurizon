@@ -272,16 +272,16 @@ const getConsultationsByEmail = asyncHandler(async (req, res) => {
 const scheduleMeeting = asyncHandler(async (req, res) => {
   const { meetingTime } = req.body;
   const requestId = req.params.requestId;
-  
+
   console.log(`[SCHEDULING] Scheduling meeting for request: ${requestId}, time: ${meetingTime}`);
-  
+
   if (!meetingTime) {
     return res.status(400).json({
       success: false,
       message: 'Meeting time is required'
     });
   }
-  
+
   try {
     const request = await ConsultationRequest.findById(requestId);
 
@@ -305,47 +305,41 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
         message: 'Only the accepting counselor can schedule this meeting'
       });
     }
-    
-    // Get counselor's email
-    const counselorEmail = req.user.email;
-    
-    // Use the Google Calendar API to create an actual Google Meet link
+
+    // Define the counselor variable using req.user
+    const counselor = req.user;
+
+    // Generate the Google Meet link
     const meetLink = await generateMeetLinkViaAPI(
-      requestId, 
+      requestId,
       meetingTime,
-      counselorEmail,
+      counselor.email, // Use the counselor's email
       request.email,
       request.name
     );
-    
-    console.log(`[SCHEDULING] Generated Google Meet link via API: ${meetLink} for requestId: ${requestId}`);
-    
-    // Store the link with the request
+
+    // Update the consultation request with the meeting details
+    request.status = 'scheduled';
     request.meetingTime = meetingTime;
     request.googleMeetLink = meetLink;
-    request.status = 'scheduled';
-    
-    // Save and verify the link was stored correctly
     await request.save();
-    
-    // Create notifications with the SAME link for both parties
-    // Notification for student
+
+    // Send notifications to both the student and counselor
     await Notification.create({
       userId: request.email,
-      title: 'Consultation Meeting Scheduled',
-      message: `Your consultation has been scheduled for ${new Date(meetingTime).toLocaleString()}`,
+      title: 'Meeting Scheduled',
+      message: `Your consultation meeting has been scheduled for ${new Date(meetingTime).toLocaleString()}.`,
       type: 'consultation',
       link: meetLink,
       read: false
     });
 
-    // Notification for counselor
     await Notification.create({
-      userId: counselorEmail,
+      userId: counselor.email,
       title: 'Meeting Scheduled',
-      message: `You have scheduled a consultation with ${request.name} for ${new Date(meetingTime).toLocaleString()}`,
+      message: `You have scheduled a consultation with ${request.name} for ${new Date(meetingTime).toLocaleString()}.`,
       type: 'consultation',
-      link: meetLink, 
+      link: meetLink,
       read: false
     });
 
