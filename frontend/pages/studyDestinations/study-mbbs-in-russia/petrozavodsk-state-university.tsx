@@ -79,7 +79,7 @@ const NewPage=()=>{
         <p><b>There are various reasons why you should choose Petrozavodsk State University to study MBBS.</b></p>
          <ul className="points-two">
           <li>Petrozavodsk State University fees are low and therefore many students have first choice to pursue MBBS in Petrozavodsk State University.</li>
-          <li>Infrastructure of Petrozavodsk is world className.</li>
+          <li>Infrastructure of Petrozavodsk is world class.</li>
           <li>Petrozavodsk State University fees can be paid semester wise.</li>
           <li>Petrozavodsk State University has hassle free admission process.</li>
           <li>Petrozavodsk State University course duration is of 6 years including one year internship.</li>

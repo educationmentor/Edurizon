@@ -31,7 +31,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
     const [resendTimer, setResendTimer] = useState(0);
 
     const [screenWidth, setScreenWidth] = useState<number | null>(null);
-
+    console.log(otp)
     useEffect(() => {
       // Set initial width
       setScreenWidth(window.innerWidth);
@@ -228,6 +228,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             setIsLoading(false);
         }
     };
+    console.log("")
 
     return (
         <div className='flex flex-col gap-[3vw] md:gap-[1.5vw]'>
@@ -273,7 +274,7 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
                         setOtp(e.target.value);
                         setErrorMessage(''); // Only clear error message, not dev OTP
                     }}
-                    className='md:w-[30vw] h-[12vw] md:h-[3vw]  text-regularTextPhone md:text-regularText text-white rounded-[12.5vw] md:rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
+                    className='md:w-[30vw] h-[12vw] md:h-[3vw] text-black dark:text-white  text-regularTextPhone md:text-regularText  rounded-[12.5vw] md:rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
                     disabled={isLoading}
                 />
             )}
