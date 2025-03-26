@@ -57,7 +57,7 @@ const RussiaData={
         ],
 
     countryCostData:{
-        countryTuitionFee:"₹₹21-39 lakhs",
+        countryTuitionFee:"₹21-39 lakhs",
         indiaTuitionFee:"₹90 lakhs-1.5 crore",
         countryHotelFee:"₹3-3.5 lakhs",
         indiaHotelFee:"₹15-20 lakhs",
@@ -67,11 +67,12 @@ const RussiaData={
     countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
     countrySpecificSection2:true,
     countryUniversities:[
-        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹5,50,000 ",href:"/studyDestinations/study-mbbs-in-russia/kazan-federal-university", gloablRanking:"QS #265 (2023)",highlights:["98% FMGE Pass Rate (2023)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
+        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹5,50,000 ",href:"/studyDestinations/study-mbbs-in-russia/kazan-federal-university", gloablRanking:"QS #265 (2023)",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
         // {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
-        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"₹5,00,000",href:"/studyDestinations/study-mbbs-in-russia/bashkir-medical-university", gloablRanking:"NMC-Approved",highlights:["95% FMGE Pass Rate (2023)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
+        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"₹5,00,000",href:"/studyDestinations/study-mbbs-in-russia/bashkir-medical-university", gloablRanking:"NMC-Approved",highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
         // {universityName:"Perm State Medical University",location:"Perm",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["1:5 cadaver ratio (3D dissection labs)","Internships at Apollo Hospitals (India)","Hindi-speaking staff","Free airport pickup"]},
         {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"₹5,30,000",href:"/studyDestinations/study-mbbs-in-russia/orenburg-medical-university", gloablRanking:"WHO-Listed",highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
+        {universityName:"Petrozavodsk State University",location:"Petrozav",annualFees:"₹2,91,042",href:"/studyDestinations/study-mbbs-in-russia/petrozavodsk-state-university", gloablRanking:"BRICS: 261-270, EECA: 301 - 350", highlights:["Petrozavodsk State University fees are low ","Infrastructure of Petrozavodsk is world class.","6 years course duration including one year of internship"]}
     ],
     countryFeeStructure:{
         title:"Fee Structure",
@@ -90,18 +91,18 @@ const RussiaData={
         [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],["Birth certificate or Class 10 documents accepted for age proof."]],
         [["Required Documents"],["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
-    keyHighlightsSection:{
-        title:"Key Highlights",
-        subTitle:"",
-        data:[
-            ["Parameter","Kazan","Bashkir","Orenburg"],
-            ["FMGE Passing Rate(2023)","98%","95%","85%"],
-            ["Years","Year 3","Year 3","Year 3"],
-            ["Indian Food Mess","Available","Available","Available"],
-            ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
-            ["Parameter","₹18,000","₹14,000","₹12,000"]
-        ]
-    },
+    // keyHighlightsSection:{
+    //     title:"Key Highlights",
+    //     subTitle:"",
+    //     data:[
+    //         ["Parameter","Kazan","Bashkir","Orenburg"],
+    //         ["FMGE Passing Rate(2024)","68.42%","30.88%","43.4%"],
+    //         ["Years","Year 3","Year 3","Year 3"],
+    //         ["Indian Food Mess","Available","Available","Available"],
+    //         ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
+    //         ["Average Living Cost/Month","₹18,000","₹14,000","₹12,000"]
+    //     ]
+    // },
     whyChoseUniversity:{
         title:"Why Choose These Universities To Study MBBS in Russia?",
         content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
