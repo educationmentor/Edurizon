@@ -24,7 +24,7 @@ async function generateMeetLinkViaAPI(requestId, meetingTime, counselorEmail, st
         timeZone: 'UTC',
       },
       attendees: [
-        { email: counselorEmail },
+        { email: counselorEmail, organizer: true }, // Set counselor as the organizer
         { email: studentEmail }
       ],
       conferenceData: {
