@@ -14,7 +14,7 @@ const Breadcrumbs: React.FC = () => {
     products: "Products",
     aboutUs: "About Us",
     contact: "Contact Us",
-    studyDestinations: "Study Destinations",
+    "study-destinations": "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
     "study-mbbs-in-china": "Study MBBS in China",
     "kazan-federal-university": "Kazan Federal University",
