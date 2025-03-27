@@ -316,6 +316,8 @@ const joinMeeting = asyncHandler(async (req, res) => {
         message: 'You are not authorized to join this meeting'
       });
     }
+
+    
     
     // Use a deterministic link based on meetingId
     if (!meeting.googleMeetUrl) {
