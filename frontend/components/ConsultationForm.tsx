@@ -14,7 +14,9 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
     phone: '',
     interestedCountry: '',
     homeCountry: '',
-    interestedCourse: ''
+    interestedCourse: '',
+    entranceExam: '',
+    passport:''
   });
   const [loading, setLoading] = useState(false);
 
@@ -129,8 +131,8 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             <input
               placeholder='JEE / NEET/ none'
               type="text"
-              name="interestedCountry"
-              value={formData.interestedCountry}
+              name="entranceExam"
+              value={formData.entranceExam}
               onChange={handleChange}
               required
               className="mt-[0.375vw] block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -141,8 +143,8 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             <input
               placeholder='Yes/No'
               type="text"
-              name="homeCountry"
-              value={formData.homeCountry}
+              name="passport"
+              value={formData.passport}
               onChange={handleChange}
               required
               className="mt-[0.375vw] block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -152,8 +154,8 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             <label className="block  font-medium text-gray-700 dark:text-gray-300">Country Intrested</label>
             <input
               type="text"
-              name="interestedCourse"
-              value={formData.interestedCourse}
+              name="interestedCountry"
+              value={formData.interestedCountry}
               onChange={handleChange}
               required
               className="mt-[0.375vw] block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"
