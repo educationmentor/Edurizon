@@ -114,7 +114,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
 
       {/* Explore Button */}
       <div className="mx-auto mt-[14vw] md:mt-[0vw]">
-        <TransitionLink href="/studyDestinations?category=Destination">
+        <TransitionLink href="/study-destinations?category=Destination">
         <IconButton
           btnTitle="Explore All Destinations"
           className="font-medium text-smallTextPhone md:text-regularText"

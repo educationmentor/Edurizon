@@ -31,7 +31,7 @@ const NewPage=()=>{
             <div className="flex flex-col items-center gap-[2vw]">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
-                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">North Western State Medical University</h1>
+                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Northern State Medical University</h1>
             </div>
             <p className="text-smallTextPhone md:text-regularTexts text-justify md:text-center">
             Are you aspiring to build a successful medical career? North-Western State Medical University in Russia offers top-tier medical education, advanced research opportunities, and a strong foundation for future healthcare professionals.
