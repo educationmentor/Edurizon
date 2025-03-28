@@ -58,21 +58,25 @@ const Navbar = () => {
   ];
 
   const topUniversitites=[
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
-    {name:"",href:"",flag:"",},
+    {name:"Bashkir Medical University",href:" /study-destinations/study-mbbs-in-russia/bashkir-medical-university",flag:"",},
+    {name:"Immanuel Kant Baltic Federal University",href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university",flag:"",},
+    {name:"Kazan Federal University",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university",flag:"",},
+    {name:"Xinjiang University",href:"/study-destinations/study-mbbs-in-china/xinjiang-university",flag:"",},
+    {name: "Tajik Natioanl University", href: "/study-destinations/study-mbbs-in-tajikistan"},
+    {name:"Zhejiang University",href:"/study-destinations/study-mbbs-in-china/zhejiang-university",flag:"",},
+    {name:"Xiamen Univeristy",href:"/study-destinations/study-mbbs-in-china/southeast-university",flag:"",},
+    {name:"Southeast University",href:"/study-destinations/study-mbbs-in-china/southeast-university",flag:"",},
+    {name:"Nanjing Medical University",href:"/study-destinations/study-mbbs-in-china/nanjing-medical-university",flag:"",},
+    {name:"Krasnoyarsk State Medical University",href:"/study-destinations/study-mbbs-in-russia/krasnoyarsk-state-medical-university",flag:"",},
+    {name:"National Research Nuclear University, MEPhI",href:"/study-destinations/study-mbbs-in-russia/national-research-nuclear-university",flag:"",},
+    {name:"North Western State Medical University",href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university",flag:"",},
+    {name:"Northern State Medical University",href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university",flag:"",},
+    {name:"Orenburg Medical University",href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university",flag:"",},
+    {name:"Tambov State University",href:"",flag:"/study-destinations/study-mbbs-in-russia/tambov-state-university",},
+    {name:"Petrozavodsk State University",href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university",flag:"",},
+    {name:"Ulyanovsk State University",href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university",flag:"",},
+    {name:"Ural State Medical University",href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university",flag:"",},
+   
   ]
   useEffect(() => {
     if (isMenuOpen) {
@@ -206,7 +210,7 @@ key={index}
                         Top Study Destinations
                         </h6>
                       </button>
-                      <button onMouseEnter={()=>setStudyDestinationHover(0)} style={{color:studyDestinationHover==1?"#FF7500":"black"}} className='text-left'>
+                      <button onMouseEnter={()=>setStudyDestinationHover(1)} style={{color:studyDestinationHover==1?"#FF7500":"black"}} className='text-left'>
                         <h6>
                         MBBS at a Glance
                         </h6>
@@ -217,11 +221,11 @@ key={index}
                         </h6>
                       </button>
                   </div>
-                  <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1.125vw] gap-x-[1.75vw]">
+                  <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1vw] gap-x-[1.75vw]">
                     {(studyDestinationHover ==0)?(studyDestinations.map((destination, i) => (
                         <TransitionLink key={i} href={destination.href}>
                           <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                              <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
+                              <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
                               <h5 className='text-mediumText font-bold'>
                               {destination.name}
                               </h5>
@@ -231,8 +235,9 @@ key={index}
                         topUniversitites.map((destination, i) => (
                           <TransitionLink key={i} href={destination.href}>
                             <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                                <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/>
-                                <h5 className='text-mediumText font-bold'>
+                                {/* 
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/> */}
+                                <h5 className='text-regularText font-bold'>
                                 {destination.name}
                                 </h5>
                             </li>
