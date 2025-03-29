@@ -69,8 +69,8 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
           } rounded-[32px] items-center justify-center relative leading-[150%]`}
         >
           <button
-            className={`text-black min-w-[82px] text-[12px]  md:text-[1rem] leading-tight  rounded-[32px]   ${
-              selectedButton === index ? 'bg-orangeChosen text-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] py-[9px] px-[18px]' : 'bg-white py-[8px] px-[16px]'
+            className={`text-black dark:text-white  min-w-[82px] text-[12px]  md:text-[1rem] leading-tight  rounded-[32px]   ${
+              selectedButton === index ? 'bg-orangeChosen text-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] py-[9px] px-[18px]' : 'dark:bg-black bg-white py-[8px] px-[16px]'
             }`}
             onClick={() => setSelectedButton(index)}
           >

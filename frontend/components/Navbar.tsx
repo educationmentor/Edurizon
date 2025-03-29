@@ -206,17 +206,17 @@ key={index}
               <div className='flex flex-row w-full mt-2 py-[2vw] px-[2vw] h-full dark:bg-black bg-white rounded-[.875vw] border-gray-300 z-50 shadow-lg border'>
                     <div className='text-regularText font-bold min-h-full w-[13vw]  flex flex-col  justify-between py-[3.5vw] border-r-[1px] border-black'>
                       <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
-                        <h6 className='text-black' style={{color:studyDestinationHover==0?"#FF7500":"black"}}>
+                        <h6 className='' style={{color:studyDestinationHover==0?"#FF7500":""}}>
                         Top Study Destinations
                         </h6>
                       </button>
-                      <button onMouseEnter={()=>setStudyDestinationHover(1)} style={{color:studyDestinationHover==1?"#FF7500":"black"}} className='text-left'>
+                      <button onMouseEnter={()=>setStudyDestinationHover(1)} style={{color:studyDestinationHover==1?"#FF7500":""}} className='text-left'>
                         <h6>
                         MBBS at a Glance
                         </h6>
                       </button>
                       <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
-                        <h6 style={{color:studyDestinationHover==2?"#FF7500":"black"}}>
+                        <h6 style={{color:studyDestinationHover==2?"#FF7500":""}}>
                         Specific Courses
                         </h6>
                       </button>

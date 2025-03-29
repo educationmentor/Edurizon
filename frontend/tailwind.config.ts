@@ -59,6 +59,10 @@ module.exports = {
   			peachpuff: 'rgba(255, 215, 195, 0.8)',
   			dimgrayChosen: 'rgba(102, 102, 102, 0.8)',
 			dimgrayLightChosen: "rgba(102, 102, 102, 0.25)",
+			adminGreenChosen:"#299D91",
+			adminTextChosen:"#191D23",
+			adminBorderFocusedChosen:"#4B5768",
+			adminBorderChosen:"#D0D5DD",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

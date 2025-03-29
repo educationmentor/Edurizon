@@ -16,10 +16,10 @@ interface ActionAreaCardProps {
 export default function ActionAreaCard({ category, image, title, description, href }: ActionAreaCardProps) {
   return (
     <TransitionLink href={href}>
-    <Card sx={{ maxWidth:innerWidth>768? 416:300,borderRadius: innerWidth>768? '16px':'8px' }} elevation={10}>
-      <CardActionArea > 
+    <div className='shadow-[3px_4px_4px_rgba(0,_0,_0,_0.25)] md:rounded-[1.875vw] overflow-hidden dark:shadow-[2px_3px_14.3px_rgba(255,_255,_255,_0.25)]'  style={{ maxWidth:innerWidth>768? 416:300,borderRadius: innerWidth>768? '16px':'8px' }}>
+      <CardActionArea className='bg-black' > 
         <Image src={image} alt={title} width={140} height={140} layout='responsive' />
-          <div className='font-roboto mt-[12px] md:mt-[24px] mb-[8px] md:mb-[12px] mx-[8px] flex flex-col gap-[8px]'>
+          <div  className=' dark:bg-black text-black dark:text-white font-roboto pt-[12px] md:pt-[24px] pb-[8px] md:pb-[12px] px-[8px] flex flex-col gap-[8px]'>
           <span className=' font-bold text-[12px] md:text-[14px] '>
             {category}
             </span>
@@ -28,7 +28,7 @@ export default function ActionAreaCard({ category, image, title, description, hr
           <span className='text-center font-poppins text-[10px] md:text-[12px] '>Edurizon@2025</span>
           </div>
       </CardActionArea>
-    </Card>
+    </div>
     </TransitionLink>
   );
 }

@@ -27,45 +27,36 @@ const Admin = () => {
     const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
     return (
-        <> {isMobileView ? (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
-              <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
-                <h1 className="text-2xl font-bold text-red-500 mb-4">
-                  Desktop Access Required
-                </h1>
-                <p className="text-gray-700">
-                  This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
-                </p>
-              </div>
-            </div>
-          ):(
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold text-center text-teal-600 mb-8">
-            Edurizon
-          </h1>
-  
+        <> 
+        <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="max-w-lg w-full flex flex-col   p-8 rounded-lg ">
+          <div className="mb-16">
+          <p className="text-[40px] leading-[32px] font-bold text-center text-adminGreenChosen ">
+            EDURIZON
+          </p>
+          </div>
+          <form>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700">Username</label>
+            <label className="block text-[16px]  text-adminTextChosen">Username</label>
             <input
               type="text"
               placeholder="username"
-              className="mt-2 w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none"
+              className="mt-[8px] text-[16px] w-full px-[16px] py-[12px] border border-adminBorderChosen rounded-[8px]  focus:border-adminBorderFocusedChosen focus:outline-none"
             />
           </div>
   
-          <div className="mb-4 relative">
+          <div className="mb-8 relative">
             <div className="flex justify-between items-center">
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <a href="#" className="text-xs text-teal-500 hover:underline">
+              <label className="block text-[16px] text-adminTextChosen">Password</label>
+              {/* <a href="#" className="text-xs text-adminGreenChosen hover:underline">
                 Forgot Password?
-              </a>
+              </a> */}
             </div>
             <div className="relative mt-2">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="password"
-                className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none pr-10"
+                className="w-full px-[16px] py-[12px] border border-adminBorderChosen rounded-[8px]  focus:border-adminBorderFocusedChosen focus:outline-none pr-10"
               />
               <span
                 onClick={togglePasswordVisibility}
@@ -76,7 +67,7 @@ const Admin = () => {
             </div>
           </div>
   
-          <div className="flex items-center mb-6">
+          <div className="flex items-center mb-4">
             <input
               type="checkbox"
               id="keep-signed-in"
@@ -87,12 +78,13 @@ const Admin = () => {
             </label>
           </div>
   
-          <button className="w-full bg-teal-500 text-white py-2 rounded-md font-semibold hover:bg-teal-600 transition">
+          <button className="w-full bg-teal-500 text-white py-[12px] rounded-[8px] text-[16px] font-semibold hover:bg-teal-600 transition">
             Login
           </button>
+          </form>
         </div>
-      </div>)
-}
+        
+      </div>
 
       </>
     )
