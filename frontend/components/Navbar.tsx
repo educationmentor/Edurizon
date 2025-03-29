@@ -183,13 +183,13 @@ key={index}
             setDropdownVisible(false);
           }}
         >
-          <button>
+          <button key={index} onClick={() => setDropdownVisible(!dropdownVisible)} >
             <TransitionLink href={item.href}>
               
             <motion.div className='dark:text-white'>
               {item.name}
               <div
-                className={`border-t-[4px] border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
+                className={`border-t-[4px]  border-orangeChosen transition-all duration-500 ease-in-out rounded-xl ${
                 hovered === index ? "w-full" : "w-0"
                         }`}
                   />
@@ -223,6 +223,7 @@ key={index}
                   </div>
                   <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1vw] gap-x-[1.75vw]">
                     {(studyDestinationHover ==0)?(studyDestinations.map((destination, i) => (
+                      <div onClick={()=>setDropdownVisible(false)}>
                         <TransitionLink key={i} href={destination.href}>
                           <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
                               <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
@@ -231,17 +232,18 @@ key={index}
                               </h5>
                           </li>
                         </TransitionLink>
+                        </div>
                       ))):(studyDestinationHover==1?(
                         topUniversitites.map((destination, i) => (
+                          <div onClick={()=>setDropdownVisible(false)}>
                           <TransitionLink key={i} href={destination.href}>
                             <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                                {/* 
-                                <Image src={destination.flag} width={50} height={50} alt='flag' className='shadow-xl rounded-full h-[2.5vw] w-[2.5vw]'/> */}
                                 <h5 className='text-regularText font-bold'>
                                 {destination.name}
                                 </h5>
                             </li>
                           </TransitionLink>
+                          </div>
                         ))
                       ):"HI") }
                       
