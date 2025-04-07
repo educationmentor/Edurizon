@@ -5,6 +5,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '@/lib/baseUrl';
 import MeetingScheduler from '@/components/MeetingScheduler';
+import ChatBox from '@/components/ChatBox';
+
 interface ConsultationRequest {
   _id: string;
   name: string;
@@ -15,12 +17,9 @@ interface ConsultationRequest {
   interestedCourse: string;
   status: string;
   createdAt: string;
+  acceptedBy?: string;
   meetingTime?: string;
   googleMeetLink?: string;
-  acceptedBy?: {
-    _id: string;
-    name: string;
-  };
 }
 
 const CounselorDashboard = () => {
@@ -30,6 +29,8 @@ const CounselorDashboard = () => {
   const [showScheduler, setShowScheduler] = useState(false);
   const [selectedRequestId, setSelectedRequestId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showChatBox, setShowChatBox] = useState(false);
+  const [activeChatRequest, setActiveChatRequest] = useState<ConsultationRequest | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -163,6 +164,11 @@ const CounselorDashboard = () => {
     fetchRequests(); // Refresh the lists
   };
 
+  const handleOpenChat = (request: ConsultationRequest) => {
+    setActiveChatRequest(request);
+    setShowChatBox(true);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('counselorToken');
     localStorage.removeItem('counselorData');
@@ -199,6 +205,8 @@ const CounselorDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+      <ToastContainer position="top-right" autoClose={5000} />
+      
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Counselor Dashboard</h1>
@@ -257,7 +265,7 @@ const CounselorDashboard = () => {
             </h2>
             {acceptedRequests.length === 0 ? (
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <p className="text-gray-600 dark:text-gray-400 text-center">No accepted requests</p>
+                <p className="text-gray-600 dark:text-gray-400 text-center">No accepted requests yet</p>
               </div>
             ) : (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -266,44 +274,56 @@ const CounselorDashboard = () => {
                     key={request._id}
                     className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
                   >
-                    <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                      {request.name}
-                    </h3>
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                        {request.name}
+                      </h3>
+                      <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                        Accepted
+                      </span>
+                    </div>
                     <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                       <p>Email: {request.email}</p>
                       <p>Phone: {request.phone}</p>
                       <p>Interested Country: {request.interestedCountry}</p>
                       <p>Home Country: {request.homeCountry}</p>
                       <p>Interested Course: {request.interestedCourse}</p>
-                      <p>Status: <span className="text-yellow-500 font-medium">Accepted</span></p>
-                      <p>Accepted At: {new Date(request.createdAt).toLocaleString()}</p>
+                      <p>Accepted on: {new Date(request.createdAt).toLocaleString()}</p>
+                      
+                      {request.meetingTime && (
+                        <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-md">
+                          <p className="font-medium text-blue-700 dark:text-blue-300">
+                            Meeting scheduled for: {new Date(request.meetingTime).toLocaleString()}
+                          </p>
+                          {request.googleMeetLink && (
+                            <a
+                              href={request.googleMeetLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 dark:text-blue-400 hover:underline block mt-1"
+                            >
+                              Join Google Meet
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
-                    {!request.meetingTime && (
+                    <div className="mt-4 flex gap-2">
+                      {!request.meetingTime && (
+                        <button
+                          onClick={() => handleOpenScheduler(request._id)}
+                          className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                        >
+                          Schedule Meeting
+                        </button>
+                      )}
                       <button
-                        onClick={() => handleOpenScheduler(request._id)}
-                        className="mt-4 w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
+                        onClick={() => handleOpenChat(request)}
+                        className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
                       >
-                        Schedule Meeting
+                        Chat
                       </button>
-                    )}
-                    {request.meetingTime && (
-                      <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-md">
-                        <p className="text-blue-800 dark:text-blue-100 font-medium">Meeting Scheduled</p>
-                        <p className="text-sm text-blue-600 dark:text-blue-200">
-                          Time: {new Date(request.meetingTime).toLocaleString()}
-                        </p>
-                        {request.googleMeetLink && (
-                          <a
-                            href={request.googleMeetLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-2 inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                          >
-                            Join Meeting
-                          </a>
-                        )}
-                      </div>
-                    )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -312,19 +332,28 @@ const CounselorDashboard = () => {
         </div>
       </div>
 
-      {showScheduler && selectedRequestId && (
+      {/* Meeting Scheduler Modal */}
+      {selectedRequestId && (
         <MeetingScheduler
           isOpen={showScheduler}
-          onClose={() => {
-            setShowScheduler(false);
-            setSelectedRequestId(null);
-          }}
           requestId={selectedRequestId}
+          onClose={() => setShowScheduler(false)}
           onScheduled={handleScheduled}
         />
       )}
-      
-      <ToastContainer />
+
+      {/* Chat Box Modal */}
+      {showChatBox && activeChatRequest && (
+        <ChatBox
+          requestId={activeChatRequest._id}
+          studentName={activeChatRequest.name}
+          userType="counselor"
+          onClose={() => {
+            setShowChatBox(false);
+            setActiveChatRequest(null);
+          }}
+        />
+      )}
     </div>
   );
 };

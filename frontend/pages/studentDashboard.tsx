@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getAuthToken } from '../utils/auth';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '@/lib/baseUrl';
+import ChatBox from '@/components/ChatBox';
 
 interface Meeting {
   _id: string;
@@ -30,6 +32,8 @@ const StudentDashboard = () => {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showChatBox, setShowChatBox] = useState(false);
+  const [activeChatRequest, setActiveChatRequest] = useState<Meeting | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -112,8 +116,8 @@ const StudentDashboard = () => {
 
     fetchMeetings();
     
-    // Poll for updates every 30 seconds
-    const interval = setInterval(fetchMeetings, 30000);
+    // Poll for updates every 60 seconds
+    const interval = setInterval(fetchMeetings, 60000);
     return () => clearInterval(interval);
   }, [router]);
 
@@ -123,30 +127,37 @@ const StudentDashboard = () => {
 
   // Open Google Meet in a new window with proper config
   const joinMeeting = (meetLink: string) => {
-    // Open in a new window with features that make it more reliable
-    window.open(
-      meetLink, 
-      '_blank',
-      'noopener,noreferrer,resizable=yes,status=yes,location=yes,toolbar=yes,menubar=yes'
-    );
-    
-    // Also copy to clipboard as a backup
-    navigator.clipboard.writeText(meetLink)
-      .then(() => toast.info('Meet link copied to clipboard as backup'))
-      .catch(() => console.error('Failed to copy link'));
+    window.open(meetLink, '_blank', 'noopener,noreferrer');
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+  const handleOpenChat = (meeting: Meeting) => {
+    setActiveChatRequest(meeting);
+    setShowChatBox(true);
+  };
+
+  // Extract user data for the ChatBox
+  const getUserData = () => {
+    try {
+      const userData = localStorage.getItem('user');
+      if (!userData) return { name: '', email: '' };
+      
+      const user = JSON.parse(userData);
+      return {
+        name: user.name || '',
+        email: user.email || ''
+      };
+    } catch (err) {
+      console.error('Error parsing user data:', err);
+      return { name: '', email: '' };
+    }
+  };
+
+  const { name: userName, email: userEmail } = getUserData();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <ToastContainer position="top-right" autoClose={5000} />
+      <div className="container mx-auto p-4 pt-16 md:pt-24">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
           Student Dashboard
         </h1>
@@ -186,29 +197,39 @@ const StudentDashboard = () => {
                       </p>
                     </div>
                     
-                    {meeting.googleMeetLink && isValidMeetLink(meeting.googleMeetLink) ? (
-                      <div className="flex flex-col space-y-2">
-                        <button
-                          onClick={() => joinMeeting(meeting.googleMeetLink)}
-                          className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                          Join Meeting
-                        </button>
-                        <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(meeting.googleMeetLink);
-                            toast.success('Meeting link copied to clipboard');
-                          }}
-                          className="inline-flex items-center justify-center px-3 py-1 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                          Copy Link
-                        </button>
-                      </div>
-                    ) : meeting.status === 'scheduled' ? (
-                      <span className="text-sm text-amber-600 dark:text-amber-400 px-3 py-1 bg-amber-100 dark:bg-amber-900 rounded-md">
-                        Meeting link will be available soon
-                      </span>
-                    ) : null}
+                    <div className="flex flex-col space-y-2">
+                      {/* Chat button is always displayed for all meetings */}
+                      <button
+                        onClick={() => handleOpenChat(meeting)}
+                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                      >
+                        Chat
+                      </button>
+                      
+                      {meeting.googleMeetLink && isValidMeetLink(meeting.googleMeetLink) ? (
+                        <div className="flex flex-col space-y-2">
+                          <button
+                            onClick={() => joinMeeting(meeting.googleMeetLink)}
+                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          >
+                            Join Meeting
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigator.clipboard.writeText(meeting.googleMeetLink);
+                              toast.success('Meeting link copied to clipboard');
+                            }}
+                            className="inline-flex items-center justify-center px-3 py-1 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          >
+                            Copy Link
+                          </button>
+                        </div>
+                      ) : meeting.status === 'scheduled' ? (
+                        <span className="text-sm text-amber-600 dark:text-amber-400 px-3 py-1 bg-amber-100 dark:bg-amber-900 rounded-md">
+                          Meeting link will be available soon
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -216,6 +237,20 @@ const StudentDashboard = () => {
           )}
         </div>
       </div>
+
+      {showChatBox && activeChatRequest && (
+        <ChatBox
+          requestId={activeChatRequest._id}
+          userType="student"
+          userEmail={userEmail}
+          userName={userName}
+          receiverName={activeChatRequest.acceptedBy?.name || 'Counselor'}
+          onClose={() => {
+            setShowChatBox(false);
+            setActiveChatRequest(null);
+          }}
+        />
+      )}
     </div>
   );
 };
