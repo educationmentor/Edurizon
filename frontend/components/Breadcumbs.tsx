@@ -14,7 +14,7 @@ const Breadcrumbs: React.FC = () => {
     products: "Products",
     aboutUs: "About Us",
     contact: "Contact Us",
-    studyDestinations: "Study Destinations",
+    "study-destinations": "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
     "study-mbbs-in-china": "Study MBBS in China",
     "kazan-federal-university": "Kazan Federal University",
@@ -35,6 +35,12 @@ const Breadcrumbs: React.FC = () => {
     "northern-state-medical-university":"Northern State Medical University",
     "orenburg-medical-university":"Orenburg Medical University",
     "petrozavodsk-state-university":"Petrozavodsk State University",
+    "immanuel-kant-baltic-federal-university":"Immanuel Kant Baltic Federal University",
+    "krasnoyarsk-state-medical-university":"Krasnoyarsk State Medical University",
+    "national-research-nuclear-university":"National Research Nuclear University",
+    "tambov-state-university":"Tambov State University",
+    "ulyanovsk-state-university":"Ulyanovsk State University",
+    "ural-state-medical-university":"Ural State Medical University",
   };
 
   return (

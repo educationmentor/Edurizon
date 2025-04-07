@@ -25,7 +25,7 @@ const RelatedCountries=()=>{
 
     <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 mx-[1vw]">
       <div className="related-countries-detail">
-        <TransitionLink href="/studyDestinations/study-mbbs-in-russia">
+        <TransitionLink href="/study-destinations/study-mbbs-in-russia">
           <div className="related-countries-detail-img">
             <Image width={100} height={100} src="/assets/Images/country-flag/russia.png" className="img-fluid" alt="MBBS in Russia" title="MBBS in Russia" />
           </div>
@@ -194,7 +194,7 @@ const RelatedCountries=()=>{
 
 <div className="related-countries-detail ">
 
-  <TransitionLink href='/studyDestinations/study-mbbs-in-ukraine'>
+  <TransitionLink href='/study-destinations/study-mbbs-in-ukraine'>
 
     <div className="related-countries-detail-img">
 

@@ -83,7 +83,7 @@ const HeroSection = () => {
 
 
             <div className='flex flex-col md:flex-row w-[54vw] md:w-[27.4375vw] gap-[4vw] md:gap-[1vw]'>
-              <TransitionLink href='/studyDestinations?category=viewAll' >
+              <TransitionLink href='/study-destinations?category=viewAll' >
               <IconButton  btnTitle={"Explore Opportunities"} className='text-smallTextPhone md:text-smallText dark:text-white' btnHeightPhone={11} btnWidthPhone={52.5} btnRadiusPhone={17.5} paddingPhone={1.5} iconWidthPhone={8} btnHeight={3} btnWidth={13.1875} btnRadius={6.25} padding={0.375} iconWidth={1.9125} image={"/assets/Images/Icons/NorthEastIcon.svg"}/>
               </TransitionLink>
               <TitleButton onClick={handleConsultationClick} btnTitle={"Book Free Consultation"} btnHeight={3} btnHeightPhone={11} btnWidth={13.1875} btnWidthPhone={52.5} btnRadius={6.25} btnRadiusPhone={17.5} />

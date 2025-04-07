@@ -31,7 +31,7 @@ const Navbar = () => {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
-    { name: "Study Destinations", href: "/studyDestinations?category=Destination", dropdown: true , borderTop: true },
+    { name: "Study Destinations", href: "/study-destinations?category=Destination", dropdown: true , borderTop: true },
     { name: "College Predictor", href: "https://college-predictor-nine.vercel.app/", external: true },
     // { name: "Budget Calculator", href: "#" },
     { name: "Services", href: "#" , borderTop: true },
@@ -41,20 +41,20 @@ const Navbar = () => {
   
 
   const studyDestinations = [
-    {name:"MBBS in Russia", href:"/studyDestinations/study-mbbs-in-russia",flag:"/assets/Images/country-flag/russia.png"},
-    {name:"Study in Germany", href:"/studyDestinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
-    {name:"MBBS in Bangladesh", href:"/studyDestinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
-    {name:"MBBS in Nepal", href:"/studyDestinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
-    {name:"Study in UK", href:"/studyDestinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
-    {name:"MBBS in Kazakhstan", href:"/studyDestinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
-    {name:"MBBS in Georgia", href:"/studyDestinations/study-mbbs-in-georgia",flag:"/assets/Images/country-flag/georgia.png"},
-    {name:"MBBS in Tajikistan", href:"/studyDestinations/study-mbbs-in-tajikistan",flag:"/assets/Images/country-flag/tajikistan.png"},
-    {name:"MBBS in China", href:"/studyDestinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
+    {name:"MBBS in Russia", href:"/study-destinations/study-mbbs-in-russia",flag:"/assets/Images/country-flag/russia.png"},
+    {name:"Study in Germany", href:"/study-destinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
+    {name:"MBBS in Bangladesh", href:"/study-destinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
+    {name:"MBBS in Nepal", href:"/study-destinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
+    {name:"Study in UK", href:"/study-destinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
+    {name:"MBBS in Kazakhstan", href:"/study-destinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
+    {name:"MBBS in Georgia", href:"/study-destinations/study-mbbs-in-georgia",flag:"/assets/Images/country-flag/georgia.png"},
+    {name:"MBBS in Tajikistan", href:"/study-destinations/study-mbbs-in-tajikistan",flag:"/assets/Images/country-flag/tajikistan.png"},
+    {name:"MBBS in China", href:"/study-destinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
     // {name:"Study in Kyrgyzstan", href:"../#",flag:"/assets/Images/country-flag/ireland.png"},
-    {name:"MBBS in Ukraine", href:"/studyDestinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
-    {name:"Study in Australia", href:"/studyDestinations/study-in-australia",flag:"/assets/Images/country-flag/australia.jpg"},
-    {name:"MBBS in Uzbekistan", href:"/studyDestinations/study-mbbs-in-uzbekistan",flag:"/assets/Images/country-flag/uzbekistan.png"},
-    {name:"Study in Hungary", href:"/studyDestinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
+    {name:"MBBS in Ukraine", href:"/study-destinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
+    {name:"Study in Australia", href:"/study-destinations/study-in-australia",flag:"/assets/Images/country-flag/australia.jpg"},
+    {name:"MBBS in Uzbekistan", href:"/study-destinations/study-mbbs-in-uzbekistan",flag:"/assets/Images/country-flag/uzbekistan.png"},
+    {name:"Study in Hungary", href:"/study-destinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
   ];
 
   const topUniversitites=[
