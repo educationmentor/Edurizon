@@ -12,11 +12,11 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
     name: '',
     email: '',
     phone: '',
-    interestedCountry: '',
     homeCountry: '',
-    interestedCourse: '',
+    interestedCountry: '',
     entranceExam: '',
-    passport:''
+    passport:'',
+    interestedCourse: 'MBBS'
   });
   const [loading, setLoading] = useState(false);
 
@@ -86,6 +86,7 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
       setLoading(false);
     }
   };
+  console.log('Form data:', formData);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -154,8 +155,8 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             <label className="block  font-medium text-gray-700 dark:text-gray-300">Country Intrested</label>
             <input
               type="text"
-              name="interestedCountry"
-              value={formData.interestedCountry}
+              name="homeCountry"
+              value={formData.homeCountry}
               onChange={handleChange}
               required
               className="mt-[0.375vw] block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -165,8 +166,8 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             <label className="block  font-medium text-gray-700 dark:text-gray-300">Course Intrested</label>
             <input
               type="text"
-              name="interestedCourse"
-              value={formData.interestedCourse}
+              name="interestedCountry"
+              value={formData.interestedCountry}
               onChange={handleChange}
               required
               className="mt-[0.375vw] block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"

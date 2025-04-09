@@ -1,7 +1,7 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 
-export default async (req, res) => {
+const sitemap= async (req, res) => {
 
     const links = [
         { url: '/', changefreq: 'daily', priority: 0.3 },
@@ -51,3 +51,5 @@ export default async (req, res) => {
     const xmlString = await streamToPromise(Readable.from(links).pipe(stream)).then(data => data.toString());
     res.end(xmlString);
 }
+
+export default sitemap;

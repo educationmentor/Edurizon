@@ -26,4 +26,4 @@ pnpm-debug.log*
 # Ignore IDE-specific files
 .vscode/
 .idea/
-backend/.env
+env

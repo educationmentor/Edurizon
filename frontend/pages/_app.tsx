@@ -23,6 +23,9 @@ import { IconButton } from "@/components/Buttons";
 import ThemeToggle from "@/components/ThemeToggle";
 import CTASection from "@/components/landingPage/CTASection";
 import ConsultationForm from "@/components/ConsultationForm";
+import { usePathname } from "next/navigation";
+import HeroSection from "@/components/landingPage/HeroSection";
+import Home from '../pages/index'
 
 const GA_TRACKING_ID = "G-Z25NZ103DJ";
 
@@ -37,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isHidden, setIsHidden] = useState(false);
   const freeConsultationRef = useRef(null);
   const ctaSectionRef = useRef(null);
+  const pathname=usePathname();
 
   const [showConsultationForm, setShowConsultationForm] = useState(false);
 
@@ -199,7 +203,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       ) : (
         <>
           {!shouldExcludeLayout && <Navbar />}
-          <Component {...pageProps} />
+          {pathname === '/' ?<Home/> :
+            <Component {...pageProps} />}
             <GoogleAnalytics gaId="G-Z25NZ103DJ"/>
             <div id='footer'>
             {!shouldExcludeLayout &&<>
