@@ -93,7 +93,9 @@ const HeroSection = () => {
         
       </div>
       {showConsultationForm && (
+        <div className='fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 z-[100] flex items-center justify-center'>
         <ConsultationForm onClose={() => setShowConsultationForm(false)} />
+        </div>
       )}
       </>
   );
