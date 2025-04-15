@@ -23,6 +23,12 @@ const nextConfig = {
         destination: '/api/my-sitemap',
         permanent: true, // or false depending on your SEO preference
       },
+      {
+        source:'/blogs',
+        destination:'/study-destinations?category=Destination',
+        permanent:true,
+      },
+      
     ];
   },
  

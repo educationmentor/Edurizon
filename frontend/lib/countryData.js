@@ -88,7 +88,7 @@ const RussiaData={
         data:[["Expense","Annual Cost (INR)","Details"],
         ["Tution Fees","₹3.5–6.5 Lakhs","Varies by university ranking"],
         ["Hostel & Food","₹1-2 Lakhs","Shared room + Indian mess"],
-        ["Medical Insurance","₹₹20,000-₹30,000 Lakhs","Mandatory for all students"],
+        ["Medical Insurance","₹20,000-₹30,000 Lakhs","Mandatory for all students"],
         ["Miscellaneous","10,000-20,000","Books, lab coats, local travel"]
         ],  
     },
@@ -99,18 +99,7 @@ const RussiaData={
         [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],["Birth certificate or Class 10 documents accepted for age proof."]],
         [["Required Documents"],["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
-    // keyHighlightsSection:{
-    //     title:"Key Highlights",
-    //     subTitle:"",
-    //     data:[
-    //         ["Parameter","Kazan","Bashkir","Orenburg"],
-    //         ["FMGE Passing Rate(2024)","68.42%","30.88%","43.4%"],
-    //         ["Years","Year 3","Year 3","Year 3"],
-    //         ["Indian Food Mess","Available","Available","Available"],
-    //         ["Scholarship Options","Merit-based","Merit-based","Merit-based"],
-    //         ["Average Living Cost/Month","₹18,000","₹14,000","₹12,000"]
-    //     ]
-    // },
+
     whyChoseUniversity:{
         title:"Why Choose These Universities To Study MBBS in Russia?",
         content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
@@ -118,6 +107,9 @@ const RussiaData={
         ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
         imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
     },
+    admissionProcess:{
+        title:"Your MBBS Journey to Russia Made Simple",
+    }
     
     }
 
@@ -226,6 +218,9 @@ const ChinaData={
             ["Food","Health Insurance","Flight Tickets"],
             ["₹15,000–20,000/month","₹10,000/year","₹30,000–50,000 (round trip)"]
         ]
+    },
+    admissionProcess:{
+        title:"Your MBBS Journey to China Made Simple",
     }
 
 }

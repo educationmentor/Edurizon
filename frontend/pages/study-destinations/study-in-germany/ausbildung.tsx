@@ -5,6 +5,7 @@ import WhyChoseUniversity from '@/components/studyDestinationComponents/whyChose
 import React from 'react'
 import Image from 'next/image'
 import UnlistedTable from '@/components/studyDestinationComponents/unListedTable'
+import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 
 const tableData = {
   title:"Top 10 Ausbildung Courses in Germany",
@@ -24,6 +25,19 @@ const tableData = {
   ]
 }
 
+const tableData2 = {
+  title:"Detailed Eligibility & Requirements of Ausbildung in Germany",
+  subTitle:"",
+  data:[
+    ["Course","Duration"],
+    ["Academic Qualification",["School Certificate: Equivalent to German secondary education (e.g., Class 12 for Indians).","Indian Students: CBSE/ICSE/State Board certificates accepted after recognition via the Anabin Database."]],
+    ["Field-Specific Requirements",["Nursing: Biology/Chemistry basics.","IT Ausbildung: Mathematics/Computer Science background."],],
+    ["Language Proficiency",["German: B1/B2 for most programs (exceptions for English-taught IT/Engineering).","English: IELTS 5.5+ or equivalent for English-medium courses."]],
+    ["Training Contract",["Secure a contract with a German employer (Ausbildungsvertrag).","Edurizon’s Support: We partner with 200+ companies to match students."]],
+    ["Financial Proof",["Blocked Account: Minimum €11,208/year (as per 2023 visa rules).","Health Insurance: Mandatory coverage (€110–€120/month).wb"]],
+  ]
+}
+
 const highestPaidTable = {
   title:"Highest-Paid Ausbildung in Germany",
   subTitle:"",
@@ -36,13 +50,48 @@ const highestPaidTable = {
   ]
 }
 
+const reasonsToStudy = [
+  {
+    title: "Earn While You Learn",
+    description:
+        "One of the most significant advantages of studying MBBS in China is cost-effectiveness. Annual tuition ..............",
+  },
+  {
+  title: "Globally Recognized Qualifications",
+  description:
+      "Medical universities in China are recognized by global organizations like the World Health Organization ...........",
+  },
+  {
+    title: "Pathway to Permanent Residency",
+    description:
+        "One of the most significant advantages of studying MBBS in China is cost-effectiveness. Annual tuition ..............",
+    },
+        {
+          title: "Job Security & Career Growth",
+          description:
+              "One of the most significant advantages of studying MBBS in China is cost-effectiveness. Annual tuition ..............",
+          },
+          {
+            title: " Personal Development & Work-Life Balance",
+            description:
+                "One of the most significant advantages of studying MBBS in China is cost-effectiveness. Annual tuition ..............",
+            },
+      {
+        title: "Cultural Immersion & Language Mastery",
+        description:
+            "One of the most significant advantages of studying MBBS in China is cost-effectiveness. Annual tuition ..............",
+        },
+                            
+]
+
 const Ausbildung = () => {
   return (
     <div className='flex flex-col gap-[5vw] md:gap-[7vw] '>
       <Header title1="Ausbildung in Germany"  title2='' id='' description='Are you ready to build a successful career through a structured, hands-on training program? Germany’s dual vocational training system, Ausbildung, offers a unique blend of paid work experience and classroom learning, making it a gateway to stable and rewarding careers. Renowned for its world-class education system, Germany provides international students and professionals—especially from India and beyond—an affordable, practical pathway to career success while earning a stipend.' />
-      <DescriptionComponent id='' title1normal={"What is"} title1orange={"Ausbildung in Germany"} content1={["Ausbildung is Germany’s innovative dual vocational training system that combines classroom-based education with hands-on, on-the-job training. This structured apprenticeship program is designed to equip participants with specialized, industry-ready skills and is globally recognized for its rigorous standards and excellent career prospects. Whether you’re seeking an ausbildung program in English or traditional German, our platform offers comprehensive resources—from detailed program listings to essential requirements and benefits."]} 
+      <DescriptionComponent id='' title1normal={"What is"} title1orange={"Ausbildung in Germany?"} content1={["Ausbildung is Germany’s innovative dual vocational training system that combines classroom-based education with hands-on, on-the-job training. This structured apprenticeship program is designed to equip participants with specialized, industry-ready skills and is globally recognized for its rigorous standards and excellent career prospects. Whether you’re seeking an ausbildung program in English or traditional German, our platform offers comprehensive resources—from detailed program listings to essential requirements and benefits."]} 
       title2={""} content2={["At Edurizon, we specialize in guiding aspiring professionals every step of the way to secure an Ausbildung in Germany. Whether you are interested in IT Ausbildung programs, dual Ausbildung opportunities, or exploring other specialized fields, we provide comprehensive support tailored to your needs."]} imageAlt={"Ausbildung Image"} imageSrc={"/assets/Images/study-in-germany/ausbildungImg2.webp"}/>
       {/* <ReasonsToStudy id='' name='Germany'  /> */}
+      <ReasonsToStudy id='' title1='Benefits of Pursuing' title2='Ausbildung in Germany' name='Germany' content={reasonsToStudy} darkImg={["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark"]} lightImg={["1","2","3","4","5","6"]} />
 
       {/* Why Chose Section */}
       <div className=" flex flex-col-reverse md:flex-row gap-[5vw] px-[6vw] md:px-[12.5vw] dark:text-black bg-linenChosen py-[10vw] md:py-[4vw] items-center  ">
@@ -64,6 +113,8 @@ const Ausbildung = () => {
 
       {/* Unlisted Table */}
       <UnlistedTable section2={"ausbildung"} content={tableData} id=''/>
+
+      <ListedTable section2='ausbildung' content={tableData2} id=''/>
 
       <UnlistedTable section2={"ausbildung"} content={highestPaidTable} id=''/>
       

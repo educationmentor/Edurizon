@@ -8,15 +8,16 @@ const socialLinks = [
 ];
 
 const quickLinks = [{ name: "Home", href: "/" },
-  { name: "About Us", href: "/aboutUs" },{ name: "Study Destination", href: "#" },
-  { name: "Blog", href: "#" },{ name: "Blog", href: "#" },
-  { name: "Contact Us", href: "#" },];
+  { name: "About Us", href: "/aboutUs" },{ name: "Study Destination", href: "/study-destinations" },
+  { name: "Blog", href: "#" },
+  { name: "Contact Us", href: "https://wa.me/919873381377?" },];
 const countries = [ { name: "Russia", href: "/study-destinations/study-mbbs-in-russia" },
   { name: "China", href: "/study-destinations/study-mbbs-in-china" },
-  { name: "Georgia", href: "../#" },
-  { name: "Kazakhstan", href: "../#" },
-  { name: "Bangladesh", href: "../#" },
-  { name: "Nepal", href: "../#" }];
+  { name: "Germany", href: "/study-destinations/study-mbbs-in-germany" },
+  { name: "Georgia", href: "/study-destinations/study-mbbs-in-georgia" },
+  { name: "Kazakhstan", href: "/study-destinations/study-mbbs-in-kazakhstan" },
+  { name: "Bangladesh", href: "/study-destinations/study-mbbs-in-bangladesh" },
+  { name: "Nepal", href: "/study-destinations/study-mbbs-in-nepal" }];
 const services = ["Language Prep", "Shortlist Colleges", "Financial Planning", "SOP Review", "Start Now", "Visa Help", "Get a Counsellor"];
 
 const Footer = () => {
@@ -35,9 +36,10 @@ const Footer = () => {
         {/* Footer Sections */}
         <div className="flex flex-col md:flex-row justify-between gap-[8vw] md:gap-[0vw] pb-[5vw]">
           {/* Logo and Contact Info */}
-          <div className="flex flex-col w-full md:w-[20.1875vw] gap-[4vw] font-medium">
+          <div className="flex flex-col w-full md:w-[20.1875vw] gap-[1vw] font-medium">
             <Image width={40} height={40} className="h-auto w-[20vw] md:w-[5.25vw]" src="/assets/Images/Icons/EdurizonFinalLogo.svg" alt="Edurizon Logo" />
             <div>
+              <a href="https://maps.app.goo.gl/DwnfVVo2YPV1VzGL9">
             <div className="flex flex-row gap-[2vw] md:gap-[1vw]">
                 <Image width={40} height={40} className='h-[5vw] md:h-[1.25vw] w-[3.5vw] md:w-[.875vw]' src="/assets/Images/Icons/locationIcon.svg" alt="Location Icon" />
                 <div className="text-smallTextPhone md:text-smallText leading-[150%]">
@@ -45,6 +47,8 @@ const Footer = () => {
               
             </div>
             </div>
+            </a>
+
             <p className="m-0">Have any queries? Let us answer them!</p>
               <ul className="m-0 pl-[1.357rem]">
                 <li className="list-disc">+91-987 3381 377</li>

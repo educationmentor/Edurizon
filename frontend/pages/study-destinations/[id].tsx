@@ -31,6 +31,9 @@ interface NewPageProps {
       highlights:string[];
       href:string;
     }[];
+    admissionProcess:{
+      title:string;
+    }
     countryFeeStructure:{title:string;
         subTitle:string;
         data:string[][];
@@ -48,6 +51,7 @@ interface NewPageProps {
     countryAdditionalCost:{title:string;
         subTitle:string;
         data:string[][];};
+
    };
 }
 
@@ -72,7 +76,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       <DescriptionComponent id={id} title1normal={countryData.countryWhyChoseSection.title1normal} title1orange={countryData.countryWhyChoseSection.title1orange} title2={countryData.countryWhyChoseSection.title2} content1={countryData.countryWhyChoseSection.Description1} content2={countryData.countryWhyChoseSection.Description2} imageAlt={countryData.countryWhyChoseSection.ImageAlt} imageSrc={countryData.countryWhyChoseSection.ImageSrc} />
 
       {/* Country Reasons To Study Destination */}
-      {countryData.countryReasonsToStudySection&& <ReasonsToStudy id={id} name={countryData.countryName} content={countryData.countryReasonsToStudySection} />}
+      {countryData.countryReasonsToStudySection&& <ReasonsToStudy id={id} title1="6 Reasons Why" title2={`Students Prefer ${countryData.countryName} for MBBS` } name={countryData.countryName} content={countryData.countryReasonsToStudySection} darkImg={["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark"]} lightImg={["1","2","3","4","5","6"]} />}
 
       {/* Scholarship Section */}
       {countryData.scholarshipSection && <ScholarshipSection id={id} data={countryData.scholarshipSection} />}
@@ -101,6 +105,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {/* Country Fee Structure */}
       {countryData.countryFeeStructure && <UnlistedTable section2={"feeStructure"} id={id} content={countryData.countryFeeStructure} />}
       {/* Country Additional Cost */}
+      {<AdmissionProcess subHeading={countryData.admissionProcess.title}/>}
      {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
       <PostArrival/>
@@ -124,6 +129,7 @@ import WhyChoseUniversity from "@/components/studyDestinationComponents/whyChose
 import countryNames  from '@/lib/countryData';
 import ScholarshipSection from "@/components/studyDestinationComponents/scholarshipSection";
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
+import AdmissionProcess from "@/components/studyDestinationComponents/admissionProcess";
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id  = context.params?.id;
