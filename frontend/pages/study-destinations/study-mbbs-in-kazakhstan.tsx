@@ -265,7 +265,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section> 
-<section className="inner-page-bg">
+{/* <section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -384,7 +384,7 @@ const NewPage=()=>{
       </div>
     </div>
   </div>
-</section>
+</section> */}
 <section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">
