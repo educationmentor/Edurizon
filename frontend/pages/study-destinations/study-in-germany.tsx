@@ -138,7 +138,7 @@ const NewPage=()=>{
                         <tbody className='font-light '>
                             <tr>
                                 <th scope="row">1.</th>
-                                <td><b><a  href="https://www.edurizon.in/ausbildung-in-germany.php">Ausbildung in Germany</a></b></td> 
+                                <td><b><a  href="/study-destinations/study-in-germany/ausbildung">Ausbildung in Germany</a></b></td> 
                                 <td><a href="https://www.edurizon.in/ausbildung-in-germany.php" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
                             <tr>
