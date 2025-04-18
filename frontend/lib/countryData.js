@@ -64,9 +64,9 @@ const RussiaData={
         countryTotal:"₹24-42.5 lakhs",
         indiaTotal:"₹1.05-1.7 crore",
         description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-    countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
-    countrySpecificSection2:true,
-    countryUniversities:[
+        countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
+        countrySpecificSection2:true,
+        countryUniversities:[
         {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹5,50,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university", gloablRanking:"QS #265 (2023)",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
         // {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
         {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"₹5,00,000",href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university", gloablRanking:"NMC-Approved",highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
@@ -129,7 +129,7 @@ const ChinaData={
         title1normal:"Top MCI-Approved",
         title1orange:"Universities in China",
         title2:"Other Prominent Universities",
-        ImageSrc:"/assets/Images/CountryBlogs/Russia1.webp",
+        ImageSrc:"/assets/Images/CountryBlogs/China1.webp",
         ImageAlt:"Russia Image",
         Description1:["Zhejiang University (QS Top 150, renowned for oncology research)",
             "Nanjing Medical University (Top 5 in China for clinical training)",
@@ -190,7 +190,7 @@ const ChinaData={
         ["Visa Success Rate: Streamlined documentation ensures a 98% visa approval rate."],
         ["Comprehensive Support: From admission to post-arrival services, Edurizon provides end-to-end assistance, ensuring a hassle-free experience."],
         ["FMGE/NExT Coaching: Partnered institutes offer discounted coaching programs to prepare students for licensing exams."]],
-        imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
+        imageURL:"/assets/Images/CountryBlogs/studyDestinationCard/China.webp"
     },
     countryEligibilityStructure:[
         ["Criteria","Details"],
