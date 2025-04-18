@@ -1,16 +1,16 @@
 
 const RussiaData={
-    metaTitle:"Study MBBS in Russia 2024-25 | MCI/NMC-Approved Universities, Low Fees, Direct Admission & Scholarships | Edurizon",
-    metaDescription:"Secure your seat in Russia’s top MCI/NMC-approved medical universities for 2024-25. Affordable fees, no entrance exams, English-medium MBBS, and end-to-end admission support with Edurizon.",
+    metaTitle:"Study MBBS in Russia 2024-25 | NMC-Approved Universities, Low Fees, Direct Admission & Scholarships | Edurizon",
+    metaDescription:"Secure your seat in Russia’s top NMC-approved medical universities for 2024-25. Affordable fees, no entrance exams, English-medium MBBS, and end-to-end admission support with Edurizon.",
     metaKeywords:"Study MBBS in Russia",
     metaCanonical:"https://edurizon.in/study-destinations/study-mbbs-in-russia", 
     countryName: "Russia",
     countryTitle1:"Study MBBS in Russia 2025-26",
-    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 50+ MCI/NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
+    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 50+ NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
     countryWhyChoseSection:{
         title1normal:"Why Should You Choose to Study",
         title1orange:"MBBS in Russia?",
-        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 50+ MCI/NMC-approved universities offer a unique blend of affordability, world-class infrastructure, and globally recognized degrees."],
+        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 50+ NMC-approved universities offer a unique blend of affordability, world-class infrastructure, and globally recognized degrees."],
         ImageSrc:"/assets/Images/CountryBlogs/Russia1.webp",
         ImageAlt:"Russia Image"
     },
@@ -43,7 +43,7 @@ const RussiaData={
             "Students benefit from a fully English-medium curriculum, ensuring ease of learning for international students.",
         },
         {
-        title: "APractical Training",
+        title: "Practical Training",
         mobileTitle: "Practical Training",
         description:
             "Students gain hands-on experience from the very first year in government hospitals.",
@@ -64,7 +64,7 @@ const RussiaData={
         countryTotal:"₹24-42.5 lakhs",
         indiaTotal:"₹1.05-1.7 crore",
         description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-        countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ MCI/NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
+        countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
         countrySpecificSection2:true,
         countryUniversities:[
         {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹5,50,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university", gloablRanking:"QS #265 (2023)",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
@@ -117,16 +117,16 @@ const RussiaData={
 
 
 const ChinaData={
-    metaTitle:"Study MBBS in China | Affordable MCI-Approved Medical Colleges | Edurizon",
-    metaDescription:"Pursue your MBBS in China at top MCI & WHO-approved universities with affordable fees, English-medium programs, and global recognition. Learn about eligibility, scholarships, and admission guidance with Edurizon!",
+    metaTitle:"Study MBBS in China | Affordable Approved Medical Colleges | Edurizon",
+    metaDescription:"Pursue your MBBS in China at top WHO-approved universities with affordable fees, English-medium programs, and global recognition. Learn about eligibility, scholarships, and admission guidance with Edurizon!",
     metaKeywords:"Study MBBS in China",
     metaCanonical:"https://edurizon.in/study-destinations/study-mbbs-in-china", 
     countryName: "China",
-    countryDescription:"China has solidified its position as a premier destination for Indian students seeking high-quality, affordable MBBS education. With 50+ MCI (NMC)--approved medical universities, English-medium programs, and cutting-edge infrastructure, China offers a cost-effective pathway to a globally recognized medical degree. At Edurizon, we simplify your journey with comprehensive admission support, scholarship guidance, and post-arrival services, ensuring a seamless transition to your dream career.",
+    countryDescription:"China has solidified its position as a premier destination for Indian students seeking high-quality, affordable MBBS education. With 50+ (NMC)--approved medical universities, English-medium programs, and cutting-edge infrastructure, China offers a cost-effective pathway to a globally recognized medical degree. At Edurizon, we simplify your journey with comprehensive admission support, scholarship guidance, and post-arrival services, ensuring a seamless transition to your dream career.",
     countryTitle1:"Study MBBS in China",
     countryTitle2:"Affordable, Globally Recognized Medical Education",
     countryWhyChoseSection:{
-        title1normal:"Top MCI-Approved",
+        title1normal:"Top NMC-Approved",
         title1orange:"Universities in China",
         title2:"Other Prominent Universities",
         ImageSrc:"/assets/Images/CountryBlogs/China1.webp",
@@ -186,7 +186,7 @@ const ChinaData={
     },
     whyChoseUniversity:{
         title:"Why Choose Edurizon for MBBS in China?",
-        content:[["100% Admission Success: Guaranteed placement in MCI-approved universities."],
+        content:[["100% Admission Success: Guaranteed placement in NMC-approved universities."],
         ["Visa Success Rate: Streamlined documentation ensures a 98% visa approval rate."],
         ["Comprehensive Support: From admission to post-arrival services, Edurizon provides end-to-end assistance, ensuring a hassle-free experience."],
         ["FMGE/NExT Coaching: Partnered institutes offer discounted coaching programs to prepare students for licensing exams."]],
@@ -200,7 +200,7 @@ const ChinaData={
         [["Required Documents"],["Applicants must provide proof of medical fitness, demonstrating they are free from critical illnesses. This requirement ensures the well-being of students during their studies in China."]]
     ],
     countryFeeStructure:{
-        title:"Fee Structure of Top MCI-Approved Universities",
+        title:"Fee Structure of Top NMC-Approved Universities",
         subTitle:"MBBS in China 2025-26: Detailed Cost Breakdown",
         data:[["University","Tuition Fee (per year)","Hostel Fee (per year)"],
         ["Zhejiang University","₹5,13,600 Lakhs","₹72,000"],

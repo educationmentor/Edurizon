@@ -18,7 +18,7 @@ export const destinationData =[
       description:"Get an affordable and high-quality MBBS degree in Tajikistan with globally accepted medical programs.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Kyrgyzstan.webp", title:"Study in Kyrgyzstan", category:"Destination",href:"/#",
-      description:"Study MBBS in Kyrgyzstan with low tuition fees, English-medium instruction, and MCI/WHO-approved universities.",
+      description:"Study MBBS in Kyrgyzstan with low tuition fees, English-medium instruction, and NMC/WHO-approved universities.",
     },  
     
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Australia.webp", title:"Study in Australia", category:"Destination",href:"/study-destinations/study-in-australia",

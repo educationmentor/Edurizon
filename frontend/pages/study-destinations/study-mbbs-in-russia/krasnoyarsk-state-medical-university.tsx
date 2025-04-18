@@ -151,7 +151,7 @@ const NewPage = () => {
         </div>
          <ul className="points-two">
           <li>The Russian government established the Krasnoyarsk State Medical University.</li>
-          <li>MCI approved college.</li>
+          <li>NMC approved college.</li>
           <li>College recognized by WHO and NMC.</li>
 
         </ul>

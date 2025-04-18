@@ -10,7 +10,7 @@ const steps = [
       contentFull:<p className='text-smallTextPhone md:text-smallText leading-[150%]'>
         Edurizon starts with a free 30-minute consultation to evaluate your academic profile, budget, and career goals. Key factors include:
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
-            <li>NEET Score: Eligibility for MCI/NMC-approved universities.</li>
+            <li>NEET Score: Eligibility for NMC-approved universities.</li>
             <li>Class 12 Marks: Minimum 50% in PCB (40% for SC/ST/OBC).</li>
             <li>Preferences: Climate, university ranking, and specialization interests.</li>
             <li>Example: A student with 55% in PCB and a NEET score of 500 may be matched with options like Crimea Federal University (low fees, tropical climate) or Smolensk State Medical University (WHO-recognized, English-medium focus).

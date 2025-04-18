@@ -162,7 +162,7 @@ const BashkirMedicalUniversity=()=>{
             <ul className="points">
                 <li>BSMU is amongst the top universities of the Russian Federation.</li>
                 <li>Government funded university.</li>
-                <li>Recognized by the leading medical council MCI</li>
+                <li>Recognized by the leading medical council NMC</li>
                 <li>Recognized by WHO.</li>
                 <li>Recognized by Ministry of Healthcare and Ministry of Education and Science of the Russian Federation.</li>
             </ul>
@@ -219,7 +219,7 @@ const BashkirMedicalUniversity=()=>{
                 <ul className="points-two">
                     <li>The University offers a number of undergraduate courses and is quite popular for Medical education among the International students because of its low tuition fees and excellent education system.</li>
                     <li>Bashkir State Medical University has students from across the globe. The University receives yearly enrolment of more than 10,000 medical students including International students. Other departments are also flooded with admissions and so the University has appointed over 700 full time faculty at School of General medicine, Pediatrics, Preventive Medicine and Pharmacy.</li>
-                    <li>BSMU is a reputed university and is recognized by both World Health Organization and MCI (Medical Council of India). Other recognitions of the university include MMC (Malaysia) and other countries too. </li>
+                    <li>BSMU is a reputed university and is recognized by both World Health Organization and NMC (National Medical Commission). Other recognitions of the university include MMC (Malaysia) and other countries too. </li>
                 </ul>
                 </div>
             </div>
@@ -541,7 +541,7 @@ export default BashkirMedicalUniversity;
                 Government funded university.
                 </li>
                 <li>
-                Recognized by the leading medical council MCI
+                Recognized by the leading medical council NMC
                 </li>
                 <li>
                 Recognized by WHO.

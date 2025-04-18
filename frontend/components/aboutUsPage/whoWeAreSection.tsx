@@ -9,8 +9,8 @@ const WhoWeAreSection = () => {
             <h6 className="text-h5Text font-bold">Our Expertise Extends To</h6>
             <ul className="text-regularText leading-[150%] list-inside pl-[.5vw]">
                 <li className="list-disc text-justify ">NEET counseling for maximizing government seats in NEET and optimizing total seats in NEET allocations.</li>
-                <li className="list-disc text-justify ">Facilitating admissions to MCI-approved colleges such as Tbilisi State Medical University, Kazan Federal University, and Smolensk State Medical University.</li>
-                <li className="list-disc text-justify ">Ensuring compliance with NMC guidelines and preparation for critical exams like the FMGE exam and MCI screening test.</li>
+                <li className="list-disc text-justify ">Facilitating admissions to NMC-approved colleges such as Tbilisi State Medical University, Kazan Federal University, and Smolensk State Medical University.</li>
+                <li className="list-disc text-justify ">Ensuring compliance with NMC guidelines and preparation for critical exams like the FMGE exam and NMC screening test.</li>
                 <li className="list-disc text-justify ">With transparency at our core, we simplify the admission process for top universities while providing end-to-end support.</li>
 
                 

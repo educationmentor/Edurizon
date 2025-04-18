@@ -154,7 +154,7 @@ const NewPage = () => {
                             </tr>
                             <tr>
                                 <th scope="row">Recognition</th>
-                                <td>NMC, WHO & BMDC, MCI</td>
+                                <td>NMC, WHO & BMDC, NMC</td>
                             </tr>
                             <tr>
                                 <th scope="row">Medium of instruction</th>

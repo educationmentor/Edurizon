@@ -173,7 +173,7 @@ const NewPage = () => {
                     <li>It is one of the oldest Government universities of China established in the year 1902 and is one of the best universities of China.</li>
                     <li>Southeast University is the only university in China which is financed by the Central Government and included in project 211 and program 985 to build as a world-className university.</li>
                     <li>The University has developed and grown over the years with 40 schools offering 60 undergraduate programs.</li>
-                    <li>The University is listed under MCI and WHO and is one of the most prestigious universities of China.</li>
+                    <li>The University is listed under NMC and WHO and is one of the most prestigious universities of China.</li>
                     <li>The University is ranked among the top institutions of China and also throughout Asia.</li>
                     <li>Southeast University is a public research university located in the main capital city of China, Nanjing.</li>
                 </ul>

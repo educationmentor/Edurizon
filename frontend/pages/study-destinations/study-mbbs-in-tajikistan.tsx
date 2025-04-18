@@ -298,7 +298,7 @@ const NewPage=()=>{
                     </tr>
                     <tr>
                       <th scope="row">Europe & Central Asia</th>
-                      <td>NMC, WHO & BMDC, MCI</td>
+                      <td>NMC, WHO & BMDC, NMC</td>
                     </tr>
                   </tbody>
                 </table>

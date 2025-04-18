@@ -55,7 +55,7 @@ const NewPage = () => {
                     <div className="heading">
                         <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">MBBS in Georgia</h3>
                     </div>
-                    <p>Mbbs in Georgia is a new favorite destination for Indian students. The medical Universities of Georgia are all recognized by MCI and are the best option for any student who wants to study MBBS from abroad.</p>
+                    <p>Mbbs in Georgia is a new favorite destination for Indian students. The medical Universities of Georgia are all recognized by NMC and are the best option for any student who wants to study MBBS from abroad.</p>
                     <p>Georgia is a literate country and is one of the best places for studying medicine in the world. The medical universities of Georgia offer high standard infrastructure and education to the students. Medical degree provided by the University is recognized worldwide, so they can work and study in any part of the world.</p>
                     <p>Most of the students wish to study MBBS in Georgia, as it is their dream to study in a European country. But very few of them get this remarkable opportunity, because of the budget and the cost of living. Indian medical aspirants who are looking forward to pursue their Mbbs always opt and select for low budget countries with at least 5 years of course. There are many countries offering Mbbs in low budget like Kyrgyzstan, Kazakhstan, Philippines and many more. But still Georgia has been able to make up the top list of most preferred countries for studying Mbbs. It has become a second home to most of the leading MBBS universities for Indian students.</p>
                     <p>As MBBS in TBILISI Georgia is a new destination for the students, its moderate environment and fun-loving people, experienced faculty members make sure that students who have taken MBBS admission in Georgia acquire the best education both theoretically and practically so that they can make a successful career after completing MBBS in Georgia. Students get relax when they come to know that more than 5000 Indians are already studying MBBS in Georgia. It becomes favorable and easier for them to decide. Students can easily apply for admission if they have managed to secure 50% in 10+2 with PCB from a recognized board.</p>
@@ -71,8 +71,8 @@ const NewPage = () => {
                         <li>Donation of fees is not required for admission process.</li>
                         <li>Visa process is also very easy for Georgia, the candidate must only be good in English.</li>
                         <li>Skype Interview is conducted for admission in Georgia medical Universities, to check the fluency of English language.</li>
-                        <li>Almost all the Medical Universities of Georgia are approved by WHO and MCI.</li>
-                        <li>MCI coaching is also provided by the Georgian Universities for Indian students.</li>
+                        <li>Almost all the Medical Universities of Georgia are approved by WHO and NMC.</li>
+                        <li>NMC coaching is also provided by the Georgian Universities for Indian students.</li>
                         <li>No entrance exam is required for all government Universities of Georgia.</li>
                         <li>Universities of Georgia are top ranked in the world.</li>
                         <li>The country is safe for study including boys and girls.</li>
@@ -89,7 +89,7 @@ const NewPage = () => {
                 </div>
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Best MBBS College in Georgia Listed Under MCI</h3>
+                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Best MBBS College in Georgia Listed Under NMC</h3>
                     </div>
                     <div className="table-responsive">
                     <table className="table table-bordered table-striped align-middle">
@@ -159,7 +159,7 @@ const NewPage = () => {
                         <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Advantages to Study MBBS in Georgia</h3>
                     </div>
                     <p>Lots of Students opt for Mbbs in Georgia as it is one of the most peaceful and crime free country to study Mbbs from Abroad. The affordable fees structure and the low cost of living attract most of the students and is one of the major advantages of the country. After completing their studies from Georgia, students can easily practice in India as the degree is valid all over the world. Georgia offers lots of opportunities for the students where they can learn and also grow as medical interns. Students are allowed to work as interns and get practical exposure during their period of study.</p>
-                    <p>The quality of education provided in all the MCI approved Universities of the country are of quite high standard in the whole country of Europe. This is the main reason why maximum number of students chooses to study in Georgia. Studying Mbbs in Europe is a dream of every student, the economical fees and budget friendly universities fascinate the students to select Georgia over other countries.</p>
+                    <p>The quality of education provided in all the NMC approved Universities of the country are of quite high standard in the whole country of Europe. This is the main reason why maximum number of students chooses to study in Georgia. Studying Mbbs in Europe is a dream of every student, the economical fees and budget friendly universities fascinate the students to select Georgia over other countries.</p>
                 </div>
             </div>
         </div>
