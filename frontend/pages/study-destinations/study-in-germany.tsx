@@ -139,7 +139,7 @@ const NewPage=()=>{
                         <tbody className='font-light '>
                             <tr>
                                 <th scope="row">1.</th>
-                                <TransitionLink href="/study-destinations/study-in-germany/ausbildung" className="text-decoration-none text-black dark:text-white">
+                                <TransitionLink href="/study-destinations/study-in-germany/ausbildung" >
                                 <td><b>Ausbildung in Germany</b></td> 
                                 </TransitionLink>
                                 <td><a href="https://www.edurizon.in/ausbildung-in-germany.php" className="btn-custom btn-univ-detail">Read More</a></td>
