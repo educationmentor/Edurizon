@@ -89,7 +89,7 @@ const Home = () => {
       <FAQSection />
       <AssociatedUniversitiesSection />
       {/* 💬 Show Consultation Form when triggered */}
-        <div className={`fixed top-0  left-0 w-full h-screen bg-black bg-opacity-50  ${showConsultationForm?"opacity-100 scale-100 z-50":"opacity-0 -z-50 scale-95"}  z-[100] flex items-center justify-center transition-opacity duration-300 ease-in-out`}>
+        <div className={`fixed top-0  left-0 w-full h-screen bg-black bg-opacity-50  ${showConsultationForm?"opacity-100 scale-100 z-50 ":"opacity-0 -z-50 scale-95"}   flex items-center justify-center transition-opacity duration-300 ease-in-out`}>
         <ConsultationForm onClose={() => setShowConsultationForm(false)} />
       </div>
     </>
