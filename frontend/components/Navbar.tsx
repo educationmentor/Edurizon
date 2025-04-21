@@ -39,23 +39,30 @@ const Navbar = () => {
   ];
 
   
-
-  const studyDestinations = [
+  const studyDestinations1=[
+    {name:"MBBS in India", href:"/study-destinations/study-mbbs-in-india",flag:"/assets/Images/country-flag/indian-flag.png"},
     {name:"MBBS in Russia", href:"/study-destinations/study-mbbs-in-russia",flag:"/assets/Images/country-flag/russia.png"},
-    {name:"Study in Germany", href:"/study-destinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
-    {name:"MBBS in Bangladesh", href:"/study-destinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
-    {name:"MBBS in Nepal", href:"/study-destinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
-    {name:"Study in UK", href:"/study-destinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
-    {name:"MBBS in Kazakhstan", href:"/study-destinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
     {name:"MBBS in Georgia", href:"/study-destinations/study-mbbs-in-georgia",flag:"/assets/Images/country-flag/georgia.png"},
     {name:"MBBS in Tajikistan", href:"/study-destinations/study-mbbs-in-tajikistan",flag:"/assets/Images/country-flag/tajikistan.png"},
     {name:"MBBS in China", href:"/study-destinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
-    // {name:"Study in Kyrgyzstan", href:"../#",flag:"/assets/Images/country-flag/ireland.png"},
-    {name:"MBBS in Ukraine", href:"/study-destinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
-    {name:"Study in Australia", href:"/study-destinations/study-in-australia",flag:"/assets/Images/country-flag/australia.jpg"},
+  ]
+   const studyDestinations2=[
+    {name:"MBBS in Bangladesh", href:"/study-destinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
+    {name:"MBBS in Kazakhstan", href:"/study-destinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
     {name:"MBBS in Uzbekistan", href:"/study-destinations/study-mbbs-in-uzbekistan",flag:"/assets/Images/country-flag/uzbekistan.png"},
+    {name:"MBBS in Nepal", href:"/study-destinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
+    // {name:"MBBS in Kyrgyzstan", href:"/study-destinations/study-mbbs-in-kyrgyzstan",flag:"/assets/Images/country-flag/kyrgyzstan.png"},
+    {name:"MBBS in Ukraine", href:"/study-destinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
+
+   ]
+
+   const studyDestinations3=[
+    {name:"Study in Germany", href:"/study-destinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
+    {name:"Study in UK", href:"/study-destinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
     {name:"Study in Hungary", href:"/study-destinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
-  ];
+    {name:"Study in Australia", href:"/study-destinations/study-in-australia",flag:"/assets/Images/country-flag/australia.jpg"},
+   ]
+
 
   const topUniversitites=[
     {name:"Bashkir Medical University",href:" /study-destinations/study-mbbs-in-russia/bashkir-medical-university",flag:"",},
@@ -212,28 +219,70 @@ key={index}
                       </button>
                       <button onMouseEnter={()=>setStudyDestinationHover(1)} style={{color:studyDestinationHover==1?"#FF7500":""}} className='text-left'>
                         <h6>
-                        MBBS at a Glance
+                        Top Medical College <br/>Country Wise
                         </h6>
                       </button>
                       <button onMouseEnter={()=>setStudyDestinationHover(0)}  className='text-left'>
                         <h6 style={{color:studyDestinationHover==2?"#FF7500":""}}>
-                        Specific Courses
+                        Budget Wise University
                         </h6>
                       </button>
                   </div>
-                  <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1vw] gap-x-[1.75vw]">
-                    {(studyDestinationHover ==0)?(studyDestinations.map((destination, i) => (
-                      <div key={i} onClick={()=>setDropdownVisible(false)}>
-                        <TransitionLink  href={destination.href}>
-                          <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                              <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
-                              <h5 className='text-mediumText font-bold'>
-                              {destination.name}
-                              </h5>
-                          </li>
-                        </TransitionLink>
-                        </div>
-                      ))):(studyDestinationHover==1?(
+                  <div className='w-[60vw] ml-auto h-full '>
+                    {studyDestinationHover==0?<ul className='ml-auto h-full  grid grid-cols-3 w-[60vw]  gap-y-[1vw] gap-x-[1.75vw]'>
+                    <div className='flex flex-col h-full gap-[1vw]'>
+                      {(
+                        studyDestinations1.map((destination, i) => (
+                          <div key={i} onClick={()=>setDropdownVisible(false)}>
+                          <TransitionLink  href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
+                                <h5 className='text-mediumText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                    <div className='flex flex-col h-full gap-[1vw]'>
+                      {(
+                        studyDestinations2.map((destination, i) => (
+                          <div key={i} onClick={()=>setDropdownVisible(false)}>
+                          <TransitionLink  href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
+                                <h5 className='text-mediumText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                    <div className='flex flex-col h-full gap-[1vw]'>
+                      {(
+                        studyDestinations3.map((destination, i) => (
+                          <div key={i} onClick={()=>setDropdownVisible(false)}>
+                          <TransitionLink  href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
+                                <h5 className='text-mediumText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    </ul>:
+                      
+                        studyDestinationHover==1?<ul className='ml-auto grid grid-cols-3 w-[60vw]  gap-y-[1vw] gap-x-[1.75vw]'>
+                          {(
                         topUniversitites.map((destination, i) => (
                           <div key={i} onClick={()=>setDropdownVisible(false)}>
                           <TransitionLink  href={destination.href}>
@@ -245,9 +294,26 @@ key={index}
                           </TransitionLink>
                           </div>
                         ))
-                      ):"HI") }
+                      )}
+                        </ul>
+                      :<></>}
+                      </div>
+                  {/* <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1vw] gap-x-[1.75vw]">
+                    {(studyDestinationHover==1?(
+                        topUniversitites.map((destination, i) => (
+                          <div key={i} onClick={()=>setDropdownVisible(false)}>
+                          <TransitionLink  href={destination.href}>
+                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
+                                <h5 className='text-regularText font-bold'>
+                                {destination.name}
+                                </h5>
+                            </li>
+                          </TransitionLink>
+                          </div>
+                        ))
+                      ):"") }
                       
-                    </ul>
+                    </ul> */}
 
              
               </div>

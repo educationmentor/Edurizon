@@ -388,7 +388,7 @@ const NewPage=()=>{
                         <h3>Admission procedure for MBBS in Nepal</h3>
                     </div>
                     <div className="table-responsive">
-                        <table className="table table table-bordered table-striped align-middle">
+                        <table className="table  table-bordered table-striped align-middle">
                             <tbody>
                                 <tr>
                                     <th scope="row">Nationality</th>

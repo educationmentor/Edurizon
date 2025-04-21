@@ -6,9 +6,9 @@ const steps = [
     {
       title: "Personalized Profile Evaluation",
       content:
-        "Edurizon starts with a free 30–minute consultation to evaluate your academic profile, budget, and career goals.",
+        "Edurizon starts with a free consultation to evaluate your academic profile, budget, and career goals..",
       contentFull:<p className='text-smallTextPhone md:text-smallText leading-[150%]'>
-        Edurizon starts with a free 30-minute consultation to evaluate your academic profile, budget, and career goals. Key factors include:
+        Edurizon starts with a free consultation to evaluate your academic profile, budget, and career goals. Key factors include:
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
             <li>NEET Score: Eligibility for NMC-approved universities.</li>
             <li>Class 12 Marks: Minimum 50% in PCB (40% for SC/ST/OBC).</li>
@@ -31,8 +31,8 @@ const steps = [
         Submit the Following Documents 
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
             <li>Academics: Class 10 & 12 mark sheets, NEET scorecard.</li>
-            <li>Identity Proof: Passport (18+ months validity), birth certificate.</li>
-            <li>Medical Fitness: HIV-negative and COVID-19 vaccination certificates.</li>
+            <li>Identity Proof: Passport</li>
+            <li>Medical Fitness: HIV-negative certificates.</li>
         </ul>
         
         Edurizon’s Role
@@ -46,24 +46,27 @@ const steps = [
     {
       title: "Admission Letter & Entrance Exam",
       content:
-        "Fee Payment: Transfer tuition fees directly to the university account.",
-        contentFull:
+        "Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter.",
+        contentFull:<>
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
+            <li>Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter, student need to submit his 
+              valid NEET score card. Thereafter University conducts entrance exam of all such students who have received admission letter and
+               deposited their NEET score card</li>
             <li>Fee Payment: Transfer tuition fees directly to the university account.</li>
-            <li>Visa Application: Submit required documents (admission letter, passport, medical reports).</li>
         </ul>
+        </>
     },
     {
       title: "Fee Payment & Visa Processing",
       content:
-        "Edurizon assists with visa forms, embassy appointments, and discounted medical tests.",
-        contentFull:<>Edurizon assists with visa forms, embassy appointments, and discounted medical tests.</>
+        "Edurizon assists with visa forms, embassy appointments etc.",
+        contentFull:<>Edurizon assists with visa forms, embassy appointments etc.</>
     },
     {
-      title: "Pre-Departure & Arrival",
+      title: "Booking flight tickets and currency exchange",
       content:
-        "Attend a pre-departure webinar covering climate tips, hostel guidelines, and cultural etiquette.",
-        contentFull:<p>Attend a pre-departure webinar covering climate tips, hostel guidelines, and cultural etiquette. Upon arrival, university representatives provide airport pickup, meal services, and transport to hostels. Edurizon’s team ensures a smooth settlement, including room allocation and local SIM cards.
+        "On receipt of visa, need to plan departure schedule with a group of students,  Edurizon also assist to exchange the money in the respective  countries currency.",
+        contentFull:<p>On receipt of visa, need to plan departure schedule with a group of students,  Edurizon also assist to exchange the money in the respective  countries currency.
     <strong><br/><br/>
         With Edurizon, every step is streamlined, ensuring a stress-free start to your medical journey in your Desired Country.</strong></p>
     },
@@ -183,10 +186,10 @@ const AdmissionProcess = ({subHeading}:AdmissionProps) => {
     <div className='bg-linenChosen py-[10vw] md:py-[4vw] px-[6vw] md:px-[12.625vw]'>
         <div className=' mb-[5vw] md:mb-[4vw]'>
             <h3 className='text-h5TextPhone md:text-h3Text text-center font-bold leading-[120%] mb-[5vw] md:mb-[1.5vw]'>Admission Process</h3>
-            <h5 className='text-h6TextPhone font-bold text-left md:text-center md:text-h5Text md:font-medium leading-[140%] mb-[2vw] md:mb-[.5vw]'>{subHeading}</h5>
-            <p className='text-smallTextPhone md:text-regularText text-justify leading-[150%]'>{headDescription}</p>
+            <h5 className='text-h6TextPhone font-bold text-left md:text-center md:text-h5Text md:font-medium leading-[140%] mb-[0vw] md:mb-[.5vw]'>{subHeading}</h5>
+            {/* <p className='text-smallTextPhone md:text-regularText text-justify leading-[150%]'>{headDescription}</p> */}
         </div>
-        <div className='flex flex-col py-[10vw] md:py-0 md:flex-row items-start  md:gap-[6.875vw] '>
+        <div className='flex flex-col py-[6vw] md:py-0 md:flex-row items-start  md:gap-[6.875vw] '>
             <div className='md:ml-[1.25vw] md:w-[31.25vw]'>
             {steps.map((step, index) => (
                 <Step

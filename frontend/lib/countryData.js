@@ -5,22 +5,23 @@ const RussiaData={
     metaKeywords:"Study MBBS in Russia",
     metaCanonical:"https://edurizon.in/study-destinations/study-mbbs-in-russia", 
     countryName: "Russia",
-    countryTitle1:"Study MBBS in Russia 2025-26",
-    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 50+ NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
+    countryTitle1:"MBBS in Russia",
+    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 70+ NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
     countryWhyChoseSection:{
-        title1normal:"Why Should You Choose to Study",
-        title1orange:"MBBS in Russia?",
-        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 50+ NMC-approved universities offer a unique blend of affordability, world-class infrastructure, and globally recognized degrees."],
+        title1normal:"BENEFITS OF STUDYING ",
+        title1orange:"MBBS IN RUSSIA",
+        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 70+ NMC- approved universities offer a unique blend of affordability, world-class infrastructure, and globally valid degrees."],
         ImageSrc:"/assets/Images/CountryBlogs/Russia1.webp",
         ImageAlt:"Russia Image"
     },
 
-    countryReasonsToStudySection:[
+    russiaReasonsToStudySection:[
         {
         title: "Globally Valid Degrees",
         mobileTitle: "Globally Valid Degrees",
         description:
             "Medical universities in Russia are accredited by WHO, UNESCO, NMC, ECFMG, and FAIMER, ensuring global recognition.",
+            
         mobileDescription:
             "Russian medical degrees are accredited by WHO, UNESCO, NMC, ECFMG, and FAIMER, ensuring ...",
         },
@@ -28,11 +29,11 @@ const RussiaData={
         title: "Affordability",
         mobileTitle: "Affordability",
         description:
-            "Russia offers world-class medical education at a fraction of the cost of Indian private colleges.",
+            "The budget of Russian medical colleges starts from 20 lakhs and goes upto 50 lakh. ",
         },
         {
-        title: "No Entrance Exams",
-        mobileTitle: "No Entrance Exams",
+        title: "Follow NMC Gazette",
+        mobileTitle: "Entrance Exams",
         description:
             "Admission is based solely on Class 12 marks (50% in PCB) and a valid NEET score, eliminating the stress of ...",
         },
@@ -56,57 +57,61 @@ const RussiaData={
         },
         ],
 
-    countryCostData:{
-        countryTuitionFee:"₹21-39 lakhs",
-        indiaTuitionFee:"₹90 lakhs-1.5 crore",
-        countryHotelFee:"₹3-3.5 lakhs",
-        indiaHotelFee:"₹15-20 lakhs",
-        countryTotal:"₹24-42.5 lakhs",
-        indiaTotal:"₹1.05-1.7 crore",
-        description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-        countrySpecificSection3:{data:'For Indian students, choosing the right university is critical to ensuring their medical degree is recognized globally and in India. Russia boasts 50+ NMC-approved medical universities, but only a handful stand out for their academic excellence, infrastructure, and Indian student-friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'},
-        countrySpecificSection2:true,
+    // countryCostData:{
+    //     countryTuitionFee:"₹21-39 lakhs",
+    //     indiaTuitionFee:"₹90 lakhs-1.5 crore",
+    //     countryHotelFee:"₹3-3.5 lakhs",
+    //     indiaHotelFee:"₹15-20 lakhs",
+    //     countryTotal:"₹24-42.5 lakhs",
+    //     indiaTotal:"₹1.05-1.7 crore",
+    //     description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
+
+
+        countrySpecificSection3:{
+            data:'For Indian students, choosing the right university is critical in ensuring their medical degree is recognized in India as well as abroad. Russia boasts 70+ NMC approved medical colleges in Russia, but only a handful stand out for their academic excellence, infrastructure, and Indian student - friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'
+        },
+        // countrySpecificSection2:true,
         countryUniversities:[
-        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"₹5,50,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university", gloablRanking:"QS #265 (2023)",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
+        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"5,40,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
         // {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
-        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"₹5,00,000",href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university", gloablRanking:"NMC-Approved",highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
+        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"3,70,000",href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university", highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
         // {universityName:"Perm State Medical University",location:"Perm",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["1:5 cadaver ratio (3D dissection labs)","Internships at Apollo Hospitals (India)","Hindi-speaking staff","Free airport pickup"]},
-        {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"₹5,30,000",href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university", gloablRanking:"WHO-Listed",highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
-        {universityName:"Petrozavodsk State University",location:"Petrozav",annualFees:"₹2,91,042",href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university", gloablRanking:"BRICS: 261-270, EECA: 301 - 350", highlights:["Petrozavodsk State University fees are low ","Infrastructure of Petrozavodsk is world class.","6 years course duration including one year of internship"]},
-        {universityName:"Immanuel Kant Baltic Federal University",location:"Kaliningrad Oblast",annualFees:"₹3,11,000",href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university", gloablRanking:"Top 5 in country Rank, QS World Rank: 801", highlights:["The university offers a wide range of programs, including humanities, social sciences, and natural sciences. ","It is known for its research on Baltic Sea regional studies and international relations."]},
-        {universityName:"Krasnoyarsk State Medical University",location:"Krasnoyarsk ",annualFees:"₹3,38,000",href:"/study-destinations/study-mbbs-in-russia/krasnoyarsk-state-medical-university", gloablRanking:"QS World Rank: 4000-5000", highlights:["The university offers undergraduate, postgraduate, and doctoral programs in medicine and health sciences.","KSMU has a notable research focus on clinical medicine, including surgery, oncology, and internal diseases.","The university has a diverse student body, with international students from over 40 countries."]},
-        {universityName:"National Research Nuclear University, MEPHI",location:"Moscow",annualFees:"₹3,61,500",href:"/study-destinations/study-mbbs-in-russia/national-research-nuclear-university", gloablRanking:"Country Rank: 05, QS World Rank: 497", highlights:["MEPhI is renowned for its research in nuclear physics, nuclear power, and information technology.","MEPhI collaborates with major research institutions, including Rosatom, the Russian nuclear energy corporation."]},
-        {universityName:"North Western State Medical University",location:"St. Petersburg",annualFees:"₹4,50,500",href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university", gloablRanking:"Country Rank: 100, QS World Rank: 601", highlights:["It is recognized for its research in clinical medicine, public health, and medical technology ","The university has a strong focus on international cooperation and attracts students from various countries, especially for its medical and dental programs."]},
-        {universityName:"Northern State Medical University",location:"Arkhangelsk Oblast",annualFees:"₹5,60,000",href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university", gloablRanking:"World Rank: 271", highlights:["The university is known for its strong emphasis on clinical training, with multiple affiliated hospitals and medical centers.","It has a diverse student body, with international students from countries across the world, particularly in its medical courses."]},
-        {universityName:"Tambov State University",location:"Tambov",annualFees:"₹5,63,000",href:"/study-destinations/study-mbbs-in-russia/tambov-state-university", gloablRanking:"Country Rank: 145, QS World Rank: 4844", highlights:["The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology.","The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology."]},
-        {universityName:"Ulyanovsk State University",location:"Ulyanovsk",annualFees:"₹3,07,000",href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university", gloablRanking:"Country Rank: 92, QS World Rank: 4138", highlights:["USU supports a vibrant student life, offering various extracurricular activities, including cultural and sports events.","The university has modern facilities, including research labs, libraries, and state-of-the-art technologies, to enhance the educational experience."]},
-        {universityName:"Ural State Medical University",location:"Yekaterinburg",annualFees:"₹2,66,000",href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university", gloablRanking:"Country Rank: 14, World Rank: 967", highlights:["It is one of the leading medical universities in the Ural region, offering a wide range of programs in medicine, dentistry, pharmacy, and public health.","USMU has a significant international presence, with students from many countries enrolled in its medical programs."]},
+        {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"$6200(with hostel)",href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university", highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
+        {universityName:"Petrozavodsk State University",location:"Petrozav",annualFees:"2,85,000",href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university",  highlights:["Petrozavodsk State University fees are low ","Infrastructure of Petrozavodsk is world class.","6 years course duration including one year of internship"]},
+        {universityName:"Immanuel Kant Baltic Federal University",location:"Kaliningrad Oblast",annualFees:"3,16,000",href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university",  highlights:["The university offers a wide range of programs, including humanities, social sciences, and natural sciences. ","It is known for its research on Baltic Sea regional studies and international relations."]},
+        {universityName:"Krasnoyarsk State Medical University",location:"Krasnoyarsk ",annualFees:"3,19,000",href:"/study-destinations/study-mbbs-in-russia/krasnoyarsk-state-medical-university",  highlights:["The university offers undergraduate, postgraduate, and doctoral programs in medicine and health sciences.","KSMU has a notable research focus on clinical medicine, including surgery, oncology, and internal diseases.","The university has a diverse student body, with international students from over 40 countries."]},
+        {universityName:"National Research Nuclear University, MEPHI",location:"Moscow",annualFees:"5,92,600 (Moscow Branch), 5,10,000(Obninsk branch)",href:"/study-destinations/study-mbbs-in-russia/national-research-nuclear-university", highlights:["MEPhI is renowned for its research in nuclear physics, nuclear power, and information technology.","MEPhI collaborates with major research institutions, including Rosatom, the Russian nuclear energy corporation."]},
+        {universityName:"North Western State Medical University",location:"St. Petersburg",annualFees:"4,40,000",href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university",   highlights:["It is recognized for its research in clinical medicine, public health, and medical technology ","The university has a strong focus on international cooperation and attracts students from various countries, especially for its medical and dental programs."]},
+        {universityName:"Northern State Medical University",location:"Arkhangelsk Oblast",annualFees:"$6,500(with Hostel) ",href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university",   highlights:["The university is known for its strong emphasis on clinical training, with multiple affiliated hospitals and medical centers.","It has a diverse student body, with international students from countries across the world, particularly in its medical courses."]},
+        {universityName:"Tambov State University",location:"Tambov",annualFees:"3,50,000",href:"/study-destinations/study-mbbs-in-russia/tambov-state-university",  highlights:["The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology.","The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology."]},
+        {universityName:"Ulyanovsk State University",location:"Ulyanovsk",annualFees:"3,00,000",href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university",  highlights:["USU supports a vibrant student life, offering various extracurricular activities, including cultural and sports events.","The university has modern facilities, including research labs, libraries, and state-of-the-art technologies, to enhance the educational experience."]},
+        {universityName:"Ural State Medical University",location:"Yekaterinburg",annualFees:"2,60,000",href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university", highlights:["It is one of the leading medical universities in the Ural region, offering a wide range of programs in medicine, dentistry, pharmacy, and public health.","USMU has a significant international presence, with students from many countries enrolled in its medical programs."]},
     ],
-    countryFeeStructure:{
-        title:"Fee Structure",
-        subTitle:"MBBS in Russia 2025-26: Detailed Cost Breakdown",
-        data:[["Expense","Annual Cost (INR)","Details"],
-        ["Tution Fees","₹3.5–6.5 Lakhs","Varies by university ranking"],
-        ["Hostel & Food","₹1-2 Lakhs","Shared room + Indian mess"],
-        ["Medical Insurance","₹20,000-₹30,000 Lakhs","Mandatory for all students"],
-        ["Miscellaneous","10,000-20,000","Books, lab coats, local travel"]
-        ],  
-    },
+    // countryFeeStructure:{
+    //     title:"Fee Structure",
+    //     subTitle:"MBBS in Russia 2025-26: Detailed Cost Breakdown",
+    //     data:[["Expense","Annual Cost (INR)","Details"],
+    //     ["Tution Fees","₹3.5–6.5 Lakhs","Varies by university ranking"],
+    //     ["Hostel & Food","₹1-2 Lakhs","Shared room + Indian mess"],
+    //     ["Medical Insurance","₹20,000-₹30,000 Lakhs","Mandatory for all students"],
+    //     ["Miscellaneous","10,000-20,000","Books, lab coats, local travel"]
+    //     ],  
+    // },
     countryEligibilityStructure:[
         ["Criteria","Details","Notes"],
-        [["Academic Qualification"],["Class 12 (or equivalent) with Physics, Chemistry, Biology (PCB).","General Category: Minimum 50% aggregate in PCB.","SC/ST/OBC: Minimum 40% aggregate in PCB."],["Recognized boards: CBSE, ICSE, State Boards, NIOS, or equivalent.","Appearing students (2024) can apply provisionally."]],
-        [["NEET Qualification"],["NEET 2024 or 2025 scorecard is mandatory.","No minimum NEET percentile required."],["As per NMC guidelines, NEET is compulsory for Indian students pursuing MBBS abroad."]],
-        [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],["Birth certificate or Class 10 documents accepted for age proof."]],
-        [["Required Documents"],["Class 10 & 12 Mark Sheets (attested by school/board).","NEET Scorecard (2024/2025).","Valid Passport (18+ months validity from admission date).","Medical Fitness Certificate (confirming no HIV, COVID-19, or contagious diseases)."],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
+        [["Academic Qualification"],["Class 12 (or equivalent) with Physics, Chemistry, Biology (PCB).","General Category: Minimum 50% aggregate in PCB.","SC/ST/OBC: Minimum 40% aggregate in PCB."],["Recognized boards: CBSE, ICSE, State Boards, NIOS, or equivalent."]],
+        [["NEET Qualification"],["NEET qualification is Mandatory."],["As per NMC guidelines, NEET is compulsory for Indian students pursuing MBBS abroad."]],
+        [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],[" Class 10 documents accepted for age proof."]],
+        [["Required Documents"],["Class 10 & 12 Mark Sheets","NEET Scorecard .","Valid Passport","HIV Report"],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
 
-    whyChoseUniversity:{
-        title:"Why Choose These Universities To Study MBBS in Russia?",
-        content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
-        ["Specializations","> Kazan: Research & AI-driven medical training.","> Bashkir: Cardiology & robotic surgery.","> Orenburg: Rural healthcare & telemedicine."],
-        ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
-        imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
-    },
+    // whyChoseUniversity:{
+    //     title:"Why Choose These Universities To Study MBBS in Russia?",
+    //     content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
+    //     ["Specializations","> Kazan: Research & AI-driven medical training.","> Bashkir: Cardiology & robotic surgery.","> Orenburg: Rural healthcare & telemedicine."],
+    //     ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
+    //     imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
+    // },
     admissionProcess:{
         title:"Your MBBS Journey to Russia Made Simple",
     }

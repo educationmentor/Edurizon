@@ -21,8 +21,8 @@ const ReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }: Reas
       lightImg;
     return (
         <div className="md:m-[4vw] flex flex-col gap-[8vw] md:gap-[4vw] mx-[6vw] md:mx-[12.5vw]">
-            <h4 className="text-h4TextPhone md:text-h4Text text-center leading-[130%] ">{title1}<br/>{title2}</h4>
-            <div className="flex flex-col md:grid md:grid-cols-3 gap-[16vw] md:gap-[4vw]">
+            <h4 className="text-h4TextPhone md:text-h4Text text-center leading-[130%] ">{title1} {title2}</h4>
+            <div className="flex flex-col  md:grid md:grid-cols-3 gap-[16vw] md:gap-[4vw]">
                 {content.map((reason, index) => (
                     <div key={index} className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                     <Image

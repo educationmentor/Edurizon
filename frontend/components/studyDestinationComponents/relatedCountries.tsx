@@ -13,13 +13,13 @@ const RelatedCountries=()=>{
   <div className="grid grid-cols-1 md:grid-cols-3 justify-content-center">
       <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 mx-[1vw]">
       <div className="related-countries-detail">
-        <a href="https://edurizon.in/mbbs-in-india.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-india">
           <div className="related-countries-detail-img">
             <Image width={100} height={100} src="/assets/Images/country-flag/indian-flag.png" className="img-fluid" alt="MBBS in India" title="MBBS in India" />
           </div>
           <h4>MBBS in India</h4>
           <p>Read More</p>
-        </a>
+        </TransitionLink>
       </div>
     </div>
 
