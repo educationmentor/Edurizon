@@ -17,7 +17,7 @@ const {
 const auth = require('../middleware/auth');
 
 // Public routes
-router.post('/request', auth, createConsultationRequest);
+router.post('/request', createConsultationRequest);
 router.get('/student', auth, getStudentRequests);
 router.get('/notifications', auth, getStudentNotifications);
 
@@ -30,4 +30,4 @@ router.put('/schedule/:requestId', protect, scheduleMeeting);
 router.get('/', protect, getConsultations);
 router.put('/:consultationId', protect, updateConsultation);
 
-module.exports = router; 
+module.exports = router;

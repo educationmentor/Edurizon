@@ -7,10 +7,18 @@ const Notification = require('../models/notificationModel');
 
 // @desc    Create a new consultation request
 // @route   POST /api/consultation/request
-// @access  Private
+// @access  Public
 const createConsultationRequest = asyncHandler(async (req, res) => {
     try {
         const { name, email, phone, interestedCountry, homeCountry, interestedCourse } = req.body;
+
+        // Validate required fields
+        if (!name || !email || !phone || !interestedCountry || !homeCountry || !interestedCourse) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
 
         // Create consultation request
         const request = await ConsultationRequest.create({
@@ -467,4 +475,4 @@ module.exports = {
   scheduleMeeting,
   rejectRequest,
   getStudentNotifications,
-}; 
+};
