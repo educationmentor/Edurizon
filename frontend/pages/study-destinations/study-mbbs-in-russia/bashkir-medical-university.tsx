@@ -81,7 +81,7 @@ const BashkirMedicalUniversity=()=>{
                 <Breadcrumbs/>
                 <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Bashkir Medical University</h1>
             </div>
-            <p className="text-regularTexts text-center">
+            <p className="text-regularText text-center">
             Established in 1932,Bashkir State Medical University located at Ufa is one of the top and leading institutions of Russia and the center of the medical and pharmaceutical sciences of the Republic of Bashkortostan.
             </p>
             </div>
@@ -524,82 +524,4 @@ const BashkirMedicalUniversity=()=>{
 
 export default BashkirMedicalUniversity;
 
- {/* <div className="mx-[12.5vw] my-[4vw]">
-            <p className="text-regularText font-semibold leading-[150%] text-justify">
-            Initially the University started with only one Faculty that is Faculty of General Medicine. But later in 1961, it extended itself to Faculty of pediatrics and Faculty of Preventive Medicine in 1970 which was later renamed to Faculty of Preventive Medicine and Microbiology. Two more faculties - Faculty of Dentistry and Faculty of Pharmacy were extended by 1976 -1981.<br/><br/>
-            The University receives a good number of medical enrollments from all over the world. The medical college at BSMU along with medicine also offers vocational secondary education in specialist of Nursing and Prosthetic Dentistry. Among 8000 medical students, more than 850 are International students from about 40 countries and 1000 are clinical residences and PHD Programs along with 7000 postgraduate professional trainings.<br/><br/>
-            Bashkir State Medical University is known for offering intense research work facilities for medical students along with simulation- based training for clinical residents and physicians which is equipped with state of the art simulators where they can enhance their practical skills in anesthesiology, resuscitation, neonatology, endoscopy, gynecology, obstetrics, and neurosurgery.<br/><br/>
-            The University has a variety of scientific infrastructure within the campus and that includes Cell Culture Laboratory, Central Scientific Research Laboratory, Vivarium, Scientific Research Institute Rehabilitation Medicine, Scientific Research Institute of Oncology and laboratory of experimental surgery. It has also cooperated with RUSNANO’S Pet Center for training specialist of nuclear medicine. The University has a large library for its medical students which can store about 527000 books and medicine and is counted as one of the best medical libraries in Russia.<br/><br/>
-            Bashkir State Medical University is also known to receive many accolades for training more than 700 Volunteers for winter Olympic and Paralympic Games in 2014 in Sochi. The University has also been awarded with the title of “Best Medical University” in Russia by the Russian National Public Organization “League of the Best”. The University has also been awarded with the title of “Best Medical University” in Russia by the Russian National Public Organization “League of the Best”.
-            </p>
-            <br/>
-            <ul className="list-disc list-inside">
-                <li>
-                BSMU is amongst the top universities of the Russian Federation.
-                </li>
-                <li>
-                Government funded university.
-                </li>
-                <li>
-                Recognized by the leading medical council NMC
-                </li>
-                <li>
-                Recognized by WHO.
-                </li>
-                <li>
-                Recognized by Ministry of Healthcare and Ministry of Education and Science of the Russian Federation.
-                </li>
-            </ul>
-        </div>
-        <div className="grid grid-cols-2 gap-[5vw] mx-[12.5vw] my-[4vw]">
-            <div className="flex flex-col gap-[2vw] justify-center">
-                <h3 className="text-h3Text font-bold leading-[120%]">
-                    The City <br/> <span className="text-orangeChosen">Kazan</span>
-                </h3>
-                <p className="text-regularText leading-[150%] text-justify">
-                The history of Kazan situated in the center of Europe which is a multinational and multifessional city of Russia is filled with millennium past record. The university is very easily reachable by underground metro from the dormitory. The city is also well known around the world for many cultural events and international sport like universaide 2013 (world student games) FINA World Acquatics Championships 2015, International Classical Ballet and Opera Festivals, International Festival of Muslim Cinema and 21st FIFA World Cup (2018).
-                </p>
-            </div>
-            <Image src="/assets/Images/kazanFederalCity.webp" alt="Kazan Federal City" width={500} height={500} className="w-[32.375vw] h-auto" />
-        </div>
-
-        <div className="px-[12.5vw] w-full bg-linenChosen grid grid-cols-2 items-center py-[4vw] gap-[2vw]  my-[4vw]">
-            <div className="flex flex-col gap-[2vw] justify-center">
-                <h2 className="text-h2Text font-bold leading-[120%]">Why MBBS in Kazan Federal University?</h2>
-                <ul className="list-disc pl-[2vw] text-regularText leading-[150%] text-justify">
-                    {why.map((item,index)=>(
-                        <li key={index} >{item}</li>
-                    ))}
-                </ul>
-            </div>
-            <Image src="/assets/Images/CountryBlogs/didYouKnow.png" alt="Did You Know" width={500} height={500} className="w-[30.5vw] h-auto mx-auto" />
-        </div>
-        <div className=""> 
-        <UnlistedTable id="1" section2="fee" content={feeStructure}/>
-        </div>
-        <div>
-        <div className=" flex flex-col  mx-[12.5vw] gap-[2vw] py-[4vw] mb-[4vw]">
-            <div className="flex flex-col gap-[1vw]">
-            <h3 className="text-h5TextPhone md:text-h3Text text-center font-bold leading-[130%]">Kazan Federal University Entrance Exam</h3>
-            <p className="text-smallText text-center ">Kazan Federal Conducts entrance exams in respect to all international students, including Indians, every year.</p>
-            </div>
-            <div className="flex flex-col gap-[1vw]">
-                <h4 className="text-h4Text font-bold text-left">Kazan Federal University Entrance Exam Sample Paper</h4>
-                <ul className="text-regularText list-disc list-inside">
-                    <li>The subjects for the entrance exams are English & Biology.</li>
-                    <li>It is mandatory to get qualified in each subject.</li>
-                    <li>It is expected that, this year, qualifying marks will be lower as Chemistry subject has been exempted.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <EligibilityCriteria id="1" data={eligibility} countryName="Kazan Federal University"/>
-        
-
-        <div className="mb-[4vw]"> 
-        <UnlistedTable id="1" section2="fee" content={facts}/>
-        </div>
-
-
-        </div>
-        <PostArrival/> */}
+ 
