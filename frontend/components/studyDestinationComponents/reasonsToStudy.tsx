@@ -1,24 +1,28 @@
 interface ReasonsToStudyProps {
     id: string;
     name:string;
-    content:{[key:string]:string}[]
+    title1:string;
+    title2:string;
+    content:{[key:string]:string}[];
+    darkImg:string[];
+    lightImg:string[];
 }
 import ThemeContext from "@/context/themeContext";
 import Image from "next/image";
 import { useContext } from "react";
   
-const ReasonsToStudy = ({ id,name,content }: ReasonsToStudyProps) => {
+const ReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }: ReasonsToStudyProps) => {
     const useTheme=()=>useContext(ThemeContext);
     const { theme } = useTheme();
     console.log(theme);
     const imageSrc =
       theme == "dark"?
-      ["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark"]:
-      ["1","2","3","4","5","6"];
+      darkImg:
+      lightImg;
     return (
         <div className="md:m-[4vw] flex flex-col gap-[8vw] md:gap-[4vw] mx-[6vw] md:mx-[12.5vw]">
-            <h4 className="text-h4TextPhone md:text-h4Text text-center md:text-left leading-[130%]">6 Reasons Why Indian<br/>Students Prefer {name} for MBBS</h4>
-            <div className="flex flex-col md:grid md:grid-cols-3 gap-[16vw] md:gap-[4vw]">
+            <h4 className="text-h4TextPhone md:text-h4Text text-center leading-[130%] ">{title1} {title2}</h4>
+            <div className="flex flex-col  md:grid md:grid-cols-3 gap-[16vw] md:gap-[4vw]">
                 {content.map((reason, index) => (
                     <div key={index} className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                     <Image

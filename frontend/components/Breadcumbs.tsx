@@ -41,6 +41,9 @@ const Breadcrumbs: React.FC = () => {
     "tambov-state-university":"Tambov State University",
     "ulyanovsk-state-university":"Ulyanovsk State University",
     "ural-state-medical-university":"Ural State Medical University",
+    "blogs":"Blogs",
+    "study-mbbs-in-russia-without-neet":"Study MBBS in Russia without NEET",
+    "study-mbbs-in-india":"Study MBBS in India",
   };
 
   return (

@@ -18,7 +18,7 @@ export const destinationData =[
       description:"Get an affordable and high-quality MBBS degree in Tajikistan with globally accepted medical programs.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Kyrgyzstan.webp", title:"Study in Kyrgyzstan", category:"Destination",href:"/#",
-      description:"Study MBBS in Kyrgyzstan with low tuition fees, English-medium instruction, and MCI/WHO-approved universities.",
+      description:"Study MBBS in Kyrgyzstan with low tuition fees, English-medium instruction, and NMC/WHO-approved universities.",
     },  
     
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Australia.webp", title:"Study in Australia", category:"Destination",href:"/study-destinations/study-in-australia",
@@ -120,6 +120,48 @@ export const destinationData =[
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university",
       description:"Want to study at one of Russia’s most respected medical institutions? Ural State Medical University offers a comprehensive medical education with cutting-edge research and clinical training."
+    },
+    {
+      image:"/assets/Images/blogs/mbbs-in-russia-without-neet-2.webp",
+      title:"Study MBBS in Russia without NEET",
+      category:"blog",
+      href:"/blogs/study-mbbs-in-russia-without-neet",
+      description:"Are you an aspiring medical student who struggled with NEET or worried about not qualifying? Don’t lose hope! Studying MBBS in Russia without NEET is an alternative path many Indian students are exploring. Russian medical universities offer quality education, "
+    },
+    {
+      image:"/assets/Images/CountryBlogs/studyDestinationCard/ZhejiangUniversity.webp",
+      title:"Zhejiang University",
+      category:"University",
+      href:"/study-destinations/study-mbbs-in-china/zhejiang-university",
+      description:"Zhejiang University was founded in the year 1897, and is one of the oldest and prestigious university of China. The University has 37schools, colleges and departments which offers 300 graduate programs, and 140 undergraduate programs."
+    },
+    {
+      image:"/assets/Images/CountryBlogs/studyDestinationCard/NanjingMedicalUniversity.webp",
+      title:"Nanjing Medical University",
+      category:"University",
+      href:"/study-destinations/study-mbbs-in-china/nanjing-medical-university",
+      description:"Nanjing Medical University was established in the year 1934 as Jiangsu Provincial College of Health Policy & Management. In 1957, Nanjing Medical University shifted from Zhenjiang to Nanjing & changed its name to Nanjing Medical College."
+    },
+    {
+      image:"/assets/Images/CountryBlogs/studyDestinationCard/XiamenUniversity.webp",
+      title:"Xiamen University",
+      category:"University",
+      href:"/study-destinations/study-mbbs-in-china/xiamen-university",
+      description:"Over the past ninety years, Xiamen University has amassed a wealth of expertise in providing educational programs. The university which offers a reasonably wide variety of educational programs and have strong faculty and staff, has grown into a first-className comprehensive university in China with significant international influence."
+    },
+    {
+      image:"/assets/Images/CountryBlogs/studyDestinationCard/SoutheastUniversity.webp",
+      title:"SouthEast University",
+      category:"University",
+      href:"/study-destinations/study-mbbs-in-china/southeast-university",
+      description:"The University has also been ranked in the top 3 list nationally in the following fields of landscape architecture, urban planning, civil engineering, electronic engineering, biomedical engineering and transportation engineering."
+    },
+    {
+      image:"/assets/Images/CountryBlogs/studyDestinationCard/XinjiangUniversity.webp",
+      title:"Xinjiang University",
+      category:"University",
+      href:"/study-destinations/study-mbbs-in-china/xinjiang-university",
+      description:"It is a national key comprehensive university with students from various ethnic groups. It is one of two in Xinjiang entering the national “211 Project.” On December 30, 2000, the former Xinjiang University and Xinjiang Engineering Institute merged into a new Xinjiang University. "
     },
   ]
 

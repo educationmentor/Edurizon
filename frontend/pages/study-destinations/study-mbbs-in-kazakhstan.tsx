@@ -62,7 +62,7 @@ const NewPage=()=>{
             for Indian students which help them to save a great amount.
           </p>
           <p>
-            All the Medical Universities of Kazakhstan are recognized by MCI, WHO, USMLE, GMC and IMED. It is a dream of every student to pursue Mbbs from Abroad. But not every individual is able to meet the budget of European countries.
+            All the Medical Universities of Kazakhstan are recognized by NMC, WHO, USMLE, GMC and IMED. It is a dream of every student to pursue Mbbs from Abroad. But not every individual is able to meet the budget of European countries.
             Medical Universities of Kazakhstan.
           </p>
           <p>
@@ -87,7 +87,7 @@ const NewPage=()=>{
             <li>Affordable fees structure</li>
             <li>Total duration of the course is only for 5 years.</li>
             <li>Indian food is easily available in almost all the universities.</li>
-            <li>Medical Universities are recognized by MCI &amp; WHO.</li>
+            <li>Medical Universities are recognized by NMC &amp; WHO.</li>
             <li>Quality education assured to all the students.</li>
             <li>World className facility with main focus on practical training</li>
             <li>Direct admission without any entrance test and donation of fees.</li>
@@ -265,7 +265,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section> 
-<section className="inner-page-bg">
+{/* <section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -384,7 +384,7 @@ const NewPage=()=>{
       </div>
     </div>
   </div>
-</section>
+</section> */}
 <section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">

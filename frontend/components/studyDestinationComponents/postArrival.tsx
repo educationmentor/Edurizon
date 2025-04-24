@@ -27,11 +27,13 @@ const PostArrival = ({ }) => {
                     <div className="flex flex-col md:grid md:grid-cols-3 gap-[8vw] md:gap-[2vw]">
                         <div className="flex flex-col gap-[2vw] md:gap-[.5vw]">
                             <span className="text-regularTextPhone md:text-regularText font-bold">
-                                University Registration
+                            AIRPORT PICK UP 
                             </span>
+
                             <p className="text-smallTextPhone md:text-regularText font-light">
-                            Complete your registration by submitting essential original documents, such as an attested Class 12 mark sheet and passport. Additionally, undergo mandatory health check-ups at campus clinics to ensure a smooth start to your academic journey.
-                            </p>
+                                <span className="font-medium">
+                            Edurizon representatives will assist all the students to reach the university hostel and thereafter facilitate to provide local SIM card.University Registration<br/></span>
+                            Complete your registration by submitting essential original documents, such as an apostilled Class 12-mark sheet, passport etc. Additionally, undergo mandatory health check-ups to ensure a smooth start to your academic journey.</p>
                             <br className="hidden md:block"/>
                         </div>
 
@@ -62,17 +64,17 @@ const PostArrival = ({ }) => {
                         <Image width={64} height={64} className="w-[10.5vw] md:w-[4vw] h-auto " src={imageSrc[1]} alt="Post Arrival Support" />
                         <h6 className="text-h6TextPhone md:text-h6Text font-bold">Daily Life & Cultural Integration</h6>
                     </div>
-                    <div className="flex flex-col md:grid md:grid-cols-3 gap-[8vw] md:gap-[2vw]">
+                    <div className="flex flex-col md:grid md:grid-cols-2 gap-[8vw] md:gap-[2vw]">
                         <div className="flex flex-col gap-[2vw] md:gap-[.5vw]">
                             <span className="text-regularTextPhone md:text-regularText font-bold">
                             Hostel Life
                             </span>
                             <p className="text-smallTextPhone md:text-regularText font-light">
-                            Experience a comfortable stay in shared hostel rooms (2–3 students) equipped with heating, 24/7 Wi-Fi, and communal kitchens. Enjoy Indian meals featuring dal, roti, and rice in the campus mess. For example, Perm State Medical University hostels provide cozy accommodations tailored to their needs.
+                            Experience a comfortable stay in shared hostel rooms (2–4 students) equipped with all basic amenities. Enjoy Indian meals featuring dal, roti, and rice in the campus mess. 
                             </p>
                             <br className="hidden md:block"/>
                         </div>
-
+{/* 
                         <div className="flex flex-col gap-[2vw] md:gap-[.5vw]">
                             <span className="text-regularTextPhone md:text-regularText font-bold">
                             Health Insurance
@@ -80,15 +82,14 @@ const PostArrival = ({ }) => {
                             <p className="text-smallTextPhone md:text-regularText font-light">
                             Secure your well-being with mandatory health insurance costing ₹20,000–30,000 annually. This comprehensive plan covers emergencies, outpatient visits, and hospitalization, giving you peace of mind during your stay.
                             </p>
-                        </div>
+                        </div> */}
 
                         <div className="flex flex-col gap-[2vw] md:gap-[.5vw]">
                             <span className="text-regularTextPhone md:text-regularText font-bold">
                             Cultural Activities
                             </span>
                             <p className="text-smallTextPhone md:text-regularText font-light">
-                            Immerse yourself in vibrant student life through Indian Student Association events, such as Diwali celebrations, cricket matches, and Bollywood movie nights. Expand your horizons by participating in university-hosted international food festivals and academic conferences.
-                            </p>
+                            Immerse yourself in vibrant student life through Indian Student Association events, such as Diwali – Holi, Republic/Independence Day celebrations, cricket matches etc. Expand your horizons by participating in university-hosted international food festivals and academic conferences.</p>
                         </div>
                     </div>
 
@@ -105,7 +106,8 @@ const PostArrival = ({ }) => {
                             Academic Mentoring
                             </span>
                             <p className="text-smallTextPhone md:text-regularText font-light">
-                            Edurizon provides personalized guidance with quarterly academic reviews and referrals for FMGE/NEXT coaching to ensure your professional success.
+                            Edurizon provides personalized guidance with regular academic reviews and referrals for FMGE/NEXT coaching to ensure professional success.<br/>
+                            <span className="font-medium">Authorization :</span> Edurizon is an authorized Company for many universities for MBBS in Russia.
                             </p>
                             <br className="hidden md:block"/>
                         </div>
@@ -115,7 +117,7 @@ const PostArrival = ({ }) => {
                             Emergency Assistance
                             </span>
                             <p className="text-smallTextPhone md:text-regularText font-light">
-                            Stay supported at all times with Edurizon’s 24/7 helpline, offering immediate aid for medical, legal, or administrative issues.
+                            Stay supported at all times with Edurizon’s 24/7 helpline, offering immediate aid for issues.
                             </p>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import Breadcrumbs from '@/components/Breadcumbs';
 import Image from 'next/image';
 import Header from '@/components/studyDestinationComponents/headerComponent';
+import { TransitionLink } from '@/utils/TransitionLink';
 const NewPage=()=>{
     return<div className='text-smallTextPhone md:text-smallText'>
         <section className="country-inner-banner">
@@ -138,7 +139,9 @@ const NewPage=()=>{
                         <tbody className='font-light '>
                             <tr>
                                 <th scope="row">1.</th>
-                                <td><b><a  href="https://www.edurizon.in/ausbildung-in-germany.php">Ausbildung in Germany</a></b></td> 
+                                <TransitionLink href="/study-destinations/study-in-germany/ausbildung" >
+                                <td><b>Ausbildung in Germany</b></td> 
+                                </TransitionLink>
                                 <td><a href="https://www.edurizon.in/ausbildung-in-germany.php" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
                             <tr>

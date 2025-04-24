@@ -388,7 +388,7 @@ const NewPage=()=>{
                         <h3>Admission procedure for MBBS in Nepal</h3>
                     </div>
                     <div className="table-responsive">
-                        <table className="table table table-bordered table-striped align-middle">
+                        <table className="table  table-bordered table-striped align-middle">
                             <tbody>
                                 <tr>
                                     <th scope="row">Nationality</th>
@@ -418,7 +418,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section> 
-<section className="inner-page-bg">
+{/* <section className="inner-page-bg">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -459,7 +459,7 @@ const NewPage=()=>{
             </div>
         </div>
     </div>
-</section>
+</section> */}
 <section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">

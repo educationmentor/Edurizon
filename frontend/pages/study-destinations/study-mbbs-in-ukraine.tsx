@@ -33,7 +33,7 @@ import Image from "next/image";
                     <p>
                         Ukraine is quite popular for studying Mbbs in Ukraine. Indian students in large number move to Ukraine every year. Apart from Indians, foreign students from different countries like Poland, Germany, Georgia, Romania,
                         Belarus and Russia come to the country. There are many good universities in Ukraine which are world ranked among those are Lviv National Medical University and Sumy State University. Because of the low cost of living
-                        and affordable fees structure, it is a favored destination for most of the students. Almost all the Universities of Ukraine are recognized by MCI, and WHO. It is even recognized by International bodies like ECFMG and
+                        and affordable fees structure, it is a favored destination for most of the students. Almost all the Universities of Ukraine are recognized by NMC, and WHO. It is even recognized by International bodies like ECFMG and
                         FAIMER. Students get the opportunity to study PG from USA after completing Mbbs from Ukraine. They have to clear USMLE step 1 and step 2 exams for PG course from US.
                     </p>
                     <p>
@@ -53,7 +53,7 @@ import Image from "next/image";
                         <li>Students don’t have to pay any donation for admission in Mbbs from the country.</li>
                         <li>The infrastructure of the Medical colleges and lab are excellent with required facilities for the students.</li>
                         <li>Apart from studies, students are also inspired to participate in extracurricular activities.</li>
-                        <li>The University is recognized by WHO, MCI and UNESCO.</li>
+                        <li>The University is recognized by WHO, NMC and UNESCO.</li>
                         <li>Accommodation and living cost in Ukraine is very cheap and inexpensive.</li>
                         <li>Lakhs of students are studying in the Country which includes India and International countries. Many of them has already passed out from the University, and currently working in different fields.</li>
                         <li>Classes are mainly conducted in English language in the Universities, keeping in view the ratio of International students.</li>
@@ -70,7 +70,7 @@ import Image from "next/image";
             <div className="immigrate-bg">
                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="heading">
-                        <h3 className="text-h5TextPhone md:text-h5Text">List of the Universities Listed Under MCI</h3>
+                        <h3 className="text-h5TextPhone md:text-h5Text">List of the Universities Listed Under NMC</h3>
                     </div>
                     <div className="table-responsive">
                     <table className="table table-bordered table-striped align-middle">
@@ -269,7 +269,7 @@ import Image from "next/image";
                         fees of private colleges are not possible for every student to afford, as it is quite high. So, the only option left with the student to fulfill his dream is to study Mbbs from low cost Universities. Among the
                         International countries, only Asian countries offer Mbbs in less fees. So there is a high ratio of Indian students moving to these countries. The Universities offer all the theoretical classes in English language
                         only, so that the students can easily understand. The course fees and the other expenses are also very much affordable for the students. So, we suggest students to go for Ukraine if they have low budget. Ukraine
-                        offers good universities in low fees structure as compared to other countries. The MCI passing ratio of the country is also very good in the last years.
+                        offers good universities in low fees structure as compared to other countries. The NMC passing ratio of the country is also very good in the last years.
                     </p>
                 </div>
             </div>
@@ -353,7 +353,7 @@ import Image from "next/image";
         </div>
     </div>
 </section> 
-<section className="inner-page-bg">
+{/* <section className="inner-page-bg">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -379,7 +379,8 @@ import Image from "next/image";
             </div>
         </div>
     </div>
-</section><section className="inner-page-bg">
+</section> */}
+<section className="inner-page-bg">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">

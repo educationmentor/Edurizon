@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
 import { useRouter } from "next/router";
 
-const categoriesMap: Record<string, string> = {viewAll:"View all", blogs:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
+const categoriesMap: Record<string, string> = {viewAll:"View all", blog:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
 const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;
