@@ -1,5 +1,7 @@
 import Breadcrumbs from "@/components/Breadcumbs";
+import EdurizonProcess from "@/components/studyDestinationComponents/EdurizonProcess";
 import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
+import VideoCarousel from "@/components/videoCarousel";
 import Image from "next/image";
 const services = [
   {
@@ -23,6 +25,39 @@ const services = [
     label: "Eurpoean & Central Asian Rank - 36",
   },
 ];
+
+
+const videoData = [
+  {
+    id: 1,
+    title: 'Best Medical College for MBBS Abroad | Tajik National University',
+    channel: 'Edurizon Pvt Ltd',
+    thumbnail: 'https://img.youtube.com/vi/_dyVVwRvQSM/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=_dyVVwRvQSM',
+  },
+  {
+    id: 2,
+    title: "Student review of Tajik National University || MBBS in Tajikistan",
+    channel: 'Edurizon Pvt Ltd',
+    thumbnail: 'https://img.youtube.com/vi/a46VW9YUTSY/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=a46VW9YUTSY',
+  },
+  {
+    id: 3,
+    title: 'Student review of Tajik National University || MBBS in Tajikistan',
+    channel: 'Edurizon Pvt Ltd',
+    thumbnail: 'https://img.youtube.com/vi/Zn9TNF7SKt8/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=Zn9TNF7SKt8',
+  },
+  {
+    id: 4,
+    title: "Tajik National University | MBBS in Tajikistan",
+    channel: 'Edurizon Pvt Ltd',
+    thumbnail: 'https://img.youtube.com/vi/jwPKSMGwGLY/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=jwPKSMGwGLY',
+  },
+];
+
 const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText">
@@ -73,7 +108,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
            {/* Tajik National University Facilities */}
 
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] pt-[5vw] md:pt-[2vw] ">
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] ">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Facilities</h3>
                   <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] ">Tajik National University, TNU encompasses publishing, a research library, a botanical garden, a hostel, 114 departments (107 special departments) and a military chair and high school.
                   </p>
@@ -86,15 +121,152 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
 
            {/* Tajik National University Notable Alumini */}
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] pt-[5vw] md:pt-[2vw] ">
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] ">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Notable Alumini</h3>
                   <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] ">Tajik National University, TNU, prepares extensive human resources for the economy of Tajikistan, from journalists to finance professionals and managers.
                   President <a href="https://en.wikipedia.org/wiki/Emomali_Rahmon" className="underline">Emomali Rahmon</a> and the former chairman of the <a href="https://en.wikipedia.org/wiki/National_Bank_of_Tajikistan" className="underline">National Bank of Tajikistan</a> Murodali Alimardon are alumni of Tajik National University, TNU.
                   </p>
            </section>
 
-            
+            {/* Tajik National University Facts */}
+            <section className="flex mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between ">
+              <div className="w-[37.5vw] flex-shrink-0">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Key Facts</h3>
+                  <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li><strong>Type</strong> - National University like AIIMS in India</li>
+                    <li><strong>Established</strong> - 21st March, 1947</li>
+                    <li>One of the reputed and old University</li>
+                    <li><strong>Academic Staff</strong> - 1299</li>
+                    <li><strong>Students</strong> - 22,661</li>
+                    <li>Medium of instruction English</li>
+                    <li>Country ranking 01</li>
+                    <li><strong>QS Emerging</strong> - 241-250(Europe & Central Asia)</li>
+                    <li><strong>QS World Rank</strong> - 561</li>
+                    <li><strong>Europe & Asian University ranking</strong> - 36</li>
+                    <li><strong>FMGE Passing Ratio</strong> - 50%</li>
+                    <li>No Licensing exam</li>
+                    <li>Direct admission</li>
+                    <li>NEET/FMGE coaching from 1st year</li>
+                    <li><strong>Travel time from India</strong> - 03 hours.</li>
+                    <li>Direct Flight from Delhi to Dushanbe.</li>
+                    <li>128 research labs</li>
+                    <li>Campus TNU is spread over 500 acres</li>
+                    <li>Indian teacher and Indian syllabus</li>
+                    <li>Indian Food</li>
+                    <li><strong>Weather</strong> - Same like India.</li>
+                    <li><strong>Currency</strong> - Somoni</li>
+                    <li><strong>Website</strong> - <a className="cursor-pointer underline" href="http://www.tnu.tj/">www.tnu.tj</a></li>
+                    <li><strong>Scholarship</strong> - Scholarship is granted at entry level also to those students who have 450+ NEET score and 70% & above marks in 12th standard</li>
+                  </ul>
+              </div>
 
+              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan3.png" alt="Tajikistan" width={200} height={200} className="w-[32.5vw] ml-auto h-auto"/>
+           </section>
+
+           {/* MBBS in Indian Student */}
+           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">MBBS in Tajik Natinonal University for Indian Student</h3>
+                  <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] mb-[2vw] md:mb-[.5vw]">The cost of studying MBBS in TNU, Tajikistan is affordable just like India. TNU is highly popular among Indian students due to following main reasons:-</p>
+                  <div className="flex flex-col md:flex-row gap-[3vw] md:gap-[1.5vw]  ">
+                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:w-[37.5vw] flex-shrink-0 md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li>Limited seats thereby offered quality education</li>
+                    <li>Affordable & reasonable fees& other expenses</li>
+                    <li>Best practical exposure.</li>
+                    <li>Provided real cadaver from the very first year.</li>
+                    <li>Biggest hospital</li>
+                    <li>Safe & secure place to study</li>
+                    <li>Indian Food</li>
+                    <li>NExT coaching facility</li>
+                  </ul>
+                  <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] w-full md:w-[37.5vw] flex-shrink-0  list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li>Indian professor.</li>
+                    <li>Indian author books.</li>
+                    <li>Strict vigilance and 24x7 monitoring.</li>
+                    <li>Drinking & smoking is completely prohibited in the city</li>
+                    <li>Located nearby India</li>
+                    <li>Similar weather like India</li>
+                    <li>English is the medium of instruction which breaks the barriers of communication for international students including Indian students.</li>
+                  </ul>
+
+                  </div>
+                  
+           </section>
+
+           {/*NMC approved Medical College in Tajikistan  */}
+           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
+                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li>MBBS of Tajikistan is valid in India after passing FMGE/NExT conducted by National Board of Education (NBE).</li>
+                    <li>For Indian foreign medical graduates, the FMGE is conducted twice a year.</li>
+                    <li>Tajik National University is recognized by NMC, WHO, FAIMER, ECFMG, WFME and UNESCO.</li>
+                    <li>This recognition is very crucial for Indian students who wish to pursue their medical education from TNU and thereafter wish to practice medicine in India upon their return.</li>
+                    <li>TNU is recognized by several international educational bodies and organizations, ensuring that its degrees are acknowledged globally.</li>
+                    <li>TNU has established partnerships with numerous institutions worldwide, promoting academic exchange and research collaboration.</li>
+                    <li>The medical faculty of TNU is listed in the World Health Organization's (WHO) World Directory of Medical Schools.</li>
+                    <li>Being in the WHO directory also signifies adherence to global standards in medical education.</li>
+                  </ul>                  
+           </section>
+
+            {/*TNU hostel  */}
+            <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University Hostel</h3>
+                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li>Tajik National University's residence halls are a collection of contemporary student campuses. They have access to all they need for a comfortable stay, independent study and scientific work, leisure, athletics, and involvement in university culture.</li>
+                    <li>Each campus has comfortable rooms and necessary living facilities such as dining rooms, housekeeping complexes, recreation areas, libraries, sports grounds, gyms.</li>
+                    <li>Separate girls and boys hostel.</li>
+                    <li>4 sharing hostels are available for all students with all basic amenities</li>
+                    <li>Constantly Indian pupils will be looked after by Indian wardens.</li>
+                    <li>Indian foods are also available for Indian students</li>
+                    <li>CCTV cameras are available all around inside the hostels</li>
+                    <li>It is strictly forbidden to smoke and drink, and smoke detectors are placed in strategic locations.</li>
+                  </ul>                  
+           </section>
+           {/*Research Opportunity  */}
+           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Research Opportunity in Tajik National University</h3>
+                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">                
+                    <li>TNU always prioritizes innovation and research, which motivates students to work on scientific research projects.</li>
+                    <li>TNU boasts a large number of research centers and laboratories with state-of-the-art equipment.</li>
+                    <li>Faculty members and Indian students could work together on research projects, advancing their academic and professional development.</li>
+                  </ul>
+           </section>
+
+           {/* Tajik National University Facts */}
+           <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
+              <div className="w-[36vw] flex-shrink-0">
+                    <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Step by Step Complete Admission Process</h3>
+                    <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
+                    <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                      <li>Submission of documents </li>
+                      <li>Within one week, University issues admission letter.</li>
+                      <li>Upon receipt of admission letter, student need to deposit $1000 (part of fees) to confirm their seat.</li>
+                      <li>Once $1000 is received, university issues invitation/telex in the name of students</li>
+                      <li>E-visa to be applied </li>
+                      <li>Remaining fees of 1st part to be paid </li>
+                      <li>Air ticket to be booked  </li>
+                      <li>Departure to be planned  </li>
+                    </ul>
+              </div>
+              
+              <div className="w-[36vw] flex-shrink-0">
+                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Documents Required for Tajik Natinonal University</h3>
+                  <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
+                  <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                    <li>10th & 12th Mark Sheets (Must Passed 12th with at least 50% in Physics, Chemistry and Biology).</li>
+                    <li>Valid Indian Passport.</li>
+                    <li>Passport Size Photos.</li>
+                    <li>NEET Score Card (Must Qualify NEET).</li>
+                    <li>1 Passport Size Photograph</li>
+                  </ul>
+              </div>
+           </section>
+
+
+            <div className="pb-[10vw] md:pb-[6vw]">
+            <EdurizonProcess/>
+            </div>
+            <VideoCarousel videoData={videoData}/>
+            
         </div>
 
     )
