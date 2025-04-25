@@ -156,7 +156,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
                     <li><strong>Weather</strong> - Same like India.</li>
                     <li><strong>Currency</strong> - Somoni</li>
                     <li><strong>Website</strong> - <a className="cursor-pointer underline" href="http://www.tnu.tj/">www.tnu.tj</a></li>
-                    <li><a className="cursor-pointer underline"  href="/assets/pdf/Information-For-Students-Seeking-Admission-In-Tajik-National-University.pdf"><strong>Important Documents for Students</strong></a>(Click Here to Know More)</li>
+                    <li><a className="cursor-pointer underline"  href="/assets/pdf/Information-For-Students-Seeking-Admission-In-Tajik-National-University.pdf"><strong>Tajikistan fulfilling all criteria as laid down by NMC</strong></a>(Click Here to Know More)</li>
                     <li><strong>Scholarship</strong> - Scholarship is granted at entry level also to those students who have 450+ NEET score and 70% & above marks in 12th standard</li>
                   </ul>
               </div>
@@ -194,7 +194,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
 
            {/*NMC approved Medical College in Tajikistan  */}
-           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between flex flex-col md:flex-row items-center gap-[2vw]">
+           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between items-center gap-[2vw]">
             {/* <div className="w-[37.5vw] flex-shrink-0 "> */}
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
                   <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
