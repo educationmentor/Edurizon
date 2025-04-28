@@ -194,8 +194,8 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
 
            {/*NMC approved Medical College in Tajikistan  */}
-           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between items-center gap-[2vw]">
-            {/* <div className="w-[37.5vw] flex-shrink-0 "> */}
+           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between items-center gap-[2vw] flex flex-col md:flex-row">
+            <div className="w-[37.5vw] flex-shrink-0 ">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
                   <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
                     <li>MBBS of Tajikistan is valid in India after passing FMGE/NExT conducted by National Board of Education (NBE).</li>
@@ -207,12 +207,12 @@ Tajik National University is the first and largest university in Tajikistan. It 
                     <li>The medical faculty of TNU is listed in the World Health Organization's (WHO) World Directory of Medical Schools.</li>
                     <li>Being in the WHO directory also signifies adherence to global standards in medical education.</li>
                   </ul>
-                  {/* </div> */}
-                  {/* <div> */}
-                  {/* <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan4.jpg" alt="Tajikistan" width={600} height={500} className="mx-auto w-[20vw] h-auto rounded-[4vw] md:rounded-[1vw] "/>                   */}
-                  {/* <h3 className="text-smallTextPhone leading-[120%] md:text-regularText mt-[3vw] md:mt-[1.5vw] text-center ">Our Director with Head of Anatomy Department of Tajik National University</h3> */}
+                  </div>
+                  <div>
+                  <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan4.jpg" alt="Tajikistan" width={600} height={500} className="mx-auto w-[20vw] h-auto rounded-[4vw] md:rounded-[1vw] "/>                  
+                  <h3 className="text-smallTextPhone leading-[120%] md:text-regularText mt-[3vw] md:mt-[1.5vw] text-center ">Our Director with Head of Anatomy Department of Tajik National University</h3>
 
-                  {/* </div> */}
+                  </div>
            </section>
 
             {/*TNU hostel  */}
