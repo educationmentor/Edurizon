@@ -68,13 +68,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    const currentRef = ctaSectionRef.current;
-  
-    if (!currentRef) return;
+    if (!ctaSectionRef.current) return;
   
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsHidden(entry.isIntersecting); // true = hide, false = show
+        setIsHidden(entry.isIntersecting); // Notice: !entry.isIntersecting (depending on your needs)
       },
       {
         root: null,
@@ -82,12 +80,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
     );
   
-    observer.observe(currentRef);
+    observer.observe(ctaSectionRef.current);
   
     return () => {
-      observer.unobserve(currentRef);
+      if (ctaSectionRef.current) {
+        observer.unobserve(ctaSectionRef.current);
+      }
     };
-  }, []);
+  }, [ctaSectionRef.current]); // Important: Watch ctaSectionRef.current changes
+  
   
 
   useEffect(() => {
