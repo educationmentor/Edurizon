@@ -41,9 +41,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   const freeConsultationRef = useRef(null);
   const ctaSectionRef = useRef(null);
   const pathname=usePathname();
-
+  const [showChatBot, setShowChatBot] = useState(false);
   const [showConsultationForm, setShowConsultationForm] = useState(false);
+  const [chatBotReply, setChatBotReply] = useState<string[]>([]);
+  const [userInput, setUserInput] = useState("");
+  const questions=[
+    "Which university or country you are looking for?",
+    "What is your budget? 20L-25L, 25L-30L, 30L-35L & Above.",
+    "Tell us your name?",
+    "Which city you are from?",
+    "Share Your Contact details ( Mob No) so our counselor can reach out to you.",
+    "Thank you for your interest. We will get back to you shortly.",
+  ]
+  const [disableChatBot, setDisableChatBot] = useState(false);
 
+  const chatBotScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatBotScrollRef.current) {
+      chatBotScrollRef.current.scrollTop = chatBotScrollRef.current.scrollHeight;
+    }
+  }, [chatBotReply, questions]); // Trigger scroll when chat updates
   const handleConsultationClick = () => {
     setShowConsultationForm(true);
     console.log('Consultation Form Opened');
@@ -128,6 +146,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     checkAuth();
   }, [router.pathname]);
 
+  
+
   useEffect(() => {
     const checkViewportWidth = () => {
       setIsMobileView(window.innerWidth < 768);
@@ -139,14 +159,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => window.removeEventListener('resize', checkViewportWidth); // Cleanup
   }, []);
 
+  useEffect(() => {
+    if(chatBotReply.length=== 5){
+      setDisableChatBot(true);
+    }
+  }, [chatBotReply]);
+
+
+
   const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer
   const shouldExcludeLayout = excludedPaths.some((path) => router.pathname.includes(path));
   const isAdminRoute = useMemo(() => router.pathname.includes("/admin"), [router.pathname]);
-  console.log(isHidden);
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  console.log(userInput);
   return (
     <>
       <Head>
@@ -173,11 +200,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         
       </Head>
        {/* Google Analytics */}
-       <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        strategy="afterInteractive"
-      />
+       <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive"/>
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -189,15 +212,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           });
         `}
       </Script>
-
     <ThemeProvider>
       {isAdminRoute && isMobileView ? (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
           <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
               <h1 className="text-2xl font-bold text-blue-500 mb-4">Coming Soon</h1>
-            <p className="text-gray-700">
-              This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
-            </p>
+              <p className="text-gray-700">
+                This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
+              </p>
           </div>
         </div>
       ) : (
@@ -212,7 +234,48 @@ function MyApp({ Component, pageProps }: AppProps) {
               <CTASection />
               </div>
               {/* ✅ Theme Toggle Positioned to Avoid Blocking Render */}
-              <div id="freeConsultation" className={`${isHidden ? "opacity-0" : "opacity-100"} fixed z-[10] bottom-[5vh] w-full px-[4vw]  transition-all duration-100 `} ref={freeConsultationRef}>
+              <div id="freeConsultation" className={`${isHidden ? "opacity-0" : "opacity-100"}  fixed z-[10] bottom-[5vh] w-full px-[4vw]  transition-all duration-100 `} ref={freeConsultationRef}>
+                <div className={`relative ml-auto flex w-min ${showChatBot ?"mx-[-2.5vw]":"mx-0"} transition-all duration-300 ease-in-out mb-[.5vw]`}>
+                <div className={`w-[14.375vw] h-[17.375vw] flex flex-col justify-center  rounded-[.625vw] border-[.125vw] border-orangeChosen  bg-linenChosen overflow-hidden transition-all duration-300 ease-in-out ${showChatBot ?"opacity-100":"opacity-0"}` }>
+                <div className="h-[1.875vw] bg-orangeChosen  flex items-center justify-center">
+                  <p className="text-white font-bold text-smallText">Ask Us Anything</p>
+                </div>
+                <div className="flex flex-col mt-auto">
+                  
+                  <div ref={chatBotScrollRef} className="max-h-[12vw] py-[.5vw] overflow-y-auto flex flex-col px-[.5vw] ">
+                  <div className="flex items-center bg-white justify-center mx-[.75vw] text-tinyText rounded-[.625vw] max-w-[10vw] px-[.5vw] py-[.5vw] mb-[.5vw]">
+                      <p className="leading-[120%] ">{questions[0]}</p>
+                  </div>
+                  {chatBotReply.map((reply, index) => (
+                    <>
+                    <div className="flex items-center ml-auto bg-orangeChosen text-white justify-center mx-[.75vw] text-tinyText rounded-[.625vw] max-w-[10vw] px-[.5vw] py-[.5vw] mb-[.5vw]">
+                      <p className="leading-[120%] ">{chatBotReply[index]}</p>
+                  </div>
+                  <div className="flex items-center bg-white justify-center mx-[.75vw] text-tinyText rounded-[.625vw] max-w-[10vw] px-[.5vw] py-[.5vw] mb-[.5vw]">
+                      <p className="leading-[120%] ">{questions[index+1]}</p>
+                  </div>
+                    </>  ))
+                  }
+                  
+                  </div>
+
+                  <div className="flex bg-white shadow-[3.078px_2.462px_12.312px_0px_rgba(0,0,0,0.13)] mx-[.75vw] rounded-[1.125vw] mb-[1vw] pl-[.875vw] py-[.2vw] ">
+                    <input name="answer" disabled={disableChatBot} onKeyDown={(e) => { if (e.key === "Enter") {e.preventDefault(); if (userInput.trim() !== "") 
+                    { setChatBotReply([...chatBotReply, userInput]); setUserInput("");}}}} value={userInput} onChange={(e)=>setUserInput(e.target.value) } type="text"
+                     placeholder="Write your message" className="w-full h-full outline-none text-smallTextPhone md:text-tinyText bg-transparent" />
+                    <button disabled={disableChatBot} onClick={(e) => {e.preventDefault(); setChatBotReply([...chatBotReply, userInput]); setUserInput("");}}>
+                    <svg className="w-[2vw] h-[2vw] ml-auto" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.6994 11.1976L11.946 5.82085C4.72259 2.20288 1.75786 5.1676 5.37583 12.391L6.46876 14.5768C6.78282 15.2175 6.78282 15.9587 6.46876 16.5994L5.37583 18.7727C1.75786 25.9961 4.71002 28.9608 11.946 25.3428L22.6994 19.9661C27.5234 17.5541 27.5234 13.6095 22.6994 11.1976ZM18.6417 16.524H11.858C11.343 16.524 10.9159 16.0969 10.9159 15.5818C10.9159 15.0668 11.343 14.6397 11.858 14.6397H18.6417C19.1568 14.6397 19.5839 15.0668 19.5839 15.5818C19.5839 16.0969 19.1568 16.524 18.6417 16.524Z" fill="#FF7500"/>
+                    </svg>
+                    </button>
+                  </div>
+                  </div>
+                </div>
+                <svg onClick={()=>setShowChatBot(!showChatBot)} className="w-[2.5vw] h-[2.5vw] cursor-pointer mt-auto " viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.0004 2.4375C11.1768 2.4371 9.38414 2.90884 7.79695 3.8068C6.20977 4.70475 4.8821 5.99833 3.94318 7.56163C3.00426 9.12493 2.48608 10.9047 2.43906 12.7277C2.39204 14.5507 2.8178 16.3548 3.67488 17.9644L2.52215 21.4226C2.42666 21.7089 2.41281 22.0162 2.48213 22.3099C2.55145 22.6037 2.70122 22.8723 2.91464 23.0857C3.12806 23.2991 3.3967 23.4489 3.69045 23.5182C3.9842 23.5875 4.29146 23.5737 4.57777 23.4782L8.03598 22.3255C9.45254 23.0789 11.0221 23.4997 12.6256 23.556C14.2291 23.6123 15.8243 23.3025 17.2902 22.6502C18.7561 21.9979 20.0541 21.0202 21.0858 19.7914C22.1174 18.5625 22.8555 17.1148 23.2441 15.5581C23.6327 14.0014 23.6615 12.3766 23.3284 10.8071C22.9953 9.23759 22.309 7.76459 21.3216 6.49991C20.3342 5.23524 19.0717 4.21212 17.6299 3.50823C16.1881 2.80433 14.6048 2.43816 13.0004 2.4375ZM8.5316 14.2188C8.29056 14.2188 8.05492 14.1473 7.8545 14.0134C7.65408 13.8794 7.49787 13.6891 7.40562 13.4664C7.31338 13.2437 7.28924 12.9986 7.33627 12.7622C7.3833 12.5258 7.49937 12.3087 7.66982 12.1382C7.84026 11.9678 8.05742 11.8517 8.29384 11.8047C8.53025 11.7576 8.7753 11.7818 8.998 11.874C9.2207 11.9663 9.41104 12.1225 9.54496 12.3229C9.67887 12.5233 9.75035 12.759 9.75035 13C9.75035 13.3232 9.62195 13.6332 9.39339 13.8618C9.16483 14.0903 8.85484 14.2188 8.5316 14.2188ZM13.0004 14.2188C12.7593 14.2188 12.5237 14.1473 12.3233 14.0134C12.1228 13.8794 11.9666 13.6891 11.8744 13.4664C11.7821 13.2437 11.758 12.9986 11.805 12.7622C11.852 12.5258 11.9681 12.3087 12.1386 12.1382C12.309 11.9678 12.5262 11.8517 12.7626 11.8047C12.999 11.7576 13.244 11.7818 13.4667 11.874C13.6894 11.9663 13.8798 12.1225 14.0137 12.3229C14.1476 12.5233 14.2191 12.759 14.2191 13C14.2191 13.3232 14.0907 13.6332 13.8621 13.8618C13.6336 14.0903 13.3236 14.2188 13.0004 14.2188ZM17.4691 14.2188C17.2281 14.2188 16.9924 14.1473 16.792 14.0134C16.5916 13.8794 16.4354 13.6891 16.3431 13.4664C16.2509 13.2437 16.2267 12.9986 16.2738 12.7622C16.3208 12.5258 16.4369 12.3087 16.6073 12.1382C16.7778 11.9678 16.9949 11.8517 17.2313 11.8047C17.4678 11.7576 17.7128 11.7818 17.9355 11.874C18.1582 11.9663 18.3485 12.1225 18.4825 12.3229C18.6164 12.5233 18.6879 12.759 18.6879 13C18.6879 13.3232 18.5594 13.6332 18.3309 13.8618C18.1023 14.0903 17.7923 14.2188 17.4691 14.2188Z" fill="#FF7500"/>
+                </svg>
+
+                </div>
                 <div className="flex  items-center justify-between space-x-2">
                 <ThemeToggle />
                 <div className="flex" >
