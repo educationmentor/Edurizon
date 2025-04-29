@@ -16,57 +16,50 @@ const CTASection = dynamic(() => import("../components/landingPage/CTASection"),
 
 const Home = () => {
   const [showConsultationForm, setShowConsultationForm] = useState(false);
-  const [count, setCount] = useState(0);
-  const universitiesRef = useRef(null);
+  
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Only trigger when it's intersecting AND close to the center
-        if (entry.isIntersecting) {
-          const rect = entry.boundingClientRect;
-          const centerY = window.innerHeight / 2;
-          const isInCenter =
-            rect.top < centerY && rect.bottom > centerY;
-
-            if (isInCenter && count < 3) {
-              setCount(prevCount => {
-                const newCount = prevCount + 1;
-                if (newCount < 3) {
-                  setShowConsultationForm(true);
-                }
-                return newCount;
-              });
-            }
-            
+        if (showConsultationForm) {
+          document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+          document.body.style.overflow = "auto"; // Enable scrolling
         }
-      },
-      {
-        root: null,
-        threshold: .6, // Adjust for more/less sensitivity
-      }
-    );
+        return () => {
+          document.body.style.overflow = "auto"; // Cleanup on unmount
+        };
+      }, [showConsultationForm]);
 
-    if (universitiesRef.current) {
-      observer.observe(universitiesRef.current);
-    }
-
+  useEffect(() => {
+    let timeouts: NodeJS.Timeout[] = [];
+  
+    const showFormAtIntervals = () => {
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, 10 * 1000) // After 30 seconds
+      );
+  
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, (1 * 60) * 1000) // After 5 minutes
+      );
+  
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, (10 * 60) * 1000) // After 20 minutes
+      );
+    };
+  
+    showFormAtIntervals();
+  
+    // Clean up on unmount
     return () => {
-      if (universitiesRef.current) {
-        observer.unobserve(universitiesRef.current);
-      }
+      timeouts.forEach(clearTimeout);
     };
   }, []);
-
-    useEffect(() => {
-          if (showConsultationForm) {
-            document.body.style.overflow = "hidden"; // Disable scrolling
-          } else {
-            document.body.style.overflow = "auto"; // Enable scrolling
-          }
-          return () => {
-            document.body.style.overflow = "auto"; // Cleanup on unmount
-          };
-        }, [showConsultationForm]);
+  
   return (
     <> 
     <Head>
@@ -82,9 +75,7 @@ const Home = () => {
 
       {/* ✅ Lazy Loaded Sections (Prevents Render Blocking) */}
       <WhyChoseUsSection />
-      <div ref={universitiesRef}>
-        <Universities />
-      </div>
+      <Universities />
       <JourneySection />
       <FAQSection />
       <AssociatedUniversitiesSection />

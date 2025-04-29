@@ -67,27 +67,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     console.log('Consultation Form Opened');
   };
 
- useEffect(() => {
+  useEffect(() => {
+    const currentRef = ctaSectionRef.current;
+  
+    if (!currentRef) return;
+  
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsHidden(entry.isIntersecting); // Hide when intersecting, show when not
+        setIsHidden(entry.isIntersecting); // true = hide, false = show
       },
       {
-        root: null, // Observe relative to the viewport
-        threshold: 0.1, // Trigger when at least 10% of ctaSection is visible
+        root: null,
+        threshold: 0.1,
       }
     );
-
-    if (ctaSectionRef.current) {
-      observer.observe(ctaSectionRef.current);
-    }
-
+  
+    observer.observe(currentRef);
+  
     return () => {
-      if (ctaSectionRef.current) {
-        observer.unobserve(ctaSectionRef.current);
-      }
+      observer.unobserve(currentRef);
     };
-  }, [ctaSectionRef.current]);
+  }, []);
+  
 
   useEffect(() => {
       if (showConsultationForm) {
@@ -234,7 +235,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <CTASection />
               </div>
               {/* ✅ Theme Toggle Positioned to Avoid Blocking Render */}
-              <div id="freeConsultation" className={`${isHidden ? "opacity-0" : "opacity-100"}  fixed z-[10] bottom-[5vh] w-full px-[4vw]  transition-all duration-100 `} ref={freeConsultationRef}>
+              <div id="freeConsultation" className={`${isHidden ? "opacity-0 z-[-10]" : "opacity-100 z-[10]"}  fixed  bottom-[5vh] w-full px-[4vw]  transition-all duration-100 `} ref={freeConsultationRef}>
                 <div className={`relative ml-auto flex w-min ${showChatBot ?"mx-[-2.5vw]":"mx-0"} transition-all duration-300 ease-in-out mb-[.5vw]`}>
                 <div className={`w-[14.375vw] h-[17.375vw] flex flex-col justify-center  rounded-[.625vw] border-[.125vw] border-orangeChosen  bg-linenChosen overflow-hidden transition-all duration-300 ease-in-out ${showChatBot ?"opacity-100":"opacity-0"}` }>
                 <div className="h-[1.875vw] bg-orangeChosen  flex items-center justify-center">
@@ -277,8 +278,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
                 </div>
                 <div className="flex  items-center justify-between space-x-2">
-                <ThemeToggle />
-                <div className="flex" >
+                 <ThemeToggle />
+                  <div className="flex" >
                   
                   <div id='youtube' className=" bg-[#ff3d00] flex items-center justify-center rounded-full w-[10vw] h-[10vw] md:w-[2.5vw] md:h-[2.5vw] p-[.25vw]">
                     <a href="https://www.youtube.com/channel/UCgz4BJlEJtPVHMSLBJXbBfg">
@@ -287,8 +288,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                     </svg>
                     </a>
                   </div>
-                {/* text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20services */}
-                <a href="https://wa.me/919873381377?" target="_blank" rel="noopener noreferrer">
+                  
+                  <a href="https://wa.me/919873381377?" target="_blank" rel="noopener noreferrer">
                   <div className="bg-[#29A71A] rounded-full w-[10vw] h-[10vw] md:w-[2.5vw] md:h-[2.5vw] p-[0.25vw] ml-[-1.75vw] md:ml-[-.5vw] flex items-center justify-center"> 
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-[7.5vw]  md:w-[1.75vw] h-auto" viewBox="0 0 48 48">
                       <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path>
@@ -300,8 +301,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                   </a>
 
                   <IconButton btnWidth={13} onClick={handleConsultationClick}  className="ml-[-0.5vw] hidden md:flex leading-[110%] text-regularText bg-orangeChosen text-white" btnTitle="Free Consultation" btnHeight={2.75} btnHeightPhone={0} btnRadius={6.25} btnRadiusPhone={0} btnWidthPhone={0} iconWidth={1.875} padding={.625} paddingPhone={0} image="/assets/Images/Icons/NorthEastIconOrange.svg" iconWidthPhone={0} />
+                  </div>
                 </div>
-              </div>
             </div>
             {showConsultationForm && (
                     <ConsultationForm onClose={() => setShowConsultationForm(false)} />
