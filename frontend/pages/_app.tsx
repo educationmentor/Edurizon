@@ -68,34 +68,28 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    let observer: IntersectionObserver;
+    if (typeof window === "undefined") return; // ⛔ Don't run on server
   
-    const observeElement = () => {
-      if (!ctaSectionRef.current) return;
+    if (!ctaSectionRef.current) return; // Maybe not yet attached
   
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          setIsHidden(entry.isIntersecting); // or !entry.isIntersecting depending on your logic
-        },
-        {
-          root: null,
-          threshold: 0.1,
-        }
-      );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHidden(entry.isIntersecting); // or !entry.isIntersecting based on behavior
+      },
+      {
+        root: null,
+        threshold: 0.1,
+      }
+    );
   
-      observer.observe(ctaSectionRef.current);
-    };
-  
-    // Delay it slightly to ensure DOM is ready
-    const timeoutId = setTimeout(observeElement, 0);
+    observer.observe(ctaSectionRef.current);
   
     return () => {
-      clearTimeout(timeoutId);
-      if (observer && ctaSectionRef.current) {
-        observer.unobserve(ctaSectionRef.current);
-      }
+      if (ctaSectionRef.current) observer.unobserve(ctaSectionRef.current);
+      observer.disconnect(); // extra safe
     };
   }, []);
+  
   
   
   
