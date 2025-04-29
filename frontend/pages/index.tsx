@@ -30,7 +30,7 @@ const Home = () => {
       }, [showConsultationForm]);
 
   useEffect(() => {
-    let timeouts: NodeJS.Timeout[] = [];
+    const timeouts: NodeJS.Timeout[] = [];
   
     const showFormAtIntervals = () => {
       timeouts.push(
