@@ -68,26 +68,35 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    if (!ctaSectionRef.current) return;
+    let observer: IntersectionObserver;
   
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHidden(entry.isIntersecting); // Notice: !entry.isIntersecting (depending on your needs)
-      },
-      {
-        root: null,
-        threshold: 0.1,
-      }
-    );
+    const observeElement = () => {
+      if (!ctaSectionRef.current) return;
   
-    observer.observe(ctaSectionRef.current);
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsHidden(entry.isIntersecting); // or !entry.isIntersecting depending on your logic
+        },
+        {
+          root: null,
+          threshold: 0.1,
+        }
+      );
+  
+      observer.observe(ctaSectionRef.current);
+    };
+  
+    // Delay it slightly to ensure DOM is ready
+    const timeoutId = setTimeout(observeElement, 0);
   
     return () => {
-      if (ctaSectionRef.current) {
+      clearTimeout(timeoutId);
+      if (observer && ctaSectionRef.current) {
         observer.unobserve(ctaSectionRef.current);
       }
     };
-  }, [ctaSectionRef.current]); // Important: Watch ctaSectionRef.current changes
+  }, []);
+  
   
   
 
