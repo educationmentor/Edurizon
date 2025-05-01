@@ -11,10 +11,10 @@ const { generateMeetLinkViaAPI, generateFallbackLink } = require('../utils/googl
 // @access  Public
 const createConsultationRequest = asyncHandler(async (req, res) => {
     try {
-        const { name, email, phone, interestedCountry, homeCountry, interestedCourse } = req.body;
+        const { name, email, phone, interestedCountry } = req.body;
 
         // Validate required fields
-        if (!name || !email || !phone || !interestedCountry || !homeCountry || !interestedCourse) {
+        if (!name || !email || !phone || !interestedCountry) {
             return res.status(400).json({
                 success: false,
                 message: 'All fields are required'
@@ -27,8 +27,6 @@ const createConsultationRequest = asyncHandler(async (req, res) => {
             email,
             phone,
             interestedCountry,
-            homeCountry,
-            interestedCourse,
             status: 'pending'
         });
 

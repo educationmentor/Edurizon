@@ -18,14 +18,6 @@ const consultationRequestSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    homeCountry: {
-      type: String,
-      required: true,
-    },
-    interestedCourse: {
-      type: String,
-      required: true,
-    },
     status: {
       type: String,
       enum: ['pending', 'accepted', 'scheduled', 'completed'],
