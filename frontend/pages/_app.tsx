@@ -42,68 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const freeConsultationRef = useRef(null);
   // const ctaSectionRef = useRef(null);
   const pathname=usePathname();
-  // const [showChatBot, setShowChatBot] = useState(false);
-  // const [showConsultationForm, setShowConsultationForm] = useState(false);
-  // const [chatBotReply, setChatBotReply] = useState<string[]>([]);
-  // const [userInput, setUserInput] = useState("");
-  // const questions=[
-  //   "Which university or country you are looking for?",
-  //   "What is your budget? 20L-25L, 25L-30L, 30L-35L & Above.",
-  //   "Tell us your name?",
-  //   "Which city you are from?",
-  //   "Share Your Contact details ( Mob No) so our counselor can reach out to you.",
-  //   "Thank you for your interest. We will get back to you shortly.",
-  // ]
-  // const [disableChatBot, setDisableChatBot] = useState(false);
-
-  // const chatBotScrollRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   if (chatBotScrollRef.current) {
-  //     chatBotScrollRef.current.scrollTop = chatBotScrollRef.current.scrollHeight;
-  //   }
-  // }, [chatBotReply, questions]); // Trigger scroll when chat updates
-  // const handleConsultationClick = () => {
-  //   setShowConsultationForm(true);
-  //   console.log('Consultation Form Opened');
-  // };
-
-//     useEffect(() => {
-//   if (!ctaSectionRef.current) return; // Don't run if no ref yet
-
-//   const observer = new IntersectionObserver(
-//     ([entry]) => {
-//       setIsHidden(entry.isIntersecting);
-//     },
-//     {
-//       root: null,
-//       threshold: 0,
-//     }
-//   );
-
-//   const currentElement = ctaSectionRef.current;
-//   observer.observe(currentElement);
-
-//   return () => {
-//     observer.unobserve(currentElement);
-//   };
-// }, [ctaSectionRef.current]); // <-- Notice the dependency here!
-
-  
-  
-  
-  
-
-  // useEffect(() => {
-  //     if (showConsultationForm) {
-  //       document.body.style.overflow = "hidden"; // Disable scrolling
-  //     } else {
-  //       document.body.style.overflow = "auto"; // Enable scrolling
-  //     }
-  //     return () => {
-  //       document.body.style.overflow = "auto"; // Cleanup on unmount
-  //     };
-  //   }, [showConsultationForm]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -163,13 +101,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return () => window.removeEventListener('resize', checkViewportWidth); // Cleanup
   }, []);
-
-  // useEffect(() => {
-  //   if(chatBotReply.length=== 5){
-  //     setDisableChatBot(true);
-  //   }
-  // }, [chatBotReply]);
-
 
 
   const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer

@@ -10,6 +10,7 @@ const counselorRoutes = require('./routes/counselorRoutes');
 const consultationRoutes = require('./routes/consultationRoutes');
 const authRoutes = require('./routes/authRoutes');
 const chatRoutes = require('./routes/chatRoutes');
+const chatbotRoutes=require('./routes/chatbotRoutes')
 const http = require('http');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessageModel');
@@ -201,7 +202,7 @@ app.use('/api/counselor', counselorRoutes);
 app.use('/api/consultation', consultationRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
-
+app.use('/api/chatbot',chatbotRoutes)
 // Use the HTTP server for listening
 const PORT = process.env.PORT || 5001;
 server.listen(PORT, () => {

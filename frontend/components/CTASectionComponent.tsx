@@ -5,6 +5,8 @@ import ThemeToggle from './ThemeToggle';
 import { IconButton } from './Buttons';
 import ConsultationForm from './ConsultationForm';
 import Footer from './Footer';
+import { baseUrl } from '@/lib/baseUrl';
+import axios from 'axios';
 const CTASectionComponent = () => {
     const ctaSectionRef = useRef(null);
     const freeConsultationRef = useRef(null);
@@ -53,9 +55,26 @@ const CTASectionComponent = () => {
       useEffect(() => {
         if(chatBotReply.length=== 5){
           setDisableChatBot(true);
+          submitBotMsg();
+
         }
       }, [chatBotReply]);
 
+     const submitBotMsg=async()=>{
+      try{
+        console.log(chatBotReply)
+        const response = await axios.post(
+          `${baseUrl}/api/chatbot/send`, 
+          chatBotReply
+        );
+        if (response.data.success) {
+          console.log("Data send");
+        }
+      }catch(e){
+          console.log(e);
+      }
+      
+     } 
      useEffect(() => {
       if (!ctaSectionRef.current) return; // Don't run if no ref yet
     
@@ -68,6 +87,8 @@ const CTASectionComponent = () => {
           threshold: 0,
         }
       );
+
+      
     
       const currentElement = ctaSectionRef.current;
       observer.observe(currentElement);
@@ -111,7 +132,8 @@ const CTASectionComponent = () => {
                     <input name="answer" disabled={disableChatBot} onKeyDown={(e) => { if (e.key === "Enter") {e.preventDefault(); if (userInput.trim() !== "") 
                     { setChatBotReply([...chatBotReply, userInput]); setUserInput("");}}}} value={userInput} onChange={(e)=>setUserInput(e.target.value) } type="text"
                      placeholder="Write your message" className="w-full h-full outline-none text-smallTextPhone md:text-tinyText bg-transparent" />
-                    <button disabled={disableChatBot} onClick={(e) => {e.preventDefault(); setChatBotReply([...chatBotReply, userInput]); setUserInput("");}}>
+                    <button disabled={disableChatBot} onClick={(e) => {e.preventDefault(); 
+                      if(userInput.length==0) return ; setChatBotReply([...chatBotReply, userInput]); setUserInput("");}}>
                     <svg className="w-[2vw] h-[2vw] ml-auto" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.6994 11.1976L11.946 5.82085C4.72259 2.20288 1.75786 5.1676 5.37583 12.391L6.46876 14.5768C6.78282 15.2175 6.78282 15.9587 6.46876 16.5994L5.37583 18.7727C1.75786 25.9961 4.71002 28.9608 11.946 25.3428L22.6994 19.9661C27.5234 17.5541 27.5234 13.6095 22.6994 11.1976ZM18.6417 16.524H11.858C11.343 16.524 10.9159 16.0969 10.9159 15.5818C10.9159 15.0668 11.343 14.6397 11.858 14.6397H18.6417C19.1568 14.6397 19.5839 15.0668 19.5839 15.5818C19.5839 16.0969 19.1568 16.524 18.6417 16.524Z" fill="#FF7500"/>
                     </svg>
