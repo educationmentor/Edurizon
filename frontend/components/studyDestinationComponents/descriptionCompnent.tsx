@@ -1,10 +1,10 @@
 interface DescriptionComponentProps {
     id: string;
     title1normal:string;
-    title1orange:string;
-    title2:string;
+    title1orange?:string;
+    title2?:string;
     content1:string[];
-    content2:string[];
+    content2?:string[];
     imageSrc:string;
     imageAlt:string;
 }

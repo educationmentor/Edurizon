@@ -5,11 +5,12 @@ interface HeaderProps {
     title1:string;
     title2:string;
     description:string;
+    description2?:string;
 }
 
 
 
-const Header = ({ id,title1,title2,description }: HeaderProps) => {
+const Header = ({ id,title1,title2,description, description2 } : HeaderProps) => {
     return (
         <div id='header' className="flex flex-col mx-[6vw] md:mx-[12.5vw] items-center pt-[10vw] md:pt-[7vw] md:pb-[3vw] gap-[4vw] md:gap-[1vw]">
         <Breadcrumbs />
@@ -20,6 +21,9 @@ const Header = ({ id,title1,title2,description }: HeaderProps) => {
         <p className="text-smallTextPhone md:text-regularText text-center ">
         {description}
         </p>
+        {description2 &&<p className="text-smallTextPhone md:text-regularText text-centerF mt-[2vw] md:mt-[2vw] ">
+            {description2}
+            </p>}
       </div>
     );
     }

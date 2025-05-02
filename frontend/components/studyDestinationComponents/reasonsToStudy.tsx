@@ -1,8 +1,8 @@
 interface ReasonsToStudyProps {
     id: string;
-    name:string;
+    name?:string;
     title1:string;
-    title2:string;
+    title2?:string;
     content:{[key:string]:string}[];
     darkImg:string[];
     lightImg:string[];
@@ -42,7 +42,7 @@ const ReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }: Reas
                         <span className="md:hidden">{reason.mobileDescription || reason.description}</span>
                         </p>
                     </div>
-                    <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                    {/* <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                     </div>
                 ))}
             </div>
