@@ -129,8 +129,8 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
 
             {/* Tajik National University Facts */}
-            <section className="flex mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between ">
-              <div className="w-[37.5vw] flex-shrink-0">
+            <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between ">
+              <div className="md:w-[37.5vw] flex-shrink-0">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Key Facts</h3>
                   <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
                     <li><strong>Type</strong> - National University like AIIMS in India</li>
@@ -161,7 +161,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
                   </ul>
               </div>
 
-              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan3.png" alt="Tajikistan" width={530} height={630} className="w-[32.5vw] ml-auto h-[39.375vw]"/>
+              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan3.png" alt="Tajikistan" width={530} height={630} className="hidden md:block w-[32.5vw] ml-auto h-[39.375vw]"/>
            </section>
 
            {/* MBBS in Indian Student */}
@@ -195,24 +195,23 @@ Tajik National University is the first and largest university in Tajikistan. It 
 
            {/*NMC approved Medical College in Tajikistan  */}
            <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between items-center gap-[2vw] flex flex-col md:flex-row">
-            <div className="w-[37.5vw] flex-shrink-0 ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
-                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li>MBBS of Tajikistan is valid in India after passing FMGE/NExT conducted by National Board of Education (NBE).</li>
-                    <li>For Indian foreign medical graduates, the FMGE is conducted twice a year.</li>
-                    <li>Tajik National University is recognized by NMC, WHO, FAIMER, ECFMG, WFME and UNESCO.</li>
-                    <li>This recognition is very crucial for Indian students who wish to pursue their medical education from TNU and thereafter wish to practice medicine in India upon their return.</li>
-                    <li>TNU is recognized by several international educational bodies and organizations, ensuring that its degrees are acknowledged globally.</li>
-                    <li>TNU has established partnerships with numerous institutions worldwide, promoting academic exchange and research collaboration.</li>
-                    <li>The medical faculty of TNU is listed in the World Health Organization's (WHO) World Directory of Medical Schools.</li>
-                    <li>Being in the WHO directory also signifies adherence to global standards in medical education.</li>
-                  </ul>
-                  </div>
-                  <div>
-                  <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan4.jpg" alt="Tajikistan" width={600} height={500} className="mx-auto w-[20vw] h-auto rounded-[4vw] md:rounded-[1vw] "/>                  
-                  <h3 className="text-smallTextPhone leading-[120%] md:text-regularText mt-[3vw] md:mt-[1.5vw] text-center ">Our Director with Head of Anatomy Department of Tajik National University</h3>
-
-                  </div>
+            <div className="md:w-[37.5vw] flex-shrink-0 ">
+              <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
+              <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
+                <li>MBBS of Tajikistan is valid in India after passing FMGE/NExT conducted by National Board of Education (NBE).</li>
+                <li>For Indian foreign medical graduates, the FMGE is conducted twice a year.</li>
+                <li>Tajik National University is recognized by NMC, WHO, FAIMER, ECFMG, WFME and UNESCO.</li>
+                <li>This recognition is very crucial for Indian students who wish to pursue their medical education from TNU and thereafter wish to practice medicine in India upon their return.</li>
+                <li>TNU is recognized by several international educational bodies and organizations, ensuring that its degrees are acknowledged globally.</li>
+                <li>TNU has established partnerships with numerous institutions worldwide, promoting academic exchange and research collaboration.</li>
+                <li>The medical faculty of TNU is listed in the World Health Organization's (WHO) World Directory of Medical Schools.</li>
+                <li>Being in the WHO directory also signifies adherence to global standards in medical education.</li>
+              </ul>
+            </div>
+            <div>
+              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan4.jpg" alt="Tajikistan" width={600} height={500} className="mx-auto md:w-[20vw] h-auto rounded-[4vw] md:rounded-[1vw] "/>                  
+              <h3 className="text-smallTextPhone leading-[120%] md:text-regularText mt-[3vw] md:mt-[1.5vw] text-center ">Our Director with Head of Anatomy Department of Tajik National University</h3>
+            </div>
            </section>
 
             {/*TNU hostel  */}
@@ -240,8 +239,8 @@ Tajik National University is the first and largest university in Tajikistan. It 
            </section>
 
            {/* Tajik National University Facts */}
-           <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
-              <div className="w-[36vw] flex-shrink-0">
+           <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[8vw] md:gap-0 justify-between ">
+              <div className="md:w-[36vw] flex-shrink-0">
                     <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Step by Step Complete Admission Process</h3>
                     <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
                     <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
@@ -256,7 +255,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
                     </ul>
               </div>
               
-              <div className="w-[36vw] flex-shrink-0">
+              <div className="md:w-[36vw] flex-shrink-0">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Documents Required for Tajik Natinonal University</h3>
                   <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
                   <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">

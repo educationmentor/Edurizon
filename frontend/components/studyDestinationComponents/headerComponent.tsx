@@ -16,12 +16,12 @@ const Header = ({ id,title1,title2,description, description2 } : HeaderProps) =>
         <Breadcrumbs />
         <div className="mb-[4vw] md:mb-[4vw]">
         <h1 className="text-h4TextPhone md:text-h1Text font-bold text-center leading-[120%]">{title1}</h1>
-        <h2 className="md:w-[58.5vw] text-h5TextPhone md:text-h2Text font-bold text-center leading-[120%]">{title2}</h2>
+        <h2 className="md:w-[58.5vw] text-h5TextPhone md:text-h2Text  font-bold text-center leading-[120%]">{title2}</h2>
         </div>
         <p className="text-smallTextPhone md:text-regularText text-center ">
         {description}
         </p>
-        {description2 &&<p className="text-smallTextPhone md:text-regularText text-centerF mt-[2vw] md:mt-[2vw] ">
+        {description2 &&<p className="hidden md:block text-smallTextPhone md:text-regularText text-center mt-[2vw] md:mt-[2vw] ">
             {description2}
             </p>}
       </div>

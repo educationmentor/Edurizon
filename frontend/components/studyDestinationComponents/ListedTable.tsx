@@ -39,7 +39,7 @@ const ListedTable = ({ id,content,section2="" }: ListedTableProps) => {
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (
-                    <td key={index} className={`border w-1/2 dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-[${100/width}%] ${index==0?"font-semibold":""} ${bool && index==0?"bg-linenChosen":""}`}>
+                    <td key={index} className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/${width} ${index==0?"font-semibold":""} ${bool && index==0?"bg-linenChosen":""}`}>
                       {content.href && index==0 ?
                        <a href={content.href[i]}>{highlight}</a>:( 
                           Array.isArray(highlight) ? (

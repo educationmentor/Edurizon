@@ -1,267 +1,258 @@
-import Breadcrumbs from "@/components/Breadcumbs";
-import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
+import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
+import Header from "@/components/studyDestinationComponents/headerComponent";
+import ListedTable from "@/components/studyDestinationComponents/ListedTable";
+import PostArrival from "@/components/studyDestinationComponents/postArrival";
+import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
+import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
+import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unListedTableEqualWidth";
 import Image from "next/image";
+
+const headerData={
+    id:"georgia",
+    title:"Study MBBS in Georgia - Best Medical Colleges in Georgia",
+    title2:"",
+    description:"Georgia has rapidly become one of the best country for mbbs for indian students, offering world‑class medical education.  In this comprehensive guide, you’ll discover everything you need to know about pursuing MBBS in Georgia —from affordable tuition fees, top NMC‑approved universities to the seamless admission process, eligibility criteria, documents required, student visas etc. With Edurizon by your side, you can apply now and secure a bright medical future, backed by personalized counseling.",
+    description2:"Nestled between Eastern Europe and Western Asia, Georgia spans 69,700 sq km and houses a population of 3.7 million. Bordered by the Black Sea to the west, Russia to the north, Turkey and Armenia to the south, and Azerbaijan to the southeast, its strategic crossroads location has forged a rich cultural tapestry. The capital, Tbilisi, enchants with winding cobblestone lanes, pastel‑faced balconies and a seamless blend of medieval churches and modern architecture. Since its independence on April  9, 1991, Georgia has overhauled its economy and education system to become a hub for international medical students. Today, over 5,000 Indian students’ study MBBS in Georgia, drawn by its English‑medium programs, cutting‑edge technologies & infrastructure, and globally recognized degrees. "
+}
+
+const descriptionData={
+    id:"geogia",
+    title1normal:"Why Edurizon for MBBS in Georgia?",
+    content:["At Edurizon, we guide you through every step of this journey—from free career counseling and university shortlisting to visa processing, Erasmus+ scholarships, and post‑graduation career pathways—ensuring your transition to a Georgian medical university is as smooth as it is successful."],
+
+    content2:"",
+    imageAlt:"Georgia",
+    imageURL:"/assets/Images/mbbs-in-georgia/Georgia1.png"
+}
+
+const reasonToStudyData={
+    id:"georgia",
+    title:"Why Study MBBS in Georgia? (Key Benefits) ",
+    content:[
+        {title:"Affordable Education",description:"Georgia offers affordable MBBS course fees. The cost of mbbs in georgia typically ranges from Rs.4 to Rs.7 lakh per year, making it budget-friendly without compromising quality. cost of mbbs in georgia"},
+        {title:"Globally Recognized Colleges",description:"All Georgia medical colleges are approved by the National Medical Commission (NMC)/WHO/FAIMER.  A Georgian MBBS is internationally recognized, allowing graduates to practice in India (after licensing exams) or pursue PG globally."},
+        {title:"High FMGE/NExT Success",description:"Georgian universities boast strong preparation for the Foreign Medical Graduates Exam. Graduates have achieved impressive FMGE passing rates, thereby truly reflecting the high quality of education, training & practical exposure. With the upcoming NExT exam, the rigorous curriculum in Georgia will give you a head start in clearing it."},
+        {title:"FMGE Passing ratio",description:"Foreign Medical Graduate Examination, is a prerequisite exam for all MBBS students. The FMGE passing ratio of Georgian universities varies from university to university. Overall passing ratio of Georgian universities are considered to be a good one."},
+        {title:"No Donation or Entrance Exam",description:"MBBS admission in Georgia does not require any donation or capitation fee. There is no separate entrance exam; however, an interview is taken by the Universities just to check the English knowledge & confidence of students. Moreover, NEET qualification is mandatory to get the admission."},
+        {title:"Safe and welcoming for Indians",description:"Georgia is known for its hospitality and safety. It ranks among the safest countries in the world, offering a secure & conducive atmosphere to study MBBS for international students. A large community of Indian students means feel at home, with celebrations of all Indian festivals and enjoy Indian cuisine."},
+        {title:"European Living Standards",description:"Studying in Georgia means living in a European standard environment – safe & secure cities, clean and green campuses, reliable public transport, and a rich cultural experience. "},
+        {title:"English-Medium & Modern Curriculum",description:"The entire MBBS program is taught in English."},
+        {title:"Easy Admission & Visa Process",description:"The process to mbbs admission in Georgia is easy, hassle-free, and student-friendly. "},
+        
+    ],
+    darkImg:["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark","2Dark","4Dark","3Dark"],
+    lightImg:["1","2","3","4","5","6","2","4","3"],
+}
+
+const academicData={
+    id:"georgia",
+    section2:"",
+    content:{
+        title:"Academic Calender",
+        subTitle:"A glimpse of the important dates an aspirant must keep in mind to get on board the best medical colleges in Georgia. The information below is not absolute and may vary university-wise.",
+        data:[["Events","Dates"],["Admission Process","Start in the month of May"],["Last date of application","In the month of October"],["Commencement of MBBS course","From October"]],
+        href:"string;"
+    }
+}
+
+const governmentUnivesitiesData={
+    id:"georgia",
+    section2:"",
+    content:{
+        title:"Top Government Universities for MBBS in Georgia",
+        subTitle:"",
+        description:"A glimpse of the important dates an aspirant must keep in mind to get on board the best medical colleges in Georgia. The information below is not absolute and may vary university-wise.",
+        data:[["University","Facts"],["Tbilisi State Medical University (TSMU)","Georgia's most prestigious & demanding medical university."],["Akaki Tsereteli State University","Provides affordable education with a good FMGE record."],["Ivane Javakhishvili Tbilisi State University (TSU)","Internationally acclaimed MBBS programs."],["Batumi Shota Rustaveli State University","Famous for its state-of-the-art infrastructure."]],
+        href:"string;"
+    }
+}
+
+const georgiaFeesData={
+    id:"georgia",
+    section2:"",
+    content:{
+        title:"Fees for MBBS in Georgia",
+        subTitle:"",
+        description:"One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students",
+        data:[
+            ["University", "Fees in $", "Fees in INR", "Hostel Fees in $", "Hostel Fees in INR"],
+            ["Tbilisi State Medical University", "8000", "680000", "3000", "255000"],
+            ["New Vision University", "7000", "595000", "3000", "255000"],
+            ["David Tvildiani Medical University", "6000", "510000", "3000", "255000"],
+            ["East European University", "5500", "467500", "3000", "255000"],
+            ["University of Georgia", "6000", "510000", "3000", "255000"],
+            ["Caucasus International University", "6000", "510000", "3000", "255000"],
+            ["Bau International University", "6500", "552500", "3000", "255000"],
+            ["Batumi Shota Rustaveli State University", "5000", "467500", "3300", "280500"],
+            ["ALTE University", "5500", "467500", "3000", "255000"],
+            ["European University", "5500", "467500", "3000", "255000"],
+            ["Grigol Robakidze University", "5500", "467500", "3000", "255000"],
+            ["Geomedi University", "5500", "467500", "3000", "255000"],
+            ["SEU, Georgian National University", "5500", "467500", "3000", "255000"],
+            ["International Black Sea University", "4900", "416500", "3000", "255000"],
+            ["Batumi Shota Rustaveli State University", "4800", "408000", "3000", "255000"],
+            ["Avicenna Batumi Medical University", "4000", "340000", "3000", "255000"]
+        ],
+        href:"string;"
+    }
+}
+
+const eligibilityData={
+    id:"georgia",
+    section2:"",
+    content:{
+        title:"Eligibility Criteria",
+        subTitle:"Eligibility Criteria for MBBS in Georgia for Indian students",
+        data:[["Criteria","Details"],["Academic Qualification",["Class 12 (equivalent) with Phy, Chem, Bio (PCB).","General Category: Min 50% aggregate in PCB.","SC/ST/OBC: Min 40% aggregate in PCB."]],["NEET Qualification",["NEET qualification is mandatory."]],["Age Limit",["Minimum 17 years as of December 31, 2024."]]],
+        href:"string;"
+    }
+}
 
 const NewPage = () => {
     return(
         <div className="text-smallTextPhone md:text-smallText">
-            <section className="country-inner-banner">
-                <div className="container pt-[4vw] pb-[4vw] md:pb-0">
-                    <div className="flex flex-row align-items-center ">
-                    <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
-                        <div className="heading">
-                        <h2 className=" text-h5TextPhone md:text-h5Text">Study MBBS in Georgia</h2>
-                        </div>
-                        <Breadcrumbs/>
-                    </div>
-                    <div className="hidden md:block col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/georgia-flag.jpeg" className="img-fluid" />
-                    </div>
-                    </div>
-                </div>
-            </section>
-            <section className="inner-page-bg">
-    <div className="container">
-        <div className="row g-0">
-            <div className="immigrate-bg">
-                <div >
-                    <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="flex justify-center items-center overflow-hidden  h-[37.25vw]">
-                                    <Image alt="hi" src="/assets/Images/slider/georgia-slider.jpg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
-                                </div>
-                    </div>
-                </div>
-                <div className="our-contact-detail">
-                    <div className="row">
-                        <div className="col-xl-4 col-4 text-center">
-                            <a href="callto:9873381377" className="bg-golden"><i className="fas fa-phone-volume"></i> <span className="d-none d-md-inline-block">+91-9873 38 1377</span></a>
-                        </div>
-                        <div className="col-xl-4 col-4 text-center">
-                            <a href="#" className="bg-green"><i className="fab fa-whatsapp"></i> <span className="d-none d-md-inline-block">+91-9873 38 1377</span></a>
-                        </div>
-                        <div className="col-xl-4 col-4 text-center">
-                            <a href="#" className="bg-black"><i className="fas fa-download"></i> <span className="d-none d-md-inline-block">Download Brochure</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">About Georgia</h3>
-                    </div>
-                    <p>Georgia is located in the middle of Europe and Asia. It lies between the crossroads of Western Asia and Eastern Europe, bordered by the Black Sea to the west, Russia to the north, Turkey and Armenia to the south, and Azerbaijan to the southeast. Tbilisi is the capital city and the capital of Georgia. The city is famous for architecture, cobblestone and mazelike. The country has a territory of about 69,700 sq kilometers and a total population of 3.718 million.</p>
-                    <p>Georgia became a constituent country in 1936 and continued until the collapse of Soviet Union. The Georgian economy was modernized and diversified during the rule of Soviet period. Georgia attained independence on April 9, 1991.</p>
-                </div>
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">MBBS in Georgia</h3>
-                    </div>
-                    <p>Mbbs in Georgia is a new favorite destination for Indian students. The medical Universities of Georgia are all recognized by NMC and are the best option for any student who wants to study MBBS from abroad.</p>
-                    <p>Georgia is a literate country and is one of the best places for studying medicine in the world. The medical universities of Georgia offer high standard infrastructure and education to the students. Medical degree provided by the University is recognized worldwide, so they can work and study in any part of the world.</p>
-                    <p>Most of the students wish to study MBBS in Georgia, as it is their dream to study in a European country. But very few of them get this remarkable opportunity, because of the budget and the cost of living. Indian medical aspirants who are looking forward to pursue their Mbbs always opt and select for low budget countries with at least 5 years of course. There are many countries offering Mbbs in low budget like Kyrgyzstan, Kazakhstan, Philippines and many more. But still Georgia has been able to make up the top list of most preferred countries for studying Mbbs. It has become a second home to most of the leading MBBS universities for Indian students.</p>
-                    <p>As MBBS in TBILISI Georgia is a new destination for the students, its moderate environment and fun-loving people, experienced faculty members make sure that students who have taken MBBS admission in Georgia acquire the best education both theoretically and practically so that they can make a successful career after completing MBBS in Georgia. Students get relax when they come to know that more than 5000 Indians are already studying MBBS in Georgia. It becomes favorable and easier for them to decide. Students can easily apply for admission if they have managed to secure 50% in 10+2 with PCB from a recognized board.</p>
-                    <p>Universities of Georgia follow the advance curriculum for study. The course provided by the University is for 6-years (5 years of study plus 1 year Internship). Students studying in the University are very genius and take part in various activities. MBBS course in Georgia is affordable as compared to Indian private Universities and other European countries.</p>
-                </div>
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Why Study MBBS from Georgia</h3>
-                    </div>
-                    <ul className="points-two">
-                        <li>Medical Universities of Georgia are recognized all over the world.</li>
-                        <li>Mbbs in Georgia admission is very easy without any hassle.</li>
-                        <li>Donation of fees is not required for admission process.</li>
-                        <li>Visa process is also very easy for Georgia, the candidate must only be good in English.</li>
-                        <li>Skype Interview is conducted for admission in Georgia medical Universities, to check the fluency of English language.</li>
-                        <li>Almost all the Medical Universities of Georgia are approved by WHO and NMC.</li>
-                        <li>NMC coaching is also provided by the Georgian Universities for Indian students.</li>
-                        <li>No entrance exam is required for all government Universities of Georgia.</li>
-                        <li>Universities of Georgia are top ranked in the world.</li>
-                        <li>The country is safe for study including boys and girls.</li>
-                        <li>Hostel facilities are available with Indian food.</li>
-                        <li>Climate is pleasant and moderate in Georgia.</li>
-                        <li>The University provides quality education with audio visual learning.</li>
-                        <li>Students get an opportunity to study in European countries.</li>
-                        <li>People of Georgia are very friendly and welcoming, so they gladly accept the Indian students.</li>
-                        <li>Classes are all delivered in English language.</li>
-                        <li>The cost of study in Georgia is very less as compared to other European countries.</li>
-                        <li>Many Indians are studying at the University.</li>
-                        <li>Georgia has many good Universities but Batumi Shota Rustaveli State University and NVU is one of the best Universities of Georgia.</li>
-                    </ul>
-                </div>
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Best MBBS College in Georgia Listed Under NMC</h3>
-                    </div>
-                    <div className="table-responsive">
-                    <table className="table table-bordered table-striped align-middle">
-                        <thead className="table-dark">
-                            <tr className="text-white">
-                                <th scope="col">Sr. No.</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">University Name</th>
-                                <th scope="col">Tuition Fees(USD)</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">About University</th>
-                                <th scope="col">Apply online</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1.</th>
-                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/ivane-javakhishvili-tbilisi-state-university-logo.png" className="img-fluid univ-logo-size" alt="Ivane Javakhishvili Tbilisi State University" title="Ivane Javakhishvili Tbilisi State University" /></td>
-                                <td><b>Ivane Javakhishvili Tbilisi State University</b></td>
-                                <td>$6,000</td>
-                                <td>6 Years</td>
-                                <td><a href="#">Read More</a></td>
-                                <td><a href="#" className="btn-custom btn-univ-detail">Apply Now</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2.</th>
-                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/new-vision-nniversity-logo.png" className="img-fluid univ-logo-size" alt="New Vision University" title="New Vision University" /></td>
-                                <td><b>New Vision University</b></td>
-                                <td>$6,500</td>
-                                <td>6 Years</td>
-                                <td><a href="#">Read More</a></td>
-                                <td><a href="#" className="btn-custom btn-univ-detail">Apply Now</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3.</th>
-                                <td><Image  width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/caucasus-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Caucasus University" title="Caucasus University" /></td>
-                                <td><b>Caucasus University</b></td>
-                                <td>$5,000</td>
-                                <td>6 Years</td>
-                                <td><a href="#">Read More</a></td>
-                                <td><a href="#" className="btn-custom btn-univ-detail">Apply Now</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4.</th>
-                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/tbilisi-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Tbilisi State Medical University" title="Tbilisi State Medical University" /></td>
-                                <td><b>Tbilisi State Medical University</b></td>
-                                <td>$8,000</td>
-                                <td>6 Years</td>
-                                <td><a href="#">Read More</a></td>
-                                <td><a href="#" className="btn-custom btn-univ-detail">Apply Now</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5.</th>
-                                <td><Image width={100} height={100} src="/assets/Images/mbbs-in-georgia/university-logo/david-tvildiani-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="David Tvildiani Medical University" title="David Tvildiani Medical University" /></td>
-                                <td><b>David Tvildiani Medical University</b></td>
-                                <td>$8,000</td>
-                                <td>6 Years</td>
-                                <td><a href="#">Read More</a></td>
-                                <td><a href="#" className="btn-custom btn-univ-detail">Apply Now</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Advantages to Study MBBS in Georgia</h3>
-                    </div>
-                    <p>Lots of Students opt for Mbbs in Georgia as it is one of the most peaceful and crime free country to study Mbbs from Abroad. The affordable fees structure and the low cost of living attract most of the students and is one of the major advantages of the country. After completing their studies from Georgia, students can easily practice in India as the degree is valid all over the world. Georgia offers lots of opportunities for the students where they can learn and also grow as medical interns. Students are allowed to work as interns and get practical exposure during their period of study.</p>
-                    <p>The quality of education provided in all the NMC approved Universities of the country are of quite high standard in the whole country of Europe. This is the main reason why maximum number of students chooses to study in Georgia. Studying Mbbs in Europe is a dream of every student, the economical fees and budget friendly universities fascinate the students to select Georgia over other countries.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section className="inner-page-bg">
-    <div className="container">
-        <div className="row g-0">
-            <div className="immigrate-bg">
-               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div className="heading">
-                            <h3 className=" text-h5TextPhone md:text-h5Text">Admission Process of MBBS in Georgia</h3>
-                        </div>
-                        <p>Indian students who are not able to meet the high fees structure of Indian universities can now apply for Mbbs in Georgia. It is very easy to get admission in Georgia only if you have the required budget. Tuition fees and the living cost are very affordable within your budget. The country has many good universities to offer at a reasonable budget.</p>
-                        <div className="heading">
-                            <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Documents Required</h3>
-                        </div>
-                        <ul className="points-two">
-                            <li>Copy of 10th score card.</li>
-                            <li>Copy of 12th score card.</li>
-                            <li>And a copy of Passport.</li>
-                            <li>NEET score card.</li>
-                            <li>2 copies of passport size photograph.</li>
-                        </ul>
-                        <div className="heading">
-                            <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Eligibility Criteria</h3>
-                        </div>
-                        <ul className="points-two">
-                            <li>Only 50% marks is required for admission in className 12th result.</li>
-                            <li>NEET Score is also required for Mbbs admission from Abroad.</li>
-                            <li>Age criteria is there candidate should be of 17 years at the time of admission.</li>
-                        </ul>
-                        <div className="heading">
-                            <h3 className="pt-[1vw] text-h5TextPhone md:text-h5Text">Visa Document for MBBS in Georgia</h3>
-                        </div>
-                        <ul className="points-two">
-                            <li>Students with 50% marks in Physics, Chemistry, Biology and English.</li>
-                            <li>NEET Qualified.</li>
-                            <li>17 years of age at the time of admission.</li>
-                        </ul>
-                        <p className="mt-4 mt-md-3">After all the above documents are submitted to Edurizon Pvt Ltd. We will then process the admission of the candidate. In 2-3 working days the University will send the admission letter of the candidate. After we provide the admission letter, the candidate has to appear for the Skype Interview. The whole interview will be recorded by the university & sent to the Ministry of Georgia. The Ministry will then send a letter to the University confirming his admission and release all the official documents of the students like the confirmation letter, Invitation letter, and University Rector decree. After this the visa process will start, which normally takes 7-10 working days to receive the visa.</p>
-                    </div>
-            </div>
-        </div>
-    </div>
-</section> 
-{/* <section className="inner-page-bg">
-    <div className="container">
-        <div className="row g-0">
-            <div className="immigrate-bg">
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="heading">
-                        <h3  className="pt-[1vw] text-h5TextPhone md:text-h5Text ">Edurizon Pvt. Ltd. Student Reviews</h3>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-[1vw]">
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/psO_4DIJlFY" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/uecmbVRw4b4" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/79nLuFGiEi8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/GLeOo2O4t-8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/mFQ-XUbRxFs" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/7c1DZGDzQLw" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div> 
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/Mw_DG67wzdM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div> 
-                        <div className="col-xl-3 col-lg-3 col-md-4 col-6 mb-4 mb-md-4">
-                            <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/WJqGcMwJOP8" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> */}
-<section className="inner-page-bg">
-  <div className="container">
-    <div className="row g-0">
-      <div className="immigrate-bg">
-        <RelatedCountries/>
-      </div>
-    </div>
-  </div>
-  
+            {/* Header Part */}
+            <Header id={headerData.id} title1={headerData.title} title2={headerData.title2} description={headerData.description} description2={headerData.description2} />
 
-  <div className='h-[2vw]'>
+            {/* Description Part */}
+            <DescriptionComponent id={descriptionData.id} title1normal={descriptionData.title1normal}  
+            content1={descriptionData.content} imageAlt={descriptionData.imageAlt} imageSrc={descriptionData.imageURL} />
 
-</div>
-</section>
+            {/* Reasons to Study */}
+            {<ReasonsToStudy id={reasonToStudyData.id} title1={reasonToStudyData.title}  content={reasonToStudyData.content} darkImg={reasonToStudyData.darkImg} lightImg={reasonToStudyData.lightImg} />}
+
+            {/* Academic Calander */}
+            <div className="text-smallTextPhone md:text-regularText leading-[150%] mb-[2vw]  ">
+                <UnlistedTableEqualWidth  id={academicData.id} section2={academicData.section2} content={academicData.content}/>
+                <div className="mx-[6vw] md:mx-[12.5vw]">
+                <h3 className="text-h5TextPhone md:text-h3Text font-bold italic leading-[120%]">Course Duration - MBBS in Georgia</h3>
+                <p className="pt-[2vw] md:pt-[.5vw] pb-[2vw] md:pb-[2vw]">6 years with 1 year compulsory clinic internship</p>
+                <h3 className="text-h5TextPhone md:text-h3Text font-bold italic leading-[120%]">Academic intakes for MBBS in Georgia</h3>
+                <ul className="pt-[2vw] md:pt-[.5vw] list-outside  list-disc">6 years with 1 year compulsory clinic internship
+                    <li className="ml-[2vw] md:ml-[1.5vw]">September-October</li>
+                    <li className="ml-[2vw] md:ml-[1.5vw]">February-March</li>
+                </ul>
+                </div>
+            </div>
+
+            {/* Indian Opportunities */}
+            <div className="md:m-[4vw] flex flex-col gap-[4vw] md:gap-[2vw] mx-[6vw] md:mx-[12.5vw]">
+                <h2 className="text-h4TextPhone md:text-h2Text font-bold text-center leading-[120%]">International Opportunities</h2>
+                <div className="text-smallTextPhone md:text-regularText leading-[150%] flex flex-col gap-[2vw] md:gap-[1.5vw] "> 
+                    <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%]">Erasmus+ and Student Exchange :-</h3>
+                    <p >One of the advantages of studying in Georgia to have the opportunity to participate in exchange programs and collaborations like Erasmus</p>
+                    <p ><strong>Erasmus+ Program:</strong> Georgia is a partner country in the European Union’s Erasmus+ program, which means Georgian universities can partake in student exchange with other European universities. As an MBBS student in Georgia, student could apply for a semester abroad in another country (like Germany, Italy, Poland, etc.) under Erasmus funding.</p>
+                    <p ><strong>How to avail opportunities:</strong> The opportunities as mentioned above and others offered by the universities from time to time are usually applicable to only those students who perform well in their academics.</p>
+                </div>
+                <Image src={"/assets/Images/mbbs-in-georgia/Georgia2.png"} className="w-full h-auto mt-[2vw]" width={1420} height={690  } alt="georgia3"/>
+            </div>
+
+             {/* Top Government Universities */}
+             <UnlistedTableEqualWidth  id={governmentUnivesitiesData.id} section2={governmentUnivesitiesData.section2} content={governmentUnivesitiesData.content}/>
+
+            {/* Top 5 NMC - Approved  */}
+
+            <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
+                <h2 className="text-h4TextPhone md:text-h2Text font-bold leading-[120%] text-center">Top 5 NMC-Approved Medical<br/>Universities in Georgia</h2>
+                <p className="md:text-center md:mx-[9vw]">When it comes to choosing the best university in Georgia for mbbs, Indian students have several options. Edurizon has identified five top Georgia MBBS university that highly excel in quality & recognition.</p>
+                <ul className="grid grid-cols-1 md:grid-cols-5 gap-[1.5vw] font-bold pl-[3vw] md:pl-[1.5vw] list-decimal">
+                    <li>Tbilisi State Medical University</li>
+                    <li>David Tvildiani Medical University</li>
+                    <li>East European University (EEU)</li>
+                    <li>New Vision University</li>
+                    <li>International Black Sea University</li>
+                </ul>
+           </div>
+
+           {/* Geogia Fees */}
+           <UnlistedTable id={georgiaFeesData.id} section2={georgiaFeesData.section2} content={georgiaFeesData.content}/>
+           <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
+
+            {/* Climate and Weather */}
+           <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:px-[4vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
+                <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%] mb-[1vw]">Climate and Weather</h3>
+                <p>Georgia’s climate is moderate and pleasant. There are four distinct seasons:</p>
+                <div className="flex flex-col md:flex-row justify-center gap-[2vw] md:gap-[1.5vw]">
+                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">i.</div>
+                        <div className="flex flex-col"><p className="font-bold">Autumn (Sep-Nov):</p><p>Weather is mild and cool. It’s very scenic. Light jackets suffice.</p></div>
+                    </div>
+                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">ii.</div>
+                        <div className="flex flex-col"><p className="font-bold">Winter (Dec-Feb):</p><p>Winters can get cold. Temperatures in Tbilisi hover around 0°C to -5°C, Good winter clothing (coat, thermals, boots) is essential. </p></div>
+                    </div>
+                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">iii.</div>
+                        <div className="flex flex-col"><p className="font-bold">Spring (Mar-May):</p><p>A beautiful season in Georgia – gradually warming, with flowers blooming. Temperature ranges 10°C to 20°C. A raincoat or umbrella is handy as spring showers are common.</p></div>
+                    </div>
+                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">iv.</div>
+                        <div className="flex flex-col"><p className="font-bold">Summer (Jun-Aug):</p><p>Summers are warm but not extreme. Tbilisi can touch 30-35°C in peak summer.</p></div>
+                    </div>
+                </div>
+           </div>
+
+           {/* Career Opportunity after mbbs */}
+           <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:px-[4vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
+                <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%] mb-[1vw]">Career Opportunities After MBBS</h3>
+                <div className="flex flex-col md:flex-row justify-center gap-[2vw] md:gap-[1.5vw]">
+                    <div className="md:w-1/2 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">i.</div>
+                        <div className="flex flex-col"><p className="font-bold">India</p><p>Graduates must clear FMGE or NExT (as per upcoming regulations) to practice in India. They can even opt for postgraduate studies (PG courses) or work in private hospitals.</p></div>
+                    </div>
+                    <div className="md:w-1/2 flex flex-row  gap-[.5vw]">
+                        <div className="font-bold">ii.</div>
+                        <div className="flex flex-col"><p className="font-bold">Overseas</p><p>The students may pursue residency courses in the US, UK, Canada or Europe through passing exams such as USMLE, PLAB or AMC. </p></div>
+                    </div>
+                </div>
+           </div>
+
+            {/* Scams and Admission Fraud Awarness */}
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row gap-[4vw] md:gap-[1vw] px-[6vw] md:px-[12.5vw] items-center bg-linenChosen">
+                <div className="flex flex-col gap-[2vw] md:gap-[1.5vw] ">
+                <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">Scams & Admission Fraud Awarness</h3>
+                <div>
+                <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw]">
+                    <li><strong>Identifying Fraud Agents:</strong> Be aware and cautious of the agents who gives you a guarantee for admission without having NEET qualification.</li>
+                    <li>Under such circumstances always check an agent's credentials first.</li>
+                    <li><strong>How to avoid fraudsters:</strong>
+                        <ul className="list-disc pl-[2vw] md:pl-[1.5vw]">
+                            <li>Verify the university's official website</li>
+                            <li>Never pay high sums in cash or to personal bank accounts.</li>
+                            <li>Be aware of counterfeit admission letters and forged documents.</li>
+                            <li>Consult verified education consultants.</li>
+                            <li>Check the testimonials.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p className="text-smallTextPhone md:text-regularText ">
+                    We believe that through a thorough analysis, students can make a well-informed decision to pursue MBBS in Georgia and therefore can have a successful career in medicine.
+                </p>
+                </div>
+                </div>  
+                <Image src={"/assets/Images/mbbs-in-georgia/Georgia3.png"} className="min-w-[35vw] h-auto" width={690} height={690  } alt="georgia3"/>
+            </div>
+
+            {/* Post Arrival */}
+            <PostArrival/>
+            
+            {/* Free MBBS Guidance & Support */}
+            <div className=" my-[8vw] md:my-[0vw] flex flex-col gap-[4vw] md:gap-[2vw] mx-[6vw] md:mx-[12.5vw]">
+                <h3 className="font-bold text-h5TextPhone md:text-h3Text md:text-center leading-[120%] text-orangeChosen">Free MBBS Guidance & Support</h3>
+                <p className="text-smallTextPhone md:text-regularText leading-[150%]">
+                From the moment you sign up with Edurizon, our services – counseling, application help, visa processing, pre-departure briefing – are designed. We aim to be your trusted partner in this life-changing journey, ensuring you make informed decisions at every step.<br/>
+                Your ambition to become a doctor should not be limited by cut-throat competition or exorbitant fees. Georgia offers you a golden opportunity to pursue your MBBS in a world-class setting at an affordable cost. Thousands of Indian students have graduated from Georgia medical colleges and are now successful doctors across the world. You can join this proud list.<br/><br/>
+                <strong>Over a period of time, we have sent hundreds of students for MBBS in Georgia (since 2013), out of which 300 students have already cleared FMGE & practicing in India successfully.</strong>
+                </p>
+            </div>
+
+            {/* Get in Touch */}
+            <div className="md:m-[4vw] my-[8vw] flex flex-col gap-[2vw] md:gap-[1vw] mx-[6vw] md:mx-[12.5vw] py-[2vw]">
+                <h3 className="text-h5TextPhone md:text-h3Text md:text-center font-bold text-orangeChosen leading-[120%]">Get in Touch with Edurizon Today!</h3>
+                <p className="text-smallTextPhone text-left md:w-[60vw] md:mx-auto md:text-center md:text-regularText leading-[150%]">
+                Kickstart your MBBS abroad adventure. Contact Edurizon for MBBS admission assistance and take the first step towards wearing that coveted white coat. Your dream of becoming a globally qualified doctor is just an application away – let’s make it happen together!
+                </p>
+            </div>
         </div>
     )
 }

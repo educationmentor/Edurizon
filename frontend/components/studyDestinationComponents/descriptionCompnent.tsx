@@ -26,7 +26,7 @@ const DescriptionComponent = ({ id,title1normal,title1orange,title2,content1,con
                     
                     </div>
                     
-                    <h4 className="text-h5TextPhone text-center md:text-left md:text-h4Text font-bold leading-[120%]">{title2}</h4>
+                    {title2 && <h4 className="text-h5TextPhone text-center md:text-left md:text-h4Text font-bold leading-[120%]">{title2}</h4>}
                     <div className="text-smallTextPhone md:text-regularText text-justify">
                     {content2 !=undefined? content2.length>1?
                     <ul className="list-disc pl-[6vw] md:pl-[1.5vw] list-outside ">
