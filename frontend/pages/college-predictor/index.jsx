@@ -11,6 +11,7 @@ import Form1 from '@/components/college-predictor-components/Form1';
 import { baseUrl } from '@/lib/baseUrl';
 import Image from 'next/image';
 import CollegePredictorForm from '@/components/CollgePredictorForm';
+import { TitleButton } from '@/components/Buttons';
 
 export default function CollgePredictor(){
     const [formData,setFormData]=useState({'marks':720,'category':'All','roundMark':'24MarkR1','roundRank':'24RankR1','amount':10000000,'rank':1});
@@ -218,7 +219,11 @@ export default function CollgePredictor(){
     
         return () => toggleScroll(false);
     }, [submitTrigger, isOpen]);
-
+    const onClick=()=>{
+        const phoneNumber = "+918319216778";  // Replace with your phone number
+        window.location.href = `tel:${phoneNumber}`;
+    }
+    console.log(data)
     return(
         <div className=''>
         
@@ -394,8 +399,19 @@ export default function CollgePredictor(){
      
       
         </div>
-        </div>)}</>:
+        </div>
+            
+    )}
+    {data.length==0 && <div className='w-full pb-[4vw] md:pb-[2vw]'><h3 className='text-h5TextPhone md:text-h5Text text-red-500 text-center pb-[.5vw]'>
+        You are not Eligible for any College in This State</h3>
+        <p className='text-center text-regularTextPhone md:text-regularText pb-[1vw]'>Click the button bellow to reach out to our Counsellor for more help</p>
+        <div className='mx-auto w-min'>
+        <TitleButton onClick={onClick} btnTitle={"Call Us Now"} btnHeight={3} btnHeightPhone={11} btnWidth={13.1875} btnWidthPhone={52.5} btnRadius={6.25} btnRadiusPhone={17.5} />
+        </div>
+        </div>}
+    </>:
         <>
+      
          <>
          <div
         className={`transition-all duration-700 ease-in-out transform ${
@@ -408,11 +424,11 @@ export default function CollgePredictor(){
     </>
         </>)}
     
-        </div>{form1Appear && (
+        </div>
+        {form1Appear && (
             <CollegePredictorForm onClose={onClose} onSubmit={onSubmit} setDetailsFnc={setDetailsFnc}/>
         )}
         </section>
-        
         
         {isOpen && (
         
