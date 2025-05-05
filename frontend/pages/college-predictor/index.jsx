@@ -232,7 +232,7 @@ export default function CollgePredictor(){
             {/* Header Div above Image*/}
             <div className='reltaive z-[1] mt-[23vw] mb-[5vw] md:mb-[3vw] md:mt-[10vw] mx-[6vw] md:mx-[12.5vw]'>
             {/* Rocket Image */}
-            <Image src={rocket} alt="background" className="absolute  md:top-[19vw] md:left-[11.5vw] hidden  md:block md:w-[12vw] h-auto pointer-events-none " />
+            <Image src='/assets/Images/college-predictor/rocket.png' width={300} height={300} alt="background" className="absolute  md:top-[19vw] md:left-[11.5vw] hidden  md:block md:w-[12vw] h-auto pointer-events-none " />
             <div className='flex flex-col justify-center bg-paleOrangeChosen mx-auto mb-[8vw] md:mb-[1.75vw] text-black font-light text-tinyTextPhone md:text-tinyText h-[6vw] md:h-[1.75vw] w-[60vw] md:w-[10vw] text-center rounded-[2.75vw]'><p className=' px-[3vw] md:px-[1.5vw]'>College Predictor</p></div>
             <div className='w-[88vw] md:w-[58vw] mb-[4vw] md:mb-[3vw] mx-auto'>
               <h1 className="text-[8vw]  sm:text-h3TextPhone md:text-h2Text leading-[120%] dark:text-white text-center  font-bold ">Find The Best Fit<br className='md:hidden'/> College For You <br/><span className='text-orangeChosen'>Unlock Now!</span></h1>
@@ -244,7 +244,7 @@ export default function CollgePredictor(){
                 <div className="flex flex-col justify-center items-center border-r-[1px]  border-[rgba(3,3,3,0.24)] col-span-1">
                 <div className='select-none flex flex-row items-center gap-[2vw] md:gap-[.75vw] justify-around'>
                 <h4 className='text-orangeChosen font-bold text-h5TextPhone md:text-h4Text text-center select-none'>{rankorMarks?"Rank":"Marks"}</h4>
-                <Image onClick={()=>setRankorMarks(!rankorMarks)} src={Switch} className='cursor-pointer w-[5vw] md:w-[1.5vw] h-auto' alt='switch'/>
+                <Image onClick={()=>setRankorMarks(!rankorMarks)} src="/assets/Images/college-predictor/Switch.svg" width={200} height={200} className='cursor-pointer w-[5vw] md:w-[1.5vw] h-auto' alt='switch'/>
                 </div>
                     {rankorMarks?<input onChange={handleChange} id="rank" className='w-[20vw] md:w-[13vw]   select-none text-center text-regularTextPhone md:text-h5Text focus:outline-none' type='number' value={formData['rank']} placeholder='Enter your Rank' ></input>
                     :<input onChange={handleChange} id="marks" className='w-[20vw] md:w-[13vw]  select-none text-center text-regularTextPhone md:text-h5Text focus:outline-none' type='number' value={formData['marks']} placeholder='Enter your marks' ></input>}

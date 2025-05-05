@@ -43,7 +43,7 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
       );
 
       if (response.data.success) {
-        toast.success('Consultation request submitted successfully! We will contact you soon.');
+        toast.success('Thanks for the Details, Wait a min till college Details Are getting Fetched from our Server.');
         
       }
       console.log("Done")

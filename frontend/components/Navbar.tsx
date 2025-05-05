@@ -32,7 +32,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
     { name: "Study Destinations", href: "/study-destinations?category=Destination", dropdown: true , borderTop: true },
-    { name: "College Predictor", href: "https://college-predictor-nine.vercel.app/", external: true },
+    { name: "College Predictor", href: "/college-predictor", external: false },
     // { name: "Budget Calculator", href: "#" },
     { name: "Services", href: "#" , borderTop: true },
     { name: "Testimonials", href: "#" },
