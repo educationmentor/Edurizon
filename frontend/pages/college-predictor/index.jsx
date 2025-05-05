@@ -33,7 +33,7 @@ export default function CollgePredictor(){
     const [form1Appear,setForm1Appear]=useState(false);
     const [isVisible, setIsVisible] = useState(false); 
     const [details,setDetails]=useState(false);
-    
+    const [clickedOnce, setClickedOnce] =useState(false);    
 
     const handleChange=(e)=>{
         setFormData({
@@ -120,6 +120,7 @@ export default function CollgePredictor(){
             return;
         }
         setWait(true);
+        setClickedOnce(true);
         handleIsGovernment();
         setColumnName(formData);
         setIsVisible(true);
@@ -402,7 +403,7 @@ export default function CollgePredictor(){
         </div>
             
     )}
-    {data.length==0 && <div className='w-full pb-[4vw] md:pb-[2vw]'><h3 className='text-h5TextPhone md:text-h5Text text-red-500 text-center pb-[.5vw]'>
+    {data.length==0 &&clickedOnce && <div className='w-full pb-[4vw] md:pb-[2vw]'><h3 className='text-h5TextPhone md:text-h5Text text-red-500 text-center pb-[.5vw]'>
         You are not Eligible for any College in This State</h3>
         <p className='text-center text-regularTextPhone md:text-regularText pb-[1vw]'>Click the button bellow to reach out to our Counsellor for more help</p>
         <div className='mx-auto w-min'>

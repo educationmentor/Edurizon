@@ -17,7 +17,7 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [error, setError] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -29,6 +29,10 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(formData.phone.length!=10){
+      setError("Enter Correct Phone Number");
+      return;
+    }
     setLoading(true);
     try {
       // Send request without requiring login
@@ -117,7 +121,9 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
               className="mt-[1vw] md:mt-[0.375vw] block w-full px-[2vw] md:px-3 py-[1vw] md:py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orangeChosen focus:border-orangeChosen dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
-         
+          {error && error.length>0&&<p className='text-regularTextPhone md:mb-[-1vw] md:text-regularText text-red-500'>{error}
+          </p>
+            }
           <div className="mt-[.7125vw] text-smallTextPhone md:text-smallText flex justify-end gap-[2vw] md:gap-[.5vw]">
             <button
               type="button"
