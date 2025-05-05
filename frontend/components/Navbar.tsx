@@ -155,7 +155,7 @@ const Navbar = () => {
   return (
     <nav
 className={`${
-router.asPath === "/" || router.asPath==="/#" ? "absolute" : "relative"
+router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predictor" ? "absolute" : "relative"
 } px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
 >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
