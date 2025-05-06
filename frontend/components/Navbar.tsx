@@ -34,9 +34,10 @@ const Navbar = () => {
     { name: "Study Destinations", href: "/study-destinations?category=Destination", dropdown: true , borderTop: true },
     { name: "College Predictor", href: "/college-predictor", external: false },
     // { name: "Budget Calculator", href: "#" },
-    { name: "Services", href: "#" , borderTop: true },
+    { name: "Contact Us", href: "/contact-us" , borderTop: true },
     { name: "Testimonials", href: "#" },
   ];
+  
 
   
   const studyDestinations1=[
