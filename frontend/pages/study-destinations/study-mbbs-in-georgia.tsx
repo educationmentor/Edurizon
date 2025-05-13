@@ -51,7 +51,6 @@ const academicData={
         title:"Academic Calender",
         subTitle:"A glimpse of the important dates an aspirant must keep in mind to get on board the best medical colleges in Georgia. The information below is not absolute and may vary university-wise.",
         data:[["Events","Dates"],["Admission Process","Start in the month of May"],["Last date of application","In the month of October"],["Commencement of MBBS course","From October"]],
-        href:"string;"
     }
 }
 
@@ -63,7 +62,6 @@ const governmentUnivesitiesData={
         subTitle:"",
         description:"A glimpse of the important dates an aspirant must keep in mind to get on board the best medical colleges in Georgia. The information below is not absolute and may vary university-wise.",
         data:[["University","Facts"],["Tbilisi State Medical University (TSMU)","Georgia's most prestigious & demanding medical university."],["Akaki Tsereteli State University","Provides affordable education with a good FMGE record."],["Ivane Javakhishvili Tbilisi State University (TSU)","Internationally acclaimed MBBS programs."],["Batumi Shota Rustaveli State University","Famous for its state-of-the-art infrastructure."]],
-        href:"string;"
     }
 }
 
@@ -93,7 +91,6 @@ const georgiaFeesData={
             ["Batumi Shota Rustaveli State University", "4800", "408000", "3000", "255000"],
             ["Avicenna Batumi Medical University", "4000", "340000", "3000", "255000"]
         ],
-        href:"string;"
     }
 }
 
@@ -123,7 +120,7 @@ const NewPage = () => {
 
             {/* Academic Calander */}
             <div className="text-smallTextPhone md:text-regularText leading-[150%] mb-[2vw]  ">
-                <UnlistedTableEqualWidth  id={academicData.id} section2={academicData.section2} content={academicData.content}/>
+                <ListedTable  id={academicData.id} section2={academicData.section2} content={academicData.content}/>
                 <div className="mx-[6vw] md:mx-[12.5vw]">
                 <h3 className="text-h5TextPhone md:text-h3Text font-bold italic leading-[120%]">Course Duration - MBBS in Georgia</h3>
                 <p className="pt-[2vw] md:pt-[.5vw] pb-[2vw] md:pb-[2vw]">6 years with 1 year compulsory clinic internship</p>
