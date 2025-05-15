@@ -48,6 +48,5 @@ const data=[{question:'How do I start the admission process?',
     answer:'Yes! Our experts can help you find universities that accept students with lower GPAs and guide you on how to strengthen your application.'},
     {question:'What are the requirements for studying abroad?',
     answer:'Requirements vary by country and university, but generally include academic transcripts, language proficiency scores (IELTS, TOEFL, etc.), SOPs, LORs, and financial proof.'},
-    {question:'Do you provide assistance for education loans and financial aid?',
-        answer:'Absolutely! We help students explore scholarships, grants, and loan options to finance their education.'}
+    
     ]

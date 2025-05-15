@@ -27,11 +27,6 @@ const howEdurizonHelps = [
           "Once you get your admission letter, the next crucial step is obtaining your visa. Edurizon’s experts will guide you through the visa application – we help you fill out the visa form, gather the right documentation, and even conduct mock interview prep if needed. With our experience, we anticipate what the visa officers expect and ensure you are well-prepared. From getting that invitation letter to stamping the visa, we stay with you at every step.​.",
     },
     {
-      title: "Affordable and Transparent Process",
-      description:
-          "We understand that finances are a big concern. Edurizon prides itself on being transparent about all costs. We’ll break down the university fee structure, hostel charges, and other expenses for you. Moreover, our consulting services aim to save you money by preventing costly mistakes (like missing a deadline or choosing the wrong university). We also assist in finding scholarships or education loan options if you need financial support.",
-    },
-    {
       title: "Pre-Departure Orientation",
       description:
           "Heading to a new country can be daunting. That’s why we conduct pre-departure sessions for students. We brief you on what to pack, how to handle immigration on arrival, and currency exchange, and we even give you tips about student life in Russia. We often connect students going to the same university so you can travel in groups and feel more comfortable knowing someone even before you land in Russia.",
