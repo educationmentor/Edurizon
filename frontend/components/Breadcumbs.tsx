@@ -44,6 +44,15 @@ const Breadcrumbs: React.FC = () => {
     "blogs":"Blogs",
     "study-mbbs-in-russia-without-neet":"Study MBBS in Russia without NEET",
     "study-mbbs-in-india":"Study MBBS in India",
+    "nepal-medical-college":"Nepal Medical College",
+    "b&c-medical-college":"B&C Medical College",
+    "birat-medical-college":"Birat Medical College",
+    "chitwan-medical-college":"Chitwan Medical College",
+    "devdaha-medical-college":"Devdaha Medical College",
+    "kathmandu-medical-college":"Kathmandu Medical College",
+    "lumbini-medical-college":"Lumbini Medical College",
+    "nobel-medical-college":"Nobel Medical College",
+    "college-of-medical-science":"College of Medical Science"
   };
 
   return (

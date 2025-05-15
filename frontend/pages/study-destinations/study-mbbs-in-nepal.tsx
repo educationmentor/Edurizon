@@ -6,6 +6,7 @@ import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unListedTableEqualWidth";
+import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
 
 const descriptionData={
@@ -73,6 +74,7 @@ const KUAffiliated = [
     year: 1997,
     fee: "55 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/kathmandu-medical-college"
   },
   {
     id: 2,
@@ -81,6 +83,7 @@ const KUAffiliated = [
     year: 1994,
     fee: "55 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/nepal-medical-college"
   },
   {
     id: 3,
@@ -92,11 +95,12 @@ const KUAffiliated = [
   },
   {
     id: 4,
-    name: "Lumbani Medical College",
+    name: "Lumbini Medical College",
     location: "Palpa, Tansen",
     year: 2006,
     fee: "50 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/lumbini-medical-college"
   },
   {
     id: 5,
@@ -105,6 +109,7 @@ const KUAffiliated = [
     year: 2006,
     fee: "55 L",
     duration: 20,
+    href:"/study-destinations/study-mbbs-in-nepal/devdaha-medical-college"
   },
   {
     id: 6,
@@ -113,6 +118,7 @@ const KUAffiliated = [
     year: 2004,
     fee: "52 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/nobel-medical-college"
   },
   {
     id: 7,
@@ -129,6 +135,7 @@ const KUAffiliated = [
     year: 1994,
     fee: "56 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/college-of-medical-science"
   },
   {
     id: 9,
@@ -137,6 +144,7 @@ const KUAffiliated = [
     year: 2014,
     fee: "52 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/birat-medical-college"
   },
   {
     id: 10,
@@ -145,6 +153,7 @@ const KUAffiliated = [
     year: 2012,
     fee: "",
     duration: "",
+    href:"/study-destinations/study-mbbs-in-nepal/b&c-medical-college"
   },
 ];
 
@@ -156,6 +165,7 @@ const TUAffiliated=[
     year: 2006,
     fee: "57 L with hostel",
     duration: 33,
+     href:"/study-destinations/study-mbbs-in-nepal/chitwan-medical-college"
   },
   {
     id: 2,
@@ -319,7 +329,7 @@ const NewPage=()=>{
             </section>
 
             {/* Benefits of MBBS in Nepal */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row gap-[4vw] md:gap-[1vw] px-[6vw] md:px-[12.5vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw] ">
                 <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">BENEFITS OF MBBS IN NEPAL - MBBS in Nepal for Indian Students</h3>
                 <div>
@@ -341,7 +351,7 @@ const NewPage=()=>{
                     Degree is recognized by National Medical Commission, India, WHO and Sri Lanka Medical Council (SLMC)
                 </p>
                 </div>  
-                <Image src={"/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan3.png"} className="min-w-[35vw] h-auto" width={690} height={690  } alt="georgia3"/>
+                <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="min-w-[32.5vw] h-auto" width={690} height={690  } alt="georgia3"/>
             </div>
 
             {/* Top Universities */}
@@ -380,6 +390,7 @@ const NewPage=()=>{
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Estd. Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Expected Tution Fees</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Seats for foreign Students</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"></td>
                 </thead>
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
 
@@ -389,7 +400,12 @@ const NewPage=()=>{
               {index + 1}.
             </td>
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
-              {college.name}
+              {college.href ? <TransitionLink href={college.href}>
+                {college.name}
+              </TransitionLink>:
+              <>{college.name}</>
+              }
+              
             </td>
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.location}
@@ -403,6 +419,12 @@ const NewPage=()=>{
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.duration}
             </td>
+            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href && <TransitionLink href={college.href}>
+                Know More
+              </TransitionLink>}
+            </td>
+            
           </tr>
         ))}
               
@@ -419,6 +441,8 @@ const NewPage=()=>{
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Estd. Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Expected Tution Fees</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Seats for foreign Students</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"></td>
+
                 </thead>
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
 
@@ -428,7 +452,12 @@ const NewPage=()=>{
               {index + 1}.
             </td>
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
-              {college.name}
+               {college.href ? <TransitionLink href={college.href}>
+                {college.name}
+              </TransitionLink>:
+              <>{college.name}</>
+              }
+              
             </td>
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.location}
@@ -441,6 +470,11 @@ const NewPage=()=>{
             </td>
             <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.duration}
+            </td>
+            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href && <TransitionLink href={college.href}>
+                Know More
+              </TransitionLink>}
             </td>
           </tr>
         ))}
