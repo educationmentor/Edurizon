@@ -70,7 +70,7 @@ const NewPage = () => {
                     <Breadcrumbs/>
                 </div>
                 <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
-                    <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-nepal/Kathmandu-medical-college.png"} alt='college Image' width={650} height={550}/>
+                    <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-nepal/kathmandu-medical-college.png"} alt='college Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                       <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>Kathmandu Medical College</h2>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-[2.25vw]  md:gap-[.75vw] items-center  justify-center">
