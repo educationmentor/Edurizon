@@ -421,7 +421,7 @@ const NewPage = () => {
                     <li>Submission of passport and other documents required.</li>
 
                 </ul>
-              <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text text-left">Required Documents for B & C Medical College</h3>
+              <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text text-left">Required Documents for Nobel Medical College</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] text-left md:text-regularText md:text-justify mb-[4vw] md:mb-[1vw]">
                     <li>10th & 12th mark sheet</li>
                     <li>Aadhaar card/voter ID</li>
@@ -432,7 +432,7 @@ const NewPage = () => {
                     <li>All documents need to be legalized by the Nepali embassy</li>
                 </ul>
                
-              <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text text-left">Other popular College t Medical Science for MBBS in Nepal</h3>
+              <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text text-left">Other popular Colleges for MBBS in Nepal</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] text-left md:text-regularText md:text-justify underline">
                     <li> <TransitionLink href='nepal-medical-college'>Nepal Medical College</TransitionLink></li>
                                        <li><TransitionLink href='kathmandu-medical-college'>Kathmandu Medical College</TransitionLink></li>
