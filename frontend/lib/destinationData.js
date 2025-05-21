@@ -22,26 +22,28 @@ export const destinationData =[
     },  
     
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Australia.webp", title:"Study in Australia", category:"Destination",href:"/study-destinations/study-in-australia",
-      description:"Choose MBBS in Bangladesh for quality medical education with a curriculum similar to India and affordable costs.",
+      description:"Australia is home to some of the best universities in the world. It is also among the most diverse nations across the globe who welcomes a large number of students every year. Studying in Australia is a dream for Indians, which IOES can fulfil with ease.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Ukraine.webp", title:"Study in Ukraine", category:"Destination",href:"/study-destinations/study-mbbs-in-ukraine",
-      description:"Study MBBS in Nepal with an Indian-similar syllabus, affordable fees, and high-quality medical training.",
+      description:"Ukraine is quite popular for studying Mbbs. Indian students in large number move to Ukraine every year. Apart from Indians, foreign students from different countries like Poland, Germany, Georgia, Romania, Belarus and Russia come to the country.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Georgia.webp", title:"Study in Georgia", category:"Destination",href:"/study-destinations/study-mbbs-in-georgia",
-      description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+      description:"Georgia has rapidly become one of the best country for mbbs for indian students, offering world‑class medical education.  In this comprehensive guide, you’ll discover everything you need to know about pursuing MBBS in Georgia —from affordable tuition fees,",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Uzbekistan.webp", title:"Study in Uzbekistan", category:"Destination",href:"/study-destinations/study-mbbs-in-uzbekistan",
-        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+        description:" Uzbekistan is a Central Asian nation and former Soviet republic. It's known for its mosques, mausoleums and other sites linked to the Silk Road, the ancient trade route between China and the Mediterranean. Tashkent is the capital city of Uzbekistan. It’s known for its many museums and its mix of modern and Soviet-era architecture.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Kazakhstan.webp", title:"Study in Kazakhstan", category:"Destination",href:"/study-destinations/study-mbbs-in-kazakhstan",
-        description:"Kazakhstan offers low-cost MBBS programs with globally recognized degrees and modern medical infrastructure.",
+        description:"Kazakhstan is a country in central Asia and the Ninth largest country in the world. The country is bordered with China, Russia, Kyrgyzstan, Turkmenistan and Uzbekistan and a large part of Caspian Sea. Nur sultan is the capital city of Kazakhstan which was moved in 1997 from Almaty. The local language of Kazakhstan is Kazakh but Russian language is also widely used.",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Nepal.webp", title:"Study in Nepal", category:"Destination",href:"/study-destinations/study-mbbs-in-nepal",
-        description:"Secure an MBBS degree in Uzbekistan with English-medium programs and affordable tuition at recognized universities.",
+        description:"Nepal is Federal Democratic Republic and a largest sovereign country which is a landlocked by Central Himalaya in South Asia.  It is located in the Himalayas, has a population of about 29 million and is the 93rd largest Country by area,",
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Bangladesh.webp", title:"Study in Bangladesh", category:"Destination",href:"/study-destinations/study-mbbs-in-bangladesh",
-        description:"Study MBBS in Georgia at top-ranked universities with European education standards and modern facilities.",
-    },{
+        description:"MBBS in Bangladesh is a great option for those who wish to study MBBS from Abroad. Lots of students appear for NEET exam every year, some of them could not get admission in Indian Medical colleges due to various reasons, such students opt to pursue their MBBS from abroad. ",
+    },
+    // MBBS IN RUSSIA
+    {
       image:"/assets/Images/CountryBlogs/studyDestinationCard/KazanFederalUniversity.webp",
       title:"Kazan Federal University",
       category:"University",
@@ -121,6 +123,8 @@ export const destinationData =[
       href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university",
       description:"Want to study at one of Russia’s most respected medical institutions? Ural State Medical University offers a comprehensive medical education with cutting-edge research and clinical training."
     },
+
+    // Blog
     {
       image:"/assets/Images/blogs/mbbs-in-russia-without-neet-2.webp",
       title:"Study MBBS in Russia without NEET",
@@ -128,6 +132,8 @@ export const destinationData =[
       href:"/blogs/study-mbbs-in-russia-without-neet",
       description:"Are you an aspiring medical student who struggled with NEET or worried about not qualifying? Don’t lose hope! Studying MBBS in Russia without NEET is an alternative path many Indian students are exploring. Russian medical universities offer quality education, "
     },
+
+    // MBBS in China
     {
       image:"/assets/Images/CountryBlogs/studyDestinationCard/ZhejiangUniversity.webp",
       title:"Zhejiang University",
@@ -163,6 +169,85 @@ export const destinationData =[
       href:"/study-destinations/study-mbbs-in-china/xinjiang-university",
       description:"It is a national key comprehensive university with students from various ethnic groups. It is one of two in Xinjiang entering the national “211 Project.” On December 30, 2000, the former Xinjiang University and Xinjiang Engineering Institute merged into a new Xinjiang University. "
     },
+
+    // MBBS in Nepal
+    {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/b&c-medical-college.webp",
+    title: "B&C Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/b&c-medical-college",
+    description: "It was established by a social worker and activist Hon’ble Shri Durga Prasai, with Dr. Ram Babu Giri and Ms. Indira Giri, who envisage excellence in international standard medical education, research, and patient care, striving to create a learning environment that inspires future healthcare leaders and contributes to the advancement of medical knowledge and community health in Nepal."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/birat-medical-college.webp",
+    title: "Birat Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/birat-medical-college",
+    description: "The Health Professions Education (HPE) Department at Birat Medical College is dedicated to enhancing the quality of medical education through innovative teaching methodologies, faculty development, and research in medical education. "
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/chitwan-medical-college.webp",
+    title: "Chitwan Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/chitwan-medical-college",
+    description: "Chitwan Medical College (CMC) was established on 20th June 2006. Chitwan Medical College (CMC), a tertiary care hospital, serves the catchment area of Narayani zone and Central Region of Nepal, an area with a rapidly growing population. "
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/college-of-medical-science.webp",
+    title: "College of Medical Sciences",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/college-of-medical-science",
+    description: "College of Medical Science is the first pioneering medical college in Nepal to get letter of Intent. It has enrolled 1st batch of MBBS students in the year 1996. College of Medical Science is the Centre of excellence for providing advanced yet affordable and quality medical education."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/devdaha-medical-college.webp",
+    title: "Devdaha Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/devdaha-medical-college",
+    description: "Devdaha Medical College is a private research institute. Devdaha Medical College is located within the western part of Nepal at Butwal. It was established in the year 2006. "
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/kathmandu-medical-college.webp",
+    title: "Kathmandu Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/kathmandu-medical-college",
+    description: "Kathmandu Medical College has been established in the year 1997, is a private institute which is situated in heart of Kathmandu. Kathmandu Medical College is affiliated with Kathmandu University."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/kist-medical-college.webp",
+    title: "KIST Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/kist-medical-college",
+    description: "KIST Medical College Pvt. Ltd was established in the year 2006. It is located in Mahalaxmi Municipality-1, Imadol, Lalitpur. The College is run by the Board of Directors and its Executive Committee. It has its own full-fledged teaching hospital and a separate dental hospital."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/lumbini-medical-college.webp",
+    title: "Lumbini Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/lumbini-medical-college",
+    description: "Lumbini Medical College (LMC) is located in the district of Palpa, a hilly district about 3OO kms west of Kathmandu, the capital city of Nepal. Lumbini Medical College has been established in the year 2008."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/manipal-college-of-medical-science.webp",
+    title: "Manipal College of Medical Sciences",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/manipal-college-of-medical-science",
+    description: "In the year 1953, he founded India’s first private medical school, Kasturba Medical College, and five years later, Manipal Institute of Technology was formed. Over the next few years, he created 32 institutions till 1978."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/nepal-medical-college.webp",
+    title: "Nepal Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/nepal-medical-college",
+    description: "Nepal Medical College (NMC) is situated at Attarkhel of Jorpati, Gokarneshwar Municipality, in Kathmandu, about 11 km northeast of Kathmandu city. It lies at the foothill of a mound. It has a quiet and tranquil environment, required of a medical college and a teaching hospital. "
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/nobel-medical-college.webp",
+    title: "Nobel Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/nobel-medical-college",
+    description: "Nobel Medical College Teaching Hospital (P) Ltd., MBBS in Nepal, affiliated to Kathmandu University, was established in the year 2004. Nobel Medical College is situated in Biratnagar, Nepal, which is one of the major academic hubs in the eastern part of Nepal."
+  }
   ]
 
   // 

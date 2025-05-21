@@ -92,6 +92,7 @@ const KUAffiliated = [
     year: 1994,
     fee: "$75000",
     duration: 50,
+    href:"/study-destinations/study-mbbs-in-nepal/manipal-college-of-medical-science"
   },
   {
     id: 4,
