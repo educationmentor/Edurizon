@@ -106,8 +106,10 @@ const CTASectionComponent = () => {
               <div id="freeConsultation" className={`${isHidden ? "opacity-0 z-[-10]" : "opacity-100 z-[10]"}  fixed  bottom-[5vh] w-full px-[4vw]  transition-all duration-100  pointer-events-none`} ref={freeConsultationRef}>
                 
                 {/* Chat bot */}
-                <div className={` relative ml-auto flex w-min ${showChatBot ?" md:mx-[-2.5vw] ":" mx-0"} transition-all duration-300 ease-in-out mb-[2vw] md:mb-[.5vw]`}>
-                <div className={`w-[80vw] h-[50vh] md:w-[14.375vw] md:h-[17.375vw] flex flex-col justify-center rounded-[2vw] md:rounded-[.625vw] border-[2px] md:border-[.125vw] border-orangeChosen  bg-linenChosen overflow-hidden transition-all duration-300 ease-in-out ${showChatBot ?"opacity-100 pointer-events-auto":"pointer-events-none opacity-0"}` }>
+                <div className={` relative ml-auto md:ml-auto flex w-min ${showChatBot ?"mx-[0]  md:mx-[-2.5vw] ":"mx-0 md:mx-0"}  transition-all duration-300 ease-in-out mb-[2vw] md:mb-[.5vw]`}>
+                <div className={`w-[80vw] h-[50vh] md:w-[14.375vw] md:h-[17.375vw] flex flex-col justify-center rounded-[2vw] md:rounded-[.625vw] border-[2px] md:border-[.125vw]
+                   border-orangeChosen  bg-linenChosen overflow-hidden transition-all duration-300
+                    ease-in-out ${showChatBot ?"opacity-100 pointer-events-auto":"pointer-events-none opacity-0"}` }>
                 <div className="h-[5vh] md:h-[1.875vw] bg-orangeChosen  flex items-center justify-center">
                   <p className="text-white font-bold text-smallTextPhone md:text-smallText">Ask Us Anything</p>
                 </div>

@@ -59,6 +59,12 @@ const NewPage = () => {
   const callBtnFnc=()=>{
         window.location.href = "tel:+919873381377"
     }
+  const callBtnFnc2=()=>{
+        window.location.href = "tel:+919540994839"
+    }
+  const callBtnFnc3=()=>{
+        window.location.href = "tel:+919873381377"
+    }
     const whatsappBtnFnc=()=>{
         window.open('https://wa.me/919873381377?')
     }
@@ -69,7 +75,7 @@ const NewPage = () => {
                     <Breadcrumbs/>
                 </div>
                 <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
-                    <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-nepal/nobel-medical-college.png"} alt='college Image' width={650} height={550}/>
+                    <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-nepal/kist-medical-college.png"} alt='college Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                       <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>KIST Medical College</h2>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-[2.25vw]  md:gap-[.75vw] items-center  justify-center">
@@ -83,8 +89,11 @@ const NewPage = () => {
                                       </div>
                                     ))}
                                   </div>
-                      <div className='absolute right-0 bottom-[2vw] flex gap-[8px] text-white text-smallTextPhone md:text-regularText font-semibold'>
-                        <button onClick={callBtnFnc} className='bg-orangeChosen md:h-[3vw] w-[10vw] md:rounded-[.675vw] p-[10px]'>+91 98733 81377</button>
+                      <div className='relative mt-[1vw] justify-end  flex gap-[8px] text-white text-smallTextPhone md:text-regularText font-semibold'>
+                        
+                        {/* <button onClick={callBtnFnc} className='bg-orangeChosen md:h-[3vw] w-[10vw] md:rounded-[.675vw] p-[10px]'>+91 98733 81377</button> */}
+                        {/* <button onClick={callBtnFnc} className='bg-orangeChosen md:h-[3vw] w-[10vw] md:rounded-[.675vw] p-[10px]'>+91 95409 94839</button> */}
+                        <button onClick={callBtnFnc} className='bg-orangeChosen md:h-[3vw] w-[10vw] md:rounded-[.675vw] p-[10px]'>+91 99992 22564</button>
                         <button onClick={whatsappBtnFnc} className='bg-orangeChosen md:h-[3vw] w-[12vw] md:rounded-[.675vw] flex items-center justify-center p-[10px] gap-[2vw] md:gap-[.5vw] '><Image src={"/assets/Images/Icons/whatsapp.png"} alt='whatsapp' width={40} height={40} /> +91 98733 81377</button>
                       </div>
                     </div>
@@ -92,14 +101,6 @@ const NewPage = () => {
             </div>
 
        {/* Medical College */}
-            {/* <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
-              <h3 className="text-h5TextPhone leading-[120%]  md:text-h3Text md:text-center text-left mb-[4vw] md:mb-[1vw]">KIST Medical College - Establishment</h3>
-       
-            
-                <p className=" text-smallTextPhone  text-left md:text-regularText md:text-justify">
-                KIST Medical College Pvt. Ltd was established in the year 2006. It is located in Mahalaxmi Municipality-1, Imadol, Lalitpur. The College is run by the Board of Directors and its Executive Committee. It has its own full-fledged teaching hospital and a separate dental hospital. 
-                </p>
-            </section> */}
 
          <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
               <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text  text-left">KIST Medical College – Establishment </h3>

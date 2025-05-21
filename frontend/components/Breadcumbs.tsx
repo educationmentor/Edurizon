@@ -52,7 +52,9 @@ const Breadcrumbs: React.FC = () => {
     "kathmandu-medical-college":"Kathmandu Medical College",
     "lumbini-medical-college":"Lumbini Medical College",
     "nobel-medical-college":"Nobel Medical College",
-    "college-of-medical-science":"College of Medical Science"
+    "college-of-medical-science":"College of Medical Science",
+    "kist-medical-college":"KIST Medical College",
+    "manipal-college-of-medical-science":"Manipal College of Medical Science",
   };
 
   return (

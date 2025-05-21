@@ -182,6 +182,7 @@ const TUAffiliated=[
     year: 2006,
     fee: "55 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/kist-medical-college"
   },
   {
     id: 4,
