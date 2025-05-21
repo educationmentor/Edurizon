@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
-import {
-  LineChart
-} from '@mui/x-charts';
+import {LineChart} from '@mui/x-charts';
 
 const Dashboard = () => {
   const [tab, setTab] = useState('Completed');
