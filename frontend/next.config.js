@@ -3,7 +3,9 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
   },
-  
+  experimental:{
+        esmExternals: 'loose', 
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
