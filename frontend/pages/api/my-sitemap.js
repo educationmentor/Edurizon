@@ -38,6 +38,31 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-mbbs-in-russia/tambov-state-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-russia/ural-state-medical-university', changefreq: 'daily', priority: 0.3 },
+
+        // MBBS In tajikistan
+
+        // MBBS In China
+        { url: '/study-destinations/study-mbbs-in-china/zhejiang-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-china/nanjing-medical-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-china/xiamen-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-china/southeast-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-china/xinjiang-university', changefreq: 'daily', priority: 0.3 },
+        
+        // MBBS In Nepal
+         { url: '/study-destinations/study-mbbs-in-nepal/kathmandu-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/nepal-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/lumbini-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/devdaha-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/nobel-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/chitwan-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/b&c-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/birat-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/college-of-medical-science', changefreq: 'daily', priority: 0.3 },
+
+        // Study in Germany 
+        { url: '/study-destinations/study-in-germany/ausbildung', changefreq: 'daily', priority: 0.3 },
+
+        
     ];
 
     const stream = new SitemapStream({

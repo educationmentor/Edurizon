@@ -331,7 +331,7 @@ const NewPage = () => {
                     <li> <TransitionLink href='nepal-medical-college'>Nepal Medical College</TransitionLink></li>
                     <li><TransitionLink href='kathmandu-medical-college'>Kathmandu Medical College</TransitionLink></li>
                     <li><TransitionLink href='nobel-medical-college'>Nobel Medical College</TransitionLink></li>
-                    <li>KIST Medical College</li>
+                    <li><TransitionLink href='kist-medical-college'>KIST Medical College</TransitionLink></li>
                     <li><TransitionLink href='b&c-college'>B&C Medical College</TransitionLink></li>
                     <li><TransitionLink href='college-of-medical-science'>College of Medical Science</TransitionLink></li>
                     <li><TransitionLink href='lumbini-medical-college'>Lumbini Medical College</TransitionLink></li>

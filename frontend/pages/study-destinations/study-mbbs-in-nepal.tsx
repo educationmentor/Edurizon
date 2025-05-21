@@ -151,8 +151,8 @@ const KUAffiliated = [
     name: "B & C Medical College & Teaching Hospital",
     location: "Jhapa",
     year: 2012,
-    fee: "",
-    duration: "",
+    fee: "52 L",
+    duration: "16",
     href:"/study-destinations/study-mbbs-in-nepal/b&c-medical-college"
   },
 ];
@@ -205,7 +205,7 @@ const TUAffiliated=[
     location: "Pokhra",
     year: 2007,
     fee: "55 L",
-    duration: "",
+    duration: "33",
   },
   {
     id: 7,
@@ -213,7 +213,7 @@ const TUAffiliated=[
     location: "Bhairahawa",
     year: 1971,
     fee: "55 L",
-    duration: "",
+    duration: "33",
   },
 ]
 
@@ -361,23 +361,34 @@ const NewPage=()=>{
               <div className="flex flex-col md:flex-row justify-center gap-[2vw] md:gap-[1.5vw] md:mx-[4vw]  mb-[4vw] md:mb-[2vw]">
                     <div className="md:w-1/5 flex flex-row  gap-[.5vw]">
                         <div className="font-bold">i.</div>
+                    <TransitionLink href="/study-destinations/study-mbbs-in-nepal/kathmandu-medical-college">
+
                         <div className="flex flex-col"><p className="font-bold">Kathmandu Medical College</p></div>
+                        </TransitionLink>
                     </div>
                     <div className="md:w-1/5 flex flex-row  gap-[.5vw]">
                         <div className="font-bold">ii.</div>
-                        <div className="flex flex-col"><p className="font-bold">Nepal Medical College</p></div>
+                         <TransitionLink href="/study-destinations/study-mbbs-in-nepal/nepal-medical-college">
+
+                        <div className="flex flex-col"><p className="font-bold">Nepal Medical College</p>
+                        </div>
+                        </TransitionLink>
                     </div>
                     <div className="md:w-1/5 flex flex-row  gap-[.5vw]">
                         <div className="font-bold">iii.</div>
+                        
                         <div className="flex flex-col"><p className="font-bold">Manipal College & Medical Science</p></div>
                     </div>
                     <div className="md:w-1/5 flex flex-row  gap-[.5vw]">
                         <div className="font-bold">iv.</div>
-                        <div className="flex flex-col"><p className="font-bold">Nobel Medical College</p></div>
+                        <TransitionLink href="/study-destinations/study-mbbs-in-nepal/nobel-medical-college">
+                        <div className="flex flex-col"><p className="font-bold">Nobel Medical College</p></div></TransitionLink>
                     </div>
                     <div className="md:w-1/5 flex flex-row  gap-[.5vw]">
-                        <div className="font-bold">iv.</div>
-                        <div className="flex flex-col"><p className="font-bold">Nepalgunj Medical College</p></div>
+                        <div className="font-bold">v.</div>
+                        <TransitionLink href="/study-destinations/study-mbbs-in-nepal/birat-medical-college">
+                        <div className="flex flex-col"><p className="font-bold">Birat Medical College</p></div>
+                        </TransitionLink>
                     </div>
                 </div>
                     <p className={`border  dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]  text-center font-semibold bg-linenChosen`} >AFFILIATED TO KU</p>
