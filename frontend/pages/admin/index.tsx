@@ -1,93 +1,174 @@
-import React, { useState,useEffect } from "react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { isMobile } from 'react-device-detect';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import axios from 'axios';
+import { baseUrl } from '@/lib/baseUrl';
 
-const Admin = () => {
-
-    const [isMobileView, setIsMobileView] = useState(false);
+const AdminLogin = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Function to check viewport width
-    const checkViewportWidth = () => {
-      setIsMobileView(window.innerWidth < 768);
-    };
+    // Check if already logged in
+    const token = localStorage.getItem('adminToken');
+    const adminData = localStorage.getItem('adminData');
+    if (token && adminData) {
+      const user = JSON.parse(adminData);
+      handleRoleBasedRouting(user.role);
+    }
+  }, [router]);
 
-    // Check width on component mount
-    checkViewportWidth();
+  const handleRoleBasedRouting = (role: string) => {
+    switch (role) {
+      case 'super-admin':
+        router.push('/admin/superadmin');
+        break;
+      case 'counsellor':
+        router.push('/admin/counsellor');
+        break;
+      case 'documentHandler':
+        router.push('/admin/document-handler');
+        break;
+      case 'finance':
+        router.push('/admin/finance');
+        break;
+      case 'digitalMarketing':
+        router.push('/admin/digital-marketing');
+        break;
+      case 'newRecruit':
+        router.push('/admin/new-recruit');
+        break;
+      default:
+        setError('Invalid role. Please contact administrator.');
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminData');
+    }
+  };
 
-    // Add resize event listener
-    window.addEventListener('resize', checkViewportWidth);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    setError(''); // Clear error when user types
+  };
 
-    // Cleanup event listener on unmount
-    return () => window.removeEventListener('resize', checkViewportWidth);
-  }, []);
-  
-    
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-    const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
-    return (
-        <> 
-        <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="max-w-lg w-full flex flex-col   p-8 rounded-lg ">
-          <div className="mb-16">
-          <p className="text-[40px] leading-[32px] font-bold text-center text-adminGreenChosen ">
-            EDURIZON
-          </p>
-          </div>
-          <form>
-          <div className="mb-6">
-            <label className="block text-[16px]  text-adminTextChosen">Username</label>
-            <input
-              type="text"
-              placeholder="username"
-              className="mt-[8px] text-[16px] w-full px-[16px] py-[12px] border border-adminBorderChosen rounded-[8px]  focus:border-adminBorderFocusedChosen focus:outline-none"
-            />
-          </div>
-  
-          <div className="mb-8 relative">
-            <div className="flex justify-between items-center">
-              <label className="block text-[16px] text-adminTextChosen">Password</label>
-              {/* <a href="#" className="text-xs text-adminGreenChosen hover:underline">
-                Forgot Password?
-              </a> */}
-            </div>
-            <div className="relative mt-2">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="password"
-                className="w-full px-[16px] py-[12px] border border-adminBorderChosen rounded-[8px]  focus:border-adminBorderFocusedChosen focus:outline-none pr-10"
-              />
-              <span
-                onClick={togglePasswordVisibility}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </span>
-            </div>
-          </div>
-  
-          <div className="flex items-center mb-4">
-            <input
-              type="checkbox"
-              id="keep-signed-in"
-              className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
-            />
-            <label htmlFor="keep-signed-in" className="ml-2 text-sm text-gray-700">
-              Keep me signed in
-            </label>
-          </div>
-  
-          <button className="w-full bg-teal-500 text-white py-[12px] rounded-[8px] text-[16px] font-semibold hover:bg-teal-600 transition">
-            Login
-          </button>
-          </form>
+    try {
+      const response = await axios.post(`${baseUrl}/api/admin/login`, formData);
+      
+      if (response.data.status === 'success') {
+        const { token, data: { user } } = response.data;
+
+        // Check if account is active
+        if (!user.active) {
+          setError('Your account has been deactivated. Please contact the super admin.');
+          return;
+        }
+
+        // Store token and user data
+        localStorage.setItem('adminToken', token);
+        localStorage.setItem('adminData', JSON.stringify(user));
+
+        // Route based on role
+        handleRoleBasedRouting(user.role);
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'An error occurred during login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Admin Login
+          </h2>
         </div>
-        
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
+              />
+            </div>
+            <div className="mb-4 relative">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                >
+                  {showPassword ? (
+                    <VisibilityOff className="h-5 w-5 text-gray-400" />
+                  ) : (
+                    <Visibility className="h-5 w-5 text-gray-400" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {error && (
+            <div className="text-red-500 text-sm text-center bg-red-50 p-3 rounded-md">
+              {error}
+            </div>
+          )}
+
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ${
+                loading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
+  );
+};
 
-      </>
-    )
-}
-
-export default Admin;
+export default AdminLogin;
