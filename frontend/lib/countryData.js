@@ -56,17 +56,6 @@ const RussiaData={
             "Cities like Kazan and Moscow host thriving Indian student communities, celebrating festivals like Diwali and ...",
         },
         ],
-
-    // countryCostData:{
-    //     countryTuitionFee:"₹21-39 lakhs",
-    //     indiaTuitionFee:"₹90 lakhs-1.5 crore",
-    //     countryHotelFee:"₹3-3.5 lakhs",
-    //     indiaHotelFee:"₹15-20 lakhs",
-    //     countryTotal:"₹24-42.5 lakhs",
-    //     indiaTotal:"₹1.05-1.7 crore",
-    //     description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-
-
         countrySpecificSection3:{
             data:'For Indian students, choosing the right university is critical in ensuring their medical degree is recognized in India as well as abroad. Russia boasts 70+ NMC approved medical colleges in Russia, but only a handful stand out for their academic excellence, infrastructure, and Indian student - friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'
         },
@@ -105,16 +94,82 @@ const RussiaData={
         [["Required Documents"],["Class 10 & 12 Mark Sheets","NEET Scorecard .","Valid Passport","HIV Report"],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
 
-    // whyChoseUniversity:{
-    //     title:"Why Choose These Universities To Study MBBS in Russia?",
-    //     content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
-    //     ["Specializations","> Kazan: Research & AI-driven medical training.","> Bashkir: Cardiology & robotic surgery.","> Orenburg: Rural healthcare & telemedicine."],
-    //     ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
-    //     imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
-    // },
     admissionProcess:{
         title:"Your MBBS Journey to Russia Made Simple",
-    }
+    },
+    videoData:[
+        {
+          id: 1,
+          title: 'Delhi Students Review | Study MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '27K views',
+          time: '1 months ago',
+          duration: '24:45',
+          thumbnail: 'https://img.youtube.com/vi/ufv7rVtxZgI/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=ufv7rVtxZgI',
+        },
+        {
+          id: 2,
+          title: "UP Students Review about MBBS ABROAD",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/by0AhfIJ3JQ/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=by0AhfIJ3JQ',
+        },
+        {
+          id: 3,
+          title: 'Why Edurizon is best MBBS Abroad Consultant ? Bihar Students Review',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/3a6NCxM8F0M/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=3a6NCxM8F0M',
+        },
+        {
+          id: 4,
+          title: "West Bengal Students Review | Study MBBS Abroad",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/q48PbIuHhRU/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=q48PbIuHhRU',
+        },
+        {
+          id: 5,
+          title: 'West Bengal Students Review | Study MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/5Da1bRZzhXE/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=5Da1bRZzhXE',
+        },
+        {
+          id: 6,
+          title: "MBBS Abroad for Indian Students | Haryana Students Share Honest Reviews",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/MiJMbsJ8Efg/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=MiJMbsJ8Efg',
+        },
+        {
+          id: 7,
+          title: 'Assam Students Review MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/3hyKvhTFucg/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=3hyKvhTFucg',
+          
+        },
+      ]
     
     }
 

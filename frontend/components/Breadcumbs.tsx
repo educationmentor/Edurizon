@@ -55,6 +55,9 @@ const Breadcrumbs: React.FC = () => {
     "college-of-medical-science":"College of Medical Science",
     "kist-medical-college":"KIST Medical College",
     "manipal-college-of-medical-science":"Manipal College of Medical Science",
+    "janaki-medical-college":"Janaki Medical College",
+    "national-medical-college":"National Medical College",
+    "nepalgunj-medical-college":"Nepalgunj Medical College",
   };
 
   return (

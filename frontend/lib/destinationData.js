@@ -247,7 +247,29 @@ export const destinationData =[
     category: "University",
     href: "/study-destinations/study-mbbs-in-nepal/nobel-medical-college",
     description: "Nobel Medical College Teaching Hospital (P) Ltd., MBBS in Nepal, affiliated to Kathmandu University, was established in the year 2004. Nobel Medical College is situated in Biratnagar, Nepal, which is one of the major academic hubs in the eastern part of Nepal."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/nepalgunj-medical-college.webp",
+    title: "Nepalgunj Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/nepalgunj-medical-college",
+    description: "Nepalgunj Medical College is located in the thriving city of Nepalgunj, in the Western region of Nepal.In the year 1993, Government of Nepal decided to ensure that medical education and healthcare become accessible and affordable in rural and underdeveloped regions of the nation."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/national-medical-college.webp",
+    title: "National Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/national-medical-college",
+    description: "National Medical College was established in the year 2001, promoted by the \"National Medical College Company Pvt. Ltd.\" under the Chairmanship of Prof.Dr.Jainuddin Ansari, an outstanding surgeon who has earned national and international credentials for the promotion of Medico-Social services."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/janaki-medical-college.webp",
+    title: "Janaki Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/janaki-medical-college",
+    description: "Janaki Medical College was established in the year 2003 with an annual intake of 80 students a year to a Bachelor of Medicine and Bachelor of Surgery program."
   }
+ 
   ]
 
   // 

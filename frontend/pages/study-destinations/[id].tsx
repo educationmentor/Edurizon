@@ -52,6 +52,7 @@ interface NewPageProps {
     countryAdditionalCost:{title:string;
         subTitle:string;
         data:string[][];};
+    videoData:{id:number;title:string;channel:string;views:string;time:string;duration:string;thumbnail:string;link:string}[]
 
    };
 }
@@ -111,7 +112,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
      {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
       <PostArrival/>
-      <RelatedVideos/>
+     {countryData.videoData && <RelatedVideos videoData={countryData.videoData}/>}
     </div>
     </>
   );

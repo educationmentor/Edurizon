@@ -60,6 +60,9 @@ const sitemap= async (req, res) => {
          { url: '/study-destinations/study-mbbs-in-nepal/college-of-medical-science', changefreq: 'daily', priority: 0.3 },
          { url: '/study-destinations/study-mbbs-in-nepal/manipal-college-of-medical-science', changefreq: 'daily', priority: 0.3 },
          { url: '/study-destinations/study-mbbs-in-nepal/kist-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/janaki-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/national-medical-college', changefreq: 'daily', priority: 0.3 },
+         { url: '/study-destinations/study-mbbs-in-nepal/nepalgunj-medical-college', changefreq: 'daily', priority: 0.3 },  
 
         // Study in Germany 
         { url: '/study-destinations/study-in-germany/ausbildung', changefreq: 'daily', priority: 0.3 },

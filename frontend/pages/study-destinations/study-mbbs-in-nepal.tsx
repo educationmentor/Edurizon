@@ -6,6 +6,7 @@ import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unListedTableEqualWidth";
+import RelatedVideos from "@/components/videoSlider";
 import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
 
@@ -128,6 +129,7 @@ const KUAffiliated = [
     year: 2004,
     fee: "55L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/nepalgunj-medical-college"
   },
   {
     id: 8,
@@ -175,6 +177,7 @@ const TUAffiliated=[
     year: 2001,
     fee: "55 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/national-medical-college"
   },
   {
     id: 3,
@@ -192,6 +195,7 @@ const TUAffiliated=[
     year: 1999,
     fee: "44 L",
     duration: 33,
+    href:"/study-destinations/study-mbbs-in-nepal/janaki-medical-college"
   },
   {
     id: 5,
@@ -216,6 +220,49 @@ const TUAffiliated=[
     year: 1971,
     fee: "55 L",
     duration: "33",
+  },
+]
+
+const videoData=[
+  {
+    id: 0,
+    title: 'MBBS in Nepal | Big News is on the way !',
+    channel: 'Edurizon Pvt Ltd',
+    views: '44K views',
+    time: '2 months ago',
+    duration: '18:32',
+    thumbnail: 'https://img.youtube.com/vi/8IcNTCwH78A/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=8IcNTCwH78A',
+  },
+  {
+    id: 1,
+    title: 'B&C Medical College & Teaching Hospital — A budget-friendly medical college in Nepal',
+    channel: 'Edurizon Pvt Ltd',
+    views: '27K views',
+    time: '1 months ago',
+    duration: '24:45',
+    thumbnail: 'https://img.youtube.com/vi/AIjclDHYebc/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=AIjclDHYebc',
+  },
+  {
+    id: 2,
+    title: "Campus Tour of Nepal Medical College, Nepal | Best FMGE Passing Rate",
+    channel: 'Edurizon Pvt Ltd',
+    views: '10M views',
+    time: '3 years ago',
+    duration: '3:03',
+    thumbnail: 'https://img.youtube.com/vi/eYFM_UwdVas/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=eYFM_UwdVas',
+  },
+  {
+    id: 3,
+    title: 'Campus Tour of Birat Medical College | Best Medical College in Nepal | Best FMGE Passing Rate',
+    channel: 'Edurizon Pvt Ltd',
+    views: '44K views',
+    time: '2 months ago',
+    duration: '18:32',
+    thumbnail: 'https://img.youtube.com/vi/rtxMG8rVMpY/maxresdefault.jpg',
+    link: 'https://www.youtube.com/watch?v=rtxMG8rVMpY',
   },
 ]
 
@@ -644,7 +691,7 @@ const NewPage=()=>{
                 </div>  
                 <Image src={"/assets/Images/CountryBlogs/didYouKnow.png"} className="min-w-[25vw] h-auto" width={400} height={400  } alt="georgia3"/>
             </div>
-
+            <RelatedVideos videoData={videoData}/>
         </div>
     )
 }
