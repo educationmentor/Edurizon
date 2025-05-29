@@ -292,7 +292,7 @@ const NewPage=()=>{
                 <tbody>
                   <tr>
                     <th scope="row">Tuition Fees</th>
-                    <td>Rs. 5,46,000 (1 USD = INR 84)</td>
+                    <td>USD 6500 </td>
                   </tr> 
                 </tbody>
               </table>

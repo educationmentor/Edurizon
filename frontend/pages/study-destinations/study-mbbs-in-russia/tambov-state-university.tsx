@@ -6,7 +6,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 3,50,000 / Year",
+      label: "Ruble 3,85,000 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -235,7 +235,7 @@ const NewPage = () => {
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
               <ul className="points-two">
-                <li>Tuition + Hostel + Biometric Fees – 3,50,000 Ruble.</li>
+                <li>Tuition + Hostel + Biometric Fees – 3,85,000 Ruble.</li>
                 <li>Charges for Visa renewal, medical insurance, medical checkup etc. will be nominal and taken separately by the Tambov State University</li>
               </ul>
               <div className="heading">

@@ -31,7 +31,31 @@ const nextConfig = {
         destination:'/study-destinations?category=Destination',
         permanent:true,
       },
-      
+      {
+        source: '/tambov-state-university.php',
+        destination: '/study-destinations/study-mbbs-in-russia/tambov-state-university',
+        permanent: true,
+      },
+      {
+        source: '/northern-state-medical-university.php',
+        destination: '/study-destinations/study-mbbs-in-russia/northern-state-medical-university',
+        permanent: true,
+      },
+      {
+        source: '/mbbs-in-nepal.php',
+        destination: '/study-destinations/study-mbbs-in-nepal',
+        permanent: true,
+      },
+      {
+        source: '/kazan-federal-university.php',
+        destination: '/study-destinations/study-mbbs-in-russia/kazan-federal-university',
+        permanent: true,
+      },
+      {
+        source: '/alexandria-university-faculty-of-medicine.php',
+        destination: '/study-destinations/study-mbbs-in-egypt/alexandria-university-faculty-of-medicine',
+        permanent: true,
+      },
     ];
   },
  

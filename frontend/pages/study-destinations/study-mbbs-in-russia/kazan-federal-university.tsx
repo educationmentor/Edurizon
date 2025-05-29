@@ -10,7 +10,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 5,40,000 / Year",
+      label: "Ruble 5,94,000 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -40,8 +40,8 @@ const feeStructure={
     subTitle:"Kazan Federal University Fees",
     data:[
         ["Expense", "Annual Cost"],
-        ["Tution Fees","5,40,740 Ruble"],
-        ["Hostel Fees","18,000 Ruble"],
+        ["Tution Fees","5,94,000 Ruble"],
+        ["Hostel Fees","24,000 Ruble"],
         ["Miscellaneous","10,000–20,000 Ruble"],
     ]
 }

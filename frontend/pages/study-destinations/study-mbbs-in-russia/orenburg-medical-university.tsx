@@ -10,7 +10,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Dollar 6,200 / Year",
+      label: "USD 6000 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -238,7 +238,7 @@ const OrenburgMedicalUniversity=()=>{
                             <tbody>
                                 <tr>
                                     <th scope="row">Tuition Fees</th>
-                                    <td>$6,200</td>
+                                    <td>USD 6000</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Hostel Fees</th>

@@ -6,7 +6,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 303,700 / Year",
+      label: "Ruble 3,15,700 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -16,7 +16,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
       text: "Country Rank",
-      label: "5Top 100",
+      label: "5th in Russia",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
@@ -340,7 +340,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row" >Immanuel Kant Baltic Federal University Fees</th>
-                                  <td>3,03,700 Ruble per annum	-	2024</td> 
+                                  <td>3,15,700 Ruble per annum	-	2024</td> 
                               </tr>
                               <tr> 
                                 <td>15,000 Ruble per annum	-	2024</td>
@@ -450,7 +450,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
                 <tbody>
                     <tr>
                         <th scope="row">Tuition Fees</th>
-                        <td>3,03,700 Ruble</td>
+                        <td>3,15,700 Ruble</td>
                     </tr>
                     <tr>
                         <th scope="row">Hostel Fees</th>

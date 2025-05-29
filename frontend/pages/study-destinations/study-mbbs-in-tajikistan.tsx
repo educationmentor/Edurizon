@@ -1,31 +1,18 @@
 import Breadcrumbs from "@/components/Breadcumbs";
 import EdurizonProcess from "@/components/studyDestinationComponents/EdurizonProcess";
-import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
+import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
+import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
 import VideoCarousel from "@/components/videoCarousel";
+import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import Image from "next/image";
-const services = [
-  {
-    icon: "/assets/Images/Icons/feesIcon.svg",
-    text: "Tution Fees | Hostel Fees",
-    label: "$4500 | $500",
-  },
-  {
-    icon: "/assets/Images/Icons/TieUpsIcon.svg",
-    text: "City & Province",
-    label: "Dushanbe, Tajikistan",
-  },
-  {
-    icon: "/assets/Images/Icons/ExperienceIcon.svg",
-    text: "QS World Rank - 561",
-    label: "Country Rank - 1 ",
-  },
-  {
-    icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",
-    text: "Amazing Fact",
-    label: "Eurpoean & Central Asian Rank - 36",
-  },
-];
-
+const descriptionData={
+  id:"tajikistan",
+  title1normal:"About Tajikistan",   
+  content:["Tajikistan is a country located in Central Asia, bordered by Afghanistan, China, Kyrgyzstan, and Uzbekistan.","Tajikistan is known for rugged mountains due to which popular for hiking and climbing", "The Fann Mountains, near the national capital Dushanbe, have snow-capped peaks that rise over 5,000 meters.", "The range encompasses the Iskanderkulsky Nature Refuge, a notable bird habitat named for Iskanderkul, a turquoise lake formed by glaciers", "The Tajik people came under Russian rule in the 1860s.", "In 1924, Tajikistan became an Autonomous Soviet Socialist Republic of the Soviet Union, the Tajik ASSR, within Uzbekistan.", "In 1929, Tajikistan was made one of the component republics of the Soviet Union – Tajik Soviet Socialist Republic (Tajik SSR) – and it kept that status until gaining independence in 1991 after the dissolution of the Soviet Union."],
+  content2:"",
+  imageAlt:"Tajikistan",
+  imageURL:"/assets/Images/mbbs-in-tajikistan/Tajikistan1.png"
+}
 
 const videoData = [
   {
@@ -58,6 +45,90 @@ const videoData = [
   },
 ];
 
+const reasonToStudyData={
+  id:"tajikistan",
+  title:"Why Study MBBS in Tajikistan? (Key Benefits) ",
+  content:[
+    {
+      title: "No Capitation Fees",
+      description: "Tajikistan's medical universities do not charge any donation or capitation fees, making it a transparent and affordable option for aspiring doctors."
+    },
+    {
+      title: "Affordable Tuition Fees",
+      description: "Total tuition fees for MBBS in Tajikistan range between ₹21 to ₹27 lakh, making it one of the most cost-effective destinations to study medicine abroad."
+    },
+    {
+      title: "Low Cost of Living",
+      description: "Along with affordable tuition, the overall cost of living in Tajikistan is low, significantly reducing the financial burden on international students."
+    },
+    {
+      title: "Indian Mess Available",
+      description: "Indian mess facilities are available in most universities, ensuring students have access to familiar and hygienic meals."
+    },
+    {
+      title: "Recognized by WHO & NMC",
+      description: "All medical universities in Tajikistan are recognized by global bodies like WHO and NMC, making graduates eligible to practice in India and other countries."
+    },
+    {
+      title: "Modern Infrastructure & Clinical Exposure",
+      description: "Universities in Tajikistan offer state-of-the-art infrastructure and excellent clinical exposure, preparing students for real-world medical practice."
+    },
+    {
+      title: "Comprehensive Curriculum",
+      description: "The MBBS curriculum in Tajikistan focuses on both theoretical and clinical education, providing a strong foundation for medical careers."
+    },
+    {
+      title: "5+1 Year Program",
+      description: "The MBBS program in Tajikistan typically lasts five years, followed by a one-year mandatory internship for hands-on experience."
+    },
+    {
+      title: "Research Opportunities",
+      description: "Students are encouraged to engage in research and have access to modern labs and clinical facilities to help them excel in their field."
+    }
+  ]
+  ,
+  darkImg:["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark","2Dark","4Dark","3Dark"],
+  lightImg:["1","2","3","4","5","6","2","4","3"],
+}
+
+const eligibilityData = {
+  id: "tajikistan",
+  section2: "",
+  content: {
+      title: "Eligibility Criteria",
+      subTitle: "Eligibility Criteria for MBBS in Khatlon State Medical University for Indian students",
+      data: [["Criteria", "Details"],
+      ["Age Requirement", "17 years of age as on 31st December in the admission year"],
+      ["Academic Requirements", "Passed 12th standard with at least 50% in Physics, Chemistry and Biology"],
+      ["NEET Requirements", "Must qualify NEET exam"]]
+  }
+}
+
+
+
+const universitiesData = [
+  {
+    id: 1,
+    name: "Tajik National University",
+    location: "Dushanbe",
+    year: 1948,
+    fee: "$4500 | $500",
+    duration: "5+1 years",
+    recognition: "WHO, NMC",
+    href: "/study-destinations/study-mbbs-in-tajikistan/tajik-national-university"
+  },
+  {
+    id: 2,
+    name: "Khatlon State Medical University",
+    location: "Danghara",
+    year: 2009,
+    fee: "$4000 | $500",
+    duration: "5+1 years",
+    recognition: "WHO, NMC",
+    href: "/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university"
+  }
+];
+
 const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText">
@@ -65,205 +136,222 @@ const NewPage=()=>{
                 <div className="flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                 <div className="flex flex-col items-center gap-[4vw] md:gap-[1vw]">
                     <Breadcrumbs/>
-                    <h1 className="text-h4TextPhone text-center   font-bold leading-[120%] md:text-h1Text">Tajik National University, Tajikistan</h1>
+                    <h1 className="text-h4TextPhone text-center   font-bold leading-[120%] md:text-h1Text">MBBS in Tajikistan</h1>
                 </div>
                 <p className="text-smallTextPhone text-left md:text-regularText md:text-center">
-                Tajik National University, TNU was established by the Resolution of Soviet of Ministries of the USSR on 21st March 1947. Tajik National University started its functioning from 1st September 1848 in Dushanbe.</p>
+                MBBS in Tajikistan is an affordable and globally recognized option for medical education, especially for international students. With English-taught programs, modern infrastructure, and WHO and NMC-recognized universities, Tajikistan offers quality medical training. Its simple admission process and low tuition fees make it an attractive destination for aspiring doctors.
+                </p>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] justify-center">
-                  {services.map((item, index) => (
-                    <div key={index} className="w-[37.5vw] md:w-[16.5vw] h-[29.25vw] md:h-[12.875vw] relative shadow-[0px_.25vw_2.46875vw_rgba(0,_0,_0,_0.25)] dark:shadow-[0px_.25vw_2.46vw_rgba(255,_255,_255,_0.25)] 
-                                rounded-[3.75vw] md:rounded-[1.875vw] bg-white overflow-hidden shrink-0 flex flex-col items-center justify-start py-[3vw] 
-                                md:py-[1.5vw] px-[3.875vw] md:px-[1.937vw] box-border gap-[1vw] text-center text-regularText text-black">
-                      <Image src={item.icon}
-                        alt={item.label} width={64} height={64} className="w-[8.5vw] h-[8.5vw] md:w-[4.25vw] md:h-[4.25vw] relative  overflow-hidden shrink-0" />
-                      <p className="text-tinyTextPhone md:text-regularText text-center leading-[150%]"> {item.text} <br /><span className="font-semibold"> {item.label}</span></p>
-                    </div>
-                  ))}
-                </div>
+                
             </div>
-            <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan1.png" alt="Tajikistan" width={1920} height={1080} className="w-full h-auto"/>
+            <DescriptionComponent id={descriptionData.id} title1normal={descriptionData.title1normal}  
+            content1={descriptionData.content} imageAlt={descriptionData.imageAlt} imageSrc={descriptionData.imageURL} />
 
-            {/* Mbbs from Tajik national University */}
-            <section className="mx-[6vw] md:mx-[12.5vw] py-[10vw] md:py-[4vw]">
-              <h3 className="text-h5TextPhone leading-[120%] mb-[4vw] md:mb-[1vw] text-center md:text-h3Text">MBBS From Tajik National University</h3>
-              <p className="text-smallTextPhone text-left md:text-regularText md:text-justify">
-              Tajik National University, TNU was established by the Resolution of Soviet of Ministries of the USSR on 21st March 1947. Tajik National University started its functioning from 1st September 1848 in Dushanbe. Tajik National University is one of a leading centre in training qualified specialists for the different spheres of the national economy of the country.
-The State University of Tajikistan named after V.I. Lenin from 1957 was renamed into State University of Tajikistan in 1992 and subsequently Tajik State National University in the year 1997.
-Tajik National University is the first and largest university in Tajikistan. It enrolls 23,000 students per year in 18 different academic disciplines.
-              </p>
-            </section>
-
+           
            {/* Dubane */}
            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] pt-[5vw] md:pt-[2vw] flex md:flex-row flex-col-reverse items-center gap-[6vw] md:gap-[5vw] "> 
-                  <div className="flex flex-col gap-[3vw] md:gap-[1.5vw] w-full md:w-[37.5vw] flex-shrink-0 ">
+                  <div className="flex flex-col gap-[3vw] md:gap-[1.5vw] flex-shrink-0 ">
                     <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text">DUSHANBE CITY</h3>
-                    <p className="text-smallTextPhone text-left md:text-regularText md:text-justify">Dushanbe is the capital of Tajikistan which is situated on the Varzob River. Rudaki Park which is named after a classical poet is situated on the east bank of the river.</p>
-                    <h4 className="text-h6TextPhone leading-[120%] md:text-h4Text">Tajik National University main campus</h4>
-                    <p className="text-smallTextPhone text-left md:text-regularText md:text-justify">The head office of Tajik National university, TNU is located in Dushanbe city which is also capital of Tajikistan. The campus of TNU is spread over in 500 acres.</p>
-                    <h4 className="text-h6TextPhone leading-[120%] md:text-h4Text">Tajik National University - History</h4>
-                    <p className="text-smallTextPhone text-left md:text-regularText md:text-justify">TNU was formed on 21 March 1947. In the year 2009, a high school and Mathematics discipline were established at the university.</p>
+                    <p className="text-smallTextPhone text-left md:text-regularText md:text-justify">Dushanbe is the capital of Tajikistan which is situated on the Varzob River. Rudaki Park which is named after a classical poet is situated on the east bank of the river.  </p>
                   </div>
-                  <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan2.png" alt="Tajikistan" width={1920} height={1080} className="w-full  h-auto rounded-[4vw] md:rounded-[1vw]"/>
            </section>
-           {/* Tajik National University Facilities */}
+         
+           
+            {/* Reasons to Study */}
+            {<ReasonsToStudy id={reasonToStudyData.id} title1={reasonToStudyData.title}  content={reasonToStudyData.content} darkImg={reasonToStudyData.darkImg} lightImg={reasonToStudyData.lightImg} />}
 
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Facilities</h3>
-                  <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] ">Tajik National University, TNU encompasses publishing, a research library, a botanical garden, a hostel, 114 departments (107 special departments) and a military chair and high school.
-                  </p>
-                  <ul className="list-disc pl-[4vw] md:pl-[1.5vw] list-outside text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">
-                    <li>TNU has 198 doctors, professors and 632 candidates of sciences.</li>
-                    <li>TNU has 8 dissertation councils and 26 Academic departments.</li>
-                    <li>TNU has scientific library with 945000 copies of scientific, educational, fiction and periodicals.</li>
-                    <li>TNU Research Institutes offers 110 research laboratories, electronic library with access to more than 12 million digital online sources, bio-technology Centre, Techno Park, Center for Language Studies, Cultural Education Center “Confucius”, Center of periodicals, printing and translation center. It emphasizes “Russian world”, and the cultural centers of Iran and Pakistan.</li>
-                  </ul>
-           </section>
+            {/* Cultural Insights and Geographical Overview */}
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+                <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">Cultural Insights and Geographical Overview</h3>
+                <div className="text-smallTextPhone md:text-regularText text-justify space-y-[2vw] md:space-y-[1vw]">
+                    <p>Tajikistan, located in Central Asia, offers a unique cultural blend with influences from Persian, Russian, and Central Asian traditions. Its capital, Dushanbe, is home to many educational institutions, including medical universities.</p>
+                    <p>Known for its scenic landscapes and hospitable environment, Tajikistan attracts international students, including a large number from India. The republic of Tajikistan provides students with a safe environment, making it a preferred choice for Indian students moving to Tajikistan to study MBBS.</p>
+                    <p>With English as one of the mediums of instruction, Tajikistan fosters multicultural interactions. Students also benefit from exploring the rich history and traditions while undergoing MBBS course. Comfortable lifestyle, affordable living costs, and easy access to local amenities add to the appeal for students choosing to study MBBS in Tajikistan.</p>
+                </div>
+            </section>
 
-           {/* Tajik National University Notable Alumini */}
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Notable Alumini</h3>
-                  <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] ">Tajik National University, TNU, prepares extensive human resources for the economy of Tajikistan, from journalists to finance professionals and managers.
-                  President <a href="https://en.wikipedia.org/wiki/Emomali_Rahmon" className="underline">Emomali Rahmon</a> and the former chairman of the <a href="https://en.wikipedia.org/wiki/National_Bank_of_Tajikistan" className="underline">National Bank of Tajikistan</a> Murodali Alimardon are alumni of Tajik National University, TNU.
-                  </p>
-           </section>
+            {/* License to Practice */}
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+                <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">License to Practice</h3>
+                <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw] space-y-[1vw] md:space-y-[0.5vw]">
+                    <li>As per NMC Gazette 2021, students need to take licence from that particular country from which she/he has done his/her MBBS.</li>
+                    <li>Tajikistan is following all the guidelines as laid down in the Gazette.</li>
+                    <li>Tajikistan is also giving licence to practice to Indian students</li>
+                    <li>No licencing exam in Tajikistan for MBBS</li>
+                    <li>In order to practice in India, post MBBS, students shall also have to undergo through a MCI exam called FMGE.</li>
+                    <li>FMGE is held twice a year.</li>
+                    <li>FMGE exam is of 300 marks with objective type which is to be conducted online and students need to get only 150 to qualify.</li>
+                </ul>
+            </section>
 
-            {/* Tajik National University Facts */}
-            <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between ">
-              <div className="md:w-[37.5vw] flex-shrink-0">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University - Key Facts</h3>
-                  <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li><strong>Type</strong> - National University like AIIMS in India</li>
-                    <li><strong>Established</strong> - 21st March, 1947</li>
-                    <li>One of the reputed and old University</li>
-                    <li><strong>Academic Staff</strong> - 1299</li>
-                    <li><strong>Students</strong> - 22,661</li>
-                    <li>Medium of instruction English</li>
-                    <li>Country ranking 01</li>
-                    <li><strong>QS Emerging</strong> - 241-250(Europe & Central Asia)</li>
-                    <li><strong>QS World Rank</strong> - 561</li>
-                    <li><strong>Europe & Asian University ranking</strong> - 36</li>
-                    <li><strong>FMGE Passing Ratio</strong> - 50%</li>
-                    <li>No Licensing exam</li>
-                    <li>Direct admission</li>
-                    <li>NEET/FMGE coaching from 1st year</li>
-                    <li><strong>Travel time from India</strong> - 03 hours.</li>
-                    <li>Direct Flight from Delhi to Dushanbe.</li>
-                    <li>128 research labs</li>
-                    <li>Campus TNU is spread over 500 acres</li>
-                    <li>Indian teacher and Indian syllabus</li>
-                    <li>Indian Food</li>
-                    <li><strong>Weather</strong> - Same like India.</li>
-                    <li><strong>Currency</strong> - Somoni</li>
-                    <li><strong>Website</strong> - <a className="cursor-pointer underline" href="http://www.tnu.tj/">www.tnu.tj</a></li>
-                    <li><a className="cursor-pointer underline"  href="/assets/pdf/Information-For-Students-Seeking-Admission-In-Tajik-National-University.pdf"><strong>Tajikistan fulfilling all criteria as laid down by NMC</strong></a>(Click Here to Know More)</li>
-                    <li><strong>Scholarship</strong> - Scholarship is granted at entry level also to those students who have 450+ NEET score and 70% & above marks in 12th standard</li>
-                  </ul>
-              </div>
+            {/* Living and Accommodation */}
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+                <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">Living and Accommodation in Tajikistan</h3>
+                
+                <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Cost of Living</h4>
+                <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[2vw]">
+                    <li>Cost of living in Tajikistan is like India.</li>
+                    <li>Students can manage their living cost easily like India.</li>
+                    <li>Food is available at 100-120 USD per month.</li>
+                </ul>
 
-              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan3.png" alt="Tajikistan" width={530} height={630} className="hidden md:block w-[32.5vw] ml-auto h-[39.375vw]"/>
-           </section>
+                <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Hostel Facilities</h4>
+                <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw]">
+                    <li>All universities in Tajikistan are providing proper accommodation with all basic necessary facilities.</li>
+                    <li>Separate arrangements for boys and girls.</li>
+                    <li>Proper security arrangements, reception, laundry, cleaning and washing personnel & reading rooms.</li>
+                    <li>Unauthorized persons are not allowed inside the hostels.</li>
+                    <li>All hostels are well furnished.</li>
+                </ul>
+            </section>
 
-           {/* MBBS in Indian Student */}
-           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">MBBS in Tajik Natinonal University for Indian Student</h3>
-                  <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] mb-[2vw] md:mb-[.5vw]">The cost of studying MBBS in TNU, Tajikistan is affordable just like India. TNU is highly popular among Indian students due to following main reasons:-</p>
-                  <div className="flex flex-col md:flex-row gap-[3vw] md:gap-[1.5vw]  ">
-                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:w-[37.5vw] flex-shrink-0 md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li>Limited seats thereby offered quality education</li>
-                    <li>Affordable & reasonable fees& other expenses</li>
-                    <li>Best practical exposure.</li>
-                    <li>Provided real cadaver from the very first year.</li>
-                    <li>Biggest hospital</li>
-                    <li>Safe & secure place to study</li>
-                    <li>Indian Food</li>
-                    <li>NExT coaching facility</li>
-                  </ul>
-                  <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] w-full md:w-[37.5vw] flex-shrink-0  list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li>Indian professor.</li>
-                    <li>Indian author books.</li>
-                    <li>Strict vigilance and 24x7 monitoring.</li>
-                    <li>Drinking & smoking is completely prohibited in the city</li>
-                    <li>Located nearby India</li>
-                    <li>Similar weather like India</li>
-                    <li>English is the medium of instruction which breaks the barriers of communication for international students including Indian students.</li>
-                  </ul>
+            {/* Academic Environment */}
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+                <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">Academic Environment</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[4vw] md:gap-[2vw]">
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Class Strength</h4>
+                        <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw]">
+                            <li>The strength of the batch is between 12-15 students.</li>
+                            <li>Every student gets the individual attention of the teachers.</li>
+                        </ul>
+                    </div>
 
-                  </div>
-                  
-           </section>
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Infrastructure</h4>
+                        <p className="text-smallTextPhone md:text-regularText">All the Universities in Tajikistan have a world-class structure with ultra-modern gadgets in all hospitals.</p>
+                    </div>
 
-           {/*NMC approved Medical College in Tajikistan  */}
-           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] justify-between items-center gap-[2vw] flex flex-col md:flex-row">
-            <div className="md:w-[37.5vw] flex-shrink-0 ">
-              <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">NMC approved medical colleges in Tajikistan</h3>
-              <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                <li>MBBS of Tajikistan is valid in India after passing FMGE/NExT conducted by National Board of Education (NBE).</li>
-                <li>For Indian foreign medical graduates, the FMGE is conducted twice a year.</li>
-                <li>Tajik National University is recognized by NMC, WHO, FAIMER, ECFMG, WFME and UNESCO.</li>
-                <li>This recognition is very crucial for Indian students who wish to pursue their medical education from TNU and thereafter wish to practice medicine in India upon their return.</li>
-                <li>TNU is recognized by several international educational bodies and organizations, ensuring that its degrees are acknowledged globally.</li>
-                <li>TNU has established partnerships with numerous institutions worldwide, promoting academic exchange and research collaboration.</li>
-                <li>The medical faculty of TNU is listed in the World Health Organization's (WHO) World Directory of Medical Schools.</li>
-                <li>Being in the WHO directory also signifies adherence to global standards in medical education.</li>
-              </ul>
-            </div>
-            <div>
-              <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan4.jpg" alt="Tajikistan" width={600} height={500} className="mx-auto md:w-[20vw] h-auto rounded-[4vw] md:rounded-[1vw] "/>                  
-              <h3 className="text-smallTextPhone leading-[120%] md:text-regularText mt-[3vw] md:mt-[1.5vw] text-center ">Our Director with Head of Anatomy Department of Tajik National University</h3>
-            </div>
-           </section>
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">International Exposure</h4>
+                        <p className="text-smallTextPhone md:text-regularText">Students get international exposure which help them greatly. Tajikistan provides opportunities for medical students to get exposed to large patient inflow.</p>
+                    </div>
 
-            {/*TNU hostel  */}
-            <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Tajik National University Hostel</h3>
-                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li>Tajik National University's residence halls are a collection of contemporary student campuses. They have access to all they need for a comfortable stay, independent study and scientific work, leisure, athletics, and involvement in university culture.</li>
-                    <li>Each campus has comfortable rooms and necessary living facilities such as dining rooms, housekeeping complexes, recreation areas, libraries, sports grounds, gyms.</li>
-                    <li>Separate girls and boys hostel.</li>
-                    <li>4 sharing hostels are available for all students with all basic amenities</li>
-                    <li>Constantly Indian pupils will be looked after by Indian wardens.</li>
-                    <li>Indian foods are also available for Indian students</li>
-                    <li>CCTV cameras are available all around inside the hostels</li>
-                    <li>It is strictly forbidden to smoke and drink, and smoke detectors are placed in strategic locations.</li>
-                  </ul>                  
-           </section>
-           {/*Research Opportunity  */}
-           <section className=" mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[vw] justify-between ">
-                  <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Research Opportunity in Tajik National University</h3>
-                  <ul className="text-smallTextPhone text-left md:text-regularText w-full md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">                
-                    <li>TNU always prioritizes innovation and research, which motivates students to work on scientific research projects.</li>
-                    <li>TNU boasts a large number of research centers and laboratories with state-of-the-art equipment.</li>
-                    <li>Faculty members and Indian students could work together on research projects, advancing their academic and professional development.</li>
-                  </ul>
-           </section>
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Safety and Security</h4>
+                        <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw]">
+                            <li>Safety and security are top priority for both students and parents.</li>
+                            <li>Universities of Tajikistan offer safe and comfortable boarding options under CCTV surveillance.</li>
+                            <li>Availability of hostel wardens in the premises.</li>
+                            <li>Students also get a chance to enjoy Indian food at the self-cooking facility available on the university premises.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-           {/* Tajik National University Facts */}
+            {/* Program Details */}
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+                <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">Top Medical Universities in Tajikistan</h3>
+                
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
+                        <thead className="text-smallTextPhone md:text-regularText text-center font-bold align-top bg-linenChosen">
+                            <tr>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">University Name</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Location</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Established</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Total Fee | Hostel Fees</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Duration</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Recognition</th>
+                                <th className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Know More</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-smallTextPhone md:text-regularText align-top">
+                            {universitiesData.map((university) => (
+                                <tr key={university.id}>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+                                        <a href={university.href}>
+                                            {university.name}
+                                        </a>
+                                    </td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.location}</td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.year}</td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.fee}</td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.duration}</td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.recognition}</td>
+                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+                                        <a href={university.href}>
+                                            Know More
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[4vw] md:gap-[2vw] mt-[4vw]">
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Program Cost</h4>
+                        <p className="text-smallTextPhone md:text-regularText">Minimum Fees/hostel – 26 lakh onwards</p>
+                    </div>
+
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Medium of Instruction</h4>
+                        <p className="text-smallTextPhone md:text-regularText">English is the medium of instruction for MBBS course for international students in Tajikistan.</p>
+                    </div>
+
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Program Duration</h4>
+                        <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw]">
+                            <li>Tajikistan has 5 years MBBS programme and one-year separate internship.</li>
+                            <li>The programme of MBBS designed as 5 + 1 basis.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Admission Process</h4>
+                        <ul className="text-smallTextPhone md:text-regularText list-disc ml-[3vw] md:ml-[1.5vw]">
+                            <li>No entrance test for MBBS admission in Tajikistan</li>
+                            <li>Admissions are taken on first-cum-first-serve basis.</li>
+                            <li>Tajikistan universities have the best & easy selection process.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Travel Information</h4>
+                        <p className="text-smallTextPhone md:text-regularText">3 hour air journey from India to Dushanbe, capital of Tajikistan</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Eligibility Criteria */}
+            <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
+
+           {/* Admission Process */}
            <section className="flex flex-col md:flex-row mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw] pt-[5vw] md:pt-[0vw] gap-[8vw] md:gap-0 justify-between ">
               <div className="md:w-[36vw] flex-shrink-0">
                     <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Step by Step Complete Admission Process</h3>
                     <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
-                    <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                      <li>Submission of documents </li>
-                      <li>Within one week, University issues admission letter.</li>
-                      <li>Upon receipt of admission letter, student need to deposit $1000 (part of fees) to confirm their seat.</li>
-                      <li>Once $1000 is received, university issues invitation/telex in the name of students</li>
-                      <li>E-visa to be applied </li>
-                      <li>Remaining fees of 1st part to be paid </li>
-                      <li>Air ticket to be booked  </li>
-                      <li>Departure to be planned  </li>
-                    </ul>
+                    <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] text-left md:text-regularText md:text-justify">
+                    <li>Submission of documents:
+                        <ul className="list-disc ml-[3vw]">
+                            <li>10/12 marksheet</li>
+                            <li>Valid passport/adhaar card</li>
+                            <li>NEET score card</li>
+                            <li>1 passport size photograph</li>
+                        </ul>
+                    </li>
+                    <li>Within one week, University issues admission letter</li>
+                    <li>Upon receipt of admission letter, student need to deposit $1000 (part of fees) to confirm their seat</li>
+                    <li>Once $1000 is received, university issues invitation/telex in the name of students</li>
+                    <li>E-visa to be applied</li>
+                    <li>Remaining fees of 1st part to be paid</li>
+                    <li>Air ticket to be booked</li>
+                    <li>Departure to be planned</li>
+                </ul>
               </div>
               
               <div className="md:w-[36vw] flex-shrink-0">
                   <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[3vw] md:mb-[1.5vw]">Documents Required for Tajik Natinonal University</h3>
                   <p className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%]">Following Documents are required for admission in Tajik National University.</p>
                   <ul className="text-smallTextPhone text-left md:text-regularText md:text-justify leading-[150%] list-disc pl-[4vw] md:pl-[1.5vw] list-outside">
-                    <li>10th & 12th Mark Sheets (Must Passed 12th with at least 50% in Physics, Chemistry and Biology).</li>
+                    <li>10th & 12th Mark Sheets.</li>
                     <li>Valid Indian Passport.</li>
                     <li>Passport Size Photos.</li>
                     <li>NEET Score Card (Must Qualify NEET).</li>
-                    <li>1 Passport Size Photograph</li>
+                    <li>Transfer and migration certificate.</li>
                   </ul>
               </div>
            </section>

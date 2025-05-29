@@ -6,7 +6,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 330,000 / Year",
+      label: "Ruble 3,19,000 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -213,7 +213,7 @@ const NewPage = () => {
                           <tbody>
                               <tr>
                                   <th scope="row">Tuition Fees</th>
-                                  <td>3,30,000 Ruble</td>
+                                  <td>3,19,000 Ruble</td>
                               </tr>
                               <tr>
                                   <th scope="row">Hostel Fees</th>

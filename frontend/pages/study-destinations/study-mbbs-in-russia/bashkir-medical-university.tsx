@@ -40,8 +40,8 @@ const feeStructure={
     subTitle:"Kazan Federal University Fees",
     data:[
         ["Expense", "Annual Cost"],
-        ["Tution Fees","4,90,080 Ruble"],
-        ["Hostel Fees","14,000 Ruble"],
+        ["Tution Fees","3,70,080 Ruble"],
+        ["Hostel Fees","36,000 Ruble"],
     ]
 }
 
@@ -52,7 +52,7 @@ const facts={
         [],
         ["Established In","1909"],
         ["Recognition","NMC, WHO, ECFMG (USMLE), GMC (PLAB), AMEE"],
-        ["Fees","2,82,080 per year"],
+        ["Fees","3,70,080 per year"],
         ["Medium of Teaching","1Fully English"],
         ["Course Duration","6 Years"],
         ["Indian students","Yes"],
@@ -324,7 +324,7 @@ const BashkirMedicalUniversity=()=>{
                                 </tr>
                                 <tr>
                                     <th scope="row">Fees</th>
-                                    <td>Ruble 2,82,000 per year</td>
+                                    <td>Ruble 3,70,080 per year</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Medium of Teaching</th>
@@ -383,11 +383,11 @@ const BashkirMedicalUniversity=()=>{
                             <tbody>
                                 <tr>
                                     <th scope="row">Tuition Fees</th>
-                                    <td>4,90,080</td> 
+                                    <td>3,70,080</td> 
                                 </tr>
                                 <tr>
                                     <th scope="row">Hostel Fees</th>
-                                    <td> 14,000</td> 
+                                    <td> 36,000</td> 
                                 </tr> 
                             </tbody>
                         </table>

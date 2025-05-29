@@ -52,43 +52,11 @@ const services = [
     },
   ];
 
-  const videoData=[
-    {
-      id: 1,
-      title: 'Delhi Students Review | Study MBBS Abroad',
-      channel: 'Edurizon Pvt Ltd',
-      views: '27K views',
-      time: '1 months ago',
-      duration: '24:45',
-      thumbnail: 'https://img.youtube.com/vi/ufv7rVtxZgI/maxresdefault.jpg',
-      link: 'https://www.youtube.com/watch?v=ufv7rVtxZgI',
-    },
-    {
-      id: 2,
-      title: "UP Students Review about MBBS ABROAD",
-      channel: 'Edurizon Pvt Ltd',
-      views: '10M views',
-      time: '3 years ago',
-      duration: '3:03',
-      thumbnail: 'https://img.youtube.com/vi/by0AhfIJ3JQ/maxresdefault.jpg',
-      link: 'https://www.youtube.com/watch?v=by0AhfIJ3JQ',
-    },
-    {
-      id: 3,
-      title: 'Why Edurizon is best MBBS Abroad Consultant ? Bihar Students Review',
-      channel: 'Edurizon Pvt Ltd',
-      views: '44K views',
-      time: '2 months ago',
-      duration: '18:32',
-      thumbnail: 'https://img.youtube.com/vi/3a6NCxM8F0M/maxresdefault.jpg',
-      link: 'https://www.youtube.com/watch?v=3a6NCxM8F0M',
-    },
-  ]
+  
 
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
 import { TransitionLink } from '@/utils/TransitionLink';
-import RelatedVideos from '@/components/videoSlider';
 
 const NewPage = () => {
   const callBtnFnc=()=>{
@@ -367,7 +335,6 @@ const NewPage = () => {
                 </ul>  
             </section>
 
-            <RelatedVideos videoData={videoData}/>
 
     </div>
   )

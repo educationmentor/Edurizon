@@ -25,6 +25,7 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-mbbs-in-ukraine', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-uzbekistan', changefreq: 'daily', priority: 0.3 },
         
+        
         //MBBS in russia universities
         { url: '/study-destinations/study-mbbs-in-russia/bashkir-medical-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university', changefreq: 'daily', priority: 0.3 },
@@ -66,6 +67,12 @@ const sitemap= async (req, res) => {
 
         // Study in Germany 
         { url: '/study-destinations/study-in-germany/ausbildung', changefreq: 'daily', priority: 0.3 },
+
+        // Study in Tajikistan
+        { url: '/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-tajikistan/tajik-national-university', changefreq: 'daily', priority: 0.3 },  
+
+        
 
         
     ];
