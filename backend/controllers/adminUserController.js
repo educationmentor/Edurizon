@@ -1,9 +1,23 @@
-const { AdminUser } = require('../models/AdminUser');
+const { AdminUser, ROLES } = require('../models/AdminUser');
 
 // Get all admin users
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await AdminUser.find()
+    const { role } = req.query;
+    
+    // Build query object
+    const query = {};
+    if (role) {
+      // Use the exact role from the ROLES enum
+      const normalizedRole = role.toLowerCase();
+      if (normalizedRole === 'counsellor' || normalizedRole === 'counselor') {
+        query.role = { $in: [ROLES.COUNSELLOR, ROLES.SUPER_ADMIN] };  
+      } else {
+        query.role = role;
+      }
+    }
+
+    const users = await AdminUser.find(query)
       .select('-password -passwordChangedAt -passwordResetToken -passwordResetExpires')
       .sort({ createdAt: -1 });
 

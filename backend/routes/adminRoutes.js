@@ -10,6 +10,7 @@ const router = express.Router();
 router.post('/login', adminAuthController.login);
 router.post('/forgot-password', adminAuthController.forgotPassword);
 router.patch('/reset-password/:token', adminAuthController.resetPassword);
+router.get('/validate-token', protectAdminRoute, adminAuthController.validateToken);
 
 // Protected routes
 router.use(protectAdminRoute);

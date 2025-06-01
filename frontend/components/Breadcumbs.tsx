@@ -14,6 +14,7 @@ const Breadcrumbs: React.FC = () => {
     products: "Products",
     aboutUs: "About Us",
     contact: "Contact Us",
+    "admin": "Admin",
     "study-destinations": "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
     "study-mbbs-in-china": "Study MBBS in China",
@@ -58,6 +59,12 @@ const Breadcrumbs: React.FC = () => {
     "janaki-medical-college":"Janaki Medical College",
     "national-medical-college":"National Medical College",
     "nepalgunj-medical-college":"Nepalgunj Medical College",
+    "superadmin":"Super Admin Dashboard",
+    "counsellor":"Counsellor Dashboard",
+    "documentHandler":"Document Handler Dashboard",
+    "finance":"Finance Dashboard",
+    "digitalMarketing":"Digital Marketing Dashboard",
+    "newRecruit":"New Recruit Dashboard",
   };
 
   return (

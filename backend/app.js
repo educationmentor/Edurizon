@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
-const universityRoutes = require('./routes/universityRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
 const counselorRoutes = require('./routes/counselorRoutes');
 const consultationRoutes = require('./routes/consultationRoutes');
@@ -13,6 +12,7 @@ const chatRoutes = require('./routes/chatRoutes');
 const chatbotRoutes=require('./routes/chatbotRoutes')
 const collegePredictorRoutes=require('./routes/collegePredictorRoutes')
 const adminRoutes = require('./routes/adminRoutes');
+const adminConsultationRoutes = require('./routes/adminConsultationRoutes');
 const http = require('http');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessageModel');
@@ -198,7 +198,6 @@ io.on('connection', (socket) => {
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/universities', universityRoutes);
 app.use('/api/meetings', meetingRoutes);
 app.use('/api/counselor', counselorRoutes);
 app.use('/api/consultation', consultationRoutes);
@@ -207,6 +206,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/chatbot',chatbotRoutes)
 app.use('/api/collegePredictor',collegePredictorRoutes)
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin/consultation', adminConsultationRoutes);
 
 // Use the HTTP server for listening
 const PORT = process.env.PORT || 5001;

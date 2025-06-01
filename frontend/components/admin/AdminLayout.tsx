@@ -2,6 +2,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import axios from 'axios';
+import { baseUrl } from '@/lib/baseUrl';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -11,20 +13,47 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const router = useRouter();
   const [userRole, setUserRole] = useState<string>('');
 
-  useEffect(() => {
-    // Check for admin token
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin');
-      return;
+  const validateToken = async (token: string) => {
+    try {
+      // Make a request to validate the token
+      await axios.get(`${baseUrl}/api/admin/validate-token`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return true;
+    } catch (error) {
+      // If token is invalid, clear localStorage and redirect to login
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminData');
+      return false;
     }
+  };
 
-    // Get user role from stored admin data
-    const adminData = localStorage.getItem('adminData');
-    if (adminData) {
+  useEffect(() => {
+    const checkAuth = async () => {
+      // Check for admin token
+      const token = localStorage.getItem('adminToken');
+      const adminData = localStorage.getItem('adminData');
+
+      if (!token || !adminData) {
+        router.push('/admin');
+        return;
+      }
+
+      // Validate token
+      const isValid = await validateToken(token);
+      if (!isValid) {
+        router.push('/admin');
+        return;
+      }
+
+      // Get user role from stored admin data
       const { role } = JSON.parse(adminData);
       setUserRole(role);
-    }
+    };
+
+    checkAuth();
   }, [router]);
 
   const navigationItems = [

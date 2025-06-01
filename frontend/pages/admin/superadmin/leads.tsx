@@ -1,11 +1,11 @@
-import Layout from '@/components/admin/CounsellorLayout';
-import { useState } from 'react';
-import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
-import { useEffect } from 'react';
-import { baseUrl } from '@/lib/baseUrl';
+import React, { useState, useEffect } from 'react';
+import AdminLayout from '@/components/admin/AdminLayout';
 import axios from 'axios';
+import { baseUrl } from '@/lib/baseUrl';
 import { PencilIcon, TrashIcon, ShareIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import toast, { Toaster } from 'react-hot-toast';
+import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
+
 interface Counselor {
   _id: string;
   firstName: string;
@@ -27,31 +27,29 @@ interface Lead {
   email: string;
   phone: string;
   interestedCountry: string;
-  status: 'pending' | 'assigned'  | 'completed';
-  counsellingStatus: 'pending' | 'completed';
-  typeofLead: 'warm' | 'cold' | 'hot';   
+  status: 'pending' | 'accepted' | 'scheduled' | 'completed';
+  acceptedBy?: {
+    _id: string;
+    name: string;
+    email: string;
+  };
   meetingTime?: string;
   googleMeetLink?: string;
   createdAt: string;
 }
 
+const ITEMS_PER_PAGE = 10;
 
-const ITEMS_PER_PAGE = 10; // Number of items to show per page
-
-const Dashboard = () => {
-  const [adminData, setAdminData] = useState<any>(null);
-  useEffect(() => {
-    const value = localStorage.getItem('adminData');
-    const parsedValue = JSON.parse(value || '{}');
-    setAdminData(parsedValue);
-  }, []);
+const ViewLeads = () => {
   const [pendingLeads, setPendingLeads] = useState<Lead[]>([]);
-  const [completedLeads, setCompletedLeads] = useState<Lead[]>([]);
-  const [activeTab, setActiveTab] = useState<'pending' | 'completed'>('pending');
+  const [acceptedLeads, setAcceptedLeads] = useState<Lead[]>([]);
+  const [activeTab, setActiveTab] = useState<'pending' | 'accepted'>('pending');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+  const [counselors, setCounselors] = useState<Counselor[]>([]);
+  const [counselorsName, setCounselorsName] = useState<{ [id: string]: string }>({});
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; leadId: string | null }>({
@@ -60,12 +58,30 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    if(adminData){
+    fetchCounselors();
     fetchLeads();
-  }
-  }, [adminData]);
+  }, []);
 
+  const fetchCounselors = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      if (!token) return;
 
+      const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+      const response = await axios.get(`${baseUrl}/api/admin/users?role=counsellor`, {
+        headers: { 
+          Authorization: authToken
+        }
+      });
+
+      if (response.data.status === 'success') {
+        setCounselors(response.data.data);
+        mapCounselorName(counselors);
+      }
+    } catch (err) {
+      console.error('Failed to fetch counselors:', err);
+    }
+  };
 
   const fetchLeads = async () => {
     try {
@@ -77,16 +93,28 @@ const Dashboard = () => {
 
       // Ensure token has Bearer prefix
       const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-      const assignedRes = await axios.get(`${baseUrl}/api/admin/consultation/assigned/${adminData?._id}`, {
-        headers: { 
-          Authorization: authToken
-        }
-      });
-      if (assignedRes.data.success) {
-        filterLeads(assignedRes.data.data);
+      
+      const [pendingRes, acceptedRes] = await Promise.all([
+        axios.get(`${baseUrl}/api/admin/consultation/pending`, {
+          headers: { 
+            Authorization: authToken
+          }
+        }),
+        axios.get(`${baseUrl}/api/admin/consultation/accepted`, {
+          headers: { 
+            Authorization: authToken
+          }
+        })
+      ]);
+      
+      if (pendingRes.data.success) {
+        setPendingLeads(pendingRes.data.data);
+      }
+
+      if (acceptedRes.data.success) {
+        setAcceptedLeads(acceptedRes.data.data);
       }
     } catch (err: any) {
-      console.log("err",err);
       if (err.response?.status === 401) {
         setError('Session expired. Please log in again.');
         // Redirect to login page
@@ -99,14 +127,8 @@ const Dashboard = () => {
     }
   };
 
-  const filterLeads = (leads:Lead[]) => {
-    const pendingLeads = leads.filter((lead) => lead.counsellingStatus === 'pending');
-    const completedLeads = leads.filter((lead) => lead.counsellingStatus === 'completed');
-    setPendingLeads(pendingLeads);
-    setCompletedLeads(completedLeads);
-  }
   // Get current leads based on active tab
-  const currentLeads = activeTab === 'pending' ? pendingLeads : completedLeads;
+  const currentLeads = activeTab === 'pending' ? pendingLeads : acceptedLeads;
 
   // Pagination logic
   const totalItems = currentLeads.length;
@@ -162,58 +184,43 @@ const Dashboard = () => {
     });
   };
 
-  const updateCounsellor = async (leadId: string, typeofLead:string,counsellingStatus:string) => {
+  const assignCounsellor = async (leadId: string, counselorId: string,counselorName:string) => {
+
     try {
       const token = localStorage.getItem('adminToken');
       if (!token) {
         setError('Not authenticated. Please log in again.');
         return;
       }
+
       const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-      console.log("typeofLead",typeofLead);
-      console.log("counsellingStatus",leadId);
+      
       const response = await axios.put(
-        `${baseUrl}/api/admin/consultation/update-counsellor/${leadId}`,
-        { typeofLead,counsellingStatus },
+        `${baseUrl}/api/admin/consultation/accept/${leadId}`,
+        { counselorId, },
         {
-          headers: {
+          headers: { 
             Authorization: authToken
           }
         }
       );
-      console.log("response",response);
+
       if (response.data.success) {
-        toast.success('Counsellor updated successfully', {
-          duration: 3000,
-          position: 'top-right',
-          style: {
-            background: '#10B981',
-            color: '#fff',
-            padding: '16px',
-          },
-        });
+        // Close the dropdown
         setOpenDropdownId(null);
+        // Refresh the leads data
         fetchLeads();
       }
     } catch (err: any) {
-      console.log("err",err);
       if (err.response?.status === 401) {
         setError('Session expired. Please log in again.');
         window.location.href = '/admin';
       } else {
-        toast.error(err.response?.data?.message || 'Failed to update counsellor', { 
-          duration: 3000,
-          position: 'top-right',
-          style: {
-            background: '#EF4444',
-            color: '#fff',
-            padding: '16px',
-          },
-        });
+        setError(err.response?.data?.message || 'Failed to assign counsellor');
       }
     }
   };
-
+  
   const handleDeleteClick = (leadId: string) => {
     setDeleteConfirmation({
       isOpen: true,
@@ -274,16 +281,26 @@ const Dashboard = () => {
     setDeleteConfirmation({ isOpen: false, leadId: null });
   };
 
+  const mapCounselorName = (counselors: Counselor[]) => {
+    counselors.forEach(counselor => {
+      setCounselorsName(prev => ({
+        ...prev,
+        [counselor._id]: counselor.firstName + " " + counselor.lastName,
+      }));
+    });
+
+  };
+
   const handleShareOnWhatsApp = (lead: Lead) => {
     // Format the message with lead details
     const message = `
-      *Lead Details*
-      Name: ${lead.name}
-      Email: ${lead.email}
-      Phone: ${lead.phone}
-      Interested Country: ${lead.interestedCountry}
-      Calling Status: ${lead.status}
-      Type of Lead: ${lead.typeofLead}
+*Lead Details*
+Name: ${lead.name}
+Email: ${lead.email}
+Phone: ${lead.phone}
+Interested Country: ${lead.interestedCountry}
+Status: ${lead.status}
+Assigned To: ${lead.assignedTo ? counselorsName[lead.assignedTo] : 'Not Assigned'}
     `.trim();
 
     // Encode the message for URL
@@ -303,8 +320,8 @@ const Dashboard = () => {
       'Email',
       'Phone',
       'Interested Country',
-      'Calling Status',
-      'Type of Lead',
+      'Status',
+      'Assigned To',
       'Created At'
     ];
 
@@ -314,8 +331,8 @@ const Dashboard = () => {
       lead.email,
       lead.phone,
       lead.interestedCountry,
-      lead.counsellingStatus,
-      lead.typeofLead,
+      lead.status,
+      lead.assignedTo ? counselorsName[lead.assignedTo] : 'Not Assigned',
       new Date(lead.createdAt).toLocaleDateString()
     ]);
 
@@ -340,7 +357,7 @@ const Dashboard = () => {
   };
 
   const handleExportAll = () => {
-    const leads = activeTab === 'pending' ? pendingLeads : completedLeads;
+    const leads = activeTab === 'pending' ? pendingLeads : acceptedLeads;
     const filename = `${activeTab}-leads-${new Date().toISOString().split('T')[0]}.csv`;
     handleExportToCSV(leads, filename);
     toast.success('Export started');
@@ -352,18 +369,15 @@ const Dashboard = () => {
       return;
     }
 
-    const leads = (activeTab === 'pending' ? pendingLeads : completedLeads)
+    const leads = (activeTab === 'pending' ? pendingLeads : acceptedLeads)
       .filter(lead => selectedLeads.includes(lead._id));
     const filename = `selected-${activeTab}-leads-${new Date().toISOString().split('T')[0]}.csv`;
     handleExportToCSV(leads, filename);
     toast.success(`Exporting ${selectedLeads.length} leads`);
   };
 
-  console.log("pendingLeads",pendingLeads);
-  console.log("completedLeads",completedLeads);
-
   return (
-     <Layout>
+    <AdminLayout>
       <Toaster />
       {deleteConfirmation.isOpen && (
         <div className="fixed inset-0 z-[9999] overflow-y-auto">
@@ -410,15 +424,15 @@ const Dashboard = () => {
 
       <div className="py-6">
         <div className="px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Leads Status</h1>
-          <BreadcrumbAdmin role={adminData?.role}/>
+          <h1 className="text-2xl font-semibold text-gray-900">View Leads</h1>
+          <BreadcrumbAdmin/>
         </div>
 
-        <div className="mx-auto    px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <div className="mt-8">
             <div className="bg-white shadow rounded-lg">
               {/* Tabs with Export Buttons */}
-              <div className="border-b border-gray-200 ">
+              <div className="border-b border-gray-200">
                 <div className="flex justify-between items-center px-6">
                   <nav className="-mb-px flex space-x-8" aria-label="Tabs">
                     <button
@@ -432,14 +446,14 @@ const Dashboard = () => {
                       Pending Leads ({pendingLeads.length})
                     </button>
                     <button
-                      onClick={() => setActiveTab('completed')}
+                      onClick={() => setActiveTab('accepted')}
                       className={`${
-                        activeTab === 'completed'
+                        activeTab === 'accepted'
                           ? 'border-teal-500 text-teal-600'
                           : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                       } whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium`}
                     >
-                      Completed Leads ({completedLeads.length})
+                      Accepted Leads ({acceptedLeads.length})
                     </button>
                   </nav>
                   
@@ -472,8 +486,8 @@ const Dashboard = () => {
               ) : error ? (
                 <div className="p-4 text-red-600">{error}</div>
               ) : (
-                <div className="overflow-x-auto min-h-[30vw]">
-                  <table className="min-w-full divide-y  divide-gray-200">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
                         <th scope="col" className="px-6 py-3 text-left">
@@ -500,10 +514,7 @@ const Dashboard = () => {
                           Preferred Country
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Calling Status
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Lead Status
+                          {activeTab === 'pending' ? 'Assign Counsellor' : 'Status'}
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
@@ -539,37 +550,43 @@ const Dashboard = () => {
                             {lead.interestedCountry}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {lead.counsellingStatus}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
                             {activeTab === 'pending' ? (
                               <div className="relative">
                                 <button
                                   onClick={() => setOpenDropdownId(openDropdownId === lead._id ? null : lead._id)}
                                   className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium inline-flex items-center"
                                 >
-                                  {lead.typeofLead}
+                                  Assign
                                   <ChevronDownIcon className="w-4 h-4 ml-1" />
                                 </button>
                                 {openDropdownId === lead._id && (
                                   <div className="absolute z-10 mt-2 w-min rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                                    <div className="py-1 max-h-48" role="menu" aria-orientation="vertical">
-                                      <p>
-                                      <button onClick={() => {updateCounsellor(lead._id,'warm','pending')}} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Warm</button>
-                                      </p>
-                                      <p>
-                                      <button onClick={() => updateCounsellor(lead._id,'cold','pending')} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cold</button>
-                                      </p>
-                                      <p>
-                                      <button onClick={() => updateCounsellor(lead._id,'hot','pending')} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hot</button>
-                                      </p>
+                                    <div className="py-1 max-h-48 overflow-auto" role="menu" aria-orientation="vertical">
+                                      {counselors.map((counselor) => (
+                                        <p>
+                                        <button
+                                          key={counselor._id}
+                                          onClick={() => assignCounsellor(lead._id, counselor._id,counselor.firstName + " " + counselor.lastName)}
+                                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                          role="menuitem"
+                                        >
+                                          {counselor.firstName} {counselor.lastName}
+                                        </button>
+                                        </p>
+
+                                      ))}
+                                      {counselors.length === 0 && (
+                                        <div className="px-4 py-2 text-sm text-gray-500">
+                                          No counselors available
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
                                 )}
                               </div>
                             ) : (
                               <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                
+                                {lead.assignedTo ? (counselorsName[lead.assignedTo]) : 'Not Assigned'}
                               </span>
                             )}
                           </td>
@@ -648,9 +665,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      </Layout>
-
+    </AdminLayout>
   );
 };
 
-export default Dashboard;
+export default ViewLeads;

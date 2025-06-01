@@ -8,9 +8,8 @@ const meetingSchema = mongoose.Schema(
       ref: 'User',
     },
     university: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: true,
-      ref: 'University',
     },
     studentDetails: {
       name: { type: String, required: true },

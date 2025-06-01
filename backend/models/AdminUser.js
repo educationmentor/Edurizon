@@ -46,6 +46,21 @@ const adminUserSchema = new mongoose.Schema({
     required: [true, 'Last name is required'],
     trim: true,
   },
+  country: {
+    type: [String],
+    required: false,
+    trim: true,
+  },
+  studentId:{
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
+    required: false,
+  },
+  contactNo: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   active: {
     type: Boolean,
     default: true,

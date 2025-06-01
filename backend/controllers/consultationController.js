@@ -60,6 +60,7 @@ const createConsultationRequest = asyncHandler(async (req, res) => {
 const getPendingRequests = asyncHandler(async (req, res) => {
   const requests = await ConsultationRequest.find({ status: 'pending' })
     .sort({ createdAt: -1 });
+    // console.log(requests);
 
   res.json({
     success: true,
@@ -67,13 +68,27 @@ const getPendingRequests = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Get all counselltation for assigned counsellor
+// @route   GET /api/consultation/assigned
+const getAssignedRequests = asyncHandler(async (req, res) => {
+  
+  const {counselorId} = req.params;
+  const requests = await ConsultationRequest.find({ assignedTo: counselorId  })
+    .sort({ createdAt: -1 });
+  res.json({
+    success: true,
+    data: requests
+  });
+});
+
+
 // @desc    Accept a consultation request
 // @route   PUT /api/consultation/accept/:requestId
 // @access  Private (Counselor only)
 const acceptRequest = asyncHandler(async (req, res) => {
+  const {counselorId,counselorName} = req.body;
   try {
     const request = await ConsultationRequest.findById(req.params.requestId);
-
     if (!request) {
       return res.status(404).json({
         success: false,
@@ -89,15 +104,15 @@ const acceptRequest = asyncHandler(async (req, res) => {
     }
 
     // Update request status and counselor details
-    request.status = 'accepted';
-    request.acceptedBy = req.user._id;
+    request.status = 'assigned';
+    request.assignedTo = counselorId;
     await request.save();
 
     // Create notification for the student
     await Notification.create({
       userId: request.email,
       title: 'Consultation Request Accepted',
-      message: `Your consultation request has been accepted by ${req.user.name}.`,
+      message: `Your consultation request has been accepted by ${counselorName}.`,
       type: 'consultation',
       read: false
     });
@@ -123,12 +138,10 @@ const acceptRequest = asyncHandler(async (req, res) => {
 const getAcceptedRequests = asyncHandler(async (req, res) => {
   const requests = await ConsultationRequest.find({
     $or: [
-      { status: 'accepted', acceptedBy: req.user._id },
-      { status: 'scheduled', acceptedBy: req.user._id }
+      { status: 'assigned' },
     ]
   }).sort({ createdAt: -1 });
 
-  console.log(`[COUNSELOR REQUESTS] Found ${requests.length} accepted/scheduled requests for counselor ${req.user._id}`);
 
   // Log only upcoming active meetings
   const now = new Date();
@@ -493,6 +506,120 @@ const getNotificationMessage = (request) => {
   }
 };
 
+// @desc    Delete a consultation request
+// @route   DELETE /api/consultation/delete/:requestId
+// @access  Private (Admin only)
+const deleteRequest = asyncHandler(async (req, res) => {
+  const { requestId } = req.params;
+  const request = await ConsultationRequest.findByIdAndDelete(requestId);
+
+  if (!request) {
+    return res.status(404).json({
+      success: false,
+      message: 'Consultation request not found'
+    });
+  }
+
+  res.json({
+    success: true,
+    message: 'Consultation request deleted successfully'
+  });
+});
+
+// @desc    Update counsellor for a consultation request
+// @route   PUT /api/consultation/update-counsellor/:requestId
+// @access  Private (Admin/Super Admin only)
+const updateCounsellor = asyncHandler(async (req, res) => {
+  const { requestId } = req.params;
+  const { counsellorId, typeofLead, counsellingStatus } = req.body;
+  console.log("typeofLead",typeofLead);
+  try {
+    const request = await ConsultationRequest.findById(requestId);
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: 'Consultation request not found'
+      });
+    }
+
+    // Check if the request is in a state that can be reassigned
+    if (request.status === 'completed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot reassign a completed consultation request'
+      });
+    }
+
+    // Validate typeofLead
+    if (typeofLead && !['warm', 'cold', 'hot'].includes(typeofLead)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid type of lead. Must be warm, cold, or hot'
+      });
+    }
+
+    // Validate counsellingStatus
+    if (counsellingStatus && !['pending', 'completed'].includes(counsellingStatus)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid counselling status. Must be pending or completed'
+      });
+    }
+
+    // Update the consultation request
+    const updates = {};
+    if(counsellorId){
+      updates.assignedTo = counsellorId;
+      updates.status = 'assigned';
+    }
+    // Only add fields if they are provided
+    if (typeofLead) {
+      updates.typeofLead = typeofLead;
+    }
+    if (counsellingStatus) {
+      updates.counsellingStatus = counsellingStatus;
+    }
+
+    // Update the request with all changes
+    Object.assign(request, updates);
+    await request.save();
+
+    // Create notification for the student
+    await Notification.create({
+      userId: request.email,
+      title: 'Consultation Request Updated',
+      message: `Your consultation request has been updated.`,
+      type: 'consultation',
+      read: false
+    });
+
+    // Create notification for the new counsellor if counsellor is being changed
+    if (counsellorId) {
+      await Notification.create({
+        userId: counsellorId,
+        title: 'New Consultation Assignment',
+        message: `You have been assigned a consultation request from ${request.name}.`,
+        type: 'consultation',
+        read: false
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: 'Consultation request updated successfully',
+      data: request
+    });
+  } catch (error) {
+    console.error('Error updating consultation request:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to update consultation request',
+      error: error.message
+    });
+  }
+});
+
 module.exports = {
   createConsultationRequest,
   getPendingRequests,
@@ -506,4 +633,7 @@ module.exports = {
   scheduleMeeting,
   rejectRequest,
   getStudentNotifications,
+  deleteRequest,
+  getAssignedRequests,
+  updateCounsellor
 };

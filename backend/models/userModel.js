@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['student', 'counselor', 'financeAdmin', 'documentAdmin'],
+      enum: ['student', 'counselor', 'financeAdmin', 'documentAdmin','registeredStudent'],
       required: true,
     },
     googleId: {

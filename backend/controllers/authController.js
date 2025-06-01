@@ -8,6 +8,9 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const sessionStore = {}; // Store OTPs temporarily
 
+// Add API key configuration
+
+
 // @desc    Register a new user
 // @route   POST /api/users/register
 // @access  Public
@@ -126,6 +129,8 @@ const sendOtp = asyncHandler(async (req, res) => {
     }
 
     try {
+         // Send OTP via 2Factor.in API
+         console.log(process.env.TWO_FACTOR_API_KEY)
         // For registration, check if user already exists
         if (isRegistration) {
             const existingUser = await User.findOne({ phone });
@@ -148,16 +153,41 @@ const sendOtp = asyncHandler(async (req, res) => {
         const otp = generateOTP();
         sessionStore[phone] = otp;
 
-        // Log OTP for development/testing
-        console.log(`OTP for ${phone}: ${otp}`);
+        // Send OTP via 2Factor.in API
+        try {
+            const smsConfig = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/${phone}/${otp}/${encodeURIComponent('OTP SMS Template')}`,
+                headers: {}
+            };
 
-        // Always return success with OTP for development
-        return res.status(200).json({ 
-            status: "success",
-            message: `OTP sent successfully for ${isRegistration ? 'registration' : 'login'}`,
-            otp: otp, // For development/testing
-            dev_note: "SMS sending is simulated for development"
-        });
+            const smsResponse = await axios(smsConfig);
+
+            if (smsResponse.data && smsResponse.data.Status === 'Success') {
+                return res.status(200).json({ 
+                    status: "success",
+                    message: `OTP sent successfully for ${isRegistration ? 'registration' : 'login'}`,
+                    dev_note: process.env.NODE_ENV === 'development' ? `OTP: ${otp}` : undefined
+                });
+            } else {
+                throw new Error('Failed to send SMS');
+            }
+        } catch (smsError) {
+            console.error('SMS API Error:', smsError);
+            
+            // In development, still return OTP even if SMS fails
+            if (process.env.NODE_ENV === 'development') {
+                return res.status(200).json({ 
+                    status: "success",
+                    message: "SMS sending simulated for development",
+                    otp: otp,
+                    dev_note: "Real SMS sending failed, but OTP provided for development"
+                });
+            }
+            
+            throw new Error('Failed to send OTP via SMS');
+        }
     } catch (error) {
         console.error('Error in sendOtp:', error);
         return res.status(500).json({ 

@@ -36,7 +36,9 @@ exports.register = async (req, res) => {
       password,
       role,
       firstName,
-      lastName
+      lastName,
+      country,
+      contactNo
     } = req.body;
 
     // Check if user already exists
@@ -55,7 +57,9 @@ exports.register = async (req, res) => {
       password,
       role,
       firstName,
-      lastName
+      lastName,
+      country,
+      contactNo
     });
 
     createSendToken(newAdmin, 201, res);
@@ -254,5 +258,15 @@ exports.getRoles = (req, res) => {
     data: {
       roles: ROLES
     }
+  });
+};
+
+// Validate Token
+exports.validateToken = async (req, res) => {
+  // If the request reaches here, it means the token is valid
+  // (protectAdminRoute middleware has already validated it)
+  res.status(200).json({
+    status: 'success',
+    message: 'Token is valid'
   });
 }; 

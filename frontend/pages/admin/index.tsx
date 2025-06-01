@@ -15,13 +15,40 @@ const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check if already logged in
-    const token = localStorage.getItem('adminToken');
-    const adminData = localStorage.getItem('adminData');
-    if (token && adminData) {
-      const user = JSON.parse(adminData);
-      handleRoleBasedRouting(user.role);
+    // Check if redirected due to expired token
+    const expired = router.query.expired === 'true';
+    if (expired) {
+      setError('Your session has expired. Please login again.');
     }
+
+    // Check if already logged in with valid token
+    const checkAuth = async () => {
+      const token = localStorage.getItem('adminToken');
+      const adminData = localStorage.getItem('adminData');
+      
+      if (token && adminData) {
+        try {
+          // Validate token
+          const response = await axios.get(`${baseUrl}/api/admin/validate-token`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          
+          if (response.data.status === 'success') {
+            const user = JSON.parse(adminData);
+            handleRoleBasedRouting(user.role);
+          }
+        } catch (error) {
+          // Clear invalid token and data
+          localStorage.removeItem('adminToken');
+          localStorage.removeItem('adminData');
+          setError('Session expired. Please login again.');
+        }
+      }
+    };
+
+    checkAuth();
   }, [router]);
 
   const handleRoleBasedRouting = (role: string) => {
@@ -96,7 +123,7 @@ const AdminLogin = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Admin Login
+            Edurizon Admin Login
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

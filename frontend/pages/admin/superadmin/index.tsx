@@ -11,6 +11,9 @@ import {
   ChartBarIcon,
   VideoCameraIcon,
 } from '@heroicons/react/24/outline';
+import AddMemberDialog from '@/components/admin/AddMemberDialog';
+import { TransitionLink } from '@/utils/TransitionLink';
+import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
 
 interface AdminUser {
   _id: string;
@@ -19,7 +22,7 @@ interface AdminUser {
   firstName: string;
   lastName: string;
   role: string;
-  country: string;
+  country: string[];
   contactNo: string;
   joiningDate: string;
   active: boolean;
@@ -44,8 +47,10 @@ interface Meeting {
   status: 'scheduled' | 'completed' | 'cancelled';
 }
 
+const ITEMS_PER_PAGE = 5; // Number of items to show per page
+
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('Finance');
+  const [activeTab, setActiveTab] = useState('Counseling');
   const [currentPage, setCurrentPage] = useState(1);
   const [teamMembers, setTeamMembers] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,20 +59,15 @@ const AdminDashboard = () => {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loadingMeetings, setLoadingMeetings] = useState(true);
   const [meetingError, setMeetingError] = useState('');
+  const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
+  const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
-  // Sample statistics data (replace with actual data from API)
-  const stats = [
-    { name: 'Total Users', stat: '1,234', icon: UsersIcon, change: '12%', changeType: 'increase' },
-    { name: 'Documents Processed', stat: '456', icon: DocumentTextIcon, change: '8%', changeType: 'increase' },
-    { name: 'Revenue', stat: '₹89,000', icon: CurrencyRupeeIcon, change: '15%', changeType: 'increase' },
-    { name: 'Marketing Leads', stat: '789', icon: ChartBarIcon, change: '5%', changeType: 'decrease' },
-  ];
-
-  const tabs = ['Counseling', 'Finance', 'Digital', 'Calling', 'Document Management'];
+  const tabs = ['Counseling', 'Finance', 'Digital','Document Management', 'Super Admin'];
 
   useEffect(() => {
     fetchTeamMembers();
     fetchMeetings();
+    fetchPendingLeadsCount();
   }, []);
 
   useEffect(() => {
@@ -112,6 +112,26 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchPendingLeadsCount = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      if (!token) return;
+
+      const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+      const response = await axios.get(`${baseUrl}/api/admin/consultation/pending`, {
+        headers: { 
+          Authorization: authToken
+        }
+      });
+
+      if (response.data.success) {
+        setPendingLeadsCount(response.data.data.length);
+      }
+    } catch (err) {
+      console.error('Failed to fetch pending leads count:', err);
+    }
+  };
+
   const filterMembers = () => {
     if (!teamMembers) return;
 
@@ -119,6 +139,9 @@ const AdminDashboard = () => {
     
     // Filter based on active tab
     switch (activeTab.toLowerCase()) {
+      case 'super admin':
+        filtered = teamMembers.filter(member => member.role === 'super-admin');
+        break;
       case 'counseling':
         filtered = teamMembers.filter(member => member.role === 'counsellor');
         break;
@@ -180,43 +203,55 @@ const AdminDashboard = () => {
     }
   };
 
+  // Calculate pagination values
+  const totalItems = filteredMembers.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentItems = filteredMembers.slice(startIndex, endIndex);
+
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Generate page numbers array
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 5; // Maximum number of visible page buttons
+    
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    // Adjust start page if we're near the end
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  };
+
+  // Reset to first page when tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
   return (
     <AdminLayout>
       <div className="py-6">
         <div className="px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+          <BreadcrumbAdmin/>
+
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-          {/* Statistics */}
-          <div className="mt-8">
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((item) => (
-                <div
-                  key={item.name}
-                  className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6"
-                >
-                  <dt>
-                    <div className="absolute rounded-md bg-teal-500 p-3">
-                      <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                    </div>
-                    <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
-                  </dt>
-                  <dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
-                    <p className="text-2xl font-semibold text-gray-900">{item.stat}</p>
-                    <p
-                      className={`ml-2 flex items-baseline text-sm font-semibold ${
-                        item.changeType === 'increase' ? 'text-green-600' : 'text-red-600'
-                      }`}
-                    >
-                      {item.changeType === 'increase' ? '↑' : '↓'} {item.change}
-                    </p>
-                  </dd>
-                </div>
-              ))}
-            </div>
-          </div>
+          
 
-          {/* Upcoming Meetings */}
+          {/* Upcoming Meetings
           <div className="mt-8">
             <div className="bg-white rounded-lg shadow">
               <div className="p-6">
@@ -299,7 +334,7 @@ const AdminDashboard = () => {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Team Section */}
           <div className="mt-8">
@@ -311,18 +346,24 @@ const AdminDashboard = () => {
                     <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
                       Team Call
                     </button>
-                    <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center">
-                      <span>Filter</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    <Link href="/admin/superadmin/add-member">
-                      <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center">
-                        <span className="mr-2">+</span>
-                        Add Member
+                    <TransitionLink href="/admin/superadmin/leads" >
+                      <button className="relative bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
+                        View Leads
+                        {pendingLeadsCount > 0 && (
+                          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                            {pendingLeadsCount}
+                          </span>
+                        )}
                       </button>
-                    </Link>
+                    </TransitionLink>
+                   
+                    <button
+                      onClick={() => setIsAddMemberDialogOpen(true)}
+                      className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center"
+                    >
+                      <span className="mr-2">+</span>
+                      Add Member
+                    </button>
                   </div>
                 </div>
 
@@ -365,7 +406,7 @@ const AdminDashboard = () => {
                       <thead className="bg-teal-600 text-white">
                         <tr>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Member name</th>
-                          <th className="px-6 py-3 text-left text-sm font-semibold">Country</th>
+                          {activeTab === 'Counseling' && <th className="px-6 py-3 text-left text-sm font-semibold">Country</th>}
                           <th className="px-6 py-3 text-left text-sm font-semibold">Contact No.</th>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Joining Date</th>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Login-Access</th>
@@ -373,17 +414,10 @@ const AdminDashboard = () => {
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {filteredMembers.map((member) => (
+                        {currentItems.map((member) => (
                           <tr key={member._id} className="hover:bg-gray-50">
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">
-                                {/* <Image
-                                  src="/assets/Images/default-avatar.png"
-                                  alt={member.username}
-                                  width={40}
-                                  height={40}
-                                  className="h-10 w-10 rounded-full"
-                                /> */}
                                 <div className="ml-4">
                                   <div className="text-sm font-medium text-gray-900">
                                     {member.firstName} {member.lastName}
@@ -392,9 +426,11 @@ const AdminDashboard = () => {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {member.country}
-                            </td>
+                            {activeTab === 'Counseling' && (
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {member.country.join(', ')}
+                              </td>
+                            )}
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {member.contactNo}
                             </td>
@@ -431,50 +467,69 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="flex items-center justify-end mt-4 gap-2">
-                  <button
-                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                    className="p-2 rounded-md hover:bg-gray-100"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-md ${
-                      currentPage === 1 ? 'bg-teal-600 text-white' : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    1
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-md ${
-                      currentPage === 2 ? 'bg-teal-600 text-white' : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    2
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-md ${
-                      currentPage === 3 ? 'bg-teal-600 text-white' : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    3
-                  </button>
-                  <button
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    className="p-2 rounded-md hover:bg-gray-100"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-end mt-4 gap-2">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={`p-2 rounded-md ${
+                        currentPage === 1
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'hover:bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    {getPageNumbers().map((pageNumber) => (
+                      <button
+                        key={pageNumber}
+                        onClick={() => handlePageChange(pageNumber)}
+                        className={`px-3 py-1 rounded-md ${
+                          currentPage === pageNumber
+                            ? 'bg-teal-600 text-white'
+                            : 'hover:bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        {pageNumber}
+                      </button>
+                    ))}
+
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className={`p-2 rounded-md ${
+                        currentPage === totalPages
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'hover:bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+
+                    <span className="ml-4 text-sm text-gray-600">
+                      Page {currentPage} of {totalPages}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Add Member Dialog */}
+      <AddMemberDialog
+        isOpen={isAddMemberDialogOpen}
+        onClose={() => setIsAddMemberDialogOpen(false)}
+        onSuccess={() => {
+          fetchTeamMembers();
+        }}
+      />
     </AdminLayout>
   );
 };
