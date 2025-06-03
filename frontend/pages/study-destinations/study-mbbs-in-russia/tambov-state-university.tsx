@@ -15,13 +15,13 @@ const services = [
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "Country Rank",
-      label: "145",
+      text: "",
+      label: "Highest FMGE Ratio",
     },
     {
-      icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "QS World Rank",
-      label: "4844",
+      icon: "/assets/Images/Icons/TieUpsIcon.svg",
+      text: "",
+      label: "Biggest Hospital in the region",
     },
   ];
 

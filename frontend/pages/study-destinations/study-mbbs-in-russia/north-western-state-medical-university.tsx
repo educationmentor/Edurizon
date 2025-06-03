@@ -14,7 +14,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
       text: "World Rank",
-      label: "Country - 100, QS world rank - 601, World - 3901",
+      label: "Country - 100, QS world rank - 601",
     },
     {
       icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",

@@ -15,13 +15,13 @@ const services = [
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "Country Rank",
-      label: "5th in Russia",
+      text: "Rank",
+      label: "Country Rank - 5th, QS World Rank - 801",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "QS World Rank",
-      label: "801",
+      text: "",
+      label: "Best FMGE Ratio",
     },
   ];
 

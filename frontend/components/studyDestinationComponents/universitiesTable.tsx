@@ -28,6 +28,7 @@ const Universities = ({ id,data,countryName }: UniversitiesProps) => {
                 <th className="min-w-[200px] md:min-w-0 border font-semibold border-black dark:border-r-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Annual Fee (Rubble/$)</th>
                 {/* <th className="min-w-[200px] md:min-w-0 border font-semibold border-black dark:border-r-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Global Ranking</th> */}
                 <th className="min-w-[200px] md:min-w-0 border font-semibold border-black  dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Key Highlights</th>
+                <th className="min-w-[200px] md:min-w-0 border font-semibold border-black  dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">Know More</th>
               </tr>
             </thead>
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
@@ -45,6 +46,10 @@ const Universities = ({ id,data,countryName }: UniversitiesProps) => {
                 {university.highlights.map((highlight, index) => (
                   <li className=" list-none " key={index}>- {highlight}</li>
                 ))}</td>
+                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] whitespace-nowrap py-[.625vw] ">
+                <TransitionLink href={university.href}>
+                Know More
+                </TransitionLink></td>
               </tr>
             ))}          
             </tbody>

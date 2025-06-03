@@ -35,7 +35,7 @@ const Navbar = () => {
     { name: "College Predictor", href: "/college-predictor", external: false },
     // { name: "Budget Calculator", href: "#" },
     { name: "Contact Us", href: "/contact-us" , borderTop: true },
-    { name: "Testimonials", href: "#" },
+    { name: "Testimonials", href: "https://www.google.com/search?q=edurizon&oq=ed&gs_lcrp=EgZjaHJvbWUqDggCEEUYJxg7GIAEGIoFMgYIABBFGDwyBggBEEUYPDIOCAIQRRgnGDsYgAQYigUyDAgDECMYJxiABBiKBTIGCAQQRRg5MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTg4N2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8#lrd=0x390d1b2870491009:0x8b3922528c2683f6,1,,,,", external: true },
   ];
   
 

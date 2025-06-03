@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
-  const tabs = ['Counseling', 'Finance', 'Digital','Document Management', 'Super Admin'];
+  const tabs = ['Counseling', 'Finance', 'Digital','Document Management', 'Super Admin','Students','Registered Students'];
 
   useEffect(() => {
     fetchTeamMembers();
@@ -124,7 +124,7 @@ const AdminDashboard = () => {
         }
       });
 
-      if (response.data.success) {
+      if (response.data.success) {  
         setPendingLeadsCount(response.data.data.length);
       }
     } catch (err) {

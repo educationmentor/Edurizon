@@ -46,10 +46,10 @@ const steps = [
     {
       title: "Admission Letter & Entrance Exam",
       content:
-        "Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter.",
+        "Students receive admission letters within 5-7 working days’ time.",
         contentFull:<>
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
-            <li>Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter, student need to submit his 
+            <li>Students receive admission letters within 5-7 working days’ time, student need to submit his 
               valid NEET score card. Thereafter University conducts entrance exam of all such students who have received admission letter and
                deposited their NEET score card</li>
             <li>Fee Payment: Transfer tuition fees directly to the university account.</li>

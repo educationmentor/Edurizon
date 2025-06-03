@@ -54,6 +54,7 @@ const Dashboard = () => {
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+  const [openDropdownId2, setOpenDropdownId2] = useState<string | null>(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; leadId: string | null }>({
     isOpen: false,
     leadId: null
@@ -193,6 +194,7 @@ const Dashboard = () => {
           },
         });
         setOpenDropdownId(null);
+        setOpenDropdownId2(null);
         fetchLeads();
       }
     } catch (err: any) {
@@ -539,10 +541,30 @@ const Dashboard = () => {
                             {lead.interestedCountry}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {lead.counsellingStatus}
+                          <div className="relative">
+                                <button
+                                  onClick={() => setOpenDropdownId2(openDropdownId2 === lead._id ? null : lead._id)}
+                                  className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium inline-flex items-center"
+                                >
+                                  {lead.counsellingStatus}
+                                  <ChevronDownIcon className="w-4 h-4 ml-1" />
+                                </button>
+                                {openDropdownId2 === lead._id && (
+                                  <div className="absolute z-10 mt-2 w-min rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                    <div className="py-1 max-h-48" role="menu" aria-orientation="vertical">
+                                      <p>
+                                      <button onClick={() => {updateCounsellor(lead._id,lead.typeofLead,'pending')}} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pending</button>
+                                      </p>
+                                      <p>
+                                      <button onClick={() => updateCounsellor(lead._id,lead.typeofLead,'completed')} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Completed</button>
+                                      </p>
+                                  
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            {activeTab === 'pending' ? (
                               <div className="relative">
                                 <button
                                   onClick={() => setOpenDropdownId(openDropdownId === lead._id ? null : lead._id)}
@@ -555,23 +577,19 @@ const Dashboard = () => {
                                   <div className="absolute z-10 mt-2 w-min rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     <div className="py-1 max-h-48" role="menu" aria-orientation="vertical">
                                       <p>
-                                      <button onClick={() => {updateCounsellor(lead._id,'warm','pending')}} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Warm</button>
+                                      <button onClick={() => {updateCounsellor(lead._id,'warm',lead.counsellingStatus)}} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Warm</button>
                                       </p>
                                       <p>
-                                      <button onClick={() => updateCounsellor(lead._id,'cold','pending')} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cold</button>
+                                      <button onClick={() => updateCounsellor(lead._id,'cold',lead.counsellingStatus)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cold</button>
                                       </p>
                                       <p>
-                                      <button onClick={() => updateCounsellor(lead._id,'hot','pending')} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hot</button>
+                                      <button onClick={() => updateCounsellor(lead._id,'hot',lead.counsellingStatus)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hot</button>
                                       </p>
                                     </div>
                                   </div>
                                 )}
                               </div>
-                            ) : (
-                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                
-                              </span>
-                            )}
+
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <div className="flex space-x-3">
