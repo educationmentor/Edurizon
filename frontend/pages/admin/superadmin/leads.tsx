@@ -153,7 +153,7 @@ const ViewLeads = () => {
     const maxVisiblePages = 5;
     
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
     
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -563,7 +563,7 @@ Assigned To: ${lead.assignedTo ? counselorsName[lead.assignedTo] : 'Not Assigned
                                   <div className="absolute z-10 mt-2 w-min rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     <div className="py-1 max-h-48 overflow-auto" role="menu" aria-orientation="vertical">
                                       {counselors.map((counselor) => (
-                                        <p>
+                                        <p key={counselor._id}>
                                         <button
                                           key={counselor._id}
                                           onClick={() => assignCounsellor(lead._id, counselor._id,counselor.firstName + " " + counselor.lastName)}
