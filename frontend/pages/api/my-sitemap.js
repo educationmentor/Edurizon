@@ -72,6 +72,13 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-tajikistan/tajik-national-university', changefreq: 'daily', priority: 0.3 },  
 
+        // MBBS in Georgia
+        { url: '/study-destinations/study-mbbs-in-georgia/georgian-national-university-seu', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-georgia/east-european-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-georgia/tbilisi-state-medical-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-georgia/new-vision-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-georgia/david-tvildiani-medical-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-georgia/international-black-sea-university', changefreq: 'daily', priority: 0.3 },
         
 
         

@@ -185,7 +185,7 @@ const NewPage = () => {
                     <li>European and American Standard Study Programs</li>
                   </ul>
                   </div>  
-                  <Image src={"/assets/Images/mbbs-in-nepal/georgia3.png"} className="ml-auto w-full   md:w-[32.5vw] h-auto" width={690} height={690} alt="georgia3"/>
+                  <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="ml-auto w-full   md:w-[32.5vw] h-auto" width={690} height={690} alt="georgia3"/>
               </div>
 
               <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">

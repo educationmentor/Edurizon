@@ -59,12 +59,12 @@ const Breadcrumbs: React.FC = () => {
     "janaki-medical-college":"Janaki Medical College",
     "national-medical-college":"National Medical College",
     "nepalgunj-medical-college":"Nepalgunj Medical College",
-    "superadmin":"Super Admin Dashboard",
-    "counsellor":"Counsellor Dashboard",
-    "documentHandler":"Document Handler Dashboard",
-    "finance":"Finance Dashboard",
-    "digitalMarketing":"Digital Marketing Dashboard",
-    "newRecruit":"New Recruit Dashboard",
+    "new-vision-university":"New Vision University",
+    "david-tvildiani-medical-university":"David Tvildiani Medical University",
+    "tbilisi-state-medical-university":"Tbilisi State Medical University",
+    "east-european-university":"East European University",
+    "georgian-national-university-seu":"Georgian National University SEU",
+    "international-black-sea-university":"International Black Sea University",
   };
 
   return (

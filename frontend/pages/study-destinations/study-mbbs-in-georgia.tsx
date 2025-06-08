@@ -73,6 +73,7 @@ const universities = [
       location: "Tbilisi",
       feesInUSD: 8000,
       hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/tbilisi-state-medical-university"
     },
     {
       id: 2,
@@ -80,6 +81,7 @@ const universities = [
       location: "Tbilisi",
       feesInUSD: 7000,
       hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/new-vision-university"
     },
     {
       id: 3,
@@ -87,6 +89,7 @@ const universities = [
       location: "Tbilisi",
       feesInUSD: 6000,
       hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/david-tvildiani-medical-university"
     },
     {
       id: 4,
