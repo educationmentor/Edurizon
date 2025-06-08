@@ -5,6 +5,7 @@ import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unListedTableEqualWidth";
+import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
 
 const headerData={
@@ -65,34 +66,125 @@ const governmentUnivesitiesData={
     }
 }
 
-const georgiaFeesData={
-    id:"georgia",
-    section2:"",
-    content:{
-        title:"Fees for MBBS in Georgia",
-        subTitle:"",
-        description:"One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students",
-        data:[
-            ["University", "Fees in $", "Fees in INR", "Hostel Fees in $", "Hostel Fees in INR"],
-            ["Tbilisi State Medical University", "8000", "680000", "3000", "255000"],
-            ["New Vision University", "7000", "595000", "3000", "255000"],
-            ["David Tvildiani Medical University", "6000", "510000", "3000", "255000"],
-            ["East European University", "5500", "467500", "3000", "255000"],
-            ["University of Georgia", "6000", "510000", "3000", "255000"],
-            ["Caucasus International University", "6000", "510000", "3000", "255000"],
-            ["Bau International University", "6500", "552500", "3000", "255000"],
-            ["Batumi Shota Rustaveli State University", "5000", "467500", "3300", "280500"],
-            ["ALTE University", "5500", "467500", "3000", "255000"],
-            ["European University", "5500", "467500", "3000", "255000"],
-            ["Grigol Robakidze University", "5500", "467500", "3000", "255000"],
-            ["Geomedi University", "5500", "467500", "3000", "255000"],
-            ["SEU, Georgian National University", "5500", "467500", "3000", "255000"],
-            ["International Black Sea University", "4900", "416500", "3000", "255000"],
-            ["Batumi Shota Rustaveli State University", "4800", "408000", "3000", "255000"],
-            ["Avicenna Batumi Medical University", "4000", "340000", "3000", "255000"]
-        ],
+const universities = [
+    {
+      id: 1,
+      name: "Tbilisi State Medical University",
+      location: "Tbilisi",
+      feesInUSD: 8000,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 2,
+      name: "New Vision University",
+      location: "Tbilisi",
+      feesInUSD: 7000,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 3,
+      name: "David Tvildiani Medical University",
+      location: "Tbilisi",
+      feesInUSD: 6000,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 4,
+      name: "East European University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/east-european-university"
+    },
+    {
+      id: 5,
+      name: "University of Georgia",
+      location: "Tbilisi",
+      feesInUSD: 6000,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 6,
+      name: "Caucasus International University",
+      location: "Tbilisi",
+      feesInUSD: 6000,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 7,
+      name: "Bau International University",
+      location: "Batumi",
+      feesInUSD: 6500,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 8,
+      name: "Batumi Shota Rustaveli State University",
+      location: "Batumi",
+      feesInUSD: 5000,
+      hostelFeesInUSD: 3300,
+    },
+    {
+      id: 9,
+      name: "ALTE University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 10,
+      name: "European University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 11,
+      name: "Grigol Robakidze University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 12,
+      name: "Geomedi University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 13,
+      name: "SEU, Georgian National University",
+      location: "Tbilisi",
+      feesInUSD: 5500,
+      hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/georgian-national-university-seu"
+    },
+    {
+      id: 14,
+      name: "International Black Sea University",
+      location: "Tbilisi",
+      feesInUSD: 4800,
+      hostelFeesInUSD: 3000,
+      href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university"
+    },
+    {
+      id: 15,
+      name: "Batumi Shota Rustaveli State University",
+      location: "Batumi",
+      feesInUSD: 4800,
+      hostelFeesInUSD: 3000,
+    },
+    {
+      id: 16,
+      name: "Avicenna Batumi Medical University",
+      location: "Batumi",
+      feesInUSD: 4000,
+      hostelFeesInUSD: 3000,
     }
-}
+  ];
+  
+
 
 const eligibilityData={
     id:"georgia",
@@ -162,7 +254,53 @@ const NewPage = () => {
            </div>
 
            {/* Geogia Fees */}
-           <UnlistedTable id={georgiaFeesData.id} section2={georgiaFeesData.section2} content={georgiaFeesData.content}/>
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] flex flex-col gap-[2vw] md:gap-[1.5vw]">
+           <h3 className="text-h5TextPhone md:text-h3Text font-bold text-center leading-[120%]">Fees for MBBS in Georgia</h3>
+           <p className="text-center text-smallTextPhone md:text-regularText opacity-80 ">One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students</p>
+           <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
+                <thead className="text-smallTextPhone md:text-regularText text-center font-bold align-top bg-linenChosen">
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Name of University</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Location</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Fees in USD</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Hostel Fees in USD</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Know More</td>
+                </thead>
+            <tbody className="text-smallTextPhone md:text-regularText align-top"> 
+
+                {universities.map((college, index) => (
+          <tr key={college.id}>
+            
+            <td className="border font-bold underline dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href ? <TransitionLink href={college.href}>
+                {college.name}
+              </TransitionLink>:
+              <>{college.name}</>
+              }
+              
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.location}
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.feesInUSD}
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.hostelFeesInUSD}
+            </td>
+            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href && <TransitionLink href={college.href}>
+                Know More
+              </TransitionLink>}
+            </td>
+            
+          </tr>
+        ))}
+              
+            </tbody>
+          </table>
+          </section>
+
+           
            <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
 
             {/* Climate and Weather */}

@@ -25,7 +25,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",
       text: "Amazing Fact",
-      label: "FMGE Passing Ratio 2024 - 36.36%",
+      label: "FMGE Passing Ratio 2024 - 68%",
     },
   ];
 
