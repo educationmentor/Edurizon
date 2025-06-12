@@ -1,6 +1,9 @@
 import React from 'react'
 
-const howEdurizonHelps = [
+
+
+export default function EdurizonProcess({country}:{country:string}) {
+  const howEdurizonHelps = [
     {
       title: "Personalized Counseling",
       description:
@@ -32,7 +35,7 @@ const howEdurizonHelps = [
           "Heading to a new country can be daunting. That’s why we conduct pre-departure sessions for students. We brief you on what to pack, how to handle immigration on arrival, and currency exchange, and we even give you tips about student life in Russia. We often connect students going to the same university so you can travel in groups and feel more comfortable knowing someone even before you land in Russia.",
     },
     {
-      title: "Support in Russia",
+      title: `Support in ${country}`,
       description:
           "Our assistance doesn’t end once you board the flight. Edurizon has tie-ups and contacts in Russia – local coordinators and senior students – who can help you upon arrival. From picking you up at the airport (if needed) to helping with your university registration and hostel check-in, we ensure you cannot fend for yourself. Throughout your course, if you face any issues or have questions, you can contact us. We remain a bridge between you and the university if communication gaps arise due to language or other reasons.",
     },
@@ -43,8 +46,6 @@ const howEdurizonHelps = [
     },
                               
   ]
-
-export default function EdurizonProcess() {
   return (
       <section className='px-[6vw] md:px-[12.625vw] text-smallTextPhone md:text-regularText leading-[150%]'>
         <h3 className='pb-[3vw] text-h5TextPhone md:text-h3Text leading-[120%]'>How Can Edurizon Help You Navigate the Process?</h3>

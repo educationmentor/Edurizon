@@ -3,39 +3,39 @@ import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
+
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useRouter();
-  const router = useRouter();
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminData');
-    router.push('/admin');
-  };
+
+  const navigationItems = [
+    { 
+      name: 'Dashboard', 
+      href: '/admin/superadmin', 
+      icon: '/assets/Images/admin/overview.svg'
+    },
+    { 
+      name: 'Counsellors', 
+      href: '/admin/counsellor', 
+      icon: '/assets/Images/admin/session-records.svg'
+    },
+    { 
+      name: 'Documents', 
+      href: '/admin/document', 
+      icon: '/assets/Images/admin/document.svg'
+    },
+   
+  ];
+
   return (
     <div className="min-h-screen bg-white text-gray-900 flex">
       <aside className=" w-[280px] bg-adminBgChosen text-white flex flex-col  ">
               <div className=' mx-auto'>
                 <div className="mt-[48px] text-2xl font-bold"><p className='text-center'>EDURIZON</p></div>
                 <nav className="mt-[40px] mb-[228px] flex flex-col gap-[16px]">
-                  <Link  href="/admin/counsellor">
+                  <Link  href="/admin/document">
                     <button className={`w-[224px] py-[12px] px-[16px] rounded-[4px]  text-white flex gap-[12px] hover:bg-adminGreenChosen  ${pathname=='/admin/counsellor'?"bg-adminGreenChosen font-semibold":"font-medium"}`}>
                     <Image src="/assets/Images/admin/overview.svg" width={40} height={40} className='w-[24px] h-[24px]' alt='overview icon'/> Overview
-                    </button>
-                  </Link>
-                  <Link  href="/admin/counsellor/session-records">
-                    <button className={`w-[224px] py-[12px] px-[16px] rounded-[4px]  text-white flex gap-[12px] hover:bg-adminGreenChosen  ${pathname=='/admin/counsellor/session-records'?"bg-adminGreenChosen font-semibold":"font-medium"}`}>
-                    <Image src="/assets/Images/admin/session-records.svg" width={40} height={40} className='w-[24px] h-[24px]' alt='sessions records icon'/> Session Records
-                    </button>
-                  </Link>
-                   <Link  href="/admin/counsellor/create-session">
-                    <button className={`w-[224px] py-[12px] px-[16px] rounded-[4px]  text-white flex gap-[12px] hover:bg-adminGreenChosen  ${pathname=='/admin/counsellor/create-session'?"bg-adminGreenChosen font-semibold":"font-medium"}`}>
-                    <Image src="/assets/Images/admin/session.svg" width={40} height={40} className='w-[24px] h-[24px]' alt='create session icon'/> Create Session
-                    </button>
-                  </Link>
-
-                  <Link  href="/admin/counsellor/sessions-record">
-                    <button className={`w-[224px] py-[12px] px-[16px] rounded-[4px]  text-white flex gap-[12px] hover:bg-adminGreenChosen  ${pathname=='/admin/counsellor/create-sessions'?"bg-adminGreenChosen font-semibold":"font-medium"}`}>
-                    <Image src="/assets/Images/admin/message.svg" width={40} height={40} className='w-[24px] h-[24px]' alt='message icon'/> Message
                     </button>
                   </Link>
                   

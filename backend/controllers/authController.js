@@ -158,7 +158,7 @@ const sendOtp = asyncHandler(async (req, res) => {
             const smsConfig = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/${phone}/${otp}/${encodeURIComponent('OTP SMS Template')}`,
+                url: `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/${phone}/${otp}/${encodeURIComponent('AuthSmsTemplate')}`,
                 headers: {}
             };
 

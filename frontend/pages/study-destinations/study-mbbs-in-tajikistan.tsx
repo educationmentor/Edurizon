@@ -358,7 +358,7 @@ const NewPage=()=>{
 
 
             <div className="pb-[10vw] md:pb-[6vw]">
-            <EdurizonProcess/>
+            <EdurizonProcess country="Tajikistan"/>
             </div>
             <VideoCarousel videoData={videoData}/>
             

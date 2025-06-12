@@ -72,21 +72,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: '/admin/document', 
       icon: '/assets/Images/admin/document.svg'
     },
-    { 
-      name: 'Finance', 
-      href: '/admin/finance', 
-      icon: '/assets/Images/admin/finance.svg'
-    },
-    { 
-      name: 'Marketing', 
-      href: '/admin/marketing', 
-      icon: '/assets/Images/admin/marketing.svg'
-    },
-    { 
-      name: 'Profile', 
-      href: '/admin/superadmin/profile', 
-      icon: '/assets/Images/admin/profile.svg'
-    },
+   
   ];
 
   // Filter navigation items based on user role
@@ -108,36 +94,38 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className="min-h-screen bg-white text-gray-900 flex">
       <aside className="w-[280px] bg-adminBgChosen text-white flex flex-col">
-        <div className="mx-auto">
-          <div className="mt-[48px] text-2xl font-bold">
-            <p className="text-center">EDURIZON</p>
+        <div className="mx-auto h-full flex flex-col justify-between py-[48px]">
+          <div>
+            <div className="text-2xl font-bold">
+              <p className="text-center">EDURIZON</p>
+            </div>
+            <nav className="mt-[40px] flex flex-col gap-[16px]">
+              {filteredNavigation.map((item) => {
+                const isActive = router.pathname === item.href;
+                return (
+                  <Link key={item.name} href={item.href}>
+                    <button
+                      className={`w-[224px] py-[12px] px-[16px] rounded-[4px] text-white flex gap-[12px] hover:bg-adminGreenChosen ${
+                        isActive ? "bg-adminGreenChosen font-semibold" : "font-medium"
+                      }`}
+                    >
+                      <Image
+                        src={item.icon}
+                        width={40}
+                        height={40}
+                        className="w-[24px] h-[24px]"
+                        alt={`${item.name.toLowerCase()} icon`}
+                      />
+                      {item.name}
+                    </button>
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
-          <nav className="mt-[40px] mb-[228px] flex flex-col gap-[16px]">
-            {filteredNavigation.map((item) => {
-              const isActive = router.pathname === item.href;
-              return (
-                <Link key={item.name} href={item.href}>
-                  <button
-                    className={`w-[224px] py-[12px] px-[16px] rounded-[4px] text-white flex gap-[12px] hover:bg-adminGreenChosen ${
-                      isActive ? "bg-adminGreenChosen font-semibold" : "font-medium"
-                    }`}
-                  >
-                    <Image
-                      src={item.icon}
-                      width={40}
-                      height={40}
-                      className="w-[24px] h-[24px]"
-                      alt={`${item.name.toLowerCase()} icon`}
-                    />
-                    {item.name}
-                  </button>
-                </Link>
-              );
-            })}
-          </nav>
           <button
             onClick={handleLogout}
-            className="w-[224px] py-[12px] px-[16px] rounded-[4px] text-white bg-[rgba(255,255,255,0.08)] flex gap-[12px] hover:bg-adminGreenChosen font-medium"
+            className="w-[224px] py-[12px] px-[16px] mb-[100px] rounded-[4px] text-white bg-[rgba(255,255,255,0.08)] flex gap-[12px] hover:bg-adminGreenChosen font-medium"
           >
             <Image
               src="/assets/Images/admin/logout.svg"

@@ -82,7 +82,7 @@ const NewPage=()=>{
                   ))}
                 </div>
             </div>
-            <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/Tajikistan1.png" alt="Tajikistan" width={1920} height={1080} className="w-full h-auto"/>
+            <Image src="/assets/Images/mbbs-in-tajikistan/tajik-national-university/tnu.jpg" alt="Tajikistan" width={1920} height={1080} className="w-full h-[35.8125vw]"/>
 
             {/* Mbbs from Tajik national University */}
             <section className="mx-[6vw] md:mx-[12.5vw] py-[10vw] md:py-[4vw]">
@@ -270,7 +270,7 @@ Tajik National University is the first and largest university in Tajikistan. It 
 
 
             <div className="pb-[10vw] md:pb-[6vw]">
-            <EdurizonProcess/>
+            <EdurizonProcess country="Tajikistan"/>
             </div>
             <VideoCarousel videoData={videoData}/>
             
