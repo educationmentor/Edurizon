@@ -7,251 +7,74 @@ import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '@/lib/baseUrl';
 import ChatBox from '@/components/ChatBox';
 
-interface Meeting {
-  _id: string;
-  status: string;
-  acceptedBy?: {
-    name: string;
-    email: string;
-  };
-  meetingTime: string;
-  googleMeetLink: string;
-}
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || `${baseUrl}`;
-
-// Helper function to validate Google Meet links
-const isValidMeetLink = (link: string | undefined): boolean => {
-  if (!link) return false;
-  
-  // Accept any link from Google Meet
-  return link.startsWith('https://meet.google.com/');
-};
 
 const StudentDashboard = () => {
-  const [meetings, setMeetings] = useState<Meeting[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [showChatBox, setShowChatBox] = useState(false);
-  const [activeChatRequest, setActiveChatRequest] = useState<Meeting | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userType, setUserType] = useState<'user' | 'counselor' | null>(null);
+
   const router = useRouter();
-
   useEffect(() => {
-    const fetchMeetings = async () => {
+    const checkAuthStatus = () => {
       try {
-        setLoading(true);
-        setError(null);
-        
-        const token = getAuthToken();
-        
-        if (!token) {
-          console.log('[STUDENT] No auth token found, redirecting to login');
-          router.push('/auth/login');
-          return;
-        }
-        
-        // Get user email from localStorage
         const userData = localStorage.getItem('user');
-        if (!userData) {
-          console.log('[STUDENT] No user data found');
-          router.push('/auth/login');
-          return;
-        }
-
-        const user = JSON.parse(userData);
-        const email = user.email;
+        const counselorToken = localStorage.getItem('counselorToken');
         
-        console.log('[STUDENT] Fetching meetings for:', email);
-        
-        const response = await axios.get(
-          `${API_URL}/api/consultation/student?email=${email}`, 
-          {
-            headers: {
-              Authorization: token
-            }
-          }
-        );
-
-        if (response.data && response.data.data && Array.isArray(response.data.data)) {
-          // Only show scheduled/accepted meetings
-          const scheduledMeetings = response.data.data.filter(
-            (meeting: Meeting) => meeting.status === 'scheduled' || meeting.status === 'accepted'
-          );
-          
-          // Log only upcoming meetings with their links
-          const now = new Date();
-          const upcomingMeetings = scheduledMeetings.filter((meeting: Meeting) => {
-            return meeting.status === 'scheduled' && new Date(meeting.meetingTime) > now;
-          });
-          
-          if (upcomingMeetings.length > 0) {
-            console.log(`[STUDENT] Found ${upcomingMeetings.length} upcoming meetings`);
-            upcomingMeetings.forEach((meeting: Meeting) => {
-              console.log(`[STUDENT] Meeting ${meeting._id} link: ${meeting.googleMeetLink || 'NO LINK'}`);
-            });
-          }
-          
-          setMeetings(scheduledMeetings);
+        if (userData) {
+          const user = JSON.parse(userData);
+          setIsLoggedIn(true);
+          // Get first name only
+          const firstName = (user.user?.name || user.name || '').split(' ')[0];
+          setUserName(firstName);
+          setUserType('user');
+        } else if (counselorToken) {
+          const counselorData = localStorage.getItem('counselorData');
+          const counselor = counselorData ? JSON.parse(counselorData) : {};
+          setIsLoggedIn(true);
+          setUserName(counselor.name || '');
+          setUserType('counselor');
         } else {
-          console.error('[STUDENT] Unexpected response format:', response.data);
-          setError('Received unexpected data format from server');
+          setIsLoggedIn(false);
+          setUserType(null);
+          setUserName('');
         }
-      } catch (error: any) {
-        console.error('[STUDENT] Error details:', error.response?.data);
-        console.error('[STUDENT] Error status:', error.response?.status);
-        console.error('[STUDENT] Failed to fetch meetings:', error);
-        
-        setError('Failed to fetch meetings. Please try again later.');
-        
-        if (axios.isAxiosError(error)) {
-          if (error.response?.status === 401) {
-            toast.error('Session expired. Please login again.');
-            router.push('/auth/login');
-          }
-        }
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error('Error checking auth status:', error);
+        setIsLoggedIn(false);
+        setUserType(null);
+        setUserName('');
       }
     };
 
-    fetchMeetings();
-    
-    // Poll for updates every 60 seconds
-    const interval = setInterval(fetchMeetings, 60000);
+    // Check auth status immediately
+    checkAuthStatus();
+
+    // Set up an interval to check auth status periodically
+    const interval = setInterval(checkAuthStatus, 5000); // Check every 5 seconds
+
+    // Clean up interval on component unmount
     return () => clearInterval(interval);
-  }, [router]);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString();
-  };
-
-  // Open Google Meet in a new window with proper config
-  const joinMeeting = (meetLink: string) => {
-    window.open(meetLink, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleOpenChat = (meeting: Meeting) => {
-    setActiveChatRequest(meeting);
-    setShowChatBox(true);
-  };
-
-  // Extract user data for the ChatBox
-  const getUserData = () => {
-    try {
-      const userData = localStorage.getItem('user');
-      if (!userData) return { name: '', email: '' };
-      
-      const user = JSON.parse(userData);
-      return {
-        name: user.name || '',
-        email: user.email || ''
-      };
-    } catch (err) {
-      console.error('Error parsing user data:', err);
-      return { name: '', email: '' };
+  }, []);
+ 
+  const handleLogout = () => {
+    if (userType === 'user') {
+      localStorage.removeItem('user');
+    } else if (userType === 'counselor') {
+      localStorage.removeItem('counselorToken');
+      localStorage.removeItem('counselorData');
     }
+    setIsLoggedIn(false);
+    setUserName('');
+    setUserType(null);
+    router.push('/');
   };
 
-  const { name: userName, email: userEmail } = getUserData();
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <ToastContainer position="top-right" autoClose={5000} />
-      <div className="container mx-auto p-4 pt-16 md:pt-24">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-          Student Dashboard
-        </h1>
-
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-            Upcoming Meetings
-          </h2>
-
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-              {error}
-            </div>
-          )}
-
-          {!error && meetings.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400">
-              No upcoming meetings scheduled.
-            </p>
-          ) : (
-            <div className="space-y-4">
-              {meetings.map((meeting) => (
-                <div
-                  key={meeting._id}
-                  className="border dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Meeting with: {meeting.acceptedBy?.name || 'Counselor'}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        Time: {formatDate(meeting.meetingTime)}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        Status: {meeting.status}
-                      </p>
-                    </div>
-                    
-                    <div className="flex flex-col space-y-2">
-                      {/* Chat button is always displayed for all meetings */}
-                      <button
-                        onClick={() => handleOpenChat(meeting)}
-                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                      >
-                        Chat
-                      </button>
-                      
-                      {meeting.googleMeetLink && isValidMeetLink(meeting.googleMeetLink) ? (
-                        <div className="flex flex-col space-y-2">
-                          <button
-                            onClick={() => joinMeeting(meeting.googleMeetLink)}
-                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                          >
-                            Join Meeting
-                          </button>
-                          <button
-                            onClick={() => {
-                              navigator.clipboard.writeText(meeting.googleMeetLink);
-                              toast.success('Meeting link copied to clipboard');
-                            }}
-                            className="inline-flex items-center justify-center px-3 py-1 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                          >
-                            Copy Link
-                          </button>
-                        </div>
-                      ) : meeting.status === 'scheduled' ? (
-                        <span className="text-sm text-amber-600 dark:text-amber-400 px-3 py-1 bg-amber-100 dark:bg-amber-900 rounded-md">
-                          Meeting link will be available soon
-                        </span>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {showChatBox && activeChatRequest && (
-        <ChatBox
-          requestId={activeChatRequest._id}
-          userType="student"
-          userEmail={userEmail}
-          userName={userName}
-          receiverName={activeChatRequest.acceptedBy?.name || 'Counselor'}
-          onClose={() => {
-            setShowChatBox(false);
-            setActiveChatRequest(null);
-          }}
-        />
-      )}
-    </div>
+   <div>
+    hi
+   </div>
   );
 };
 

@@ -119,6 +119,7 @@ const universities = [
       location: "Batumi",
       feesInUSD: 6500,
       hostelFeesInUSD: 3000,
+      href:'/study-destinations/study-mbbs-in-georgia/bau-international-university'
     },
     {
       id: 8,

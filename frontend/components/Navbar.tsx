@@ -19,10 +19,11 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const [userType, setUserType] = useState<'user' | 'counselor' | null>(null);
+  const [userType, setUserType] = useState<'student' | 'counselor'|'registered-student' | null>(null);
 
   const [hovered, setHovered] = useState(-1);
   const router = useRouter();
+  const [allowDashboard,setAllowDashboard]=useState(false);
   const isMainPage = router.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [transitionEnd, setTransitionEnd] = useState(false);
@@ -104,12 +105,13 @@ const Navbar = () => {
         const counselorToken = localStorage.getItem('counselorToken');
         
         if (userData) {
+          console.log(userData);
           const user = JSON.parse(userData);
           setIsLoggedIn(true);
           // Get first name only
           const firstName = (user.user?.name || user.name || '').split(' ')[0];
           setUserName(firstName);
-          setUserType('user');
+          setUserType(user.type);
         } else if (counselorToken) {
           const counselorData = localStorage.getItem('counselorData');
           const counselor = counselorData ? JSON.parse(counselorData) : {};
@@ -137,20 +139,15 @@ const Navbar = () => {
 
     // Clean up interval on component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
 
-  const handleLogout = () => {
-    if (userType === 'user') {
-      localStorage.removeItem('user');
-    } else if (userType === 'counselor') {
-      localStorage.removeItem('counselorToken');
-      localStorage.removeItem('counselorData');
+  useEffect(()=>{
+    if(userType=='registered-student'){
+      setAllowDashboard(true);
+    }else{
+      setAllowDashboard(false);
     }
-    setIsLoggedIn(false);
-    setUserName('');
-    setUserType(null);
-    router.push('/');
-  };
+  },[userType])
 
 
   return (
@@ -299,22 +296,6 @@ key={index}
                         </ul>
                       :<></>}
                       </div>
-                  {/* <ul className="ml-auto w-[60vw] grid grid-cols-3 gap-y-[1vw] gap-x-[1.75vw]">
-                    {(studyDestinationHover==1?(
-                        topUniversitites.map((destination, i) => (
-                          <div key={i} onClick={()=>setDropdownVisible(false)}>
-                          <TransitionLink  href={destination.href}>
-                            <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                                <h5 className='text-regularText font-bold'>
-                                {destination.name}
-                                </h5>
-                            </li>
-                          </TransitionLink>
-                          </div>
-                        ))
-                      ):"") }
-                      
-                    </ul> */}
 
              
               </div>
@@ -344,49 +325,27 @@ key={index}
 {/* Action Buttons */}
         <div className="flex gap-[1vw] md:gap-[.5vw] items-center">
 
-        {isLoggedIn ? (
-            <div className="relative flex items-center gap-4">
-              <button
-                className="flex items-center gap-2 hover:text-orangeChosen transition-colors"
-                onMouseEnter={() => setUserDropdownVisible(true)}
-                onMouseLeave={() => setUserDropdownVisible(false)}
-              >
-                <span className="hidden md:block">Welcome, {userName}</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                {userDropdownVisible && (
-                  <div className="absolute right-0 mt-8 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
-                    {userType === 'counselor' ? (
-                      <button
-                        onClick={() => router.push('/counselor/dashboard')}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                      >
-                        Dashboard
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => router.push('/studentDashboard')}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                      >
-                        Dashboard
-                      </button>
-                    )}
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </button>
-            </div>):
+        {isLoggedIn ?  (
+            <div className="hidden md:flex relative  items-center justify-center gap-4 ">
+              <div className='border-orangeChosen border-[2px] rounded-full'>
+              <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[2.5vw] h-[2.5vw] rounded-full' />
+              </div>
+              <div className='flex flex-col '>
+              <span className=" text-smallTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
+              <TransitionLink href="/studentDashboard">
+              <button disabled={!allowDashboard}
+                className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
+                <span className="hidden md:block text-smallTextPhone leading-[100%]">View Dashboard</span>
 
+              </button>
+
+              </TransitionLink>
+              </div>
+            </div>):
+  <>
           <TransitionLink href="/login">
             <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Login" />
-          </TransitionLink>}
-          
+          </TransitionLink>
           <TransitionLink href="/signup">
           <IconButton onClick={() => {}} 
           className="text-smallTextPhone flex  md:hidden lg:flex md:text-smallText" 
@@ -403,6 +362,10 @@ key={index}
             image="/assets/Images/Icons/ApplyNowIcon.svg"
             btnTitle="Apply Now"/>
           </TransitionLink>
+          </>
+          }
+          
+          
           
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <Image src="/assets/Images/Icons/menuIcon.svg" width="40" height="40" alt="menuIcon" className="md:hidden w-[8vw] h-[8vw]" />
@@ -421,12 +384,27 @@ key={index}
     <div className={`fixed top-[14vw] w-[90vw] h-full px-[3vw] dark:text-black bg-[#f7f2fa] mt-[5vw] shadow-lg p-4 transition-all duration-300 transform ${
           isMenuOpen ? transitionEnd ? "right-0":"right-[2vw]" : "right-[-90vw]"}`} onTransitionEnd={() => isMenuOpen && setTimeout(() => setTransitionEnd(true), 10)} >
         <div className='flex justify-start gap-[3vw]'>
-          <div className='ml-auto'>
-        <TransitionLink href="/signup">
+          
+       {isLoggedIn?<div className="mx-[4vw] flex relative  items-center justify-center gap-1 ">
+              <div className='border-orangeChosen border-[2px] rounded-full'>
+              <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[12vw] h-auto rounded-full' />
+              </div>
+              <div className='flex flex-col '>
+              <span className=" text-regularTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
+              <TransitionLink href="/studentDashboard">
+              <button disabled={!allowDashboard}
+                className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
+                <span className="text-regularTextPhone leading-[100%]">View Dashboard</span>
+
+              </button>
+
+              </TransitionLink>
+              </div>
+            </div>:<div className='ml-auto'><TransitionLink href="/signup">
          <IconButton className='ml-auto text-smallTextPhone opacity-70  ' image='/assets/Images/Icons/ApplyNowIcon.svg' iconWidth={0} padding={0} btnWidth={0} btnTitle='Apply Now' btnRadius={0} btnRadiusPhone={15} btnHeight={0} iconWidthPhone={7.75} paddingPhone={1.75} btnWidthPhone={34} btnHeightPhone={11}/>
-        </TransitionLink>
-        </div>
-        <button  className=" text-orangeChosen " onClick={() => (setIsMenuOpen(false),setTransitionEnd(false))}>
+        </TransitionLink></div>}
+        
+        <button  className="ml-auto text-orangeChosen " onClick={() => (setIsMenuOpen(false),setTransitionEnd(false))}>
         <svg xmlns="http://www.w3.org/2000/svg" className='w-[6vw] h-[6vw]' viewBox="0 0 24 24" fill="none" stroke='#FF7500' 
           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
           <line x1="18" y1="6" x2="6" y2="18" />
@@ -445,9 +423,9 @@ key={index}
             </div>
           ))}
         </div>
-          <div className='flex justify-center mt-[2vw]'>
+          {isLoggedIn?<></>:<div className='flex justify-center mt-[2vw]'>
             <TitleButton  btnWidthPhone={76} btnHeight={0} btnHeightPhone={11} btnRadius={0} btnRadiusPhone={25} btnTitle='Login' btnWidth={0}/>
-          </div>
+          </div>}
       </div>
       </div>
 
