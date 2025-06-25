@@ -38,7 +38,7 @@ const DescriptionComponent = ({ id,title1normal,title1orange,title2,content1,con
                     </div>
                     
                   </div>
-                <Image width={500} height={500} className="w-full md:w-[32.375vw] px-[3vw] md:px-0 h-auto" src={imageSrc} alt={imageAlt} />
+                <Image width={500} height={500} className="rounded-full w-full md:w-[32.375vw] px-[3vw] md:px-0 h-auto" src={imageSrc} alt={imageAlt} />
         </div>
     );
     }

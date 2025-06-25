@@ -65,6 +65,8 @@ const Breadcrumbs: React.FC = () => {
     "east-european-university":"East European University",
     "georgian-national-university-seu":"Georgian National University SEU",
     "international-black-sea-university":"International Black Sea University",
+    'study-mbbs-in-kyrgyzstan':'Study MBBS in Kyrgyzstan',
+    'central-asian-international-medical-university':'Central Asian International Medical University',
   };
 
   return (

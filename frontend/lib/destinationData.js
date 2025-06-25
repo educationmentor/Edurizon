@@ -17,7 +17,7 @@ export const destinationData =[
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Tajikistan.webp", title:"Study in Tajikistan", category:"Destination", href:"/study-destinations/study-mbbs-in-tajikistan",
       description:"Get an affordable and high-quality MBBS degree in Tajikistan with globally accepted medical programs.",
     },
-    {image:"/assets/Images/CountryBlogs/studyDestinationCard/Kyrgyzstan.webp", title:"Study in Kyrgyzstan", category:"Destination",href:"/#",
+    {image:"/assets/Images/CountryBlogs/studyDestinationCard/Kyrgyzstan.webp", title:"Study in Kyrgyzstan", category:"Destination",href:"/study-destinations/study-mbbs-in-kyrgyzstan",
       description:"Study MBBS in Kyrgyzstan with low tuition fees, English-medium instruction, and NMC/WHO-approved universities.",
     },  
     

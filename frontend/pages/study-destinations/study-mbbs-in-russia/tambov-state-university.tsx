@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import RelatedVideos from '@/components/videoSlider';
 
 const services = [
     {
@@ -24,6 +25,60 @@ const services = [
       label: "Biggest Hospital in the region",
     },
   ];
+  const videoData=[
+    {
+      id: 0,
+      title: "You won't find better university than this under 30 lakhs in Russia",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/xm14Ck8YilA/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=xm14Ck8YilA',
+    },
+    {
+      id: 1,
+      title: "Tambov State University Russia | Best Budget-Friendly MBBS Option for Indian Students",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/avYg0ak9Qms/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=avYg0ak9Qms',
+    },
+    {
+      id: 2,
+      title: "Tambov State University || The Best University Under 24 Lakhs | MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/0pfplVt8M08/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=0pfplVt8M08',
+    },
+    {
+      id: 3,
+      title: "Hostel of Tambov State University || MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/G3pOwOGY4DI/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=G3pOwOGY4DI',
+    },
+    {
+      id: 4,
+      title: "Introducing one of the leading University of Russia || Tambov State University || MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/r_lZ1U3oIvY/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=r_lZ1U3oIvY',
+    },
+  
+  ]
+
 
 const NewPage = () => {
   return (
@@ -359,6 +414,7 @@ const NewPage = () => {
     </div>
   </div>
 </section>
+<RelatedVideos videoData={videoData}/>
 <div className='h-[4vw]'/>
     </div>
   )

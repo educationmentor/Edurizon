@@ -112,6 +112,7 @@ const universities = [
       location: "Tbilisi",
       feesInUSD: 6000,
       hostelFeesInUSD: 3000,
+      
     },
     {
       id: 7,
