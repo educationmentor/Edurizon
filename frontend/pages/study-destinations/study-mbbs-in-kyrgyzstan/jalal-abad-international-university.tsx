@@ -262,7 +262,7 @@ const TbilisiStateMedicalUniversity = () => {
                     <li>Separate hostels for Boys and Girls.</li>
                     <li>Relaxing and peaceful stay that is conducive to learning is assured.</li>
                     <li>Numerous Indian restaurants are there in the market where students can enjoy Indian food.</li>
-                    <li>Students are very well taken-care of during their entire stay in CAIMU.</li>
+                    <li>Students are very well taken-care of during their entire stay in JAIU.</li>
                     <li>Considered a safe snf student-friendly city.</li>
                     <li>Law enforcement is active; student ID is often sufficient for identification.</li>
                                         
@@ -285,7 +285,7 @@ const TbilisiStateMedicalUniversity = () => {
             <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
             <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
                 
-            <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">CAIMU initial admission Process</h3>
+            <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">JAIU initial admission Process</h3>
                 <p className="text-smallTextPhone text-left md:text-regularText">Documents required:</p>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
                     <li>Copy of 10/12 Marksheet</li>
@@ -295,7 +295,7 @@ const TbilisiStateMedicalUniversity = () => {
                     <li>Passport-sized photos</li>
                 </ul>
 
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">CAIMU complete admission Process:</h3>
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">JAIU complete admission Process:</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
                     <li><strong>Step 1:</strong> Application form to be filled meticulously.</li>
                     <li><strong>Step 2:</strong> Students must submit their educational certificates and other supporting documents</li>
