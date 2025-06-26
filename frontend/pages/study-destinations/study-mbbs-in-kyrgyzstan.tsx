@@ -137,7 +137,8 @@ const NewPage = () => {
                 <h2 className="text-h4TextPhone md:text-h2Text font-bold leading-[120%] text-center">Top ranking medical colleges in Kyrgyzstan</h2>
                 <ul className="grid grid-cols-1 md:grid-cols-4 gap-[1.5vw] font-bold pl-[3vw] md:pl-[1.5vw] list-decimal">
                     <li>Jalal-Abad State University</li>
-                    <li>Jalal-Abad International University</li>
+                    <TransitionLink href='/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university'>
+                    <li>Jalal-Abad International University</li></TransitionLink>
                     <TransitionLink href="/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university">
                     <li>Central Asian International Medical University</li></TransitionLink>
                     <li>Osh State Medical University</li>

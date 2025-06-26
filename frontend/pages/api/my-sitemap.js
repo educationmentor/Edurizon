@@ -15,7 +15,7 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-in-australia', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-in-germany', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-in-hungary', changefreq: 'daily', priority: 0.3 },
-        { url: '/study-destinations/study-in-kyrgyzstan', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-in-uk', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-bangladesh', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-georgia', changefreq: 'daily', priority: 0.3 },
@@ -80,7 +80,10 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-mbbs-in-georgia/david-tvildiani-medical-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-georgia/international-black-sea-university', changefreq: 'daily', priority: 0.3 },
         
-
+        //MBBS in Krgystan
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university', changefreq: 'daily', priority: 0.3 },
+        
         
     ];
 
