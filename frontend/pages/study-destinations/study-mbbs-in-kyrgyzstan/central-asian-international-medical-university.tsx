@@ -3,25 +3,13 @@ import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
 
-const academicCalenderData = {
-    id: "nepal",
-    section2: "",
-    content: {
-        title: "Academic Calendar",
-        subTitle: "Important dates for MBBS admission at Tbilisi State Medical University",
-        data: [["Events", "Dates"],
-        ["Admission process", "Starts in May"],
-        ["Last date of application", "July/August"],
-        ["Commencement of MBBS course", "September/October"]],
-    }
-}
 
 const eligibilityData = {
     id: "nepal",
     section2: "",
     content: {
         title: "Eligibility Criteria",
-        subTitle: "Eligibility Criteria for MBBS in TSMU for Indian students",
+        subTitle: "Eligibility Criteria for MBBS in CAIMU for Indian students",
         data: [["Criteria", "Details"],
         ["Age", "Must be 17 years of age as on December 31st of the admission year"],
         ["Academic Qualification", ["Class 12 with PCB", "Minimum 50% in PCB"]],
