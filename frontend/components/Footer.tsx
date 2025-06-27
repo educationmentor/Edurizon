@@ -13,7 +13,7 @@ const quickLinks = [{ name: "Home", href: "/" },
   { name: "Contact Us", href: "https://wa.me/919873381377?" },];
 const countries = [ { name: "Russia", href: "/study-destinations/study-mbbs-in-russia" },
   { name: "China", href: "/study-destinations/study-mbbs-in-china" },
-  { name: "Germany", href: "/study-destinations/study-mbbs-in-germany" },
+  { name: "Germany", href: "/study-destinations/study-in-germany" },
   { name: "Georgia", href: "/study-destinations/study-mbbs-in-georgia" },
   { name: "Kazakhstan", href: "/study-destinations/study-mbbs-in-kazakhstan" },
   { name: "Bangladesh", href: "/study-destinations/study-mbbs-in-bangladesh" },
