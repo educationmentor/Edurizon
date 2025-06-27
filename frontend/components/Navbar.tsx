@@ -46,19 +46,20 @@ const Navbar = () => {
     {name:"MBBS in Russia", href:"/study-destinations/study-mbbs-in-russia",flag:"/assets/Images/country-flag/russia.png"},
     {name:"MBBS in Georgia", href:"/study-destinations/study-mbbs-in-georgia",flag:"/assets/Images/country-flag/georgia.png"},
     {name:"MBBS in Tajikistan", href:"/study-destinations/study-mbbs-in-tajikistan",flag:"/assets/Images/country-flag/tajikistan.png"},
-    {name:"MBBS in China", href:"/study-destinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
+    {name:"MBBS in Kyrgyzstan", href:"/study-destinations/study-mbbs-in-kyrgyzstan",flag:"/assets/Images/country-flag/kyrgyzstan.png"},
+
   ]
    const studyDestinations2=[
+    {name:"MBBS in China", href:"/study-destinations/study-mbbs-in-china",flag:"/assets/Images/country-flag/china.png"},
     {name:"MBBS in Bangladesh", href:"/study-destinations/study-mbbs-in-bangladesh",flag:"/assets/Images/country-flag/bangladesh.png"},
     {name:"MBBS in Kazakhstan", href:"/study-destinations/study-mbbs-in-kazakhstan",flag:"/assets/Images/country-flag/kazakhstan.png"},
     {name:"MBBS in Uzbekistan", href:"/study-destinations/study-mbbs-in-uzbekistan",flag:"/assets/Images/country-flag/uzbekistan.png"},
     {name:"MBBS in Nepal", href:"/study-destinations/study-mbbs-in-nepal",flag:"/assets/Images/country-flag/nepal.png"},
-    // {name:"MBBS in Kyrgyzstan", href:"/study-destinations/study-mbbs-in-kyrgyzstan",flag:"/assets/Images/country-flag/kyrgyzstan.png"},
-    {name:"MBBS in Ukraine", href:"/study-destinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
 
    ]
 
    const studyDestinations3=[
+    {name:"MBBS in Ukraine", href:"/study-destinations/study-mbbs-in-ukraine",flag:"/assets/Images/country-flag/ukraine.png"},
     {name:"Study in Germany", href:"/study-destinations/study-in-germany",flag:"/assets/Images/country-flag/german.png"},
     {name:"Study in UK", href:"/study-destinations/study-in-uk",flag:"/assets/Images/country-flag/uk.png"},
     {name:"Study in Hungary", href:"/study-destinations/study-in-hungary",flag:"/assets/Images/country-flag/hungary.png"},
@@ -234,7 +235,7 @@ key={index}
                           <div key={i} onClick={()=>setDropdownVisible(false)}>
                           <TransitionLink  href={destination.href}>
                             <li className="flex flex-row items-center gap-[1.125vw] hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white  cursor-pointer transition-all duration-300">
-                                <Image src={destination.flag} width={50} height={50} alt='flag' className={`shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
+                                <Image src={destination.flag} width={50} height={50} alt='flag' className={` shadow-xl rounded-full h-[2.5vw] w-[2.5vw] `}/>
                                 <h5 className='text-mediumText font-bold'>
                                 {destination.name}
                                 </h5>
