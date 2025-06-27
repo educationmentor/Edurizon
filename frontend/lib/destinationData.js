@@ -268,6 +268,97 @@ export const destinationData =[
     category: "University",
     href: "/study-destinations/study-mbbs-in-nepal/janaki-medical-college",
     description: "Janaki Medical College was established in the year 2003 with an annual intake of 80 students a year to a Bachelor of Medicine and Bachelor of Surgery program."
+  },
+  {
+    image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/nepalgunj-medical-college.webp",
+    title: "Nepalgunj Medical College",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-nepal/nepalgunj-medical-college",
+    description: "Nepalgunj Medical College, established to cater to the growing demand for quality medical education in Nepal, offers modern teaching facilities and hospital training for MBBS students."
+  },
+  // {
+  //   image: "/assets/Images/CountryBlogs/studyDestinationCard/germany/ausbildung.webp",
+  //   title: "Ausbildung in Germany",
+  //   category: "University",
+  //   href: "/study-destinations/study-in-germany/ausbildung",
+  //   description: "Ausbildung in Germany offers vocational training opportunities across multiple fields, providing a gateway to practical careers with strong industry ties."
+  // },
+  {
+    image: "/assets/Images/mbbs-in-tajikistan/khatlon-state-medical-university.png",
+    title: "Khatlon State Medical University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university",
+    description: "Located in the Khatlon region of Tajikistan, this university is known for its affordable MBBS programs and commitment to medical excellence."
+  },
+  {
+    image: "/assets/Images/mbbs-in-tajikistan/tajik-national-university.png",
+    title: "Tajik National University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-tajikistan/tajik-national-university",
+    description: "Founded in 1947, Tajik National University is one of the leading universities in Tajikistan offering MBBS courses with a strong emphasis on research and practical skills."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/SEU.png",
+    title: "Georgian National University SEU",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/georgian-national-university-seu",
+    description: "SEU is a modern university located in Tbilisi, Georgia, offering globally recognized MBBS programs with state-of-the-art infrastructure."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/EEU.png",
+    title: "East European University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/east-european-university",
+    description: "East European University in Georgia provides internationally accredited MBBS programs in English, ensuring quality education for aspiring doctors."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/TSMU.png",
+    title: "Tbilisi State Medical University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/tbilisi-state-medical-university",
+    description: "Established in 1918, Tbilisi State Medical University is one of the oldest and most prestigious medical institutions in Georgia."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/bau-international-university.png",
+    title: "BAU International University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/bau-international-university",
+    description: "BAU International University, Batumi, established in 2015 as part of the BAU Global Network, delivers a 6‑year English‑medium MD program accredited by WFME and recognized by WHO and NMC/India. It blends an American‑model curriculum with early clinical exposure, cadaver labs, USMLE prep, modern simulation, and multicultural campus life in Batumi’s health‑centre hub.",
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/NVU.png",
+    title: "New Vision University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/new-vision-university",
+    description: "New Vision University is a dynamic institution in Georgia known for its innovative approach to medical education and clinical research."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/DTMU.png",
+    title: "David Tvildiani Medical University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/david-tvildiani-medical-university",
+    description: "David Tvildiani Medical University stands out for its USMLE-focused curriculum and is highly regarded among international MBBS aspirants."
+  },
+  {
+    image: "/assets/Images/mbbs-in-georgia/IBSU.png",
+    title: "International Black Sea University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university",
+    description: "This Tbilisi-based university blends modern education with international standards, offering MBBS courses in English."
+  },
+  {
+    image: "/assets/Images/mbbs-in-kyrgyzstan/JAIU.png",
+    title: "Jalal-Abad International University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university",
+    description: "Jalal-Abad International University is a reputed institution in Kyrgyzstan providing comprehensive MBBS training for global students."
+  },
+  {
+    image: "/assets/Images/mbbs-in-kyrgyzstan/CAIMU.png",
+    title: "Central Asian International Medical University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university",
+    description: "Located in Bishkek, this university offers affordable and quality medical education with English-taught MBBS programs."
   }
  
   ]
