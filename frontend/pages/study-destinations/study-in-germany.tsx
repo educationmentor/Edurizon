@@ -147,18 +147,18 @@ const NewPage=()=>{
                             </tr>
                             <tr>
                                 <th scope="row">2.</th> 
-                                <td><b><a href="/assets/pdf/bachelors-in-english-taught.pdf" target="_blank">Bachelors</a></b></td> 
-                                <td><a href="/assets/pdf/bachelors-in-english-taught.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/bachelors-in-germany" >Bachelors</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/bachelors-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">3.</th>
-                                <td><b><a href="/assets/pdf/masters-in-english-taught-programe.pdf" target="_blank">Masters</a></b></td> 
-                                <td><a href="/assets/pdf/masters-in-english-taught-programe.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/masters-in-germany" >Masters</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/masters-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">4.</th> 
-                                <td><b><a href="/assets/pdf/md-medicine-germany.pdf" target="_blank">MD – Medicine</a></b></td> 
-                                <td><a href="/assets/pdf/md-medicine-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/md-in-germany" >MD – Medicine</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/md-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">5.</th>

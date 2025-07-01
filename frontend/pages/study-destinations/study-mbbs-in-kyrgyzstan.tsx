@@ -65,6 +65,63 @@ const academicData={
     }
 }
 
+const universities = [
+    {
+      id: 1,
+      name: "Jalal-Abad State University",
+      feesInUSD: 4200,
+      feesInINR: '3,57,000',
+      hostelFeesInUSD: 800,
+      hostelFeesInINR: '68,000',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-state-university"
+    },
+    {
+      id: 2,
+      name: "Jalal-Abad International University",
+      feesInUSD: 3200,
+      feesInINR: '2,72,000',
+      hostelFeesInUSD: 500,
+      hostelFeesInINR: '42,500',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university"
+    },
+    {
+      id: 3,
+      name: "Osh International State Medical University",
+      feesInUSD: 3500,
+      feesInINR: '2,97,500',
+      hostelFeesInUSD: 600,
+      hostelFeesInINR: '51,000',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/osh-international-state-medical-university"
+    },
+    {
+      id: 4,
+      name: "Osh State University",
+      feesInUSD: 4000,
+      feesInINR: '3,40,000',
+      hostelFeesInUSD: 800,
+      hostelFeesInINR: '68,000',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/osh-state-university"
+    },
+    {
+      id: 5,
+      name: "Royal Metropolitan Medical College",
+      feesInUSD: 3500,
+      feesInINR: '2,97,000',
+      hostelFeesInUSD: 800,
+      hostelFeesInINR: '68,000',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-medical-college"
+    },
+    {
+      id: 6,
+      name: "CAIMU",
+      feesInUSD: 3200,
+      feesInINR: '2,72,000',
+      hostelFeesInUSD: 500,
+      hostelFeesInINR: '42,500',
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university"
+    },
+  ];
+
 
 
   
@@ -133,17 +190,55 @@ const NewPage = () => {
 
             {/* Top 5 NMC - Approved  */}
 
-            <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
-                <h2 className="text-h4TextPhone md:text-h2Text font-bold leading-[120%] text-center">Top ranking medical colleges in Kyrgyzstan</h2>
-                <ul className="grid grid-cols-1 md:grid-cols-4 gap-[1.5vw] font-bold pl-[3vw] md:pl-[1.5vw] list-decimal">
-                    <li>Jalal-Abad State University</li>
-                    <TransitionLink href='/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university'>
-                    <li>Jalal-Abad International University</li></TransitionLink>
-                    <TransitionLink href="/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university">
-                    <li>Central Asian International Medical University</li></TransitionLink>
-                    <li>Osh State Medical University</li>
-                </ul>
-           </div>
+             {/* Geogia Fees */}
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] flex flex-col gap-[2vw] md:gap-[1.5vw]">
+           <h3 className="text-h5TextPhone md:text-h3Text font-bold text-center leading-[120%]">TOP MEDICAL UNIVERSITIES IN KRYGYZSTAN</h3>
+           <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
+                <thead className="text-smallTextPhone md:text-regularText text-center font-bold align-top bg-linenChosen">
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Name of University</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Tution Fees in USD/Year</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Tution Fees in INR/Year</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Hostel Fees in USD/Year</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Hostel Fees in INR/Year</td>
+                    <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Know More</td>
+                </thead>
+            <tbody className="text-smallTextPhone md:text-regularText align-top"> 
+
+                {universities.map((college, index) => (
+          <tr key={college.id}>
+            
+            <td className="border font-bold underline dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href ? <TransitionLink href={college.href}>
+                {college.name}
+              </TransitionLink>:
+              <>{college.name}</>
+              }
+              
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.feesInUSD}
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.feesInINR}
+            </td>
+            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.hostelFeesInUSD}
+            </td>
+            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.hostelFeesInINR}
+            </td>
+            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+              {college.href && <TransitionLink href={college.href}>
+                Know More
+              </TransitionLink>}
+            </td>
+            
+          </tr>
+        ))}
+              
+            </tbody>
+          </table>
+          </section>
            
            <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
 
