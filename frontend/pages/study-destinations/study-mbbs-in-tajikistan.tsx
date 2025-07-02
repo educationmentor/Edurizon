@@ -126,6 +126,26 @@ const universitiesData = [
     duration: "5+1 years",
     recognition: "WHO, NMC",
     href: "/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university"
+  },
+  {
+    id: 3,
+    name: "Medical Social Institute of Tajikistan",
+    location: "Dushanbe",
+    year: 2009,
+    fee: "$4000 | $500",
+    duration: "5+1 years",
+    recognition: "WHO, NMC",
+    href: "/study-destinations/study-mbbs-in-tajikistan/medical-social-institute-of-tajikistan"
+  },
+  {
+    id: 4,
+    name: "Avicenna Tajik State Medical University",
+    location: "Dushanbe",
+    year: 2009,
+    fee: "$4000 | $500",
+    duration: "5+1 years",
+    recognition: "WHO, NMC",
+    href: "/study-destinations/study-mbbs-in-tajikistan/avicenna-tajik-state-medical-university"
   }
 ];
 

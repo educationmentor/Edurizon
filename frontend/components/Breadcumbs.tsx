@@ -67,7 +67,17 @@ const Breadcrumbs: React.FC = () => {
     "international-black-sea-university":"International Black Sea University",
     'study-mbbs-in-kyrgyzstan':'Study MBBS in Kyrgyzstan',
     'central-asian-international-medical-university':'Central Asian International Medical University',
-    'jalal-abad-international-university':'Jalal Abad International University'
+    'jalal-abad-international-university':'Jalal Abad International University',
+    'avicenna-tajik-state-medical-university':'Avicenna Tajik State Medical University',
+    'medical-social-institute-of-tajikistan':'Medical Social Institute of Tajikistan',
+    'osh-state-university':'Osh State University',
+    'osh-international-state-medical-university':'Osh International State Medical University',
+    'jalal-abad-state-university':'Jalalabad State University',
+    'royal-metropolitan-university':'Royal Metropolitan University',
+    'bachelors-in-germany':'Bachelors in Germany',
+    'masters-in-germany':'Masters in Germany',
+    'md-in-germany':'MD in Germany',
+    'hotel-management-in-germany':'Hotel Management in Germany',
   };
 
   return (

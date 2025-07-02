@@ -283,6 +283,8 @@ export const destinationData =[
   //   href: "/study-destinations/study-in-germany/ausbildung",
   //   description: "Ausbildung in Germany offers vocational training opportunities across multiple fields, providing a gateway to practical careers with strong industry ties."
   // },
+
+  // MBBS in Tajikistan
   {
     image: "/assets/Images/mbbs-in-tajikistan/khatlon-state-medical-university.png",
     title: "Khatlon State Medical University",
@@ -297,6 +299,22 @@ export const destinationData =[
     href: "/study-destinations/study-mbbs-in-tajikistan/tajik-national-university",
     description: "Founded in 1947, Tajik National University is one of the leading universities in Tajikistan offering MBBS courses with a strong emphasis on research and practical skills."
   },
+  {
+    image: "/assets/Images/mbbs-in-tajikistan/MSIT.png",
+    title: "Medical Social Institute of Tajikistan",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-tajikistan/medical-social-institute-of-tajikistan",
+    description: "Medical Social Institute of Tajikistan is a leading institution in Tajikistan offering comprehensive MBBS training for global students."
+  },
+  {
+    image: "/assets/Images/mbbs-in-tajikistan/ATSMU.png",
+    title: "Avicenna Tajik State Medical University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-tajikistan/avicenna-tajik-state-medical-university",
+    description: "Avicenna Tajik State Medical University is a leading institution in Tajikistan offering comprehensive MBBS training for global students."
+  },
+
+  // MBBS in Georgia
   {
     image: "/assets/Images/mbbs-in-georgia/SEU.png",
     title: "Georgian National University SEU",
@@ -346,6 +364,8 @@ export const destinationData =[
     href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university",
     description: "This Tbilisi-based university blends modern education with international standards, offering MBBS courses in English."
   },
+
+  // MBBS in Kyrgyzstan
   {
     image: "/assets/Images/mbbs-in-kyrgyzstan/JAIU.png",
     title: "Jalal-Abad International University",
@@ -354,12 +374,42 @@ export const destinationData =[
     description: "Jalal-Abad International University is a reputed institution in Kyrgyzstan providing comprehensive MBBS training for global students."
   },
   {
+    image:"/assets/Images/mbbs-in-kyrgyzstan/JASU.png",
+    title:"Jalalabad State University",
+    category:"University",
+    href:"/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-state-university",
+    description:"Jalalabad State University is a leading institution in Kyrgyzstan offering comprehensive MBBS training for global students."
+  },
+  {
+    image:"/assets/Images/mbbs-in-kyrgyzstan/Osh-state-university.png",
+    title:"Osh State University",
+    category:"University",
+    href:"/study-destinations/study-mbbs-in-kyrgyzstan/osh-state-university",
+    description:"Osh State University is a leading institution in Kyrgyzstan offering comprehensive MBBS training for global students."
+  },
+  {
+    image:"/assets/Images/mbbs-in-kyrgyzstan/Osh-intenational-state-medical-university.png",
+    title:"Osh International State Medical University",
+    category:"University",
+    href:"/study-destinations/study-mbbs-in-kyrgyzstan/osh-international-state-medical-university",
+    description:"Osh International State Medical University is a leading institution in Kyrgyzstan offering comprehensive MBBS training for global students."
+  },
+  {
     image: "/assets/Images/mbbs-in-kyrgyzstan/CAIMU.png",
     title: "Central Asian International Medical University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university",
     description: "Located in Bishkek, this university offers affordable and quality medical education with English-taught MBBS programs."
-  }
+  },
+  {
+    image: "/assets/Images/mbbs-in-kyrgyzstan/RMU.png",
+    title: "Royal Metropolitan University",
+    category: "University",
+    href: "/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university",
+    description: "Royal Metropolitan University is a leading institution in Kyrgyzstan offering globally recognized MBBS programs with state-of-the-art infrastructure."
+  },
+
+  
  
   ]
 
