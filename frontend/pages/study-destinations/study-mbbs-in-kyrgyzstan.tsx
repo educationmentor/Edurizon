@@ -104,12 +104,12 @@ const universities = [
     },
     {
       id: 5,
-      name: "Royal Metropolitan Medical College",
+      name: "Royal Metropolitan University",
       feesInUSD: 3500,
       feesInINR: '2,97,000',
       hostelFeesInUSD: 800,
       hostelFeesInINR: '68,000',
-      href: "/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-medical-college"
+      href: "/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university"
     },
     {
       id: 6,

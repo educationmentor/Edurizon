@@ -162,8 +162,8 @@ const NewPage=()=>{
                             </tr>
                             <tr>
                                 <th scope="row">5.</th>
-                                <td><b><a href="/assets/pdf/hotel-managment-in-germany.pdf" target="_blank">Hotel Management</a></b></td> 
-                                <td><a href="/assets/pdf/hotel-managment-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/hotel-management-in-germany" >Hotel Management</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/hotel-management-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">6.</th>

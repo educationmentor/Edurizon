@@ -67,6 +67,10 @@ const sitemap= async (req, res) => {
 
         // Study in Germany 
         { url: '/study-destinations/study-in-germany/ausbildung', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/bachelors-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/masters-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/md-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/hotel-management-in-germany', changefreq: 'daily', priority: 0.3 },
 
         // Study in Tajikistan
         { url: '/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university', changefreq: 'daily', priority: 0.3 },
@@ -82,7 +86,12 @@ const sitemap= async (req, res) => {
         
         //MBBS in Krgystan
         { url: '/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/osh-state-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-state-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/osh-international-state-medical-university', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university', changefreq: 'daily', priority: 0.3 },
+
         
         
     ];
