@@ -172,42 +172,37 @@ const NewPage=()=>{
                             </tr>
                             <tr>
                                 <th scope="row">7.</th>
-                                <td><b><a href="/assets/pdf/nurses-in-germany.pdf" target="_blank">Nursing</a></b></td> 
-                                <td><a href="/assets/pdf/nurses-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/nursing-in-germany" >Nursing</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/nursing-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">8.</th> 
-                                <td><b><a href="/assets/pdf/vocational-courses-in-germany.pdf" target="_blank">Vocational Courses</a></b></td> 
-                                <td><a href="/assets/pdf/vocational-courses-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/vocational-courses-in-germany" >Vocational Courses</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/vocational-courses-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">9.</th> 
-                                <td><b><a href="/assets/pdf/" target="_blank">MBBS / BDS</a></b></td> 
-                                <td><a href="/assets/pdf/" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10.</th> 
                                 <td><b><a href="/assets/pdf/germany/german-education-system.pdf" target="_blank">German Education System</a></b></td> 
                                 <td><a href="/assets/pdf/germany/german-education-system.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
                             <tr>
-                                <th scope="row">11.</th> 
-                                <td><b><a href="/assets/pdf/germany/mbbs-in-germany.pdf" target="_blank">MBBS in Germany</a></b></td> 
-                                <td><a href="/assets/pdf/germany/mbbs-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <th scope="row">10.</th> 
+                                <td><b><TransitionLink href="/study-destinations/study-in-germany/mbbs-in-germany" >MBBS in Germany</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/mbbs-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
-                                <th scope="row">12.</th> 
+                                <th scope="row">11.</th> 
                                 <td><b><a href="/assets/pdf/germany/ms-in-economics-in-germany.pdf" target="_blank">MS in Economics in Germany</a></b></td> 
                                 <td><a href="/assets/pdf/germany/ms-in-economics-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
                             <tr>
-                                <th scope="row">13.</th> 
+                                <th scope="row">12.</th> 
                                 <td><b><a href="/assets/pdf/germany/phd-in-garmany.pdf" target="_blank">PHD in Garmany</a></b></td> 
                                 <td><a href="/assets/pdf/germany/phd-in-garmany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
                            
                             <tr>
-                                <th scope="row">14.</th> 
+                                <th scope="row">13.</th> 
                                 <td><b><a href="/assets/pdf/germany/masters-in-public-health.pdf" target="_blank">Masters in Public Health</a></b></td> 
                                 <td><a href="/assets/pdf/germany/masters-in-public-health.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
                             </tr>
