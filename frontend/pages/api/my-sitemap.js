@@ -4,7 +4,7 @@ import { Readable } from 'stream';
 const sitemap= async (req, res) => {
 
     const links = [
-        { url: '/', changefreq: 'daily', priority: 0.3 },
+        { url: '/', changefreq: 'daily', priority: 1 },
         { url: '/aboutUs', changefreq: 'daily', priority: 0.3 },
         { url: '/terms', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations', changefreq: 'daily', priority: 0.3 },

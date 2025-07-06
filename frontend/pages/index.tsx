@@ -63,12 +63,22 @@ const Home = () => {
   return (
     <> 
     <Head>
-        <title>Edurizon | Study Abroad Consultancy & Career Guidance for Global Success</title>
-        <meta name="description" content="Unlock your academic and career potential with Edurizon. Expert study abroad guidance, study mbbs abroad, university admissions support. Start your journey today!" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="Edurizon" />
-        <link rel="canonical" href="https://www.edurizon.in" />
-    </Head>
+  <title>Edurizon | Study Abroad Consultancy & Career Guidance</title>
+  <meta name="description" content="Edurizon helps students unlock global careers with expert study abroad consultancy. Explore MBBS abroad, top universities, and personalised guidance for success." />
+  <meta name="author" content="Edurizon" />
+  <link rel="canonical" href="https://www.edurizon.in" />
+  <script type="application/ld+json">
+  {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Edurizon",
+      "url": "https://www.edurizon.in",
+      "logo": "https://www.edurizon.in/logo.png",
+      "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi.",
+  `}
+  </script>
+</Head>
     
       {/* ✅ Load Hero Section Immediately (Critical for LCP) */}
       <HeroSection />
