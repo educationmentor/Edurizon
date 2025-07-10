@@ -38,8 +38,9 @@ const RelatedCountries=()=>{
     <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 mx-[1vw]">
 
       <div className="related-countries-detail">
+        <TransitionLink href="/study-destinations/study-mbbs-in-bangladesh">
 
-        <a href="mbbs-in-bangladesh.php">
+
 
           <div className="related-countries-detail-img">
 
@@ -51,7 +52,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -61,7 +62,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-china.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-china">
 
           <div className="related-countries-detail-img">
 
@@ -73,7 +74,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -83,7 +84,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-kazakhstan.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-kazakhstan">
 
           <div className="related-countries-detail-img">
 
@@ -95,7 +96,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -105,7 +106,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-georgia.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-georgia">
 
           <div className="related-countries-detail-img">
 
@@ -117,7 +118,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -127,7 +128,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="https://edurizon.in/mbbs-in-uzbekistan.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-uzbekistan">
 
           <div className="related-countries-detail-img">
 
@@ -139,7 +140,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -149,7 +150,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="https://edurizon.in/study-in-germany.php">
+        <TransitionLink href="/study-destinations/study-in-germany">
 
           <div className="related-countries-detail-img">
 
@@ -161,7 +162,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -171,7 +172,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-nepal.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-nepal">
 
           <div className="related-countries-detail-img">
 
@@ -183,7 +184,7 @@ const RelatedCountries=()=>{
 
           <p>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -212,11 +213,11 @@ const RelatedCountries=()=>{
 
 </div>
 
-<div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 w-[380px] mx-[1vw]">
+{/* <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 w-[380px] mx-[1vw]">
 
 <div className="related-countries-detail">
 
-  <a href="mbbs-in-egypt.php">
+  <TransitionLink href="/study-destinations/study-mbbs-in-egypt">
 
     <div className="related-countries-detail-img">
 
@@ -232,7 +233,7 @@ const RelatedCountries=()=>{
 
 </div>
 
-</div>
+</div> */}
   </div>
 
 </div>
