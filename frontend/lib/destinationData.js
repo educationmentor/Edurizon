@@ -48,6 +48,7 @@ export const destinationData =[
       title:"Kazan Federal University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university",
+      budget: "under35",
       description:"Kazan Federal University was established in the year 1804 and received the federal status in the year 2010. The University is located in Kazan and is one of the best government universities in Russia."
     },
     {
@@ -55,6 +56,7 @@ export const destinationData =[
       title:"Baskhir State University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university",
+      budget: "under25",
       description:"Planning to pursue medicine at a top-ranked university? Bashkir State Medical University is renowned for its academic strength, innovative research, and strong international medical collaborations."
     },
     {
@@ -62,6 +64,7 @@ export const destinationData =[
       title:"Orenburg State Medical University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university",
+      budget: "under35",
       description:"Embark on a journey toward a rewarding medical career at Far Eastern Federal University, a distinguished institution offering world-class medical education, research, and clinical practice."
     },
     
@@ -70,6 +73,7 @@ export const destinationData =[
       title:"Petrozavodsk State University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university",
+      budget: "under25",
       description:"Take the first step toward a rewarding medical career at Petrozavodsk State University, where innovation meets excellence in medical education, preparing students for international opportunities in healthcare."
     },
     {
@@ -77,6 +81,7 @@ export const destinationData =[
       title:"Northern State Medical University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university",
+      budget: "under35",
       description:"Dreaming of studying medicine in a well-established institution? Northern State Medical University is a leading center for medical education and research, equipping students with the skills to excel in the healthcare industry."
     },
     {
@@ -84,18 +89,21 @@ export const destinationData =[
       title:"North Western State Medical University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university",
+      budget: "under35",
       description:"Are you aspiring to build a successful medical career? North-Western State Medical University in Russia offers top-tier medical education, advanced research opportunities, and a strong foundation for future healthcare professionals."
     },{
       image:"/assets/Images/CountryBlogs/studyDestinationCard/ImmanuelKantBalticFederalUniversity.webp",
       title:"Immanuel Kant Baltic Federal University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university",
+      budget: "under25",
       description:"Looking for a globally recognized medical education? Immanuel Kant Baltic Federal University provides a high-quality learning environment."
     },{
       image:"/assets/Images/CountryBlogs/studyDestinationCard/KrasnoyarskStateMedicalUniversity.webp",
       title:"Krasnoyarsk State Medical University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/krasnoyarsk-state-medical-university",
+      budget: "under25",
       description:"Get the best medical education at Krasnoyarsk State Medical University, where experienced faculty, advanced laboratories, and clinical exposure."
     },{
       image:"/assets/Images/CountryBlogs/studyDestinationCard/MEPHI.webp",
@@ -108,6 +116,7 @@ export const destinationData =[
       title:"Tambov State University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/tambov-state-university",
+      budget: "under25",
       description:"Make your medical dreams a reality at Tambov State University, known for its strong medical faculty, state-of-the-art facilities, and a curriculum that shapes skilled and compassionate doctors."
     },
     {
@@ -115,11 +124,13 @@ export const destinationData =[
       title:"Ulyanovsk State University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university",
+      budget: "under25",
       description:"Ulyanovsk State University stands as a hub for medical excellence, offering a globally competitive curriculum, hands-on training, and opportunities to shape a successful career in medicine."
     },{
       image:"/assets/Images/CountryBlogs/studyDestinationCard/UralStateMedicalUniversity.webp",
       title:"Ural State Medical University",
       category:"University",
+      budget:'under25',
       href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university",
       description:"Want to study at one of Russia’s most respected medical institutions? Ural State Medical University offers a comprehensive medical education with cutting-edge research and clinical training."
     },
@@ -139,6 +150,7 @@ export const destinationData =[
       title:"Zhejiang University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-china/zhejiang-university",
+      budget: "under40",
       description:"Zhejiang University was founded in the year 1897, and is one of the oldest and prestigious university of China. The University has 37schools, colleges and departments which offers 300 graduate programs, and 140 undergraduate programs."
     },
     {
@@ -146,6 +158,7 @@ export const destinationData =[
       title:"Nanjing Medical University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-china/nanjing-medical-university",
+      budget: "under35",
       description:"Nanjing Medical University was established in the year 1934 as Jiangsu Provincial College of Health Policy & Management. In 1957, Nanjing Medical University shifted from Zhenjiang to Nanjing & changed its name to Nanjing Medical College."
     },
     {
@@ -153,6 +166,7 @@ export const destinationData =[
       title:"Xiamen University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-china/xiamen-university",
+      budget: "under35",
       description:"Over the past ninety years, Xiamen University has amassed a wealth of expertise in providing educational programs. The university which offers a reasonably wide variety of educational programs and have strong faculty and staff, has grown into a first-className comprehensive university in China with significant international influence."
     },
     {
@@ -160,6 +174,7 @@ export const destinationData =[
       title:"SouthEast University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-china/southeast-university",
+      budget: "under35",
       description:"The University has also been ranked in the top 3 list nationally in the following fields of landscape architecture, urban planning, civil engineering, electronic engineering, biomedical engineering and transportation engineering."
     },
     {
@@ -167,6 +182,7 @@ export const destinationData =[
       title:"Xinjiang University",
       category:"University",
       href:"/study-destinations/study-mbbs-in-china/xinjiang-university",
+      budget: "under25",
       description:"It is a national key comprehensive university with students from various ethnic groups. It is one of two in Xinjiang entering the national “211 Project.” On December 30, 2000, the former Xinjiang University and Xinjiang Engineering Institute merged into a new Xinjiang University. "
     },
 
@@ -182,6 +198,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/birat-medical-college.webp",
     title: "Birat Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/birat-medical-college",
     description: "The Health Professions Education (HPE) Department at Birat Medical College is dedicated to enhancing the quality of medical education through innovative teaching methodologies, faculty development, and research in medical education. "
   },
@@ -189,6 +206,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/chitwan-medical-college.webp",
     title: "Chitwan Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/chitwan-medical-college",
     description: "Chitwan Medical College (CMC) was established on 20th June 2006. Chitwan Medical College (CMC), a tertiary care hospital, serves the catchment area of Narayani zone and Central Region of Nepal, an area with a rapidly growing population. "
   },
@@ -196,6 +214,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/college-of-medical-science.webp",
     title: "College of Medical Sciences",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/college-of-medical-science",
     description: "College of Medical Science is the first pioneering medical college in Nepal to get letter of Intent. It has enrolled 1st batch of MBBS students in the year 1996. College of Medical Science is the Centre of excellence for providing advanced yet affordable and quality medical education."
   },
@@ -203,6 +222,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/devdaha-medical-college.webp",
     title: "Devdaha Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/devdaha-medical-college",
     description: "Devdaha Medical College is a private research institute. Devdaha Medical College is located within the western part of Nepal at Butwal. It was established in the year 2006. "
   },
@@ -210,6 +230,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/kathmandu-medical-college.webp",
     title: "Kathmandu Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/kathmandu-medical-college",
     description: "Kathmandu Medical College has been established in the year 1997, is a private institute which is situated in heart of Kathmandu. Kathmandu Medical College is affiliated with Kathmandu University."
   },
@@ -217,6 +238,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/kist-medical-college.webp",
     title: "KIST Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/kist-medical-college",
     description: "KIST Medical College Pvt. Ltd was established in the year 2006. It is located in Mahalaxmi Municipality-1, Imadol, Lalitpur. The College is run by the Board of Directors and its Executive Committee. It has its own full-fledged teaching hospital and a separate dental hospital."
   },
@@ -224,6 +246,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/lumbini-medical-college.webp",
     title: "Lumbini Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/lumbini-medical-college",
     description: "Lumbini Medical College (LMC) is located in the district of Palpa, a hilly district about 3OO kms west of Kathmandu, the capital city of Nepal. Lumbini Medical College has been established in the year 2008."
   },
@@ -231,6 +254,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/manipal-college-of-medical-science.webp",
     title: "Manipal College of Medical Sciences",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/manipal-college-of-medical-science",
     description: "In the year 1953, he founded India’s first private medical school, Kasturba Medical College, and five years later, Manipal Institute of Technology was formed. Over the next few years, he created 32 institutions till 1978."
   },
@@ -245,6 +269,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/nobel-medical-college.webp",
     title: "Nobel Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/nobel-medical-college",
     description: "Nobel Medical College Teaching Hospital (P) Ltd., MBBS in Nepal, affiliated to Kathmandu University, was established in the year 2004. Nobel Medical College is situated in Biratnagar, Nepal, which is one of the major academic hubs in the eastern part of Nepal."
   },
@@ -259,6 +284,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/national-medical-college.webp",
     title: "National Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/national-medical-college",
     description: "National Medical College was established in the year 2001, promoted by the \"National Medical College Company Pvt. Ltd.\" under the Chairmanship of Prof.Dr.Jainuddin Ansari, an outstanding surgeon who has earned national and international credentials for the promotion of Medico-Social services."
   },
@@ -266,6 +292,7 @@ export const destinationData =[
     image: "/assets/Images/CountryBlogs/studyDestinationCard/nepal/janaki-medical-college.webp",
     title: "Janaki Medical College",
     category: "University",
+    budget: "above40",
     href: "/study-destinations/study-mbbs-in-nepal/janaki-medical-college",
     description: "Janaki Medical College was established in the year 2003 with an annual intake of 80 students a year to a Bachelor of Medicine and Bachelor of Surgery program."
   },
@@ -276,15 +303,6 @@ export const destinationData =[
     href: "/study-destinations/study-mbbs-in-nepal/nepalgunj-medical-college",
     description: "Nepalgunj Medical College, established to cater to the growing demand for quality medical education in Nepal, offers modern teaching facilities and hospital training for MBBS students."
   },
-  // {
-  //   image: "/assets/Images/CountryBlogs/studyDestinationCard/germany/ausbildung.webp",
-  //   title: "Ausbildung in Germany",
-  //   category: "University",
-  //   href: "/study-destinations/study-in-germany/ausbildung",
-  //   description: "Ausbildung in Germany offers vocational training opportunities across multiple fields, providing a gateway to practical careers with strong industry ties."
-  // },
-
-  // MBBS in Tajikistan
   {
     image: "/assets/Images/mbbs-in-tajikistan/khatlon-state-medical-university.png",
     title: "Khatlon State Medical University",
@@ -297,6 +315,7 @@ export const destinationData =[
     title: "Tajik National University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-tajikistan/tajik-national-university",
+    budget: "under25",
     description: "Founded in 1947, Tajik National University is one of the leading universities in Tajikistan offering MBBS courses with a strong emphasis on research and practical skills."
   },
   {
@@ -327,6 +346,7 @@ export const destinationData =[
     title: "East European University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/east-european-university",
+    budget: "above40",
     description: "East European University in Georgia provides internationally accredited MBBS programs in English, ensuring quality education for aspiring doctors."
   },
   {
@@ -334,6 +354,7 @@ export const destinationData =[
     title: "Tbilisi State Medical University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/tbilisi-state-medical-university",
+    budget: "above40",
     description: "Established in 1918, Tbilisi State Medical University is one of the oldest and most prestigious medical institutions in Georgia."
   },
   {
@@ -341,13 +362,15 @@ export const destinationData =[
     title: "BAU International University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/bau-international-university",
-    description: "BAU International University, Batumi, established in 2015 as part of the BAU Global Network, delivers a 6‑year English‑medium MD program accredited by WFME and recognized by WHO and NMC/India. It blends an American‑model curriculum with early clinical exposure, cadaver labs, USMLE prep, modern simulation, and multicultural campus life in Batumi’s health‑centre hub.",
+    budget: "above40",
+    description: "BAU International University, Batumi, established in 2015 as part of the BAU Global Network, delivers a 6‑year English‑medium MD program accredited by WFME and recognized by WHO and NMC/India. It blends an American‑model curriculum with early clinical exposure, cadaver labs, USMLE prep, modern simulation, and multicultural campus life in Batumi’s health‑centre hub."
   },
   {
     image: "/assets/Images/mbbs-in-georgia/NVU.png",
     title: "New Vision University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/new-vision-university",
+    budget: "above40",
     description: "New Vision University is a dynamic institution in Georgia known for its innovative approach to medical education and clinical research."
   },
   {
@@ -355,6 +378,7 @@ export const destinationData =[
     title: "David Tvildiani Medical University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/david-tvildiani-medical-university",
+    budget: "above40",
     description: "David Tvildiani Medical University stands out for its USMLE-focused curriculum and is highly regarded among international MBBS aspirants."
   },
   {
@@ -362,16 +386,18 @@ export const destinationData =[
     title: "International Black Sea University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university",
+    budget: "under40",
     description: "This Tbilisi-based university blends modern education with international standards, offering MBBS courses in English."
   },
 
   // MBBS in Kyrgyzstan
   {
-    image: "/assets/Images/mbbs-in-kyrgyzstan/JAIU.png",
-    title: "Jalal-Abad International University",
-    category: "University",
-    href: "/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university",
-    description: "Jalal-Abad International University is a reputed institution in Kyrgyzstan providing comprehensive MBBS training for global students."
+    image:"/assets/Images/mbbs-in-kyrgyzstan/JAIU.png",
+    title:"Jalal-Abad International University",
+    category:"University",
+    href:"/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university",
+    budget: "under25",
+    description:"Jalal-Abad International University is a reputed institution in Kyrgyzstan providing comprehensive MBBS training for global students."
   },
   {
     image:"/assets/Images/mbbs-in-kyrgyzstan/JASU.png",
@@ -399,6 +425,7 @@ export const destinationData =[
     title: "Central Asian International Medical University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-kyrgyzstan/central-asian-international-medical-university",
+    budget: "under25",
     description: "Located in Bishkek, this university offers affordable and quality medical education with English-taught MBBS programs."
   },
   {
@@ -406,6 +433,7 @@ export const destinationData =[
     title: "Royal Metropolitan University",
     category: "University",
     href: "/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university",
+    budget: "under25",
     description: "Royal Metropolitan University is a leading institution in Kyrgyzstan offering globally recognized MBBS programs with state-of-the-art infrastructure."
   },
 

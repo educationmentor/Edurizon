@@ -80,17 +80,9 @@ const NewPage = () => {
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/LIAnNYDMEQs" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
                             </div> 
                             <div className="edu-videos">
-                                <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/0liJ61My-Cw" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                            </div>
-                            <div className="edu-videos">
-                                <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/AM6vhqiTsLc" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                            </div>
-                            <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/T0gI3qDCyos" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
                             </div>
-                            <div className="edu-videos">
-                                <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/f4jyXDgmo68" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
