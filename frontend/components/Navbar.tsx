@@ -36,7 +36,7 @@ const Navbar = () => {
     { name: "College Predictor", href: "/college-predictor", external: false },
     // { name: "Budget Calculator", href: "#" },
     { name: "Contact Us", href: "/contact-us" , borderTop: true },
-    { name: "Testimonials", href: "https://www.google.com/search?q=edurizon&oq=ed&gs_lcrp=EgZjaHJvbWUqDggCEEUYJxg7GIAEGIoFMgYIABBFGDwyBggBEEUYPDIOCAIQRRgnGDsYgAQYigUyDAgDECMYJxiABBiKBTIGCAQQRRg5MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTg4N2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8#lrd=0x390d1b2870491009:0x8b3922528c2683f6,1,,,,", external: true },
+    { name: "Testimonials", href: "/testimonial", external: false },
   ];
   
 
@@ -154,7 +154,7 @@ const Navbar = () => {
   return (
     <nav
 className={`${
-router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predictor" ? "absolute" : "relative"
+router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predictor" || router.asPath==="/testimonial" ? "absolute" : "relative"
 } px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
 >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
