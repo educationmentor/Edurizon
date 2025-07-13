@@ -130,7 +130,7 @@ const VideoSection = () => {
         ],
       };
   return (
-    <div className=''>
+    <div className='px-[5vw]'>
         <h2 className='text-h3TextPhone md:text-h2Text font-bold text-center pb-[2vw] md:pb-[1.5vw]'>
         Why Student Love Us
         </h2>
