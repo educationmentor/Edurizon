@@ -4,7 +4,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "$6,500 / year",
+      label: "Rs. 3,20,000 yearly",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",

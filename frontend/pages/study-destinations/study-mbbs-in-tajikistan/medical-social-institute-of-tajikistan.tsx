@@ -202,7 +202,7 @@ const MedicalSocialInstituteOfTajikistan = () => {
                     <li>Academic requirements: Applicant must have passed 12th standard with at least 50% in Physics, Chemistry and Biology.</li>
                     <li>NEET requirements:  Must qualify NEET exam.</li>
                 </ul>
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">STEP BY STEP COMPLETE ADMISSION PROCESS</h3>
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Step By Step Complete Admission Process</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
                     <li>Submission of documents 
                         <ul className="ml-[2vw] list-disc">

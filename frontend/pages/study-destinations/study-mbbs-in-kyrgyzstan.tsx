@@ -9,9 +9,9 @@ import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
 
 const headerData={
-    id:"krgystan",
-    title:"Study MBBS in Krgystan",
-    title2:"About Krgystan",
+    id:"Kyrgyzstan",
+    title:"Study MBBS in Kyrgyzstan",
+    title2:"About Kyrgyzstan",
     description:"Kyrgyzstan is a landlocked country in Central Asia, bordering Kazakhstan, China, Tajikistan and Uzbekistan. The mountainous region of the Tian Shan covers over 80% of the country (Kyrgyzstan is occasionally referred to as 'the Switzerland of Central Asia', as a result), with the remainder made up of valleys and basins. Issyk-Kul Lake is the largest lake in Kyrgyzstan which is situated in the north-eastern Tian Shan and the second largest mountain lake in the world after Titicaca. Heavy snowfall in winter leads to spring floods which often cause serious damage downstream. The runoff from the mountains is also used for hydro-electricity.",
     description2:"Kyrgyzstan has significant deposits of metals including gold and rare-earth metals. Due to the country's predominantly mountainous terrain, less than 8% of the land is cultivated, and this is concentrated in the northern lowlands and the fringes of the Fergana Valley.Bishkek in the north is the capital and largest city. The second city is the ancient town of Osh, located in the Fergana Valley near the border with Uzbekistan."
 }
@@ -34,7 +34,7 @@ const descriptionData={
 }
 
 const reasonToStudyData={
-    id:"krgystan",
+    id:"Kyrgyzstan",
     title:"Why Study MBBS in Kyrgyzstan? ",
     content: [
         {title: "No Capitation Fees", description: "Kyrgyzstan medical programs have no capitation fees."},
@@ -331,7 +331,7 @@ const NewPage = () => {
                         <li>Transfer and Migration Certificate</li>
                     </ul>
     
-                    <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">STEP BY STEP COMPLETE ADMISSION PROCESS </h3>
+                    <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Step By Step Complete Admission Process </h3>
                     <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
                         <li><strong>Step 1:</strong> Submission of documents.</li>
                         <li><strong>Step 2:</strong> Within one week, University issues admission letter.</li>
