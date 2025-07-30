@@ -28,7 +28,7 @@ export const NewPage = () => {
                 <div className="immigrate-bg">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="flex justify-center items-center overflow-hidden  h-[37.25vw]">
-                                    <Image alt="hi" src="/assets/Images/slider/b-5.jpeg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
+                                    <Image alt="hi" src="/assets/Images/slider/bangladesh.jpg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
                                 </div>
                     </div>
                     <div className="row">
