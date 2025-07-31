@@ -151,6 +151,15 @@ const NewVisionUniversity = () => {
                 <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="ml-auto w-full md:w-[32.5vw] h-auto" width={690} height={690} alt="nepal2"/>
             </div>
 
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[1vw]   md:text-h3Text text-center">Image Gallery</h3>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/mbbs-in-georgia/nvu1.jpg"} className='w-full md:w-[30vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+                <Image src={"/assets/Images/mbbs-in-georgia/nvu2.jpg"} className='w-full md:w-[30vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
+
             {/* At a glance Section */}
             <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
                 <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">New Vision University at a glance</h3>

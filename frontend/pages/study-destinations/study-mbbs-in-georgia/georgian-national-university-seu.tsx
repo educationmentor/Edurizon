@@ -187,6 +187,14 @@ const NewPage = () => {
                   </div>  
                   <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="ml-auto w-full   md:w-[32.5vw] h-auto" width={690} height={690} alt="georgia3"/>
               </div>
+              <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[.5vw]   md:text-h3Text text-center">Image Gallery</h3>
+              <p className='mx-auto text-smallTextPhone md:text-regularText font--medium pb-[2vw] md:pb-[1vw] text-center'>Our Director With Vice Dean of SEU</p>
+
+              <div className='relative flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/mbbs-in-georgia/seu1.jpg"} className='w-full md:w-[30vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
 
             {/* At a glance  */}
             <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">

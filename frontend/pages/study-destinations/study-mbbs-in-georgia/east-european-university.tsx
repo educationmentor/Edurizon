@@ -189,6 +189,15 @@ const NewPage = () => {
               </div>
 
               <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[.5vw]   md:text-h3Text text-center">Image Gallery</h3>
+              <p className='mx-auto text-smallTextPhone md:text-regularText font--medium pb-[2vw] md:pb-[1vw] text-center'>Our Director With Dean of East European University</p>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/mbbs-in-georgia/eeu1.jpg"} className='w-full md:w-[30vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
+
+              <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
               <h3 className="text-h6TextPhone leading-[120%]  md:text-h5Text text-left">EEU at a glance </h3>
                 <ul className="text-smallTextPhone ml-[3vw] md:ml-[1.5vw] text-left gap-x-[1vw] md:text-regularText md:text-justify grid grid-cols-2 ">
                 <li className='font-bold'>o College name</li>

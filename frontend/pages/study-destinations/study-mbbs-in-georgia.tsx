@@ -305,8 +305,28 @@ const NewPage = () => {
           </table>
           </section>
 
+
            
            <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
+
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[1vw]   md:text-h3Text text-center">Image Gallery</h3>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <div>
+                <Image src={"/assets/Images/mbbs-in-georgia/seu1.jpg"} className='w-full md:w-[30vw] h-auto pb-[1vw] md:pb-[.5vw]' width={1080} height={1080} alt='isbu1'/>
+                <span className="list-disc text-smallTextPhone md:text-smallText"><li>With Vice Dean of SEU</li></span>
+                </div>
+                <div>
+                <Image src={"/assets/Images/mbbs-in-georgia/isbu1.jpg"} className='w-full md:w-[30vw] h-auto pb-[1vw] md:pb-[.5vw]' width={1080} height={1080} alt='isbu1'/>
+                <span className="list-disc text-smallTextPhone md:text-smallText"><li>With Nino ma’am head of International Department IBSU</li></span>
+                </div>
+                <div>
+                <Image src={"/assets/Images/mbbs-in-georgia/eeu1.jpg"} className='w-full md:w-[30vw] h-auto pb-[1vw] md:pb-[.5vw]' width={1080} height={1080} alt='isbu1'/>
+                <span className="list-disc text-smallTextPhone md:text-smallText"><li>With Dean of East European University</li></span>
+                </div>
+              </div>
+            </section>
 
             {/* Climate and Weather */}
            <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:px-[4vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
