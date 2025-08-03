@@ -38,10 +38,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [isMobileView, setIsMobileView] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const [isHidden, setIsHidden] = useState(false);
   const freeConsultationRef = useRef(null);
-  // const ctaSectionRef = useRef(null);
-  const pathname=usePathname();
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -50,18 +48,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         const counselorToken = localStorage.getItem('counselorToken');
         const currentPath = router.pathname;
 
-        // Handle counselor routes
         if (currentPath.includes('/counselor/dashboard')) {
           if (!counselorToken) {
             router.push('/counselor/login');
           }
-        }
-        // Handle student routes
-        else if (currentPath.includes('/dashboard')) {
+        } else if (currentPath.includes('/dashboard')) {
           if (!userData) {
             router.push('/login');
           } else {
-            // Verify token validity with backend
             try {
               const response = await axios.get(`${baseUrl}/api/auth/verify`, {
                 headers: {
@@ -89,87 +83,70 @@ function MyApp({ Component, pageProps }: AppProps) {
     checkAuth();
   }, [router.pathname]);
 
-  
-
   useEffect(() => {
     const checkViewportWidth = () => {
       setIsMobileView(window.innerWidth < 768);
     };
 
-    checkViewportWidth(); // Check on mount
-    window.addEventListener('resize', checkViewportWidth); // Check on resize
-
-    return () => window.removeEventListener('resize', checkViewportWidth); // Cleanup
+    checkViewportWidth();
+    window.addEventListener('resize', checkViewportWidth);
+    return () => window.removeEventListener('resize', checkViewportWidth);
   }, []);
 
+  const excludedPaths = [
+    '/login',
+    '/admin',
+    '/signup',
+    '/counselor/dashboard',
+    '/counselor/secret-register',
+    '/counselor/secret-login'
+  ];
+  const shouldExcludeLayout = excludedPaths.some(path => router.pathname.includes(path));
+  const isAdminRoute = useMemo(() => router.pathname.includes('/admin'), [router.pathname]);
 
-  const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer
-  const shouldExcludeLayout = excludedPaths.some((path) => router.pathname.includes(path));
-  const isAdminRoute = useMemo(() => router.pathname.includes("/admin"), [router.pathname]);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  // console.log(userInput);
   return (
     <>
-      {/* <Head> */}
-        {/* ✅ Preload Fonts & Critical Images */}
-        {/* <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta name="description" content="Your Website Description Here" />
-        <title>Edurizon Private Limited</title> */}
-        
-        {/* <style>{`
-        
-        body {
-          font-family: ${poppins.style.fontFamily}, sans-serif;
-          
-        }
-
-
-         h1, h2, h3, h4, h5, h6 {
-          font-family: ${helvetica.style.fontFamily}, sans-serif;
-          font-weight: 700;
-        }
-        `}</style> */}
-        
-      {/* </Head> */}
-       {/* Google Analytics */}
-       <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive"/>
+      {/* Google Analytics */}
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', '${GA_TRACKING_ID}', {
             page_path: window.location.pathname,
           });
         `}
       </Script>
-    <ThemeProvider>
-      {isAdminRoute && isMobileView ? (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
+
+      <ThemeProvider>
+        {/* Loading Overlay */}
+        {isLoading && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white text-xl font-semibold">
+            Loading...
+          </div>
+        )}
+
+        {isAdminRoute && isMobileView ? (
+          <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
+            <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
               <h1 className="text-2xl font-bold text-blue-500 mb-4">Coming Soon</h1>
               <p className="text-gray-700">
                 This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
               </p>
+            </div>
           </div>
-        </div>
-      ) : (
-        <>
-          {!shouldExcludeLayout && <Navbar />}
-          {pathname === '/' ?<Home/> :
-            <Component {...pageProps} />}
-            <GoogleAnalytics gaId="G-Z25NZ103DJ"/>
-            <div id='footer'>
-            {!shouldExcludeLayout &&
-            <CTASectionComponent/>
-            }</div>
-        </>
-      )}
-    </ThemeProvider>
+        ) : (
+          <>
+            {!shouldExcludeLayout && <Navbar />}
+            {pathname === '/' ? <Home /> : <Component {...pageProps} />}
+            <GoogleAnalytics gaId="G-Z25NZ103DJ" />
+            <div id="footer">
+              {!shouldExcludeLayout && <CTASectionComponent />}
+            </div>
+          </>
+        )}
+      </ThemeProvider>
     </>
   );
 }
