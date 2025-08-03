@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -14,6 +15,15 @@ interface ActionAreaCardProps {
 }
 
 export default function ActionAreaCard({ category, image, title, description, href }: ActionAreaCardProps) {
+  const [innerWidth, setInnerWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setInnerWidth(window.innerWidth);
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <TransitionLink href={href}>
     <div className='shadow-[3px_4px_4px_rgba(0,_0,_0,_0.25)] md:rounded-[1.875vw] overflow-hidden dark:shadow-[2px_3px_14.3px_rgba(255,_255,_255,_0.25)]'  style={{ maxWidth:innerWidth>768? 416:300,borderRadius: innerWidth>768? '16px':'8px' }}>
