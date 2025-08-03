@@ -119,7 +119,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="description" content="Your Website Description Here" />
         <title>Edurizon Private Limited</title>
         
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <style>{`
         
         body {
