@@ -63,22 +63,30 @@ const Home = () => {
   return (
     <> 
     <Head>
-  <title>Edurizon | Study Abroad Consultancy & Career Guidance</title>
-  <meta name="description" content="Edurizon helps students unlock global careers with expert study abroad consultancy. Explore MBBS abroad, top universities, and personalised guidance for success." />
-  <meta name="author" content="Edurizon" />
+  <title>Edurizon | Your Gateway to Learning</title>
+  <meta name="description" content="Edurizon offers expert guidance, mock interviews, doubt-solving, and mentorship for every career journey." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:title" content="Edurizon" />
+  <meta property="og:description" content="Empowering students with mentorship and career guidance." />
   <link rel="canonical" href="https://www.edurizon.in" />
-  <script type="application/ld+json">
-  {`
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Edurizon",
-      "url": "https://www.edurizon.in",
-      "logo": "https://www.edurizon.in/favicon.ico",
-      "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi."
-  `}
-  </script>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Edurizon",
+        "url": "https://www.edurizon.in",
+        "logo": "https://www.edurizon.in/favicon.ico",
+        "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi.",
+      }),
+    }}
+  />
 </Head>
+
     
       {/* ✅ Load Hero Section Immediately (Critical for LCP) */}
       <HeroSection />

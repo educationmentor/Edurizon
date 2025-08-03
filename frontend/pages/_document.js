@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { helvetica,poppins } from "../styles/fonts";
 
 class MyDocument extends Document {
   render() {
@@ -15,9 +16,25 @@ class MyDocument extends Document {
           
           {/* Web App Manifest */}
           <link rel="manifest" href="/site.webmanifest" />
-          
-          {/* Theme Color */}
-          <meta name="theme-color" content="#ffffff" />
+            
+            {/* Theme Color */}
+            <meta name="theme-color" content="#ffffff" />
+            <meta charSet="UTF-8" />
+            {/* Preload Fonts */}
+            <link rel="preload" href={poppins.src} as="font" type="font/ttf" crossOrigin="anonymous" />
+            <link rel="preload" href={helvetica.src} as="font" type="font/ttf" crossOrigin="anonymous" />
+
+            {/* Global Font Style */}
+            <style>{`
+              body {
+                font-family: ${poppins.style.fontFamily}, sans-serif;
+              }
+
+              h1, h2, h3, h4, h5, h6 {
+                font-family: ${helvetica.style.fontFamily}, sans-serif;
+                font-weight: 700;
+              }
+            `}</style>
         </Head>
         <body>
           <Main />

@@ -112,14 +112,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   // console.log(userInput);
   return (
     <>
-      <Head>
+      {/* <Head> */}
         {/* ✅ Preload Fonts & Critical Images */}
-        <meta charSet="UTF-8" />
+        {/* <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="description" content="Your Website Description Here" />
-        <title>Edurizon Private Limited</title>
+        <title>Edurizon Private Limited</title> */}
         
-        <style>{`
+        {/* <style>{`
         
         body {
           font-family: ${poppins.style.fontFamily}, sans-serif;
@@ -131,9 +131,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           font-family: ${helvetica.style.fontFamily}, sans-serif;
           font-weight: 700;
         }
-        `}</style>
+        `}</style> */}
         
-      </Head>
+      {/* </Head> */}
        {/* Google Analytics */}
        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive"/>
       <Script id="google-analytics" strategy="afterInteractive">
