@@ -74,8 +74,8 @@ const Home = () => {
       "@type": "Organization",
       "name": "Edurizon",
       "url": "https://www.edurizon.in",
-      "logo": "https://www.edurizon.in/logo.png",
-      "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi.",
+      "logo": "https://www.edurizon.in/favicon.ico",
+      "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi."
   `}
   </script>
 </Head>
