@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           
           {/* Web App Manifest */}
-          <link rel="manifest" href="/site.webmanifest" />
+          <link rel="manifest" href="/manifest.json" />
             
             {/* Theme Color */}
             <meta name="theme-color" content="#ffffff" />
