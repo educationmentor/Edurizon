@@ -2,6 +2,71 @@ import Breadcrumbs from '@/components/Breadcumbs';
 import Image from 'next/image';
 import Header from '@/components/studyDestinationComponents/headerComponent';
 import { TransitionLink } from '@/utils/TransitionLink';
+import RelatedVideos from '@/components/videoSlider';
+const videoData=[
+    {
+      id: 1,
+      title: 'Student Review MBBS in Germany | MBBS in Germany for Indian students',
+      channel: 'Edurizon Pvt Ltd',
+      views: '27K views',
+      time: '1 months ago',
+      duration: '24:45',
+      thumbnail: 'https://img.youtube.com/vi/Vne9JYxgtlg/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=Vne9JYxgtlg',
+    },
+    {
+      id: 2,
+      title: "Why Germany is getting Popular | Punjab Student Review | Study in Germany",
+      channel: 'Edurizon Pvt Ltd',
+      views: '10M views',
+      time: '3 years ago',
+      duration: '3:03',
+      thumbnail: 'https://img.youtube.com/vi/tK2uYJ8TI0U/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=tK2uYJ8TI0U',
+    },
+    {
+      id: 3,
+      title: 'Student Review TU - Clausthal Germany | Study in Germany',
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/bJvR9HoUo-8/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=bJvR9HoUo-8',
+    },
+    {
+      id: 4,
+      title: "MBBS in Germany for Indian Students | Is German Language Tough ? Review | free MBBS in Germany",
+      channel: 'Edurizon Pvt Ltd',
+      views: '10M views',
+      time: '3 years ago',
+      duration: '3:03',
+      thumbnail: 'https://img.youtube.com/vi/G3sa8uEsK00/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=G3sa8uEsK00',
+    },
+    {
+      id: 5,
+      title: 'Student Review for MBBS in Germany',
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/QHpxbApkJyw/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=QHpxbApkJyw',
+    },
+    {
+      id: 6,
+      title: "Journey from Delhi to Germany | MBBS in Germany",
+      channel: 'Edurizon Pvt Ltd',
+      views: '10M views',
+      time: '3 years ago',
+      duration: '3:03',
+      thumbnail: 'https://img.youtube.com/vi/UQautmY8erY/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=UQautmY8erY',
+    },
+    
+  ]
+
 const NewPage=()=>{
     return<div className='text-smallTextPhone md:text-smallText'>
         <section className="country-inner-banner">
@@ -215,7 +280,7 @@ const NewPage=()=>{
     </div>
 </section>
 <section className="inner-page-bg ">
-    <div className="container">
+    <div className="container mb-[2vw] md:mb-[4vw]">
         <div className="immigrate-bg ">
         <div className="row">
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -242,6 +307,7 @@ const NewPage=()=>{
             </div>
         </div>
     </div>
+    <RelatedVideos videoData={videoData}/>
     <div className='h-[2vw]'>
 
         </div>
