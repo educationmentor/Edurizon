@@ -16,7 +16,7 @@ interface University {
 
 const Navbar = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<'user' | 'counselor'|'registered-student' | null>(null);
   const [userName, setUserName] = useState('');
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const [userType, setUserType] = useState<'student' | 'counselor'|'registered-student' | null>(null);
@@ -103,12 +103,19 @@ const Navbar = () => {
     const checkAuthStatus = () => {
       try {
         const userData = localStorage.getItem('user');
+    
         const counselorToken = localStorage.getItem('counselorToken');
         
         if (userData) {
           console.log(userData);
           const user = JSON.parse(userData);
-          setIsLoggedIn(true);
+          if(user.role=='student'){
+            setIsLoggedIn('user');
+          }else if(user.role=='registered-student'){
+            setIsLoggedIn('registered-student');
+          }else{
+            setIsLoggedIn(null);
+          }
           // Get first name only
           const firstName = (user.user?.name || user.name || '').split(' ')[0];
           setUserName(firstName);
@@ -116,17 +123,17 @@ const Navbar = () => {
         } else if (counselorToken) {
           const counselorData = localStorage.getItem('counselorData');
           const counselor = counselorData ? JSON.parse(counselorData) : {};
-          setIsLoggedIn(true);
+          setIsLoggedIn('counselor');
           setUserName(counselor.name || '');
           setUserType('counselor');
         } else {
-          setIsLoggedIn(false);
+          setIsLoggedIn(null);
           setUserType(null);
           setUserName('');
         }
       } catch (error) {
         console.error('Error checking auth status:', error);
-        setIsLoggedIn(false);
+        setIsLoggedIn(null);
         setUserType(null);
         setUserName('');
       }
@@ -326,44 +333,63 @@ key={index}
 {/* Action Buttons */}
         <div className="flex gap-[1vw] md:gap-[.5vw] items-center">
 
-        {isLoggedIn ?  (
+        {isLoggedIn=='user' ? 
             <div className="hidden md:flex relative  items-center justify-center gap-4 ">
               <div className='border-orangeChosen border-[2px] rounded-full'>
               <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[2.5vw] h-[2.5vw] rounded-full' />
               </div>
               <div className='flex flex-col '>
               <span className=" text-smallTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
-              <TransitionLink href="/studentDashboard">
-              <button disabled={!allowDashboard}
+              <TransitionLink href="/login">
+              <button onClick={()=>{
+                localStorage.removeItem('user');
+                setIsLoggedIn(null);
+              }}
                 className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
-                <span className="hidden md:block text-smallTextPhone leading-[100%]">View Dashboard</span>
+                <span className="hidden md:block text-smallTextPhone leading-[100%]">Logout</span>
 
               </button>
 
               </TransitionLink>
               </div>
-            </div>):
-  <>
-          <TransitionLink href="/login">
-            <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Login" />
-          </TransitionLink>
-          <TransitionLink href="/signup">
-          <IconButton onClick={() => {}} 
-          className="text-smallTextPhone flex  md:hidden lg:flex md:text-smallText" 
-          btnHeight={2.75} 
-          btnWidth={9.0625} 
-          btnRadius={6.25} 
-          padding={0.375} 
-          iconWidth={1.9125} 
-          paddingPhone={1.5}
-            iconWidthPhone={8}
-          btnHeightPhone={11} 
-                    btnRadiusPhone={15} 
-          btnWidthPhone={36}
-            image="/assets/Images/Icons/ApplyNowIcon.svg"
-            btnTitle="Apply Now"/>
-          </TransitionLink>
-          </>
+            </div>
+            :isLoggedIn=='counselor' ? <></>:isLoggedIn=='registered-student' ? <div className="hidden md:flex relative  items-center justify-center gap-4 ">
+            <div className='border-orangeChosen border-[2px] rounded-full'>
+            <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[2.5vw] h-[2.5vw] rounded-full' />
+            </div>
+            <div className='flex flex-col '>
+            <span className=" text-smallTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
+            <TransitionLink href="/studentDashboard">
+            <button disabled={!allowDashboard}
+              className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
+              <span className="hidden md:block text-smallTextPhone leading-[100%]">View Dashboard</span>
+
+            </button>
+
+            </TransitionLink>
+            </div>
+          </div>:
+            <>
+            <TransitionLink href="/login">
+              <TitleButton className="md:block hidden" btnHeightPhone={0} btnRadiusPhone={0} btnWidthPhone={0} btnHeight={2.75} btnWidth={6.0625} btnRadius={6.25} btnTitle="Login" />
+            </TransitionLink>
+            <TransitionLink href="/signup">
+            <IconButton onClick={() => {}} 
+            className="text-smallTextPhone flex  md:hidden lg:flex md:text-smallText" 
+            btnHeight={2.75} 
+            btnWidth={9.0625} 
+            btnRadius={6.25} 
+            padding={0.375} 
+            iconWidth={1.9125} 
+            paddingPhone={1.5}
+              iconWidthPhone={8}
+            btnHeightPhone={11} 
+                      btnRadiusPhone={15} 
+            btnWidthPhone={36}
+              image="/assets/Images/Icons/ApplyNowIcon.svg"
+              btnTitle="Apply Now"/>
+            </TransitionLink>
+            </>
           }
           
           
@@ -435,79 +461,3 @@ key={index}
 };
 
 export default Navbar;
-
-
-
-  // const isMainPage = router.pathname === '/';
-  // const [dropdownOpen, setDropdownOpen] = useState(false);
-  // const [universities, setUniversities] = useState<University[]>([]);
-
-
-  // interface University {
-  //   _id: string;
-  //   name: string;
-  //   country: string;
-  //   type: string;
-  // }
-  
-
-// useEffect(() => {
-  //   const fetchUniversities = async () => {
-  //     const response = await axios.get('http://localhost:5000/api/universities/mbbs');
-  //     setUniversities(response.data);
-  //   };
-
-  //   fetchUniversities();
-  // }, []);
-
-  // const handleUniversityClick = (id: string) => {
-  //   setDropdownOpen(false); // Close the dropdown
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     router.push(`/login?redirect=/university/${id}`);
-  //   } else {
-  //     router.push(`/university/${id}`);
-  //   }
-  // };
-
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   router.push('/login');
-  // };
-
-
-
-{/* <div className="relative">
-          
-          <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="text-white bg-gray-800 px-4 py-2 rounded hover:bg-gray-700"
-          >
-            MBBS
-          </button>
-          {dropdownOpen && (
-            <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded shadow-lg">
-              {universities.length > 0 ? (
-                universities.map((university) => (
-                  <div
-                    key={university._id}
-                    className="px-4 py-2 text-gray-300 cursor-pointer hover:bg-gray-700"
-                    onClick={() => handleUniversityClick(university._id)}
-                  >
-                    {university.name} ({university.country})
-                  </div>
-                ))
-              ) : (
-                <div className="px-4 py-2 text-gray-300">No universities available</div>
-              )}
-            </div>
-          )}
-        </div> */}
-        
-  
-    {/* <button
-          onClick={handleLogout}
-          className="text-white bg-red-600 px-4 py-2 rounded hover:bg-red-500"
-        >
-          Logout
-        </button> */}

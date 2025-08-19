@@ -1,4 +1,4 @@
-import Layout from '@/components/admin/CounsellorLayout';
+import Layout from '@/components/admin/DocumentLayout';
 import { useState } from 'react';
 import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
 import { useEffect } from 'react';
@@ -38,8 +38,33 @@ interface Lead {
 
 const ITEMS_PER_PAGE = 10; // Number of items to show per page
 
+const navItems = [
+    {
+      href: "/admin/counsellor",
+      icon: "/assets/Images/admin/overview.svg",
+      label: "Overview",
+    },
+  {
+    href: "/admin/counsellor/session-records",
+    icon: "/assets/Images/admin/session-records.svg",
+    label: "Session Records",
+  },
+  {
+    href: "/admin/counsellor/create-session",
+    icon: "/assets/Images/admin/session.svg",
+    label: "Create Session",
+  },
+  {
+    href: "/admin/counsellor/sessions-record",
+    icon: "/assets/Images/admin/message.svg",
+    label: "Message",
+  },
+];
+
 const Dashboard = () => {
   const [adminData, setAdminData] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     const value = localStorage.getItem('adminData');
     const parsedValue = JSON.parse(value || '{}');
@@ -365,7 +390,7 @@ const Dashboard = () => {
   console.log("completedLeads",completedLeads);
 
   return (
-     <Layout>
+     <Layout navItems={navItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       <Toaster />
       {deleteConfirmation.isOpen && (
         <div className="fixed inset-0 z-[9999] overflow-y-auto">
@@ -413,7 +438,7 @@ const Dashboard = () => {
       <div className="py-6">
         <div className="px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900">Leads Status</h1>
-          <BreadcrumbAdmin role={adminData?.role}/>
+
         </div>
 
         <div className="mx-auto    px-4 sm:px-6 md:px-8">

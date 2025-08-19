@@ -4,6 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SearchIcon from '@mui/icons-material/Search';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -12,6 +15,20 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const router = useRouter();
   const [userRole, setUserRole] = useState<string>('');
+    interface AdminData {
+          role: string;
+          [key: string]: any; // Add this if there are additional properties
+      }
+  
+      const [adminData, setAdminData] = useState<AdminData | null>(null);
+  
+    useEffect(() => {
+      const adminDataString = localStorage.getItem("adminData");
+      if (adminDataString) {
+        const parsedData = JSON.parse(adminDataString);
+        setAdminData(parsedData);
+      }
+    }, []);
 
   const validateToken = async (token: string) => {
     try {
@@ -127,20 +144,25 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             onClick={handleLogout}
             className="w-[224px] py-[12px] px-[16px] mb-[100px] rounded-[4px] text-white bg-[rgba(255,255,255,0.08)] flex gap-[12px] hover:bg-adminGreenChosen font-medium"
           >
-            <Image
-              src="/assets/Images/admin/logout.svg"
-              width={40}
-              height={40}
-              className="w-[24px] h-[24px]"
-              alt="logout icon"
-            />
+            <LogoutIcon className='w-[24px] h-[24px]' /> 
             Logout
           </button>
         </div>
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-6 space-y-6 overflow-auto">{children}</main>
+      <main className="flex-1 space-y-6 overflow-auto bg-[#F4F5F7]" >
+         <nav className='border-b-2 items-center border-[#E8E8E8] px-[24px] py-[24px] flex'>
+            <h4 className='font-bold text-h5Text'>Hello, {adminData?.firstName}</h4>
+            <Image src="/assets/Images/admin/double-chevron-right.svg" width={20} height={20} className='ml-[2vw] w-[1.5vw] h-[1.5vw]' alt='arrow down icon' />
+            <h4 className='text-regularText text-[#9F9F9F] ml-[8px]'>{new Date().toLocaleDateString()}</h4>
+            <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} />
+            <div className='ml-[32px] w-[340px] bg-white rounded-[16px]  h-[48px] overflow-hidden flex'>
+                <input type="text" placeholder="Search..." className='w-full  h-full outline-none px-[12px] text-smallText' />
+                <SearchIcon className='ml-auto my-auto mr-[12px]' style={{fontSize: '32px', color: '#666666'}}/>
+            </div>
+        </nav>
+        {children}</main>
     </div>
   );
 };

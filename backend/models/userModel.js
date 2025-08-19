@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['student', 'counselor', 'financeAdmin', 'documentAdmin','registeredStudent'],
+      enum: ['student', 'counselor', 'financeAdmin', 'documentAdmin','registered-student'],
       required: true,
     },
     googleId: {
@@ -53,4 +53,4 @@ userSchema.index({ name: 'text' }); // For text search on name field
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = { User };

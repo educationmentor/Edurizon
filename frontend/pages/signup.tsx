@@ -95,7 +95,9 @@ const SignUp = () => {
             </div>
             <div className=' md:w-[30vw]'>
               <p className='text-regularTextPhone md:text-regularText text-dimgrayChosen dark:text-gray-300 text-center'>
-                Already have an account? <TransitionLink href='/login'><span className='text-orangeChosen'>Login</span></TransitionLink> | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
+                Already have an account? <TransitionLink href='/login'><span className='text-orangeChosen'>Login</span></TransitionLink>
+                | <TransitionLink href='/registered-student-login'><span className='text-orangeChosen'>Registered Student</span></TransitionLink>
+                 | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
               </p>
             </div>
           </div>

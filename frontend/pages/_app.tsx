@@ -99,7 +99,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     '/signup',
     '/counselor/dashboard',
     '/counselor/secret-register',
-    '/counselor/secret-login'
+    '/counselor/secret-login',
+    '/registered-student-login'
   ];
   const shouldExcludeLayout = excludedPaths.some(path => router.pathname.includes(path));
   const isAdminRoute = useMemo(() => router.pathname.includes('/admin'), [router.pathname]);

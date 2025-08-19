@@ -60,7 +60,7 @@ const AdminLogin = () => {
         router.push('/admin/counsellor');
         break;
       case 'documentHandler':
-        router.push('/admin/document-handler');
+        router.push('/admin/document');
         break;
       case 'finance':
         router.push('/admin/finance');

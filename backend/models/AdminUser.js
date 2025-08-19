@@ -68,6 +68,7 @@ const adminUserSchema = new mongoose.Schema({
   lastLogin: {
     type: Date,
   },
+  
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
