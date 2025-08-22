@@ -21,8 +21,8 @@ const services = [
 
 const NewPage = () => {
   return (
-    <div className="text-regularTextPhone md:text-regularText">
-        <div className="relative h-auto w-full">
+    <div className="text-regularTextPhone md:text-regularText text-black">
+        <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/mbbs-in-china/associated-universities/xiamen-university.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -47,7 +47,7 @@ const NewPage = () => {
         </div>
         </div>
 
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -70,18 +70,18 @@ const NewPage = () => {
                             <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/LIAnNYDMEQs" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                             </div> 
-                            <div className="edu-videos">
+                            {/* <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/0liJ61My-Cw" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                             </div>
                             <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/AM6vhqiTsLc" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                            </div>
+                            </div> */}
                             <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/T0gI3qDCyos" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                             </div>
-                            <div className="edu-videos">
+                            {/* <div className="edu-videos">
                                 <iframe width="100%" className="h-[100px] md:h-[250px]" src="https://www.youtube.com/embed/f4jyXDgmo68" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@ const NewPage = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row immigrate-bg g-0">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
@@ -223,7 +223,7 @@ const NewPage = () => {
         </div>
         </div>
 </section> 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -254,7 +254,7 @@ const NewPage = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -349,7 +349,7 @@ const NewPage = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">

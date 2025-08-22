@@ -5,6 +5,7 @@ export const destinationData =[
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/China.webp", title:"Study in China", category:"Destination",href:"/study-destinations/study-mbbs-in-china",
         description:"Earn a globally recognized MBBS degree in China with advanced infrastructure, affordable fees, and world-class faculty.",
       },
+    
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Germany.webp", title:"Study in Germany", category:"Destination", href:"/study-destinations/study-in-germany",
       description:"Explore world-class education in Germany with tuition-free universities, research opportunities, and strong career prospects.",
     },
@@ -41,6 +42,9 @@ export const destinationData =[
     },
     {image:"/assets/Images/CountryBlogs/studyDestinationCard/Bangladesh.webp", title:"Study in Bangladesh", category:"Destination",href:"/study-destinations/study-mbbs-in-bangladesh",
         description:"MBBS in Bangladesh is a great option for those who wish to study MBBS from Abroad. Lots of students appear for NEET exam every year, some of them could not get admission in Indian Medical colleges due to various reasons, such students opt to pursue their MBBS from abroad. ",
+    },
+    {image:"/assets/Images/mbbs-in-india/india-gate.jpg", title:"Study in India", category:"Destination",href:"/study-destinations/study-mbbs-in-india",
+      description:"MBBS in India is a lengthy study which requires a huge amount of patience and capability. MBBS in India curriculum describes different medicine and human anatomy which educates all students on how to test and cure specific diseases.",
     },
     // MBBS IN RUSSIA
     {

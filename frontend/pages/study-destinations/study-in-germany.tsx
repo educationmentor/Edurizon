@@ -68,8 +68,8 @@ const videoData=[
   ]
 
 const NewPage=()=>{
-    return<div className='text-smallTextPhone md:text-smallText'>
-        <section className="country-inner-banner">
+    return<div className='text-smallTextPhone md:text-smallText dark:bg-black dark:text-black'>
+        <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -78,18 +78,18 @@ const NewPage=()=>{
                         </div>
                         <Breadcrumbs/>
                     </div>
-                    <div className="md:block hidden col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/german.png" className="img-fluid" />
+                    <div className="md:block hidden col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto ">
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/german.png" className="img-fluid dark:border-[2px] rounded-sm" />
                     </div>
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black dark:text-white">
             <div className="container">
                 <div className="row g-0">
                 <div className="immigrate-bg">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div className="flex justify-center items-center overflow-hidden  h-[37.25vw]">
+                    <div className="flex justify-center items-center overflow-hidden  h-[37.25vw] ">
                                     <Image alt="hi" src="/assets/Images/slider/german-slider.jpeg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
                                 </div>
                     </div>
@@ -97,7 +97,7 @@ const NewPage=()=>{
                 </div>
             </div>
             </section>
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black ">
             <div className="container">
                 <div className="row g-0">
                     <div className="immigrate-bg">
@@ -118,7 +118,7 @@ const NewPage=()=>{
                 </div>
             </div>
         </section>
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -149,7 +149,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -166,7 +166,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg"> 
@@ -184,7 +184,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg"> 
@@ -279,7 +279,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg ">
+<section className="inner-page-bg dark:bg-black">
     <div className="container mb-[2vw] md:mb-[4vw]">
         <div className="immigrate-bg ">
         <div className="row">

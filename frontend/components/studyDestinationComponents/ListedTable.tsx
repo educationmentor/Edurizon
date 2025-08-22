@@ -39,9 +39,9 @@ const ListedTable = ({ id,content,section2="" }: ListedTableProps) => {
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (
-                    <td key={index} className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/${width} ${index==0?"font-semibold":""} ${bool && index==0?"bg-linenChosen":""}`}>
+                    <td key={index} className={`border  dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw] w-1/${width} ${index==0?"font-semibold":""} ${bool && index==0?"bg-linenChosen":""}`}>
                       {content.href && index==0 ?
-                       <a href={content.href[i]}>{highlight}</a>:( 
+                       <a className="dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in" href={content.href[i]}>{highlight}</a>:( 
                           Array.isArray(highlight) ? (
                             <ul className="list-disc pl-[6vw] md:pl-[1.5vw] list-outside ">
                               {highlight.map((item, itemIndex) => (

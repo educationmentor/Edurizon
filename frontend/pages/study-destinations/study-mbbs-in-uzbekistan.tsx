@@ -3,8 +3,8 @@ import RelatedCountries from "@/components/studyDestinationComponents/relatedCou
 import Image from "next/image";
 const NewPage=()=>{
     return(
-        <div>
-             <section className="country-inner-banner">
+        <div className="text-black">
+             <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -19,7 +19,7 @@ const NewPage=()=>{
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -58,7 +58,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -85,7 +85,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -108,55 +108,55 @@ const NewPage=()=>{
                 <tr>
                   <th scope="row">1.</th>
                   <td>
-                    <a href="https://edurizon.in/andijan-state-medical-institute.php">
+                    <a >
                       <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/andijan-state-medical-institute-logo.jpeg" className="img-fluid univ-logo-size" alt="Andijan State Medical Institute" title="Andijan State Medical Institute" />
                     </a>
                   </td>
                   <td>
-                    <b><a href="https://edurizon.in/andijan-state-medical-institute.php">Andijan State Medical Institute</a></b>
+                    <b><a >Andijan State Medical Institute</a></b>
                   </td>
                   <td>3,400</td> 
-                  <td><a href="https://edurizon.in/andijan-state-medical-institute.php" className="btn-custom btn-univ-detail">Read More</a></td>
+                  <td><a className="btn-custom btn-univ-detail">Read More</a></td>
                 </tr>
                 <tr>
                   <th scope="row">2.</th>
                   <td>
-                    <a href="https://edurizon.in/samarkand-state-medical-university.php">
+                    <a >
                       <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/samarkand-state-medical-university-logo.png" className="img-fluid univ-logo-size" alt="Samarkand State Medical University" title="Samarkand State Medical University" />
                     </a>
                   </td>
                   <td>
-                    <b><a href="https://edurizon.in/samarkand-state-medical-university.php">Samarkand State Medical University</a></b>
+                    <b><a >Samarkand State Medical University</a></b>
                   </td>
                   <td>3,600</td> 
-                  <td><a href="https://edurizon.in/samarkand-state-medical-university.php" className="btn-custom btn-univ-detail">Read More</a></td>
+                  <td><a  className="btn-custom btn-univ-detail">Read More</a></td>
                 </tr>
                 <tr>
                   <th scope="row">3.</th>
                   <td>
-                    <a href="https://edurizon.in/fergana-state-medical-university.php">
+                    <a >
                       <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/fergana-state-medical-university-logo.jpeg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
                     </a>
                   </td>
                   <td>
-                    <b><a href="https://edurizon.in/fergana-state-medical-university.php">Fergana State Medical University</a></b>
+                    <b><a >Fergana State Medical University</a></b>
                   </td>
                   <td>3,600</td> 
-                  <td><a href="https://edurizon.in/fergana-state-medical-university.php" className="btn-custom btn-univ-detail">Read More</a></td>
+                  <td><a  className="btn-custom btn-univ-detail">Read More</a></td>
                 </tr>
                 
                 <tr>
                   <th scope="row">4.</th>
                   <td>
-                    <a href="https://edurizon.in/tashkent-medical-academy.php">
+                    <a >
                       <Image width={100} height={100} src="/assets/Images/mbbs-in-uzbekistan/university-logo/tashkent-medical-academy-logo.jpg" className="img-fluid univ-logo-size" alt="Fergana State Medical University" title="Fergana State Medical University" />
                     </a>
                   </td>
                   <td>
-                    <b><a href="https://edurizon.in/tashkent-medical-academy.php">Tashkent Medical Academy</a></b>
+                    <b><a >Tashkent Medical Academy</a></b>
                   </td>
                   <td>3,000</td> 
-                  <td><a href="https://edurizon.in/tashkent-medical-academy.php" className="btn-custom btn-univ-detail">Read More</a></td>
+                  <td><a  className="btn-custom btn-univ-detail">Read More</a></td>
                 </tr>
                 
               </tbody>
@@ -167,7 +167,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section> 
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">

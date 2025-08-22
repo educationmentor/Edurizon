@@ -277,22 +277,23 @@ const NewPage = () => {
             
             <td className="border font-bold underline dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.href ? <TransitionLink href={college.href}>
-                {college.name}
+                <p className="dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out">
+                {college.name}</p>
               </TransitionLink>:
               <>{college.name}</>
               }
               
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.location}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.feesInUSD}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.hostelFeesInUSD}
             </td>
-            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white whitespace-nowrap  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.href && <TransitionLink href={college.href}>
                 Know More
               </TransitionLink>}
@@ -368,7 +369,7 @@ const NewPage = () => {
            </div>
 
             {/* Scams and Admission Fraud Awarness */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row gap-[4vw] md:gap-[1vw] px-[6vw] md:px-[12.5vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row gap-[4vw] md:gap-[1vw] px-[6vw] md:px-[12.5vw] items-center dark:text-black bg-linenChosen">
                 <div className="flex flex-col gap-[2vw] md:gap-[1.5vw] ">
                 <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">Scams & Admission Fraud Awarness</h3>
                 <div>

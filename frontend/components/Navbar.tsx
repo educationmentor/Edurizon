@@ -166,17 +166,17 @@ router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predic
 >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
       <div className="flex items-center justify-between w-full ">
-          <div className="relative md:w-[5vw]">
+          <div className="relative md:w-[10vw] md:ml-[-2vw]">
           <TransitionLink href="/">
         
           <Image 
-          height={40} width={40}
+          height={400} width={400}
             src="/assets/Images/Icons/EdurizonFinalLogo.svg"
             alt="Edurizon Logo"
-            className="w-[17.75vw] md:w-[5vw] h-[14vw] md:h-[3.875vw]"
+            className="w-[17.75vw] md:w-[10vw] h-[14vw] md:h-[4.875vw]"
           />
           </TransitionLink>
-        <div className="absolute top-[2vw]  hidden w-[5.375vw] dark:md:block left-0 [filter:blur(10vw)] md:[filter:blur(1.7vw)] rounded-[50%] bg-paleOrangeChosen md:h-[1vw]" />
+        <div className="absolute top-[2vw]  hidden w-[5.375vw] dark:md:block left-0 md:left-[2.1vw] [filter:blur(10vw)] md:[filter:blur(1.7vw)] rounded-[50%] bg-paleOrangeChosen md:h-[1vw]" />
         </div>
 
 <div className='flex gap-[3vw] items-center'>

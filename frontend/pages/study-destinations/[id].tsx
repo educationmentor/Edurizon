@@ -130,7 +130,6 @@ import Section3 from "@/components/studyDestinationComponents/section3";
 import EligibilityCriteria from "@/components/studyDestinationComponents/eligibilityCriteriaTable";
 import Universities from "@/components/studyDestinationComponents/universitiesTable";
 import PostArrival from "@/components/studyDestinationComponents/postArrival";
-import CTASection from "@/components/landingPage/CTASection";
 import Header from "@/components/studyDestinationComponents/headerComponent";
 import Head from "next/head";
 import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";

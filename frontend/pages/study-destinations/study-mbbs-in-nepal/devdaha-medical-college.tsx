@@ -65,7 +65,7 @@ const NewPage = () => {
     }
   return (
     <div>
-        <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center  ">
+        <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center  text-black">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>
@@ -202,7 +202,7 @@ const NewPage = () => {
 
            
           {/* Why chose section */}
-          <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+          <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row text-black  px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
                             <div className="flex flex-col gap-[2vw] md:gap-[1vw] ">
                                 <div>
                             <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">Devdaha Medical College – Safety & Security</h3>

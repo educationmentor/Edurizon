@@ -24,8 +24,8 @@ const services = [
   ];
 const NewPage=()=>{
     return(
-        <div className="text-regularTextPhone md:text-regularText">
-            <div className="relative h-auto w-full">
+        <div className="text-regularTextPhone md:text-regularText text-black">
+            <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/NorthernStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -52,7 +52,7 @@ const NewPage=()=>{
         </div>
 
         {/* old code */}
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black">
   <div className="container">
       <div className="row g-0">
           <div className="immigrate-bg">
@@ -88,7 +88,7 @@ const NewPage=()=>{
       </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -123,7 +123,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -164,7 +164,7 @@ const NewPage=()=>{
                 </tr>
                 <tr>
                   <th scope="row">Photos in Instagram</th>
-                  <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                  <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                 </tr>
                 <tr>
                   <th scope="row">University &amp; Review videos</th>
@@ -178,7 +178,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -201,7 +201,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -218,7 +218,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
     <div className="row">
@@ -251,7 +251,7 @@ const NewPage=()=>{
   </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -316,7 +316,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -343,7 +343,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -363,7 +363,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -382,7 +382,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -399,7 +399,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0"> 
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

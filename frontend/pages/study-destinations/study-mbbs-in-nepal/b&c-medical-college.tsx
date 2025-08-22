@@ -70,7 +70,7 @@ const NewPage = () => {
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>
-                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
+                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full text-black'>
                     <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-nepal/bc-medical-college.png"} alt='college Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                       <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>B&C Medical College</h2>
@@ -227,7 +227,7 @@ const NewPage = () => {
                 </ul>  
             </section>
 
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] gap-[5vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] gap-[5vw] mb-[10vw] md:mb-[4vw] items-center text-black bg-linenChosen">
                             <div className="flex flex-col gap-[2vw] md:gap-[1vw] ">
                             <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">Why Choose B & C Medial College?</h3>
                             <div>

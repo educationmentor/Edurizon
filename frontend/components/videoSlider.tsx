@@ -39,8 +39,8 @@ const RelatedVideos = ({videoData}:RelatedVideosProps) => {
     };
   
     return (
-      <div className=" mb-[10vw] md:mb-[8vw] ">
-        <h2 className="text-center text-h5TextPhone md:text-h3Text font-bold mb-[2vw] md:mb-[1vw] leading-[130%]">What Our Students Has To Say About Us</h2>
+      <div className=" mb-[10vw] md:mb-[8vw] dark:text-white">
+        <h2 className="text-center text-h5TextPhone md:text-h3Text font-bold mb-[2vw] md:mb-[1vw] leading-[130%] ">What Our Students Has To Say About Us</h2>
         <Slider {...settings} className='px-[2vw] md:px-0 flex flex-row items-start justify-start'>
           {videoData.map((video) => (
             <div key={video.id} className="">
@@ -53,8 +53,8 @@ const RelatedVideos = ({videoData}:RelatedVideosProps) => {
                   />
                   </div>
                 <div className="mt-[2vw] md:mt-[1vw]">
-                  <p className="font-semibold line-clamp-1 text-smallTextPhone md:text-regularText">{video.title}</p>
-                  <p className="text-gray-600 text-tinyTextPhone md:text-tinyText">{video.channel}</p>
+                  <p className="font-semibold line-clamp-1 dark:text-white text-smallTextPhone md:text-regularText">{video.title}</p>
+                  <p className="text-gray-600 dark:text-white text-tinyTextPhone md:text-tinyText">{video.channel}</p>
                 </div>
               </a>
             </div>

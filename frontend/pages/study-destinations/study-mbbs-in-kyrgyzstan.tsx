@@ -209,25 +209,26 @@ const NewPage = () => {
             
             <td className="border font-bold underline dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {college.href ? <TransitionLink href={college.href}>
-                {college.name}
+                <p className="dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in">
+                {college.name}</p>
               </TransitionLink>:
               <>{college.name}</>
               }
               
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.feesInUSD}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.feesInINR}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.hostelFeesInUSD}
             </td>
-            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white whitespace-nowrap  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.hostelFeesInINR}
             </td>
-            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white whitespace-nowrap  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.href && <TransitionLink href={college.href}>
                 Know More
               </TransitionLink>}

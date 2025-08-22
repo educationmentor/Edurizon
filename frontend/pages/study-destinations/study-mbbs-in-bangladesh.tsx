@@ -6,8 +6,8 @@ import Breadcrumbs from "@/components/Breadcumbs";
 export const NewPage = () => {
 
     return(
-        <div className="text-smallTextPhone md:text-smallText">
-            <section className="country-inner-banner">
+        <div className="text-smallTextPhone md:text-smallText text-black">
+            <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -22,7 +22,7 @@ export const NewPage = () => {
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
             <div className="container">
                 <div className="row g-0">
                 <div className="immigrate-bg">
@@ -64,7 +64,7 @@ export const NewPage = () => {
             </section>
 
 
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row"> 
@@ -109,7 +109,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">  
@@ -147,7 +147,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -206,7 +206,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -784,7 +784,7 @@ export const NewPage = () => {
   </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -829,7 +829,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -863,7 +863,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
           <div className="container">
             <div className="row g-0">
               <div className="immigrate-bg">

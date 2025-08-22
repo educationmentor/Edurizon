@@ -7,7 +7,7 @@ import VideoSection from '@/components/testimonial/videoSection'
 const Testimonial = () => {
   return (
     <div >
-      <div className='bg-linenChosen md:h-screen '>
+      <div className='bg-linenChosen  dark:bg-black md:h-screen '>
         <div className='pt-[40vw] px-[5vw] md:px-0 md:pt-[15.375vw] md:pl-[7.5vw] pb-[6vw] md:pb-[1.5vw] md:w-[47vw]'>
         <h2 className='text-h3TextPhone  md:text-h1Text font-bold  leading-[120%]  w-full mb-[6vw] md:mb-[1.5vw] '>Trusted By Thousand Of Students For Their Study Abroad Journey</h2>
         <p className='text-mediumTextPhone md:text-mediumText pb-[6vw] md:pb-[1.5vw]'>Hear from students who turned their global dreams into reality with Edurizon’s expert guidance.</p>

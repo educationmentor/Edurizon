@@ -82,8 +82,8 @@ const services = [
 
 const NewPage = () => {
   return (
-    <div className="text-regularTextPhone md:text-regularText">
-        <div className="relative h-auto w-full">
+    <div className="text-regularTextPhone md:text-regularText text-black">
+        <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/TambovStateUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -108,7 +108,7 @@ const NewPage = () => {
             </div>
         </div>
         </div>
-        <section className="inner-page-bg mb-4">
+        <section className="inner-page-bg mb-4 dark:bg-black">
   <div className="container">
     <div className="row">
       <div className="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -119,21 +119,21 @@ const NewPage = () => {
                 <h4 className="text-h5TextPhone md:text-h5Text">History</h4>
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
-              <p>
+              <p className='text-black'>
                 Tambov State University named after G.R. Derzhavin with 100 years of history is a modern educational and research center based on the best practices of a traditional university. Sometimes referred to as G. R. Derzhavin State
                 University, it is named in honor of the Russian poet and statesman, Gavrila Romanovich Derzhavin, and was formed in 1994 when the Tambov State Pedagogical Institute and Tambov State Institute of Culture were merged into a
                 single institution.
               </p>
-              <p>
+              <p className='text-black'>
                 Tambov State University went through extreme progress transformations. Tambov State University attracts numerous national and international students pursuing higher education due to its progressive and accommodating nature.
                 The Tambov State University has world className infrastructure and urban lifestyle gives young students the opportunity to mix leisure with education. This includes being involved in entertaining events like festivals and sports
                 competitions. Sports Complexes and museums are always accessible to the university students to help them take their mind off of books and to experience the rich Russian culture. Tambov State University also have Volleyball,
                 football and other teams take part in inter university sports competitions across the nation.
               </p>
-              <p>
+              <p className='text-black'>
                 The Tambov state University is one of the best state University in and around the Russian federation which not only adds to the rapid development of the city but also provides high quality specialists. The Tambov State
                 University has more than 100 specialists in various fields ranging from medicine, computer science, nanotechnology to economics, arts etc.
-              </p>
+              </p >
 
               <div className="heading">
                 <h4 className="text-h5TextPhone md:text-h5Text pt-[2vw] md:pt-[1vw]">The Tambov State University structure is divided into 15 segments which comprise of:-</h4>
@@ -149,7 +149,7 @@ const NewPage = () => {
                 <h4 className="text-h5TextPhone md:text-h5Text pt-[2vw] md:pt-[1vw]">Tambov City</h4>
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
-              <p>
+              <p className='text-black'>
                 Tambov is a city and the administrative center of Tambov Oblast, central Russia, at the confluence of the Tsna and Studenents rivers, about 418 km south-southeast of Moscow. With a population of 261,803 as of 2021, Tambov is
                 the largest city, and historical center, of the Tambov Oblast as a whole.
               </p>
@@ -225,7 +225,7 @@ const NewPage = () => {
                     </tr>
                     <tr>
                       <th scope="row">Photos in Instagram</th>
-                      <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                      <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                     </tr>
                     <tr>
                       <th scope="row">University &amp; Review videos</th>

@@ -315,7 +315,7 @@ const NewPage=()=>{
             content1={descriptionData.content} imageAlt={descriptionData.imageAlt} imageSrc={descriptionData.imageURL} />
 
             {/* Katmandu University */}
-            <section className="mx-[6vw] md:mx-[12.5vw] py-[10vw] md:py-[4vw]">
+            <section className="mx-[6vw] md:mx-[12.5vw] py-[10vw] md:py-[4vw] ">
               <h3 className="text-h5TextPhone leading-[120%] mb-[4vw] md:mb-[1vw] text-left md:text-h3Text">KATHMANDU UNIVERSITY</h3>
               <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[8vw] md:mb-[2vw] text-left md:text-regularText md:text-justify">
               <li>
@@ -378,7 +378,7 @@ const NewPage=()=>{
             </section>
 
             {/* Benefits of MBBS in Nepal */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen dark:text-black">
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw] ">
                 <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">BENEFITS OF MBBS IN NEPAL - MBBS in Nepal for Indian Students</h3>
                 <div>
@@ -456,10 +456,10 @@ const NewPage=()=>{
 
                 {KUAffiliated.map((college, index) => (
           <tr key={college.id}>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-black dark:border-b-black text-center dark:border-r-black w-[1vw] bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {index + 1}.
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.href ? <TransitionLink href={college.href}>
                 {college.name}
               </TransitionLink>:
@@ -467,19 +467,19 @@ const NewPage=()=>{
               }
               
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.location}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.year}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.fee}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.duration}
             </td>
-            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.href && <TransitionLink href={college.href}>
                 Know More
               </TransitionLink>}
@@ -511,7 +511,7 @@ const NewPage=()=>{
             <td className="border dark:text-black dark:border-b-black dark:border-r-black bg-linenChosen border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
               {index + 1}.
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
                {college.href ? <TransitionLink href={college.href}>
                 {college.name}
               </TransitionLink>:
@@ -519,19 +519,19 @@ const NewPage=()=>{
               }
               
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.location}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.year}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.fee}
             </td>
-            <td className="border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.duration}
             </td>
-            <td className="border dark:text-black whitespace-nowrap dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
+            <td className="border  whitespace-nowrap dark:text-white border-black dark:border-white px-[.75vw] py-[.625vw]">
               {college.href && <TransitionLink href={college.href}>
                 Know More
               </TransitionLink>}
@@ -573,17 +573,17 @@ const NewPage=()=>{
               <table className="w-full border-collapse border border-black dark:border-borderGreyChosen ">
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
                 <tr>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Basic Sciences</td>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2  `}>Anatomy Physiology Biochemistry Microbiology Pathology Pharmacology</td>
+                    <td className={`border  dark:text-black   border-black  px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Basic Sciences</td>
+                    <td className={`border  dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw] w-1/2  `}>Anatomy Physiology Biochemistry Microbiology Pathology Pharmacology</td>
                 </tr>
                 <tr>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Community Med</td>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2  `}>Epidemiology Biostatistics Demography Health education Environmental
+                    <td className={`border   dark:text-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Community Med</td>
+                    <td className={`border  dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw] w-1/2  `}>Epidemiology Biostatistics Demography Health education Environmental
  health Nutrition Sociology Clinical Medicine</td>
                 </tr>
                 <tr>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Clinical Medicine</td>
-                    <td className={`border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2  `}>Community Medicine Forensic Medicine Ophthalmology
+                    <td className={`border  dark:text-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/2 font-semibold bg-linenChosen`}>Clinical Medicine</td>
+                    <td className={`border  dark:text-white  border-black dark:border-white px-[.75vw] py-[.625vw] w-1/2  `}>Community Medicine Forensic Medicine Ophthalmology
                     Otorhinolaryngology (ENT) Medicine (including psychiatry and dermatology & venereal disease) Surgery (including orthopedics anesthesiology, radiology and dental) Obstetrics & Gynecology, Pediatrics</td>
                 </tr>
               

@@ -67,7 +67,7 @@ const MedicalSocialInstituteOfTajikistan = () => {
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>
-                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
+                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full text-black'>
                     <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-tajikistan/MSIT.png"} alt='MSIT Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                         <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>Medical Social Institute of Tajikistan</h2>
@@ -119,10 +119,10 @@ const MedicalSocialInstituteOfTajikistan = () => {
             </section>
 
             {/* Why Choose Section */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] text-black md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw]">
                     <div>
-                        <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%] mb-[4vw] md:mb-[1vw]">Why Choose MSIT for MBBS Abroad?</h3>
+                        <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%] mb-[4vw] md:mb-[1vw] ">Why Choose MSIT for MBBS Abroad?</h3>
                         <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText">
                             <li>Globally Recognized Degree: MSIT's MBBS degree is recognized by global bodies such as WHO, FAIMER, and it is listed in the World Directory of Medical Schools (WDOMS). Graduates are eligible to sit for international licensing exams like FMGE (India), USMLE (USA), PLAB (UK), etc.</li>
                             <li>Affordable Education: Pursuing MBBS at MSIT is highly cost-effective. The tuition fees and living expenses in Tajikistan are much lower compared to private medical colleges in India or universities in countries like the USA, UK, or Australia.</li>

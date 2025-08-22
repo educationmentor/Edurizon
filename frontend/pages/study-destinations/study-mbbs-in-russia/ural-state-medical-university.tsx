@@ -26,8 +26,8 @@ const services = [
   ];
 const NewPage = () => {
   return (
-    <div  className="text-regularTextPhone md:text-regularText">
-        <div className="relative h-auto w-full">
+    <div  className="text-regularTextPhone md:text-regularText text-black">
+        <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/UralStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -52,7 +52,7 @@ const NewPage = () => {
             </div>
         </div>
         </div>
-      <section className="inner-page-bg mb-4">
+      <section className="inner-page-bg mb-4 dark:bg-black">
   <div className="container">
     <div className="row">
       <div className="col-xl-8 col-lg-8 col-md-8 col-12">
@@ -77,7 +77,7 @@ const NewPage = () => {
                 <h3 className="text-h5TextPhone md:text-h5Text pt-[2vw] md:pt-[1vw]"> Ural State Medical University</h3>
                 <h5>MBBS in Russia – MBBS in Ural State Medical University</h5>
               </div>
-              <p>
+              <p className='dark:text-black'>
                 Ural State Medical University was established in the year 1930. Since Ural State Medical University is accredited by both UNESCO and the WHO, it can guarantee the highest standards of theoretical instruction, research, and
                 development in higher education. It has a history of more than a century of distinction in medical teaching and research, making it one of the best medical universities in Russia.
               </p>
@@ -194,7 +194,7 @@ const NewPage = () => {
                     </tr>
                     <tr>
                       <th scope="row">Photos in Instagram</th>
-                      <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                      <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                     </tr>
                     <tr>
                       <th scope="row">University &amp; Review videos</th>

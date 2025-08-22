@@ -154,7 +154,7 @@ const VideoSection = () => {
         </div>
       ))}
         </section>
-        <Slider {...settings} className='px-[2vw] md:px-0 flex flex-row items-start justify-start'>
+        <Slider {...settings} className='px-[2vw] md:px-0  flex flex-row items-start justify-start'>
           {filteredVideoData.map((video) => (
             <div key={video.id} className="">
               <a href={video.link} target="_blank" rel="noopener noreferrer">
@@ -165,9 +165,9 @@ const VideoSection = () => {
                     className="rounded-[2vw] md:rounded-[.5vw] border-gray-500 w-auto h-auto object-cover"
                   />
                   </div>
-                <div className="mt-[2vw] md:mt-[1vw]">
+                <div className="mt-[2vw] md:mt-[1vw] dark:text-white">
                   <p className="font-semibold line-clamp-1 text-smallTextPhone md:text-regularText">{video.title}</p>
-                  <p className="text-gray-600 text-tinyTextPhone md:text-tinyText">{video.channel}</p>
+                  <p className="text-gray-600 dark:text-white text-tinyTextPhone md:text-tinyText">{video.channel}</p>
                 </div>
               </a>
             </div>

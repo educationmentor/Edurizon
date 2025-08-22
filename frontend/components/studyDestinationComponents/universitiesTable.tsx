@@ -36,17 +36,19 @@ const Universities = ({ id,data,countryName }: UniversitiesProps) => {
               <tr key={i}>
                 <td className=" border dark:text-black bg-linenChosen underline border-black  dark:border-borderGreyChosen dark:border-r-black  dark:border-b-black px-[.75vw] py-[.625vw] font-semibold">
                 <TransitionLink href={university.href}>
-                {university.universityName}
+                  <p className="text-black hover:text-orange-400 duration-300 transition-colors ease-in-out">
+                  
+                {university.universityName}</p>
                 </TransitionLink></td>
                 
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]  ">{university.location}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">{university.annualFees}</td>
+                <td className="border border-black dark:border-white px-[.75vw] py-[.625vw]  ">{university.location}</td>
+                <td className="border border-black dark:border-white px-[.75vw] py-[.625vw] ">{university.annualFees}</td>
                 {/* <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">{university.gloablRanking}</td> */}
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] ">
+                <td className="border border-black dark:border-white px-[.75vw] py-[.625vw] ">
                 {university.highlights.map((highlight, index) => (
                   <li className=" list-none " key={index}>- {highlight}</li>
                 ))}</td>
-                <td className="border border-black dark:border-borderGreyChosen px-[.75vw] whitespace-nowrap py-[.625vw] ">
+                <td className="border border-black dark:border-white px-[.75vw] whitespace-nowrap py-[.625vw] ">
                 <TransitionLink href={university.href}>
                 Know More
                 </TransitionLink></td>

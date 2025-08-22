@@ -69,8 +69,8 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
   // console.log('Form data:', formData);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto" >
-      <div className='absolute h-full w-full top-0 left-0  z-0' onClick={onClose}> </div>
+    <div className="fixed inset-0 bg-black bg-opacity-50  flex items-center justify-center z-50 overflow-y-auto" >
+      <div className='absolute h-full w-full top-0 left-0 text-black  z-0' onClick={onClose}> </div>
       <div className="z-50 relative bg-white dark:bg-gray-800  rounded-[2vw] md:rounded-[.5vw] w-[90vw] md:w-[28.625vw] h-[85vw] md:h-[30vw] max-h-[95vh] overflow-y-auto my-[2vh]">
         <div id='form' className={`absolute p-8 top-0 left-0 ${success ? 'opacity-0' : 'opacity-100'} z-50 w-full transition-all duration-100 h-full`}>
         <h2 className="text-h6TextPhone md:text-h5Text mb-[4vw] md:mb-[2vw] font-bold text-gray-900 dark:text-white">Book a Free Consultation</h2>

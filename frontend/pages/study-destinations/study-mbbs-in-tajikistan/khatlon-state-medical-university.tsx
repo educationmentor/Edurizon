@@ -53,7 +53,7 @@ const KhatlonStateMedicalUniversity = () => {
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs />
                 </div>
-                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
+                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full text-black'>
                     <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-tajikistan/khatlon-state-medical-university.png"} alt='Khatlon State Medical University' width={650} height={550} />
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                         <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>Khatlon State Medical University</h2>
@@ -77,7 +77,7 @@ const KhatlonStateMedicalUniversity = () => {
             </div>
 
             {/* About Section */}
-            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
+            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] ">
                 <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text text-left mb-[4vw] md:mb-[1vw]">About Khatlon State Medical University</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] text-left md:text-regularText md:text-justify">
                     <li>Tajikistan is a landlocked country in Central Asia. Landlocked nations are surrounded by land and do not have access to the open sea.</li>
@@ -126,7 +126,7 @@ const KhatlonStateMedicalUniversity = () => {
             </section>
 
             {/* Why Choose Section */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] text-black items-center bg-linenChosen">
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw]">
                     <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%]">Why Choose KSMU for Indian Students?</h3>
                     <div>

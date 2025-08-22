@@ -55,10 +55,10 @@ const TbilisiStateMedicalUniversity = () => {
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>
-                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
+                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full ' >
                     <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-kyrgyzstan/JAIU.png"} alt='college Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
-                        <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>Jalal Abad International University</h2>
+                        <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw] text-black'>Jalal Abad International University</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-[2.25vw] md:gap-[.75vw] items-center justify-center">
                             {services.map((item, index) => (
                                 <div key={index} className="w-full md:w-[16.5vw] relative mx-auto shadow-[0px_.25vw_2.46875vw_rgba(0,_0,_0,_0.25)] dark:shadow-[0px_.25vw_2.46vw_rgba(255,_255,_255,_0.25)] 
@@ -167,8 +167,8 @@ const TbilisiStateMedicalUniversity = () => {
             </section>
 
             {/* Why Choose Section */}
-            <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
-                <div className="flex flex-col gap-[2vw] md:gap-[1vw]">
+            <div className="p-[8vw]  md:p-[4vw] flex flex-col md:flex-row px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
+                <div className="flex flex-col gap-[2vw] md:gap-[1vw] text-black">
                     <div>
                         <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%] mb-[4vw] md:mb-[1vw]">Why Choose JAIU for MBBS?</h3>
                         <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText">

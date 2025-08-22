@@ -31,7 +31,7 @@ const EligibilityCriteria = ({ id,data,countryName }: EligibilityCriteriaProps) 
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (
-                    <td key={index} className={`border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-1/${width} ${index==0?"font-semibold bg-linenChosen":""}`}>
+                    <td key={index} className={`border   border-black dark:border-white px-[.75vw] py-[.625vw] w-1/${width} ${index==0?"font-semibold bg-linenChosen dark:text-black dark:border-b-black dark:border-r-black":"dark:text-white"}`}>
                       {index!=0?
                       (highlight.map((highlight, index) => (
                         <li className=" list-none " key={index}>- {highlight}</li>

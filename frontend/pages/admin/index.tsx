@@ -19,6 +19,7 @@ const AdminLogin = () => {
   
   useEffect(() => {
     // Check if redirected due to expired token
+    localStorage.removeItem('theme');
     const expired = router.query.expired === 'true';
     if (expired) {
       setError('Your session has expired. Please login again.');

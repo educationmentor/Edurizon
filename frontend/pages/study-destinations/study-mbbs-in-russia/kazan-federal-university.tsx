@@ -123,7 +123,7 @@ const KazanFederalUniversity=()=>{
             <Image src="/assets/Images/kazanFederalCity.webp" alt="Kazan Federal City" width={500} height={500} className="w-[32.375vw] h-auto" />
         </div>
 
-        <div className="px-[12.5vw] w-full bg-linenChosen grid grid-cols-2 items-center py-[4vw] gap-[2vw]  my-[4vw]">
+        <div className="px-[12.5vw] w-full bg-linenChosen grid grid-cols-2 text-black items-center py-[4vw] gap-[2vw]  my-[4vw]">
             <div className="flex flex-col gap-[2vw] justify-center">
                 <h2 className="text-h2Text font-bold leading-[120%]">Why MBBS in Kazan Federal University?</h2>
                 <ul className="list-disc pl-[2vw] text-regularText leading-[150%] text-justify">

@@ -53,7 +53,7 @@ export default function EdurizonProcess({country}:{country:string}) {
             {howEdurizonHelps.map((item,index)=>(
               <div key={index}>
               <h6 className='  md:mb-[.5vw]'>{item.title}</h6>
-              <p className=' text-[rgba(0,0,0,.6)]'>{item.description}</p>
+              <p className=' text-[rgba(0,0,0,.6)] dark:text-white'>{item.description}</p>
               </div>  
             ))}
             

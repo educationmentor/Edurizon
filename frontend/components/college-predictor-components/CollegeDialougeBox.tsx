@@ -100,7 +100,7 @@ export default function CollegeDetailDialouge({isOpen,setIsOpen,college,isGovern
             
             </div>  
             </div> */}
-            <div className='w-[90%]  md:w-[60%] bg-white rounded-[2vw] p-[4vw] md:p-[2vw]'>
+            <div className='w-[90%]  md:w-[60%] bg-white rounded-[2vw] p-[4vw] md:p-[2vw] text-black'>
                 <div className='relative flex flex-row gap-[2vw] justify-center items-center'>
             <h4 className='w-[75%] text-mediumTextPhone md:text-h5Text  font-bold text-center'>Contact Our Counsellor for More Details Regarding this College<br/>
                 <span className="text-mediumTextPhone md:text-mediumText font-normal ">Mobile Number:<a className="underline" href="tel:+918800907657">8800907657</a>, <a className="underline" href="tel:+919873381377">9873381377</a>,</span><br/>

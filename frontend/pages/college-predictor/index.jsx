@@ -232,7 +232,7 @@ export default function CollgePredictor(){
         <div  >
 
         {/* Header Section of this page */}
-        <div className="relative  flex flex-col items-center z-[0] ">
+        <div className="relative  flex flex-col items-center z-[0] text-black ">
             {/* Background Paper Image */}
 
             {/* Header Div above Image*/}
@@ -252,7 +252,7 @@ export default function CollgePredictor(){
                 <h4 className='text-orangeChosen font-bold text-h5TextPhone md:text-h4Text text-center select-none'>{rankorMarks?"Rank":"Marks"}</h4>
                 <Image onClick={()=>setRankorMarks(!rankorMarks)} src="/assets/Images/college-predictor/Switch.svg" width={200} height={200} className='cursor-pointer w-[5vw] md:w-[1.5vw] h-auto' alt='switch'/>
                 </div>
-                    {rankorMarks?<input onChange={handleChange} id="rank" className='w-[20vw] md:w-[13vw]   select-none text-center text-regularTextPhone md:text-h5Text focus:outline-none' type='number' value={formData['rank']} placeholder='Enter your Rank' ></input>
+                    {rankorMarks?<input onChange={handleChange} id="rank" className='w-[20vw] md:w-[13vw]    select-none text-center text-regularTextPhone md:text-h5Text focus:outline-none' type='number' value={formData['rank']} placeholder='Enter your Rank' ></input>
                     :<input onChange={handleChange} id="marks" className='w-[20vw] md:w-[13vw]  select-none text-center text-regularTextPhone md:text-h5Text focus:outline-none' type='number' value={formData['marks']} placeholder='Enter your marks' ></input>}
                 </div>
 
@@ -341,7 +341,7 @@ export default function CollgePredictor(){
         {!wait&&        
         (columnName['category']!='All'?<>
        {data.length >0&&( 
-       <div className=' pb-[4vw] overflow-y-visible'>
+       <div className=' pb-[4vw] overflow-y-visible text-black'>
         <h2 className='underline text-h5TextPhone md:text-h3Text font-bold text-center pt-[1vw] pb-[2.5vw] select-none text-orangeChosen'>Your Result</h2>
         <div className='relative rounded-[1vw] py-[1vw] px-[1vw]  mx-[2vw] bg-white overflow-x-auto '>
         <table className='relative rounded-[1vw] overflow-x-scroll  mb-[5vw] table-auto border-collapse text-center w-full'>
@@ -403,7 +403,7 @@ export default function CollgePredictor(){
         </div>
             
     )}
-    {data.length==0 &&clickedOnce && <div className='w-full pb-[4vw] md:pb-[2vw]'><h3 className='text-h5TextPhone md:text-h5Text text-red-500 text-center pb-[.5vw]'>
+    {data.length==0 &&clickedOnce && <div className='w-full pb-[4vw] md:pb-[2vw] text-black'><h3 className='text-h5TextPhone md:text-h5Text text-red-500 text-center pb-[.5vw]'>
         You are not Eligible for any College in This State</h3>
         <p className='text-center text-regularTextPhone md:text-regularText pb-[1vw]'>Click the button bellow to reach out to our Counsellor for more help</p>
         <div className='mx-auto w-min'>
@@ -415,7 +415,7 @@ export default function CollgePredictor(){
       
          <>
          <div
-        className={`transition-all duration-700 ease-in-out transform ${
+        className={`transition-all duration-700 text-black ease-in-out transform ${
           isVisible ? 'opacity-0 translate-y-0' : 'opacity-100 translate-y-5'
         }`}
       >

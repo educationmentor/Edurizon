@@ -67,7 +67,7 @@ const NewPage = () => {
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>
-                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full'>
+                <div className='bg-linenChosen flex flex-col md:flex-row gap-[3vw] items-center w-full text-black'>
                     <Image className='w-full md:w-[40.625vw] h-full' src={"/assets/Images/mbbs-in-georgia/IBSU.png"} alt='college Image' width={650} height={550}/>
                     <div className='relative mx-[6vw] md:mx-0 py-[4vw]'>
                       <h2 className='font-bold text-h3TextPhone md:text-h2Text leading-[120%] mb-[2vw] md:mb-[1.5vw]'>International Black Sea University</h2>
@@ -157,7 +157,7 @@ const NewPage = () => {
 
               {/* Why choose section */}
               <div className="p-[8vw] md:p-[4vw] flex flex-col md:flex-row  px-[6vw] md:px-[12.5vw] gap-[5vw] md:gap-[2vw] mb-[10vw] md:mb-[4vw] items-center bg-linenChosen">
-                  <div className="flex flex-col gap-[2vw] md:gap-[1vw] ">
+                  <div className="flex flex-col gap-[2vw] md:gap-[1vw] text-black">
                   <h3 className="font-bold text-h5TextPhone md:text-h3Text  leading-[120%]">Why Choose IBSU for MBBS?</h3>
                   <ul className="text-smallTextPhone md:text-regularText list-disc list-outside pl-[2vw] md:pl-[1.5vw]">
                     <li>A leading and most demanded Medical University</li>

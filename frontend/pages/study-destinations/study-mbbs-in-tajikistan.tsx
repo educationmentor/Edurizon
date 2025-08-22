@@ -280,18 +280,18 @@ const NewPage=()=>{
                         <tbody className="text-smallTextPhone md:text-regularText align-top">
                             {universitiesData.map((university) => (
                                 <tr key={university.id}>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
-                                        <a href={university.href}>
+                                    <td className="border    border-black dark:border-white px-[.75vw] py-[.625vw]">
+                                        <a className="dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in" href={university.href}>
                                             {university.name}
                                         </a>
                                     </td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.location}</td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.year}</td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.fee}</td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.duration}</td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">{university.recognition}</td>
-                                    <td className="border dark:text-black dark:border-b-black dark:border-r-black  border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">
-                                        <a href={university.href}>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">{university.location}</td>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">{university.year}</td>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">{university.fee}</td>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">{university.duration}</td>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">{university.recognition}</td>
+                                    <td className="border dark:text-white   border-black dark:border-white px-[.75vw] py-[.625vw]">
+                                        <a href={university.href} className="dark:text-white dark:hover:text-orange-300 duration-300 transition-colors ease-in-out">
                                             Know More
                                         </a>
                                     </td>

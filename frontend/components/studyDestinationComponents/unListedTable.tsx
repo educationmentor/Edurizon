@@ -41,9 +41,9 @@ const UnlistedTable = ({ id,content,section2="" }: UnlistedTableProps) => {
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (
-                    <td key={index} className={`border dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw] w-[${100/width}%] ${index==0?"font-semibold":""} ${bool && index==0?"bg-linenChosen":""}`}>
+                    <td key={index} className={`border border-black  px-[.75vw] py-[.625vw] w-[${100/width}%] ${index==0?"font-semibold ":""} ${bool && index==0?"bg-linenChosen dark:text-black dark:border-b-black dark:border-r-black":"dark:text-white dark:border-white"}`}>
                       {content.href && index==0 ?
-                       <a href={content.href[i]}>{highlight}</a>:(highlight)}
+                       <a className="dark:text-white dark:hover:text-orange-400 transition-colors duration-300 ease-in-out" href={content.href[i]}>{highlight}</a>:(highlight)}
                     </td>
                   ))}
                 </tr>
