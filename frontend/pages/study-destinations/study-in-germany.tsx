@@ -205,71 +205,71 @@ const NewPage=()=>{
                             <tr>
                                 <th scope="row">1.</th>
                                 <td><TransitionLink href="/study-destinations/study-in-germany/ausbildung" >
-                                <b>Ausbildung in Germany</b>
+                                <b className='text-black'>Ausbildung in Germany</b>
                                 </TransitionLink>
                                 </td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/ausbildung" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">2.</th> 
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/bachelors-in-germany" >Bachelors</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/bachelors-in-germany" ><b className='text-black'>Bachelors</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/bachelors-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">3.</th>
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/masters-in-germany" >Masters</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/masters-in-germany" ><b className='text-black'>Masters</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/masters-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">4.</th> 
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/md-in-germany" >MD – Medicine</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/md-in-germany" ><b className='text-black'>MD – Medicine</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/md-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">5.</th>
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/hotel-management-in-germany" >Hotel Management</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/hotel-management-in-germany" ><b className='text-black'>Hotel Management</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/hotel-management-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">6.</th>
-                                <td><b><a href="/assets/pdf/pharmacy-in-germany.pdf" target="_blank">Pharmaceuticals</a></b></td> 
-                                <td><a href="/assets/pdf/pharmacy-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><TransitionLink href="/study-destinations/study-in-germany/pharmacy-in-germany" ><b className='text-black'>Pharmaceuticals</b></TransitionLink></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/pharmacy-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">7.</th>
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/nursing-in-germany" >Nursing</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/nursing-in-germany" ><b className='text-black'>Nursing</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/nursing-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">8.</th> 
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/vocational-courses-in-germany" >Vocational Courses</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/vocational-courses-in-germany" ><b className='text-black'>Vocational Courses</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/vocational-courses-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">9.</th> 
-                                <td><b><a href="/assets/pdf/germany/german-education-system.pdf" target="_blank">German Education System</a></b></td> 
-                                <td><a href="/assets/pdf/germany/german-education-system.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><TransitionLink href="/study-destinations/study-in-germany/education-system-in-germany" ><b className='text-black'>German Education System</b></TransitionLink></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/education-system-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">10.</th> 
-                                <td><b><TransitionLink href="/study-destinations/study-in-germany/mbbs-in-germany" >MBBS in Germany</TransitionLink></b></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/mbbs-in-germany" ><b className='text-black'>MBBS in Germany</b></TransitionLink></td> 
                                 <td><TransitionLink href="/study-destinations/study-in-germany/mbbs-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">11.</th> 
-                                <td><b><a href="/assets/pdf/germany/ms-in-economics-in-germany.pdf" target="_blank">MS in Economics in Germany</a></b></td> 
-                                <td><a href="/assets/pdf/germany/ms-in-economics-in-germany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><TransitionLink href="/study-destinations/study-in-germany/ms-in-economics-in-germany" ><b className='text-black'>MS in Economics in Germany</b></TransitionLink></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/ms-in-economics-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                             <tr>
                                 <th scope="row">12.</th> 
-                                <td><b><a href="/assets/pdf/germany/phd-in-garmany.pdf" target="_blank">PHD in Garmany</a></b></td> 
-                                <td><a href="/assets/pdf/germany/phd-in-garmany.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><TransitionLink href="/study-destinations/study-in-germany/phd-in-germany" ><b className='text-black'>PHD in Garmany</b></TransitionLink></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/phd-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                            
                             <tr>
                                 <th scope="row">13.</th> 
-                                <td><b><a href="/assets/pdf/germany/masters-in-public-health.pdf" target="_blank">Masters in Public Health</a></b></td> 
-                                <td><a href="/assets/pdf/germany/masters-in-public-health.pdf" target="_blank" className="btn-custom btn-univ-detail">Read More</a></td>
+                                <td><TransitionLink href="/study-destinations/study-in-germany/masters-in-public-health-in-germany" ><b className='text-black'>Masters in Public Health</b></TransitionLink></td> 
+                                <td><TransitionLink href="/study-destinations/study-in-germany/masters-in-public-health-in-germany" ><p className='btn-custom btn-univ-detail'>Read More</p></TransitionLink></td>
                             </tr>
                         </tbody>
                     </table>

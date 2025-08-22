@@ -27,6 +27,7 @@ import { usePathname } from "next/navigation";
 // import HeroSection from "@/components/landingPage/HeroSection";
 import CTASectionComponent from "@/components/CTASectionComponent";
 import Home from '../pages/index'
+import NavHeader from "@/components/NavHeader";
 
 const GA_TRACKING_ID = "G-Z25NZ103DJ";
 
@@ -139,6 +140,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         ) : (
           <>
+            {/* {!shouldExcludeLayout && <NavHeader/>} */}
             {!shouldExcludeLayout && <Navbar />}
             {pathname === '/' ? <Home /> : <Component {...pageProps} />}
             <GoogleAnalytics gaId="G-Z25NZ103DJ" />

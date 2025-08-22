@@ -162,7 +162,7 @@ const Navbar = () => {
     <nav
 className={`${
 router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predictor" || router.asPath==="/testimonial" ? "absolute" : "relative"
-} px-[2vw] md:px-[4.125vw] top-0 left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
+} px-[2vw] md:px-[4.125vw] top-[0vw] left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
 >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
       <div className="flex items-center justify-between w-full ">
