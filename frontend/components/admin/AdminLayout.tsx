@@ -89,6 +89,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: '/admin/document', 
       icon: '/assets/Images/admin/document.svg'
     },
+    {
+      name: 'Digital Team',
+      href: '/admin/digital',
+      icon: '/assets/Images/admin/document.svg'
+    }
    
   ];
 
@@ -155,7 +160,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
          <nav className='border-b-2 items-center border-[#E8E8E8] px-[24px] py-[24px] flex'>
             <h4 className='font-bold text-h5Text'>Hello, {adminData?.firstName}</h4>
             <Image src="/assets/Images/admin/double-chevron-right.svg" width={20} height={20} className='ml-[2vw] w-[1.5vw] h-[1.5vw]' alt='arrow down icon' />
-            <h4 className='text-regularText text-[#9F9F9F] ml-[8px]'>{new Date().toLocaleDateString()}</h4>
+            {/* <h4 className='text-regularText text-[#9F9F9F] ml-[8px]'>{new Date().toLocaleDateString()}</h4> */}
             <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} />
             <div className='ml-[32px] w-[340px] bg-white rounded-[16px]  h-[48px] overflow-hidden flex'>
                 <input type="text" placeholder="Search..." className='w-full  h-full outline-none px-[12px] text-smallText' />

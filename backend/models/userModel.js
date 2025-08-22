@@ -53,4 +53,4 @@ userSchema.index({ name: 'text' }); // For text search on name field
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = { User };
+module.exports = User ;

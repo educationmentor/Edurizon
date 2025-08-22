@@ -19,7 +19,7 @@ const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessageModel');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-
+const { v2: cloudinary } = require('cloudinary');
 dotenv.config();
 
 const app = express();
@@ -38,6 +38,14 @@ app.use(cookieParser());
 
 // Database Connection
 connectDB();
+
+// Cloudinary Setup
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_API_KEY
+});
+
 
 // Set up Socket.io
 const io = new Server(server, {

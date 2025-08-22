@@ -19,12 +19,13 @@ interface AdminTableProps {
 tabs: Array<{ key: string; label: string; count: number }>;
 activeTab: string;
 setActiveTab: (key: string) => void;
+extraButtons?:React.ReactNode;
 }
 
-const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,error,csvHeader,csvDataFields,tabs, activeTab, setActiveTab  }: AdminTableProps) => {
+const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,error,csvHeader,csvDataFields,tabs, activeTab, setActiveTab,extraButtons  }: AdminTableProps) => {
 
 
-  
+  console.log(leads, "leads in admin table");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
   
@@ -163,6 +164,8 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
                     >
                       Export All
                     </button>
+                    {extraButtons}
+
                   </div>
                 </div>
               </div>
@@ -208,7 +211,8 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
                               onChange={() => handleSelectLead(lead._id)}
                             />
                           </td>
-                          {tableColumns.map((col, index) => (
+                          
+                          {tableColumns.map((col) => (
                                 <td key={col.key} className="px-6 py-4 whitespace-nowrap">
                                 {col.render(lead, index)}
                                 </td>

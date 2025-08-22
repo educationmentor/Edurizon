@@ -18,11 +18,20 @@ export default function Layout({ children, navItems, searchTerm,setSearchTerm }:
   console.log("Search Term:", searchTerm);
   // Fetch Data of Admin from local Storage
   useEffect(() => {
-    const adminDataString = localStorage.getItem("adminData");
+    if(sessionStorage.getItem('adminData')){
+      const adminDataString = sessionStorage.getItem("adminData");
+      if (adminDataString) {
+        const parsedData = JSON.parse(adminDataString);
+        setAdminData(parsedData);}
+    }else{
+      const adminDataString = localStorage.getItem("adminData");
     if (adminDataString) {
       const parsedData = JSON.parse(adminDataString);
       setAdminData(parsedData);
     }
+
+    }
+    
     }, []);
 
   // Handle logout

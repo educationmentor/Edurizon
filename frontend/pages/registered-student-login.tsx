@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import OtpLogin from '../components/OtpLogin';
 import { TransitionLink } from '../utils/TransitionLink';
+import axios from 'axios';
+import { baseUrl } from '@/lib/baseUrl';
 
 const Login = () => {
   const router = useRouter();
@@ -59,9 +61,14 @@ const Login = () => {
 //     );
 //   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit  = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
+    try{
+        const response = await axios.post(`${baseUrl}/api/`,form);
+        console.log(response);
+    }catch(error){
+        console.log(error);
+    }
   };
 
   return (

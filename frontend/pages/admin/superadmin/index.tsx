@@ -50,7 +50,7 @@ interface Meeting {
 const ITEMS_PER_PAGE = 5; // Number of items to show per page
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('Counseling');
+  const [activeTab, setActiveTab] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [teamMembers, setTeamMembers] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
-  const tabs = ['Counseling', 'Finance', 'Digital','Document Management', 'Super Admin','Students','Registered Students'];
+  const tabs = ['All', 'Super Admin','Counseling', 'Digital','Document Management','Finance' ];
 
   useEffect(() => {
     fetchTeamMembers();
@@ -240,6 +240,27 @@ const AdminDashboard = () => {
     setCurrentPage(1);
   }, [activeTab]);
 
+
+  const handleImpersonate = async (id:any) => {
+    try {
+      const res = await axios.post(`${baseUrl}/api/admin/impersonate/${id}`, {}, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` }
+      });
+  
+    const { token, user } = res.data;
+
+    // Save into sessionStorage instead of localStorage
+    sessionStorage.setItem("adminToken", token);
+    sessionStorage.setItem("adminData", JSON.stringify(user));
+    
+    // open impersonated dashboard in new tab
+    const newWindow = window.open("/admin", "_blank");
+    sessionStorage.clear();
+  } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="py-6">
@@ -411,6 +432,7 @@ const AdminDashboard = () => {
                           <th className="px-6 py-3 text-left text-sm font-semibold">Joining Date</th>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Login-Access</th>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Remove</th>
+                          <th className='px-6 py-3 text-left text-sm font-semibold'>View</th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -447,7 +469,7 @@ const AdminDashboard = () => {
                                 }`}
                               >
                                 {member.active ? 'Access' : 'No Access'}
-                              </button>
+                              </button> 
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <button
@@ -458,6 +480,16 @@ const AdminDashboard = () => {
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                               </button>
+                            </td>
+                            <td className=''>
+                            <div className="relative">
+                              <button
+                                onClick={()=>{handleImpersonate(member._id)}}
+                                className="bg-teal-100  text-teal-800 px-[32px] py-[8px] rounded-full text-sm font-medium  items-center"
+                            >
+                              View
+                            </button>
+                          </div>
                             </td>
                           </tr>
                         ))}

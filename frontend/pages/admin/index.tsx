@@ -14,6 +14,9 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  
+
+  
   useEffect(() => {
     // Check if redirected due to expired token
     const expired = router.query.expired === 'true';
@@ -23,21 +26,33 @@ const AdminLogin = () => {
 
     // Check if already logged in with valid token
     const checkAuth = async () => {
-      const token = localStorage.getItem('adminToken');
-      const adminData = localStorage.getItem('adminData');
-      
-      if (token && adminData) {
+      const tokenLocalStorage = localStorage.getItem('adminToken');
+      const adminDataLocalStorage = localStorage.getItem('adminData');
+      const tokenSessionStoarge =sessionStorage.getItem('adminToken');
+      const adminDataSessionStorage = sessionStorage.getItem('adminData');
+
+      console.log('LocalStorage', 'admin Data:',adminDataLocalStorage)
+      console.log('token',tokenLocalStorage);
+      console.log('Session Storage', 'adminData:',adminDataSessionStorage)
+      console.log('token',tokenSessionStoarge);
+      if (tokenLocalStorage && adminDataLocalStorage) {
         try {
           // Validate token
           const response = await axios.get(`${baseUrl}/api/admin/validate-token`, {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${tokenLocalStorage}`
             }
           });
           
           if (response.data.status === 'success') {
-            const user = JSON.parse(adminData);
-            handleRoleBasedRouting(user.role);
+            if(adminDataSessionStorage && tokenSessionStoarge){
+              const user = JSON.parse(adminDataSessionStorage);
+              handleRoleBasedRouting(user.role);
+            }else{
+              const user = JSON.parse(adminDataLocalStorage);
+              handleRoleBasedRouting(user.role);
+            }
+            
           }
         } catch (error) {
           // Clear invalid token and data
@@ -66,7 +81,7 @@ const AdminLogin = () => {
         router.push('/admin/finance');
         break;
       case 'digitalMarketing':
-        router.push('/admin/digital-marketing');
+        router.push('/admin/digital');
         break;
       case 'newRecruit':
         router.push('/admin/new-recruit');

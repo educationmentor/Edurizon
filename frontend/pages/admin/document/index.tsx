@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import DocumentLayout from '@/components/admin/DocumentLayout';
-import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
 import { baseUrl } from '@/lib/baseUrl';
 import axios from 'axios';
-import { PencilIcon, TrashIcon, EyeIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import toast, { Toaster } from 'react-hot-toast';
 import AdminTable from '@/components/admin/AdminTable';
-import leads from '../superadmin/leads';
+import { useRouter } from "next/router";
+import { TransitionLink } from '@/utils/TransitionLink';
 
 const navItems = [
   {
@@ -51,15 +50,16 @@ const DocumentManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Action Button
-  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [openDropdownId2, setOpenDropdownId2] = useState<string | null>(null);  
 
   // Table Data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [adminData, setAdminData] = useState<any>(null);
-  const [pendingLeads, setPendingLeads] = useState<any[]>([]);
-  const [completedLeads, setCompletedLeads] = useState<any[]>([]);
+  const [registeredStudents, setRegisteredStudents] = useState<any[]>([]);
+  const [currentLeads,setCurrentLeads] = useState<any[]>([]);
+   const router = useRouter();
+
 
   const tableColumns = [
   {
@@ -75,39 +75,40 @@ const DocumentManagement = () => {
     ),
   },
   {
+    key: "studyDestination",
+    render: (lead:any) => (
+      <span className="text-sm text-gray-500">{lead.studyDestination}</span>
+    ),
+  },
+  {
     key: "phone",
     render: (lead:any) => (
-      <span className="text-sm text-gray-500">{lead.phone}</span>
+
+        <span className="text-sm text-gray-500">{lead.phone}</span>
     ),
   },
   {
     key: "email",
     render: (lead:any) => (
-      <a
+            <a
+        className="text-sm text-gray-500"
         href={`mailto:${lead.email}`}
-        className="text-sm text-blue-600"
       >
-        {lead.email}
+      <span className="text-sm text-gray-500">{lead.email}</span>
       </a>
     ),
   },
   {
-    key: "interestedCountry",
-    render: (lead:any) => (
-      <span className="text-sm text-gray-500">{lead.interestedCountry}</span>
-    ),
-  },
-  {
-    key: "counsellingStatus",
+    key: "documentsUploadStatus",
     render: (lead:any) => (
       <div className="relative">
         <button
           onClick={() =>
             setOpenDropdownId2(openDropdownId2 === lead._id ? null : lead._id)
           }
-          className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium inline-flex items-center"
+          className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium  items-center"
         >
-          {lead.counsellingStatus}
+          {lead.documentsUploadStatus}
           <ExpandMoreIcon className="w-4 h-4 ml-1" />
         </button>
         {openDropdownId2 === lead._id && (
@@ -115,106 +116,78 @@ const DocumentManagement = () => {
             <div
               className="py-1 max-h-48"
               role="menu"
-              aria-orientation="vertical"
             >
               <button
-                onClick={()=>{}
+                onClick={()=>{updateStatusOfUpload(lead._id,"pending");}
                 }
                 className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Pending
               </button>
-              <button
-                onClick={()=>{}
+              
+            </div>
+            <div
+              className="py-1 max-h-48"
+              role="menu"
+            >
+            <button
+                onClick={()=>{updateStatusOfUpload(lead._id,"completed");}
                 }
                 className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Completed
               </button>
-            </div>
+              </div>
           </div>
         )}
       </div>
     ),
   },
   {
-    key: "typeofLead",
+    key: "view",
     render: (lead:any) => (
       <div className="relative">
-        <button
-          onClick={() =>
-            setOpenDropdownId(openDropdownId === lead._id ? null : lead._id)
-          }
-          className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium inline-flex items-center"
+        <TransitionLink href={`/admin/document/${lead._id}`}>
+          <button
+            className="bg-teal-100  text-teal-800 px-[64px] py-[8px] rounded-full text-sm font-medium  items-center"
         >
-          {lead.typeofLead}
-          <ExpandMoreIcon className="w-4 h-4 ml-1" />
+          View
         </button>
-        {openDropdownId === lead._id && (
-          <div className="absolute z-10 mt-2 w-min rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-            <div
-              className="py-1 max-h-48"
-              role="menu"
-              aria-orientation="vertical"
-            >
-              <button
-                onClick={() =>{}}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Warm
-              </button>
-              <button
-                onClick={() =>{}}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Cold
-              </button>
-              <button
-                onClick={() =>{}}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Hot
-              </button>
-            </div>
-          </div>
-        )}
+        </TransitionLink>
       </div>
     ),
   },
-
   ];
 
   useEffect(() => {
-    const value = localStorage.getItem('adminData');
-    const parsedValue = JSON.parse(value || '{}');
-    setAdminData(parsedValue);
+    if(sessionStorage.getItem('adminData')){
+      const value = sessionStorage.getItem('adminData');
+      const parsedValue = JSON.parse(value || '{}');
+      setAdminData(parsedValue);
+    }else{
+      const value = localStorage.getItem('adminData');
+      const parsedValue = JSON.parse(value || '{}');
+      setAdminData(parsedValue);
+    }
+    
   }, []);
 
-    
-   useEffect(() => {
-    if(adminData){fetchLeads();
+  console.log('adminData',adminData)
+  useEffect(() => {
+    if(adminData){fetchRegisteredStudents();
   }
   }, [adminData]);
 
-
-
-
     // Tabs and its 
-  const [activeTab, setActiveTab] = useState('pending');
+  const [activeTab, setActiveTab] = useState('allStudents');
 
    const tabs = [
-    { key: "All Students", label: "All Students", count: pendingLeads.length + completedLeads.length },
+    { key: "allStudents", label: "All Students", count: registeredStudents.length },
     ];
 
 
-    // Leads Filtering And Fetching
-  const filterLeads = (leads:any) => {
-    const pendingLeads = leads.filter((lead:any) => lead.counsellingStatus === 'pending');
-    const completedLeads = leads.filter((lead:any) => lead.counsellingStatus === 'completed');
-    setPendingLeads(pendingLeads);
-    setCompletedLeads(completedLeads);
-  }
-  const fetchLeads = async () => {
+  // Fetch registered students
+  const fetchRegisteredStudents = async () => {
       try {
         const token = localStorage.getItem('adminToken');
         if (!token) {
@@ -224,13 +197,13 @@ const DocumentManagement = () => {
 
         // Ensure token has Bearer prefix
         const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-        const assignedRes = await axios.get(`${baseUrl}/api/admin/consultation/assigned/${adminData?._id}`, {
+        const assignedRes = await axios.get(`${baseUrl}/api/registered-students/get-all`, {
           headers: { 
             Authorization: authToken
           }
         });
-        if (assignedRes.data.success) {
-          filterLeads(assignedRes.data.data);
+        if (assignedRes.data) {
+          setRegisteredStudents(assignedRes.data);
         }
       } catch (err: any) {
         console.log("err",err);
@@ -245,16 +218,46 @@ const DocumentManagement = () => {
         setLoading(false);
       }
     };
-  const [currentLeads,setCurrentLeads] = useState<any[]>([]);
-  useEffect(() => {
-    setCurrentLeads(activeTab === 'pending' ? pendingLeads : completedLeads);
-  }, [activeTab, pendingLeads, completedLeads]);
 
-  console.log(activeTab)
+  // Update Status of Upload
+  const updateStatusOfUpload=async(id:string,status:string)=>{
+    try {
+      const response = await axios.put(
+        `${baseUrl}/api/registered-students/updateStatus/${id}`,
+        { id, status },
+      );
+      if (response.data) {
+        toast.success('Updated successfully', {
+          duration: 3000,
+          position: 'top-right',
+          style: {
+            background: '#10B981',
+            color: '#fff',
+            padding: '16px',
+          },
+        });
+        setOpenDropdownId2(null);
+        fetchRegisteredStudents();
+      }
+    } catch (err: any) {
+      console.log("err",err);
+    }
+  }
+
+
+
+
+  useEffect(() => {
+    setCurrentLeads(activeTab === 'allStudents' ? registeredStudents : []);
+  }, [activeTab, registeredStudents]);
+          console.log('Assigned Students:', registeredStudents);
+
+  console.log('Current Leads:', currentLeads);
   return (
     <DocumentLayout navItems={navItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       <Toaster />
       <div>
+        {}
         <div className="py-8">
             <div className="px-4 sm:px-6 md:px-8">
             <h1 className="text-2xl font-semibold text-gray-900">Document Management</h1>

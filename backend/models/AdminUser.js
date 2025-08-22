@@ -10,6 +10,47 @@ const ROLES = {
   NEW_RECRUIT: 'newRecruit'
 };
 
+const videoSchema = new mongoose.Schema({
+  videoName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  dateOfShoot: {
+    type: Date,
+    required: true,
+  },
+  videoEdited: {
+    type: Boolean,
+    default: false,
+  },
+  thumbnailUploaded: {
+    type: Boolean,
+    default: false,
+  },
+  captionAdded: {
+    type: Boolean,
+    default: false,
+  },
+  videoUploaded: {
+    type: Boolean,
+    default: false,
+  },
+  platform: {
+    type: [String], // e.g. ["YouTube", "Instagram", "Facebook"]
+    default: [],
+  },
+  uploadDate: {
+    type: Date,
+  },
+  description: {
+    type: String,
+    trim: true,
+  }
+}, { _id: false }); // no extra _id for subdocs
+
+
+
 const adminUserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -30,6 +71,11 @@ const adminUserSchema = new mongoose.Schema({
     required: [true, 'Password is required'],
     minlength: [8, 'Password must be at least 8 characters long'],
     select: false,
+  },
+  contactNo: {
+    type: String,
+    required: false,
+    trim: true,
   },
   role: {
     type: String,
@@ -56,11 +102,16 @@ const adminUserSchema = new mongoose.Schema({
     ref: 'User',
     required: false,
   },
-  contactNo: {
-    type: String,
-    required: false,
-    trim: true,
+  
+   digitalMarketingVideos: {
+    type: [videoSchema],
+    required: function () {
+      return this.role === ROLES.DIGITAL_MARKETING;
+    },
+    default: [],
   },
+
+  // Account Information
   active: {
     type: Boolean,
     default: true,

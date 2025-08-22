@@ -8,10 +8,12 @@ module.exports = {
   },
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
   email: {
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    username: process.env.EMAIL_USERNAME,
-    password: process.env.EMAIL_PASSWORD,
-    from: process.env.EMAIL_FROM || 'noreply@edurizon.com'
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: process.env.EMAIL_PORT || 587,
+    username: process.env.EMAIL_USERNAME || 'edurizon.website@gmail.com',
+    password: process.env.EMAIL_PASSWORD || '',
+    from: process.env.EMAIL_FROM || 'edurizon.website@gmail.com',
+    secure: process.env.EMAIL_SECURE === 'true' || false,
+    service: process.env.EMAIL_SERVICE || 'gmail'
   }
 }; 

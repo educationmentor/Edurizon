@@ -1,5 +1,26 @@
 const mongoose = require('mongoose');
 
+
+const documentSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true, // e.g., "Aadhar Card", "Visa"
+  },
+  link: {
+    type: String,
+    required: false, // File URL or storage path
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'uploaded', 'verified', 'rejected'],
+    default: 'pending',
+  },
+  remark: {
+    type: String,
+    required: false,
+  }
+}, { _id: false });
+
 const userSchema = mongoose.Schema(
   {
     // Personal Details
@@ -37,9 +58,20 @@ const userSchema = mongoose.Schema(
     
     // Documents
     documents: {
-      type: Map,
-      of: String,
-      required: false,
+      type: [documentSchema],
+      default: [
+        { name: 'Aadhar Card' },
+        { name: 'Pancard' },
+        { name: 'Visa' },
+        { name: 'Result Certificate' },
+        { name: 'Identity Proof' },
+      ]
+    },
+    
+    documentsUploadStatus:{
+      type:String,
+      enum: ['pending', 'completed'],
+      default: 'pending'
     },
 
     // Academic Preferences

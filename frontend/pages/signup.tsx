@@ -7,7 +7,6 @@ import ThemeContext from '@/context/themeContext';
 
 const SignUp = () => {
   const router = useRouter();
-  const [height, setHeight] = useState(0);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useState<any>(null);

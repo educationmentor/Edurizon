@@ -115,14 +115,7 @@ exports.login = async (req, res) => {
       status: 'success',
       token,
       data: {
-        user: {
-          _id: adminUser._id,
-          email: adminUser.email,
-          firstName: adminUser.firstName,
-          lastName: adminUser.lastName,
-          role: adminUser.role,
-          active: adminUser.active
-        }
+        user: adminUser
       }
     });
   } catch (error) {
@@ -270,3 +263,74 @@ exports.validateToken = async (req, res) => {
     message: 'Token is valid'
   });
 }; 
+
+
+// Function to Create Token for loging as superadmin
+exports.impersonate=async (req, res) => {
+  // if (req.user.role !== "super-admin") {
+  //   return res.status(403).json({ message: "Unauthorized" });
+  // }
+
+  const user = await AdminUser.findById(req.params.id);
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  // create token as if Parthiv logged in
+  const token = jwt.sign(
+    { id: user._id, role: user.role, name: user.name, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+
+  res.json({ token, user });
+}
+
+
+// Function to add video data for digital Team 
+exports.addVideoData=async(req,res)=>{
+  try {
+    const { userId } = req.params; // pass userId in route
+    const {
+      videoName,
+      dateOfShoot,
+      videoEdited,
+      thumbnailUploaded,
+      captionAdded,
+      videoUploaded,
+      platform,
+      uploadDate,
+      description
+    } = req.body;
+
+    // Video object to add
+    const newVideo = {
+      videoName,
+      dateOfShoot,
+      videoEdited: videoEdited || false,
+      thumbnailUploaded: thumbnailUploaded || false,
+      captionAdded: captionAdded || false,
+      videoUploaded: videoUploaded || false,
+      platform: platform || [],
+      uploadDate,
+      description,
+    };
+
+    // Push video into user's digitalMarketingVideos
+    const updatedUser = await AdminUser.findByIdAndUpdate(
+      userId,
+      { $push: { digitalMarketingVideos: newVideo } },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "Video added successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
