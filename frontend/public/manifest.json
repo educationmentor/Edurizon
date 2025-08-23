@@ -1,6 +1,7 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Edurizon - Your Gateway to Learning",
+  "short_name": "Edurizon",
+  "description": "Edurizon offers expert guidance, mock interviews, doubt-solving, and mentorship for every career journey.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -17,5 +18,7 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
 }

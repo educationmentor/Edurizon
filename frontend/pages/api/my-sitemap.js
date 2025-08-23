@@ -71,6 +71,14 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-in-germany/masters-in-germany', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-in-germany/md-in-germany', changefreq: 'daily', priority: 0.3 },
         { url: '/study-destinations/study-in-germany/hotel-management-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/mbbs-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/nursing-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/pharmacy-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/vocational-courses-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/education-system-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/ms-in-economics-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/phd-in-germany', changefreq: 'daily', priority: 0.3 },
+        { url: '/study-destinations/study-in-germany/masters-in-public-health-in-germany', changefreq: 'daily', priority: 0.3 },
 
         // Study in Tajikistan
         { url: '/study-destinations/study-mbbs-in-tajikistan/khatlon-state-medical-university', changefreq: 'daily', priority: 0.3 },
