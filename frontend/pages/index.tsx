@@ -69,9 +69,6 @@ const Home = () => {
   <meta property="og:title" content="Edurizon" />
   <meta property="og:description" content="Empowering students with mentorship and career guidance." />
   <link rel="canonical" href="https://www.edurizon.in" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
 
   <script
     type="application/ld+json"

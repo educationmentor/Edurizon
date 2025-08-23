@@ -115,12 +115,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
-        {/* Favicon Links */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
+
         
         {/* SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
