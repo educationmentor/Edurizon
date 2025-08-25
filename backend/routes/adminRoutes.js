@@ -2,7 +2,7 @@ const express = require('express');
 const adminAuthController = require('../controllers/adminAuthController');
 const adminUserController = require('../controllers/adminUserController');
 const { protectAdminRoute, restrictTo, isSuperAdmin } = require('../middleware/adminAuth');
-
+const {getAllCounsellors} = require('../controllers/adminCounsellorAdminController');
 const router = express.Router();
 
 // Public routes
@@ -10,8 +10,13 @@ router.post('/login', adminAuthController.login);
 router.post('/forgot-password', adminAuthController.forgotPassword);
 router.patch('/reset-password/:token', adminAuthController.resetPassword);
 router.get('/validate-token', protectAdminRoute, adminAuthController.validateToken);
+
+
 // backend route
 router.post("/impersonate/:id",adminAuthController.impersonate);
+
+// Counsellor Admin Routes
+router.get('/getAllcounsellors', getAllCounsellors);
   
 // Protected routes
 router.use(protectAdminRoute);

@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
-  const tabs = ['All', 'Super Admin','Counseling', 'Digital','Document Management','Finance' ];
+  const tabs = ['All', 'Super Admin','Counseling', 'Digital','Document Management','Finance','Counsellor Admin' ];
 
   useEffect(() => {
     fetchTeamMembers();
@@ -153,6 +153,9 @@ const AdminDashboard = () => {
         break;
       case 'document management':
         filtered = teamMembers.filter(member => member.role === 'documentHandler');
+        break;
+      case 'counsellor admin':
+        filtered = teamMembers.filter(member => member.role === 'counsellorAdmin');
         break;
       default:
         filtered = teamMembers;

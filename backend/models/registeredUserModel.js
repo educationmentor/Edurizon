@@ -88,7 +88,12 @@ const userSchema = mongoose.Schema(
       required: false,
       default: 'None'
     },
-    assignedCounselor: {
+    assignedCounsellor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'AdminUser',
+      required: false,
+    },
+    assignedCounsellorName: {
       type: String,
       required: false,
     },

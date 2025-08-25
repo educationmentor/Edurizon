@@ -7,7 +7,7 @@ const ROLES = {
   DOCUMENT_HANDLER: 'documentHandler',
   FINANCE: 'finance',
   DIGITAL_MARKETING: 'digitalMarketing',
-  NEW_RECRUIT: 'newRecruit'
+  COUNSELLOR_ADMIN: 'counsellorAdmin'
 };
 
 const videoSchema = new mongoose.Schema({

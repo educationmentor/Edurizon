@@ -20,12 +20,13 @@ tabs: Array<{ key: string; label: string; count: number }>;
 activeTab: string;
 setActiveTab: (key: string) => void;
 extraButtons?:React.ReactNode;
+bgColor?:string;
+setSelectedLead?: (lead: any) => void;
 }
 
-const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,error,csvHeader,csvDataFields,tabs, activeTab, setActiveTab,extraButtons  }: AdminTableProps) => {
+const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,error,csvHeader,csvDataFields,tabs, activeTab, setActiveTab,extraButtons,bgColor,setSelectedLead }: AdminTableProps) => {
 
 
-  console.log(leads, "leads in admin table");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
   
@@ -41,6 +42,13 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
     setCurrentPage(1);
     setSelectedLeads([]);
   }, [activeTab]);
+
+  useEffect(()=>{
+    if(setSelectedLead){
+      setSelectedLead(selectedLeads);
+    }
+  },[selectedLeads])
+
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -129,8 +137,8 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
   return (
     <div>
      <div className="border-b border-gray-200 ">
-                <div className="flex justify-between items-center px-6">
-                  <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                <div className={`flex justify-between items-center px-6 ${bgColor}`}>
+                  <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
                     {tabs.map((tab) => (
                         <button
                         key={tab.key}
@@ -177,7 +185,7 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
               ) : error ? (
                 <div className="p-4 text-red-600">{error}</div>
               ) : (
-                <div className="overflow-x-auto min-h-[30vw]">
+                <div className="overflow-x-auto ">
                   <table className="min-w-full divide-y  divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>

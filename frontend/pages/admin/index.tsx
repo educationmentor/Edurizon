@@ -84,8 +84,8 @@ const AdminLogin = () => {
       case 'digitalMarketing':
         router.push('/admin/digital');
         break;
-      case 'newRecruit':
-        router.push('/admin/new-recruit');
+      case 'counsellorAdmin':
+        router.push('/admin/counsellor-admin');
         break;
       default:
         setError('Invalid role. Please contact administrator.');

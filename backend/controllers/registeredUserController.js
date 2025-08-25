@@ -6,7 +6,11 @@ const createRegisteredStudent = async(req, res) => {
     const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounselor,address, notes } = req.body;
   try {
     const newUser = await RegisteredStudent.create({ name,gender, email, dob, password,phone,address, studyDestination,intendedCourse,preferedUniversity,assignedCounselor, notes });
-    res.status(201).json(newUser);
+    res.status(201).json({
+      success:true,
+      message:'Student enrolled successfully',
+      data:newUser
+    });
   } catch (error) {
     console.error('Error creating registered student:', error);
     res.status(500).json({ error: 'Failed to create registered student' });
@@ -33,6 +37,38 @@ const getAllRegisteredStudents = async (req, res) => {
   } catch (error) {
     console.error('Error fetching registered students:', error);
     res.status(500).json({ error: 'Failed to fetch registered students' });
+  }
+};
+
+const updateRegisteredStudent = async (req, res) => {
+  const { id } = req.params;
+  const { assignedCounsellor,assignedCounsellorName } = req.body;
+  try {
+    const updatedStudent = await RegisteredStudent.findByIdAndUpdate(
+      id,
+      { assignedCounsellor,assignedCounsellorName },
+      { new: true }
+    );
+    console.log("updatedStudent",updatedStudent);
+    if (!updatedStudent) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+  res.status(200).json({success:true,data:updatedStudent});
+  } catch (error) {
+    console.error('Error updating registered student:', error);
+    res.status(500).json({ error: 'Failed to update registered student' });
+  }
+};
+
+const deleteRegisteredStudent = async (req, res) => {
+
+  const { id } = req.params;
+  try {
+    await RegisteredStudent.findByIdAndDelete(id);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error deleting registered student:', error);
+    res.status(500).json({ error: 'Failed to delete registered student' });
   }
 };
 
@@ -310,10 +346,12 @@ module.exports = {
   createRegisteredStudent,
   getSingleRegisteredStudent,
   getAllRegisteredStudents,
+  updateRegisteredStudent,
   updateDocumentStatus,
   updateDocumentConditionStatus,
   sendRemark,
   deleteOneDocument,
   addOneDocument,
-  addVideoData
+  addVideoData,
+  deleteRegisteredStudent
 };

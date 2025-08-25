@@ -3,7 +3,8 @@ import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
 import Select from 'react-select';
 import { countryOptions } from '@/lib/adminData';
-interface AddMemberDialogProps {
+
+interface AddCounsellorDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
@@ -11,7 +12,7 @@ interface AddMemberDialogProps {
 
 // Country options
 
-const AddMemberDialog = ({ isOpen, onClose, onSuccess }: AddMemberDialogProps) => {
+const AddCounsellor = ({ isOpen, onClose, onSuccess }: AddCounsellorDialogProps) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -60,13 +61,7 @@ const AddMemberDialog = ({ isOpen, onClose, onSuccess }: AddMemberDialogProps) =
     }
   }, [showNotification, notificationType, onClose]);
 
-  const roles = [
-    { value: 'counsellor', label: 'Counsellor' },
-    { value: 'documentHandler', label: 'Document Handler' },
-    { value: 'finance', label: 'Finance' },
-    { value: 'digitalMarketing', label: 'Digital Marketing' },
-    { value: 'counsellorAdmin', label: 'Counsellor Admin' },
-  ];
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -208,22 +203,6 @@ const AddMemberDialog = ({ isOpen, onClose, onSuccess }: AddMemberDialogProps) =
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
-            >
-              {roles.map((role) => (
-                <option key={role.value} value={role.value}>
-                  {role.label}
-                </option>
-              ))}
-            </select>
-          </div>
 
           {formData.role === 'counsellor' && (
             <div>
@@ -283,4 +262,4 @@ const AddMemberDialog = ({ isOpen, onClose, onSuccess }: AddMemberDialogProps) =
   );
 };
 
-export default AddMemberDialog; 
+export default AddCounsellor; 
