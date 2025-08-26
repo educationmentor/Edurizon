@@ -3,7 +3,6 @@ const getAllCounsellors = async (req, res) => {
     try {
       const counsellors = await AdminUser.find({ role: { $in: ['super-admin', 'counsellor'] } })
       .select('-password'); // exclude password
-        console.log(counsellors);
         res.status(200).json({
           success: true,
           data: counsellors

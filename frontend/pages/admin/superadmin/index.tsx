@@ -7,6 +7,7 @@ import { baseUrl } from '@/lib/baseUrl';
 
 import AddMemberDialog from '@/components/admin/AddMemberDialog';
 import { TransitionLink } from '@/utils/TransitionLink';
+import Header from '@/components/admin/superadmin/header';
 
 interface AdminUser {
   _id: string;
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
-  const tabs = ['All', 'Super Admin','Counseling', 'Digital','Document Management','Finance','Counsellor Admin' ];
+  const tabs = ['All', 'Super Admin','Counsellor Admin','Counseling', 'Digital','Document Management','Finance' ];
 
   useEffect(() => {
     fetchTeamMembers();
@@ -261,8 +262,8 @@ const AdminDashboard = () => {
     <AdminLayout>
       <div className="py-6">
     
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-          
+        <div className="mx-auto  px-4 sm:px-6 md:px-8">
+          <Header/>
 
           
 
@@ -271,7 +272,7 @@ const AdminDashboard = () => {
             <div className="bg-white rounded-lg shadow">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Team</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Team Details</h2>
                   <div className="flex gap-4">
                     <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
                       Team Call
