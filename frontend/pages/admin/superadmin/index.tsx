@@ -4,16 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
-import {
-  UsersIcon,
-  DocumentTextIcon,
-  CurrencyRupeeIcon,
-  ChartBarIcon,
-  VideoCameraIcon,
-} from '@heroicons/react/24/outline';
+
 import AddMemberDialog from '@/components/admin/AddMemberDialog';
 import { TransitionLink } from '@/utils/TransitionLink';
-import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
 
 interface AdminUser {
   _id: string;
@@ -267,98 +260,11 @@ const AdminDashboard = () => {
   return (
     <AdminLayout>
       <div className="py-6">
-        <div className="px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-          <BreadcrumbAdmin/>
-
-        </div>
+    
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           
 
-          {/* Upcoming Meetings
-          <div className="mt-8">
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Upcoming Meetings</h2>
-                  <Link href="/admin/superadmin/schedule-call">
-                    <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center">
-                      <VideoCameraIcon className="h-5 w-5 mr-2" />
-                      Schedule Team Call
-                    </button>
-                  </Link>
-                </div>
-
-                {meetingError && (
-                  <div className="mb-4 text-sm text-red-600 bg-red-50 p-3 rounded-md">
-                    {meetingError}
-                  </div>
-                )}
-
-                {loadingMeetings ? (
-                  <div className="flex justify-center items-center py-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
-                  </div>
-                ) : meetings.length > 0 ? (
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Title
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Date & Time
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Duration
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Organizer
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {meetings.map((meeting) => (
-                          <tr key={meeting._id}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              {meeting.title}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {new Date(meeting.dateTime).toLocaleString()}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {meeting.duration} minutes
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {`${meeting.organizer.firstName} ${meeting.organizer.lastName}`}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              <a
-                                href={meeting.meetLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-teal-600 hover:text-teal-900 mr-4"
-                              >
-                                Join Meeting
-                              </a>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    No upcoming meetings scheduled
-                  </div>
-                )}
-              </div>
-            </div>
-          </div> */}
+          
 
           {/* Team Section */}
           <div className="mt-8">

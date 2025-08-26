@@ -35,7 +35,7 @@ const CTASection = () => {
             <div className='w-full md:w-[19vw] my-auto flex flex-col items-center gap-[4.5vw] md:gap-[1vw]'>
                 <div className=' flex flex-row gap-[2vw] md:gap-[1.125vw] '>
                     <div className='pr-[2vw] md:pr-[0.4375vw] border-r-[.5vw] md:border-r-[.25vw] border-white'>
-                        <h3 className=' text-h5TextPhone md:text-h3Text md:w-[9.75vw] text-center'><p className='leading-[120%] m-0 font-bold'>2.5k+</p> <p className='text-mediumTextPhone md:text-h6Text leading-[140%]'>Success Stories</p></h3>
+                        <h3 className=' text-h5TextPhone md:text-h3Text md:w-[9.75vw] text-center'><p className='leading-[120%] m-0 font-bold'>25k+</p> <p className='text-mediumTextPhone md:text-h6Text leading-[140%]'>Success Stories</p></h3>
                         </div>
                         <div className="relative flex flex-row items-center justify-start ">
                         <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover" alt="" src={DummyStudent1} />

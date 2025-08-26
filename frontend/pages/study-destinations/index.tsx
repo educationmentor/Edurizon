@@ -7,7 +7,7 @@ import { TextField, InputAdornment } from '@mui/material';
 import { useRouter } from "next/router";
 
 const categoriesMap: Record<string, string> = {viewAll:"View all", blog:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", 
-  under25:"Under 25ac", under35:"Budget 25Lac - 35Lac", under40:"Budget 35Lac - 40Lac",above40:"Budget Above 40Lac"};
+  under25:"Under 25Lac", under35:"Budget 25Lac - 35Lac", under40:"Budget 35Lac - 40Lac",above40:"Budget Above 40Lac"};
 const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;

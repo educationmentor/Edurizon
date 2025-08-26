@@ -3,17 +3,17 @@ import React from 'react'
 const services = [
     {
       icon: "/assets/Images/Icons/onboardedIcon.svg",
-      text: "5000+",
+      text: "25000+",
       label: "Students onboarded",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
-      text: "150+",
-      label: "University Tie Ups",
+      text: "500+",
+      label: "Partnered Universities",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "15+",
+      text: "19+",
       label: "Years of Experience",
     },
     {

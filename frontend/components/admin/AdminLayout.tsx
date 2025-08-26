@@ -7,6 +7,7 @@ import { baseUrl } from '@/lib/baseUrl';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
+import BreadcrumbAdmin from '../BreadcumbAdmin';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -21,7 +22,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       }
   
       const [adminData, setAdminData] = useState<AdminData | null>(null);
-  
+      const [searchTerm, setSearchTerm] = useState('');
     useEffect(() => {
       const adminDataString = localStorage.getItem("adminData");
       if (adminDataString) {
@@ -77,6 +78,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { 
       name: 'Dashboard', 
       href: '/admin/superadmin', 
+      icon: '/assets/Images/admin/overview.svg'
+    },
+    { 
+      name: 'Counsellor Admin', 
+      href: '/admin/counsellor-admin', 
       icon: '/assets/Images/admin/overview.svg'
     },
     { 
@@ -157,16 +163,17 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
       {/* Main content */}
       <main className="flex-1 space-y-6 overflow-auto bg-[#F4F5F7]" >
-         <nav className='border-b-2 items-center border-[#E8E8E8] px-[24px] py-[24px] flex'>
+      <nav className='border-b-2 items-center border-[#E8E8E8] px-[24px] py-[24px] flex'>
             <h4 className='font-bold text-h5Text'>Hello, {adminData?.firstName}</h4>
             <Image src="/assets/Images/admin/double-chevron-right.svg" width={20} height={20} className='ml-[2vw] w-[1.5vw] h-[1.5vw]' alt='arrow down icon' />
-            {/* <h4 className='text-regularText text-[#9F9F9F] ml-[8px]'>{new Date().toLocaleDateString()}</h4> */}
+            {/* <h4 className='text-regularText text-[#9F9F9F] ml-[8px] mr-[24px]'>{new Date().toLocaleDateString()}</h4> */}
+             <BreadcrumbAdmin  role={adminData?.role}/>
             <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} />
             <div className='ml-[32px] w-[340px] bg-white rounded-[16px]  h-[48px] overflow-hidden flex'>
-                <input type="text" placeholder="Search..." className='w-full  h-full outline-none px-[12px] text-smallText' />
+                <input type="text" placeholder="Search..." className='w-full  h-full outline-none px-[12px] text-smallText' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 <SearchIcon className='ml-auto my-auto mr-[12px]' style={{fontSize: '32px', color: '#666666'}}/>
             </div>
-        </nav>
+        </nav>  
         {children}</main>
     </div>
   );

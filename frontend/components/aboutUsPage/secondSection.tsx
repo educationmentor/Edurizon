@@ -14,17 +14,17 @@ import DummyStudent4 from '../../public/assets/Images/landingPage/DummyStudent4.
 const services = [
         {
           icon: "/assets/Images/Icons/onboardedIcon.svg",
-          text: "5000+",
+          text: "25000+",
           label: "Students onboarded",
         },
         {
           icon: "/assets/Images/Icons/TieUpsIcon.svg",
-          text: "150+",
-          label: "University Tie Ups",
+          text: "500+",
+          label: "Partnered Universities",
         },
         {
           icon: "/assets/Images/Icons/ExperienceIcon.svg",
-          text: "15+",
+          text: "19+",
           label: "Years of Experience",
         },
         {
@@ -86,7 +86,7 @@ const SecondSection = () => {
                                         <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent3} />
                                         <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent4} />
                                         </div>
-                                        <span className='text-black dark:text-white text-smallTextPhone md:text-smallText whitespace-nowrap font-semibold'>Trusted by 5k+ Students</span>
+                                        <span className='text-black dark:text-white text-smallTextPhone md:text-smallText whitespace-nowrap font-semibold'>Trusted by 25k+ Students</span>
                                 </div>
                         </div>
                 </div>
