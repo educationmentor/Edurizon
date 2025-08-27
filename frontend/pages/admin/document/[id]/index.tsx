@@ -12,7 +12,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import DownloadIcon from '@mui/icons-material/Download';
-
+import GridViewIcon from '@mui/icons-material/GridView';    
 
 type DocumentPageProps = {
   id: string;
@@ -20,7 +20,7 @@ type DocumentPageProps = {
 const navItems = [
   {
     href: "/admin/document",
-    icon: "/assets/Images/admin/overview.svg",
+    icon: <GridViewIcon />,
     label: "Overview",
   }
 ]

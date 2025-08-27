@@ -15,6 +15,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const adminConsultationRoutes = require('./routes/adminConsultationRoutes');
 const registeredStudentRoutes = require('./routes/registeredStudentRoutes')
 const leadsRoutes = require('./routes/leadsRoutes')
+const partneredUniversitiesRoutes = require('./routes/partneredUniversitiesRoutes')
 const http = require('http');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessageModel');
@@ -219,6 +220,8 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/admin/consultation', adminConsultationRoutes);
 app.use('/api/registered-students', registeredStudentRoutes);
 app.use('/api/leads', leadsRoutes);
+app.use('/api/partnered-universities', partneredUniversitiesRoutes);
+
 
 // Use the HTTP server for listening
 const PORT = process.env.PORT || 5001;

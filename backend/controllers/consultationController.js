@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const Notification = require('../models/notificationModel');
 // Fix the import path to match the existing file
 const { generateMeetLinkViaAPI, generateFallbackLink } = require('../utils/googleMeet');
+const Leads = require('../models/leadsModel');
 
 // @desc    Create a new consultation request
 // @route   POST /api/consultation/request
@@ -39,6 +40,16 @@ const createConsultationRequest = asyncHandler(async (req, res) => {
             read: false
         });
 
+        // Create a lead
+        await Leads.create({
+          name,
+          email,
+          phone,
+          countryInterested:interestedCountry,
+          status: 'pending',
+          remark: 'Request Received from Home Page Consultation Form'
+        })
+
         res.status(201).json({
             success: true,
             message: 'Consultation request created successfully',
@@ -50,6 +61,7 @@ const createConsultationRequest = asyncHandler(async (req, res) => {
             success: false,
             message: 'Error creating consultation request',
             error: error.message
+            // error: error.message0
         });
     }
 });

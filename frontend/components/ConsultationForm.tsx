@@ -43,7 +43,10 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
 
       if (response.data.success) {
         toast.success('Consultation request submitted successfully! We will contact you soon.');
-        onClose();
+        // Wait for toast to appear before closing modal
+        setTimeout(() => {
+          onClose();
+        }, 1000); // 2 second delay
       }
     } catch (error: any) {
       console.error('Consultation request error:', error);
@@ -132,7 +135,7 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             </button>
           </div>
         </form>
-        <ToastContainer position="top-right" autoClose={5000} />
+        <ToastContainer className='z-[9999]' position="top-right" autoClose={5000} />
         </div>
         <div id='success' className={`absolute p-8 top-0 left-0 ${success ? 'opacity-100' : 'opacity-0'} w-full transition-all duration-100 h-full flex flex-col items-center justify-center`}>
           <h5 className="text-h6TextPhone leading-[120%] md:text-h5Text mb-[4vw] md:mb-[2vw] font-bold text-gray-900 dark:text-white text-center">Thank You 🎉</h5>

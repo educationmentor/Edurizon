@@ -100,7 +100,7 @@ const CallingDetails= ()  => {
         {
           key: "country",
           render: (lead:any) => (
-            <span className="text-sm text-gray-500">{lead.interestedCountry??'None'}</span>
+            <span className="text-sm text-gray-500">{lead.countryInterested??'None'}</span>
           ),
         },
         {

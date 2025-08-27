@@ -7,15 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "init-admin": "node scripts/initSuperAdmin.js"
+    "init-admin": "node scripts/initSuperAdmin.js",
+    "test-zoom": "node scripts/testZoomApi.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.8.1",
+    "axios": "^1.11.0",
     "backend": "file:",
     "bcryptjs": "^2.4.3",
+    "btoa": "^1.2.1",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

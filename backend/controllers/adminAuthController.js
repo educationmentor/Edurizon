@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const { AdminUser, ROLES } = require('../models/AdminUser');
 const config = require('../config/config');
 const sendEmail = require('../utils/email');
+const mongoose = require('mongoose');
 
 // Generate JWT Token
 const signToken = (id) => {
@@ -288,7 +289,7 @@ exports.impersonate=async (req, res) => {
 // Function to add video data for digital Team 
 exports.addVideoData=async(req,res)=>{
   try {
-    const { userId } = req.params; // pass userId in route
+    const { id } = req.params; // pass userId in route
     const {
       videoName,
       dateOfShoot,
@@ -300,7 +301,7 @@ exports.addVideoData=async(req,res)=>{
       uploadDate,
       description
     } = req.body;
-
+    console.log(id);
     // Video object to add
     const newVideo = {
       videoName,
@@ -316,11 +317,12 @@ exports.addVideoData=async(req,res)=>{
 
     // Push video into user's digitalMarketingVideos
     const updatedUser = await AdminUser.findByIdAndUpdate(
-      userId,
+      id,
       { $push: { digitalMarketingVideos: newVideo } },
       { new: true, runValidators: true }
     );
 
+    console.log('Updated User',updatedUser);
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -330,7 +332,308 @@ exports.addVideoData=async(req,res)=>{
       user: updatedUser,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
 
+exports.updateVideoData=async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const { videoId, ...data } = req.body;
+    
+    // Find the user and update the specific video field
+    const updatedUser = await AdminUser.findOneAndUpdate(
+      { 
+        _id: id, 
+        'digitalMarketingVideos._id': videoId 
+      },
+      { 
+        $set: { 
+          [`digitalMarketingVideos.$.${Object.keys(data)[0]}`]: Object.values(data)[0]
+        } 
+      },
+      { new: true, runValidators: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User or video not found" });
+    }
+
+    // Find the updated video
+    const updatedVideo = updatedUser.digitalMarketingVideos.find(
+      video => video._id.toString() === videoId
+    );
+
+    res.status(200).json({ 
+      message: "Video updated successfully", 
+      video: updatedVideo 
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+}
+
+exports.deleteVideoData=async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const { videoId } = req.body;
+    const updatedUser = await AdminUser.findOneAndUpdate(
+      { _id: id },
+      { $pull: { digitalMarketingVideos: { _id: videoId } } },
+      { new: true, runValidators: true }
+    );
+    res.status(200).json({ message: "Video deleted successfully", user: updatedUser });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+}
+
+// Function to update individual video field for instant updates
+exports.updateVideoField = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { videoId, field, value } = req.body;
+
+    // Find the user and update the specific field of the specific video
+    const updatedUser = await AdminUser.findOneAndUpdate(
+      { 
+        _id: userId, 
+        'digitalMarketingVideos._id': videoId 
+      },
+      { 
+        $set: { 
+          [`digitalMarketingVideos.$.${field}`]: value 
+        } 
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User or video not found" });
+    }
+
+    // Find the updated video
+    const updatedVideo = updatedUser.digitalMarketingVideos.find(
+      video => video._id.toString() === videoId
+    );
+
+    res.status(200).json({ 
+      message: "Video field updated successfully", 
+      video: updatedVideo 
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Function to get all admin users for meeting scheduling
+exports.getAllAdminUsers = async (req, res) => {
+  try {
+    const users = await AdminUser.find({}, {
+      _id: 1,
+      firstName: 1,
+      lastName: 1,
+      username: 1,
+      email: 1,
+      role: 1
+    }).sort({ firstName: 1, lastName: 1 });
+
+    res.status(200).json({
+      status: 'success',
+      data: users
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
+};
+
+// Function to schedule a meeting
+exports.scheduleMeeting = async (req, res) => {
+  try {
+    const {
+      title,
+      date,
+      time,
+      duration,
+      description,
+      agenda,
+      attendees,
+      organizer,
+      meetingType
+    } = req.body;
+
+    // Validate required fields
+    if (!title || !date || !time || !duration || !attendees || !organizer) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields"
+      });
+    }
+
+    // Validate attendees array
+    if (!Array.isArray(attendees) || attendees.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "At least one attendee is required"
+      });
+    }
+
+    // Check if organizer exists
+    const organizerExists = await AdminUser.findById(organizer);
+    if (!organizerExists) {
+      return res.status(404).json({
+        success: false,
+        message: "Organizer not found"
+      });
+    }
+
+    // Check if all attendees exist - Fixed ObjectId constructor
+    const attendeeIds = attendees.map(id => new mongoose.Types.ObjectId(id));
+    const existingAttendees = await AdminUser.find({
+      _id: { $in: attendeeIds }
+    });
+
+    if (existingAttendees.length !== attendees.length) {
+      return res.status(404).json({
+        success: false,
+        message: "One or more attendees not found"
+      });
+    }
+
+    // Create new meeting
+    const Meeting = require('../models/meetingModel');
+    const meeting = new Meeting({
+      title,
+      date,
+      time,
+      duration,
+      description,
+      agenda,
+      attendees,
+      organizer,
+      meetingType: meetingType || 'zoom'
+    });
+
+    // Generate Zoom meeting if meetingType is 'zoom'
+    if (meetingType === 'zoom' || meetingType === undefined) {
+      try {
+        const { createZoomMeeting } = require('../utils/zoomApi');
+        
+        // Combine date and time for Zoom API
+        const startTime = new Date(`${date}T${time}`);
+        const endTime = new Date(startTime.getTime() + duration * 60 * 1000);
+        
+        const zoomMeetingData = {
+          title: title,
+          startTime: startTime.toISOString(),
+          duration: duration
+        };
+
+        const zoomResult = await createZoomMeeting(zoomMeetingData);
+        
+        if (zoomResult.success) {
+          meeting.zoomMeetingId = zoomResult.meetingId;
+          meeting.zoomJoinUrl = zoomResult.joinUrl;
+          meeting.zoomStartUrl = zoomResult.startUrl;
+          meeting.zoomPassword = zoomResult.password;
+          meeting.meetingLink = zoomResult.joinUrl; // Set the main meeting link
+        }
+      } catch (zoomError) {
+        console.error('Failed to create Zoom meeting:', zoomError);
+        // Continue with meeting creation even if Zoom fails
+        meeting.meetingType = 'other';
+      }
+    }
+
+    await meeting.save();
+
+    // Populate attendee and organizer details for response
+    await meeting.populate([
+      { path: 'attendees', select: 'firstName lastName username email role' },
+      { path: 'organizer', select: 'firstName lastName username email role' }
+    ]);
+
+    // Send email notifications if Zoom meeting was created successfully
+    if (meeting.zoomJoinUrl) {
+      try {
+        const { sendZoomMeetingNotification } = require('../utils/email');
+        
+        // Send notification to organizer
+        const organizerEmail = meeting.organizer.email;
+        await sendZoomMeetingNotification(organizerEmail, meeting, true);
+        
+        // Send notifications to all attendees
+        for (const attendee of meeting.attendees) {
+          if (attendee.email !== organizerEmail) { // Don't send duplicate to organizer
+            await sendZoomMeetingNotification(attendee.email, meeting, false);
+          }
+        }
+        
+        console.log(`📧 Zoom meeting notifications sent to ${meeting.attendees.length + 1} participants`);
+      } catch (emailError) {
+        console.error('Failed to send Zoom meeting notifications:', emailError);
+        // Continue with response even if emails fail
+      }
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "Meeting scheduled successfully",
+      meeting
+    });
+
+  } catch (error) {
+    console.error('Error scheduling meeting:', error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to schedule meeting",
+      error: error.message
+    });
+  }
+};
+
+// Function to get all digital marketing videos from all admins
+exports.getAllDigitalVideos = async (req, res) => {
+  try {
+    // Find all admin users with digitalMarketing role
+    const digitalAdmins = await AdminUser.find({ role: 'digitalMarketing' });
+    
+    let allVideos = [];
+    
+    // Collect all videos from each admin and add admin information
+    digitalAdmins.forEach(admin => {
+      if (admin.digitalMarketingVideos && admin.digitalMarketingVideos.length > 0) {
+        const videosWithAdminInfo = admin.digitalMarketingVideos.map(video => ({
+          ...video.toObject(),
+          adminName: admin.firstName && admin.lastName 
+            ? `${admin.firstName} ${admin.lastName}` 
+            : admin.username || admin.email,
+          adminId: admin._id,
+          adminEmail: admin.email
+        }));
+        allVideos.push(...videosWithAdminInfo);
+      }
+    });
+
+    // Sort by creation date (newest first)
+    allVideos.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    res.status(200).json({
+      success: true,
+      count: allVideos.length,
+      videos: allVideos
+    });
+
+  } catch (error) {
+    console.error('Error fetching all digital videos:', error);
+    res.status(500).json({ 
+      success: false,
+      message: error.message 
+    });
+  }
+};

@@ -7,42 +7,29 @@ import axios from 'axios';
 import {  TrashIcon, ShareIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import toast, { Toaster } from 'react-hot-toast';
 import CallingDetails from '@/components/admin/counsellor-components/callingDetails';
-
-
-interface Lead {
-  assignedTo: any;
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  interestedCountry: string;
-  status: 'pending' | 'assigned'  | 'completed';
-  counsellingStatus: 'pending' | 'completed';
-  typeofLead: 'warm' | 'cold' | 'hot';   
-  meetingTime?: string;
-  googleMeetLink?: string;
-  createdAt: string;
-}
-
+import GridViewIcon from '@mui/icons-material/GridView';
+import CallIcon from '@mui/icons-material/Call';
+import MessageIcon from '@mui/icons-material/Message';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const navItems = [
     {
       href: "/admin/counsellor",
-      icon: "/assets/Images/admin/overview.svg",
+      icon: <GridViewIcon />,
       label: "Overview",
     },
   {
     href: "/admin/counsellor/calling-records",
-    icon: "/assets/Images/admin/session-records.svg",
+    icon: <CallIcon />,
     label: "Calling Records",
   },
   {
     href: "/admin/counsellor/messages",
-    icon: "/assets/Images/admin/message.svg",
+    icon: <MessageIcon />,
     label: "Messages",
   },
   {
     href: "/admin/counsellor/view-sessions",
-    icon: "/assets/Images/admin/message.svg",
+    icon: <ArrowForwardIosIcon />,
     label: "View Sessions",
   },
 ];

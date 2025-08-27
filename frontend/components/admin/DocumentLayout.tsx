@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
+import CameraIcon from '@mui/icons-material/Camera';
 import BreadcrumbAdmin from '@/components/BreadcumbAdmin';
 interface AdminData {
           role: string;
           [key: string]: any;
 }
 
-export default function Layout({ children, navItems, searchTerm,setSearchTerm }: { children: React.ReactNode, navItems: Array<{ href: string, icon: string, label: string,  }>, searchTerm: string, setSearchTerm: (term: string) => void }) {
+export default function Layout({ children, navItems, searchTerm,setSearchTerm }: { children: React.ReactNode, navItems: Array<{ href: string, icon: React.ReactNode, label: string,  }>, searchTerm: string, setSearchTerm: (term: string) => void }) {
   const { pathname } = useRouter();
   const [adminData, setAdminData] = useState<AdminData | null>(null);
   console.log("Search Term:", searchTerm);
@@ -53,8 +54,7 @@ export default function Layout({ children, navItems, searchTerm,setSearchTerm }:
                     <Link key={item.href} href={item.href}>
                       <button className={`w-[224px] py-[12px] px-[16px] rounded-[4px] text-white flex gap-[12px] hover:bg-adminGreenChosen 
                           ${pathname === item.href ? "bg-adminGreenChosen font-semibold" : "font-medium"}`}>
-                        <Image src={item.icon} width={40} height={40} className="w-[24px] h-[24px]"
-                          alt={`${item.label.toLowerCase()} icon`}/>{item.label}
+                        {item.icon} {item.label}
                       </button>
                     </Link>
                   ))}
@@ -87,6 +87,7 @@ export default function Layout({ children, navItems, searchTerm,setSearchTerm }:
             {/* <h4 className='text-regularText text-[#9F9F9F] ml-[8px] mr-[24px]'>{new Date().toLocaleDateString()}</h4> */}
              <BreadcrumbAdmin  role={adminData?.role}/>
             <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} />
+            <CameraIcon className='ml-[16px]' style={{fontSize: '40px', color: '#666666' }} />
             <div className='ml-[32px] w-[340px] bg-white rounded-[16px]  h-[48px] overflow-hidden flex'>
                 <input type="text" placeholder="Search..." className='w-full  h-full outline-none px-[12px] text-smallText' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 <SearchIcon className='ml-auto my-auto mr-[12px]' style={{fontSize: '32px', color: '#666666'}}/>

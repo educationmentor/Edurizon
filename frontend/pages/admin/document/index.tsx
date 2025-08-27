@@ -7,11 +7,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import AdminTable from '@/components/admin/AdminTable';
 import { useRouter } from "next/router";
 import { TransitionLink } from '@/utils/TransitionLink';
-
+import GridViewIcon from '@mui/icons-material/GridView';
 const navItems = [
   {
     href: "/admin/document",
-    icon: "/assets/Images/admin/overview.svg",
+    icon: <GridViewIcon />,
     label: "Overview",
   }
 ]
@@ -43,7 +43,7 @@ const csvDataFields = [
   'counsellingStatus',
   'typeofLead',
   'createdAt'
-];
+];  
 
 const DocumentManagement = () => {
   // Navbar Search

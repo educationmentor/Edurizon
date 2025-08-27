@@ -50,9 +50,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [filteredMembers, setFilteredMembers] = useState<AdminUser[]>([]);
-  const [meetings, setMeetings] = useState<Meeting[]>([]);
-  const [loadingMeetings, setLoadingMeetings] = useState(true);
-  const [meetingError, setMeetingError] = useState('');
+
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
 
@@ -60,7 +58,6 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchTeamMembers();
-    fetchMeetings();
     fetchPendingLeadsCount();
   }, []);
 
@@ -87,24 +84,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const fetchMeetings = async () => {
-    try {
-      const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${baseUrl}/api/admin/meetings`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.data.status === 'success') {
-        setMeetings(response.data.data);
-      }
-    } catch (err: any) {
-      setMeetingError(err.response?.data?.message || 'Failed to fetch meetings');
-    } finally {
-      setLoadingMeetings(false);
-    }
-  };
+  
 
   const fetchPendingLeadsCount = async () => {
     try {
@@ -277,16 +257,6 @@ const AdminDashboard = () => {
                     <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
                       Team Call
                     </button>
-                    <TransitionLink href="/admin/superadmin/leads" >
-                      <button className="relative bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
-                        View Leads
-                        {pendingLeadsCount > 0 && (
-                          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                            {pendingLeadsCount}
-                          </span>
-                        )}
-                      </button>
-                    </TransitionLink>
                    
                     <button
                       onClick={() => setIsAddMemberDialogOpen(true)}

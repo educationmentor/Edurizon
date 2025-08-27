@@ -18,7 +18,7 @@ const videoSchema = new mongoose.Schema({
   },
   dateOfShoot: {
     type: Date,
-    required: true,
+    required: false,
   },
   videoEdited: {
     type: Boolean,
@@ -47,7 +47,9 @@ const videoSchema = new mongoose.Schema({
     type: String,
     trim: true,
   }
-}, { _id: false }); // no extra _id for subdocs
+}, { _id: true,
+  timestamps: true,
+ }); // no extra _id for subdocs
 
 
 

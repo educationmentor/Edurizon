@@ -2,20 +2,23 @@ import React, { useState,useEffect } from 'react'
 import DocumentLayout from '@/components/admin/DocumentLayout'
 import CounsellorDetails from '@/components/admin/counsellor-admin-components/counsellerDetails';
 import CallingDetails from '@/components/admin/counsellor-admin-components/callingDetails';
+import GridViewIcon from '@mui/icons-material/GridView';
+import CallIcon from '@mui/icons-material/Call';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const navItems = [
     {
       href: "/admin/counsellor-admin",
-      icon: "/assets/Images/admin/overview.svg",
+      icon: <GridViewIcon />,
       label: "Overview",
     },
     {
         href: "/admin/counsellor-admin/calling-records",
-        icon: "/assets/Images/admin/overview.svg",
+        icon: <CallIcon />,
         label: "Calling Records",
     },
     {
         href: "/admin/counsellor-admin/view-sessions",
-        icon: "/assets/Images/admin/overview.svg",
+        icon: <ArrowForwardIosIcon />,
         label: "View Sessions",
     },
   ]

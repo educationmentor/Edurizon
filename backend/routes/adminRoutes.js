@@ -33,5 +33,12 @@ router.get('/roles', adminAuthController.getRoles);
 
 // Digital Team Routes
 router.patch('/addVideoData/:id',adminAuthController.addVideoData)
+router.patch('/updateVideoData/:id', adminAuthController.updateVideoData);
+router.delete('/deleteVideoData/:id', adminAuthController.deleteVideoData);
+router.patch('/updateVideoField/:id', adminAuthController.updateVideoField);
+router.get('/getAllDigitalVideos', adminAuthController.getAllDigitalVideos);
 
+// Meeting Routes
+router.get('/users', adminAuthController.getAllAdminUsers);
+router.post('/schedule-meeting', adminAuthController.scheduleMeeting);
 module.exports = router; 
