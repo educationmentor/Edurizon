@@ -128,13 +128,14 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     try {
       setLoading(true);
       
+      // Format the meeting payload according to backend expectations
       const meetingPayload = {
         title: meetingData.title,
         date: meetingData.date,
         time: meetingData.time,
         duration: parseInt(meetingData.duration),
-        description: meetingData.description,
-        agenda: meetingData.agenda,
+        description: meetingData.description || '',
+        agenda: meetingData.agenda || '',
         attendees: selectedAdmins,
         organizer: adminData?._id,
         meetingType: 'zoom'
@@ -151,10 +152,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         setShowMeetingModal(false);
         setShowSuccessModal(true);
         resetMeetingForm();
+        
+        // Show success message
+        console.log('Meeting scheduled successfully:', response.data.message);
+      } else {
+        alert(response.data.message || 'Failed to schedule meeting');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error scheduling meeting:', error);
-      alert('Failed to schedule meeting');
+      const errorMessage = error.response?.data?.message || 'Failed to schedule meeting';
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -287,7 +294,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
         {/* Meeting Scheduler Modal */}
         {showMeetingModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex  min-h-full items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-[600px] max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-semibold text-gray-900">Schedule Zoom Meeting</h3>
@@ -356,20 +363,6 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                     <option value="90">1.5 hours</option>
                     <option value="120">2 hours</option>
                   </select>
-                </div>
-
-                {/* Description */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Meeting Description
-                  </label>
-                  <textarea
-                    value={meetingData.description}
-                    onChange={(e) => setMeetingData(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                    rows={3}
-                    placeholder="Brief description of the meeting"
-                  />
                 </div>
 
                 {/* Agenda */}
@@ -449,7 +442,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-full max-w-2xl mx-4">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">Meeting Scheduled Successfully!</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Meeting Scheduled Successfully! 🎉</h2>
                 <button
                   onClick={() => setShowSuccessModal(false)}
                   className="text-gray-400 hover:text-gray-600"
@@ -461,6 +454,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               </div>
 
               <div className="space-y-4">
+                {/* Meeting Details */}
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h3 className="font-semibold text-lg mb-2">{scheduledMeeting.title}</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
@@ -479,6 +473,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   </div>
                 </div>
 
+                {/* Zoom Meeting Details */}
                 {scheduledMeeting.zoomJoinUrl && (
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-900 mb-2">🎥 Zoom Meeting Details</h4>
@@ -519,6 +514,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   </div>
                 )}
 
+                {/* Meeting Description and Agenda */}
                 {scheduledMeeting.description && (
                   <div>
                     <span className="font-medium">Description:</span>
@@ -533,12 +529,39 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   </div>
                 )}
 
+                {/* WhatsApp Notification Status */}
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                  <p className="text-green-800 text-sm">
-                    ✅ Meeting has been scheduled and all attendees have been notified. 
+                  <div className="flex items-center space-x-2">
+                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <h4 className="font-semibold text-green-900">WhatsApp Notifications Sent</h4>
+                  </div>
+                  <p className="text-green-800 text-sm mt-2">
+                    ✅ Meeting has been scheduled and all attendees have been notified via WhatsApp. 
                     The Zoom meeting link is now available for all participants.
                   </p>
+                  <p className="text-green-700 text-xs mt-1">
+                    📱 Check your WhatsApp for meeting details and join link.
+                  </p>
                 </div>
+
+                {/* Attendees List */}
+                {scheduledMeeting.attendees && scheduledMeeting.attendees.length > 0 && (
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">👥 Attendees ({scheduledMeeting.attendees.length})</h4>
+                    <div className="space-y-1">
+                      {scheduledMeeting.attendees.map((attendee: any, index: number) => (
+                        <div key={index} className="text-sm text-gray-700">
+                          • {attendee.firstName && attendee.lastName 
+                            ? `${attendee.firstName} ${attendee.lastName}` 
+                            : attendee.username || attendee.email
+                          }
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-end mt-6">

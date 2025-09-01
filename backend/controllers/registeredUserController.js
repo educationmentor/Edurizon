@@ -337,10 +337,31 @@ const addVideoData=async(req,res)=>{
   }
 };
 
+// @desc    Get registered students by counsellor
+// @route   GET /api/registered-students/get-by-counsellor/:counsellorId
+// @access  Private
+const getRegisteredStudentsByCounsellor = async (req, res) => {
+  try {
+    const { counsellorId } = req.params;
+    
+    const students = await RegisteredStudent.find({ assignedCounsellor: counsellorId })
+      .populate('assignedCounsellor', 'name email')
+      .sort({ updatedAt: -1 });
 
-
-
-
+    res.status(200).json({
+      success: true,
+      count: students.length,
+      data: students
+    });
+  } catch (error) {
+    console.error('Error fetching registered students by counsellor:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching registered students by counsellor',
+      error: error.message
+    });
+  }
+};
 
 module.exports = {
   createRegisteredStudent,
@@ -353,5 +374,6 @@ module.exports = {
   deleteOneDocument,
   addOneDocument,
   addVideoData,
-  deleteRegisteredStudent
+  deleteRegisteredStudent,
+  getRegisteredStudentsByCounsellor
 };

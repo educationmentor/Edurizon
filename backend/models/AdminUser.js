@@ -79,6 +79,12 @@ const adminUserSchema = new mongoose.Schema({
     required: false,
     trim: true,
   },
+  whatsapp: {
+    type: String,
+    required: false,
+    trim: true,
+    match: [/^\+?[1-9]\d{9,14}$/, 'Please enter a valid WhatsApp number with country code'],
+  },
   role: {
     type: String,
     enum: Object.values(ROLES),

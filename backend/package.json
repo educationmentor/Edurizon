@@ -8,7 +8,8 @@
     "dev": "nodemon app.js",
     "start": "node app.js",
     "init-admin": "node scripts/initSuperAdmin.js",
-    "test-zoom": "node scripts/testZoomApi.js"
+    "test-zoom": "node scripts/testZoomApi.js",
+    "test-whatsapp": "node scripts/testWhatsApp.js"
   },
   "keywords": [],
   "author": "",

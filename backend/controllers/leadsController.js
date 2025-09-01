@@ -249,6 +249,73 @@ const getLeadsByStatus = async (req, res) => {
 // @desc    Get leads by counsellor
 // @route   GET /api/leads/get-all-leads-by-counsellor/:counsellorId
 // @access  Private
+const getLeadsByCounsellor = async (req, res) => {
+  try {
+    const { counsellorId } = req.params;
+    
+    const leads = await Leads.find({ assignedCounsellor: counsellorId })
+      .populate('assignedCounsellor', 'name email')
+      .sort({ updatedAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: leads.length,
+      data: leads
+    });
+  } catch (error) {
+    console.error('Error fetching leads by counsellor:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching leads by counsellor',
+      error: error.message
+    });
+  }
+};
+
+// @desc    Update calling status and category instantly
+// @route   PATCH /api/leads/:id/update-status
+// @access  Private
+const updateLeadStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { callingStatus, leadType, leadStatus } = req.body;
+
+    const lead = await Leads.findById(id);
+    
+    if (!lead) {
+      return res.status(404).json({
+        success: false,
+        message: 'Lead not found'
+      });
+    }
+
+    // Update fields
+    if (callingStatus !== undefined) lead.callingStatus = callingStatus;
+    if (leadType !== undefined) lead.leadType = leadType;
+    if (leadStatus !== undefined) lead.leadStatus = leadStatus;
+    
+    // Update the updatedAt timestamp
+    lead.updatedAt = new Date();
+
+    const updatedLead = await lead.save();
+    
+    // Populate the assigned counsellor details
+    await updatedLead.populate('assignedCounsellor', 'name email');
+
+    res.status(200).json({
+      success: true,
+      message: 'Lead status updated successfully',
+      data: updatedLead
+    });
+  } catch (error) {
+    console.error('Error updating lead status:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while updating lead status',
+      error: error.message
+    });
+  }
+};
 
 module.exports = {
   getAllLeads,
@@ -256,5 +323,7 @@ module.exports = {
   addLead,
   modifyLead,
   deleteLead,
-  getLeadsByStatus
+  getLeadsByStatus,
+  getLeadsByCounsellor,
+  updateLeadStatus
 };

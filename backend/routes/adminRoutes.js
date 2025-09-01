@@ -3,6 +3,13 @@ const adminAuthController = require('../controllers/adminAuthController');
 const adminUserController = require('../controllers/adminUserController');
 const { protectAdminRoute, restrictTo, isSuperAdmin } = require('../middleware/adminAuth');
 const {getAllCounsellors} = require('../controllers/adminCounsellorAdminController');
+const { 
+  scheduleMeeting, 
+  getAdminMeetings, 
+  getMeetingById, 
+  updateMeeting, 
+  deleteMeeting 
+} = require('../controllers/adminMeetingController');
 const router = express.Router();
 
 // Public routes
@@ -40,5 +47,10 @@ router.get('/getAllDigitalVideos', adminAuthController.getAllDigitalVideos);
 
 // Meeting Routes
 router.get('/users', adminAuthController.getAllAdminUsers);
-router.post('/schedule-meeting', adminAuthController.scheduleMeeting);
+router.post('/schedule-meeting', scheduleMeeting);
+router.get('/meetings', getAdminMeetings);
+router.get('/meetings/:id', getMeetingById);
+router.put('/meetings/:id', updateMeeting);
+router.delete('/meetings/:id', deleteMeeting);
+
 module.exports = router; 

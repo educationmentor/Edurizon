@@ -7,6 +7,8 @@ const {
   modifyLead,
   deleteLead,
   getLeadsByStatus,
+  getLeadsByCounsellor,
+  updateLeadStatus,
 } = require('../controllers/leadsController');
 
 // Apply authentication middleware to all routes
@@ -19,7 +21,7 @@ router.get('/get-all', getAllLeads);
 // @route   GET /api/leads/get-all-leads-by-counsellor
 // @desc    Get all leads by counsellor
 // @access  Private
-router.get('/get-all-leads-by-counsellor/:counsellorId', getLeadById);
+router.get('/get-all-leads-by-counsellor/:counsellorId', getLeadsByCounsellor);
 
 // @route   GET /api/leads/status/:status
 // @desc    Get leads by status
@@ -44,5 +46,10 @@ router.put('/:id', modifyLead);
 // @desc    Delete a lead
 // @access  Private
 router.delete('/:id', deleteLead);
+
+// @route   PATCH /api/leads/:id/update-status
+// @desc    Update calling status and category instantly
+// @access  Private
+router.patch('/:id/update-status', updateLeadStatus);
 
 module.exports = router;
