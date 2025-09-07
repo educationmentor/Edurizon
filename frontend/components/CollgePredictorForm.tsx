@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {baseUrl} from '@/lib/baseUrl';
+import Image from 'next/image';
 interface CollegePredictorFormProps {
   onClose: () => void;
   onSubmit:()=>void;
@@ -71,10 +72,13 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50  flex items-center justify-center z-50 overflow-y-auto" >
       <div className='absolute h-full w-full top-0 left-0 text-black  z-0' onClick={onClose}> </div>
-      <div className="z-50 relative bg-white dark:bg-gray-800  rounded-[2vw] md:rounded-[.5vw] w-[90vw] md:w-[28.625vw] h-[85vw] md:h-[30vw] max-h-[95vh] overflow-y-auto my-[2vh]">
-        <div id='form' className={`absolute p-8 top-0 left-0 ${success ? 'opacity-0' : 'opacity-100'} z-50 w-full transition-all duration-100 h-full`}>
+      <div className="z-50 relative bg-white dark:bg-gray-800  rounded-[2vw] md:rounded-[.5vw] w-[90vw] md:w-[55vw] h-[85vw] md:h-[37vw] max-h-[95vh] overflow-y-auto my-[2vh]">
+        <div id='form' className={`absolute p-4 md:p-0  md:flex top-0 left-0 ${success ? 'opacity-0' : 'opacity-100'} z-50 w-full transition-all duration-100 h-full`}>
+        
+        <Image src='/assets/Images/consultationForm.png' alt='consultation' className='hidden md:block w-[28vw] h-full  shadow-2xl' width={1920} height={1080} />
+        <div className='md:flex md:flex-col items-center  md:pt-[2vw] lg:md:pt-[4vw] w-full h-full'>
         <h2 className="text-h6TextPhone md:text-h5Text mb-[4vw] md:mb-[2vw] font-bold text-gray-900 dark:text-white">Book a Free Consultation</h2>
-        <form onSubmit={handleSubmit} className="text-smallTextPhone md:text-smallText flex flex-col gap-[2vw] md:gap-[.875vw]">
+        <form onSubmit={handleSubmit} className="text-smallTextPhone md:w-[20vw] md:text-smallText flex flex-col gap-[2vw] md:gap-[.875vw]">
           <div className=' '>
             <label className="block  font-medium text-gray-700 dark:text-gray-300">Name</label>
             <input
@@ -124,7 +128,7 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
           {error && error.length>0&&<p className='text-regularTextPhone md:mb-[-1vw] md:text-regularText text-red-500'>{error}
           </p>
             }
-          <div className="mt-[.7125vw] text-smallTextPhone md:text-smallText flex justify-end gap-[2vw] md:gap-[.5vw]">
+          <div className="mt-[.7125vw] text-smallTextPhone md:text-smallText flex justify-center gap-[2vw] md:gap-[.5vw]">
             <button
               type="button"
               onClick={onClose}
@@ -141,6 +145,7 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
             </button>
           </div>
         </form>
+        </div>
         <ToastContainer position="top-right" autoClose={5000} />
         </div>
         <div id='success' className={`absolute p-8 top-0 left-0 ${success ? 'opacity-100' : 'opacity-0'} w-full transition-all duration-100 h-full flex flex-col items-center justify-center`}>

@@ -120,7 +120,7 @@ const ConsultationForm: React.FC<ConsultationFormProps> = ({ onClose }) => {
             />
           </div>
          
-          <div className="mt-[.7125vw] text-smallTextPhone md:text-smallText flex justify-end gap-[2vw] md:gap-[.5vw]">
+          <div className="mt-[.7125vw]  text-smallTextPhone md:text-smallText flex justify-center gap-[2vw] md:gap-[.5vw]">
             <button
               type="button"
               onClick={onClose}
