@@ -3,6 +3,7 @@ import EdurizonProcess from "@/components/studyDestinationComponents/EdurizonPro
 import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
 import VideoCarousel from "@/components/videoCarousel";
 import Image from "next/image";
+import Head from "next/head";
 const services = [
   {
     icon: "/assets/Images/Icons/feesIcon.svg",
@@ -60,7 +61,46 @@ const videoData = [
 
 const NewPage=()=>{
     return(
-        <div className="text-smallTextPhone md:text-smallText">
+        <>
+            <Head>
+                <title>Tajik National University MBBS | Best Medical College in Tajikistan</title>
+                <meta name="keyword" content="mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs in tajikistan fee structure, mbbs cost in tajikistan, op medical colleges in tajikistan, Tajik National University, Avicenna Tajik State Medical University, Mbbs in tajikistan best medical college, Avicenna Tajik State Medical University fees." />
+                <meta name="description" content="Pursue MBBS at Tajik National University. Top medical college in Tajikistan with low tuition fees, scholarships & global recognition." />
+                <meta name="author" content="edurizon" />
+                <meta name="robots" content="index, follow"/>
+                <meta name="DC.title" content="MBBS in Tajikistan" />
+                <meta name="geo.region" content="IN-DL" />
+                <meta name="geo.placename" content="Dwarka" />
+                <meta name="geo.position" content="22.351115;78.667743" />
+                <meta name="ICBM" content="22.351115, 78.667743" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Tajik National University MBBS | Best Medical College in Tajikistan" />
+                <meta property="og:description" content="Pursue MBBS at Tajik National University. Top medical college in Tajikistan with low tuition fees, scholarships & global recognition." />
+                <meta property="og:url" content="https://www.edurizon.in/" />
+                <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@edurizon" />
+                <meta name="twitter:title" content="Tajik National University MBBS | Best Medical College in Tajikistan" />
+                <meta name="twitter:description" content="Pursue MBBS at Tajik National University. Top medical college in Tajikistan with low tuition fees, scholarships & global recognition." />
+                <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:image:alt" content="MBBS in Tajikistan" />
+                <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan/tajik-national-university"/>
+                <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan/tajik-national-university" hrefLang="en-in"/>
+
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+            </Head>
+            <div className="text-smallTextPhone md:text-smallText">
             <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto">
                 <div className="flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                 <div className="flex flex-col items-center gap-[4vw] md:gap-[1vw]">
@@ -274,7 +314,8 @@ Tajik National University is the first and largest university in Tajikistan. It 
             </div>
             <VideoCarousel videoData={videoData}/>
             
-        </div>
+            </div>
+        </>
 
     )
 }

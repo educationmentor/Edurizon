@@ -1,5 +1,6 @@
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import React from 'react'
+import Head from 'next/head'
 const academicCalenderData={
     id:"nepal",
     section2:"",
@@ -64,7 +65,46 @@ const NewPage = () => {
         window.open('https://wa.me/919873381377?')
     }
   return (
-    <div>
+    <>
+      <Head>
+        <title>MBBS in Nepal – Fees, Top Colleges, Admission, Chitwan Medical College</title>
+        <meta name="keyword" content="mbbs in nepal, nepal mbbs fees, mbbs in nepal without neet, mbbs in nepal for indian students, Nepal Medical College, Nepal Medical College fees, MBBS in Nepal for Indian students fees, B&C Medical college, Kist medical College Kathmandu, Devdah medical College, Lumbini medical College, nobel medical college nepal, Kathmandu Medical College, Birat Medical College, Devdaha Medical College, Manipal college of medical science, college of medical science." />
+        <meta name="description" content="Apply to MBBS in Nepal's top colleges with fee details, admission support, visa help & more on https://www.edurizon.in/study-destinations/study-mbbs-in-nepal/chitwan-medical-college." />
+        <meta name="author" content="edurizon" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="DC.title" content="MBBS in Nepal" />
+        <meta name="geo.region" content="IN-DL" />
+        <meta name="geo.placename" content="Dwarka" />
+        <meta name="geo.position" content="22.351115;78.667743" />
+        <meta name="ICBM" content="22.351115, 78.667743" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Nobel Medical College Nepal – MBBS Fee Structure & Admission Guide" />
+        <meta property="og:description" content="Apply to MBBS in Nepal's top colleges with fee details, admission support, visa help & more on https://www.edurizon.in/study-destinations/study-mbbs-in-nepal/chitwan-medical-college." />
+        <meta property="og:url" content="https://www.edurizon.in/" />
+        <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@edurizon" />
+        <meta name="twitter:title" content="Nobel Medical College Nepal – MBBS Fee Structure & Admission Guide" />
+        <meta name="twitter:description" content="Apply to MBBS in Nepal's top colleges with fee details, admission support, visa help & more on https://www.edurizon.in/study-destinations/study-mbbs-in-nepal/chitwan-medical-college." />
+        <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+        <meta name="twitter:image:alt" content="MBBS in Nepal" />
+        <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-nepal/chitwan-medical-college"/>
+        <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-nepal/chitwan-medical-college" hrefLang="en-in"/>
+
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-9JDZZKPGL8');
+            `,
+          }}
+        />
+      </Head>
+      <div>
          <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center  ">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
@@ -288,7 +328,8 @@ const NewPage = () => {
 
             
 
-    </div>
+      </div>
+    </>
   )
 }
 

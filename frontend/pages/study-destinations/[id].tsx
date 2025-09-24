@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 interface NewPageProps {
   id: string;
   countryData:  { 
@@ -55,19 +56,59 @@ interface NewPageProps {
     videoData:{id:number;title:string;channel:string;views:string;time:string;duration:string;thumbnail:string;link:string}[]
 
    };
+} 
+
+const metaData={
+  "study-mbbs-in-russia":<Head>
+    <title>Study MBBS in Russia | Top Medical Universities & Fees for 2025</title> 
+<meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+<meta name="description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<meta name="DC.title" content="MBBS In Russia" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Study MBBS in Russia | Top Medical Universities & Fees for 2025"/>
+<meta property="og:description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students."/>
+<meta property="og:url" content="https://www.edurizon.in/"/>
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@edurizon"/>
+<meta name="twitter:title" content="Study MBBS in Russia | Top Medical Universities & Fees for 2025"/>
+<meta name="twitter:description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students."/>
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:image:alt" content="MBBS In Russia"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia"/>
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia" hrefLang="en-in"/>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+
+
+
+  </Head>,
+  
 }
 
 
 const NewPage = ({ id,countryData }: NewPageProps) => {
+  console.log("id",id);
   return (
     <>
-    <Head>
-        <title>{countryData.metaTitle}</title>
-        <meta name="description" content={countryData.metaDescription} />
-        <meta name="keywords" content={countryData.metaKeywords} />
-        <meta name="author" content="Edurizon" />
-        <link rel="canonical" href={countryData.metaCanonical} />
-    </Head>
+      {metaData[id as keyof typeof metaData]}
     <div className="flex flex-col gap-[10vw] md:gap-[4vw] justify-center  ">
 
       {/* Header Part */}
@@ -131,7 +172,6 @@ import EligibilityCriteria from "@/components/studyDestinationComponents/eligibi
 import Universities from "@/components/studyDestinationComponents/universitiesTable";
 import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import Header from "@/components/studyDestinationComponents/headerComponent";
-import Head from "next/head";
 import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
 import ReasonsToStudy from "../../components/studyDestinationComponents/reasonsToStudy";
 import CostTable from "@/components/studyDestinationComponents/costTable";

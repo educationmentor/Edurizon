@@ -2,6 +2,7 @@ import React from 'react'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
+import Head from 'next/head'
 
 const academicCalenderData = {
     id: "tajikistan",
@@ -61,7 +62,46 @@ const AvicennaTajikStateMedicalUniversity = () => {
     }
     
     return (
-        <div>
+        <>
+            <Head>
+                <title>Avicenna Tajik State Medical University | MBBS Fees & Admission</title>
+                <meta name="keyword" content="mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs in tajikistan fee structure, mbbs cost in tajikistan, op medical colleges in tajikistan, Tajik National University, Avicenna Tajik State Medical University, Mbbs in tajikistan best medical college, Avicenna Tajik State Medical University fees." />
+                <meta name="description" content="Study MBBS at Avicenna Tajik State Medical University, one of the best medical colleges in Tajikistan. Affordable fee structure for Indian students." />
+                <meta name="author" content="edurizon" />
+                <meta name="robots" content="index, follow"/>
+                <meta name="DC.title" content="MBBS in Tajikistan" />
+                <meta name="geo.region" content="IN-DL" />
+                <meta name="geo.placename" content="Dwarka" />
+                <meta name="geo.position" content="22.351115;78.667743" />
+                <meta name="ICBM" content="22.351115, 78.667743" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Avicenna Tajik State Medical University | MBBS Fees & Admission" />
+                <meta property="og:description" content="Study MBBS at Avicenna Tajik State Medical University, one of the best medical colleges in Tajikistan. Affordable fee structure for Indian students." />
+                <meta property="og:url" content="https://www.edurizon.in/" />
+                <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@edurizon" />
+                <meta name="twitter:title" content="Avicenna Tajik State Medical University | MBBS Fees & Admission" />
+                <meta name="twitter:description" content="Study MBBS at Avicenna Tajik State Medical University, one of the best medical colleges in Tajikistan. Affordable fee structure for Indian students." />
+                <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:image:alt" content="MBBS in Tajikistan" />
+                <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan/avicenna-tajik-state-medical-university"/>
+                <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan/avicenna-tajik-state-medical-university" hrefLang="en-in"/>
+
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+            </Head>
+            <div>
             <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
@@ -212,7 +252,8 @@ const AvicennaTajikStateMedicalUniversity = () => {
                 info@edurizon.com</p>
                 <p className="text-smallTextPhone text-left md:text-regularText mt-[2vw]"><strong>Take the Leap – Become a Global Doctor with ATSMU</strong><br/>Choosing Avicenna Tajik State Medical University is more than a smart academic decision — it's an investment in a globally respected career. Get the right education, practical training, and international exposure without the burden of huge fees.<br/><br/><strong>Seats are filling fast for September 2025! Contact us today for spot admission.</strong></p>
             </section>
-        </div>
+            </div>
+        </>
     )
 }
 

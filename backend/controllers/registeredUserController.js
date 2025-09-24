@@ -1,11 +1,30 @@
 const { AdminUser } = require("../models/AdminUser");
 const { RegisteredStudent } = require("../models/registeredUserModel");
+const generateToken = require('../utils/generateToken');
+const bcrypt = require('bcryptjs');
 
 
 const createRegisteredStudent = async(req, res) => {
     const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounselor,address, notes } = req.body;
   try {
-    const newUser = await RegisteredStudent.create({ name,gender, email, dob, password,phone,address, studyDestination,intendedCourse,preferedUniversity,assignedCounselor, notes });
+    // Hash the password before storing
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const newUser = await RegisteredStudent.create({ 
+      name,
+      gender, 
+      email, 
+      dob, 
+      password: hashedPassword,
+      phone,
+      address, 
+      studyDestination,
+      intendedCourse,
+      preferedUniversity,
+      assignedCounselor, 
+      notes 
+    });
+    
     res.status(201).json({
       success:true,
       message:'Student enrolled successfully',
@@ -17,6 +36,76 @@ const createRegisteredStudent = async(req, res) => {
   }
 };
 
+const loginRegisteredStudent = async(req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    // Validate required fields
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and password are required'
+      });
+    }
+
+    // Find user by email
+    const user = await RegisteredStudent.findOne({ email });
+    
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      });
+    }
+
+    // Check if account is active
+    if (user.accountStatus !== 'active') {
+      return res.status(401).json({
+        success: false,
+        message: 'Account is inactive or suspended. Please contact support.'
+      });
+    }
+
+    // Compare password using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password'
+      });
+    }
+
+    // Update last login date
+    user.lastLoginDate = new Date();
+    await user.save();
+
+    // Generate JWT token
+    const token = generateToken(user._id);
+
+    // Return user data without password
+    const { password: _, ...rest } = user._doc;
+    
+const userData = { ...rest, role: "registered-student" };
+
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      token,
+      user: userData
+    });
+
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+}
+
+
+
 const getSingleRegisteredStudent = async (req, res) => {
   try {
     const user = await RegisteredStudent.findById(req.params.id);
@@ -27,6 +116,33 @@ const getSingleRegisteredStudent = async (req, res) => {
   } catch (error) {
     console.error('Error fetching registered user:', error);
     res.status(500).json({ error: 'Failed to fetch registered user' });
+  }
+};
+
+// Get current user profile (authenticated user)
+const getCurrentUserProfile = async (req, res) => {
+  try {
+    const user = await RegisteredStudent.findById(req.user._id).select('-password');
+    if (!user) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'User not found' 
+      });
+    }
+    
+    // Add role to the response
+    const userData = { ...user._doc, role: "registered-student" };
+    
+    res.status(200).json({
+      success: true,
+      data: userData
+    });
+  } catch (error) {
+    console.error('Error fetching current user profile:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Failed to fetch user profile' 
+    });
   }
 };
 
@@ -122,8 +238,7 @@ const updateDocumentConditionStatus = async (req, res) => {
 
 const sendRemark = async (req, res) => {
   const { id } = req.params;  
-  const { remark } = req.body;
-  const { email } = req.body;
+  const { remark, studentEmail } = req.body;
 
   try {
     const updatedStudent = await RegisteredStudent.findByIdAndUpdate(
@@ -185,15 +300,16 @@ const sendRemark = async (req, res) => {
           </div>
         </div>
       `;
-
+      console.log('studentEmail', studentEmail);
+      console.log('emailSubject', emailSubject);
       const emailResult = await sendEmail({
-        email: email,
+        email: studentEmail,
         subject: emailSubject,
         html: emailHtml
       });
 
       if (emailResult.success) {
-        console.log('✅ Remark email sent successfully to:', updatedStudent.email);
+        console.log('✅ Remark email sent successfully to:', studentEmail);
       } else {
         console.error('❌ Failed to send remark email:', emailResult.error);
       }
@@ -363,6 +479,56 @@ const getRegisteredStudentsByCounsellor = async (req, res) => {
   }
 };
 
+const uploadDocument = async (req, res) => {
+  const { id } = req.params;
+  const { documentName } = req.body;
+
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    if (!documentName) {
+      return res.status(400).json({ error: 'Document name is required' });
+    }
+
+    // Upload file to Cloudinary
+    const { uploadToCloudinary } = require('../utils/cloudinary');
+    const cloudinaryResult = await uploadToCloudinary(req.file.buffer, 'edurizon/documents');
+
+    // Find the student and add the document
+    const student = await RegisteredStudent.findById(id);
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    // Find and update the existing document by the document name passed from frontend
+    const existingDocumentIndex = student.documents.findIndex(doc => doc.name === documentName);
+    
+    if (existingDocumentIndex !== -1) {
+      // Update existing document's link and status
+      student.documents[existingDocumentIndex].link = cloudinaryResult.secure_url;
+      student.documents[existingDocumentIndex].status = 'uploaded';
+      // Keep existing remark if any
+    } else {
+      // This should not happen in normal flow since we're uploading to an existing document
+      console.error('Document not found:', documentName);
+      return res.status(404).json({ error: 'Document not found to update' });
+    }
+    
+    await student.save();
+
+    res.status(200).json({
+      message: 'Document uploaded successfully',
+      document: student.documents[existingDocumentIndex]
+    });
+
+  } catch (error) {
+    console.error('Error uploading document:', error);
+    res.status(500).json({ error: 'Failed to upload document' });
+  }
+};
+
 module.exports = {
   createRegisteredStudent,
   getSingleRegisteredStudent,
@@ -375,5 +541,8 @@ module.exports = {
   addOneDocument,
   addVideoData,
   deleteRegisteredStudent,
-  getRegisteredStudentsByCounsellor
+  getRegisteredStudentsByCounsellor,
+  loginRegisteredStudent,
+  getCurrentUserProfile,
+  uploadDocument
 };

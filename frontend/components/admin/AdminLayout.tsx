@@ -14,6 +14,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import LanguageIcon from '@mui/icons-material/Language';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CameraIcon from '@mui/icons-material/Camera';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -212,6 +213,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       name: 'Digital Team',
       href: '/admin/digital',
       icon: <LanguageIcon />
+    },
+    {
+      name: 'Finance Admin',
+      href: '/admin/finance',
+      icon: <AccountBalanceWalletIcon />
     }
   ];
 
@@ -222,6 +228,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     if (userRole === 'documentHandler' && item.name.toLowerCase().includes('document')) return true;
     if (userRole === 'finance' && item.name.toLowerCase().includes('finance')) return true;
     if (userRole === 'digitalMarketing' && item.name.toLowerCase().includes('marketing')) return true;
+    if (userRole === 'finance' && item.name.toLowerCase().includes('finance')) return true;
     return item.name === 'Dashboard' || item.name === 'Profile';
   });
 

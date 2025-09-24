@@ -1,5 +1,6 @@
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import React from 'react'
+import Head from 'next/head'
 
 const academicCalenderData={
     id:"nepal",
@@ -62,7 +63,46 @@ const NewPage = () => {
         window.open('https://wa.me/919873381377?')
     }
   return (
-    <div>
+    <>
+        <Head>
+            <title>International Black Sea University Georgia | MBBS & Higher Studies</title>
+            <meta name="keyword" content="tbilisi state medical university, tbilisi state medical university georgia, tbilisi medical university, tbilisi state medical university mbbs fees, georgian national university seu, georgian national university, georgian national university seu fee structure, east european university georgia, european university georgia, east european university tbilisi georgia, new vision university georgia, new vision university tbilisi, georgia new vision university, bau international university, bau international university batumi, bau international university batumi fees, Batumi Shota Rustaveli State University, Batumi Shota Rustaveli State Georgia, georgian american university, university of georgia, georgia institute of technology, mbb in georgia, mbbs in georgia for indian students, mbb in georgia fees, top medical universities in georgia." />
+            <meta name="description" content="Study MBBS and higher education at International Black Sea University. Affordable education in Georgia with global recognition." />
+            <meta name="author" content="edurizon" />
+            <meta name="robots" content="index, follow"/>
+            <meta name="DC.title" content="MBBS in Georgia" />
+            <meta name="geo.region" content="IN-DL" />
+            <meta name="geo.placename" content="Dwarka" />
+            <meta name="geo.position" content="22.351115;78.667743" />
+            <meta name="ICBM" content="22.351115, 78.667743" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="International Black Sea University Georgia | MBBS & Higher Studies" />
+            <meta property="og:description" content="Study MBBS and higher education at International Black Sea University. Affordable education in Georgia with global recognition." />
+            <meta property="og:url" content="https://www.edurizon.in/" />
+            <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@edurizon" />
+            <meta name="twitter:title" content="International Black Sea University Georgia | MBBS & Higher Studies" />
+            <meta name="twitter:description" content="Study MBBS and higher education at International Black Sea University. Affordable education in Georgia with global recognition." />
+            <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:image:alt" content="MBBS in Georgia" />
+            <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia/international-black-sea-university"/>
+            <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia/international-black-sea-university" hrefLang="en-in"/>
+
+            {/* Google tag (gtag.js) */}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-9JDZZKPGL8');
+                    `,
+                }}
+            />
+        </Head>
+        <div>
          <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center  ">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
@@ -315,7 +355,8 @@ const NewPage = () => {
                 <li>Maximum 30 Minutes journey to IBSU after reaching Tbilisi airport</li>
               </ul>
             </section>
-    </div>
+        </div>
+    </>
   )
 }
 

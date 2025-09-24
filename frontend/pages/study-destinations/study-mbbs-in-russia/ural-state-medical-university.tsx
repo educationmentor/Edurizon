@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import Head from 'next/head';
 
 const services = [
     {
@@ -26,7 +27,46 @@ const services = [
   ];
 const NewPage = () => {
   return (
-    <div  className="text-regularTextPhone md:text-regularText text-black">
+    <>
+        <Head>
+            <title>MBBS in Russia – Scholarship & Low Cost Options Ural State Medical University</title>
+            <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+            <meta name="description" content="Compare cost of MBBS in Russia, find admission & eligibility rules and apply to universities with help from https://www.edurizon.in/study-destinations/study-mbbs-in-russia/ural-state-medical-university." />
+            <meta name="author" content="edurizon" />
+            <meta name="robots" content="index, follow"/>
+            <meta name="DC.title" content="MBBS In Russia" />
+            <meta name="geo.region" content="IN-DL" />
+            <meta name="geo.placename" content="Dwarka" />
+            <meta name="geo.position" content="22.351115;78.667743" />
+            <meta name="ICBM" content="22.351115, 78.667743" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="MBBS in Russia – Scholarship & Low Cost Options Ural State Medical University" />
+            <meta property="og:description" content="Compare cost of MBBS in Russia, find admission & eligibility rules and apply to universities with help from https://www.edurizon.in/study-destinations/study-mbbs-in-russia/ural-state-medical-university." />
+            <meta property="og:url" content="https://www.edurizon.in/" />
+            <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@edurizon" />
+            <meta name="twitter:title" content="MBBS in Russia – Scholarship & Low Cost Options Ural State Medical University" />
+            <meta name="twitter:description" content="Compare cost of MBBS in Russia, find admission & eligibility rules and apply to universities with help from https://www.edurizon.in/study-destinations/study-mbbs-in-russia/ural-state-medical-university." />
+            <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:image:alt" content="MBBS in Russia" />
+            <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/ural-state-medical-university"/>
+            <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/ural-state-medical-university" hrefLang="en-in"/>
+
+            {/* Google tag (gtag.js) */}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-9JDZZKPGL8');
+                    `,
+                }}
+            />
+        </Head>
+        <div  className="text-regularTextPhone md:text-regularText text-black">
         <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/UralStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
@@ -531,7 +571,8 @@ const NewPage = () => {
   </div>
 </section>
  <div className='h-[4vw]'/>
-    </div>
+        </div>
+    </>
   )
 }
 

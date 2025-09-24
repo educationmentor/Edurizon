@@ -2,6 +2,7 @@ import React from 'react'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
+import Head from 'next/head'
 
 const eligibilityData = {
     id: "kyrgyzstan",
@@ -62,6 +63,46 @@ const RoyalMetropolitanUniversity = () => {
         window.open('https://wa.me/919540994829?')
     }
     return (
+        <>
+        <Head>
+        <title>Royal Metropolitan University Kyrgyzstan | MBBS for Indian Students</title>
+<meta name="keyword" content="mbbs in kyrgyzstan, central asian international medical university, central asian international medical university mbbs fees, caimu kyrgyzstan, jasu kyrgyzstan, Jalal-Abad State University, Kyrgyzstan, Jalal-Abad State University fees, mbbs in kyrgyzstan, best medical colleges in kyrgyzstan, kyrgyzstan mbbs fees, mbbs in kyrgyzstan fees, Mbbs in kyrgyzstan for indian students, Jalal -Abad international University, Jalal -Abad international University fees." />
+<meta name="description" content="Study MBBS at Royal Metropolitan University Kyrgyzstan. Affordable fee structure, globally recognized degree, and English-medium programs." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<meta name="DC.title" content="MBBS in Kyrgyzstan" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Royal Metropolitan University Kyrgyzstan | MBBS for Indian Students"/>
+<meta property="og:description" content="Study MBBS at Royal Metropolitan University Kyrgyzstan. Affordable fee structure, globally recognized degree, and English-medium programs."/>
+<meta property="og:url" content="https://www.edurizon.in/"/>
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@edurizon"/>
+<meta name="twitter:title" content="Royal Metropolitan University Kyrgyzstan | MBBS for Indian Students"/>
+<meta name="twitter:description" content="Study MBBS at Royal Metropolitan University Kyrgyzstan. Affordable fee structure, globally recognized degree, and English-medium programs."/>
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:image:alt" content="MBBS in Kyrgyzstan"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university"/>
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university" hrefLang="en-in"/>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+
+            </Head>
         <div>
             <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
@@ -209,7 +250,7 @@ const RoyalMetropolitanUniversity = () => {
                     <li>Your Trusted MBBS Abroad Consultant</li>
                 </ul>
             </section>
-        </div>
+        </div></>
     )
 }
 

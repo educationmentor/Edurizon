@@ -2,6 +2,7 @@ import React from 'react'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
+import Head from 'next/head'
 
 
 
@@ -50,6 +51,47 @@ const TbilisiStateMedicalUniversity = () => {
         window.open('https://wa.me/919873381377?')
     }
     return (
+        <>
+        <Head>
+        <title>Jalal-Abad International University Kyrgyzstan | MBBS Fees 2025</title>
+<meta name="keyword" content="mbbs in kyrgyzstan, central asian international medical university, central asian international medical university mbbs fees, caimu kyrgyzstan, jasu kyrgyzstan, Jalal-Abad State University, Kyrgyzstan, Jalal-Abad State University fees, mbbs in kyrgyzstan, best medical colleges in kyrgyzstan, kyrgyzstan mbbs fees, mbbs in kyrgyzstan fees, Mbbs in kyrgyzstan for indian students, Jalal -Abad international University, Jalal -Abad international University fees." />
+<meta name="description" content="Study MBBS in Kyrgyzstan at Jalal-Abad International University. Affordable fees, NMC-approved, and best choice for Indian students." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<meta name="DC.title" content="MBBS in Kyrgyzstan" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Jalal-Abad International University Kyrgyzstan | MBBS Fees 2025"/>
+<meta property="og:description" content="Study MBBS in Kyrgyzstan at Jalal-Abad International University. Affordable fees, NMC-approved, and best choice for Indian students."/>
+<meta property="og:url" content="https://www.edurizon.in/"/>
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@edurizon"/>
+<meta name="twitter:title" content="Jalal-Abad International University Kyrgyzstan | MBBS Fees 2025"/>
+<meta name="twitter:description" content="Study MBBS in Kyrgyzstan at Jalal-Abad International University. Affordable fees, NMC-approved, and best choice for Indian students."/>
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:image:alt" content="MBBS in Kyrgyzstan"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university"/>
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-kyrgyzstan/jalal-abad-international-university" hrefLang="en-in"/>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+
+        </Head>
         <div>
             <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
@@ -304,6 +346,8 @@ const TbilisiStateMedicalUniversity = () => {
                 </ul>
             </section>
         </div>
+        </>
+
     )
 }
 

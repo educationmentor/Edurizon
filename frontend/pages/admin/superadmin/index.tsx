@@ -254,9 +254,9 @@ const AdminDashboard = () => {
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-xl font-semibold text-gray-900">Team Details</h2>
                   <div className="flex gap-4">
-                    <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
+                    {/* <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
                       Team Call
-                    </button>
+                    </button> */}
                    
                     <button
                       onClick={() => setIsAddMemberDialogOpen(true)}

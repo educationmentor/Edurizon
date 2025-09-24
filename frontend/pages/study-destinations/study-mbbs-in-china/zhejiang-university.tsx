@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import Head from "next/head";
 
 const services = [
     {
@@ -26,6 +27,51 @@ const services = [
 
 const NewPage = () => {
   return (
+    <>
+    <Head>
+    <title>MBBS in China – Fee Structure, Admission & Scholarships Zhejiang University</title> 
+<meta name="keyword" content="mbbs in china, Top 10 medical colleges in china, Best Medical University in china, Top Medical Universities in china, Top10 Medical Universities in china, mbbs in china fee structure, Top medical colleges in china, Best medical colleges in china, zhejiang university, zhejiang science and technology university, zhejiang university china, xi an jiaotong university, xi an jiaotong university china, nanjing university china, nanjing university, nanjing medical university china, xiamen university, china xiamen university, xiamen university xiamen." />
+<meta name="description" content="Discover affordable MBBS in China, admission process, and fee structure with scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<meta name="DC.title" content="MBBS in China" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="MBBS in China – Fee Structure, Admission & Scholarships Zhejiang University"/>
+<meta property="og:description" content="Compare cost of MBBS in    Russia, find admission & eligibility rules and apply to universities with help from Discover affordable MBBS in China, admission process, and fee structure with scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university."/>
+<meta property="og:url" content="https://www.edurizon.in/"/>
+    <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@edurizon"/>
+<meta name="twitter:title" content="MBBS in China – Fee Structure, Admission & Scholarships Zhejiang University"/>
+<meta name="twitter:description" content="Compare cost of MBBS in Russia, find admission & eligibility rules and apply to universities with help from Discover affordable MBBS in China, admission process, and fee structure with scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university"/>
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:image:alt" content="MBBS in China"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university"/>
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university" hrefLang="en-in"/>
+
+
+{/* Google tag (gtag.js) */}
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"
+/>
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JDZZKPGL8');
+    `,
+  }}
+/>
+
+
+    </Head>
     <div className="text-regularTextPhone md:text-regularText text-black">
         <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/mbbs-in-china/associated-universities/zhejiang-university.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
@@ -355,6 +401,7 @@ const NewPage = () => {
 </section>
 <div className="h-[4vw]"/>
     </div>
+    </>
   )
 }
 

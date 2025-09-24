@@ -15,5 +15,11 @@ module.exports = {
     from: process.env.EMAIL_FROM || 'edurizon.website@gmail.com',
     secure: process.env.EMAIL_SECURE === 'true' || false,
     service: process.env.EMAIL_SERVICE || 'gmail'
+  },
+  cloudinary: {
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'da9cfxiph',
+    api_key: process.env.CLOUDINARY_API_KEY || '128169163149369',
+    api_secret: process.env.CLOUDINARY_API_SECRET || 'lQrZJN7ziiJ6CwAeJMF9JUaScJw'
   }
+  
 }; 

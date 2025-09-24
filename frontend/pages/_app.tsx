@@ -53,24 +53,45 @@ function MyApp({ Component, pageProps }: AppProps) {
           if (!counselorToken) {
             router.push('/counselor/login');
           }
-        } else if (currentPath.includes('/dashboard')) {
+        } else if (currentPath.includes('/dashboard') || currentPath.includes('/student-dashboard')) {
           if (!userData) {
             router.push('/login');
           } else {
-            try {
-              const response = await axios.get(`${baseUrl}/api/auth/verify`, {
-                headers: {
-                  Authorization: `Bearer ${JSON.parse(userData).token}`
+            const user = JSON.parse(userData);
+            // Check if it's a registered student
+            if (user.role === 'registered-student') {
+              try {
+                const response = await axios.get(`${baseUrl}/api/registered-students/profile`, {
+                  headers: {
+                    Authorization: `Bearer ${user.token}`
+                  }
+                });
+                if (!response.data.success) {
+                  localStorage.removeItem('user');
+                  router.push('/login');
                 }
-              });
-              if (!response.data.valid) {
+              } catch (error) {
+                console.error('Token verification failed for registered student:', error);
                 localStorage.removeItem('user');
                 router.push('/login');
               }
-            } catch (error) {
-              console.error('Token verification failed:', error);
-              localStorage.removeItem('user');
-              router.push('/login');
+            } else {
+              // For regular users, use the existing verification
+              try {
+                const response = await axios.get(`${baseUrl}/api/auth/verify`, {
+                  headers: {
+                    Authorization: `Bearer ${user.token}`
+                  }
+                });
+                if (!response.data.valid) {
+                  localStorage.removeItem('user');
+                  router.push('/login');
+                }
+              } catch (error) {
+                console.error('Token verification failed:', error);
+                localStorage.removeItem('user');
+                router.push('/login');
+              }
             }
           }
         }

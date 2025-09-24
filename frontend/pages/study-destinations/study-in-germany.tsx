@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Header from '@/components/studyDestinationComponents/headerComponent';
 import { TransitionLink } from '@/utils/TransitionLink';
 import RelatedVideos from '@/components/videoSlider';
+import Head from 'next/head';
 const videoData=[
     {
       id: 1,
@@ -68,7 +69,47 @@ const videoData=[
   ]
 
 const NewPage=()=>{
-    return<div className='text-smallTextPhone md:text-smallText dark:bg-black dark:text-black'>
+    return(
+        <>
+            <Head>
+                <title>Study in Germany for Free | Top Universities & Scholarships Abroad</title>
+                <meta name="keyword" content="mbbs in Germany, mbbs in Germany low cost, mbbs in Germany for indian student, cost of mbbs in Germany, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+                <meta name="description" content="Explore free education in Germany for international students. Apply to top universities with scholarships and career opportunities." />
+                <meta name="author" content="edurizon" />
+                <meta name="robots" content="index, follow"/>
+                <meta name="DC.title" content="MBBS In Germany" />
+                <meta name="geo.region" content="IN-DL" />
+                <meta name="geo.placename" content="Dwarka" />
+                <meta name="geo.position" content="22.351115;78.667743" />
+                <meta name="ICBM" content="22.351115, 78.667743" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Study in Germany for Free | Top Universities & Scholarships Abroad" />
+                <meta property="og:description" content="Explore free education in Germany for international students. Apply to top universities with scholarships and career opportunities." />
+                <meta property="og:url" content="https://www.edurizon.in/" />
+                <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@edurizon" />
+                <meta name="twitter:title" content="Study in Germany for Free | Top Universities & Scholarships Abroad" />
+                <meta name="twitter:description" content="Explore free education in Germany for international students. Apply to top universities with scholarships and career opportunities." />
+                <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:image:alt" content="MBBS In Germany" />
+                <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-in-germany"/>
+                <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-in-germany" hrefLang="en-in"/>
+
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+            </Head>
+            <div className='text-smallTextPhone md:text-smallText dark:bg-black dark:text-black'>
         <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
@@ -312,7 +353,9 @@ const NewPage=()=>{
 
         </div>
 </section>
-    </div>
+            </div>
+        </>
+    )
 }
 
 export default NewPage;

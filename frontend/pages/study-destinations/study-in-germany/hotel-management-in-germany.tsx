@@ -2,9 +2,52 @@ import Breadcrumbs from '@/components/Breadcumbs'
 import Header from '@/components/studyDestinationComponents/headerComponent'
 import React from 'react'
 import Image from 'next/image'
+import Head from 'next/head'
 
 const HotelManagement = () => {
   return (
+    <>
+    <Head>
+    <title>Study Hotel Management in Germany | Top Universities & Free Education</title>
+<meta name="keywords" content="hotel management in germany, study in germany for free, hospitality courses in germany, top universities in germany for hotel management, free education in germany, international students in germany, hospitality management in germany, scholarships in germany, study abroad in germany" />
+<meta name="description" content="Build a global career in hospitality. Explore hotel management courses in Germany with affordable fees and international exposure. https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow" />
+<meta name="DC.title" content="Study Hotel Management in Germany" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Study Hotel Management in Germany | Top Universities & Free Education" />
+<meta property="og:description" content="Build a global career in hospitality. Explore hotel management courses in Germany with affordable fees and international exposure. https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" />
+<meta property="og:url" content="https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" />
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@edurizon" />
+<meta name="twitter:title" content="Study Hotel Management in Germany | Top Universities & Free Education" />
+<meta name="twitter:description" content="Build a global career in hospitality. Explore hotel management courses in Germany with affordable fees and international exposure. https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" />
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+<meta name="twitter:image:alt" content="Hotel Management in Germany" />
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" />
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-in-germany/hotel-management-in-germany" hrefLang="en-in" />
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"
+></script>
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JDZZKPGL8');
+    `,
+  }}
+></script>
+
+    </Head>
     <div className='flex flex-col mx-[6vw] md:mx-[12.5vw] items-center pt-[5vw] md:pt-[4vw] md:pb-[3vw] gap-[4vw] md:gap-[4vw] '>
         <div className='flex flex-col gap-[1vw] w-full items-center'>
         <Breadcrumbs />
@@ -120,6 +163,7 @@ const HotelManagement = () => {
         </div>
         
     </div>
+    </>
   )
 }
 

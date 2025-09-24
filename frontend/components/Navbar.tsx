@@ -358,9 +358,9 @@ key={index}
             <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[2.5vw] h-[2.5vw] rounded-full' />
             </div>
             <div className='flex flex-col '>
-            <span className=" text-smallTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
-            <TransitionLink href="/studentDashboard">
-            <button disabled={!allowDashboard}
+            <span className=" text-smallTextPhone leading-[100%] mb-1 ">Welcome, {userName.charAt(0).toUpperCase() + userName.slice(1)}</span>
+            <TransitionLink href="/student-dashboard">
+            <button
               className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
               <span className="hidden md:block text-smallTextPhone leading-[100%]">View Dashboard</span>
 
@@ -417,13 +417,14 @@ key={index}
               <Image src={"/assets/Images/user.png"} alt="user" width={56} height={56} className='w-[12vw] h-auto rounded-full' />
               </div>
               <div className='flex flex-col '>
-              <span className=" text-regularTextPhone leading-[100%] mb-1 ">Welcome, {userName}</span>
-              <TransitionLink href="/studentDashboard">
-              <button disabled={!allowDashboard}
+              <span className=" text-regularTextPhone leading-[100%] mb-1 ">Welcome, {userName.charAt(0).toUpperCase() + userName.slice(1)}</span>
+              <TransitionLink href="/student-dashboard">
+              <button
                 className="flex items-center gap-2 text-[#FF7500] hover:text-orangeChosen transition-colors">
                 <span className="text-regularTextPhone leading-[100%]">View Dashboard</span>
 
               </button>
+
 
               </TransitionLink>
               </div>

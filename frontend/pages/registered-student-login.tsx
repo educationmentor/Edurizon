@@ -9,12 +9,14 @@ import { baseUrl } from '@/lib/baseUrl';
 
 const Login = () => {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [form,setForm] = useState({
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
   const useTheme=()=>useContext(ThemeContext);
   const { theme } = useTheme();
   const imageSrc =
@@ -35,7 +37,7 @@ const Login = () => {
         } else if (parsedUser.role === 'admin') {
           router.push('/admin');
         } else {
-          router.push('/studentDashboard');
+          router.push('/student-dashboard');
         }
       }, 2000);
     }
@@ -48,26 +50,59 @@ const Login = () => {
     </div>;
   }
 
-//   if (user) {
-//     return (
-//       <div className="h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-gray-900">
-//         <h1 className="text-4xl font-bold text-black dark:text-white mb-4">
-//           Welcome back, <span className="text-orangeChosen">{user.name}</span>!
-//         </h1>
-//         <p className="text-dimgrayChosen dark:text-gray-300 text-lg">
-//           Redirecting you to your dashboard...
-//         </p>
-//       </div>
-//     );
-//   }
+  if (user) {
+    return (
+      <div className="h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-gray-900">
+        <h1 className="text-4xl font-bold text-black dark:text-white mb-4">
+          Welcome back, <span className="text-orangeChosen">{user.name}</span>!
+        </h1>
+        <p className="text-dimgrayChosen dark:text-gray-300 text-lg">
+          Redirecting you to your dashboard...
+        </p>
+      </div>
+    );
+  }
 
-  const handleSubmit  = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try{
-        const response = await axios.post(`${baseUrl}/api/`,form);
-        console.log(response);
-    }catch(error){
-        console.log(error);
+    setError('');
+    setLoginLoading(true);
+
+    try {
+      const response = await axios.post(`${baseUrl}/api/registered-students/login`, form);
+      
+      if (response.data.success) {
+        // Store user data and token in localStorage
+        const userData = {
+          ...response.data.user,
+          token: response.data.token
+        };
+        
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        // Show success message and redirect
+        setUser(userData);
+        
+        // Redirect to student dashboard after a short delay
+        setTimeout(() => {
+          router.push('/student-dashboard');
+        }, 1500);
+      } else {
+        setError(response.data.message || 'Login failed');
+      }
+    } catch (error: any) {
+      console.error('Login error:', error);
+      if (error.response?.data?.message) {
+        setError(error.response.data.message);
+      } else if (error.response?.status === 401) {
+        setError('Invalid email or password');
+      } else if (error.response?.status === 400) {
+        setError('Please fill in all required fields');
+      } else {
+        setError('Login failed. Please try again.');
+      }
+    } finally {
+      setLoginLoading(false);
     }
   };
 
@@ -87,6 +122,7 @@ const Login = () => {
               type="email"
               placeholder="Enter Email"
               value={form.email}
+              required
               className='w-full md:w-[30vw] h-[12vw] md:h-[3vw] text-regularTextPhone md:text-regularText text-black dark:text-white rounded-[12.5vw] md:rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[5vw] md:px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
               onChange={(e) => setForm({...form,email:e.target.value})}
             />
@@ -94,15 +130,23 @@ const Login = () => {
               type="password"
               placeholder="Enter Password"
               value={form.password}
+              required
               className='w-full md:w-[30vw] h-[12vw] md:h-[3vw] text-regularTextPhone md:text-regularText text-black dark:text-white rounded-[12.5vw] md:rounded-[6.25vw] border border-dimgrayChosen dark:border-white focus:outline-none px-[5vw] md:px-[1.5vw] bg-transparent placeholder:text-dimgrayChosen dark:placeholder:text-gray-400'
               onChange={(e) => setForm({...form,password:e.target.value})}
             />
+            
+            {error && (
+              <div className="text-red-500 text-smallTextPhone md:text-smallText text-center bg-red-50 dark:bg-red-900/20 p-2 rounded-md">
+                {error}
+              </div>
+            )}
+            
             <button
                 type='submit'
-                disabled={isLoading}
-                className={`md:w-[30vw] h-[12vw] md:h-[3vw]  text-regularTextPhone md:text-regularText text-white rounded-[12.5vw] md:rounded-[6.25vw] ${isLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-orangeChosen hover:bg-orange-600'}`}
+                disabled={loginLoading}
+                className={`md:w-[30vw] h-[12vw] md:h-[3vw]  text-regularTextPhone md:text-regularText text-white rounded-[12.5vw] md:rounded-[6.25vw] ${loginLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-orangeChosen hover:bg-orange-600'}`}
             >
-                {isLoading ? 'Please wait...' : 'Login'}
+                {loginLoading ? 'Logging in...' : 'Login'}
             </button>
             </form>
             <div className='flex md:w-[30vw] items-center'>

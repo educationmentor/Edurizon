@@ -1,9 +1,17 @@
 import Breadcrumbs from "@/components/Breadcumbs";
 import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
+import Head from "next/head";
 import Image from "next/image";
 const NewPage=()=>{
     return(
         <div className="text-smallTextPhone md:text-smallText text-black">
+            <Head>
+                <title>Study in Australia</title>
+                <meta name="description" content="Study in Australia" />
+                <meta name="keywords" content="Study in Australia" />
+                <meta name="author" content="Edurizon" />
+                <link rel="canonical" href="https://www.edurizon.in/study-in-australia" />
+            </Head>
             <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">

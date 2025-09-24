@@ -55,6 +55,10 @@ const userSchema = mongoose.Schema(
         type: String,
         required: false,
     },
+    feesInfo:{
+      type:String,
+      required:false,
+    },
     
     // Documents
     documents: {
