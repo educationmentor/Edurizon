@@ -17,16 +17,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/sitemap.xml',
-        destination: '/api/my-sitemap',
-        permanent: true, // or false depending on your SEO preference
-      },
-      {
-        source: '/sitemap',
-        destination: '/api/my-sitemap',
-        permanent: true, // or false depending on your SEO preference
-      },
-      {
         source:'/blogs',
         destination:'/study-destinations?category=Destination',
         permanent:true,
