@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "start": "node app.js",
+    "vercel-build": "echo 'Vercel build completed'",
     "init-admin": "node scripts/initSuperAdmin.js",
     "test-zoom": "node scripts/testZoomApi.js",
     "test-whatsapp": "node scripts/testWhatsApp.js",

@@ -11,6 +11,15 @@
         "src": "/(.*)",
         "dest": "app.js"
       }
-    ]
+    ],
+    "functions": {
+      "app.js": {
+        "maxDuration": 60
+      }
+    },
+    "regions": ["iad1"],
+    "env": {
+      "NODE_ENV": "production"
+    }
   }
   

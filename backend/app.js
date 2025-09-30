@@ -132,64 +132,72 @@ cloudinary.config({
 });
 
 
-// Set up Socket.io
-const io = new Server(server, {
-  cors: {
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        
-        // In production, be more permissive
-        if (process.env.NODE_ENV === 'production') {
-            // Allow any edurizon.in subdomain
-            if (origin && origin.includes('edurizon.in')) {
-                console.log('Socket.IO allowing origin:', origin);
-                return callback(null, true);
-            }
-            // Allow Vercel deployments
-            if (origin && origin.includes('vercel.app')) {
-                console.log('Socket.IO allowing Vercel origin:', origin);
-                return callback(null, true);
-            }
-        }
-        
-        if (allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            console.log('Socket.IO CORS blocked origin:', origin);
-            callback(new Error('Not allowed by CORS'));
-        }
+// Set up Socket.io (only if not in serverless environment)
+let io;
+if (process.env.VERCEL !== '1') {
+  io = new Server(server, {
+    cors: {
+      origin: function (origin, callback) {
+          // Allow requests with no origin (like mobile apps or curl requests)
+          if (!origin) return callback(null, true);
+          
+          // In production, be more permissive
+          if (process.env.NODE_ENV === 'production') {
+              // Allow any edurizon.in subdomain
+              if (origin && origin.includes('edurizon.in')) {
+                  console.log('Socket.IO allowing origin:', origin);
+                  return callback(null, true);
+              }
+              // Allow Vercel deployments
+              if (origin && origin.includes('vercel.app')) {
+                  console.log('Socket.IO allowing Vercel origin:', origin);
+                  return callback(null, true);
+              }
+          }
+          
+          if (allowedOrigins.indexOf(origin) !== -1) {
+              callback(null, true);
+          } else {
+              console.log('Socket.IO CORS blocked origin:', origin);
+              callback(new Error('Not allowed by CORS'));
+          }
+      },
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials: true,
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-  },
-  pingTimeout: 120000, // 2 minutes (increase socket timeout)
-  pingInterval: 25000, // 25 seconds
-  transports: ['polling', 'websocket'],
-  allowEIO3: true, // Allow Engine.IO v3 clients
-  upgradeTimeout: 10000, // 10 seconds for upgrade timeout
-  maxHttpBufferSize: 1e6, // 1MB max buffer size
-  serveClient: false // Don't serve the client files
-});
+    pingTimeout: 120000, // 2 minutes (increase socket timeout)
+    pingInterval: 25000, // 25 seconds
+    transports: ['polling', 'websocket'],
+    allowEIO3: true, // Allow Engine.IO v3 clients
+    upgradeTimeout: 10000, // 10 seconds for upgrade timeout
+    maxHttpBufferSize: 1e6, // 1MB max buffer size
+    serveClient: false // Don't serve the client files
+  });
+} else {
+  console.log('Running in Vercel serverless environment - Socket.IO disabled');
+}
 
 // Track active users
 const activeUsers = new Map();
 
-// Add connection error handling
-io.on('connection', (socket) => {
-  console.log('Socket connected:', socket.id);
-  
-  socket.on('disconnect', (reason) => {
-    console.log('Socket disconnected:', socket.id, 'Reason:', reason);
+// Add connection error handling (only if Socket.IO is available)
+if (io) {
+  io.on('connection', (socket) => {
+    console.log('Socket connected:', socket.id);
+    
+    socket.on('disconnect', (reason) => {
+      console.log('Socket disconnected:', socket.id, 'Reason:', reason);
+    });
+    
+    socket.on('error', (error) => {
+      console.error('Socket error:', socket.id, error);
+    });
   });
-  
-  socket.on('error', (error) => {
-    console.error('Socket error:', socket.id, error);
-  });
-});
+}
 
-// Socket middleware for authentication
+// Socket middleware for authentication (only if Socket.IO is available)
+if (io) {
 io.use((socket, next) => {
   const token = socket.handshake.auth.token;
   
@@ -374,6 +382,53 @@ io.on('connection', (socket) => {
     }
   });
 });
+} // End of Socket.IO conditional block
+
+// Fallback chat endpoints for serverless environment
+if (!io) {
+  // Simple polling-based chat endpoints
+  app.get('/api/chat/poll/:roomId', async (req, res) => {
+    try {
+      const { roomId } = req.params;
+      const { lastMessageId } = req.query;
+      
+      // Get messages newer than lastMessageId
+      const query = { consultationRequest: roomId };
+      if (lastMessageId) {
+        query._id = { $gt: lastMessageId };
+      }
+      
+      const messages = await ChatMessage.find(query)
+        .sort({ createdAt: 1 })
+        .limit(50);
+      
+      res.json({ success: true, messages });
+    } catch (error) {
+      console.error('Polling error:', error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+  
+  app.post('/api/chat/send', async (req, res) => {
+    try {
+      const { consultationRequest, message, senderType, senderId } = req.body;
+      
+      const newMessage = new ChatMessage({
+        consultationRequest,
+        message,
+        senderType,
+        senderId,
+        read: false
+      });
+      
+      await newMessage.save();
+      res.json({ success: true, message: newMessage });
+    } catch (error) {
+      console.error('Send message error:', error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+}
 
 // CORS test endpoint
 app.get('/api/cors-test', (req, res) => {
@@ -388,11 +443,19 @@ app.get('/api/cors-test', (req, res) => {
 
 // Socket.IO connection test endpoint
 app.get('/api/socket-test', (req, res) => {
-    res.json({
-        message: 'Socket.IO server is running',
-        timestamp: new Date().toISOString(),
-        activeConnections: io.engine.clientsCount
-    });
+    if (io) {
+        res.json({
+            message: 'Socket.IO server is running',
+            timestamp: new Date().toISOString(),
+            activeConnections: io.engine.clientsCount
+        });
+    } else {
+        res.json({
+            message: 'Socket.IO is disabled in serverless environment',
+            timestamp: new Date().toISOString(),
+            activeConnections: 0
+        });
+    }
 });
 
 // Routes
