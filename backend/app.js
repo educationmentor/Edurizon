@@ -29,6 +29,11 @@ const app = express();
 // Create HTTP server
 const server = http.createServer(app);
 
+// Increase server timeout and connection limits
+server.keepAliveTimeout = 65000; // 65 seconds
+server.headersTimeout = 66000; // 66 seconds
+server.maxConnections = 1000; // Maximum concurrent connections
+
 // Middleware
 const allowedOrigins = [
     'http://localhost:3000', 
@@ -48,16 +53,25 @@ app.use(cors({
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         
+        // In production, be more permissive
+        if (process.env.NODE_ENV === 'production') {
+            // Allow any edurizon.in subdomain
+            if (origin && origin.includes('edurizon.in')) {
+                console.log('CORS allowing origin:', origin);
+                return callback(null, true);
+            }
+            // Allow Vercel deployments
+            if (origin && origin.includes('vercel.app')) {
+                console.log('CORS allowing Vercel origin:', origin);
+                return callback(null, true);
+            }
+        }
+        
         if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
-            // In production, also allow any subdomain of edurizon.in
-            if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
-                callback(null, true);
-            } else {
-                console.log('CORS blocked origin:', origin);
-                callback(new Error('Not allowed by CORS'));
-            }
+            console.log('CORS blocked origin:', origin);
+            callback(new Error('Not allowed by CORS'));
         }
     },
     credentials: true,
@@ -69,8 +83,9 @@ app.use(cors({
 app.use((req, res, next) => {
     const origin = req.headers.origin;
     
-    // Allow all edurizon.in subdomains in production
-    if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
+    // Allow all edurizon.in subdomains and Vercel deployments in production
+    if (process.env.NODE_ENV === 'production' && origin && 
+        (origin.includes('edurizon.in') || origin.includes('vercel.app'))) {
         res.header('Access-Control-Allow-Origin', origin);
         res.header('Access-Control-Allow-Credentials', 'true');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -81,6 +96,22 @@ app.use((req, res, next) => {
     if (req.method === 'OPTIONS') {
         res.status(200).end();
         return;
+    }
+    
+    next();
+});
+
+// Fallback CORS for Socket.IO (more permissive)
+app.use('/socket.io/', (req, res, next) => {
+    const origin = req.headers.origin;
+    
+    if (process.env.NODE_ENV === 'production') {
+        if (origin && (origin.includes('edurizon.in') || origin.includes('vercel.app'))) {
+            res.header('Access-Control-Allow-Origin', origin);
+            res.header('Access-Control-Allow-Credentials', 'true');
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        }
     }
     
     next();
@@ -108,28 +139,55 @@ const io = new Server(server, {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         
+        // In production, be more permissive
+        if (process.env.NODE_ENV === 'production') {
+            // Allow any edurizon.in subdomain
+            if (origin && origin.includes('edurizon.in')) {
+                console.log('Socket.IO allowing origin:', origin);
+                return callback(null, true);
+            }
+            // Allow Vercel deployments
+            if (origin && origin.includes('vercel.app')) {
+                console.log('Socket.IO allowing Vercel origin:', origin);
+                return callback(null, true);
+            }
+        }
+        
         if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
-            // In production, also allow any subdomain of edurizon.in
-            if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
-                callback(null, true);
-            } else {
-                console.log('Socket.IO CORS blocked origin:', origin);
-                callback(new Error('Not allowed by CORS'));
-            }
+            console.log('Socket.IO CORS blocked origin:', origin);
+            callback(new Error('Not allowed by CORS'));
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
   },
-  pingTimeout: 60000, // 60 seconds (increase socket timeout)
-  transports: ['polling', 'websocket']
+  pingTimeout: 120000, // 2 minutes (increase socket timeout)
+  pingInterval: 25000, // 25 seconds
+  transports: ['polling', 'websocket'],
+  allowEIO3: true, // Allow Engine.IO v3 clients
+  upgradeTimeout: 10000, // 10 seconds for upgrade timeout
+  maxHttpBufferSize: 1e6, // 1MB max buffer size
+  serveClient: false // Don't serve the client files
 });
 
 // Track active users
 const activeUsers = new Map();
+
+// Add connection error handling
+io.on('connection', (socket) => {
+  console.log('Socket connected:', socket.id);
+  
+  socket.on('disconnect', (reason) => {
+    console.log('Socket disconnected:', socket.id, 'Reason:', reason);
+  });
+  
+  socket.on('error', (error) => {
+    console.error('Socket error:', socket.id, error);
+  });
+});
 
 // Socket middleware for authentication
 io.use((socket, next) => {
@@ -322,7 +380,18 @@ app.get('/api/cors-test', (req, res) => {
     res.json({ 
         message: 'CORS is working!', 
         origin: req.headers.origin,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV,
+        allowedOrigins: allowedOrigins
+    });
+});
+
+// Socket.IO connection test endpoint
+app.get('/api/socket-test', (req, res) => {
+    res.json({
+        message: 'Socket.IO server is running',
+        timestamp: new Date().toISOString(),
+        activeConnections: io.engine.clientsCount
     });
 });
 
