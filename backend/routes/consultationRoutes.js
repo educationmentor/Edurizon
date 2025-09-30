@@ -13,13 +13,15 @@ const {
   scheduleMeeting,
   rejectRequest,
   getStudentNotifications,
-  updateCounsellor
+  updateCounsellor,
+  getStudentRequestsById
 } = require('../controllers/consultationController');
 const auth = require('../middleware/auth');
 
 // Public routes
 router.post('/request', createConsultationRequest);
 router.get('/student', auth, getStudentRequests);
+router.get('/student/:studentId', auth, getStudentRequestsById);
 router.get('/notifications', auth, getStudentNotifications);
 
 // Counselor routes (protected)

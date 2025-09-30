@@ -12,6 +12,7 @@ const {
   deleteMeeting,
   cleanupOldMeetings
 } = require('../controllers/adminMeetingController');
+const { getChatHistory, markMessagesAsRead, getUserChatHistory, markUserMessagesAsRead, deleteMessage } = require('../controllers/chatController');
 const router = express.Router();
 
 // Public routes
@@ -56,5 +57,16 @@ router.get('/meetings/:id', getMeetingById);
 router.put('/meetings/:id', updateMeeting);
 router.delete('/meetings/:id', deleteMeeting);
 router.post('/meetings/cleanup', cleanupOldMeetings);
+
+// Chat routes for admin
+router.get('/chat/:requestId', protectAdminRoute, getChatHistory);
+router.put('/chat/:requestId/read', protectAdminRoute, markMessagesAsRead);
+
+// User-based chat routes for admin
+router.get('/chat/user/:userId', protectAdminRoute, getUserChatHistory);
+router.put('/chat/user/:userId/read', protectAdminRoute, markUserMessagesAsRead);
+
+// Delete message route for admin
+router.delete('/chat/delete/:messageId', protectAdminRoute, deleteMessage);
 
 module.exports = router; 

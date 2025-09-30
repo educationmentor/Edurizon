@@ -79,6 +79,7 @@ const Login = () => {
         };
         
         localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', response.data.token);
         
         // Show success message and redirect
         setUser(userData);

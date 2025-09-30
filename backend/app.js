@@ -74,13 +74,13 @@ io.use((socket, next) => {
   }
   
   try {
-    // Check if token starts with Bearer
-    if (token.startsWith('Bearer ')) {
+    // Accept both Bearer tokens and direct admin tokens
+    if (token.startsWith('Bearer ') || token.length > 50) {
       console.log('Token format is valid');
       next();
     } else {
-      console.error('Invalid token format - token does not start with Bearer');
-      next(new Error('Invalid token format - token must start with "Bearer "'));
+      console.error('Invalid token format');
+      next(new Error('Invalid token format'));
     }
   } catch (error) {
     console.error('Socket authentication error:', error);
@@ -95,30 +95,45 @@ io.on('connection', (socket) => {
   // Store user info if provided
   if (socket.handshake.query.userId) {
     const userId = socket.handshake.query.userId;
+    const userType = socket.handshake.query.userType;
+    const adminRole = socket.handshake.query.adminRole;
+    
     activeUsers.set(userId, socket.id);
-    console.log(`User ${userId} is active with socket ${socket.id}`);
+    console.log(`User ${userId} (${userType}) is active with socket ${socket.id}`);
+    if (adminRole) {
+      console.log(`Admin role: ${adminRole}`);
+    }
   }
   
-  // Join a room based on consultation request ID
-  socket.on('join_room', (requestId) => {
-    if (!requestId || !mongoose.Types.ObjectId.isValid(requestId)) {
-      socket.emit('error', { message: 'Invalid request ID' });
+  // Join a room based on consultation request ID or user ID
+  socket.on('join_room', (roomId) => {
+    if (!roomId || !mongoose.Types.ObjectId.isValid(roomId)) {
+      socket.emit('error', { message: 'Invalid room ID' });
       return;
     }
     
-    socket.join(requestId);
-    console.log(`User joined room: ${requestId}`);
+    socket.join(roomId);
+    console.log(`User joined room: ${roomId}`);
     
     // Notify client that join was successful
-    socket.emit('joined_room', { requestId });
+    socket.emit('joined_room', { roomId });
   });
   
   // Handle message sending
   socket.on('send_message', async (data) => {
     try {
-      const { senderType, senderEmail, senderName, consultationRequest, message, clientMessageId } = data;
+      const { senderType, senderEmail, senderName, consultationRequest, message, clientMessageId, senderId, receiverId } = data;
       
-      if (!consultationRequest || !mongoose.Types.ObjectId.isValid(consultationRequest)) {
+      // For user-based chat, we need valid senderId and receiverId
+      if (senderId && receiverId && receiverId !== 'counselor') {
+        if (!mongoose.Types.ObjectId.isValid(senderId) || !mongoose.Types.ObjectId.isValid(receiverId)) {
+          socket.emit('message_error', { 
+            clientMessageId,
+            error: 'Invalid sender or receiver ID format' 
+          });
+          return;
+        }
+      } else if (!consultationRequest || !mongoose.Types.ObjectId.isValid(consultationRequest)) {
         socket.emit('message_error', { 
           clientMessageId,
           error: 'Invalid request ID format' 
@@ -127,23 +142,41 @@ io.on('connection', (socket) => {
       }
       
       // Save message to database
-      const newMessage = await ChatMessage.create({
+      const messageData = {
         senderType,
         senderEmail,
         senderName,
-        consultationRequest,
         message,
         clientMessageId,
         delivered: true
-      });
+      };
       
-      const messageData = {
+      // Add user-based fields if provided and valid
+      if (senderId && receiverId && receiverId !== 'counselor' && mongoose.Types.ObjectId.isValid(receiverId)) {
+        messageData.senderId = senderId;
+        messageData.receiverId = receiverId;
+      } else {
+        messageData.consultationRequest = consultationRequest;
+      }
+      
+      console.log('Creating message with data:', messageData);
+      const newMessage = await ChatMessage.create(messageData);
+      console.log('Message created successfully:', newMessage._id);
+      
+      const responseData = {
         ...newMessage.toObject(),
         createdAt: new Date()
       };
       
-      // Emit the message to the room (consultation request ID)
-      io.to(consultationRequest).emit('receive_message', messageData);
+      // Emit the message to the appropriate room
+      if (senderId && receiverId && receiverId !== 'counselor' && mongoose.Types.ObjectId.isValid(receiverId)) {
+        // For user-based chat, emit to the room (both users should be in the same room)
+        const roomId = receiverId; // Use receiverId as room ID for user-based chat
+        io.to(roomId).emit('receive_message', responseData);
+      } else {
+        // For consultation-request-based chat, emit to the consultation room
+        io.to(consultationRequest).emit('receive_message', responseData);
+      }
       
       // Acknowledge message receipt back to sender
       socket.emit('message_delivered', { 
@@ -154,12 +187,15 @@ io.on('connection', (socket) => {
       
     } catch (error) {
       console.error('Error handling message:', error);
+      console.error('Message data:', data);
+      console.error('Error details:', error.message);
+      console.error('Error stack:', error.stack);
       
       // Send error back to client for handling
       if (data && data.clientMessageId) {
         socket.emit('message_error', { 
           clientMessageId: data.clientMessageId,
-          error: 'Failed to save message'
+          error: `Failed to save message: ${error.message}`
         });
       }
     }

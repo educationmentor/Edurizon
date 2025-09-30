@@ -7,6 +7,8 @@ import SendIcon from '@mui/icons-material/Send';
 import PersonIcon from '@mui/icons-material/Person';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ChatMessage {
@@ -35,55 +37,41 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isInitialRender, setIsInitialRender] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<Socket | null>(null);
   const pendingMessagesRef = useRef<Set<string>>(new Set());
-  const [consultationRequestId, setConsultationRequestId] = useState<string>('');
+  const [showMessageMenu, setShowMessageMenu] = useState<string | null>(null);
+  const [showMessageDeleteDialog, setShowMessageDeleteDialog] = useState(false);
+  const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
 
-  // Get consultation request ID for the student
+  // Set initial render flag to false after component mounts
   useEffect(() => {
-    const fetchConsultationRequest = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/api/consultation/student/${userData._id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('studentToken') || sessionStorage.getItem('studentToken')}`
-          }
-        });
-        
-        if (response.data.success && response.data.data.length > 0) {
-          // Use the first consultation request ID
-          setConsultationRequestId(response.data.data[0]._id);
-        }
-      } catch (error) {
-        console.error('Error fetching consultation request:', error);
-      }
-    };
-
-    if (userData && userData._id) {
-      fetchConsultationRequest();
-    }
-  }, [userData]);
+    const timer = setTimeout(() => {
+      setIsInitialRender(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Socket.IO connection
   useEffect(() => {
-    if (userData && userData._id && consultationRequestId) {
-      const token = localStorage.getItem('studentToken') || sessionStorage.getItem('studentToken');
+    if (userData ) {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token'); 
       
       if (token) {
-        // Ensure token has Bearer prefix
-        const formattedToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-        
-        console.log('Student token for Socket.IO:', formattedToken);
+        console.log('Student token for Socket.IO:', token);
         console.log('Student data:', userData);
-        console.log('Consultation request ID:', consultationRequestId);
+        console.log('Consultation request ID:', userData._id);
         
         const newSocket = io(baseUrl, {
           auth: {
-            token: formattedToken
+            token: token
           },
           query: {
             userId: userData._id,
-            userType: 'student'
+            userType: 'student',
+            userRole: userData.role || 'registered-student'
           }
         });
 
@@ -99,13 +87,16 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
 
         newSocket.on('connect_error', (error) => {
           console.error('Student connection error:', error);
-          console.error('Token being used:', formattedToken);
+          console.error('Token being used:', token);
           toast.error(`Connection failed: ${error.message}`);
         });
 
         newSocket.on('receive_message', (messageData) => {
           console.log('Student received message:', messageData);
-          setMessages(prevMessages => [...prevMessages, messageData]);
+          // Only add message if it's not from the current user (to avoid duplicates)
+          if (messageData.senderType !== 'student') {
+            setMessages(prevMessages => [...prevMessages, messageData]);
+          }
         });
 
         newSocket.on('message_delivered', (data) => {
@@ -140,23 +131,25 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
         };
       }
     }
-  }, [userData, consultationRequestId]);
+  }, [userData]);
 
   // Join room when consultation request is available
   useEffect(() => {
-    if (consultationRequestId && socketRef.current) {
-      socketRef.current.emit('join_room', consultationRequestId);
+    if (userData && socketRef.current) {
+      socketRef.current.emit('join_room', userData._id);
     }
-  }, [consultationRequestId]);
+  }, [userData]);
 
   // Load chat history
   useEffect(() => {
-    if (consultationRequestId) {
+    if (userData) {
       const fetchChatHistory = async () => {
         try {
-          const response = await axios.get(`${baseUrl}/api/chat/${consultationRequestId}`, {
+          const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+          
+          const response = await axios.get(`${baseUrl}/api/chat/user/${userData._id}`, {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('studentToken') || sessionStorage.getItem('studentToken')}`
+              Authorization: `Bearer ${token}`
             }
           });
           
@@ -170,17 +163,12 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
 
       fetchChatHistory();
     }
-  }, [consultationRequestId]);
+  }, [userData]);
 
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
+  
 
   const handleSendMessage = async () => {
-    if (!newMessage.trim() || !consultationRequestId) return;
+    if (!newMessage.trim() || !userData) return;
 
     if (!socketRef.current) {
       toast.error('Not connected to chat server');
@@ -193,7 +181,7 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
       senderType: 'student',
       senderEmail: userData?.email || 'student@edurizon.com',
       senderName: userData?.name || 'Student',
-      consultationRequest: consultationRequestId,
+      consultationRequest: userData._id,
       message: newMessage.trim(),
       createdAt: new Date(),
       clientMessageId,
@@ -207,16 +195,18 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
 
     socketRef.current.emit('send_message', {
       senderType: 'student',
+      senderId: userData._id,
+      receiverId: 'counselor', // Will be replaced with actual counselor ID
       senderEmail: userData?.email || 'student@edurizon.com',
       senderName: userData?.name || 'Student',
-      consultationRequest: consultationRequestId,
+      consultationRequest: userData._id,
       message: newMessage.trim(),
       clientMessageId
     });
 
     // Mark messages as read
     socketRef.current.emit('mark_read', {
-      consultationRequest: consultationRequestId,
+      consultationRequest: userData._id,
       userType: 'student'
     });
 
@@ -235,47 +225,98 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
     }, 5000);
   };
 
-  if (activeTab !== 'chat') {
+  const handleDeleteMessage = async (messageId: string) => {
+    if (!messageId) return;
+
+    try {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      
+      const response = await axios.delete(`${baseUrl}/api/chat/delete/${messageId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        // Remove message from local state
+        setMessages(prev => prev.filter(msg => msg._id !== messageId));
+        toast.success('Message deleted successfully');
+        setShowMessageDeleteDialog(false);
+        setMessageToDelete(null);
+      }
+    } catch (error) {
+      console.error('Error deleting message:', error);
+      toast.error('Failed to delete message');
+    }
+  };
+
+  const handleDeleteMessageClick = (messageId: string) => {
+    setMessageToDelete(messageId);
+    setShowMessageDeleteDialog(true);
+    setShowMessageMenu(null);
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.message-menu-container')) {
+        setShowMessageMenu(null);
+      }
+    };
+
+    if (showMessageMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMessageMenu]);
+
+  if (activeTab !== 'chat-support') {
     return null;
   }
 
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-full bg-white max-h-screen rounded-[1vw] shadow-[.5vw_.5vw_3vw_.5vw_rgba(0,_0,_0,_0.08)]">
       <Toaster />
       
       {/* Chat Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-            <PersonIcon className="w-5 h-5 text-white" />
+      <div className="p-[2vw] flex items-center justify-between bg-[#FF7500]">
+        <div className="flex items-center gap-[1vw]">
+          <div className="w-[3vw] h-[3vw] rounded-full bg-white/20 flex items-center justify-center">
+            <PersonIcon className="w-[1.5vw] h-[1.5vw] text-white" />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900">Your Counselor</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="font-semibold text-white text-[1.2vw]">Team Edurizon</h3>
+            <p className="text-white/80 text-[0.9vw]">
               {connected ? 'Online' : 'Offline'}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className={`w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-          <span className="text-sm text-gray-500">
+        <div className="flex items-center gap-[0.5vw]">
+          <div className={`w-[0.8vw] h-[0.8vw] rounded-full ${connected ? 'bg-green-400' : 'bg-red-400'}`}></div>
+          <span className="text-white/80 text-[0.8vw]">
             {connected ? 'Connected' : 'Disconnected'}
           </span>
         </div>
       </div>
 
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+      <div className="flex-1 overflow-y-auto p-[2vw] bg-[#FFD7C3]/20 flex flex-col max-h-[calc(100vh-200px)]">
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <PersonIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Start a conversation</h3>
-              <p className="text-gray-500">Send a message to your counselor</p>
+              <div className="w-[4vw] h-[4vw] bg-[#FF7500]/20 rounded-full flex items-center justify-center mx-auto mb-[1vw]">
+                <PersonIcon className="w-[2vw] h-[2vw] text-[#FF7500]" />
+              </div>
+              <h3 className="text-[1.2vw] font-semibold text-gray-900 mb-[0.5vw]">Start a conversation</h3>
+              <p className="text-gray-500 text-[0.9vw]">Send a message to your counselor</p>
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-[1vw]">
             {messages.map((message) => {
               const isOutgoing = message.senderType === 'student';
               const timestamp = message.createdAt 
@@ -285,31 +326,56 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
               return (
                 <div
                   key={message._id || message.clientMessageId}
-                  className={`flex ${isOutgoing ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${isOutgoing ? 'justify-end' : 'justify-start'} group`}
                 >
-                  <div
-                    className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                      isOutgoing
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-white text-gray-900 border border-gray-200'
-                    } ${message.pending ? 'opacity-70' : ''} ${message.error ? 'border-red-300 bg-red-50' : ''}`}
-                  >
-                    <p className="text-sm">{message.message}</p>
-                    <div className="flex items-center justify-end mt-1 gap-1">
-                      <span className="text-xs opacity-70">{timestamp}</span>
-                      {isOutgoing && (
-                        <div className="flex items-center">
-                          {message.error ? (
-                            <span className="text-red-300 text-xs">!</span>
-                          ) : message.pending ? (
-                            <span className="text-blue-200 text-xs">...</span>
-                          ) : message.read ? (
-                            <DoneAllIcon className="w-3 h-3 text-blue-200" />
-                          ) : (
-                            <CheckIcon className="w-3 h-3 text-blue-200" />
+                  <div className="relative">
+                    <div
+                      className={`max-w-[20vw] px-[1vw] py-[0.8vw] rounded-[0.8vw] ${
+                        isOutgoing
+                          ? 'bg-[#FF7500] text-white'
+                          : 'bg-white text-gray-900 border border-gray-200 shadow-sm'
+                      } ${message.pending ? 'opacity-70' : ''} ${message.error ? 'border-red-300 bg-red-50' : ''}`}
+                    >
+                      <p className="text-[0.9vw] leading-relaxed">{message.message}</p>
+                      <div className="flex items-center justify-between mt-[0.2vw]">
+                        <div className="flex items-center gap-[0.5vw]">
+                          <span className="text-[0.7vw] opacity-70">{timestamp}</span>
+                          {isOutgoing && (
+                            <div className="flex items-center gap-1">
+                              {message.error ? (
+                                <span className="text-red-300 text-[0.7vw] font-bold">!</span>
+                              ) : message.pending ? (
+                                <span className="text-white/70 text-[0.7vw] animate-pulse">...</span>
+                              ) : message.read ? (
+                                <DoneAllIcon className="w-[0.8vw] h-[0.8vw] text-white/70" />
+                              ) : (
+                                <CheckIcon className="w-[0.8vw] h-[0.8vw] text-white/70" />
+                              )}
+                            </div>
                           )}
                         </div>
-                      )}
+                        {isOutgoing && message._id && (
+                          <div className="relative message-menu-container">
+                            <button
+                              onClick={() => setShowMessageMenu(showMessageMenu === message._id ? null : (message._id || null))}
+                              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-[0.3vw] hover:bg-white/20 rounded-full"
+                            >
+                              <MoreVertIcon className="w-[1vw] h-[1vw]" />
+                            </button>
+                            {showMessageMenu === message._id && (
+                              <div className="absolute right-0 top-[1.5vw] bg-white rounded-[0.5vw] shadow-lg border border-gray-200 py-[0.5vw] z-10 min-w-[8vw]">
+                                <button
+                                  onClick={() => handleDeleteMessageClick(message._id!)}
+                                  className="w-full px-[0.8vw] py-[0.5vw] text-left text-red-600 hover:bg-red-50 flex items-center gap-[0.5vw] text-[0.8vw]"
+                                >
+                                  <DeleteIcon className="w-[1vw] h-[1vw]" />
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -321,26 +387,60 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
       </div>
 
       {/* Message Input */}
-      <div className="bg-white border-t border-gray-200 p-4">
-        <div className="flex items-center gap-2">
+      <div className="bg-white border-t border-gray-200 p-[1.5vw]">
+        <div className="flex items-center gap-[1vw]">
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder="Type your message..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-[1.5vw] py-[1vw] border border-gray-300 rounded-[1vw] focus:ring-2 focus:ring-[#FF7500] focus:border-transparent text-[0.9vw]"
             disabled={!connected}
           />
           <button
             onClick={handleSendMessage}
             disabled={loading || !newMessage.trim() || !connected}
-            className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-[1vw] bg-[#FF7500] text-white rounded-[1vw] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:bg-[#E66A00]"
           >
-            <SendIcon className="w-5 h-5" />
+            <SendIcon className="w-[1.2vw] h-[1.2vw]" />
           </button>
         </div>
       </div>
+
+      {/* Delete Message Confirmation Dialog */}
+      {showMessageDeleteDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-[1vw] p-[2vw] max-w-md w-full mx-4">
+            <div className="flex items-center gap-[1vw] mb-[1vw]">
+              <div className="w-[2.5vw] h-[2.5vw] bg-red-100 rounded-full flex items-center justify-center">
+                <DeleteIcon className="w-[1.2vw] h-[1.2vw] text-red-500" />
+              </div>
+              <h3 className="text-[1.2vw] font-semibold text-gray-900">Delete Message</h3>
+            </div>
+            <p className="text-gray-600 mb-[1.5vw] text-[0.9vw]">
+              Are you sure you want to delete this message? This action cannot be undone.
+            </p>
+            <div className="flex gap-[1vw] justify-end">
+              <button
+                onClick={() => {
+                  setShowMessageDeleteDialog(false);
+                  setMessageToDelete(null);
+                }}
+                className="px-[1.5vw] py-[0.8vw] text-gray-600 border border-gray-300 rounded-[0.5vw] hover:bg-gray-50 transition-colors text-[0.9vw]"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => messageToDelete && handleDeleteMessage(messageToDelete)}
+                className="px-[1.5vw] py-[0.8vw] bg-red-500 text-white rounded-[0.5vw] hover:bg-red-600 transition-colors text-[0.9vw]"
+              >
+                Delete Message
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -107,7 +107,6 @@ const Navbar = () => {
         const counselorToken = localStorage.getItem('counselorToken');
         
         if (userData) {
-          console.log(userData);
           const user = JSON.parse(userData);
           if(user.role=='student'){
             setIsLoggedIn('user');

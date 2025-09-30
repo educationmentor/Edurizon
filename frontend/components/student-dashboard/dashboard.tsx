@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import { TransitionLink } from '@/utils/TransitionLink'
 const Dashboard = ({ userData,activeTab, setActiveTab }: { userData: any,activeTab: string, setActiveTab: (tab: string) => void }) => {
-    console.log(userData);
   return (
     <div className='flex flex-col gap-[3vw]'>
         {/* Banner */}

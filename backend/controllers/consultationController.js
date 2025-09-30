@@ -202,6 +202,38 @@ const getStudentRequests = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Get consultation requests for a student by student ID
+// @route   GET /api/consultation/student/:studentId
+// @access  Private
+const getStudentRequestsById = asyncHandler(async (req, res) => {
+  const { studentId } = req.params;
+
+  console.log(`[STUDENT REQUESTS BY ID] Getting requests for student ID: ${studentId}`);
+
+  if (!studentId) {
+    res.status(400);
+    throw new Error('Please provide student ID');
+  }
+
+  // Get student email from user data
+  const student = await User.findById(studentId);
+  if (!student) {
+    res.status(404);
+    throw new Error('Student not found');
+  }
+
+  const requests = await ConsultationRequest.find({ email: student.email })
+    .populate('acceptedBy', 'name email')
+    .sort({ createdAt: -1 });
+
+  console.log(`[STUDENT REQUESTS BY ID] Found ${requests.length} requests for student ID: ${studentId}`);
+  
+  res.json({
+    success: true,
+    data: requests
+  });
+});
+
 // Helper function to check if a link is valid
 function isValidGoogleMeetLink(link) {
   if (!link) return false;
@@ -638,6 +670,7 @@ module.exports = {
   acceptRequest,
   getAcceptedRequests,
   getStudentRequests,
+  getStudentRequestsById,
   createConsultation,
   getConsultations,
   updateConsultation,
