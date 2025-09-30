@@ -44,6 +44,8 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
   const [showMessageMenu, setShowMessageMenu] = useState<string | null>(null);
   const [showMessageDeleteDialog, setShowMessageDeleteDialog] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
+  const [usePolling, setUsePolling] = useState(false);
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Set initial render flag to false after component mounts
   useEffect(() => {
@@ -54,7 +56,50 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Socket.IO connection
+  // Polling functions for fallback when Socket.IO is not available
+  const startPolling = () => {
+    console.log('Starting polling for messages');
+    setUsePolling(true);
+    
+    // Poll for new messages every 2 seconds
+    pollingIntervalRef.current = setInterval(async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/chat/poll/${userData._id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
+          }
+        });
+        
+        if (response.data.success && response.data.messages) {
+          setMessages(prevMessages => {
+            const newMessages = response.data.messages.filter((newMsg: any) => 
+              !prevMessages.some(existingMsg => existingMsg._id === newMsg._id)
+            );
+            return [...prevMessages, ...newMessages];
+          });
+        }
+      } catch (error) {
+        console.error('Polling error:', error);
+      }
+    }, 2000);
+  };
+
+  const stopPolling = () => {
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
+    setUsePolling(false);
+  };
+
+  // Cleanup polling on unmount
+  useEffect(() => {
+    return () => {
+      stopPolling();
+    };
+  }, []);
+
+  // Socket.IO connection with fallback to polling
   useEffect(() => {
     if (userData ) {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token'); 
@@ -64,6 +109,7 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
         console.log('Student data:', userData);
         console.log('Consultation request ID:', userData._id);
         
+        // Try Socket.IO connection first
         const newSocket = io(baseUrl, {
           auth: {
             token: token
@@ -72,7 +118,9 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
             userId: userData._id,
             userType: 'student',
             userRole: userData.role || 'registered-student'
-          }
+          },
+          timeout: 5000, // 5 second timeout
+          reconnection: false // Disable reconnection to fail fast
         });
 
         newSocket.on('connect', () => {
@@ -88,7 +136,16 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
         newSocket.on('connect_error', (error) => {
           console.error('Student connection error:', error);
           console.error('Token being used:', token);
-          toast.error(`Connection failed: ${error.message}`);
+          
+          // If Socket.IO fails, fall back to polling
+          if (error.message.includes('404') || error.message.includes('Not Found')) {
+            console.log('Socket.IO not available, falling back to polling');
+            setConnected(false);
+            newSocket.disconnect();
+            startPolling();
+          } else {
+            toast.error(`Connection failed: ${error.message}`);
+          }
         });
 
         newSocket.on('receive_message', (messageData) => {
@@ -170,7 +227,8 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
   const handleSendMessage = async () => {
     if (!newMessage.trim() || !userData) return;
 
-    if (!socketRef.current) {
+    // Check if we have a connection (Socket.IO or polling)
+    if (!socketRef.current && !usePolling) {
       toast.error('Not connected to chat server');
       return;
     }
@@ -193,22 +251,53 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
     
     pendingMessagesRef.current.add(clientMessageId);
 
-    socketRef.current.emit('send_message', {
-      senderType: 'student',
-      senderId: userData._id,
-      receiverId: 'counselor', // Will be replaced with actual counselor ID
-      senderEmail: userData?.email || 'student@edurizon.com',
-      senderName: userData?.name || 'Student',
-      consultationRequest: userData._id,
-      message: newMessage.trim(),
-      clientMessageId
-    });
+    try {
+      if (usePolling) {
+        // Send message via polling API
+        const response = await axios.post(`${baseUrl}/api/chat/send`, {
+          consultationRequest: userData._id,
+          message: newMessage.trim(),
+          senderType: 'student',
+          senderId: userData._id
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
+          }
+        });
 
-    // Mark messages as read
-    socketRef.current.emit('mark_read', {
-      consultationRequest: userData._id,
-      userType: 'student'
-    });
+        if (response.data.success) {
+          console.log('Student message sent via polling API');
+          // Update the message with the server response
+          setMessages(prev => prev.map(msg => 
+            msg.clientMessageId === clientMessageId 
+              ? { ...msg, _id: response.data.message._id, pending: false }
+              : msg
+          ));
+          pendingMessagesRef.current.delete(clientMessageId);
+        }
+      } else if (socketRef.current) {
+        // Send message via Socket.IO
+        socketRef.current.emit('send_message', {
+          senderType: 'student',
+          senderId: userData._id,
+          receiverId: 'counselor', // Will be replaced with actual counselor ID
+          senderEmail: userData?.email || 'student@edurizon.com',
+          senderName: userData?.name || 'Student',
+          consultationRequest: userData._id,
+          message: newMessage.trim(),
+          clientMessageId
+        });
+
+        // Mark messages as read
+        socketRef.current.emit('mark_read', {
+          consultationRequest: userData._id,
+          userType: 'student'
+        });
+      }
+    } catch (error) {
+      console.error('Student message error:', error);
+      toast.error('Failed to send message');
+    }
 
     // Timeout for message delivery
     setTimeout(() => {
@@ -296,9 +385,9 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
           </div>
         </div>
         <div className="flex items-center gap-[0.5vw]">
-          <div className={`w-[0.8vw] h-[0.8vw] rounded-full ${connected ? 'bg-green-400' : 'bg-red-400'}`}></div>
+          <div className={`w-[0.8vw] h-[0.8vw] rounded-full ${connected ? 'bg-green-400' : usePolling ? 'bg-yellow-400' : 'bg-red-400'}`}></div>
           <span className="text-white/80 text-[0.8vw]">
-            {connected ? 'Connected' : 'Disconnected'}
+            {connected ? 'Connected' : usePolling ? 'Polling Mode' : 'Disconnected'}
           </span>
         </div>
       </div>

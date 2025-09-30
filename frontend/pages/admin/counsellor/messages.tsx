@@ -87,11 +87,58 @@ const Messages = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<Socket | null>(null);
   const pendingMessagesRef = useRef<Set<string>>(new Set());
-  const [showMenu, setShowMenu] = useStateMenu(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [showMessageMenu, setShowMessageMenu] = useStateMenu<string | null>(null);
+  const [showMessageMenu, setShowMessageMenu] = useState<string | null>(null);
   const [showMessageDeleteDialog, setShowMessageDeleteDialog] = useState(false);
   const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
+  const [usePolling, setUsePolling] = useState(false);
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Polling functions for fallback when Socket.IO is not available
+  const startPolling = () => {
+    console.log('Starting polling for admin messages');
+    setUsePolling(true);
+    
+    // Poll for new messages every 2 seconds
+    pollingIntervalRef.current = setInterval(async () => {
+      try {
+        if (selectedConversation) {
+          const response = await axios.get(`${baseUrl}/api/admin/chat/user/${selectedConversation}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken')}`
+            }
+          });
+          
+          if (response.data.success && response.data.messages) {
+            setChatMessages(prevMessages => {
+              const newMessages = response.data.messages.filter((newMsg: any) => 
+                !prevMessages.some((existingMsg: any) => existingMsg._id === newMsg._id)
+              );
+              return [...prevMessages, ...newMessages];
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Admin polling error:', error);
+      }
+    }, 2000);
+  };
+
+  const stopPolling = () => {
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
+    setUsePolling(false);
+  };
+
+  // Cleanup polling on unmount
+  useEffect(() => {
+    return () => {
+      stopPolling();
+    };
+  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -127,7 +174,7 @@ const Messages = () => {
     }
   }, []);
 
-  // Socket.IO connection
+  // Socket.IO connection with fallback to polling
   useEffect(() => {
     if (adminData && adminData._id) {
       const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
@@ -146,7 +193,9 @@ const Messages = () => {
             userId: adminData._id,
             userType: 'counselor',
             adminRole: adminData.role || 'counsellor'
-          }
+          },
+          timeout: 5000, // 5 second timeout
+          reconnection: false // Disable reconnection to fail fast
         });
 
         newSocket.on('connect', () => {
@@ -163,8 +212,17 @@ const Messages = () => {
         newSocket.on('connect_error', (error) => {
           console.error('Connection error:', error);
           console.error('Token being used:', token);
-          setReconnecting(true);
-          toast.error(`Connection failed: ${error.message}`);
+          
+          // If Socket.IO fails, fall back to polling
+          if (error.message.includes('404') || error.message.includes('Not Found')) {
+            console.log('Socket.IO not available, falling back to polling');
+            setConnected(false);
+            newSocket.disconnect();
+            startPolling();
+          } else {
+            setReconnecting(true);
+            toast.error(`Connection failed: ${error.message}`);
+          }
         });
 
         newSocket.on('receive_message', (messageData) => {
