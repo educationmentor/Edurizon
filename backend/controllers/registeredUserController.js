@@ -158,21 +158,73 @@ const getAllRegisteredStudents = async (req, res) => {
 
 const updateRegisteredStudent = async (req, res) => {
   const { id } = req.params;
-  const { assignedCounsellor,assignedCounsellorName } = req.body;
+  const { 
+    name, 
+    email, 
+    phone, 
+    gender, 
+    dob, 
+    address, 
+    studyDestination, 
+    intendedCourse, 
+    preferedUniversity, 
+    applicationStage, 
+    documentsUploadStatus, 
+    accountStatus, 
+    scholarshipApplied, 
+    notes, 
+    feesInfo,
+    assignedCounsellor,
+    assignedCounsellorName 
+  } = req.body;
+  
   try {
+    const updateData = {};
+    
+    // Only update fields that are provided
+    if (name !== undefined) updateData.name = name;
+    if (email !== undefined) updateData.email = email;
+    if (phone !== undefined) updateData.phone = phone;
+    if (gender !== undefined) updateData.gender = gender;
+    if (dob !== undefined) updateData.dob = dob;
+    if (address !== undefined) updateData.address = address;
+    if (studyDestination !== undefined) updateData.studyDestination = studyDestination;
+    if (intendedCourse !== undefined) updateData.intendedCourse = intendedCourse;
+    if (preferedUniversity !== undefined) updateData.preferedUniversity = preferedUniversity;
+    if (applicationStage !== undefined) updateData.applicationStage = applicationStage;
+    if (documentsUploadStatus !== undefined) updateData.documentsUploadStatus = documentsUploadStatus;
+    if (accountStatus !== undefined) updateData.accountStatus = accountStatus;
+    if (scholarshipApplied !== undefined) updateData.scholarshipApplied = scholarshipApplied;
+    if (notes !== undefined) updateData.notes = notes;
+    if (feesInfo !== undefined) updateData.feesInfo = feesInfo;
+    if (assignedCounsellor !== undefined) updateData.assignedCounsellor = assignedCounsellor;
+    if (assignedCounsellorName !== undefined) updateData.assignedCounsellorName = assignedCounsellorName;
+    
     const updatedStudent = await RegisteredStudent.findByIdAndUpdate(
       id,
-      { assignedCounsellor,assignedCounsellorName },
-      { new: true }
+      updateData,
+      { new: true, runValidators: true }
     );
-    console.log("updatedStudent",updatedStudent);
+    
     if (!updatedStudent) {
-      return res.status(404).json({ error: 'Student not found' });
+      return res.status(404).json({ 
+        success: false,
+        message: 'Student not found' 
+      });
     }
-  res.status(200).json({success:true,data:updatedStudent});
+    
+    res.status(200).json({
+      success: true,
+      message: 'Student information updated successfully',
+      data: updatedStudent
+    });
   } catch (error) {
     console.error('Error updating registered student:', error);
-    res.status(500).json({ error: 'Failed to update registered student' });
+    res.status(500).json({ 
+      success: false,
+      message: 'Failed to update registered student',
+      error: error.message 
+    });
   }
 };
 
@@ -529,6 +581,41 @@ const uploadDocument = async (req, res) => {
   }
 };
 
+
+const uploadFeesDocument = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    // Upload file to Cloudinary
+    const { uploadToCloudinary } = require('../utils/cloudinary');
+    const cloudinaryResult = await uploadToCloudinary(req.file.buffer, 'edurizon/documents');
+
+    // Find the student and add the document
+    const student = await RegisteredStudent.findById(id);
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    
+    student.feesInfo = cloudinaryResult.secure_url;
+
+    
+    await student.save();
+
+    res.status(200).json({
+      message: 'Document uploaded successfully',
+      document: student.feesInfo
+    });
+
+  } catch (error) {
+    console.error('Error uploading document:', error);
+    res.status(500).json({ error: 'Failed to upload document' });
+  }
+};
+
 module.exports = {
   createRegisteredStudent,
   getSingleRegisteredStudent,
@@ -544,5 +631,6 @@ module.exports = {
   getRegisteredStudentsByCounsellor,
   loginRegisteredStudent,
   getCurrentUserProfile,
-  uploadDocument
+  uploadDocument,
+  uploadFeesDocument
 };

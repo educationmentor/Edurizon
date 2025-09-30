@@ -30,10 +30,62 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
+const allowedOrigins = [
+    'http://localhost:3000', 
+    'http://localhost:3001', 
+    'http://192.168.1.2:3000',
+    'http://edurizon.in',
+    'http://www.edurizon.in',
+    'https://edurizon.in',
+    'https://www.edurizon.in',
+    'https://edurizon-git-noddy-updated-utkarshs-projects-467c395b.vercel.app',
+    'https://edurizon-five.vercel.app',
+    'https://edurizon-blsj.vercel.app'
+];
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.1.2:3000','http://edurizon.in','http://www.edurizon.in','https://edurizon.in','https://www.edurizon.in','https://edurizon-git-noddy-updated-utkarshs-projects-467c395b.vercel.app','https://edurizon-five.vercel.app'],
-    credentials: true
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            // In production, also allow any subdomain of edurizon.in
+            if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
+                callback(null, true);
+            } else {
+                console.log('CORS blocked origin:', origin);
+                callback(new Error('Not allowed by CORS'));
+            }
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Additional CORS headers for production
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    
+    // Allow all edurizon.in subdomains in production
+    if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
+        res.header('Access-Control-Allow-Origin', origin);
+        res.header('Access-Control-Allow-Credentials', 'true');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    }
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+    
+    next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -52,11 +104,28 @@ cloudinary.config({
 // Set up Socket.io
 const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.1.2:3000','http://edurizon.in','http://www.edurizon.in','https://edurizon.in','https://www.edurizon.in','https://edurizon-git-noddy-updated-utkarshs-projects-467c395b.vercel.app','https://edurizon-five.vercel.app'],
-    methods: ['GET', 'POST'],
-    credentials: true
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            // In production, also allow any subdomain of edurizon.in
+            if (process.env.NODE_ENV === 'production' && origin && origin.includes('edurizon.in')) {
+                callback(null, true);
+            } else {
+                console.log('Socket.IO CORS blocked origin:', origin);
+                callback(new Error('Not allowed by CORS'));
+            }
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
   },
   pingTimeout: 60000, // 60 seconds (increase socket timeout)
+  transports: ['polling', 'websocket']
 });
 
 // Track active users
@@ -246,6 +315,15 @@ io.on('connection', (socket) => {
       }
     }
   });
+});
+
+// CORS test endpoint
+app.get('/api/cors-test', (req, res) => {
+    res.json({ 
+        message: 'CORS is working!', 
+        origin: req.headers.origin,
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Routes

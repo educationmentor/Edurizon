@@ -6,7 +6,7 @@ import Layout from '@/components/admin/DocumentLayout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CallIcon from '@mui/icons-material/Call';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import MessageIcon from '@mui/icons-material/Message';
+import PersonIcon from '@mui/icons-material/Person';
 
 interface RegisteredStudent {
   _id: string;
@@ -42,21 +42,21 @@ const ViewSessions = () => {
       label: "Overview",
     },
     {
-      href: "/admin/counsellor-admin/calling-records",
-      icon: <CallIcon />,
-      label: "Calling Records",
+        href: "/admin/counsellor-admin/calling-records",
+        icon: <CallIcon />,
+        label: "Calling Records",
     },
     {
-      href: "/admin/counsellor-admin/view-sessions",
-      icon: <ArrowForwardIosIcon />,
-      label: "View Sessions",
+        href: "/admin/counsellor-admin/view-sessions",
+        icon: <ArrowForwardIosIcon />,
+        label: "View Sessions",
     },
     {
-      href: "/admin/counsellor-admin/messages",
-      icon: <MessageIcon />,
-      label: "Messages",
+      href: "/admin/counsellor-admin/registered-students",
+      icon: <PersonIcon />,
+      label: "Registered Students",
     },
-  ];
+  ]
 
   // Get counsellor ID from sessionStorage or localStorage
   const counsellorId = adminData?._id;

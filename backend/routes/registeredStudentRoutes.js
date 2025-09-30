@@ -1,7 +1,8 @@
 const express = require('express');
 const multer = require('multer');
-const { createRegisteredStudent, getSingleRegisteredStudent, getAllRegisteredStudents,updateDocumentStatus,updateDocumentConditionStatus,sendRemark,addOneDocument,deleteOneDocument,addVideoData,updateRegisteredStudent,deleteRegisteredStudent,getRegisteredStudentsByCounsellor,loginRegisteredStudent,getCurrentUserProfile,uploadDocument } = require('../controllers/registeredUserController.js');
+const { createRegisteredStudent, getSingleRegisteredStudent, getAllRegisteredStudents,updateDocumentStatus,updateDocumentConditionStatus,sendRemark,addOneDocument,deleteOneDocument,addVideoData,updateRegisteredStudent,deleteRegisteredStudent,getRegisteredStudentsByCounsellor,loginRegisteredStudent,getCurrentUserProfile,uploadDocument,uploadFeesDocument } = require('../controllers/registeredUserController.js');
 const { protectRegisteredStudent } = require('../middleware/registeredStudentAuth');
+const { protectAdminRoute } = require('../middleware/adminAuth');
 const router = express.Router();
 
 // Configure multer for file uploads
@@ -29,8 +30,8 @@ router.post('/create', createRegisteredStudent);
 router.get('/get-single/:id', getSingleRegisteredStudent);
 router.get('/get-all', getAllRegisteredStudents);
 router.get('/get-by-counsellor/:counsellorId', getRegisteredStudentsByCounsellor);
-router.put('/:id',updateRegisteredStudent);
-router.delete('/:id',deleteRegisteredStudent);
+router.put('/:id', protectAdminRoute, updateRegisteredStudent);
+router.delete('/:id', protectAdminRoute, deleteRegisteredStudent);
 router.post('/login',loginRegisteredStudent);
 
 // Protected routes (authentication required)
@@ -44,7 +45,7 @@ router.delete('/deleteOneDocument/:id',deleteOneDocument)
 router.post('/addOneDocument/:id',addOneDocument);
 router.post('/sendRemark/:id', sendRemark);
 router.post('/uploadDocument/:id', upload.single('document'), uploadDocument);
-
+router.post('/uploadFeesDocument/:id', upload.single('document'), uploadFeesDocument);
 router.patch('/addVideoData/:id',addVideoData)
 
 module.exports = router;

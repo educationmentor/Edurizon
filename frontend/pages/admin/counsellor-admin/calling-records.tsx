@@ -3,24 +3,30 @@ import DocumentLayout from '@/components/admin/DocumentLayout'
 import CallingRecordComponent from '@/components/admin/counsellor-admin-components/callingRecordComponent';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CallIcon from '@mui/icons-material/Call';
+import PersonIcon from '@mui/icons-material/Person';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const navItems = [
-    {
-      href: "/admin/counsellor-admin",
-      icon: <GridViewIcon />,
-      label: "Overview",
-    },
-    {
-        href: "/admin/counsellor-admin/calling-records",
-        icon: <CallIcon />,
-        label: "Calling Records",
-    },
-    {
-        href: "/admin/counsellor-admin/view-sessions",
-        icon: <ArrowForwardIosIcon />,
-        label: "View Sessions",
-    },
-  ]
+  {
+    href: "/admin/counsellor-admin",
+    icon: <GridViewIcon />,
+    label: "Overview",
+  },
+  {
+      href: "/admin/counsellor-admin/calling-records",
+      icon: <CallIcon />,
+      label: "Calling Records",
+  },
+  {
+      href: "/admin/counsellor-admin/view-sessions",
+      icon: <ArrowForwardIosIcon />,
+      label: "View Sessions",
+  },
+  {
+    href: "/admin/counsellor-admin/registered-students",
+    icon: <PersonIcon />,
+    label: "Registered Students",
+  },
+]
 
 const CounsellorAdmin = () => {
     const [searchTerm, setSearchTerm] = useState('');
