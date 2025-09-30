@@ -66,16 +66,21 @@ const activeUsers = new Map();
 io.use((socket, next) => {
   const token = socket.handshake.auth.token;
   
+  console.log('Socket authentication attempt with token:', token ? token.substring(0, 20) + '...' : 'No token');
+  
   if (!token) {
+    console.error('No authentication token provided');
     return next(new Error('Authentication token is missing'));
   }
   
   try {
-    // Skip detailed verification at socket level, just basic format check
+    // Check if token starts with Bearer
     if (token.startsWith('Bearer ')) {
+      console.log('Token format is valid');
       next();
     } else {
-      next(new Error('Invalid token format'));
+      console.error('Invalid token format - token does not start with Bearer');
+      next(new Error('Invalid token format - token must start with "Bearer "'));
     }
   } catch (error) {
     console.error('Socket authentication error:', error);

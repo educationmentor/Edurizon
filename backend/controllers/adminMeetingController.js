@@ -10,8 +10,13 @@ const { sendWhatsAppNotification } = require('../utils/whatsappApi');
 const scheduleMeeting = asyncHandler(async (req, res) => {
   const { title, date, time, duration, description, agenda, attendees, organizer, meetingType } = req.body;
 
+  // Extract only IDs from attendees array
+  const attendeeIds = attendees.map(attendee => 
+    typeof attendee === 'string' ? attendee : attendee.id
+  );
+
   // Validate required fields
-  if (!title || !date || !time || !attendees || !organizer) {
+  if (!title || !date || !time || !attendeeIds || !organizer) {
     return res.status(400).json({
       success: false,
       message: 'Please provide all required fields: title, date, time, attendees, organizer'
@@ -27,7 +32,7 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
       duration: duration || 60,
       description: description || '',
       agenda: agenda || '',
-      attendees,
+      attendees: attendeeIds,
       organizer,
       meetingType: meetingType || 'zoom',
       status: 'scheduled'
@@ -125,10 +130,13 @@ const scheduleMeeting = asyncHandler(async (req, res) => {
 // @access  Private (Admin)
 const getAdminMeetings = asyncHandler(async (req, res) => {
   try {
+    // First, clean up old meetings (24+ hours old)
+    await deleteOldMeetings();
+
     const meetings = await Meeting.find({})
       .populate('attendees', 'firstName lastName email phone')
       .populate('organizer', 'firstName lastName email')
-      .sort({ createdAt: -1 });
+      .sort({ date: 1, time: 1 }); // Sort by meeting date and time, earliest first
 
     res.json({
       success: true,
@@ -143,6 +151,93 @@ const getAdminMeetings = asyncHandler(async (req, res) => {
     });
   }
 });
+
+// @desc    Get meetings for a specific user (attendee or organizer)
+// @route   GET /api/admin/meetings/user/:id
+// @access  Private (Admin)
+const getUserMeetings = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // First, clean up old meetings (24+ hours old)
+    await deleteOldMeetings();
+
+    // Find meetings where the user is either an attendee or organizer
+    const meetings = await Meeting.find({
+      $or: [
+        { attendees: { $in: [id] } },  // User is in attendees array
+        { organizer: id }               // User is the organizer
+      ]
+    })
+    .populate('attendees', 'firstName lastName email phone')
+    .populate('organizer', 'firstName lastName email')
+    .sort({ date: 1, time: 1 }); // Sort by meeting date and time, earliest first
+
+    res.json({
+      success: true,
+      message: 'User meetings fetched successfully',
+      data: meetings
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch user meetings',
+      error: error.message
+    });
+  }
+});
+
+// Function to delete meetings that are 24+ hours old based on their scheduled date and time
+const deleteOldMeetings = async () => {
+  try {
+    const now = new Date();
+    const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+    
+    console.log(`Current time: ${now.toISOString()}`);
+    console.log(`Looking for meetings scheduled before: ${twentyFourHoursAgo.toISOString()}`);
+    
+    // Find meetings that are 24+ hours old based on their scheduled date and time
+    const oldMeetings = await Meeting.find({
+      $expr: {
+        $lt: [
+          {
+            $dateFromString: {
+              dateString: { $concat: ["$date", "T", "$time", ":00"] },
+              format: "%Y-%m-%dT%H:%M:%S"
+            }
+          },
+          twentyFourHoursAgo
+        ]
+      }
+    });
+
+    console.log(`Found ${oldMeetings.length} meetings scheduled more than 24 hours ago`);
+
+    if (oldMeetings.length > 0) {
+      const deletedMeetings = await Meeting.deleteMany({
+        $expr: {
+          $lt: [
+            {
+              $dateFromString: {
+                dateString: { $concat: ["$date", "T", "$time", ":00"] },
+                format: "%Y-%m-%dT%H:%M:%S"
+              }
+            },
+            twentyFourHoursAgo
+          ]
+        }
+      });
+
+      console.log(`Deleted ${deletedMeetings.deletedCount} old meetings based on scheduled date/time`);
+      return deletedMeetings.deletedCount;
+    }
+
+    return 0;
+  } catch (error) {
+    console.error('Error deleting old meetings:', error);
+    return 0;
+  }
+};
 
 // @desc    Get meeting by ID
 // @route   GET /api/admin/meetings/:id
@@ -276,10 +371,34 @@ Best regards,
 Edurizon Team`;
 };
 
+// @desc    Clean up old meetings (24+ hours old)
+// @route   POST /api/admin/meetings/cleanup
+// @access  Private (Admin)
+const cleanupOldMeetings = asyncHandler(async (req, res) => {
+  try {
+    const deletedCount = await deleteOldMeetings();
+    
+    res.json({
+      success: true,
+      message: `Successfully cleaned up ${deletedCount} old meetings`,
+      deletedCount
+    });
+  } catch (error) {
+    console.error('Error cleaning up old meetings:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to clean up old meetings',
+      error: error.message
+    });
+  }
+});
+
 module.exports = {
   scheduleMeeting,
   getAdminMeetings,
+  getUserMeetings,
   getMeetingById,
   updateMeeting,
-  deleteMeeting
+  deleteMeeting,
+  cleanupOldMeetings
 }; 

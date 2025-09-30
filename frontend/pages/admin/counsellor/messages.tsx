@@ -1,5 +1,5 @@
 import Layout from '@/components/admin/DocumentLayout';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { baseUrl } from '@/lib/baseUrl';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
@@ -15,6 +15,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckIcon from '@mui/icons-material/Check';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { io, Socket } from 'socket.io-client';
+import { v4 as uuidv4 } from 'uuid';
 
 const navItems = [
   {
@@ -22,30 +24,41 @@ const navItems = [
     icon: <GridViewIcon />,
     label: "Overview",
   },
-  {
-    href: "/admin/counsellor/calling-records",
-    icon: <CallIcon />,
-    label: "Session Records",
-  },
-  {
-    href: "/admin/counsellor/view-sessions",
-    icon: <ArrowForwardIosIcon />,
-    label: "Create Session",
-  },
-  {
-    href: "/admin/counsellor/messages",
-    icon: <MessageIcon />,
-    label: "Message",
-  },
+{
+  href: "/admin/counsellor/calling-records",
+  icon: <CallIcon />,
+  label: "Calling Records",
+},
+{
+  href: "/admin/counsellor/messages",
+  icon: <MessageIcon />,
+  label: "Messages",
+},
+{
+  href: "/admin/counsellor/view-sessions",
+  icon: <ArrowForwardIosIcon />,
+  label: "View Sessions",
+},
 ];
 
 interface ChatMessage {
-  id: string;
-  sender: string;
+  _id?: string;
+  clientMessageId?: string;
+  senderType: 'student' | 'counselor';
+  senderEmail: string;
+  senderName: string;
+  consultationRequest: string;
   message: string;
-  timestamp: string;
-  isRead: boolean;
-  type: 'incoming' | 'outgoing';
+  createdAt: Date;
+  read?: boolean;
+  delivered?: boolean;
+  pending?: boolean;
+  error?: boolean;
+  id?: string;
+  sender?: string;
+  timestamp?: string;
+  isRead?: boolean;
+  type?: 'incoming' | 'outgoing';
 }
 
 interface Conversation {
@@ -67,6 +80,12 @@ const Messages = () => {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [assignedStudents, setAssignedStudents] = useState<any[]>([]);
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [connected, setConnected] = useState(false);
+  const [reconnecting, setReconnecting] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const socketRef = useRef<Socket | null>(null);
+  const pendingMessagesRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     if(sessionStorage.getItem('adminData')){
@@ -80,6 +99,98 @@ const Messages = () => {
       setAdminData(parsedValue);
     }
   }, []);
+
+  // Socket.IO connection
+  useEffect(() => {
+    if (adminData && adminData._id) {
+      const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+      
+      if (token) {
+        // Ensure token has Bearer prefix
+        const formattedToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+        
+        console.log('Admin token for Socket.IO:', formattedToken);
+        console.log('Admin data:', adminData);
+        console.log('Base URL:', baseUrl);
+        
+        const newSocket = io(baseUrl, {
+          auth: {
+            token: formattedToken
+          },
+          query: {
+            userId: adminData._id,
+            userType: 'counselor'
+          }
+        });
+
+        newSocket.on('connect', () => {
+          console.log('Connected to chat server');
+          setConnected(true);
+          setReconnecting(false);
+        });
+
+        newSocket.on('disconnect', () => {
+          console.log('Disconnected from chat server');
+          setConnected(false);
+        });
+
+        newSocket.on('connect_error', (error) => {
+          console.error('Connection error:', error);
+          console.error('Token being used:', formattedToken);
+          setReconnecting(true);
+          toast.error(`Connection failed: ${error.message}`);
+        });
+
+        newSocket.on('receive_message', (messageData) => {
+          console.log('Received message:', messageData);
+          setChatMessages(prevMessages => [...prevMessages, messageData]);
+        });
+
+        newSocket.on('message_delivered', (data) => {
+          console.log('Message delivered:', data);
+          setChatMessages(prevMessages => 
+            prevMessages.map(msg => 
+              msg.clientMessageId === data.clientMessageId 
+                ? { ...msg, pending: false, delivered: true, _id: data.messageId }
+                : msg
+            )
+          );
+          pendingMessagesRef.current.delete(data.clientMessageId);
+        });
+
+        newSocket.on('message_error', (data) => {
+          console.error('Message error:', data);
+          setChatMessages(prevMessages => 
+            prevMessages.map(msg => 
+              msg.clientMessageId === data.clientMessageId 
+                ? { ...msg, pending: false, error: true }
+                : msg
+            )
+          );
+          pendingMessagesRef.current.delete(data.clientMessageId);
+        });
+
+        newSocket.on('messages_read', (data) => {
+          console.log('Messages read:', data);
+          setChatMessages(prevMessages => 
+            prevMessages.map(msg => 
+              msg.consultationRequest === data.consultationRequest && 
+              msg.senderType !== 'counselor'
+                ? { ...msg, read: true }
+                : msg
+            )
+          );
+        });
+
+        setSocket(newSocket);
+        socketRef.current = newSocket;
+
+        return () => {
+          newSocket.close();
+        };
+      }
+    }
+  }, [adminData]);
 
   // Fetch assigned students from backend
   useEffect(() => {
@@ -128,56 +239,100 @@ const Messages = () => {
     }
   }, [assignedStudents]);
 
-  // Mock chat messages for selected conversation
+  // Load chat messages when conversation is selected
   useEffect(() => {
-    if (selectedConversation) {
-      const mockChatMessages: ChatMessage[] = [
-        {
-          id: '1',
-          sender: 'Student_1',
-          message: 'I confirm to attend counseling session at 12, Jan',
-          timestamp: '18:12',
-          isRead: true,
-          type: 'incoming'
-        },
-        {
-          id: '2',
-          sender: 'Counsellor',
-          message: 'Done your counseling session will be scheduled accordingly',
-          timestamp: '18:16',
-          isRead: true,
-          type: 'outgoing'
+    if (selectedConversation && selectedConversation !== 'announcements') {
+      const fetchChatHistory = async () => {
+        try {
+          const response = await axios.get(`${baseUrl}/api/chat/${selectedConversation}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken')}`
+            }
+          });
+          
+          if (response.data.success) {
+            setChatMessages(response.data.data);
+          }
+        } catch (error) {
+          console.error('Error fetching chat history:', error);
+          toast.error('Failed to load chat history');
         }
-      ];
-      setChatMessages(mockChatMessages);
+      };
+
+      fetchChatHistory();
+    } else if (selectedConversation === 'announcements') {
+      setChatMessages([]);
     }
   }, [selectedConversation]);
 
-  const handleSendMessage = async () => {
-    if (!newMessage.trim() || !selectedConversation) return;
-
-    setLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const newMsg: ChatMessage = {
-        id: Date.now().toString(),
-        sender: 'Counsellor',
-        message: newMessage,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        isRead: true,
-        type: 'outgoing'
-      };
-
-      setChatMessages(prev => [...prev, newMsg]);
-      setNewMessage('');
-      toast.success('Message sent successfully!');
-    } catch (error) {
-      toast.error('Failed to send message');
-    } finally {
-      setLoading(false);
+  // Join room when conversation is selected
+  useEffect(() => {
+    if (selectedConversation && selectedConversation !== 'announcements' && socketRef.current) {
+      socketRef.current.emit('join_room', selectedConversation);
     }
+  }, [selectedConversation]);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatMessages]);
+
+  const handleSendMessage = async () => {
+    if (!newMessage.trim() || !selectedConversation || selectedConversation === 'announcements') return;
+
+    if (!socketRef.current) {
+      toast.error('Not connected to chat server');
+      return;
+    }
+
+    const clientMessageId = uuidv4();
+    
+    const newMsg: ChatMessage = {
+      senderType: 'counselor',
+      senderEmail: adminData?.email || 'counselor@edurizon.com',
+      senderName: adminData?.firstName + ' ' + adminData?.lastName || 'Counselor',
+      consultationRequest: selectedConversation,
+      message: newMessage.trim(),
+      createdAt: new Date(),
+      clientMessageId,
+      pending: true
+    };
+
+    setChatMessages(prev => [...prev, newMsg]);
+    setNewMessage('');
+    
+    pendingMessagesRef.current.add(clientMessageId);
+
+    socketRef.current.emit('send_message', {
+      senderType: 'counselor',
+      senderEmail: adminData?.email || 'counselor@edurizon.com',
+      senderName: adminData?.firstName + ' ' + adminData?.lastName || 'Counselor',
+      consultationRequest: selectedConversation,
+      message: newMessage.trim(),
+      clientMessageId
+    });
+
+    // Mark messages as read
+    socketRef.current.emit('mark_read', {
+      consultationRequest: selectedConversation,
+      userType: 'counselor'
+    });
+
+    // Timeout for message delivery
+    setTimeout(() => {
+      if (pendingMessagesRef.current.has(clientMessageId)) {
+        setChatMessages(prevMessages => prevMessages.map(msg => {
+          if (msg.clientMessageId === clientMessageId) {
+            return { ...msg, pending: false, error: true };
+          }
+          return msg;
+        }));
+        
+        toast.error('Message may not have been delivered. Please try again.');
+      }
+    }, 5000);
   };
 
   const filteredConversations = conversations.filter(conv => 
@@ -282,34 +437,46 @@ const Messages = () => {
 
                 {/* Messages */}
                 <div className="space-y-4">
-                  {chatMessages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${message.type === 'outgoing' ? 'justify-end' : 'justify-start'}`}
-                    >
+                  {chatMessages.map((message) => {
+                    const isOutgoing = message.senderType === 'counselor';
+                    const timestamp = message.createdAt 
+                      ? new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                      : message.timestamp || '00:00';
+                    
+                    return (
                       <div
-                        className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                          message.type === 'outgoing'
-                            ? 'bg-green-500 text-white'
-                            : 'bg-white text-gray-900 border border-gray-200'
-                        }`}
+                        key={message._id || message.id || message.clientMessageId}
+                        className={`flex ${isOutgoing ? 'justify-end' : 'justify-start'}`}
                       >
-                        <p className="text-sm">{message.message}</p>
-                        <div className="flex items-center justify-end mt-1 gap-1">
-                          <span className="text-xs opacity-70">{message.timestamp}</span>
-                          {message.type === 'outgoing' && (
-                            <div className="flex items-center">
-                              {message.isRead ? (
-                                <DoneAllIcon className="w-3 h-3 text-blue-200" />
-                              ) : (
-                                <CheckIcon className="w-3 h-3 text-blue-200" />
-                              )}
-                            </div>
-                          )}
+                        <div
+                          className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                            isOutgoing
+                              ? 'bg-green-500 text-white'
+                              : 'bg-white text-gray-900 border border-gray-200'
+                          } ${message.pending ? 'opacity-70' : ''} ${message.error ? 'border-red-300 bg-red-50' : ''}`}
+                        >
+                          <p className="text-sm">{message.message}</p>
+                          <div className="flex items-center justify-end mt-1 gap-1">
+                            <span className="text-xs opacity-70">{timestamp}</span>
+                            {isOutgoing && (
+                              <div className="flex items-center">
+                                {message.error ? (
+                                  <span className="text-red-300 text-xs">!</span>
+                                ) : message.pending ? (
+                                  <span className="text-blue-200 text-xs">...</span>
+                                ) : message.read ? (
+                                  <DoneAllIcon className="w-3 h-3 text-blue-200" />
+                                ) : (
+                                  <CheckIcon className="w-3 h-3 text-blue-200" />
+                                )}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
+                  <div ref={messagesEndRef} />
                 </div>
               </div>
 

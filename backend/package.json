@@ -9,7 +9,8 @@
     "start": "node app.js",
     "init-admin": "node scripts/initSuperAdmin.js",
     "test-zoom": "node scripts/testZoomApi.js",
-    "test-whatsapp": "node scripts/testWhatsApp.js"
+    "test-whatsapp": "node scripts/testWhatsApp.js",
+    "cleanup-meetings": "node scripts/cleanupMeetings.js"
   },
   "keywords": [],
   "author": "",

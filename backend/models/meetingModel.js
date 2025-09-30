@@ -20,17 +20,13 @@ const meetingSchema = new mongoose.Schema({
     min: 15,
     max: 480 // 8 hours max
   },
-  description: {
-    type: String,
-    trim: true
-  },
   agenda: {
     type: String,
     trim: true
   },
   attendees: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'AdminUser',
+    ref: 'AdminUser' || 'RegisteredStudent',
     required: true
   }],
   organizer: {
@@ -47,9 +43,6 @@ const meetingSchema = new mongoose.Schema({
     type: String,
     enum: ['scheduled', 'in-progress', 'completed', 'cancelled'],
     default: 'scheduled'
-  },
-  meetingLink: {
-    type: String
   },
   zoomMeetingId: {
     type: String
