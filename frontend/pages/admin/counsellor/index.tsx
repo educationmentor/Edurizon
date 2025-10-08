@@ -27,11 +27,11 @@ const navItems = [
     icon: <MessageIcon />,
     label: "Messages",
   },
-  {
-    href: "/admin/counsellor/view-sessions",
-    icon: <ArrowForwardIosIcon />,
-    label: "View Sessions",
-  },
+  // {
+  //   href: "/admin/counsellor/view-sessions",
+  //   icon: <ArrowForwardIosIcon />,
+  //   label: "View Sessions",
+  // },
 ];
 
 const Dashboard = () => {

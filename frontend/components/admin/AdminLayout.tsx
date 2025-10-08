@@ -152,7 +152,22 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     return item.name === 'Dashboard' || item.name === 'Profile';
   });
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      // Record logout in attendance
+      const token = localStorage.getItem('adminToken');
+      if (token) {
+        await axios.post(`${baseUrl}/api/attendance/logout`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Failed to record logout:', error);
+      // Continue with logout even if attendance recording fails
+    }
+
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminData');
     router.push('/admin');

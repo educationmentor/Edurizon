@@ -4,6 +4,7 @@ const { AdminUser, ROLES } = require('../models/AdminUser');
 const config = require('../config/config');
 const sendEmail = require('../utils/email');
 const mongoose = require('mongoose');
+const Attendance = require('../models/attendanceModel');
 
 // Generate JWT Token
 const signToken = (id) => {
@@ -105,6 +106,34 @@ exports.login = async (req, res) => {
     // Update last login
     adminUser.lastLogin = Date.now();
     await adminUser.save({ validateBeforeSave: false });
+
+    // Record attendance
+    try {
+      const ipAddress = req.ip || req.connection.remoteAddress || req.socket.remoteAddress;
+      const userAgent = req.get('User-Agent');
+      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+      // Check if attendance already exists for today
+      const existingAttendance = await Attendance.findOne({
+        adminId: adminUser._id,
+        date: today,
+        isActive: true
+      });
+
+      if (!existingAttendance) {
+        const attendance = new Attendance({
+          adminId: adminUser._id,
+          ipAddress,
+          userAgent,
+          date: today
+        });
+        await attendance.save();
+        console.log('Attendance recorded for admin:', adminUser.email);
+      }
+    } catch (attendanceError) {
+      console.error('Error recording attendance:', attendanceError);
+      // Don't fail login if attendance recording fails
+    }
 
     // Generate token
     const token = signToken(adminUser._id);

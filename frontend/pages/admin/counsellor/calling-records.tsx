@@ -47,11 +47,11 @@ const CallingRecords = () => {
     icon: <MessageIcon />,
     label: "Messages",
   },
-  {
-    href: "/admin/counsellor/view-sessions",
-    icon: <ArrowForwardIosIcon />,
-    label: "View Sessions",
-  },
+  // {
+  //   href: "/admin/counsellor/view-sessions",
+  //   icon: <ArrowForwardIosIcon />,
+  //   label: "View Sessions",
+  // },
 ];
 
   // Get counsellor ID from sessionStorage or localStorage

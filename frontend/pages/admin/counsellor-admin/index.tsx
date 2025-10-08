@@ -17,11 +17,11 @@ const navItems = [
         icon: <CallIcon />,
         label: "Calling Records",
     },
-    {
-        href: "/admin/counsellor-admin/view-sessions",
-        icon: <ArrowForwardIosIcon />,
-        label: "View Sessions",
-    },
+    // {
+    //     href: "/admin/counsellor-admin/view-sessions",
+    //     icon: <ArrowForwardIosIcon />,
+    //     label: "View Sessions",
+    // },
     {
       href: "/admin/counsellor-admin/registered-students",
       icon: <PersonIcon />,

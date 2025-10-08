@@ -271,59 +271,8 @@ const SuperAdminTable: React.FC = () => {
     );
 
     return (
-        <div className='m-[32px] rounded-[8px] bg-white py-[16px] px-[8px] shadow-sm'>
-            <div className="flex justify-between items-center px-[32px]">
-                <h3 className="text-h6Text font-bold font-poppins">All Digital Marketing Videos</h3>
-                <div className="flex items-center space-x-4">
-                    <div className="relative">
-                        <input
-                            type="text"
-                            placeholder="Search videos, admins, or platforms..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent w-80"
-                        />
-                        <svg
-                            className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            
-            <div className='m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
-                <AdminTable 
-                    ITEMS_PER_PAGE={15} 
-                    tableColumns={tableColumns} 
-                    tableHeaders={tableHeaders} 
-                    csvHeader={csvHeader} 
-                    csvDataFields={csvDataFields} 
-                    loading={loading} 
-                    error={error} 
-                    leads={filteredVideos} 
-                    setActiveTab={setActiveTab} 
-                    tabs={tabs} 
-                    activeTab={activeTab} 
-                    bgColor="bg-gray-50"
-                />
-            </div>
-
-            {error && (
-                <div className="px-[32px] mt-4">
-                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-                        {error}
-                    </div>
-                </div>
-            )}
+        <div className='m-[32px] rounded-[8px] text-center bg-white py-[16px] px-[8px] shadow-sm'>
+            Coming Soon
     </div>
     );
 };

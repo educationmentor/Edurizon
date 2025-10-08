@@ -18,7 +18,7 @@ interface AdminUser {
   role: string;
   country: string[];
   contactNo: string;
-  joiningDate: string;
+  createdAt: string;
   active: boolean;
 }
 
@@ -53,6 +53,10 @@ const AdminDashboard = () => {
 
   const [isAddMemberDialogOpen, setIsAddMemberDialogOpen] = useState(false);
   const [pendingLeadsCount, setPendingLeadsCount] = useState(0);
+  const [showAttendanceModal, setShowAttendanceModal] = useState(false);
+  const [selectedMemberAttendance, setSelectedMemberAttendance] = useState<AdminUser | null>(null);
+  const [attendanceData, setAttendanceData] = useState<any[]>([]);
+  const [attendanceLoading, setAttendanceLoading] = useState(false);
 
   const tabs = ['All', 'Super Admin','Counsellor Admin','Counseling', 'Digital','Document Management','Finance' ];
 
@@ -104,6 +108,33 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error('Failed to fetch pending leads count:', err);
     }
+  };
+
+  const fetchAttendanceData = async (adminId: string) => {
+    try {
+      setAttendanceLoading(true);
+      const token = localStorage.getItem('adminToken');
+      const response = await axios.get(`${baseUrl}/api/attendance/admin/${adminId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data.success) {
+        setAttendanceData(response.data.data.attendance);
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch attendance:', err);
+      setError(err.response?.data?.message || 'Failed to fetch attendance data');
+    } finally {
+      setAttendanceLoading(false);
+    }
+  };
+
+  const handleViewAttendance = (member: AdminUser) => {
+    setSelectedMemberAttendance(member);
+    setShowAttendanceModal(true);
+    fetchAttendanceData(member._id);
   };
 
   const filterMembers = () => {
@@ -313,6 +344,7 @@ const AdminDashboard = () => {
                           <th className="px-6 py-3 text-left text-sm font-semibold">Login-Access</th>
                           <th className="px-6 py-3 text-left text-sm font-semibold">Remove</th>
                           <th className='px-6 py-3 text-left text-sm font-semibold'>View</th>
+                          <th className='px-6 py-3 text-left text-sm font-semibold'>Attendance</th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -337,7 +369,10 @@ const AdminDashboard = () => {
                               {member.contactNo}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {new Date(member.joiningDate).toLocaleDateString()}
+                              {member.createdAt 
+                                ? new Date(member.createdAt).toLocaleDateString()
+                                : 'N/A'
+                              }
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <button
@@ -370,6 +405,16 @@ const AdminDashboard = () => {
                               View
                             </button>
                           </div>
+                            </td>
+                            <td className=''>
+                            <div className="relative">
+                              <button
+                                onClick={() => handleViewAttendance(member)}
+                                className="bg-blue-100 text-blue-800 px-[32px] py-[8px] rounded-full text-sm font-medium items-center"
+                              >
+                                Attendance
+                              </button>
+                            </div>
                             </td>
                           </tr>
                         ))}
@@ -442,6 +487,86 @@ const AdminDashboard = () => {
           fetchTeamMembers();
         }}
       />
+
+      {/* Attendance Modal */}
+      {showAttendanceModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Attendance - {selectedMemberAttendance?.firstName} {selectedMemberAttendance?.lastName}
+                </h2>
+                <button
+                  onClick={() => setShowAttendanceModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {attendanceLoading ? (
+                <div className="flex justify-center items-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  {attendanceData.length === 0 ? (
+                    <div className="text-center py-8 text-gray-500">
+                      No attendance records found
+                    </div>
+                  ) : (
+                    <table className="min-w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Date</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Login Time</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Logout Time</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Duration</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">IP Address</th>
+                          <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {attendanceData.map((record, index) => (
+                          <tr key={index} className="hover:bg-gray-50">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {new Date(record.date).toLocaleDateString()}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {new Date(record.loginTime).toLocaleString()}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {record.logoutTime ? new Date(record.logoutTime).toLocaleString() : 'Still Active'}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {record.sessionDuration ? `${record.sessionDuration} minutes` : 'N/A'}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {record.ipAddress}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className={`px-2 py-1 rounded-full text-xs ${
+                                record.isActive 
+                                  ? 'bg-green-100 text-green-800' 
+                                  : 'bg-gray-100 text-gray-800'
+                              }`}>
+                                {record.isActive ? 'Active' : 'Completed'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 };
