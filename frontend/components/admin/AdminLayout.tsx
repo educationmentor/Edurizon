@@ -215,9 +215,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <h4 className='font-bold text-h5Text'>Hello, {adminData?.firstName}</h4>
           <Image src="/assets/Images/admin/double-chevron-right.svg" width={20} height={20} className='ml-[2vw] w-[1.5vw] h-[1.5vw]' alt='arrow down icon' />
           <BreadcrumbAdmin role={adminData?.role}/>
-          <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} />
+          {/* <NotificationsIcon className='ml-auto' style={{fontSize: '40px', color: '#666666' }} /> */}
           <div 
-            className="relative meeting-dropdown-container ml-[16px] group"
+            className="relative meeting-dropdown-container ml-auto group"
             onMouseEnter={() => setShowMeetingDropdown(true)}
             onMouseLeave={() => setShowMeetingDropdown(false)}
           >

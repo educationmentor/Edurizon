@@ -31,6 +31,6 @@ export const updateLeadStatus = async (leadId: string, statusData: { callingStat
 
 // Registered Students API functions
 export const getRegisteredStudentsByCounsellor = async (counsellorId: string) => {
-  const response = await axios.get(`${API_URL}/registered-students/get-by-counsellor/${counsellorId}`);
+  const response = await axios.get(`${API_URL}/registered-students/get-all`);
   return response.data;
 };

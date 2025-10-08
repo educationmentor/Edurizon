@@ -58,7 +58,7 @@ const CallingRecordComponent= ()  => {
         "Interested Course",
         activeTab=='registered'?'Enrollment Date':'Lead Date',
         'Assigned to',
-        'Calling Status'
+        'Lead Type'
       ];
       
       const csvHeader=[
@@ -68,7 +68,7 @@ const CallingRecordComponent= ()  => {
         'Interested Course',
         activeTab=='registered'?'Enrollment Date':'Lead Date',
         'Assigned to',
-        'Calling Status'
+        'Lead Type'
       ];
       
       const csvDataFields = [
@@ -80,7 +80,7 @@ const CallingRecordComponent= ()  => {
         'leadStatus',
         'remark',
         'assignedCounsellorName',
-        'callingStatus'
+        'leadType'
       ];
 
       const tableColumns = [
@@ -136,9 +136,9 @@ const CallingRecordComponent= ()  => {
              },
            },
            {
-            key: "callingStatus",
+            key: "leadType",
             render: (lead:any) => {
-              return <span className="text-sm text-gray-500">{lead.callingStatus?lead.callingStatus.charAt(0).toUpperCase() + lead.callingStatus.slice(1): 'None'}</span>
+              return <span className="text-sm text-gray-500">{lead.leadType?lead.leadType.charAt(0).toUpperCase() + lead.leadType.slice(1): 'None'}</span>
             }
            }
         ];

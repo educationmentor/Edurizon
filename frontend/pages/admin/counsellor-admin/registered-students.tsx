@@ -105,8 +105,8 @@ const RegisteredStudents = () => {
     
     try {
       const response = await getRegisteredStudentsByCounsellor(counsellorId);
-      if (response.success) {
-        setStudents(response.data);
+      if (response) {
+        setStudents(response);
       } else {
         setError(response.message || 'Failed to fetch students');
       }

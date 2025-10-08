@@ -249,16 +249,22 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
                 setError('Not authenticated. Please log in again.');
                 return;
               }
+
+              // Check if adminData is available
+              if (!adminData || !adminData._id) {
+                console.log('AdminData not available yet, skipping registered students fetch');
+                return;
+              }
       
               // Ensure token has Bearer prefix
               const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-              const assignedRes = await axios.get(`${baseUrl}/api/registered-students/get-all`, {
+              const assignedRes = await axios.get(`${baseUrl}/api/registered-students/get-by-counsellor/${adminData._id}`, {
                 headers: { 
                   Authorization: authToken
                 }
               });
               if (assignedRes.data) {
-                setRegisteredStudents(assignedRes.data);
+                setRegisteredStudents(assignedRes.data.data);
               }
             } catch (err: any) {
               console.log("err",err);

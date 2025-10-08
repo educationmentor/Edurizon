@@ -11,7 +11,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import { countryOptions, courseOptions } from '@/lib/adminData';
 interface Lead {
-    leadType: 'pending' | 'follow-up' | 'negative' | 'completed';
+    leadType: 'pending' | 'follow-up' | 'negative' | 'completed' | 'registered';
     [key: string]: any; // other fields if you’re not typing them yet
   }
   
@@ -28,7 +28,8 @@ const CallingDetails= ()  => {
     const [followUp,setFollowUp] = useState<Lead[]>([]);
     const [negative, setNegative] = useState<Lead[]>([]);
     const [completed, setCompleted] = useState<Lead[]>([]);
-    const [registeredStudents, setRegisteredStudents] = useState([]);
+    const [registered, setRegistered] = useState<Lead[]>([]);
+    const [enrolledStudents, setenrolledStudents] = useState([]);
     const [selectedLead,setSelectedLead] = useState<Lead|null>(null);
 
     // Popup Open States
@@ -139,7 +140,8 @@ const CallingDetails= ()  => {
             { key: "follow-up", label:'Follow Up', count:followUp.length},
             { key: "negative", label: 'Negative', count:negative.length},
             { key: "completed", label: 'Completed', count:completed.length},
-            { key: "registered", label: 'Students Enrolled', count:registeredStudents.length},
+            { key: "registered", label: 'Registered', count:registered.length},
+            { key: "enrolled", label: 'Students Enrolled', count:enrolledStudents.length},
             ];  
 
         // Fetching leads and registered students data initialization
@@ -161,8 +163,8 @@ const CallingDetails= ()  => {
 
         // selecting which data to show
         useEffect(()=>{
-            if(activeTab=='registered'){
-                setCurrentDataForTable(registeredStudents)
+            if(activeTab=='enrolled'){
+                setCurrentDataForTable(enrolledStudents)
             }else if(activeTab=='allLeads'){
                 setCurrentDataForTable(leads)
             }else if(activeTab=='pending'){
@@ -173,6 +175,8 @@ const CallingDetails= ()  => {
                 setCurrentDataForTable(negative)
             }else if(activeTab=='completed'){
                 setCurrentDataForTable(completed)
+            }else if(activeTab=='registered'){
+                setCurrentDataForTable(registered)
             }
             // Clear filters and selections when switching tabs
             setFilterCriteria({
@@ -228,6 +232,7 @@ const CallingDetails= ()  => {
             setFollowUp([])
             setNegative([])
             setCompleted([])
+            setRegistered([])
             leads.forEach((lead:any)=>{
                 if(lead.leadType=='pending'){
                     setPending(prev=>[...prev,lead])
@@ -237,6 +242,8 @@ const CallingDetails= ()  => {
                     setNegative(prev=>[...prev,lead])
                 }else if(lead.leadType=='completed'){
                     setCompleted(prev=>[...prev,lead])
+                }else if(lead.leadType=='registered'){
+                    setRegistered(prev=>[...prev,lead])
                 }
             })
         }
@@ -259,7 +266,7 @@ const CallingDetails= ()  => {
                 }
               });
               if (assignedRes.data) {
-                setRegisteredStudents(assignedRes.data);
+                setenrolledStudents(assignedRes.data);
               }
             } catch (err: any) {
               console.log("err",err);
@@ -685,6 +692,7 @@ const CallingDetails= ()  => {
                         <option value="follow-up">Follow Up</option>
                         <option value="negative">Negative</option>
                         <option value="completed">Completed</option>
+                        <option value="registered">Registered</option>
                       </select>
                     </div>
                                          <div className="col-span-2">
