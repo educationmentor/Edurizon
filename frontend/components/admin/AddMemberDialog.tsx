@@ -61,6 +61,7 @@ const AddMemberDialog = ({ isOpen, onClose, onSuccess }: AddMemberDialogProps) =
   }, [showNotification, notificationType, onClose]);
 
   const roles = [
+    { value: 'super-admin', label:'Super Admin'},
     { value: 'counsellor', label: 'Counsellor' },
     { value: 'documentHandler', label: 'Document Handler' },
     { value: 'finance', label: 'Finance' },

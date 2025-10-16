@@ -106,7 +106,6 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
             : doc
         ));
         
-        setShowUploadModal(false);
         setSelectedFile(null);
       }
     } catch (error: any) {
