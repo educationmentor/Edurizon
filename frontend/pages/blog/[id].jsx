@@ -2,8 +2,8 @@ import React from 'react'
 
 const BlogPageDetails = ({ page }) => {
   return (
-    <div className='container mx-auto p-8 pb-16'>
-      <section className='mx-auto'>
+    <div className='container  p-8 pb-16'>
+      <section className='mx-auto  max-w-[800px]'>
         <h1 className='text-h4TextPhone md:text-h4Text pb-[2vw] font-bold'>{page.title.rendered}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
       </section>
