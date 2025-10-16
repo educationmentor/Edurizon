@@ -60,9 +60,11 @@ const Header = () => {
                 </span>
               </div>
             </div>
+            <TransitionLink href="/admin/counsellor-admin/calling-records">
             <button className="ml-4 bg-teal-600 hover:bg-teal-700 text-white w-[200px] h-[60px] font-bold py-2 rounded-lg text-smallText  transition-colors duration-200">
               View Leads
             </button>
+            </TransitionLink>
           </div>
         </div>
 
@@ -80,9 +82,11 @@ const Header = () => {
                 <div className="w-20"></div> {/* Spacer for alignment */}
               </div>
             </div>
+            <TransitionLink href="/admin/counsellor-admin/registered-students">
             <button className="ml-4 bg-teal-600 hover:bg-teal-700 text-white w-[200px] h-[60px] font-bold py-2 rounded-lg text-smallText transition-colors duration-200">
               Students
             </button>
+            </TransitionLink>
           </div>
         </div>
 

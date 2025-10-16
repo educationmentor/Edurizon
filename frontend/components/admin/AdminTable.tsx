@@ -125,12 +125,15 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
   };
 
   const handleExportSelected = () => {
+    console.log("selectedLeads",selectedLeads);
     if (selectedLeads.length === 0) {
       toast.error('Please select leads to export');
       return;
     }``
     const filename = `selected-${activeTab}-leads-${new Date().toISOString().split('T')[0]}.csv`;
-    handleExportToCSV(leads, filename);
+
+    const selectedLeadsData = leads.filter(lead => selectedLeads.includes(lead._id));
+    handleExportToCSV(selectedLeadsData, filename);
     toast.success(`Exporting ${selectedLeads.length} leads`);
   };
 

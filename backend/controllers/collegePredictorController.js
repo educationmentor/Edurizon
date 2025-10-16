@@ -4,21 +4,20 @@ const collegePredictorModer = require('../models/collegePredictorModer');
 
 dotenv.config();
 
-const pool=mysql.createPool({
-    host:process.env.DB_HOST,
-    user:process.env.DB_USER,
-    password:process.env.DB_PASS,
-    database:process.env.DB_NAME,
-    
-}).promise();
+// const pool=mysql.createPool({
+//     host:process.env.DB_HOST,
+//     user:process.env.DB_USER,
+//     password:process.env.DB_PASS,
+//     database:process.env.DB_NAME,
+// }).promise();
 
-pool.getConnection((err, connection) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-    } else {
-        console.log('Connected to the MySQL database');
-    }
-});
+// pool.getConnection((err, connection) => {
+//     if (err) {
+//         console.error('Error connecting to the database:', err);
+//     } else {
+//         console.log('Connected to the MySQL database');
+//     }
+// });
 
 const tables=['All','DeemedUniversity','AndhraPradesh','Bihar','Chattisgarh','Haryana','Jharkhand','Karnataka','Kerala','MP','Odisha','Pondicherry','Rajasthan_Boys','Rajasthan_Girls','UP','Uttarakhand','WB']
 

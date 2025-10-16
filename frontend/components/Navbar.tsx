@@ -33,7 +33,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
     { name: "Study Destinations", href: "/study-destinations?category=Destination", dropdown: true , borderTop: true },
-    { name: "College Predictor", href: "/college-predictor", external: false },
+    { name: "Blogs", href: "/blog", external: false },
     // { name: "Budget Calculator", href: "#" },
     { name: "Contact Us", href: "/contact-us" , borderTop: true },
     { name: "Testimonials", href: "/testimonial", external: false },

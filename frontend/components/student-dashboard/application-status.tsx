@@ -44,13 +44,14 @@ const ApplicationStatus = ({userData}: {userData: any}) => {
 
   const getCurrentStage = () => {
     const stageMap: {[key: string]: number} = {
-      'consultation': 1,
-      'documents-upload': 2,
-      'document-verification': 3,
-      'university-application': 4,
-      'offer-letter': 5,
-      'visa-approval': 6
+      'Consultation': 1,
+      'Document Upload': 2,
+      'Document Verification': 3,
+      'Selected University Application': 4,
+      'Offer Letter': 5,
+      'Visa Approval': 6
     };
+    console.log("userData",userData);
     return stageMap[userData.applicationStage] || 1;
   };
 

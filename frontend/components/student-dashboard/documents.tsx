@@ -30,7 +30,6 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
-  const [showUploadModal, setShowUploadModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
 
   useEffect(() => {
@@ -70,12 +69,6 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
     }
   };
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
 
   const handleUpload = async (documentName: string) => {
     if (!selectedFile) {
@@ -173,16 +166,29 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
 
             {/* Document Actions */}
             <div className="flex space-x-2">
-              {document.status === 'pending' && (
-                <button
-                  onClick={() => {
-                    setSelectedDocument(document);
-                    setShowUploadModal(true);
-                  }}
-                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
-                >
-                  Upload Document
-                </button>
+              {(document.status === 'pending' || document.status === 'rejected') && (
+                <div className="flex-1">
+                  <input
+                    type="file"
+                    id={`file-input-${index}`}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        setSelectedFile(file);
+                        setSelectedDocument(document);
+                        handleUpload(document.name);
+                      }
+                    }}
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt"
+                    style={{ display: 'none' }}
+                  />
+                  <label
+                    htmlFor={`file-input-${index}`}
+                    className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium cursor-pointer inline-block text-center"
+                  >
+                    {document.status === 'rejected' ? 'Re-upload Document' : 'Upload Document'}
+                  </label>
+                </div>
               )}
               
               {document.link && (
@@ -208,74 +214,6 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
         ))}
       </div>
 
-      {/* Upload Modal */}
-      {showUploadModal && selectedDocument && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">
-                Upload {selectedDocument.name}
-              </h3>
-              <button
-                onClick={() => {
-                  setShowUploadModal(false);
-                  setSelectedFile(null);
-                  setSelectedDocument(null);
-                }}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <XCircleIcon className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="p-6">
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Select File
-                </label>
-                <input
-                  type="file"
-                  onChange={handleFileSelect}
-                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {selectedFile && (
-                  <p className="mt-2 text-sm text-gray-600">
-                    Selected: {selectedFile.name}
-                  </p>
-                )}
-              </div>
-
-              <p className="text-sm text-gray-500 mb-4">
-                Supported formats: PDF, DOC, DOCX, JPG, JPEG, PNG, GIF, TXT (Max 10MB)
-              </p>
-            </div>
-
-            {/* Footer */}
-            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200">
-              <button
-                onClick={() => {
-                  setShowUploadModal(false);
-                  setSelectedFile(null);
-                  setSelectedDocument(null);
-                }}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => handleUpload(selectedDocument.name)}
-                disabled={uploading || !selectedFile}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {uploading ? 'Uploading...' : 'Upload Document'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* View Document Modal */}
       {showViewModal && selectedDocument && (

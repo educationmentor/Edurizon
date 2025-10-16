@@ -3,6 +3,16 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'srv757671.hstgr.cloud',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   // experimental:{
   //       esmExternals: 'loose', 
   // },
