@@ -57,7 +57,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         "Contact No.",
         "Interested Course",
         activeTab=='registered'?'Enrollment Date':'Lead Date',
-        'Assigned to',
       ];
       
       const csvHeader=[
@@ -66,7 +65,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         'Contact No.',
         'Interested Course',
         activeTab=='registered'?'Enrollment Date':'Lead Date',
-        'Assigned to',
       ];
       
       const csvDataFields = [
@@ -77,7 +75,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         'createdAt',
         'leadStatus',
         'remark',
-        'assignedCounsellorName'
       ];
 
       const tableColumns = [
@@ -96,7 +93,7 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         {
           key: "country",
           render: (lead:any) => (
-            <span className="text-sm text-gray-500">{lead.interestedCountry??'None'}</span>
+            <span className="text-sm text-gray-500">{lead.countryInterested??'None'}</span>
           ),
         },
         {
@@ -122,13 +119,9 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
               })}</span>
           ),
         },
-        {
-            key: "assigned to",
-            render: (lead:any) => (
-              <span className="text-sm text-gray-500">{lead.assignedCounsellorName??'None'}</span>
-            ),
-          },
         ];
+
+        console.log(counsellors)
         const tabs = [
             { key: "allLeads", label: "All Leads", count: leads.length},
             { key: "pending", label:'Pending', count:pending.length},
@@ -149,6 +142,7 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
             }
         }, [adminData]);
 
+        
         // Setting the data for the table
         useEffect(()=>{
             setCurrentDataForTable(leads)
@@ -367,7 +361,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
                 const response = await axios.get(`${baseUrl}/api/admin/getAllCounsellors`, {
                     headers: { Authorization: authToken }
                 });
-
                 if (response.data.success) {
                     setCounsellors(response.data.data);
                 }

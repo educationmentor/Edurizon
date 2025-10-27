@@ -18,6 +18,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
     countryInterested: '',
     courseName: '',
     remark: '',
+    assignedCounsellor: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
         countryInterested: '',
         courseName: '',
         remark: '',
+        assignedCounsellor: '',
       });
       setError('');
       setShowNotification(false);
@@ -61,7 +63,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
   const fetchCounsellors = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${baseUrl}/api/admin/get-all-counsellors`, {
+      const response = await axios.get(`${baseUrl}/api/admin/getAllCounsellors`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -74,7 +76,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const   handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -215,6 +217,23 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
                 classNamePrefix="select"
               />
             </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Assign Lead to Counsellor</label>
+                <select
+                  name="assignedCounsellor"
+                  value={formData.assignedCounsellor}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                >
+                  <option value="">Select counsellor</option>
+                  {counsellors.map((counsellor: any) => (
+                    <option className='text-black' key={counsellor._id} value={counsellor._id}>
+                      {counsellor.username}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>

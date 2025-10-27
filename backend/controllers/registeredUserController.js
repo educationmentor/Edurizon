@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs');
 
 
 const createRegisteredStudent = async(req, res) => {
-    const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounselor,address, notes } = req.body;
+    const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounsellor,address, notes } = req.body;
+
   try {
     // Hash the password before storing
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,7 +22,7 @@ const createRegisteredStudent = async(req, res) => {
       studyDestination,
       intendedCourse,
       preferedUniversity,
-      assignedCounselor, 
+      assignedCounsellor, 
       notes 
     });
     

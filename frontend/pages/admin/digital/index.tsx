@@ -39,7 +39,7 @@ const DigitalTeam = () => {
       <DocumentLayout navItems={navItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
         <div>
             {
-                adminData?.role=='super-admin'?<SuperAdminTable/>:<MemberTable adminData={adminData}/>
+                adminData?.role=='super-admin'?<SuperAdminTable/>:<MemberTable adminData={adminData} setAdminData={setAdminData}/>
             }
         </div>
         </DocumentLayout>
@@ -328,7 +328,7 @@ const SuperAdminTable: React.FC = () => {
     );
 };
 
-const MemberTable: React.FC<{adminData:any}> = ({adminData}) => {
+const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}> = ({adminData, setAdminData}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [videos, setVideos] = useState<any[]>(adminData?.digitalMarketingVideos || []);
@@ -519,13 +519,6 @@ const MemberTable: React.FC<{adminData:any}> = ({adminData}) => {
             key: "actions",
             render: (video: any) => (
                 <div className="flex items-center space-x-2">
-                    <button
-                        onClick={() => handleEdit(video)}
-                        className="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition-colors duration-200"
-                        title="Edit Video"
-                    >
-                        <EditIcon style={{ fontSize: '20px' }} />
-                    </button>
                 <button
                         onClick={() => handleDeleteClick(video)}
                         className="p-2 text-red-600 hover:bg-red-100 rounded-full transition-colors duration-200"
@@ -667,6 +660,11 @@ const MemberTable: React.FC<{adminData:any}> = ({adminData}) => {
             } else {
                 localStorage.setItem('adminData', JSON.stringify(updatedAdminData));
             }
+            
+            // Update parent component's adminData state
+            if (setAdminData) {
+                setAdminData(updatedAdminData);
+            }
 
             setShowEditModal(false);
             setEditingVideo(null);
@@ -709,6 +707,11 @@ const MemberTable: React.FC<{adminData:any}> = ({adminData}) => {
             } else {
                 localStorage.setItem('adminData', JSON.stringify(updatedAdminData));
             }
+            
+            // Update parent component's adminData state
+            if (setAdminData) {
+                setAdminData(updatedAdminData);
+            }
 
             setShowDeleteModal(false);
             setVideoToDelete(null);
@@ -731,23 +734,22 @@ const MemberTable: React.FC<{adminData:any}> = ({adminData}) => {
                 }
             });
 
-            const newVideo = response.data;
+            const updatedUser = response.data.user; // Get the updated user data
+            
+            // Update adminData in localStorage with the complete updated user data
             if (sessionStorage.getItem('adminData')) {
-              sessionStorage.setItem('adminData', JSON.stringify(response.data.user));
+                sessionStorage.setItem('adminData', JSON.stringify(updatedUser));
             } else {
-                localStorage.setItem('adminData', JSON.stringify(response.data.user));
+                localStorage.setItem('adminData', JSON.stringify(updatedUser));
             }
-            // Add to local state
-            setVideos(prevVideos => [...prevVideos, newVideo]);
-
-            // Update adminData in localStorage after successful addition
-            const updatedAdminData = {
-                ...adminData,
-                digitalMarketingVideos: [...videos, newVideo]
-            };
             
-            // Update localStorage
+            // Update parent component's adminData state
+            if (setAdminData) {
+                setAdminData(updatedUser);
+            }
             
+            // Update local state with the new videos array from the updated user
+            setVideos(updatedUser.digitalMarketingVideos || []);
 
             setShowAddModal(false);
             setFormData({

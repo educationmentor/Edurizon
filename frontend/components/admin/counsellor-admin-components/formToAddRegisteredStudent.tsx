@@ -40,12 +40,14 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
     notes: '',
   });
 
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const [notificationType, setNotificationType] = useState<'success' | 'error'>('success');
   const [notificationMessage, setNotificationMessage] = useState('');
   const [counsellors, setCounsellors] = useState([]);
+  console.log('counsellor', counsellors)
 
   // Reset form when dialog opens/closes
   useEffect(() => {
@@ -63,6 +65,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
         assignedCounsellor: '',
         notes: '',
       });
+     
       setError('');
       setShowNotification(false);
       fetchCounsellors();
@@ -82,6 +85,8 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
     }
   }, [showNotification, notificationType, onClose]);
 
+
+ 
   // Fetch counsellors for assignment
   const fetchCounsellors = async () => {
     try {
@@ -98,6 +103,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
       console.error('Error fetching counsellors:', error);
     }
   };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -106,6 +112,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
       [name]: value
     }));
     setError('');
+   
   };
 
   const handleSelectChange = (name: string, value: any) => {
@@ -121,6 +128,9 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
     setLoading(true);
     setError('');
     setShowNotification(false);
+    setTimeout(()=>{
+      console.log(formData)
+    },1000)
 
     try {
       const token = localStorage.getItem('adminToken');
@@ -300,7 +310,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
                   classNamePrefix="select"
                 />
               </div>
-
+              
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Assigned Counsellor</label>
                 <select
@@ -311,8 +321,8 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
                 >
                   <option value="">Select counsellor</option>
                   {counsellors.map((counsellor: any) => (
-                    <option key={counsellor._id} value={counsellor._id}>
-                      {counsellor.name}
+                    <option className='text-black' key={counsellor._id} value={counsellor._id}>
+                      {counsellor.username}
                     </option>
                   ))}
                 </select>
