@@ -37,7 +37,7 @@ const BreadcrumbAdmin: React.FC<BreadcrumbAdminProps> = ({ role="" }) => {
     <nav aria-label="breadcrumb" className=" text-black dark:text-white text-tinyTextPhone md:text-regularText ">
       <ul className="flex flex-wrap">
         <li className="hover:underline ">
-          <TransitionLink href="/" >
+          <TransitionLink href="/admin" >
           <p className="dark:text-white">Home</p>
           </TransitionLink>
         </li>
