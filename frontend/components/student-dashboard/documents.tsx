@@ -70,51 +70,55 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
   };
 
 
-  const handleUpload = async (documentName: string) => {
-    if (!selectedFile) {
-      toast.error('Please select a file to upload');
-      return;
-    }
-
+  const handleUpload = async (documentName: string, file: File) => {
     setUploading(true);
+  
     try {
       const formData = new FormData();
-      formData.append('document', selectedFile);
-      formData.append('documentName', documentName);
-
-      const response = await axios.post(`${baseUrl}/api/registered-students/uploadDocument/${userData._id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
+      formData.append("document", file);
+      formData.append("documentName", documentName);
+  
+      const response = await axios.post(
+        `${baseUrl}/api/registered-students/uploadDocument/${userData._id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+  
       if (response.data) {
-        toast.success('Document uploaded successfully!', {
+        toast.success("Document uploaded successfully!", {
           duration: 3000,
-          position: 'top-right',
+          position: "top-right",
           style: {
-            background: '#10B981',
-            color: '#fff',
-            padding: '16px',
+            background: "#10B981",
+            color: "#fff",
+            padding: "16px",
           },
         });
-        
-        // Update the document status
-        setDocuments(prev => prev.map(doc => 
-          doc.name === documentName 
-            ? { ...doc, status: 'uploaded', link: response.data.document.link }
-            : doc
-        ));
-        
+  
+        setDocuments((prev) =>
+          prev.map((doc) =>
+            doc.name === documentName
+              ? {
+                  ...doc,
+                  status: "uploaded",
+                  link: response.data.document.link,
+                }
+              : doc
+          )
+        );
+  
         setSelectedFile(null);
       }
     } catch (error: any) {
-      console.error('Error uploading document:', error);
-      toast.error(error.response?.data?.error || 'Failed to upload document');
+      console.error("Error uploading document:", error);
+      toast.error(error.response?.data?.error || "Failed to upload document");
     } finally {
       setUploading(false);
     }
   };
+  
 
   const handleViewDocument = (document: Document) => {
     setSelectedDocument(document);
@@ -172,13 +176,14 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
                     id={`file-input-${index}`}
                     onChange={(e) => {
                       const file = e.target.files?.[0]
-                      console.log("file",file);
                       if (file) {
+                        console.log("file",file);
                         setSelectedFile(file);
                         setSelectedDocument(document);
-                        handleUpload(document.name);
+                        handleUpload(document.name, file);
                       }
                     }}
+                    disabled={uploading}
                     accept=".pdf,.jpg,.jpeg,.png"
                     style={{ display: 'none' }}
                   />
@@ -186,7 +191,7 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
                     htmlFor={`file-input-${index}`}
                     className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium cursor-pointer inline-block text-center"
                   >
-                    {document.status !== 'pending' ? 'Re-upload Document' : 'Upload Document'}
+                    {uploading ? 'Uploading...' : (document.status !== 'pending' ? 'Re-upload Document' : 'Upload Document')}
                   </label>
                 </div>
               )}
