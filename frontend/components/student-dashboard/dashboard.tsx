@@ -67,9 +67,9 @@ const Dashboard = ({ userData,activeTab, setActiveTab }: { userData: any,activeT
                         <span className='font-bold md:text-mediumText text-nowrap text-orangeChosen'>Our Counsellors</span>
                            
                            <div className='flex flex-row gap-[.5vw]'>
-                           <Image src='/assets/Images/student-dashboard/counsellor.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] ' />
-                           <Image src='/assets/Images/student-dashboard/counsellor.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] ' />
-                           <Image src='/assets/Images/student-dashboard/counsellor.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] ' />
+                           <Image src='/assets/Images/Team/maidulSir.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] rounded-full border-[4px] border-orangeChosen' />
+                           <Image src='/assets/Images/Team/sanjaySir.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] rounded-full border-[4px] border-orangeChosen' />
+                           <Image src='/assets/Images/Team/karishmaMam.png' alt='application-status' width={128} height={128} className='w-[5vw] h-[5vw] rounded-full border-[4px] border-orangeChosen' />
 
                            </div>
                         </div>

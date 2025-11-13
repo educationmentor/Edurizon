@@ -165,27 +165,28 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
 
             {/* Document Actions */}
             <div className="flex space-x-2">
-              {(document.status === 'pending' || document.status === 'rejected') && (
+              {(document.status !== 'verified') && (
                 <div className="flex-1">
                   <input
                     type="file"
                     id={`file-input-${index}`}
                     onChange={(e) => {
-                      const file = e.target.files?.[0];
+                      const file = e.target.files?.[0]
+                      console.log("file",file);
                       if (file) {
                         setSelectedFile(file);
                         setSelectedDocument(document);
                         handleUpload(document.name);
                       }
                     }}
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt"
+                    accept=".pdf,.jpg,.jpeg,.png"
                     style={{ display: 'none' }}
                   />
                   <label
                     htmlFor={`file-input-${index}`}
                     className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium cursor-pointer inline-block text-center"
                   >
-                    {document.status === 'rejected' ? 'Re-upload Document' : 'Upload Document'}
+                    {document.status !== 'pending' ? 'Re-upload Document' : 'Upload Document'}
                   </label>
                 </div>
               )}

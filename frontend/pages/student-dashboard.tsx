@@ -17,6 +17,7 @@ import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsAct
 import Documents from '@/components/student-dashboard/documents';
 import { useUserData } from '@/hooks/useUserData';
 import Chat from '@/components/student-dashboard/chat';
+import Meetings from '../components/student-dashboard/meetings';
 const dashboardItems=[
   { id: 'dashboard', label: 'Dashboard', icon: SpaceDashboardRoundedIcon },
   { id: 'fee-structure', label: 'Fees Info', icon: PaymentsRoundedIcon },
@@ -64,15 +65,15 @@ const StudentDashboard = () => {
   };
 
 
-  // Add refresh functionality on page focus
-  useEffect(() => {
-    const handleFocus = () => {
-      refetchUserData();
-    };
+  // // Add refresh functionality on page focus
+  // useEffect(() => {
+  //   const handleFocus = () => {
+  //     refetchUserData();
+  //   };
 
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
-  }, [refetchUserData]);
+  //   window.addEventListener('focus', handleFocus);
+  //   return () => window.removeEventListener('focus', handleFocus);
+  // }, [refetchUserData]);
 
   // Show loading state
   if (isLoading) {
@@ -218,6 +219,7 @@ const StudentDashboard = () => {
            {activeTab === 'application-status' && <ApplicationStatus userData={userData} />}
            {activeTab === 'documents' && <Documents userData={userData} activeTab={activeTab} />}
            {activeTab === 'chat-support' && <Chat userData={userData} activeTab={activeTab} />}
+           {activeTab === 'meetings' && <Meetings userData={userData} activeTab={activeTab} />}
 
           </div>
         </div>}

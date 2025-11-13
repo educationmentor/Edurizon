@@ -269,7 +269,7 @@ const ScheduledMeetingsModal: React.FC<ScheduledMeetingsModalProps> = ({
                 {/* Compact agenda display */}
                 {meeting.agenda && meeting.agenda !== 'no' && (
                   <div className="mb-2">
-                    <span className="text-xs font-medium text-gray-600">Agenda:</span>
+                    <span className="text-xs font-medium text-gray-600">Purpose of Meeting:</span>
                     <p className="text-xs text-gray-700 mt-0.5 line-clamp-1">{meeting.agenda}</p>
                   </div>
                 )}

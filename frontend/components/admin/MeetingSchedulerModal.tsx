@@ -16,6 +16,7 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
   adminData
 }) => {
   const [admins, setAdmins] = useState<any[]>([]);
+  const [registeredStudents, setRegisteredStudents] = useState<any[]>([]);
   const [meetingData, setMeetingData] = useState({
     title: '',
     date: '',
@@ -31,6 +32,7 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       fetchAdmins();
+      fetchRegisteredStudents();
     }
   }, [isOpen]);
 
@@ -60,6 +62,23 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
     } catch (error) {
       console.error('Error fetching admins:', error);
       alert('Failed to fetch admins');
+    }
+  };
+
+  const fetchRegisteredStudents = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/registered-students/get-all`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        }
+      });
+      console.log('response',response.data);
+      if (response.data) {
+        setRegisteredStudents(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching registered students:', error);
+      alert('Failed to fetch registered students');
     }
   };
 
@@ -129,6 +148,26 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
         return {
           ...prev,
           attendees: [...prev.attendees, { id: adminId, name: firstName + ' ' + lastName }]
+        };
+      }
+    });
+  };
+
+  const handleStudentSelection = (studentId: string, name: string) => {
+    setMeetingData(prev => {
+      const isSelected = prev.attendees.some(attendee => attendee.id === studentId);
+      
+      if (isSelected) {
+        // Remove admin from selection
+        return {
+          ...prev,
+          attendees: prev.attendees.filter(attendee => attendee.id !== studentId)
+        };
+      } else {
+        // Add admin to selection
+        return {
+          ...prev,
+          attendees: [...prev.attendees, { id: studentId, name: name }]
         };
       }
     });
@@ -211,14 +250,14 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
           {/* Agenda */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Agenda
+            Purpose of Meeting
             </label>
             <textarea
               value={meetingData.agenda}
               onChange={(e) => setMeetingData(prev => ({ ...prev, agenda: e.target.value }))}
               className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               rows={4}
-              placeholder="Detailed agenda and discussion points"
+              placeholder="Enter the purpose of the meeting"
             />
           </div>
 
@@ -228,6 +267,7 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
               Select Attendees *
             </label>
             <div className="max-h-40 overflow-y-auto border border-gray-300 rounded-md p-3">
+             <span className="text-sm text-gray-700">Admins</span>
               {admins.length > 0 ? (
                 admins.map((admin) => (
                   <label key={admin._id} className="flex items-center space-x-3 py-2 hover:bg-gray-50 px-2 rounded">
@@ -251,10 +291,31 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
               ) : (
                 <p className="text-gray-500 text-sm">Loading admins...</p>
               )}
+              <span className="text-sm text-gray-700">Registered Students</span>
+              {registeredStudents.length > 0 ? (
+                registeredStudents.map((student) => (
+                  <label key={student._id} className="flex items-center space-x-3 py-2 hover:bg-gray-50 px-2 rounded">
+                    <input
+                      type="checkbox"
+                      checked={meetingData.attendees.some(attendee => attendee.id === student._id)}
+                      onChange={() => handleStudentSelection(student._id, student.name || '')}
+                      className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 focus:ring-2"
+                    />
+                    <span className="text-sm text-gray-700">
+                      {student.name}
+                      {student.assignedCounsellorName && (
+                        <span className="text-gray-500 ml-2">({student.assignedCounsellorName})</span>
+                      )}
+                    </span>
+                  </label>
+                ))
+              ) : (
+                <p className="text-gray-500 text-sm">Loading admins...</p>
+              )}
             </div>
             {meetingData.attendees.length > 0 && (
               <p className="text-sm text-gray-600 mt-2">
-                {meetingData.attendees.length} admin(s) selected
+                {meetingData.attendees.length} attendee(s) selected
               </p>
             )}
           </div>
