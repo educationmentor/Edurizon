@@ -447,6 +447,13 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
+<section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] my-[10vw] md:my-[1vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[.5vw]   md:text-h3Text text-center font-bold">Authorization</h3>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/authorization/russia/Russia5.jpg"} className='w-full md:w-[20vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
 <div className='h-[2vw]'>
 
 </div>

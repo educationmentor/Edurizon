@@ -6,6 +6,7 @@ import ScholarshipSection from "@/components/studyDestinationComponents/scholars
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 import Image from "next/image";
 import Head from "next/head";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 
 const services = [
     {
@@ -200,6 +201,14 @@ const KazanFederalUniversity=()=>{
         <UnlistedTable id="1" section2="fee" content={facts}/>
         </div>
 
+        {/* Authorization Slider */}
+        <AuthorizationSlider 
+          images={[
+            '/assets/Images/authorization/russia/Russia1.jpeg',
+            '/assets/Images/authorization/russia/Russia2.jpg',
+            '/assets/Images/authorization/russia/Russia3.jpeg',
+          ]}
+        />
 
         </div>
         <PostArrival/>

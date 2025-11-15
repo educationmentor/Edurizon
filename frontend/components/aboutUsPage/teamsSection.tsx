@@ -4,12 +4,6 @@ import React from "react";
 const teamMembers = [
     [
       {
-        name: "Lalit Sir",
-        position: "Counsellor",
-        image: "/assets/Images/aboutUs/teamDummy.png",
-        hidden: true, // Controls visibility
-      },
-      {
         name: "Sanjay Burari",
         position: "CEO",
         image: "/assets/Images/Team/sanjaySir.png",
@@ -19,6 +13,11 @@ const teamMembers = [
         position: "Academic Director",
         image: "/assets/Images/Team/kunalSir.png",
       },
+      {
+        name: "Lalit Sir",
+        position: "Counsellor",
+        image: "/assets/Images/Team/lalitSir.png",
+      }
     ],
     [
       {
@@ -55,7 +54,7 @@ const TeamsSection=()=>{
           {row.map((member, index) => (
             <div
               key={index}
-              className={`shadow-[3.5vw_2.5vw_9vw_-1vw_rgba(0,_0,_0,_0.1)] overflow-y-visible md:shadow-[.875vw_0.625vw_2.25vw_-.25vw_rgba(0,_0,_0,_0.1)] w-[70.5vw] md:w-[17.625vw] flex-shrink-0 ${rowIndex==1 && index==2 ?"mr-[6vw]":""} ${rowIndex==0 && index==1 ?"ml-[6vw]":""}  ${member.hidden ? "hidden" : ""}`}
+              className={`shadow-[3.5vw_2.5vw_9vw_-1vw_rgba(0,_0,_0,_0.1)] overflow-y-visible md:shadow-[.875vw_0.625vw_2.25vw_-.25vw_rgba(0,_0,_0,_0.1)] w-[70.5vw] md:w-[17.625vw] flex-shrink-0 `}
             >
               <Image
                 alt={member.name}

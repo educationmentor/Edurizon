@@ -2,6 +2,7 @@ import RelatedCountries from "@/components/studyDestinationComponents/relatedCou
 import React from "react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 
 export const NewPage = () => {
 
@@ -863,6 +864,15 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
+      {/* Authorization Slider */}
+      <AuthorizationSlider 
+        images={[
+          '/assets/Images/authorization/bangladesh/Bangaldesh1.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh2.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh3.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh4.jpg',
+        ]}
+      />
 <section className="inner-page-bg dark:bg-black">
           <div className="container">
             <div className="row g-0">

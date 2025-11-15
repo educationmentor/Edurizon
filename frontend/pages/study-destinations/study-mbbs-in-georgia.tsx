@@ -7,6 +7,7 @@ import UnlistedTable from "@/components/studyDestinationComponents/unListedTable
 import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unListedTableEqualWidth";
 import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 
 const headerData={
     id:"georgia",
@@ -393,6 +394,16 @@ const NewPage = () => {
                 </div>  
                 <Image src={"/assets/Images/mbbs-in-georgia/Georgia3.png"} className="min-w-[35vw] h-auto" width={690} height={690  } alt="georgia3"/>
             </div>
+
+            {/* Authorization Slider */}
+            <AuthorizationSlider 
+              images={[
+                '/assets/Images/authorization/georgia/Georgia1.jpg',
+                '/assets/Images/authorization/georgia/Georgia2.jpg',
+                '/assets/Images/authorization/georgia/Georgia3.jpeg',
+                '/assets/Images/authorization/georgia/Georgia4.jpeg',
+              ]}
+            />
 
             {/* Post Arrival */}
             <PostArrival/>

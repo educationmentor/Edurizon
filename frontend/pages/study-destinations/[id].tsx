@@ -152,6 +152,23 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {<AdmissionProcess subHeading={countryData.admissionProcess.title}/>}
      {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
+      {/* Authorization Slider - Only for Russia */}
+      {id === 'study-mbbs-in-russia' && (
+        <AuthorizationSlider 
+          images={[
+            '/assets/Images/authorization/russia/Russia1.jpeg',
+            '/assets/Images/authorization/russia/Russia2.jpg',
+            '/assets/Images/authorization/russia/Russia3.jpeg',
+            '/assets/Images/authorization/russia/Russia4.jpg',
+            '/assets/Images/authorization/russia/Russia5.jpg',
+            '/assets/Images/authorization/russia/Russia6.jpg',
+            '/assets/Images/authorization/russia/Russia7.jpg',
+            '/assets/Images/authorization/russia/Russia8.jpg',
+            '/assets/Images/authorization/russia/Russia9.jpg',
+          ]}
+        />
+      )}
+      
       <PostArrival/>
      {countryData.videoData && <RelatedVideos videoData={countryData.videoData}/>}
     </div>
@@ -182,6 +199,7 @@ import UnlistedTable from "@/components/studyDestinationComponents/unListedTable
 import AdmissionProcess from "@/components/studyDestinationComponents/admissionProcess";
 import RelatedVideos from "@/components/videoSlider";
 import RussiaReasonsToStudy from "@/components/studyDestinationComponents/russiaReasonsToStudy";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id  = context.params?.id;
