@@ -140,6 +140,14 @@ const KazanFederalUniversity=()=>{
             </div>
         </div>
         </div>
+         {/* Authorization Slider */}
+         <AuthorizationSlider 
+          images={[
+            '/assets/Images/authorization/russia/Russia1.jpeg',
+            '/assets/Images/authorization/russia/Russia2.jpg',
+            '/assets/Images/authorization/russia/Russia3.jpeg',
+          ]}
+        />
 
         <div className="mx-[12.5vw] my-[4vw]">
             <p className="text-regularText font-semibold leading-[150%] text-justify">
@@ -201,14 +209,7 @@ const KazanFederalUniversity=()=>{
         <UnlistedTable id="1" section2="fee" content={facts}/>
         </div>
 
-        {/* Authorization Slider */}
-        <AuthorizationSlider 
-          images={[
-            '/assets/Images/authorization/russia/Russia1.jpeg',
-            '/assets/Images/authorization/russia/Russia2.jpg',
-            '/assets/Images/authorization/russia/Russia3.jpeg',
-          ]}
-        />
+       
 
         </div>
         <PostArrival/>
