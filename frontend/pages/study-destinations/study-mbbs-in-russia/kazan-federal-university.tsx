@@ -143,7 +143,7 @@ const KazanFederalUniversity=()=>{
          {/* Authorization Slider */}
          <AuthorizationSlider 
           images={[
-            '/assets/Images/authorization/russia/Russia1.jpeg',
+            '/assets/Images/authorization/russia/Russia1.jpg',
             '/assets/Images/authorization/russia/Russia2.jpg',
             '/assets/Images/authorization/russia/Russia3.jpeg',
           ]}

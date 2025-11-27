@@ -41,12 +41,12 @@ const AuthorizationSlider = ({ images }: AuthorizationSliderProps) => {
         <Slider {...settings} className="authorization-slider">
           {images.map((image, index) => (
             <div key={index} className="px-[2vw] md:px-[1vw]">
-              <div className="relative w-full h-[60vw] md:h-[30vw] rounded-[2vw] md:rounded-[1vw] overflow-hidden">
+              <div className="relative w-full h-[60vw] md:h-[30vw]  overflow-hidden">
                 <Image
                   src={image}
                   alt={`Authorization document ${index + 1}`}
                   fill
-                  className="object-contain"
+                  className="object-cover rounded-none"
                   sizes="(max-width: 768px) 100vw, 80vw"
                 />
               </div>
