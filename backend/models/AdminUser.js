@@ -46,6 +46,25 @@ const videoSchema = new mongoose.Schema({
   description: {
     type: String,
     trim: true,
+  },
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'AdminUser',
+    default: null,
+  },
+  assignedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'AdminUser',
+    default: null,
+  },
+  assignmentDeadline: {
+    type: Date,
+    default: null,
+  },
+  assignmentMessage: {
+    type: String,
+    trim: true,
+    default: null,
   }
 }, { _id: true,
   timestamps: true,

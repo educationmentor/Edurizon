@@ -68,7 +68,7 @@ const ViewLeads = () => {
       if (!token) return;
 
       const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-      const response = await axios.get(`${baseUrl}/api/admin/users?role=counsellor`, {
+      const response = await axios.get(`${baseUrl}/api/admin/users/all?role=counsellor`, {
         headers: { 
           Authorization: authToken
         }

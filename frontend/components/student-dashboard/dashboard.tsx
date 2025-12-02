@@ -1,7 +1,35 @@
 import React from 'react'
 import Image from 'next/image'
 import { TransitionLink } from '@/utils/TransitionLink'
-const Dashboard = ({ userData,activeTab, setActiveTab }: { userData: any,activeTab: string, setActiveTab: (tab: string) => void }) => {
+
+interface Notification {
+  _id?: string;
+  message: string;
+  sentAt: string;
+  isRead: boolean;
+}
+
+interface DashboardProps {
+  userData: any;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  notifications: Notification[];
+  notificationsLoading: boolean;
+  unreadCount: number;
+  onNotificationClick: (notification: Notification) => void;
+  formatNotificationDate: (date: string) => string;
+}
+
+const Dashboard = ({
+  userData,
+  activeTab,
+  setActiveTab,
+  notifications,
+  notificationsLoading,
+  unreadCount,
+  onNotificationClick,
+  formatNotificationDate
+}: DashboardProps) => {
   return (
     <div className='flex flex-col gap-[3vw]'>
         {/* Banner */}
@@ -80,10 +108,59 @@ const Dashboard = ({ userData,activeTab, setActiveTab }: { userData: any,activeT
             </div>
 
             {/*Right Side */}
-            <div className='flex flex-col items-center justify-center gap-[3vw] px-[1vw] rounded-[.75vw]  shadow-[.5vw_.5vw_3vw_.5vw_rgba(0,_0,_0,_0.08)] '>
-                {/* <span className='text-h4Text font-bold'>No Notifications Found</span> */}
-                <span className='text-regularText text-[rgba(0,0,0,.5)]'>You will see your notifications here</span>
-                {/* <button className='bg-orangeChosen text-white px-[3vw] py-[1vw] rounded-[.5vw] font-medium hover:bg-[#E66A00] transition-colors duration-300'>View All Notifications</button> */}
+            <div className='flex flex-col gap-[1.5vw] w-full max-w-[28vw] px-[1.25vw] py-[1.5vw] rounded-[.75vw] shadow-[.5vw_.5vw_3vw_.5vw_rgba(0,_0,_0,_0.08)] bg-white'>
+              <div className='flex items-center justify-between flex-wrap gap-[.75vw]'>
+                <div>
+                  <p className='text-[.7vw] uppercase tracking-[0.2em] text-[rgba(0,0,0,.4)] font-semibold'>Notifications</p>
+                  <h3 className='text-mediumText font-bold text-[#1A1A1A] leading-tight'>Stay in the loop</h3>
+                  <p className='text-smallText text-[rgba(0,0,0,.5)]'>Updates from your counsellors & admin team.</p>
+                </div>
+                <span className='px-[1vw] py-[.35vw] rounded-full text-smallText font-semibold bg-orangeChosen/10 text-orangeChosen'>
+                  {unreadCount} unread
+                </span>
+              </div>
+
+              {notificationsLoading ? (
+                <div className='flex items-center justify-center py-[3vw]'>
+                  <div className='animate-spin rounded-full h-[2.5vw] w-[2.5vw] border-b-[3px] border-orangeChosen'></div>
+                </div>
+              ) : notifications.length === 0 ? (
+                <div className='flex flex-col items-center justify-center gap-[1vw] py-[4vw] text-center'>
+                  <div className='w-[4vw] h-[4vw] rounded-full bg-orangeChosen/10 flex items-center justify-center text-orangeChosen text-mediumText font-bold'>
+                    🔔
+                  </div>
+                  <p className='text-regularText text-[rgba(0,0,0,.5)]'>You’re all caught up. We’ll notify you when something changes.</p>
+                </div>
+              ) : (
+                <div className='space-y-[.75vw] max-h-[22vw] overflow-y-auto pr-[.5vw]'>
+                  {notifications.map((notification, index) => (
+                    <button
+                      key={notification._id ?? `${notification.sentAt}-${index}`}
+                      onClick={() => onNotificationClick(notification)}
+                      className={`w-full text-left flex items-start gap-[.75vw] rounded-[.75vw] border px-[1vw] py-[.8vw] transition-all ${
+                        notification.isRead
+                          ? 'bg-[#F7F8FA] border-transparent'
+                          : 'bg-white border-orangeChosen/30 shadow-md shadow-orangeChosen/10'
+                      }`}
+                    >
+                      <span
+                        className={`mt-[.2vw] h-[.65vw] w-[.65vw] rounded-full ${
+                          notification.isRead ? 'bg-gray-300' : 'bg-orangeChosen'
+                        }`}
+                      ></span>
+                      <div className='flex-1'>
+                        <p className='text-smallText font-medium text-[#1A1A1A]'>{notification.message}</p>
+                        <p className='text-smallText text-[rgba(0,0,0,.5)] mt-[.35vw]'>
+                          {formatNotificationDate(notification.sentAt)}
+                        </p>
+                      </div>
+                      {!notification.isRead && (
+                        <span className='text-[.75vw] font-semibold text-orangeChosen'>Mark as read</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
         </div>
     </div>

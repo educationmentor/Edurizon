@@ -34,7 +34,7 @@ const ScheduleCall = () => {
   const fetchAdminUsers = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${baseUrl}/api/admin/users`, {
+      const response = await axios.get(`${baseUrl}/api/admin/users/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

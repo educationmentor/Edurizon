@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import DocumentLayout from '@/components/admin/DocumentLayout'
 import AdminTable from '@/components/admin/AdminTable';
 import { TransitionLink } from '@/utils/TransitionLink';
@@ -15,6 +15,21 @@ const navItems = [
       label: "Overview",
     }
   ]
+
+// Utility to check if a given deadline is within the next 24 hours (future only)
+const isDeadlineImminent = (deadlineDate: string | Date | null | undefined): boolean => {
+    if (!deadlineDate) return false;
+
+    const deadline = new Date(deadlineDate);
+    if (Number.isNaN(deadline.getTime())) return false;
+
+    const nowMs = Date.now();
+    const deadlineMs = deadline.getTime();
+    const diffMs = deadlineMs - nowMs;
+
+    // Future deadline within the next 24 hours
+    return diffMs > 0 && diffMs < 24 * 60 * 60 * 1000;
+};
 
 const DigitalTeam = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -52,34 +67,70 @@ const SuperAdminTable: React.FC = () => {
     const [error, setError] = useState('');
     const [allVideos, setAllVideos] = useState<any[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [adminUsers, setAdminUsers] = useState<any[]>([]);
+
+    // Modal state for creating and assigning tasks
+    const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
+    const [selectedAdmin, setSelectedAdmin] = useState<string>('');
+    const [deadline, setDeadline] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [newVideoName, setNewVideoName] = useState<string>('');
+    const [newVideoDateOfShoot, setNewVideoDateOfShoot] = useState<string>('');
+    const [newVideoPlatform, setNewVideoPlatform] = useState<string>('');
+    const [newVideoDescription, setNewVideoDescription] = useState<string>('');
+
+    // Modal state for editing only deadline
+    const [isDeadlineModalOpen, setIsDeadlineModalOpen] = useState(false);
+    const [deadlineVideoId, setDeadlineVideoId] = useState<string | null>(null);
+    const [newDeadline, setNewDeadline] = useState<string>('');
 
     // Fetch all videos from all digital marketing admins
+    const fetchAllVideos = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${baseUrl}/api/admin/getAllDigitalVideos`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+                }
+            });
+            
+            if (response.data.success) {
+                // Sort by creation date (newest first)
+                const sortedVideos = response.data.videos.sort((a: any, b: any) => 
+                    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                );
+                setAllVideos(sortedVideos);
+            }
+        } catch (error) {
+            console.error('Error fetching all videos:', error);
+            setError('Failed to fetch videos');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchAllVideos = async () => {
+        fetchAllVideos();
+    }, []);
+
+    // Fetch all admin users (super admin view - management)
+    useEffect(() => {
+        const fetchAdmins = async () => {
             try {
-                setLoading(true);
-                const response = await axios.get(`${baseUrl}/api/admin/getAllDigitalVideos`, {
+                const response = await axios.get(`${baseUrl}/api/admin/users`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
                     }
                 });
-                
-                if (response.data.success) {
-                    // Sort by creation date (newest first)
-                    const sortedVideos = response.data.videos.sort((a: any, b: any) => 
-                        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-                    );
-                    setAllVideos(sortedVideos);
-                }
-            } catch (error) {
-                console.error('Error fetching all videos:', error);
-                setError('Failed to fetch videos');
-            } finally {
-                setLoading(false);
+
+                const users = response.data?.data || [];
+                setAdminUsers(users);
+            } catch (err) {
+                console.error('Error fetching admin users:', err);
             }
         };
 
-        fetchAllVideos();
+        fetchAdmins();
     }, []);
 
     const platformOptions = [
@@ -104,7 +155,12 @@ const SuperAdminTable: React.FC = () => {
         'Date of Upload',
         'Platform',
         'Description',
-        'Created Date'
+        'Created Date',
+        'Assigned By',
+        'Assigned To',
+        'Assignment Deadline',
+        'Assignment Message',
+        'Actions'
     ];
       
     const csvHeader = [
@@ -134,6 +190,8 @@ const SuperAdminTable: React.FC = () => {
         'description',
         'createdAt'
     ];
+
+    const digitalAdmins = adminUsers.filter((user: any) => user.role === 'digitalMarketing');
 
     const tableColumns = [
         {
@@ -254,6 +312,88 @@ const SuperAdminTable: React.FC = () => {
                 </span>
             ),
         },
+        {
+            key: "assignedBy",
+            render: (video: any) => {
+                if (!video.assignedBy) {
+                    return <span className="text-sm text-gray-500">Not set</span>;
+                }
+
+                const admin = adminUsers.find((a: any) => a._id === video.assignedBy);
+                const name =
+                    admin?.firstName || admin?.lastName
+                        ? `${admin.firstName || ''} ${admin.lastName || ''}`.trim()
+                        : admin?.username || admin?.email || 'Unknown';
+
+                return (
+                    <span className="text-sm text-gray-700">
+                        {name}
+                    </span>
+                );
+            },
+        },
+        {
+            key: "assignedTo",
+            render: (video: any) => {
+                if (!video.assignedTo) {
+                    return <span className="text-sm text-gray-500">Unassigned</span>;
+                }
+
+                const admin = digitalAdmins.find((a: any) => a._id === video.assignedTo);
+                const name =
+                    admin?.firstName || admin?.lastName
+                        ? `${admin.firstName || ''} ${admin.lastName || ''}`.trim()
+                        : admin?.username || admin?.email || 'Unknown';
+
+                return (
+                    <span className="text-sm text-gray-700">
+                        {name}
+                    </span>
+                );
+            },
+        },
+        {
+            key: "assignmentDeadline",
+            render: (video: any) => (
+                <span className="text-sm text-gray-500">
+                    {video.assignmentDeadline
+                        ? new Date(video.assignmentDeadline).toLocaleDateString()
+                        : 'Not set'}
+                </span>
+            ),
+        },
+        {
+            key: "assignmentMessage",
+            render: (video: any) => (
+                <span
+                    className="text-sm text-gray-600 max-w-xs truncate"
+                    title={video.assignmentMessage}
+                >
+                    {video.assignmentMessage || 'No message'}
+                </span>
+            ),
+        },
+        {
+            key: "actions",
+            render: (video: any) => (
+                <div className="flex items-center space-x-2">
+                    <button
+                        onClick={() => {
+                            setDeadlineVideoId(video._id);
+                            setNewDeadline(
+                                video.assignmentDeadline
+                                    ? new Date(video.assignmentDeadline).toISOString().split('T')[0]
+                                    : ''
+                            );
+                            setIsDeadlineModalOpen(true);
+                        }}
+                        className="px-3 py-1 text-xs bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+                    >
+                        Edit Deadline
+                    </button>
+                </div>
+            ),
+        },
     ];
 
     const [activeTab, setActiveTab] = useState('allVideos');
@@ -261,6 +401,75 @@ const SuperAdminTable: React.FC = () => {
     const tabs = [
         { key: "allVideos", label: "All Digital Marketing Videos", count: allVideos.length },
     ];
+
+    const handleCreateAndAssign = async () => {
+        if (!newVideoName || !selectedAdmin) return;
+
+        try {
+            setLoading(true);
+            await axios.post(
+                `${baseUrl}/api/digital/assign`,
+                {
+                    videoName: newVideoName,
+                    dateOfShoot: newVideoDateOfShoot || null,
+                    platform: newVideoPlatform ? [newVideoPlatform] : [],
+                    description: newVideoDescription || '',
+                    assignedToId: selectedAdmin,
+                    deadline: deadline || null,
+                    message: message || null,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            setIsAssignModalOpen(false);
+            setSelectedAdmin('');
+            setDeadline('');
+            setMessage('');
+            setNewVideoName('');
+            setNewVideoDateOfShoot('');
+            setNewVideoPlatform('');
+            setNewVideoDescription('');
+
+            await fetchAllVideos();
+        } catch (err) {
+            console.error('Error creating and assigning task:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleUpdateDeadline = async () => {
+        if (!deadlineVideoId || !newDeadline) return;
+
+        try {
+            setLoading(true);
+            await axios.patch(
+                `${baseUrl}/api/admin/digital/deadline/${deadlineVideoId}`,
+                { newDeadline },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            setIsDeadlineModalOpen(false);
+            setDeadlineVideoId(null);
+            setNewDeadline('');
+
+            await fetchAllVideos();
+        } catch (err) {
+            console.error('Error updating deadline:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Filter videos based on search term
     const filteredVideos = allVideos.filter(video => 
@@ -297,6 +506,32 @@ const SuperAdminTable: React.FC = () => {
                             />
                         </svg>
                     </div>
+                    <button
+                        type="button"
+                        onClick={fetchAllVideos}
+                        className="inline-flex items-center justify-center rounded-full border border-gray-300 bg-white p-2 text-gray-600 hover:bg-gray-50"
+                        title="Refresh videos"
+                    >
+                        <svg
+                            className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 4v6h6M20 20v-6h-6M5 19a9 9 0 0014-7V11M19 5A9 9 0 005 12v2"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        onClick={() => setIsAssignModalOpen(true)}
+                        className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 text-sm font-medium"
+                    >
+                        Create and Assign Task
+                    </button>
                 </div>
             </div>
             
@@ -316,6 +551,174 @@ const SuperAdminTable: React.FC = () => {
                     bgColor="bg-gray-50"
                 />
             </div>
+
+            {/* Create and Assign Task Modal */}
+            {isAssignModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                        <h3 className="text-lg font-semibold mb-4">Create and Assign Task</h3>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Video Name
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newVideoName}
+                                    onChange={(e) => setNewVideoName(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                    placeholder="Enter video name"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Date of Shoot
+                                </label>
+                                <input
+                                    type="date"
+                                    value={newVideoDateOfShoot}
+                                    onChange={(e) => setNewVideoDateOfShoot(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Platform
+                                </label>
+                                <select
+                                    value={newVideoPlatform}
+                                    onChange={(e) => setNewVideoPlatform(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                >
+                                    <option value="">Select Platform</option>
+                                    {platformOptions.map((platform) => (
+                                        <option key={platform} value={platform}>{platform}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Description
+                                </label>
+                                <textarea
+                                    value={newVideoDescription}
+                                    onChange={(e) => setNewVideoDescription(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                    rows={2}
+                                    placeholder="Enter video description"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Assign To
+                                </label>
+                                <select
+                                    value={selectedAdmin}
+                                    onChange={(e) => setSelectedAdmin(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                >
+                                    <option value="">Select Digital Admin</option>
+                                    {digitalAdmins.map((admin: any) => (
+                                        <option key={admin._id} value={admin._id}>
+                                            {admin.firstName || admin.lastName
+                                                ? `${admin.firstName || ''} ${admin.lastName || ''}`.trim()
+                                                : admin.username || admin.email}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Deadline
+                                </label>
+                                <input
+                                    type="date"
+                                    value={deadline}
+                                    onChange={(e) => setDeadline(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Message
+                                </label>
+                                <textarea
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                    rows={3}
+                                    placeholder="Add any instructions or context for this task"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end space-x-3 mt-6">
+                            <button
+                                onClick={() => {
+                                    setIsAssignModalOpen(false);
+                                }}
+                                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleCreateAndAssign}
+                                disabled={loading || !newVideoName || !selectedAdmin}
+                                className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:opacity-50"
+                            >
+                                {loading ? 'Saving...' : 'Create and Assign'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Edit Deadline Modal */}
+            {isDeadlineModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-sm">
+                        <h3 className="text-lg font-semibold mb-4">Edit Deadline</h3>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                New Deadline
+                            </label>
+                            <input
+                                type="date"
+                                value={newDeadline}
+                                onChange={(e) => setNewDeadline(e.target.value)}
+                                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                            />
+                        </div>
+
+                        <div className="flex justify-end space-x-3 mt-6">
+                            <button
+                                onClick={() => {
+                                    setIsDeadlineModalOpen(false);
+                                    setDeadlineVideoId(null);
+                                }}
+                                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleUpdateDeadline}
+                                disabled={loading}
+                                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                            >
+                                {loading ? 'Saving...' : 'Update Deadline'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {error && (
                 <div className="px-[32px] mt-4">
@@ -349,16 +752,94 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
         description: ''
     });
 
-    // Update videos when adminData changes
-    useEffect(() => {
-        if (adminData?.digitalMarketingVideos && adminData.digitalMarketingVideos.length > 0) {
-            setVideos(adminData.digitalMarketingVideos);
-            console.log('Videos loaded from adminData:', adminData.digitalMarketingVideos);
-        } else {
-            console.log('No videos found in adminData:', adminData);
-            setVideos([]);
+    // Urgent tasks (deadlines within next 24 hours, not yet uploaded, assigned to this admin)
+    const [urgentTasks, setUrgentTasks] = useState<any[]>([]);
+    const [showUrgentModal, setShowUrgentModal] = useState(false);
+    const [showUrgentDropdown, setShowUrgentDropdown] = useState(false);
+    const [adminUsers, setAdminUsers] = useState<any[]>([]);
+    const [notificationTab, setNotificationTab] = useState<'urgent' | 'all'>('urgent');
+
+    const hasShownUrgentModalRef = useRef(false);
+
+    // Centralized fetch function for assigned videos (supports manual refresh and polling)
+    const fetchAssignedVideos = async () => {
+        try {
+            setLoading(true);
+
+            const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+
+            if (!token) {
+                setError('Not authenticated. Please log in again.');
+                setVideos([]);
+                setUrgentTasks([]);
+                setShowUrgentModal(false);
+                return;
+            }
+
+            const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+
+            const response = await axios.get(`${baseUrl}/api/admin/me`, {
+                headers: {
+                    Authorization: authToken,
+                },
+            });
+
+            const freshAdmin = response.data?.data;
+
+            if (freshAdmin && Array.isArray(freshAdmin.digitalMarketingVideos)) {
+                const latestVideos = freshAdmin.digitalMarketingVideos;
+
+                setVideos(latestVideos);
+
+                // Persist latest admin data for the rest of the app
+                if (sessionStorage.getItem('adminData')) {
+                    sessionStorage.setItem('adminData', JSON.stringify(freshAdmin));
+                } else {
+                    localStorage.setItem('adminData', JSON.stringify(freshAdmin));
+                }
+
+                if (setAdminData) {
+                    setAdminData(freshAdmin);
+                }
+
+                // Compute urgent tasks based on freshly loaded videos
+                const tasks = latestVideos.filter((video: any) =>
+                    video.assignmentDeadline &&
+                    !video.videoUploaded &&
+                    isDeadlineImminent(video.assignmentDeadline) &&
+                    (!video.assignedTo || video.assignedTo === freshAdmin._id)
+                );
+
+                setUrgentTasks(tasks);
+
+                if (!hasShownUrgentModalRef.current && tasks.length > 0) {
+                    setShowUrgentModal(true);
+                    hasShownUrgentModalRef.current = true;
+                }
+
+                if (tasks.length === 0) {
+                    setShowUrgentModal(false);
+                }
+            } else {
+                setVideos([]);
+                setUrgentTasks([]);
+                setShowUrgentModal(false);
+            }
+        } catch (err) {
+            console.error('Error refreshing assigned videos:', err);
+            setError('Failed to refresh videos');
+        } finally {
+            setLoading(false);
         }
-    }, [adminData]);
+    };
+
+    // Initial load + polling every 60s for assigned videos
+    useEffect(() => {
+        fetchAssignedVideos();
+        const intervalId = setInterval(fetchAssignedVideos, 60000);
+        return () => clearInterval(intervalId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Debug: Log adminData structure
     useEffect(() => {
@@ -366,6 +847,26 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
         console.log('AdminData keys:', adminData ? Object.keys(adminData) : 'No adminData');
         console.log('DigitalMarketingVideos:', adminData?.digitalMarketingVideos);
     }, [adminData]);
+
+    // Fetch admin users (for resolving assignedBy names in notifications, non-super admins)
+    useEffect(() => {
+        const fetchAdmins = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/api/admin/users/all`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+                    }
+                });
+
+                const users = response.data?.data || [];
+                setAdminUsers(users);
+            } catch (err) {
+                console.error('Error fetching admin users for notifications:', err);
+            }
+        };
+
+        fetchAdmins();
+    }, []);
 
     const platformOptions = [
         'YouTube',
@@ -388,10 +889,12 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
         'Date of Upload',
         'Platform',
         'Description',
+        'Assignment Deadline',
+        'Assignment Message',
         'Actions'
       ];
       
-    const csvHeader = [
+      const csvHeader = [
         'Video Name',
         'Date of Shoot',
         'Video Edited',
@@ -514,6 +1017,27 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
                     placeholder="Enter description"
                 />
           ),
+        },
+        {
+            key: "assignmentDeadline",
+            render: (video: any) => (
+                <span className="text-sm text-gray-500">
+                    {video.assignmentDeadline
+                        ? new Date(video.assignmentDeadline).toLocaleDateString()
+                        : 'Not set'}
+                </span>
+            ),
+        },
+        {
+            key: "assignmentMessage",
+            render: (video: any) => (
+                <span
+                    className="text-sm text-gray-600 max-w-xs truncate"
+                    title={video.assignmentMessage}
+                >
+                    {video.assignmentMessage || 'No message'}
+                </span>
+            ),
         },
         {
             key: "actions",
@@ -772,33 +1296,235 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
     };
       
 return (
-        <div className='m-[32px] rounded-[8px] bg-white py-[16px] px-[8px] shadow-sm'>
-            <div className="flex justify-between items-center px-[32px]">
+      <div className='m-[32px] rounded-[8px] bg-white py-[16px] px-[8px] shadow-sm'>
+            <div className="flex justify-between items-center px-[32px] relative">
                 <h3 className="text-h6Text font-bold font-poppins">Digital Marketing Videos</h3>
-                <button
-                    onClick={() => setShowAddModal(true)}
-                    className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center"
-                >
-                    <AddIcon style={{ fontSize: '20px' }} className="mr-2" />
-                    Add Video
-                </button>
+                <div className="flex items-center space-x-4">
+                    {/* Notification bell with urgent count */}
+                    <button
+                        type="button"
+                        onClick={() => setShowUrgentDropdown((prev) => !prev)}
+                        className="relative inline-flex items-center justify-center rounded-full border border-yellow-400 bg-yellow-50 p-2 text-yellow-700 hover:bg-yellow-100"
+                    >
+                        {/* Simple bell icon */}
+                        <svg
+                            className="h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0h6z"
+                            />
+                        </svg>
+                        {urgentTasks.length > 0 && (
+                            <span className="absolute -top-1 -right-1 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-red-600 px-1 text-xs font-semibold text-white">
+                                {urgentTasks.length}
+                            </span>
+                        )}
+                    </button>
+
+                    {/* Manual refresh button */}
+                    <button
+                        type="button"
+                        onClick={fetchAssignedVideos}
+                        className="inline-flex items-center justify-center rounded-full border border-gray-300 bg-white p-2 text-gray-600 hover:bg-gray-50"
+                        title="Refresh videos"
+                    >
+                        <svg
+                            className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 4v6h6M20 20v-6h-6M5 19a9 9 0 0014-7V11M19 5A9 9 0 005 12v2"
+                            />
+                        </svg>
+                    </button>
+
+                    <button
+                        onClick={() => setShowAddModal(true)}
+                        className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center"
+                    >
+                        <AddIcon style={{ fontSize: '20px' }} className="mr-2" />
+                        Add Video
+                    </button>
+                </div>
+
+                {/* Notification dropdown with tabs (Urgent | All with deadline) */}
+                {showUrgentDropdown && (urgentTasks.length > 0 || videos.some(v => v.assignmentDeadline)) && (
+                    <div className="absolute right-8 top-14 z-30 w-80 rounded-md border border-yellow-300 bg-white shadow-lg">
+                        <div className="border-b border-yellow-200 bg-yellow-50 px-4 pt-2">
+                            <div className="flex items-center justify-between">
+                                <p className="text-sm font-semibold text-red-700">
+                                    Notifications
+                                </p>
+                                <span className="text-xs text-gray-500">
+                                    {urgentTasks.length} urgent
+                                </span>
+                            </div>
+                            <div className="mt-2 flex gap-1 rounded-md bg-yellow-100 p-1 text-xs font-medium">
+                                <button
+                                    type="button"
+                                    onClick={() => setNotificationTab('urgent')}
+                                    className={`flex-1 rounded-md px-2 py-1 text-center ${
+                                        notificationTab === 'urgent'
+                                            ? 'bg-red-600 text-white'
+                                            : 'text-red-700'
+                                    }`}
+                                >
+                                    Urgent (24h)
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setNotificationTab('all')}
+                                    className={`flex-1 rounded-md px-2 py-1 text-center ${
+                                        notificationTab === 'all'
+                                            ? 'bg-yellow-500 text-white'
+                                            : 'text-yellow-700'
+                                    }`}
+                                >
+                                    All with deadline
+                                </button>
+                            </div>
+                        </div>
+                        <div className="max-h-64 space-y-2 overflow-y-auto px-3 py-2">
+                            {(notificationTab === 'urgent'
+                                ? urgentTasks
+                                : videos.filter((task: any) => task.assignmentDeadline)
+                              ).map((task: any) => {
+                                const assignedByAdmin = adminUsers.find(
+                                    (a: any) => a._id === task.assignedBy
+                                );
+                                const assignedByName =
+                                    assignedByAdmin?.firstName || assignedByAdmin?.lastName
+                                        ? `${assignedByAdmin?.firstName || ''} ${assignedByAdmin?.lastName || ''}`.trim()
+                                        : assignedByAdmin?.username || assignedByAdmin?.email || 'Unknown';
+
+                                return (
+                                    <div
+                                        key={task._id}
+                                        className="rounded-md border border-yellow-200 bg-yellow-50 p-2"
+                                    >
+                                        <p className="text-xs font-semibold text-gray-900">
+                                            {task.videoName || 'Untitled video'}
+                                        </p>
+                                        <p className="mt-1 text-xs text-gray-700">
+                                            {task.assignmentMessage || 'No message provided'}
+                                        </p>
+                                        <p className="mt-1 text-[11px] text-gray-600">
+                                            Assigned By: {assignedByName}
+                                        </p>
+                                        <p className="mt-0.5 text-[11px] text-gray-600">
+                                            Deadline:{' '}
+                                            {task.assignmentDeadline
+                                                ? new Date(task.assignmentDeadline).toLocaleString()
+                                                : 'Not set'}
+                                        </p>
+                                    </div>
+                                );
+                            })}
+
+                            {(notificationTab === 'urgent'
+                                ? urgentTasks.length === 0
+                                : !videos.some((v: any) => v.assignmentDeadline)
+                              ) && (
+                                <p className="py-4 text-center text-xs text-gray-500">
+                                    No tasks to display in this tab.
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
-            <div className=' m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
-            <AdminTable 
-                ITEMS_PER_PAGE={10} 
-                tableColumns={tableColumns} 
-                tableHeaders={tableHeaders} 
-                csvHeader={csvHeader} 
-                csvDataFields={csvDataFields} 
-                loading={loading} 
-                error={error} 
-                leads={videos} 
-                setActiveTab={setActiveTab} 
-                tabs={tabs} 
-                activeTab={activeTab} 
-                bgColor="bg-gray-50"
-            />
-            </div>
+      <div className=' m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
+      <AdminTable 
+          ITEMS_PER_PAGE={10} 
+          tableColumns={tableColumns} 
+          tableHeaders={tableHeaders} 
+          csvHeader={csvHeader} 
+          csvDataFields={csvDataFields} 
+          loading={loading} 
+          error={error} 
+          leads={videos} 
+          setActiveTab={setActiveTab} 
+          tabs={tabs} 
+          activeTab={activeTab} 
+          bgColor="bg-gray-50"
+      />
+      </div>
+
+      {/* Urgent Deadline Warning Modal */}
+      {showUrgentModal && urgentTasks.length > 0 && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="w-full max-w-lg rounded-lg border border-yellow-400 bg-yellow-50 p-6 shadow-xl">
+                  <div className="mb-4 flex items-center space-x-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white">
+                          !
+                      </div>
+                      <div>
+                          <h3 className="text-lg font-bold text-red-700">
+                              URGENT DEADLINE ALERT
+                          </h3>
+                          <p className="text-sm text-red-600">
+                              {urgentTasks.length} task{urgentTasks.length > 1 ? 's' : ''} are due within the next 24 hours.
+                          </p>
+                      </div>
+                  </div>
+
+                  <div className="max-h-64 space-y-3 overflow-y-auto rounded-md bg-white p-3">
+                      {urgentTasks.map((task: any) => {
+                          const assignedByAdmin = adminUsers.find(
+                              (a: any) => a._id === task.assignedBy
+                          );
+                          const assignedByName =
+                              assignedByAdmin?.firstName || assignedByAdmin?.lastName
+                                  ? `${assignedByAdmin?.firstName || ''} ${assignedByAdmin?.lastName || ''}`.trim()
+                                  : assignedByAdmin?.username || assignedByAdmin?.email || 'Unknown';
+
+                          return (
+                              <div
+                                  key={task._id}
+                                  className="rounded-md border border-yellow-200 bg-yellow-50 p-3"
+                              >
+                                  <p className="text-sm font-semibold text-gray-900">
+                                      {task.videoName || 'Untitled video'}
+                                  </p>
+                                  <p className="mt-1 text-xs text-gray-700">
+                                      {task.assignmentMessage || 'No message provided'}
+                                  </p>
+                                  <p className="mt-1 text-xs text-gray-600">
+                                      Assigned By: {assignedByName}
+                                  </p>
+                                  <p className="mt-1 text-xs text-gray-700">
+                                      Deadline:{' '}
+                                      {task.assignmentDeadline
+                                          ? new Date(task.assignmentDeadline).toLocaleString()
+                                          : 'Not set'}
+                                  </p>
+                              </div>
+                          );
+                      })}
+                  </div>
+
+                  <div className="mt-5 flex justify-end space-x-3">
+                      <button
+                          onClick={() => setShowUrgentModal(false)}
+                          className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                      >
+                          View Tasks
+                      </button>
+                  </div>
+              </div>
+          </div>
+      )}
 
             {/* Add Video Modal */}
             {showAddModal && (

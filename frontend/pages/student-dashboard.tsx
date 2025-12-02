@@ -18,6 +18,8 @@ import Documents from '@/components/student-dashboard/documents';
 import { useUserData } from '@/hooks/useUserData';
 import Chat from '@/components/student-dashboard/chat';
 import Meetings from '../components/student-dashboard/meetings';
+import axios from 'axios';
+import { baseUrl } from '@/lib/baseUrl';
 const dashboardItems=[
   { id: 'dashboard', label: 'Dashboard', icon: SpaceDashboardRoundedIcon },
   { id: 'fee-structure', label: 'Fees Info', icon: PaymentsRoundedIcon },
@@ -28,10 +30,23 @@ const dashboardItems=[
   { id: 'meetings', label: 'Meetings', icon: VideoCallRoundedIcon },
 ]
 
+interface StudentNotification {
+  _id?: string;
+  message: string;
+  sentAt: string;
+  isRead: boolean;
+  senderId?: string;
+}
+
 const StudentDashboard = () => {
   const { userData, isLoading, error, refetchUserData } = useUserData();
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [showFeesPopup, setShowFeesPopup] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<StudentNotification[]>([]);
+  const [notificationsLoading, setNotificationsLoading] = useState<boolean>(false);
+  const studentToken = (userData as any)?.token;
+  const unreadCount = notifications.filter((notification) => !notification.isRead).length;
+  const studentNotificationsFromProfile = (userData as any)?.notifications;
 
   // Function to download PDF from Google Drive
   const downloadFeeStructurePDF = async () => {
@@ -61,6 +76,124 @@ const StudentDashboard = () => {
       downloadFeeStructurePDF();
     } else {
       setShowFeesPopup(true);
+    }
+  };
+
+  const applyLocalNotifications = (source: any) => {
+    if (!source || !Array.isArray(source)) {
+      setNotifications([]);
+      return;
+    }
+
+    const normalized = source
+      .map((notification: any) => ({
+        ...notification,
+        sentAt: notification.sentAt || new Date().toISOString(),
+        isRead: Boolean(notification.isRead),
+      }))
+      .sort(
+        (a: StudentNotification, b: StudentNotification) =>
+          new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
+      );
+
+    setNotifications(normalized);
+  };
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (!studentToken) {
+        applyLocalNotifications(studentNotificationsFromProfile);
+        return;
+      }
+
+      setNotificationsLoading(true);
+      try {
+        const response = await axios.get(`${baseUrl}/api/student/notifications`, {
+          headers: {
+            Authorization: `Bearer ${studentToken}`
+          }
+        });
+
+        const payload =
+          response.data?.notifications ||
+          response.data?.data ||
+          response.data ||
+          [];
+
+        if (Array.isArray(payload) && payload.length > 0) {
+          applyLocalNotifications(payload);
+        } else {
+          applyLocalNotifications(studentNotificationsFromProfile);
+        }
+      } catch (err: any) {
+        if (err?.response?.status === 404) {
+          applyLocalNotifications(studentNotificationsFromProfile);
+        } else {
+          console.error('Error fetching notifications:', err);
+        }
+      } finally {
+        setNotificationsLoading(false);
+      }
+    };
+
+    fetchNotifications();
+  }, [studentToken, studentNotificationsFromProfile]);
+
+  const markNotificationAsRead = async (notification: StudentNotification) => {
+    if (!notification || notification.isRead) return;
+
+    const updateLocal = () => {
+      setNotifications((prev) =>
+        prev.map((item) => {
+          const matchesId = notification._id && item._id === notification._id;
+          const matchesTimestamp =
+            !notification._id &&
+            item.sentAt === notification.sentAt &&
+            item.message === notification.message;
+
+          return matchesId || matchesTimestamp ? { ...item, isRead: true } : item;
+        })
+      );
+    };
+
+    updateLocal();
+
+    if (!studentToken || !notification._id) return;
+
+    try {
+      await axios.put(
+        `${baseUrl}/api/student/notifications/${notification._id}/read`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${studentToken}`
+          }
+        }
+      );
+    } catch (err: any) {
+      if (err?.response?.status === 404) {
+        return;
+      }
+      console.error('Error marking notification as read:', err);
+    }
+  };
+
+  const handleNotificationClick = (notification: StudentNotification) => {
+    if (!notification) return;
+    if (!notification.isRead) {
+      markNotificationAsRead(notification);
+    }
+  };
+
+  const formatNotificationDate = (sentAt: string) => {
+    if (!sentAt) return 'Unknown date';
+    try {
+      return new Date(sentAt).toLocaleString(undefined, {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      });
+    } catch {
+      return sentAt;
     }
   };
 
@@ -210,11 +343,28 @@ const StudentDashboard = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
-            <NotificationsActiveRoundedIcon style={{fontSize: '1.5vw', color: '#000000' }} />
+            <div className="relative">
+              <NotificationsActiveRoundedIcon style={{fontSize: '1.5vw', color: '#000000' }} />
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[0.6rem] font-semibold rounded-full px-1.5 py-[1px]">
+                  {unreadCount > 9 ? '9+' : unreadCount}
+                </span>
+              )}
+            </div>
           </div>
-
-              </div>
-           {activeTab === 'dashboard' && <Dashboard userData={userData} activeTab={activeTab} setActiveTab={setActiveTab} />}
+          </div>
+          {activeTab === 'dashboard' && (
+            <Dashboard
+              userData={userData}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              notifications={notifications}
+              notificationsLoading={notificationsLoading}
+              unreadCount={unreadCount}
+              onNotificationClick={handleNotificationClick}
+              formatNotificationDate={formatNotificationDate}
+            />
+          )}
            {activeTab === 'language-courses' && <LanguageCourses activeTab={activeTab} userData={userData} />}
            {activeTab === 'application-status' && <ApplicationStatus userData={userData} />}
            {activeTab === 'documents' && <Documents userData={userData} activeTab={activeTab} />}

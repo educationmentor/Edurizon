@@ -284,6 +284,37 @@ exports.getRoles = (req, res) => {
   });
 };
 
+// Get current logged-in admin (from token)
+exports.getCurrentAdmin = async (req, res) => {
+  try {
+    if (!req.adminUser) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'Not authenticated'
+      });
+    }
+
+    // Fresh fetch to ensure latest data from DB (including videos)
+    const freshAdmin = await AdminUser.findById(req.adminUser._id);
+    if (!freshAdmin) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Admin not found'
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: freshAdmin
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
+};
+
 // Validate Token
 exports.validateToken = async (req, res) => {
   // If the request reaches here, it means the token is valid

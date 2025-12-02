@@ -48,9 +48,8 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
 
 
   const fetchAdmins = async () => {
-    
     try {
-      const response = await axios.get(`${baseUrl}/api/admin/users`, {
+      const response = await axios.get(`${baseUrl}/api/admin/users/all`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }

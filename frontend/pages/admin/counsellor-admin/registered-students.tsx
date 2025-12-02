@@ -19,6 +19,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import UploadIcon from '@mui/icons-material/Upload';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
 
@@ -89,6 +90,10 @@ const RegisteredStudents = () => {
   const [editFormData, setEditFormData] = useState<Partial<RegisteredStudent>>({});
   const [uploadingFile, setUploadingFile] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+  const [sendingNotification, setSendingNotification] = useState(false);
 
   // Get counsellor ID from sessionStorage or localStorage
   const counsellorId = adminData?._id;
@@ -181,6 +186,63 @@ const RegisteredStudents = () => {
     { key: 'visa-approval', label: 'Visa Approval', count: students.filter(student => student.applicationStage === 'Visa Approval').length },
     { key: 'departure', label: 'Departure', count: students.filter(student => student.applicationStage === 'Departure').length },
   ];
+
+  const handleToggleStudentSelection = (studentId: string) => {
+    setSelectedStudentIds((prev) =>
+      prev.includes(studentId) ? prev.filter((id) => id !== studentId) : [...prev, studentId]
+    );
+  };
+
+  const handleOpenNotificationModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseNotificationModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSendNotification = async () => {
+    if (!notificationMessage.trim()) {
+      toast.error('Please enter a notification message');
+      return;
+    }
+
+    if (selectedStudentIds.length === 0) {
+      toast.error('Please select at least one student');
+      return;
+    }
+
+    const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+    if (!token) {
+      toast.error('Authentication token missing');
+      return;
+    }
+
+    const payload = {
+      studentIds: selectedStudentIds,
+      message: notificationMessage.trim(),
+      senderId: adminData?._id || 'ADMIN_ID_PLACEHOLDER',
+    };
+
+    try {
+      setSendingNotification(true);
+      await axios.post(`${baseUrl}/api/admin/send-notifications`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success('Notifications sent successfully');
+      setIsModalOpen(false);
+      setNotificationMessage('');
+      setSelectedStudentIds([]);
+    } catch (error: any) {
+      console.error('Notification send error:', error);
+      toast.error(error.response?.data?.message || 'Failed to send notifications');
+    } finally {
+      setSendingNotification(false);
+    }
+  };
 
   // Handle student click
   const handleStudentClick = (student: RegisteredStudent) => {
@@ -366,7 +428,17 @@ const RegisteredStudents = () => {
                 View and manage students assigned to you
               </p>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex ml-auto ">
+              <button
+                onClick={handleOpenNotificationModal}
+                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+              >
+              <NotificationsIcon className='ml-auto mr-2' style={{fontSize: '20px', color: '#666666' }} />
+                
+                Send Notifications
+              </button> 
+            </div>
+            <div className="flex ml-[24px] ">
               <button
                 onClick={fetchStudents}
                 className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
@@ -477,6 +549,107 @@ const RegisteredStudents = () => {
           )}
         </div>
       </div>
+
+      {/* Notifications Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
+          <div
+            className="absolute inset-0 bg-black bg-opacity-50"
+            onClick={handleCloseNotificationModal}
+          />
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl mx-auto p-6">
+            <div className="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+              <div>
+                <p className="text-sm uppercase tracking-wide text-teal-500 font-semibold">
+                  Notifications
+                </p>
+                <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                  Send updates to students
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  Select the students you want to notify and craft your message below.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleCloseNotificationModal}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <CloseIcon className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="mt-6 space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Notification message
+                </label>
+                <textarea
+                  value={notificationMessage}
+                  onChange={(e) => setNotificationMessage(e.target.value)}
+                  rows={5}
+                  className="w-full rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all p-3 text-sm text-gray-700"
+                  placeholder="Type the announcement or update you want to share..."
+                />
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Select students
+                  </label>
+                  <span className="text-xs text-gray-500">
+                    {selectedStudentIds.length} selected
+                  </span>
+                </div>
+                <div className="border border-gray-200 rounded-xl max-h-64 overflow-y-auto divide-y divide-gray-100">
+                  {students.length === 0 ? (
+                    <p className="p-4 text-sm text-gray-500 text-center">
+                      No students available to select.
+                    </p>
+                  ) : (
+                    students.map((student) => (
+                      <label
+                        key={student._id}
+                        className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 cursor-pointer"
+                      >
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">{student.name}</p>
+                          <p className="text-xs text-gray-500">{student.email || 'No email provided'}</p>
+                        </div>
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                          checked={selectedStudentIds.includes(student._id)}
+                          onChange={() => handleToggleStudentSelection(student._id)}
+                        />
+                      </label>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={handleCloseNotificationModal}
+                className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSendNotification}
+                disabled={sendingNotification}
+                className="inline-flex items-center px-5 py-2.5 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {sendingNotification ? 'Sending...' : 'Send Notification'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Student Details Modal */}
       {showModal && selectedStudent && (

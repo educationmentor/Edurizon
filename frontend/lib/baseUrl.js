@@ -2,4 +2,3 @@ export const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://edurizon-blsj
 // export const baseUrl="http://localhost:5000" 
 
 
-    

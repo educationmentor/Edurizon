@@ -21,6 +21,30 @@ const documentSchema = new mongoose.Schema({
   }
 }, { _id: false });
 
+const notificationSchema = new mongoose.Schema({
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: () => new mongoose.Types.ObjectId()
+  },
+  message: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  sentAt: {
+    type: Date,
+    default: Date.now,
+  },
+  isRead: {
+    type: Boolean,
+    default: false,
+  },
+  senderId: {
+    type: String,
+    required: false,
+  }
+});
+
 const userSchema = mongoose.Schema(
   {
     // Personal Details
@@ -128,7 +152,11 @@ const userSchema = mongoose.Schema(
     notes:{
       type: String,
       required: false,
-    }
+    },
+    notifications: {
+      type: [notificationSchema],
+      default: [],
+    },
   },
   {
     timestamps: true,

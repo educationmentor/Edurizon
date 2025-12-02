@@ -12,8 +12,10 @@ const chatRoutes = require('./routes/chatRoutes');
 const chatbotRoutes=require('./routes/chatbotRoutes')
 const collegePredictorRoutes=require('./routes/collegePredictorRoutes')
 const adminRoutes = require('./routes/adminRoutes');
+const digitalVideoRoutes = require('./routes/digitalVideoRoutes');
 const adminConsultationRoutes = require('./routes/adminConsultationRoutes');
 const registeredStudentRoutes = require('./routes/registeredStudentRoutes')
+const studentRoutes = require('./routes/studentRoutes')
 const leadsRoutes = require('./routes/leadsRoutes')
 const partneredUniversitiesRoutes = require('./routes/partneredUniversitiesRoutes')
 const attendanceRoutes = require('./routes/attendanceRoutes')
@@ -469,8 +471,11 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/chatbot',chatbotRoutes)
 app.use('/api/collegePredictor',collegePredictorRoutes)
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin/digital', digitalVideoRoutes);
+app.use('/api/digital', digitalVideoRoutes);
 app.use('/api/admin/consultation', adminConsultationRoutes);
 app.use('/api/registered-students', registeredStudentRoutes);
+app.use('/api/student', studentRoutes);
 app.use('/api/leads', leadsRoutes);
 app.use('/api/partnered-universities', partneredUniversitiesRoutes);
 app.use('/api/attendance', attendanceRoutes);
