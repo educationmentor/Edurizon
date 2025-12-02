@@ -111,7 +111,10 @@ const RegisteredStudents = () => {
     try {
       const response = await getRegisteredStudentsByCounsellor(counsellorId);
       if (response) {
-        setStudents(response);
+        const sorted = [...response].sort((a: RegisteredStudent, b: RegisteredStudent) =>
+          (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase())
+        );
+        setStudents(sorted);
       } else {
         setError(response.message || 'Failed to fetch students');
       }
@@ -454,9 +457,9 @@ const RegisteredStudents = () => {
       </div>
 
       {/* Main Content */}
-      <div className="rounded-[12px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="rounded-[12px] mx-auto px-4 sm:px-6 lg:px-6 py-4">
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow mb-6">
+        <div className="bg-white rounded-lg shadow mb-4">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8 px-6">
               {tabs.map((tab) => (
@@ -504,14 +507,14 @@ const RegisteredStudents = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
               {filteredStudents.map((student) => (
                 <div
                   key={student._id}
                   onClick={() => handleStudentClick(student)}
-                  className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center">
                         <PersonIcon className="w-6 h-6 text-teal-600" />

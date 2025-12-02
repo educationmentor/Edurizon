@@ -30,7 +30,8 @@ const BreadcrumbAdmin: React.FC<BreadcrumbAdminProps> = ({ role="" }) => {
     "digitalMarketing":"Digital Marketing Dashboard",
     "counsellor-admin":"Counsellor Admin Dashboard",
     "document":"Document Management",
-    "digital":"Digital Team"
+    "digital":"Digital Team",
+    'tasks':'Tasks'
   };
 
   return (

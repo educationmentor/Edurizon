@@ -28,6 +28,11 @@ import { usePathname } from "next/navigation";
 import CTASectionComponent from "@/components/CTASectionComponent";
 import Home from '../pages/index'
 import NavHeader from "@/components/NavHeader";
+import { setupAdminAxiosInterceptor } from "@/lib/setupAdminAxiosInterceptor";
+
+if (typeof window !== "undefined") {
+  setupAdminAxiosInterceptor();
+}
 
 const GA_TRACKING_ID = "G-Z25NZ103DJ";
 
@@ -165,26 +170,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         )}
 
-        {isAdminRoute && isMobileView ? (
-          <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
-              <h1 className="text-2xl font-bold text-blue-500 mb-4">Coming Soon</h1>
-              <p className="text-gray-700">
-                This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
-              </p>
-            </div>
+        <>
+          {/* Admin routes are now fully accessible on all screen sizes */}
+          {/* {!shouldExcludeLayout && <NavHeader/>} */}
+          {!shouldExcludeLayout && <Navbar />}
+          {pathname === '/' ? <Home /> : <Component {...pageProps} />}
+          <GoogleAnalytics gaId="G-Z25NZ103DJ" />
+          <div id="footer">
+            {!shouldExcludeLayout && <CTASectionComponent />}
           </div>
-        ) : (
-          <>
-            {/* {!shouldExcludeLayout && <NavHeader/>} */}
-            {!shouldExcludeLayout && <Navbar />}
-            {pathname === '/' ? <Home /> : <Component {...pageProps} />}
-            <GoogleAnalytics gaId="G-Z25NZ103DJ" />
-            <div id="footer">
-              {!shouldExcludeLayout && <CTASectionComponent />}
-            </div>
-          </>
-        )}
+        </>
       </ThemeProvider>
     </>
   );

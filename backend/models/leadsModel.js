@@ -39,6 +39,16 @@ const leadsSchema = mongoose.Schema(
         enum: ['hot','warm','negative','cold','pending','completed'],
         default:'pending'
     },
+    // Explicit calling date (separate from createdAt/updatedAt)
+    callingDate: {
+      type: Date,
+      required: false,
+    },
+    // Optional follow-up date for counsellors to schedule callbacks
+    followUpDate: {
+      type: Date,
+      required: false,
+    },
     remark:{
         type:String,
         required:false

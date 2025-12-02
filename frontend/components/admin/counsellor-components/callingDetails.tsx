@@ -258,7 +258,10 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
                 }
               });
               if (assignedRes.data) {
-                setRegisteredStudents(assignedRes.data.data);
+                const sorted = [...assignedRes.data.data].sort((a: any, b: any) =>
+                  (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase())
+                );
+                setRegisteredStudents(sorted);
               }
             } catch (err: any) {
               console.log("err",err);

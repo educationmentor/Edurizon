@@ -75,8 +75,14 @@ const ViewLeads = () => {
       });
 
       if (response.data.status === 'success') {
-        setCounselors(response.data.data);
-        mapCounselorName(counselors);
+        const sorted = [...response.data.data].sort((a: Counselor, b: Counselor) => {
+          const nameA = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase();
+          const nameB = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase();
+          if (nameA && nameB) return nameA.localeCompare(nameB);
+          return (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase());
+        });
+        setCounselors(sorted);
+        mapCounselorName(sorted);
       }
     } catch (err) {
       console.error('Failed to fetch counselors:', err);

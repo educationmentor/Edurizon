@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
+import { getAdminData } from '@/utils/adminStorage';
 const navItems = [
     {
       href: "/admin/digital",
@@ -37,15 +38,8 @@ const DigitalTeam = () => {
     
     const [adminData, setAdminData] = useState<any>(null);
     useEffect(() => {
-        if(sessionStorage.getItem('adminData')){
-          const value = sessionStorage.getItem('adminData');
-          const parsedValue = JSON.parse(value || '{}');
-          setAdminData(parsedValue);
-        }else{
-          const value = localStorage.getItem('adminData');
-          const parsedValue = JSON.parse(value || '{}');
-          setAdminData(parsedValue);
-        }
+        const storedAdmin = getAdminData();
+        setAdminData(storedAdmin || null);
       }, []);
     
 
@@ -124,7 +118,13 @@ const SuperAdminTable: React.FC = () => {
                 });
 
                 const users = response.data?.data || [];
-                setAdminUsers(users);
+                const sorted = [...users].sort((a: any, b: any) => {
+                    const nameA = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase();
+                    const nameB = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase();
+                    if (nameA && nameB) return nameA.localeCompare(nameB);
+                    return (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase());
+                });
+                setAdminUsers(sorted);
             } catch (err) {
                 console.error('Error fetching admin users:', err);
             }

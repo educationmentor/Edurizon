@@ -51,15 +51,15 @@ const CallingRecordComponent= ()  => {
     const [assigningCounsellor, setAssigningCounsellor] = useState(false);
 
     const  tableHeaders = [
-        "S.No",
-        "Student Name",
-        "Interested Country",
-        "Contact No.",
-        "Interested Course",
-        activeTab=='registered'?'Enrollment Date':'Lead Date',
-        'Assigned to',
-        'Lead Type'
-      ];
+    "S.No",
+    "Student Name",
+    "Interested Country",
+    "Contact No.",
+    "Interested Course",
+    activeTab=='registered'?'Enrollment Date':'Lead Date',
+    'Calling Status',
+    'Lead Type'
+  ];
       
       const csvHeader=[
         'Student Name',
@@ -67,7 +67,7 @@ const CallingRecordComponent= ()  => {
         'Contact No.',
         'Interested Course',
         activeTab=='registered'?'Enrollment Date':'Lead Date',
-        'Assigned to',
+        'Calling Status',
         'Lead Type'
       ];
       
@@ -125,22 +125,77 @@ const CallingRecordComponent= ()  => {
               })}</span>
           ),
         },
-                 {
-             key: "assigned to",
-             render: (lead:any) => {
-               // Try multiple possible field names for counsellor name
-               const counsellorName = lead.assignedCounsellorName || lead.counsellorName || lead.assignedToName || lead.assignedTo;
-               return (
-                 <span className="text-sm text-gray-500">{counsellorName ?? 'None'}</span>
-               );
-             },
-           },
            {
+            key: "callingStatus",
+            render: (lead:any) => {
+              const status = lead.callingStatus || 'pending';
+              const label = status
+                .split('-')
+                .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+                .join(' ');
+
+              const getCallingStatusClasses = (value: string) => {
+                switch (value) {
+                  case 'pending':
+                    return 'text-yellow-700 bg-yellow-50 border-yellow-200';
+                  case 'follow-up':
+                    return 'text-blue-700 bg-blue-50 border-blue-200';
+                  case 'no-answer':
+                    return 'text-orange-700 bg-orange-50 border-orange-200';
+                  case 'not-interested':
+                    return 'text-red-700 bg-red-50 border-red-200';
+                  default:
+                    return 'text-gray-700 bg-gray-50 border-gray-200';
+                }
+              };
+
+              return (
+                <span
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${getCallingStatusClasses(
+                    status
+                  )}`}
+                >
+                  {label}
+                </span>
+              );
+            },
+          },
+          {
             key: "leadType",
             render: (lead:any) => {
-              return <span className="text-sm text-gray-500">{lead.leadType?lead.leadType.charAt(0).toUpperCase() + lead.leadType.slice(1): 'None'}</span>
-            }
-           }
+              const type = lead.leadType || 'none';
+              const label = type !== 'none'
+                ? type.charAt(0).toUpperCase() + type.slice(1)
+                : 'None';
+
+              const getLeadStatusClasses = (status: string) => {
+                switch (status) {
+                  case 'pending':
+                    return 'text-yellow-700 bg-yellow-50 border-yellow-200';
+                  case 'follow-up':
+                    return 'text-blue-700 bg-blue-50 border-blue-200';
+                  case 'negative':
+                    return 'text-red-700 bg-red-50 border-red-200';
+                  case 'completed':
+                    return 'text-green-700 bg-green-50 border-green-200';
+                  case 'registered':
+                    return 'text-purple-700 bg-purple-50 border-purple-200';
+                  default:
+                    return 'text-gray-700 bg-gray-50 border-gray-200';
+                }
+              };
+
+              return (
+                <span
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${getLeadStatusClasses(
+                    type
+                  )}`}
+                >
+                  {label}
+                </span>
+              );
+            },
+          }
         ];
 
         

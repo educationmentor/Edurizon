@@ -338,8 +338,8 @@ exports.impersonate=async (req, res) => {
   // create token as if Parthiv logged in
   const token = jwt.sign(
     { id: user._id, role: user.role, name: user.name, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" }
+    config.jwt.adminSecret,
+    { expiresIn: config.jwt.expiresIn || '1h' }
   );
 
   res.json({ token, user });

@@ -20,6 +20,9 @@ interface Lead {
   remark: string;
   updatedAt: string;
   assignedCounsellor: any;
+  // Explicit dates stored in DB (can be null/undefined)
+  callingDate?: string | null;
+  followUpDate?: string | null;
 }
 
 const CallingRecords = () => {
@@ -30,6 +33,12 @@ const CallingRecords = () => {
   const [filteredLeads, setFilteredLeads] = useState<Lead[]>([]);
   const [adminData, setAdminData] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showFollowUpModal, setShowFollowUpModal] = useState(false);
+  const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<Lead | null>(null);
+  const [followUpDateInput, setFollowUpDateInput] = useState('');
+  const [todayFollowUps, setTodayFollowUps] = useState<Lead[]>([]);
+  const [editingRemarkId, setEditingRemarkId] = useState<string | null>(null);
+  const [remarkInput, setRemarkInput] = useState('');
 
   const navItems = [
     {
@@ -58,6 +67,20 @@ const CallingRecords = () => {
   const counsellorId = adminData?._id;
 
   const ITEMS_PER_PAGE = 10;
+
+  const isSameDate = (dateStr?: string | null, refDate?: Date) => {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    const ref = refDate || new Date();
+    const dY = d.getFullYear();
+    const dM = d.getMonth();
+    const dD = d.getDate();
+    return (
+      dY === ref.getFullYear() &&
+      dM === ref.getMonth() &&
+      dD === ref.getDate()
+    );
+  };
 
   // Fetch leads for the counsellor
   const fetchLeads = async () => {
@@ -93,6 +116,12 @@ const CallingRecords = () => {
       setFilteredLeads(leads.filter(lead => lead.leadType === activeTab));
     }
   }, [activeTab, leads]);
+
+  // Compute today's follow-ups whenever leads change
+  useEffect(() => {
+    const todayDue = leads.filter((lead) => isSameDate(lead.followUpDate || undefined));
+    setTodayFollowUps(todayDue);
+  }, [leads]);
 
   // Fetch admin data on component mount
   useEffect(() => {
@@ -169,9 +198,9 @@ const CallingRecords = () => {
     "Course",
     "Calling Status",
     "Lead Type",
-    "Category",
     "Remark",
-    "Calling Date"
+    "Calling Date",
+    "Follow-up Date"
   ];
 
   // CSV headers
@@ -182,9 +211,9 @@ const CallingRecords = () => {
     "Course",
     "Calling Status",
     "Lead Type",
-    "Category",
     "Remark",
-    "Calling Date"
+    "Calling Date",
+    "Follow-up Date"
   ];
 
   // CSV data fields
@@ -197,7 +226,8 @@ const CallingRecords = () => {
     "leadType",
     "leadStatus",
     "remark",
-    "updatedAt"
+    "callingDate",
+    "followUpDate"
   ];
 
   // Table columns configuration
@@ -293,68 +323,179 @@ const CallingRecords = () => {
       },
     },
     {
-      key: "category",
+      key: "remark",
       render: (lead: Lead) => {
-        const getStatusColor = (status: string) => {
-          switch (status) {
-            case 'hot': return 'text-red-600 bg-red-50 border-red-200';
-            case 'warm': return 'text-orange-600 bg-orange-50 border-orange-200';
-            case 'cold': return 'text-blue-600 bg-blue-50 border-blue-200';
-            case 'negative': return 'text-gray-600 bg-gray-50 border-gray-200';
-            case 'completed': return 'text-green-600 bg-green-50 border-green-200';
-            default: return 'text-gray-500 bg-gray-50 border-gray-200';
-          }
-        };
+        const isEditing = editingRemarkId === lead._id;
+        if (isEditing) {
+          return (
+            <div className="flex flex-col space-y-1 max-w-xs">
+              <textarea
+                value={remarkInput}
+                onChange={(e) => setRemarkInput(e.target.value)}
+                className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                rows={2}
+              />
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      const response = await updateLeadStatus(lead._id, { remark: remarkInput });
+                      if (response.success) {
+                        setLeads((prev) =>
+                          prev.map((l) =>
+                            l._id === lead._id ? { ...l, remark: remarkInput } : l
+                          )
+                        );
+                        toast.success('Remark updated successfully');
+                      } else {
+                        toast.error(response.message || 'Failed to update remark');
+                      }
+                    } catch (err: any) {
+                      toast.error(
+                        err.response?.data?.message || 'Failed to update remark'
+                      );
+                    } finally {
+                      setEditingRemarkId(null);
+                      setRemarkInput('');
+                    }
+                  }}
+                  className="text-xs px-2 py-1 rounded-md bg-teal-600 text-white hover:bg-teal-700"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditingRemarkId(null);
+                    setRemarkInput('');
+                  }}
+                  className="text-xs px-2 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          );
+        }
+        return (
+          <button
+            type="button"
+            onClick={() => {
+              setEditingRemarkId(lead._id);
+              setRemarkInput(lead.remark || '');
+            }}
+            className="text-left text-sm text-gray-500 max-w-xs truncate hover:text-gray-700 underline-offset-2 hover:underline"
+            title={lead.remark}
+          >
+            {lead.remark || 'Add remark'}
+          </button>
+        );
+      },
+    },
+    {
+      key: "callingDate",
+      render: (lead: Lead) => {
+        const valueForInput = lead.callingDate
+          ? new Date(lead.callingDate).toISOString().split('T')[0]
+          : '';
 
-        const getStatusIcon = (status: string) => {
-          switch (status) {
-            case 'hot': return '🔥';
-            case 'warm': return '🟠';
-            case 'cold': return '🔵';
-            case 'negative': return '⚫';
-            case 'completed': return '✅';
-            default: return '⏳';
+        const label = lead.callingDate
+          ? new Date(lead.callingDate).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
+          : 'Not set';
+
+        const isToday = isSameDate(lead.callingDate || undefined);
+
+        const handleChange = async (dateStr: string) => {
+          const payloadValue = dateStr || null;
+          try {
+            const response = await updateLeadStatus(lead._id, {
+              callingDate: payloadValue,
+            });
+            if (response.success) {
+              setLeads((prev) =>
+                prev.map((l) =>
+                  l._id === lead._id ? { ...l, callingDate: payloadValue } : l
+                )
+              );
+              toast.success(
+                payloadValue
+                  ? 'Calling date updated successfully'
+                  : 'Calling date cleared'
+              );
+            } else {
+              toast.error(response.message || 'Failed to update calling date');
+            }
+          } catch (err: any) {
+            toast.error(
+              err.response?.data?.message || 'Failed to update calling date'
+            );
           }
         };
 
         return (
-          <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${lead.leadStatus === 'pending' ? 'bg-gray-400' : lead.leadStatus === 'hot' ? 'bg-red-400' : lead.leadStatus === 'warm' ? 'bg-orange-400' : lead.leadStatus === 'cold' ? 'bg-blue-400' : lead.leadStatus === 'negative' ? 'bg-gray-600' : 'bg-green-400'}`}></div>
-            <select
-              value={lead.leadStatus || 'pending'}
-              onChange={(e) => handleStatusUpdate(lead._id, 'leadStatus', e.target.value)}
-              className={`text-sm border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent font-medium ${getStatusColor(lead.leadStatus || 'pending')}`}
+          <div className="flex flex-col gap-1">
+            <span
+              className={`text-sm ${
+                isToday ? 'font-semibold text-blue-700' : 'text-gray-500'
+              }`}
             >
-              <option value="pending" className="bg-white text-gray-500">⏳ Pending</option>
-              <option value="hot" className="bg-white text-red-600">🔥 Hot</option>
-              <option value="warm" className="bg-white text-orange-600">🟠 Warm</option>
-              <option value="cold" className="bg-white text-blue-600">🔵 Cold</option>
-              <option value="negative" className="bg-white text-gray-600">⚫ Negative</option>
-              <option value="completed" className="bg-white text-green-600">✅ Completed</option>
-            </select>
+              {label}
+              {isToday && ' (Today)'}
+            </span>
+            <input
+              type="date"
+              value={valueForInput}
+              onChange={(e) => handleChange(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+            />
           </div>
         );
       },
     },
     {
-      key: "remark",
-      render: (lead: Lead) => (
-        <span className="text-sm text-gray-500 max-w-xs truncate" title={lead.remark}>
-          {lead.remark || 'No remarks'}
-        </span>
-      ),
-    },
-    {
-      key: "callingDate",
-      render: (lead: Lead) => (
-        <span className="text-sm text-gray-500">
-          {new Date(lead.updatedAt).toLocaleDateString('en-IN', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-          })}
-        </span>
-      ),
+      key: "followUpDate",
+      render: (lead: Lead) => {
+        const isToday = isSameDate(lead.followUpDate || undefined);
+
+        return (
+          <div className="flex items-center gap-2">
+            <span
+              className={`text-sm ${
+                isToday ? 'font-semibold text-orange-700' : 'text-gray-500'
+              }`}
+            >
+              {lead.followUpDate
+                ? new Date(lead.followUpDate).toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })
+                : 'Not set'}
+              {isToday && ' (Today)'}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedLeadForFollowUp(lead);
+                setFollowUpDateInput(
+                  lead.followUpDate
+                    ? new Date(lead.followUpDate).toISOString().split('T')[0]
+                    : ''
+                );
+                setShowFollowUpModal(true);
+              }}
+              className="text-xs text-teal-700 hover:text-teal-900 underline"
+            >
+              {lead.followUpDate ? 'Update' : 'Set'}
+            </button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -366,6 +507,43 @@ const CallingRecords = () => {
   // Refresh data
   const handleRefresh = () => {
     fetchLeads();
+  };
+
+  // Save or clear follow-up date for selected lead
+  const handleSaveFollowUpDate = async (overrideValue?: string | null) => {
+    if (!selectedLeadForFollowUp) return;
+    try {
+      const value =
+        overrideValue !== undefined
+          ? overrideValue
+          : followUpDateInput
+          ? followUpDateInput
+          : null;
+
+      const response = await updateLeadStatus(selectedLeadForFollowUp._id, {
+        followUpDate: value,
+      } as any);
+
+      if (response.success) {
+        setLeads((prev) =>
+          prev.map((lead) =>
+            lead._id === selectedLeadForFollowUp._id
+              ? { ...lead, followUpDate: value }
+              : lead
+          )
+        );
+        toast.success(
+          value ? 'Follow-up date updated successfully' : 'Follow-up date cleared'
+        );
+        setShowFollowUpModal(false);
+        setSelectedLeadForFollowUp(null);
+        setFollowUpDateInput('');
+      } else {
+        toast.error(response.message || 'Failed to update follow-up date');
+      }
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || 'Failed to update follow-up date');
+    }
   };
 
   if (!adminData) {
@@ -430,6 +608,21 @@ const CallingRecords = () => {
 
       {/* Main Content */}
       <div className="rounded-[12px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {todayFollowUps.length > 0 && (
+          <div className="mb-4 rounded-lg border border-orange-200 bg-orange-50 px-4 py-3">
+            <p className="text-sm font-semibold text-orange-800">
+              You have {todayFollowUps.length} lead
+              {todayFollowUps.length > 1 ? 's' : ''} scheduled for follow-up today.
+            </p>
+            <p className="mt-1 text-xs text-orange-700">
+              {todayFollowUps
+                .slice(0, 5)
+                .map((l) => l.name)
+                .join(', ')}
+              {todayFollowUps.length > 5 && ' ...'}
+            </p>
+          </div>
+        )}
         {/* Status Legend */}
         {/* <div className="bg-white rounded-lg shadow mb-6 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Legend</h3>
@@ -529,6 +722,81 @@ const CallingRecords = () => {
           />
         </div>
       </div>
+      {showFollowUpModal && selectedLeadForFollowUp && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full shadow-xl">
+            <div className="px-4 py-3 border-b flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-gray-900">
+                Set Follow-up Date
+              </h3>
+              <button
+                onClick={() => {
+                  setShowFollowUpModal(false);
+                  setSelectedLeadForFollowUp(null);
+                  setFollowUpDateInput('');
+                }}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4 space-y-4">
+              <div>
+                <p className="text-sm font-medium text-gray-900">
+                  {selectedLeadForFollowUp.name}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {selectedLeadForFollowUp.phone || selectedLeadForFollowUp.countryInterested}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Follow-up Date
+                </label>
+                <input
+                  type="date"
+                  value={followUpDateInput}
+                  onChange={(e) => setFollowUpDateInput(e.target.value)}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+                />
+              </div>
+            </div>
+            <div className="px-4 py-3 border-t flex items-center justify-end gap-2">
+              {selectedLeadForFollowUp.followUpDate && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    // Clear directly to avoid stale state issues
+                    handleSaveFollowUpDate(null);
+                  }}
+                  className="px-3 py-1.5 text-xs rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Clear Date
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowFollowUpModal(false);
+                  setSelectedLeadForFollowUp(null);
+                  setFollowUpDateInput('');
+                }}
+                className="px-3 py-1.5 text-xs rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSaveFollowUpDate()}
+                disabled={!followUpDateInput}
+                className="px-3 py-1.5 text-xs rounded-md bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-60"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };

@@ -19,12 +19,22 @@ export const googleAuth = async (tokenId: string) => {
 };
 
 // Leads API functions
+export interface UpdateLeadStatusPayload {
+  callingStatus?: string;
+  leadType?: string;
+  leadStatus?: string;
+  // optional dates/remark for counsellor UI
+  callingDate?: string | null;
+  followUpDate?: string | null;
+  remark?: string;
+}
+
 export const getLeadsByCounsellor = async (counsellorId: string) => {
   const response = await axios.get(`${API_URL}/leads/get-all-leads-by-counsellor/${counsellorId}`);
   return response.data;
 };
 
-export const updateLeadStatus = async (leadId: string, statusData: { callingStatus?: string; leadType?: string; leadStatus?: string }) => {
+export const updateLeadStatus = async (leadId: string, statusData: UpdateLeadStatusPayload) => {
   const response = await axios.patch(`${API_URL}/leads/${leadId}/update-status`, statusData);
   return response.data;
 };

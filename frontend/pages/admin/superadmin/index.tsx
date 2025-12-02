@@ -8,6 +8,7 @@ import { baseUrl } from '@/lib/baseUrl';
 import AddMemberDialog from '@/components/admin/AddMemberDialog';
 import { TransitionLink } from '@/utils/TransitionLink';
 import Header from '@/components/admin/superadmin/header';
+import { getAdminToken } from '@/utils/adminStorage';
 
 interface AdminUser {
   _id: string;
@@ -71,15 +72,23 @@ const AdminDashboard = () => {
 
   const fetchTeamMembers = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = getAdminToken();
+      if (!token) return;
+      const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
       const response = await axios.get(`${baseUrl}/api/admin/users`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: authToken,
         },
       });
 
       if (response.data.status === 'success') {
-        setTeamMembers(response.data.data);
+        const sorted = [...response.data.data].sort((a: AdminUser, b: AdminUser) => {
+          const nameA = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase();
+          const nameB = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase();
+          if (nameA && nameB) return nameA.localeCompare(nameB);
+          return (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase());
+        });
+        setTeamMembers(sorted);
       }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to fetch team members');
@@ -92,7 +101,7 @@ const AdminDashboard = () => {
 
   const fetchPendingLeadsCount = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = getAdminToken();
       if (!token) return;
 
       const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
@@ -113,10 +122,12 @@ const AdminDashboard = () => {
   const fetchAttendanceData = async (adminId: string) => {
     try {
       setAttendanceLoading(true);
-      const token = localStorage.getItem('adminToken');
+      const token = getAdminToken();
+      if (!token) return;
+      const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
       const response = await axios.get(`${baseUrl}/api/attendance/admin/${adminId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: authToken,
         },
       });
 
@@ -171,13 +182,14 @@ const AdminDashboard = () => {
 
   const toggleAccess = async (userId: string, currentStatus: boolean) => {
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = getAdminToken();
+      if (!token) return;
       await axios.patch(
         `${baseUrl}/api/admin/users/${userId}/toggle-access`,
         { active: !currentStatus },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
           },
         }
       );
@@ -197,10 +209,11 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to remove this team member?')) return;
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = getAdminToken();
+      if (!token) return;
       await axios.delete(`${baseUrl}/api/admin/users/${userId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
         },
       });
 
@@ -251,20 +264,44 @@ const AdminDashboard = () => {
 
   const handleImpersonate = async (id:any) => {
     try {
+      const adminToken = getAdminToken();
+      if (!adminToken) return;
       const res = await axios.post(`${baseUrl}/api/admin/impersonate/${id}`, {}, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` }
+        headers: { Authorization: adminToken.startsWith('Bearer ') ? adminToken : `Bearer ${adminToken}` }
       });
   
-    const { token, user } = res.data;
+      const { token: impersonatedToken, user } = res.data;
+      const newWindow = window.open("/admin", "_blank");
 
-    // Save into sessionStorage instead of localStorage
-    sessionStorage.setItem("adminToken", token);
-    sessionStorage.setItem("adminData", JSON.stringify(user));
-    
-    // open impersonated dashboard in new tab
-    const newWindow = window.open("/admin", "_blank");
-    sessionStorage.clear();
-  } catch (err) {
+      if (!newWindow) {
+        console.error("Unable to open impersonated admin window.");
+        return;
+      }
+
+      // Try immediately in case the document is already ready.
+      const persistSession = () => {
+        newWindow.sessionStorage.setItem("adminToken", impersonatedToken);
+        newWindow.sessionStorage.setItem("adminData", JSON.stringify(user));
+      };
+
+      try {
+        persistSession();
+      } catch (error) {
+        // Fallback: poll until the new window's sessionStorage is available.
+        const timer = setInterval(() => {
+          if (newWindow.closed) {
+            clearInterval(timer);
+            return;
+          }
+          try {
+            persistSession();
+            clearInterval(timer);
+          } catch {
+            // Keep trying until sessionStorage is ready or window closes.
+          }
+        }, 100);
+      }
+    } catch (err) {
       console.error(err);
     }
   };
@@ -288,7 +325,13 @@ const AdminDashboard = () => {
                     {/* <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
                       Team Call
                     </button> */}
-                   
+                    <Link href="/admin/superadmin/tasks/create">
+                      <button
+                        className="bg-white border border-teal-600 text-teal-700 px-4 py-2 rounded-md hover:bg-teal-50 flex items-center"
+                      >
+                        New Task/Update
+                      </button>
+                    </Link>
                     <button
                       onClick={() => setIsAddMemberDialogOpen(true)}
                       className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center"

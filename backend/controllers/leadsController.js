@@ -69,7 +69,9 @@ const addLead = async (req, res) => {
       leadStatus,
       remark,
       assignedCounsellor,
-      assignedCounsellorName
+      assignedCounsellorName,
+      callingDate,
+      followUpDate,
     } = req.body;
 
     // Validate required fields
@@ -89,6 +91,10 @@ const addLead = async (req, res) => {
       leadType: leadType || 'pending',
       callingStatus: callingStatus || 'pending',
       leadStatus: leadStatus || 'pending',
+      // Optional explicit calling date (falls back to createdAt/updatedAt in UI)
+      callingDate: callingDate || undefined,
+      // Allow optional initial follow-up date when creating a lead
+      followUpDate: followUpDate || undefined,
       remark,
       assignedCounsellor,
       assignedCounsellorName
@@ -130,7 +136,9 @@ const modifyLead = async (req, res) => {
       leadStatus,
       remark,
       assignedCounsellor,
-      assignedCounsellorName
+      assignedCounsellorName,
+      callingDate,
+      followUpDate,
     } = req.body;
 
     // Find the lead first
@@ -152,6 +160,14 @@ const modifyLead = async (req, res) => {
     if (leadType !== undefined) lead.leadType = leadType;
     if (callingStatus !== undefined) lead.callingStatus = callingStatus;
     if (leadStatus !== undefined) lead.leadStatus = leadStatus;
+    if (callingDate !== undefined) {
+      // Allow clearing the calling date by sending null/empty
+      lead.callingDate = callingDate ? new Date(callingDate) : null;
+    }
+    if (followUpDate !== undefined) {
+      // Allow clearing the follow-up date by sending null/empty
+      lead.followUpDate = followUpDate ? new Date(followUpDate) : null;
+    }
     if (remark !== undefined) lead.remark = remark;
     if (assignedCounsellor !== undefined) lead.assignedCounsellor = assignedCounsellor;
     if (assignedCounsellorName !== undefined) lead.assignedCounsellorName=assignedCounsellorName;
@@ -278,7 +294,7 @@ const getLeadsByCounsellor = async (req, res) => {
 const updateLeadStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { callingStatus, leadType, leadStatus } = req.body;
+    const { callingStatus, leadType, leadStatus, callingDate, followUpDate, remark } = req.body;
 
     const lead = await Leads.findById(id);
     
@@ -293,6 +309,18 @@ const updateLeadStatus = async (req, res) => {
     if (callingStatus !== undefined) lead.callingStatus = callingStatus;
     if (leadType !== undefined) lead.leadType = leadType;
     if (leadStatus !== undefined) lead.leadStatus = leadStatus;
+    if (callingDate !== undefined) {
+      // value can be a date string (yyyy-mm-dd) or null to clear
+      lead.callingDate = callingDate ? new Date(callingDate) : null;
+    }
+    // Handle follow-up date updates from counsellor UI
+    if (followUpDate !== undefined) {
+      // value can be a date string (yyyy-mm-dd) or null to clear
+      lead.followUpDate = followUpDate ? new Date(followUpDate) : null;
+    }
+    if (remark !== undefined) {
+      lead.remark = remark;
+    }
     
     // Update the updatedAt timestamp
     lead.updatedAt = new Date();

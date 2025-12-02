@@ -56,7 +56,13 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
       });
       
       if (response.data.status === 'success') {
-        setAdmins(response.data.data);
+        const sorted = [...response.data.data].sort((a: any, b: any) => {
+          const nameA = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase();
+          const nameB = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase();
+          if (nameA && nameB) return nameA.localeCompare(nameB);
+          return (a.email || '').toLowerCase().localeCompare((b.email || '').toLowerCase());
+        });
+        setAdmins(sorted);
       }
     } catch (error) {
       console.error('Error fetching admins:', error);
@@ -73,7 +79,10 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
       });
       console.log('response',response.data);
       if (response.data) {
-        setRegisteredStudents(response.data);
+        const sorted = [...response.data].sort((a: any, b: any) =>
+          (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase())
+        );
+        setRegisteredStudents(sorted);
       }
     } catch (error) {
       console.error('Error fetching registered students:', error);
