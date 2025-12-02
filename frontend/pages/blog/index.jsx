@@ -28,7 +28,7 @@ const Blog = ({ blogs }) => {
 
 export async function getServerSideProps(context) {
   const res = await fetch(
-    `https://srv757671.hstgr.cloud/wp-json/wp/v2/blogs?_fields=id,slug,title,acf`
+    `https://srv757671.hstgr.cloud/wp-json/wp/v2/blogs?_fields=id,slug,title,acf&per_page=100`
   )
   const blogs = await res.json()
 

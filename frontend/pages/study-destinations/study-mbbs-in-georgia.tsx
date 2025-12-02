@@ -52,7 +52,7 @@ const academicData={
     content:{
         title:"Academic Calender",
         subTitle:"A glimpse of the important dates an aspirant must keep in mind to get on board the best medical colleges in Georgia. The information below is not absolute and may vary university-wise.",
-        data:[["Events","Dates"],["Admission Process","Start in the month of May"],["Last date of application","In the month of October"],["Commencement of MBBS course","From October"]],
+        data:[["Events","Dates"],["Admission Process","Start in the month of May"],["Last date of application","In the month of October"],["Commencement of MBBS course","There are two sessions October & February"]],
     }
 }
 
@@ -130,59 +130,59 @@ const universities = [
       feesInUSD: 5000,
       hostelFeesInUSD: 3300,
     },
+    // {
+    //   id: 9,
+    //   name: "ALTE University",
+    //   location: "Tbilisi",
+    //   feesInUSD: 5500,
+    //   hostelFeesInUSD: 3000,
+    // },
     {
       id: 9,
-      name: "ALTE University",
-      location: "Tbilisi",
-      feesInUSD: 5500,
-      hostelFeesInUSD: 3000,
-    },
-    {
-      id: 10,
       name: "European University",
       location: "Tbilisi",
       feesInUSD: 5500,
       hostelFeesInUSD: 3000,
     },
     {
-      id: 11,
+      id: 10,
       name: "Grigol Robakidze University",
       location: "Tbilisi",
       feesInUSD: 5500,
       hostelFeesInUSD: 3000,
     },
+    // {
+    //   id: 12,
+    //   name: "Geomedi University",
+    //   location: "Tbilisi",
+    //   feesInUSD: 5500,
+    //   hostelFeesInUSD: 3000,
+    // },
     {
-      id: 12,
-      name: "Geomedi University",
-      location: "Tbilisi",
-      feesInUSD: 5500,
-      hostelFeesInUSD: 3000,
-    },
-    {
-      id: 13,
+      id: 11,
       name: "SEU, Georgian National University",
       location: "Tbilisi",
       feesInUSD: 5500,
       hostelFeesInUSD: 3000,
       href: "/study-destinations/study-mbbs-in-georgia/georgian-national-university-seu"
     },
+    // {
+    //   id: 14,
+    //   name: "International Black Sea University",
+    //   location: "Tbilisi",
+    //   feesInUSD: 4800,
+    //   hostelFeesInUSD: 3000,
+    //   href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university"
+    // },
+    // {
+    //   id: 15,
+    //   name: "Batumi Shota Rustaveli State University",
+    //   location: "Batumi",
+    //   feesInUSD: 4800,
+    //   hostelFeesInUSD: 3000,
+    // },
     {
-      id: 14,
-      name: "International Black Sea University",
-      location: "Tbilisi",
-      feesInUSD: 4800,
-      hostelFeesInUSD: 3000,
-      href: "/study-destinations/study-mbbs-in-georgia/international-black-sea-university"
-    },
-    {
-      id: 15,
-      name: "Batumi Shota Rustaveli State University",
-      location: "Batumi",
-      feesInUSD: 4800,
-      hostelFeesInUSD: 3000,
-    },
-    {
-      id: 16,
+      id: 12,
       name: "Avicenna Batumi Medical University",
       location: "Batumi",
       feesInUSD: 4000,
@@ -198,7 +198,7 @@ const eligibilityData={
     content:{
         title:"Eligibility Criteria",
         subTitle:"Eligibility Criteria for MBBS in Georgia for Indian students",
-        data:[["Criteria","Details"],["Academic Qualification",["Class 12 (equivalent) with Phy, Chem, Bio (PCB).","General Category: Min 50% aggregate in PCB.","SC/ST/OBC: Min 40% aggregate in PCB."]],["NEET Qualification",["NEET qualification is mandatory."]],["Age Limit",["Minimum 17 years as of December 31, 2024."]]],
+        data:[["Criteria","Details"],["Academic Qualification",["Class 12 (equivalent) with Phy, Chem, Bio (PCB).","General Category: Min 50% aggregate in PCB.","SC/ST/OBC: Min 40% aggregate in PCB."]],["NEET Qualification",["NEET qualification is mandatory."]],["Age Limit",["Minimum 17 years as of December 31, of the admission year."]]],
         href:"string;"
     }
 }
@@ -255,7 +255,7 @@ const NewPage = () => {
                     <li>David Tvildiani Medical University</li>
                     <li>East European University (EEU)</li>
                     <li>New Vision University</li>
-                    <li>International Black Sea University</li>
+                    <li>Batumi Shota Rustaveli State University</li>
                 </ul>
            </div>
 
@@ -310,8 +310,17 @@ const NewPage = () => {
 
            
            <ListedTable id={eligibilityData.id} section2={eligibilityData.section2} content={eligibilityData.content} />
+           {/* Authorization Slider */}
+           <AuthorizationSlider 
+              images={[
+                '/assets/Images/authorization/georgia/Georgia1.jpg',
+                '/assets/Images/authorization/georgia/Georgia2.jpg',
+                '/assets/Images/authorization/georgia/Georgia3.jpeg',
+                '/assets/Images/authorization/georgia/Georgia4.jpeg',
+              ]}
+            />
 
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw]">
+           {/* <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[2vw]">
               <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[1vw]   md:text-h3Text text-center">Image Gallery</h3>
 
               <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
@@ -328,7 +337,7 @@ const NewPage = () => {
                 <span className="list-disc text-smallTextPhone md:text-smallText"><li>With Dean of East European University</li></span>
                 </div>
               </div>
-            </section>
+            </section> */}
 
             {/* Climate and Weather */}
            <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:px-[4vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
@@ -395,15 +404,7 @@ const NewPage = () => {
                 <Image src={"/assets/Images/mbbs-in-georgia/Georgia3.png"} className="min-w-[35vw] h-auto" width={690} height={690  } alt="georgia3"/>
             </div>
 
-            {/* Authorization Slider */}
-            <AuthorizationSlider 
-              images={[
-                '/assets/Images/authorization/georgia/Georgia1.jpg',
-                '/assets/Images/authorization/georgia/Georgia2.jpg',
-                '/assets/Images/authorization/georgia/Georgia3.jpeg',
-                '/assets/Images/authorization/georgia/Georgia4.jpeg',
-              ]}
-            />
+            
 
             {/* Post Arrival */}
             <PostArrival/>
