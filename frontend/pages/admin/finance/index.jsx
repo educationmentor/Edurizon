@@ -1,16 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import DocumentLayout from '@/components/admin/DocumentLayout';
 import { baseUrl } from '@/lib/baseUrl';
 import { getAdminToken } from '@/utils/adminStorage';
 import GridViewIcon from '@mui/icons-material/GridView';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import BillReceipt from '@/components/admin/BillReceipt';
 
 const navItems = [
   {
     href: '/admin/finance',
     icon: <GridViewIcon />,
     label: 'Overview',
+  },
+  {
+    href: '/admin/finance/student-tracking',
+    icon: <GridViewIcon />,
+    label: 'Student Tracking',
   },
 ];
 
@@ -50,6 +58,9 @@ const FinanceDashboard = () => {
     method: '',
     loading: false,
   });
+
+  const pdfContainerRef = useRef(null);
+  const [pdfContext, setPdfContext] = useState(null);
 
   const authHeaders = () => {
     const token = getAdminToken();
@@ -143,8 +154,14 @@ const FinanceDashboard = () => {
 
   const filteredStudentOptions = useMemo(() => {
     const query = studentPickerSearch.trim().toLowerCase();
-    if (!query) return students;
-    return students.filter(
+
+    const sorted = [...students].sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+    );
+
+    if (!query) return sorted;
+
+    return sorted.filter(
       (student) =>
         student.name?.toLowerCase().includes(query) || student.email?.toLowerCase().includes(query)
     );
@@ -152,40 +169,46 @@ const FinanceDashboard = () => {
 
   const enrichedStudents = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    return students
-      .map((student) => {
-        const summary =
-          studentFinancialMap.get(student._id) || {
-            totalBilled: 0,
-            totalPaid: 0,
-            outstanding: 0,
-            status: 'Pending',
-          };
-        const overallStatus =
-          summary.outstanding <= 0
-            ? 'Paid'
-            : summary.status === 'Overdue'
-            ? 'Overdue'
-            : summary.status === 'Partial Payment'
-            ? 'Partial Payment'
-            : 'Pending';
 
-        return {
-          ...student,
-          totalBilled: summary.totalBilled,
-          totalPaid: summary.totalPaid,
-          outstanding: summary.outstanding,
-          overallStatus,
+    const mapped = students.map((student) => {
+      const summary =
+        studentFinancialMap.get(student._id) || {
+          totalBilled: 0,
+          totalPaid: 0,
+          outstanding: 0,
+          status: 'Pending',
         };
-      })
-      .filter((student) => {
-        if (!query) return true;
-        return (
-          student.name?.toLowerCase().includes(query) ||
-          student.email?.toLowerCase().includes(query) ||
-          student.overallStatus?.toLowerCase().includes(query)
-        );
-      });
+      const overallStatus =
+        summary.outstanding <= 0
+          ? 'Paid'
+          : summary.status === 'Overdue'
+          ? 'Overdue'
+          : summary.status === 'Partial Payment'
+          ? 'Partial Payment'
+          : 'Pending';
+
+      return {
+        ...student,
+        totalBilled: summary.totalBilled,
+        totalPaid: summary.totalPaid,
+        outstanding: summary.outstanding,
+        overallStatus,
+      };
+    });
+
+    const filtered = mapped.filter((student) => {
+      if (!query) return true;
+      return (
+        student.name?.toLowerCase().includes(query) ||
+        student.email?.toLowerCase().includes(query) ||
+        student.overallStatus?.toLowerCase().includes(query)
+      );
+    });
+
+    // Sort alphabetically by student name
+    return filtered.sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+    );
   }, [students, studentFinancialMap, searchQuery]);
 
   const pendingTabRows = useMemo(() => {
@@ -339,6 +362,62 @@ const FinanceDashboard = () => {
       setPaymentModal((prev) => ({ ...prev, loading: false }));
     }
   };
+
+  const handleDownloadReceipt = (bill, student) => {
+    if (!bill || !student) {
+      toast.error('Bill or student information missing');
+      return;
+    }
+    setPdfContext({ bill, student });
+  };
+
+  useEffect(() => {
+    const generatePdf = async () => {
+      if (!pdfContext || !pdfContainerRef.current) return;
+
+      try {
+        const element = pdfContainerRef.current;
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+        });
+        const imgData = canvas.toDataURL('image/png');
+
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        const imgProps = {
+          width: canvas.width,
+          height: canvas.height,
+        };
+
+        const ratio = Math.min(pageWidth / imgProps.width, pageHeight / imgProps.height);
+        const imgWidth = imgProps.width * ratio;
+        const imgHeight = imgProps.height * ratio;
+
+        const x = (pageWidth - imgWidth) / 2;
+        const y = 0;
+
+        pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+
+        const receiptNumber = pdfContext.bill?._id
+          ? String(pdfContext.bill._id).slice(-8).toUpperCase()
+          : 'RECEIPT';
+        pdf.save(`Edurizon_Receipt_${receiptNumber}.pdf`);
+      } catch (err) {
+        console.error('Failed to generate PDF receipt:', err);
+        toast.error('Failed to generate PDF receipt');
+      } finally {
+        setPdfContext(null);
+      }
+    };
+
+    if (pdfContext) {
+      const id = setTimeout(generatePdf, 50);
+      return () => clearTimeout(id);
+    }
+  }, [pdfContext]);
 
   const renderStatusBadge = (status) => {
     const colors = {
@@ -760,7 +839,21 @@ const FinanceDashboard = () => {
               {activeTab === 'students' && (
                 <div className="flex flex-col gap-6">
                   {renderBillGenerationSection()}
-                  {renderStudentTrackingTable()}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-3">
+                    <p className="text-lg font-semibold text-gray-900">Student Tracking</p>
+                    <p className="text-sm text-gray-500">
+                      View detailed student-wise billing and payment history in the dedicated
+                      tracking page.
+                    </p>
+                    <div>
+                      <a
+                        href="/admin/finance/student-tracking"
+                        className="inline-flex items-center px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700"
+                      >
+                        Go to Student Tracking
+                      </a>
+                    </div>
+                  </div>
                 </div>
               )}
               {activeTab === 'pending' && renderPendingBillsTable()}
@@ -825,13 +918,20 @@ const FinanceDashboard = () => {
                           {bill.dueDate ? new Date(bill.dueDate).toLocaleDateString() : '—'}
                         </td>
                         <td className="px-4 py-3">{renderStatusBadge(bill.status)}</td>
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 space-x-3 whitespace-nowrap">
                           <button
                             type="button"
                             className="text-sm font-medium text-teal-600 hover:text-teal-800"
                             onClick={() => openPaymentModal(bill)}
                           >
                             Record Payment
+                          </button>
+                          <button
+                            type="button"
+                            className="text-sm font-medium text-gray-600 hover:text-gray-800"
+                            onClick={() => handleDownloadReceipt(bill, studentModal.student)}
+                          >
+                            Download Receipt
                           </button>
                         </td>
                       </tr>
@@ -903,6 +1003,15 @@ const FinanceDashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Hidden container used for HTML-to-PDF rendering */}
+      <div style={{ position: 'fixed', left: '-9999px', top: 0, zIndex: -1 }}>
+        {pdfContext && (
+          <div ref={pdfContainerRef}>
+            <BillReceipt bill={pdfContext.bill} student={pdfContext.student} />
+          </div>
+        )}
+      </div>
     </DocumentLayout>
   );
 };

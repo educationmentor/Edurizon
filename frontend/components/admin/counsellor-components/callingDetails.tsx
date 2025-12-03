@@ -28,7 +28,7 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
     const [followUp,setFollowUp] = useState<Lead[]>([]);
     const [negative, setNegative] = useState<Lead[]>([]);
     const [completed, setCompleted] = useState<Lead[]>([]);
-    const [registeredStudents, setRegisteredStudents] = useState([]);
+    const [registeredStudents, setRegisteredStudents] = useState<any[]>([]);
 
     // Popup Open States
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -252,17 +252,26 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
       
               // Ensure token has Bearer prefix
               const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-              const assignedRes = await axios.get(`${baseUrl}/api/registered-students/get-by-counsellor/${adminData._id}`, {
-                headers: { 
-                  Authorization: authToken
-                }
-              });
-              if (assignedRes.data) {
-                const sorted = [...assignedRes.data.data].sort((a: any, b: any) =>
-                  (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase())
-                );
-                setRegisteredStudents(sorted);
-              }
+             const assignedRes = await axios.get(`${baseUrl}/api/registered-students/get-by-counsellor/${adminData._id}`, {
+               headers: { 
+                 Authorization: authToken
+               }
+             });
+
+             const registeredData = Array.isArray(assignedRes.data?.data)
+               ? assignedRes.data.data
+               : [];
+
+             if (registeredData.length) {
+               const sorted = [...registeredData].sort((a: any, b: any) =>
+                 String(a?.name ?? '').toLowerCase().localeCompare(
+                   String(b?.name ?? '').toLowerCase()
+                 )
+               );
+               setRegisteredStudents(sorted);
+             } else {
+               setRegisteredStudents([]);
+             }
             } catch (err: any) {
               console.log("err",err);
               if (err.response?.status === 401) {

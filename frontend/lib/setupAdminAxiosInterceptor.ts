@@ -26,7 +26,7 @@ export const setupAdminAxiosInterceptor = () => {
   if (typeof window === 'undefined') return;
   if (window.__adminAxiosInterceptorConfigured) return;
 
-  axios.interceptors.request.use((config) => {
+  axios.interceptors.request.use((config:any) => {
     if (typeof window === 'undefined') return config;
 
     if (!window.location.pathname.includes('/admin')) {
