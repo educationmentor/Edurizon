@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Layout from '@/components/admin/DocumentLayout';
 import { getRegisteredStudentsByCounsellor } from '@/services/api';
 import toast, { Toaster } from 'react-hot-toast';
@@ -22,6 +22,7 @@ import UploadIcon from '@mui/icons-material/Upload';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
+import { COUNTRIES, getUniversitiesByCountry } from '@/lib/constants';
 
 interface RegisteredStudent {
   _id: string;
@@ -49,6 +50,8 @@ interface RegisteredStudent {
     remark: string;
   }>;
   feesInfo: string;
+  enrolledCountry?: string[];
+  enrolledUniversity?: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -94,6 +97,8 @@ const RegisteredStudents = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
   const [sendingNotification, setSendingNotification] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
+  const [selectedUniversity, setSelectedUniversity] = useState<string>('');
 
   // Get counsellor ID from sessionStorage or localStorage
   const counsellorId = adminData?._id;
@@ -196,12 +201,68 @@ const RegisteredStudents = () => {
     );
   };
 
+  // Filter students based on country and university
+  const filteredStudentsForNotification = useMemo(() => {
+    let filtered = students;
+
+    // Filter by country
+    if (selectedCountry) {
+      filtered = filtered.filter(student => {
+        const enrolledCountries = student.enrolledCountry || [];
+        return enrolledCountries.some((country: string) => 
+          country.toLowerCase() === selectedCountry.toLowerCase()
+        );
+      });
+    }
+
+    // Filter by university
+    if (selectedUniversity) {
+      filtered = filtered.filter(student => {
+        const enrolledUniversities = student.enrolledUniversity || [];
+        return enrolledUniversities.some((university: string) => 
+          university.toLowerCase().includes(selectedUniversity.toLowerCase())
+        );
+      });
+    }
+
+    return filtered;
+  }, [students, selectedCountry, selectedUniversity]);
+
+  // Handle select all filtered students
+  const handleSelectAllFiltered = () => {
+    const allFilteredIds = filteredStudentsForNotification.map(student => student._id);
+    const allSelected = allFilteredIds.every(id => selectedStudentIds.includes(id));
+    
+    if (allSelected) {
+      // Deselect all filtered students
+      setSelectedStudentIds(prev => prev.filter(id => !allFilteredIds.includes(id)));
+    } else {
+      // Select all filtered students
+      setSelectedStudentIds(prev => [...new Set([...prev, ...allFilteredIds])]);
+    }
+  };
+
+  // Get available universities based on selected country
+  const availableUniversities = useMemo(() => {
+    if (selectedCountry) {
+      return getUniversitiesByCountry(selectedCountry);
+    }
+    // If no country selected, return all unique universities from all students
+    const allUniversities = new Set<string>();
+    students.forEach(student => {
+      (student.enrolledUniversity || []).forEach((uni: string) => allUniversities.add(uni));
+    });
+    return Array.from(allUniversities).sort();
+  }, [selectedCountry, students]);
+
   const handleOpenNotificationModal = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseNotificationModal = () => {
     setIsModalOpen(false);
+    setSelectedCountry('');
+    setSelectedUniversity('');
   };
 
   const handleSendNotification = async () => {
@@ -596,22 +657,76 @@ const RegisteredStudents = () => {
                 />
               </div>
 
+              {/* Filters */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Filter by Country
+                  </label>
+                  <select
+                    value={selectedCountry}
+                    onChange={(e) => {
+                      setSelectedCountry(e.target.value);
+                      setSelectedUniversity(''); // Reset university when country changes
+                    }}
+                    className="w-full rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all p-2.5 text-sm text-gray-700"
+                  >
+                    <option value="">All Countries</option>
+                    {COUNTRIES.map(country => (
+                      <option key={country} value={country}>{country}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Filter by University
+                  </label>
+                  <select
+                    value={selectedUniversity}
+                    onChange={(e) => setSelectedUniversity(e.target.value)}
+                    className="w-full rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all p-2.5 text-sm text-gray-700"
+                    disabled={!selectedCountry && availableUniversities.length === 0}
+                  >
+                    <option value="">All Universities</option>
+                    {availableUniversities.map(university => (
+                      <option key={university} value={university}>{university}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="block text-sm font-medium text-gray-700">
                     Select students
                   </label>
-                  <span className="text-xs text-gray-500">
-                    {selectedStudentIds.length} selected
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-gray-500">
+                      {selectedStudentIds.length} selected
+                    </span>
+                    {filteredStudentsForNotification.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleSelectAllFiltered}
+                        className="text-xs font-medium text-teal-600 hover:text-teal-800"
+                      >
+                        {filteredStudentsForNotification.every(student => selectedStudentIds.includes(student._id))
+                          ? 'Deselect All'
+                          : 'Select All Filtered'}
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <div className="border border-gray-200 rounded-xl max-h-64 overflow-y-auto divide-y divide-gray-100">
-                  {students.length === 0 ? (
+                  {filteredStudentsForNotification.length === 0 ? (
                     <p className="p-4 text-sm text-gray-500 text-center">
-                      No students available to select.
+                      {students.length === 0 
+                        ? 'No students available to select.'
+                        : 'No students match the selected filters.'}
                     </p>
                   ) : (
-                    students.map((student) => (
+                    filteredStudentsForNotification.map((student) => (
                       <label
                         key={student._id}
                         className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 cursor-pointer"
@@ -619,6 +734,13 @@ const RegisteredStudents = () => {
                         <div>
                           <p className="text-sm font-medium text-gray-900">{student.name}</p>
                           <p className="text-xs text-gray-500">{student.email || 'No email provided'}</p>
+                          {((student.enrolledCountry && student.enrolledCountry.length > 0) || (student.enrolledUniversity && student.enrolledUniversity.length > 0)) && (
+                            <p className="text-xs text-gray-400 mt-1">
+                              {student.enrolledCountry?.join(', ')}
+                              {(student.enrolledCountry && student.enrolledCountry.length > 0) && (student.enrolledUniversity && student.enrolledUniversity.length > 0) && ' • '}
+                              {student.enrolledUniversity?.join(', ')}
+                            </p>
+                          )}
                         </div>
                         <input
                           type="checkbox"

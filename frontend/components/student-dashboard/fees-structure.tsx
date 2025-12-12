@@ -31,7 +31,9 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
     studentName: '',
   });
   const [filteredBills, setFilteredBills] = useState<FeeInfo[]>([]);
-  const [billFilter, setBillFilter] = useState<string>('due'); 
+  const [billFilter, setBillFilter] = useState<string>('due');
+  const [agreeDialogOpen, setAgreeDialogOpen] = useState(false);
+  const [updatingAgreement, setUpdatingAgreement] = useState(false); 
 
   const openImgModal = (imgUrl:string, studentName:string) => {
     setImgModal({
@@ -92,6 +94,46 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
       console.error("Download failed", error);
     }
   };
+
+  const handleAgreementCheckbox = () => {
+    if (!userData.feeStructureAgreed) {
+      setAgreeDialogOpen(true);
+    }
+  };
+
+  const handleConfirmAgreement = async () => {
+    try {
+      setUpdatingAgreement(true);
+      const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}').token : null;
+      
+      if (!token) {
+        toast.error('Authentication required');
+        return;
+      }
+
+      const response = await axios.put(
+        `${baseUrl}/api/registered-students/fee-structure/agree`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      if (response.data.success) {
+        toast.success('You have successfully agreed to the fee structure terms');
+        setAgreeDialogOpen(false);
+        // Refresh user data
+        window.location.reload(); // Or use a refetch function if available
+      }
+    } catch (error: any) {
+      console.error('Failed to update agreement:', error);
+      toast.error(error?.response?.data?.message || 'Failed to update agreement');
+    } finally {
+      setUpdatingAgreement(false);
+    }
+  };
   
   
   
@@ -131,9 +173,7 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
             </div>
 
             {/* Document Actions */}
-            <div className="flex space-x-2">
-              
-              
+            <div className="flex space-x-2 mb-4">
             <button
                 onClick={() => openImgModal(userData.feeStructure, userData.name)}
                 className="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium flex items-center justify-center"
@@ -148,7 +188,27 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
             
             Download
             </button>
-              
+            </div>
+
+            {/* Agreement Checkbox */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={userData.feeStructureAgreed || false}
+                  onChange={handleAgreementCheckbox}
+                  disabled={userData.feeStructureAgreed}
+                  className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+                <span className={`text-sm ${userData.feeStructureAgreed ? 'text-gray-500' : 'text-gray-700'}`}>
+                  I agree with the fees, info and terms given in the fee structure
+                </span>
+              </label>
+              {userData.feeStructureGeneratedDate && (
+                <p className="text-xs text-gray-500 mt-2 ml-7">
+                  Generated on: {new Date(userData.feeStructureGeneratedDate).toLocaleDateString()}
+                </p>
+              )}
             </div>
           </div>
       </div>
@@ -268,6 +328,39 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
                   alt="Fee Structure"
                   className="max-w-full max-h-full object-contain"
                 />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Agreement Confirmation Dialog */}
+      {agreeDialogOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Confirm Agreement
+            </h3>
+            <p className="text-sm text-gray-700 mb-6">
+              Are you sure you want to agree to the fees, information, and terms given in the fee structure? 
+              This action will notify the finance admin.
+            </p>
+            <div className="flex space-x-3 justify-end">
+              <button
+                type="button"
+                onClick={() => setAgreeDialogOpen(false)}
+                disabled={updatingAgreement}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmAgreement}
+                disabled={updatingAgreement}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {updatingAgreement ? 'Confirming...' : 'Confirm'}
+              </button>
             </div>
           </div>
         </div>

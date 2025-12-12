@@ -86,7 +86,9 @@ const StudentDashboard = () => {
       return;
     }
 
+    // Filter out read notifications and normalize
     const normalized = source
+      .filter((notification: any) => !notification.isRead) // Only show unread notifications
       .map((notification: any) => ({
         ...notification,
         sentAt: notification.sentAt || new Date().toISOString(),
@@ -143,16 +145,18 @@ const StudentDashboard = () => {
   const markNotificationAsRead = async (notification: StudentNotification) => {
     if (!notification || notification.isRead) return;
 
+    // Remove notification from local state immediately (since we only show unread ones)
     const updateLocal = () => {
       setNotifications((prev) =>
-        prev.map((item) => {
+        prev.filter((item) => {
           const matchesId = notification._id && item._id === notification._id;
           const matchesTimestamp =
             !notification._id &&
             item.sentAt === notification.sentAt &&
             item.message === notification.message;
 
-          return matchesId || matchesTimestamp ? { ...item, isRead: true } : item;
+          // Remove the notification (return false to filter it out)
+          return !(matchesId || matchesTimestamp);
         })
       );
     };

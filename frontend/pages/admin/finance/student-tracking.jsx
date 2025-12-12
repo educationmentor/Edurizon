@@ -518,7 +518,7 @@ const FinanceStudentTrackingPage = () => {
                 <table className="min-w-full divide-y divide-gray-100">
                   <thead className="bg-gray-50">
                     <tr>
-                      {['Student', 'Email', 'Phone', 'Fee Structure', 'Actions'].map(
+                      {['Student', 'Email', 'Phone', 'Fee Structure', 'Agreed', 'Generated Date', 'Actions'].map(
                         (header) => (
                           <th
                             key={header}
@@ -534,7 +534,7 @@ const FinanceStudentTrackingPage = () => {
                   <tbody className="bg-white divide-y divide-gray-100">
                     {filteredFeeStructureStudents.length === 0 && (
                       <tr>
-                        <td colSpan={5} className="px-6 py-8 text-center text-sm text-gray-500">
+                        <td colSpan={7} className="px-6 py-8 text-center text-sm text-gray-500">
                           No students found. Adjust your search or try again later.
                         </td>
                       </tr>
@@ -561,6 +561,32 @@ const FinanceStudentTrackingPage = () => {
                             <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
                               Not Generated
                             </span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {student.feeStructure ? (
+                            student.feeStructureAgreed ? (
+                              <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                Agreed
+                              </span>
+                            ) : (
+                              <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
+                                Not Agreed
+                              </span>
+                            )
+                          ) : (
+                            <span className="text-sm text-gray-400">—</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                          {student.feeStructureGeneratedDate ? (
+                            new Date(student.feeStructureGeneratedDate).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric'
+                            })
+                          ) : (
+                            <span className="text-gray-400">—</span>
                           )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

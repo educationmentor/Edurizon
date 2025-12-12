@@ -15,6 +15,7 @@ const feeStructure = async (req, res) => {
       processingCharge,
       ticketsIncluded,
       visasIncluded,
+      firstYearPackageIncluded,
     } = req.body;
 
     // Validate required fields
@@ -64,10 +65,27 @@ const feeStructure = async (req, res) => {
         console.log('Format:', cloudinaryResult.format);
         console.log('Public ID:', cloudinaryResult.public_id);
 
-        // Update student's feeStructure field
-        // Cloudinary should preserve the .pdf extension in the URL when public_id includes it
+        // Update student's feeStructure field, set generation date, and reset agreement
         student.feeStructure = cloudinaryResult.secure_url;
+        student.feeStructureGeneratedDate = new Date();
+        student.feeStructureAgreed = false;
         await student.save();
+
+        // Send notification to student about fee structure generation
+        const mongoose = require('mongoose');
+        const notificationPayload = {
+          _id: new mongoose.Types.ObjectId(),
+          message: `Your fee structure has been generated. Please review and agree to the terms.`,
+          sentAt: new Date(),
+          isRead: false,
+          senderId: req.adminUser?._id?.toString() || 'system',
+        };
+        
+        await RegisteredStudent.findByIdAndUpdate(
+          studentId,
+          { $push: { notifications: notificationPayload } },
+          { new: false }
+        );
 
         res.status(200).json({
           success: true,
@@ -116,6 +134,18 @@ const feeStructure = async (req, res) => {
 
     yPosition += 40;
 
+    // Date - Above Student Information
+    const generationDate = new Date().toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    doc.fontSize(10)
+       .font('Times-Roman')
+       .text(`Date: ${generationDate}`, margin, yPosition, { align: 'right' });
+
+    yPosition += 25;
+
     // Two Column Layout for Student and Academic Information
     const col1Start = margin;
     const col2Start = margin + (contentWidth / 2) + 20;
@@ -141,7 +171,10 @@ const feeStructure = async (req, res) => {
     doc.text(`Phone: ${student.phone || 'N/A'}`, col1Start, leftY, { width: colWidth });
     
     leftY += 18;
-    doc.text(`Country: ${countryName}`, col1Start, leftY, { width: colWidth });
+    // Handle multiple countries (comma separated)
+    const countriesList = countryName ? countryName.split(',').map(c => c.trim()).filter(c => c) : [];
+    const countriesText = countriesList.length > 0 ? countriesList.join(', ') : countryName;
+    doc.text(`Country: ${countriesText}`, col1Start, leftY, { width: colWidth });
 
     // Academic Information Section (Right Column)
     doc.fontSize(14)
@@ -190,7 +223,7 @@ const feeStructure = async (req, res) => {
     doc.fontSize(11)
        .font('Times-Bold')
        .text('Description', col1, tableTop)
-       .text('Amount (USD)', col2, tableTop, { align: 'right' });
+       .text('Amount', col2, tableTop, { align: 'right' });
 
     yPosition = tableTop + itemHeight;
     doc.moveTo(margin, yPosition - 5)
@@ -200,14 +233,14 @@ const feeStructure = async (req, res) => {
     // One Time Charge
     doc.fontSize(11)
        .font('Times-Roman')
-       .text('One Time Charge', col1, yPosition)
+       .text('One Time Charge (USD)', col1, yPosition)
        .text(`$${Number(oneTimeCharge).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col2, yPosition, { align: 'right' });
     
     yPosition += itemHeight;
 
     // Processing Charge
-    doc.text('Processing Charge', col1, yPosition)
-       .text(`$${Number(processingCharge).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col2, yPosition, { align: 'right' });
+    doc.text('Processing Charge (INR)', col1, yPosition)
+       .text(`INR ${Number(processingCharge).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col2, yPosition, { align: 'right' });
     
     yPosition += itemHeight;
 
@@ -219,25 +252,18 @@ const feeStructure = async (req, res) => {
     }
 
     if (visasIncluded) {
-      doc.text('Visa Processing (Included)', col1, yPosition)
+      doc.text('Visa Charges (Included)', col1, yPosition)
          .text('Included', col2, yPosition, { align: 'right' });
       yPosition += itemHeight;
     }
 
-    // Total
-    yPosition += 10;
-    doc.moveTo(margin, yPosition)
-       .lineTo(pageWidth - margin, yPosition)
-       .stroke();
-    
-    yPosition += 15;
-    const totalAmount = Number(oneTimeCharge) + Number(processingCharge);
-    doc.fontSize(12)
-       .font('Times-Bold')
-       .text('Total Amount', col1, yPosition)
-       .text(`$${totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col2, yPosition, { align: 'right' });
+    if (firstYearPackageIncluded) {
+      doc.text('First Year Package (Included)', col1, yPosition)
+         .text('Included', col2, yPosition, { align: 'right' });
+      yPosition += itemHeight;
+    }
 
-    yPosition += 50;
+    yPosition += 30;
 
     // Important Notes Section
     doc.fontSize(12)
@@ -250,7 +276,12 @@ const feeStructure = async (req, res) => {
        .text('1. NEET qualification is mandatory.', margin + 10, yPosition, { width: contentWidth - 10 });
     
     yPosition += 15;
-    doc.text('2. Final admission shall be strictly subject to the successful clearance of the entrance examination/interview, as and when conducted.', margin + 10, yPosition, { width: contentWidth - 10 });
+    const note2Text = '2. Final admission shall be strictly subject to the successful clearance of the entrance examination/interview, as and when conducted.';
+    const note2Height = doc.heightOfString(note2Text, { width: contentWidth - 10 });
+    doc.text(note2Text, margin + 10, yPosition, { width: contentWidth - 10 });
+    
+    yPosition += note2Height + 10;
+    doc.text('3. All the amount is non-refundable.', margin + 10, yPosition, { width: contentWidth - 10 });
 
     yPosition += 40;
 
@@ -269,13 +300,6 @@ const feeStructure = async (req, res) => {
         doc.fontSize(10)
            .font('Times-Roman')
            .text('This is a system-generated fee structure document.', margin, footerY + 30, { align: 'center' });
-        
-        const currentDate = new Date().toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-        doc.text(`Generated on: ${currentDate}`, margin, footerY + 45, { align: 'center' });
       }
     } else {
       // Content is too long, add footer on current position
@@ -287,13 +311,6 @@ const feeStructure = async (req, res) => {
         doc.fontSize(10)
            .font('Times-Roman')
            .text('This is a system-generated fee structure document.', margin, yPosition + 30, { align: 'center' });
-        
-        const currentDate = new Date().toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-        doc.text(`Generated on: ${currentDate}`, margin, yPosition + 45, { align: 'center' });
       }
     }
 
@@ -531,4 +548,164 @@ const billStructure = async (req, res) => {
   }
 };
 
-module.exports = { feeStructure, billStructure };
+const updateStudentEnrollment = async (req, res) => {
+  try {
+    const { studentId, countryName, universities } = req.body;
+
+    // Validate required fields
+    if (!studentId) {
+      return res.status(400).json({
+        success: false,
+        message: 'studentId is required',
+      });
+    }
+
+    // Fetch student details
+    const student = await RegisteredStudent.findById(studentId);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: 'Student not found',
+      });
+    }
+
+    // Handle multiple countries (comma separated)
+    const countriesList = countryName
+      ? countryName.split(',').map(c => c.trim()).filter(Boolean)
+      : [];
+
+    // Handle universities (string or array)
+    const universitiesList = universities
+      ? (Array.isArray(universities)
+          ? universities.map(u => u.trim())
+          : [universities.trim()]
+        ).filter(Boolean)
+      : [];
+
+    // Ensure arrays exist
+    if (!Array.isArray(student.enrolledCountry)) {
+      student.enrolledCountry = [];
+    }
+
+    if (!Array.isArray(student.enrolledUniversity)) {
+      student.enrolledUniversity = [];
+    }
+
+    // Add values WITHOUT duplicates
+    countriesList.forEach(country => {
+      if (!student.enrolledCountry.includes(country)) {
+        student.enrolledCountry.push(country);
+      }
+    });
+
+    universitiesList.forEach(university => {
+      if (!student.enrolledUniversity.includes(university)) {
+        student.enrolledUniversity.push(university);
+      }
+    });
+
+    console.log('previous student',student)
+
+    // Save document
+    await student.save();
+    const newStd = RegisteredStudent.findById(studentId)
+
+    console.log('newStd', newStd)
+
+    return res.status(200).json({
+      success: true,
+      message: 'Student updated successfully',
+      data: student,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Student enrollment updated successfully',
+      data: {
+        studentId: updatedStudent._id,
+        enrolledCountry: updatedStudent.enrolledCountry,
+        enrolledUniversity: updatedStudent.enrolledUniversity,
+      },
+    });
+  } catch (error) {
+    console.error('Error updating student enrollment:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update student enrollment',
+      error: error.message,
+    });
+  }
+};
+
+const updateFeeStructureAgreement = async (req, res) => {
+  try {
+    const student = await RegisteredStudent.findById(req.user._id);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: 'Student not found',
+      });
+    }
+
+    if (!student.feeStructure) {
+      return res.status(400).json({
+        success: false,
+        message: 'Fee structure not found for this student',
+      });
+    }
+
+    // Update agreement status
+    student.feeStructureAgreed = true;
+    await student.save();
+
+    // Send notification to finance admins using the admin notification API
+    try {
+      const { AdminUser } = require('../models/AdminUser');
+      const financeAdmins = await AdminUser.find({
+        role: { $in: ['finance', 'finance-admin', 'super-admin'] },
+        active: true
+      }).select('_id email name');
+
+      if (financeAdmins.length > 0) {
+        // Use the existing admin notification system
+        // For now, we'll use the send-notifications endpoint pattern
+        const axios = require('axios');
+        const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+        
+        const notificationMessage = `${student.name} (${student.email}) has agreed to the fee structure terms and conditions.`;
+        
+        // If there's a direct way to send admin notifications, use it here
+        // Otherwise, log it for now
+        console.log('📧 Notification for finance admins:', notificationMessage);
+        console.log('Finance admins to notify:', financeAdmins.map(a => ({ id: a._id, email: a.email })));
+        
+        // TODO: Implement admin notification system if needed
+        // For now, this will be logged and can be viewed in admin dashboard
+      }
+    } catch (notifError) {
+      console.error('Error sending notification to finance admins:', notifError);
+      // Don't fail the request if notification fails
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Fee structure agreement updated successfully',
+      data: {
+        studentId: student._id,
+        feeStructureAgreed: student.feeStructureAgreed,
+        feeStructureGeneratedDate: student.feeStructureGeneratedDate,
+      },
+    });
+  } catch (error) {
+    console.error('Error updating fee structure agreement:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update fee structure agreement',
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { feeStructure, billStructure, updateStudentEnrollment, updateFeeStructureAgreement };

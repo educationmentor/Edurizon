@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const { createRegisteredStudent, getSingleRegisteredStudent, getAllRegisteredStudents,updateDocumentStatus,updateDocumentConditionStatus,sendRemark,addOneDocument,deleteOneDocument,addVideoData,updateRegisteredStudent,deleteRegisteredStudent,getRegisteredStudentsByCounsellor,loginRegisteredStudent,getCurrentUserProfile,uploadDocument,uploadFeesDocument } = require('../controllers/registeredUserController.js');
+const { updateFeeStructureAgreement } = require('../controllers/financeAdminController');
 const { protectRegisteredStudent } = require('../middleware/registeredStudentAuth');
 const { protectAdminRoute } = require('../middleware/adminAuth');
 const router = express.Router();
@@ -36,6 +37,7 @@ router.post('/login',loginRegisteredStudent);
 
 // Protected routes (authentication required)
 router.get('/profile', protectRegisteredStudent, getCurrentUserProfile);
+router.put('/fee-structure/agree', protectRegisteredStudent, updateFeeStructureAgreement);
 
 
 // Routes for document Admin

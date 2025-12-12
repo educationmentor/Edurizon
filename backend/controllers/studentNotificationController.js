@@ -26,13 +26,16 @@ const getStudentNotifications = async (req, res) => {
       await student.save();
     }
 
-    const notifications = [...student.notifications].sort(
-      (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
-    );
+    // Filter out read notifications - only return unread ones
+    const unreadNotifications = student.notifications
+      .filter(notification => !notification.isRead)
+      .sort(
+        (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
+      );
 
     return res.status(200).json({
       success: true,
-      notifications
+      notifications: unreadNotifications
     });
   } catch (error) {
     console.error('Error fetching student notifications:', error);

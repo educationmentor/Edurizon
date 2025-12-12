@@ -20,6 +20,7 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
         processingCharge:0,
         ticketsIncluded:false,
         visasIncluded:false,
+        firstYearPackageIncluded:false,
       });
     const [studentPickerOpen, setStudentPickerOpen] = useState(false);
     const [studentPickerSearch, setStudentPickerSearch] = useState('');
@@ -69,9 +70,25 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
         processingCharge: Number(billForm.processingCharge),
         ticketsIncluded: billForm.ticketsIncluded,
         visasIncluded: billForm.visasIncluded,
+        firstYearPackageIncluded: billForm.firstYearPackageIncluded,
         };
 
         await axios.put(`${baseUrl}/api/admin/finance/bills/feeStructure`, payload, { headers });
+        
+        // Update student enrollment (countries and universities)
+        try {
+          const enrollmentPayload = {
+            studentId: billForm.studentId,
+            countryName: billForm.countryName,
+            universities: universitiesArray,
+          };
+          await axios.put(`${baseUrl}/api/admin/finance/students/enrollment`, enrollmentPayload, { headers });
+          console.log('Student enrollment updated successfully');
+        } catch (enrollmentErr: any) {
+          console.error('Failed to update student enrollment:', enrollmentErr);
+          // Don't show error toast as fee structure was already generated successfully
+        }
+        
         toast.success('Fee structure generated and uploaded successfully');
         setBillForm({
         studentId: '',
@@ -84,6 +101,7 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
         processingCharge:0,
         ticketsIncluded:false,
         visasIncluded:false,
+        firstYearPackageIncluded:false,
         });
         setStudentPickerSearch('');
         await fetchFinanceData();
@@ -222,10 +240,11 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
                 <input
                   type="text"
                   className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter country name"
+                  placeholder="Enter country name (comma separated for multiple)"
                   value={billForm.countryName}
                   onChange={(e) => handleBillFormChange('countryName', e.target.value)}
                 />
+                <p className="text-xs text-gray-500 mt-1">You can enter multiple countries separated by commas</p>
               </div>
 
               <div>
@@ -265,7 +284,7 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Processing Charge (USD) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Processing Charge (INR) *</label>
                 <input
                   type="number"
                   min="0"
@@ -301,7 +320,20 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
                   onChange={(e) => handleBillFormChange('visasIncluded', e.target.checked)}
                 />
                 <label htmlFor="visasIncluded" className="ml-2 text-sm font-medium text-gray-700">
-                  Visa Processing Included
+                  Visa Charges Included
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="firstYearPackageIncluded"
+                  className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                  checked={billForm.firstYearPackageIncluded}
+                  onChange={(e) => handleBillFormChange('firstYearPackageIncluded', e.target.checked)}
+                />
+                <label htmlFor="firstYearPackageIncluded" className="ml-2 text-sm font-medium text-gray-700">
+                  First Year Package Included
                 </label>
               </div>
             </div>

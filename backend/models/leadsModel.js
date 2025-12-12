@@ -60,6 +60,10 @@ const leadsSchema = mongoose.Schema(
     assignedCounsellorName:{
         type:String,
         required:false
+    },
+    source:{
+      type:String,
+      default:'Website'
     }
   },
   {

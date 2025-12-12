@@ -2,7 +2,7 @@ const express = require('express');
 const FinanceBill = require('../model/FinanceBill');
 const { RegisteredStudent } = require('../models/registeredUserModel');
 const { protectAdminRoute, restrictTo } = require('../middleware/adminAuth');
-const { feeStructure, billStructure } = require('../controllers/financeAdminController');
+const { feeStructure, billStructure, updateStudentEnrollment, updateFeeStructureAgreement } = require('../controllers/financeAdminController');
 
 const router = express.Router();
 
@@ -266,6 +266,9 @@ router.put('/bills/feeStructure', ...requireFinanceAdmin, feeStructure);
 
 // Route for generating payment acknowledgement receipt (bill)
 router.post('/bills/generate-receipt', ...requireFinanceAdmin, billStructure);
+
+// Route for updating student enrollment (countries and universities)
+router.put('/students/enrollment', ...requireFinanceAdmin, updateStudentEnrollment);
 
 module.exports = router;
 

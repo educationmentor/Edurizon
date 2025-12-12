@@ -89,6 +89,17 @@ const userSchema = mongoose.Schema(
       required:false,
       default:null
     },
+    feeStructureGeneratedDate:{
+      type:Date,
+      required:false,
+      default:null
+    },
+    feeStructureAgreed:{
+      type:Boolean,
+      required:false,
+      default:false
+    },
+
     // Documents
     documents: {
       type: [documentSchema],
@@ -134,6 +145,16 @@ const userSchema = mongoose.Schema(
       type:String,
       required:false,
       default:'None'
+    },
+    enrolledUniversity:{
+      type:Array,
+      required:false,
+      default:[]
+    },
+    enrolledCountry:{
+      type:Array,
+      required:false,
+      default:[]
     },
     // Process Tracking
     applicationStage:{
