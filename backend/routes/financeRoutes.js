@@ -2,6 +2,7 @@ const express = require('express');
 const FinanceBill = require('../model/FinanceBill');
 const { RegisteredStudent } = require('../models/registeredUserModel');
 const { protectAdminRoute, restrictTo } = require('../middleware/adminAuth');
+const { feeStructure, billStructure } = require('../controllers/financeAdminController');
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ const resolveBillStatus = (bill) => {
 // Route 1: Create/Generate New Bill
 router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
   try {
-    const { studentId, dueDate, description, amountDue } = req.body;
+    const { studentId, dueDate, description, amountDue,newBill, studentName, university,url } = req.body;
 
     if (!studentId || !dueDate || !description || amountDue === undefined) {
       return res.status(400).json({
@@ -56,7 +57,16 @@ router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
       description,
       amountDue,
       issuedBy,
+      studentName,
+      university,
+      url,
     });
+    
+  
+    await RegisteredStudent.findByIdAndUpdate(studentId, {
+      $push: { feesInfo: newBill }
+    });
+    
 
     res.status(201).json({
       success: true,
@@ -208,6 +218,54 @@ router.get('/students/all', ...requireFinanceAdmin, async (_req, res) => {
     });
   }
 });
+
+router.patch('/update-student-receipt-status', ...requireFinanceAdmin, async (req, res) => {
+  try {
+    const { studentId, oldUrl, newBill } = req.body;
+    
+    const student = await RegisteredStudent.findById(studentId);
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: 'Student not found',
+      });
+    }
+    
+    console.log('before update', student.feesInfo);
+    student.feesInfo.forEach(fee => {
+      if (fee.url === oldUrl) {
+        fee.url = newBill.url;
+        fee.status = newBill.status;
+        fee.description = fee.description;
+      }
+    });
+    student.markModified('feesInfo'); // 🚀 KEY FIX
+    await student.save();
+
+    console.log('after update', student.feesInfo);
+    console.log('new bill', newBill);
+    console.log('old url', oldUrl);
+    
+    const newStudent = await RegisteredStudent.findById(studentId);
+    console.log('new student', newStudent.feesInfo);
+    res.status(200).json({
+      success: true,
+      message: 'Student receipt status updated successfully',
+      data: student,
+    });
+  } catch (error) {
+    console.error('Error updating student:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update student',
+    });
+  }
+});
+
+router.put('/bills/feeStructure', ...requireFinanceAdmin, feeStructure);
+
+// Route for generating payment acknowledgement receipt (bill)
+router.post('/bills/generate-receipt', ...requireFinanceAdmin, billStructure);
 
 module.exports = router;
 

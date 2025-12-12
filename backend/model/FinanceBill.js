@@ -28,6 +28,14 @@ const financeBillSchema = new Schema(
       ref: 'RegisteredStudent',
       required: true,
     },
+    studentName: {
+      type: String,
+      required: true,
+    },
+    university: {
+      type: String,
+      required: true,
+    },
     issueDate: {
       type: Date,
       default: Date.now,
@@ -67,6 +75,10 @@ const financeBillSchema = new Schema(
       default: null,
       trim: true,
     },
+    url:{
+      type: String,
+      default: null,
+    }
   },
   {
     timestamps: true,

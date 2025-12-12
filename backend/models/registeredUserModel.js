@@ -80,10 +80,15 @@ const userSchema = mongoose.Schema(
         required: false,
     },
     feesInfo:{
+      type:Array,
+      required:false,
+      default:[]
+    },
+    feeStructure:{
       type:String,
       required:false,
+      default:null
     },
-    
     // Documents
     documents: {
       type: [documentSchema],

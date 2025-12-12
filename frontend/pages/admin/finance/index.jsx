@@ -3,11 +3,21 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import DocumentLayout from '@/components/admin/DocumentLayout';
 import { baseUrl } from '@/lib/baseUrl';
-import { getAdminToken } from '@/utils/adminStorage';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import GridViewIcon from '@mui/icons-material/GridView';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+
+// Components
+import PendingBills from '@/components/admin/finance-admin/pendingBills';
+import SummaryCards from '@/components/admin/finance-admin/summaryCards';
+import BillGeneration from '@/components/admin/finance-admin/billGeneration';
+import FeeStructureGeneration from '@/components/admin/finance-admin/feeStructureGeneration';
+import StudentModal from '@/components/admin/finance-admin/studentModal';
+import PaymentModal from '@/components/admin/finance-admin/paymentModal';
+
 import BillReceipt from '@/components/admin/BillReceipt';
+import authHeaders from '@/components/admin/authHeader'
 
 const navItems = [
   {
@@ -17,8 +27,8 @@ const navItems = [
   },
   {
     href: '/admin/finance/student-tracking',
-    icon: <GridViewIcon />,
-    label: 'Student Tracking',
+    icon: <AccountBalanceWalletIcon />,
+    label: 'Student Payments',
   },
 ];
 
@@ -31,18 +41,6 @@ const FinanceDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const [billFormOpen, setBillFormOpen] = useState(true);
-  const [billForm, setBillForm] = useState({
-    studentId: '',
-    studentName: '',
-    amountDue: '',
-    dueDate: '',
-    description: '',
-  });
-  const [studentPickerOpen, setStudentPickerOpen] = useState(false);
-  const [studentPickerSearch, setStudentPickerSearch] = useState('');
-  const [submittingBill, setSubmittingBill] = useState(false);
 
   const [studentModal, setStudentModal] = useState({
     open: false,
@@ -61,13 +59,6 @@ const FinanceDashboard = () => {
 
   const pdfContainerRef = useRef(null);
   const [pdfContext, setPdfContext] = useState(null);
-
-  const authHeaders = () => {
-    const token = getAdminToken();
-    if (!token) return {};
-    const formatted = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-    return { Authorization: formatted };
-  };
 
   const fetchFinanceData = async () => {
     setLoading(true);
@@ -97,44 +88,6 @@ const FinanceDashboard = () => {
     fetchFinanceData();
   }, []);
 
-  const studentFinancialMap = useMemo(() => {
-    const map = new Map();
-    allBills.forEach((bill) => {
-      const key =
-        bill?.studentId?._id || bill?.studentId || bill?.student?._id || String(bill?.studentId);
-      if (!key) return;
-
-      if (!map.has(key)) {
-        map.set(key, {
-          totalBilled: 0,
-          totalPaid: 0,
-          outstanding: 0,
-          status: 'Pending',
-        });
-      }
-
-      const entry = map.get(key);
-      entry.totalBilled += bill.amountDue || 0;
-      entry.totalPaid += bill.amountPaid || 0;
-      entry.outstanding = Math.max(entry.totalBilled - entry.totalPaid, 0);
-
-      if (bill.status === 'Overdue') {
-        entry.status = 'Overdue';
-      } else if (bill.status === 'Partial Payment' && entry.status !== 'Overdue') {
-        entry.status = 'Partial Payment';
-      } else if (
-        bill.status === 'Paid' &&
-        entry.status !== 'Overdue' &&
-        entry.status !== 'Partial Payment'
-      ) {
-        entry.status = 'Paid';
-      } else if (entry.outstanding === 0) {
-        entry.status = 'Paid';
-      }
-    });
-    return map;
-  }, [allBills]);
-
   const summaryStats = useMemo(() => {
     const totalOutstanding = pendingBills.reduce((sum, bill) => {
       const outstanding = Math.max((bill.amountDue || 0) - (bill.amountPaid || 0), 0);
@@ -152,65 +105,6 @@ const FinanceDashboard = () => {
     };
   }, [students.length, pendingBills, allBills]);
 
-  const filteredStudentOptions = useMemo(() => {
-    const query = studentPickerSearch.trim().toLowerCase();
-
-    const sorted = [...students].sort((a, b) =>
-      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
-    );
-
-    if (!query) return sorted;
-
-    return sorted.filter(
-      (student) =>
-        student.name?.toLowerCase().includes(query) || student.email?.toLowerCase().includes(query)
-    );
-  }, [studentPickerSearch, students]);
-
-  const enrichedStudents = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-
-    const mapped = students.map((student) => {
-      const summary =
-        studentFinancialMap.get(student._id) || {
-          totalBilled: 0,
-          totalPaid: 0,
-          outstanding: 0,
-          status: 'Pending',
-        };
-      const overallStatus =
-        summary.outstanding <= 0
-          ? 'Paid'
-          : summary.status === 'Overdue'
-          ? 'Overdue'
-          : summary.status === 'Partial Payment'
-          ? 'Partial Payment'
-          : 'Pending';
-
-      return {
-        ...student,
-        totalBilled: summary.totalBilled,
-        totalPaid: summary.totalPaid,
-        outstanding: summary.outstanding,
-        overallStatus,
-      };
-    });
-
-    const filtered = mapped.filter((student) => {
-      if (!query) return true;
-      return (
-        student.name?.toLowerCase().includes(query) ||
-        student.email?.toLowerCase().includes(query) ||
-        student.overallStatus?.toLowerCase().includes(query)
-      );
-    });
-
-    // Sort alphabetically by student name
-    return filtered.sort((a, b) =>
-      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
-    );
-  }, [students, studentFinancialMap, searchQuery]);
-
   const pendingTabRows = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
     return pendingBills.filter((bill) => {
@@ -224,55 +118,6 @@ const FinanceDashboard = () => {
       );
     });
   }, [pendingBills, searchQuery]);
-
-  const handleBillFormChange = (field, value) => {
-    setBillForm((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSelectStudentForBill = (student) => {
-    setBillForm((prev) => ({
-      ...prev,
-      studentId: student._id,
-      studentName: student.name,
-    }));
-    setStudentPickerOpen(false);
-  };
-
-  const handleCreateBill = async (event) => {
-    event.preventDefault();
-    if (!billForm.studentId || !billForm.amountDue || !billForm.dueDate || !billForm.description) {
-      toast.error('Please complete all required fields');
-      return;
-    }
-
-    setSubmittingBill(true);
-    try {
-      const headers = authHeaders();
-      const payload = {
-        studentId: billForm.studentId,
-        amountDue: Number(billForm.amountDue),
-        dueDate: billForm.dueDate,
-        description: billForm.description,
-      };
-
-      await axios.post(`${baseUrl}/api/admin/finance/bills`, payload, { headers });
-      toast.success('Bill generated successfully');
-      setBillForm({
-        studentId: '',
-        studentName: '',
-        amountDue: '',
-        dueDate: '',
-        description: '',
-      });
-      setStudentPickerSearch('');
-      await fetchFinanceData();
-    } catch (err) {
-      console.error('Failed to create bill:', err);
-      toast.error(err?.response?.data?.message || 'Failed to create bill');
-    } finally {
-      setSubmittingBill(false);
-    }
-  };
 
   const openStudentBillsModal = async (student) => {
     setStudentModal({
@@ -345,11 +190,31 @@ const FinanceDashboard = () => {
         amount: Number(paymentModal.amount),
         method: paymentModal.method || 'Manual',
       };
-      await axios.patch(
+      const bill=await axios.patch(
         `${baseUrl}/api/admin/finance/bills/${paymentModal.bill._id}/payment`,
         payload,
         { headers }
       );
+      
+      const receiptPayload = {
+        studentId: bill.data.data.studentId,
+        paymentAmount: Number(paymentModal.amount),
+        paymentNumber: 1,
+        studentName: bill.data.data.studentName,
+        university: bill.data.data.university,
+        status:'completed'
+      };
+
+      const res=await axios.post(`${baseUrl}/api/admin/finance/bills/generate-receipt`, receiptPayload, { headers })
+
+      const updateStudentPayload = {
+        studentId: bill.data.data.studentId,
+        oldUrl: bill.data.data.url,
+        newBill:{status:'completed', url:res.data.url},
+      }
+      
+      axios.patch(`${baseUrl}/api/admin/finance/update-student-receipt-status`, updateStudentPayload, { headers })
+
       toast.success('Payment recorded');
       closePaymentModal();
       await fetchFinanceData();
@@ -419,310 +284,7 @@ const FinanceDashboard = () => {
     }
   }, [pdfContext]);
 
-  const renderStatusBadge = (status) => {
-    const colors = {
-      Paid: 'bg-green-100 text-green-700',
-      Pending: 'bg-yellow-100 text-yellow-700',
-      'Partial Payment': 'bg-blue-100 text-blue-700',
-      Overdue: 'bg-red-100 text-red-600',
-      Cancelled: 'bg-gray-100 text-gray-600',
-    };
-    const color = colors[status] || 'bg-gray-100 text-gray-600';
-    return (
-      <span className={`px-3 py-1 rounded-full text-xs font-medium ${color}`}>{status}</span>
-    );
-  };
-
-  const renderBillGenerationSection = () => (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-      <button
-        type="button"
-        className="w-full flex items-center justify-between px-6 py-4"
-        onClick={() => setBillFormOpen((prev) => !prev)}
-      >
-        <div>
-          <p className="text-lg font-semibold text-gray-900">Generate New Bill</p>
-          <p className="text-sm text-gray-500">
-            Create and assign a new bill to a registered student
-          </p>
-        </div>
-        <svg
-          className={`w-5 h-5 text-gray-600 transition-transform ${
-            billFormOpen ? 'rotate-180' : 'rotate-0'
-          }`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {billFormOpen && (
-        <div className="border-t border-gray-100 px-6 py-6">
-          <form onSubmit={handleCreateBill} className="grid grid-cols-1 gap-4">
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Select Student
-                </label>
-                <div
-                  className="border border-gray-200 rounded-lg px-4 py-2 flex items-center justify-between cursor-pointer"
-                  onClick={() => setStudentPickerOpen((prev) => !prev)}
-                >
-                  <div>
-                    <p className="text-sm text-gray-900">
-                      {billForm.studentName || 'Choose a student'}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {billForm.studentId ? 'Ready to generate bill' : 'Required field'}
-                    </p>
-                  </div>
-                  <svg
-                    className={`w-4 h-4 text-gray-500 transform ${
-                      studentPickerOpen ? 'rotate-180' : 'rotate-0'
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-
-                {studentPickerOpen && (
-                  <div className="absolute z-20 mt-2 w-full bg-white border border-gray-100 rounded-xl shadow-lg">
-                    <div className="p-3 border-b border-gray-100">
-                      <input
-                        type="text"
-                        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                        placeholder="Search student..."
-                        value={studentPickerSearch}
-                        onChange={(e) => setStudentPickerSearch(e.target.value)}
-                      />
-                    </div>
-                    <div className="max-h-48 overflow-y-auto">
-                      {filteredStudentOptions.length === 0 && (
-                        <p className="text-xs text-center text-gray-500 py-3">No students found</p>
-                      )}
-                      {filteredStudentOptions.map((student) => (
-                        <button
-                          type="button"
-                          key={student._id}
-                          className="w-full px-4 py-2 text-left hover:bg-gray-50"
-                          onClick={() => handleSelectStudentForBill(student)}
-                        >
-                          <p className="text-sm font-medium text-gray-900">{student.name}</p>
-                          <p className="text-xs text-gray-500">{student.email}</p>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount Due</label>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter amount"
-                  value={billForm.amountDue}
-                  onChange={(e) => handleBillFormChange('amountDue', e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
-                <input
-                  type="date"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  value={billForm.dueDate}
-                  onChange={(e) => handleBillFormChange('dueDate', e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea
-                rows={4}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                placeholder="Describe the bill purpose..."
-                value={billForm.description}
-                onChange={(e) => handleBillFormChange('description', e.target.value)}
-              />
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                disabled={submittingBill}
-                className="inline-flex items-center px-5 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {submittingBill ? 'Generating...' : 'Generate Bill'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
-    </div>
-  );
-
-  const renderStudentTrackingTable = () => (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-      <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
-        <div>
-          <p className="text-lg font-semibold text-gray-900">Student Tracking</p>
-          <p className="text-sm text-gray-500">Monitor billing status across all registered students</p>
-        </div>
-        <p className="text-sm text-gray-500">
-          Showing {enrichedStudents.length} of {students.length} students
-        </p>
-      </div>
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-100">
-          <thead className="bg-gray-50">
-            <tr>
-              {['Student', 'Email', 'Total Billed', 'Total Paid', 'Outstanding', 'Status', 'Actions'].map(
-                (header) => (
-                  <th
-                    key={header}
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                  >
-                    {header}
-                  </th>
-                )
-              )}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
-            {enrichedStudents.length === 0 && (
-              <tr>
-                <td colSpan={7} className="px-6 py-8 text-center text-sm text-gray-500">
-                  No students found. Adjust your search or try again later.
-                </td>
-              </tr>
-            )}
-            {enrichedStudents.map((student) => (
-              <tr key={student._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div>
-                    <p className="font-medium text-gray-900">{student.name}</p>
-                    <p className="text-xs text-gray-500">{student.phone || '—'}</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {student.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                  ₹{student.totalBilled.toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-teal-700 font-semibold">
-                  ₹{student.totalPaid.toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
-                  ₹{student.outstanding.toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{renderStatusBadge(student.overallStatus)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <button
-                    type="button"
-                    className="text-sm font-medium text-teal-600 hover:text-teal-800"
-                    onClick={() => openStudentBillsModal(student)}
-                  >
-                    View Bills
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-
-  const renderPendingBillsTable = () => (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-      <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
-        <div>
-          <p className="text-lg font-semibold text-gray-900">Pending Bills & Payments</p>
-          <p className="text-sm text-gray-500">Track outstanding dues and follow up with students</p>
-        </div>
-        <p className="text-sm text-gray-500">Total pending bills: {pendingTabRows.length}</p>
-      </div>
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-100">
-          <thead className="bg-gray-50">
-            <tr>
-              {['Student', 'Description', 'Amount Due', 'Due Date', 'Status', 'Actions'].map((header) => (
-                <th
-                  key={header}
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                >
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
-            {pendingTabRows.length === 0 && (
-              <tr>
-                <td colSpan={6} className="px-6 py-8 text-center text-sm text-gray-500">
-                  All caught up! There are no pending bills right now.
-                </td>
-              </tr>
-            )}
-            {pendingTabRows.map((bill) => (
-              <tr key={bill._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  <p className="font-medium">{bill?.studentId?.name || 'Unknown Student'}</p>
-                  <p className="text-xs text-gray-500">{bill?.studentId?.email || '—'}</p>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 max-w-xs">
-                  {bill.description}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                  ₹{(bill.amountDue || 0).toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                  {bill.dueDate ? new Date(bill.dueDate).toLocaleDateString() : '—'}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{renderStatusBadge(bill.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap space-x-3">
-                  <button
-                    type="button"
-                    className="text-sm font-medium text-teal-600 hover:text-teal-800"
-                    onClick={() =>
-                      bill?.studentId ? openStudentBillsModal(bill.studentId) : toast.error('Student record missing')
-                    }
-                  >
-                    View Bills
-                  </button>
-                  <button
-                    type="button"
-                    className="text-sm font-medium text-teal-600 hover:text-teal-800"
-                    onClick={() => openPaymentModal(bill)}
-                  >
-                    Record Payment
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-
+ 
   const renderTabs = () => (
     <div className="flex flex-wrap gap-3">
       {[
@@ -748,38 +310,6 @@ const FinanceDashboard = () => {
     </div>
   );
 
-  const renderSummaryCards = () => (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {[
-        {
-          label: 'Total Students',
-          value: summaryStats.totalStudents.toLocaleString(),
-          subtext: 'Active finance profiles',
-        },
-        {
-          label: 'Total Amount Billed',
-          value: `₹${summaryStats.totalBilled.toLocaleString()}`,
-          subtext: 'All-time',
-        },
-        {
-          label: 'Total Amount Paid',
-          value: `₹${summaryStats.totalPaid.toLocaleString()}`,
-          subtext: 'Across all bills',
-        },
-        {
-          label: 'Outstanding Amount',
-          value: `₹${summaryStats.totalOutstanding.toLocaleString()}`,
-          subtext: 'Pending & overdue',
-        },
-      ].map((card) => (
-        <div key={card.label} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-          <p className="text-sm text-gray-500">{card.label}</p>
-          <p className="text-2xl font-semibold text-gray-900 mt-2">{card.value}</p>
-          <p className="text-xs text-gray-400 mt-1">{card.subtext}</p>
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <DocumentLayout navItems={navItems} searchTerm={topSearchTerm} setSearchTerm={setTopSearchTerm}>
@@ -822,7 +352,7 @@ const FinanceDashboard = () => {
             {renderTabs()}
           </div>
 
-          {renderSummaryCards()}
+          <SummaryCards summaryStats={summaryStats} />
 
           {error && (
             <div className="bg-red-50 border border-red-100 text-red-700 px-4 py-3 rounded-xl">
@@ -838,170 +368,24 @@ const FinanceDashboard = () => {
             <>
               {activeTab === 'students' && (
                 <div className="flex flex-col gap-6">
-                  {renderBillGenerationSection()}
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-3">
-                    <p className="text-lg font-semibold text-gray-900">Student Tracking</p>
-                    <p className="text-sm text-gray-500">
-                      View detailed student-wise billing and payment history in the dedicated
-                      tracking page.
-                    </p>
-                    <div>
-                      <a
-                        href="/admin/finance/student-tracking"
-                        className="inline-flex items-center px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700"
-                      >
-                        Go to Student Tracking
-                      </a>
-                    </div>
-                  </div>
+                  <BillGeneration fetchFinanceData={fetchFinanceData} students={students} />
+                  <FeeStructureGeneration fetchFinanceData={fetchFinanceData} students={students}/>
+
                 </div>
               )}
-              {activeTab === 'pending' && renderPendingBillsTable()}
+              {activeTab === 'pending' &&  <PendingBills pendingTabRows={pendingTabRows} openStudentBillsModal={openStudentBillsModal} openPaymentModal={openPaymentModal} />}
             </>
           )}
         </div>
       </div>
 
       {studentModal.open && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <div>
-                <p className="text-lg font-semibold text-gray-900">
-                  {studentModal.student?.name || 'Student'}
-                </p>
-                <p className="text-sm text-gray-500">{studentModal.student?.email}</p>
-              </div>
-              <button
-                type="button"
-                className="text-gray-400 hover:text-gray-600"
-                onClick={closeStudentModal}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="px-6 py-4 overflow-y-auto max-h-[65vh]">
-              {studentModal.loading ? (
-                <p className="text-center text-sm text-gray-500 py-6">Loading bills...</p>
-              ) : studentModal.bills.length === 0 ? (
-                <p className="text-center text-sm text-gray-500 py-6">
-                  No bills available for this student.
-                </p>
-              ) : (
-                <table className="min-w-full divide-y divide-gray-100">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      {['Description', 'Amount Due', 'Amount Paid', 'Due Date', 'Status', 'Actions'].map(
-                        (header) => (
-                          <th
-                            key={header}
-                            className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                          >
-                            {header}
-                          </th>
-                        )
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-100">
-                    {studentModal.bills.map((bill) => (
-                      <tr key={bill._id}>
-                        <td className="px-4 py-3 text-sm text-gray-900">{bill.description}</td>
-                        <td className="px-4 py-3 text-sm font-semibold text-gray-900">
-                          ₹{(bill.amountDue || 0).toLocaleString()}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-teal-700 font-semibold">
-                          ₹{(bill.amountPaid || 0).toLocaleString()}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-600">
-                          {bill.dueDate ? new Date(bill.dueDate).toLocaleDateString() : '—'}
-                        </td>
-                        <td className="px-4 py-3">{renderStatusBadge(bill.status)}</td>
-                        <td className="px-4 py-3 space-x-3 whitespace-nowrap">
-                          <button
-                            type="button"
-                            className="text-sm font-medium text-teal-600 hover:text-teal-800"
-                            onClick={() => openPaymentModal(bill)}
-                          >
-                            Record Payment
-                          </button>
-                          <button
-                            type="button"
-                            className="text-sm font-medium text-gray-600 hover:text-gray-800"
-                            onClick={() => handleDownloadReceipt(bill, studentModal.student)}
-                          >
-                            Download Receipt
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-          </div>
-        </div>
+      
+        <StudentModal studentModal={studentModal} closeStudentModal={closeStudentModal} openPaymentModal={openPaymentModal} handleDownloadReceipt={handleDownloadReceipt} />
       )}
 
       {paymentModal.open && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <div>
-                <p className="text-lg font-semibold text-gray-900">Record Payment</p>
-                <p className="text-sm text-gray-500">
-                  {paymentModal.bill?.description || 'Bill reference'}
-                </p>
-              </div>
-              <button
-                type="button"
-                className="text-gray-400 hover:text-gray-600"
-                onClick={closePaymentModal}
-              >
-                ✕
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmitPayment} className="px-6 py-6 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter payment amount"
-                  value={paymentModal.amount}
-                  onChange={(e) =>
-                    setPaymentModal((prev) => ({ ...prev, amount: e.target.value }))
-                  }
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Method</label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Bank transfer, credit card..."
-                  value={paymentModal.method}
-                  onChange={(e) =>
-                    setPaymentModal((prev) => ({ ...prev, method: e.target.value }))
-                  }
-                />
-              </div>
-              <div className="flex justify-end pt-2">
-                <button
-                  type="submit"
-                  disabled={paymentModal.loading}
-                  className="inline-flex items-center px-5 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 disabled:opacity-60"
-                >
-                  {paymentModal.loading ? 'Saving...' : 'Record Payment'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <PaymentModal paymentModal={paymentModal} closePaymentModal={closePaymentModal} handleSubmitPayment={handleSubmitPayment} setPaymentModal={setPaymentModal} />
       )}
 
       {/* Hidden container used for HTML-to-PDF rendering */}

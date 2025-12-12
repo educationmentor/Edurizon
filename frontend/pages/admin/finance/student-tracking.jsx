@@ -5,7 +5,7 @@ import DocumentLayout from '@/components/admin/DocumentLayout';
 import { baseUrl } from '@/lib/baseUrl';
 import { getAdminToken } from '@/utils/adminStorage';
 import GridViewIcon from '@mui/icons-material/GridView';
-
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 const navItems = [
   {
     href: '/admin/finance',
@@ -14,18 +14,24 @@ const navItems = [
   },
   {
     href: '/admin/finance/student-tracking',
-    icon: <GridViewIcon />,
-    label: 'Student Tracking',
+    icon: <AccountBalanceWalletIcon />,
+    label: 'Student Payments',
   },
 ];
 
 const FinanceStudentTrackingPage = () => {
+  const [activeTab, setActiveTab] = useState('bills'); // 'bills' or 'feeStructure'
   const [students, setStudents] = useState([]);
   const [allBills, setAllBills] = useState([]);
   const [pendingBills, setPendingBills] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [pdfModal, setPdfModal] = useState({
+    open: false,
+    pdfUrl: null,
+    studentName: '',
+  });
 
   const [studentModal, setStudentModal] = useState({
     open: false,
@@ -73,9 +79,31 @@ const FinanceStudentTrackingPage = () => {
     }
   };
 
+  const fetchStudentsWithFeeStructure = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const headers = authHeaders();
+      // Fetch all registered students with feeStructure field
+      const res = await axios.get(`${baseUrl}/api/registered-students/get-all`, { headers });
+      setStudents(res.data || []);
+    } catch (err) {
+      console.error('Failed to load students with fee structure:', err);
+      const message = err?.response?.data?.message || 'Failed to load students';
+      setError(message);
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchFinanceData();
-  }, []);
+    if (activeTab === 'bills') {
+      fetchFinanceData();
+    } else {
+      fetchStudentsWithFeeStructure();
+    }
+  }, [activeTab]);
 
   const studentFinancialMap = useMemo(() => {
     const map = new Map();
@@ -158,6 +186,20 @@ const FinanceStudentTrackingPage = () => {
       (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
     );
   }, [students, studentFinancialMap, searchQuery]);
+
+  const filteredFeeStructureStudents = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    const filtered = students.filter((student) => {
+      if (!query) return true;
+      return (
+        student.name?.toLowerCase().includes(query) ||
+        student.email?.toLowerCase().includes(query)
+      );
+    });
+    return filtered.sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+    );
+  }, [students, searchQuery]);
 
   const openStudentBillsModal = async (student) => {
     setStudentModal({
@@ -259,6 +301,50 @@ const FinanceStudentTrackingPage = () => {
     );
   };
 
+  const openPdfModal = (pdfUrl, studentName) => {
+    setPdfModal({
+      open: true,
+      pdfUrl,
+      studentName,
+    });
+  };
+
+  const closePdfModal = () => {
+    setPdfModal({
+      open: false,
+      pdfUrl: null,
+      studentName: '',
+    });
+  };
+
+  const handleDownloadDocument = async (url, docName) => {
+    if (!url){
+      console.log('url is not found');
+      return};
+  
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+  
+      const blobUrl = window.URL.createObjectURL(blob);
+  
+      const link = document.createElement("a");
+      link.href = blobUrl;
+  
+      // filename (extract from URL or default)
+      link.download = docName ||"document.jpg";
+  
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+  
+      // Cleanup
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed", error);
+    }
+  };
+
   return (
     <DocumentLayout navItems={navItems}>
       <div className="min-h-screen bg-[#F5F7FA] px-6 py-8">
@@ -269,7 +355,9 @@ const FinanceStudentTrackingPage = () => {
               <div>
                 <p className="text-2xl font-bold text-gray-900">Student Finance Tracking</p>
                 <p className="text-sm text-gray-500">
-                  View student-wise billing, payments, and outstanding amounts.
+                  {activeTab === 'bills' 
+                    ? 'View student-wise billing, payments, and outstanding amounts.'
+                    : 'View and manage student fee structure documents.'}
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -289,13 +377,39 @@ const FinanceStudentTrackingPage = () => {
                   </svg>
                   <input
                     type="text"
-                    placeholder="Search students or status..."
+                    placeholder={activeTab === 'bills' ? 'Search students or status...' : 'Search students...'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10 pr-4 py-2 rounded-full border border-gray-200 focus:ring-teal-500 focus:border-teal-500 text-sm bg-gray-50"
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Tabs */}
+            <div className="flex gap-2 border-b border-gray-200">
+              <button
+                type="button"
+                onClick={() => setActiveTab('bills')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activeTab === 'bills'
+                    ? 'text-teal-600 border-b-2 border-teal-600'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                View Bills
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('feeStructure')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activeTab === 'feeStructure'
+                    ? 'text-teal-600 border-b-2 border-teal-600'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                View Fees Structure
+              </button>
             </div>
           </div>
 
@@ -309,7 +423,7 @@ const FinanceStudentTrackingPage = () => {
             <div className="bg-white rounded-xl border border-gray-100 p-10 text-center text-gray-500">
               Loading student tracking data...
             </div>
-          ) : (
+          ) : activeTab === 'bills' ? (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200">
               <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
                 <div>
@@ -386,6 +500,99 @@ const FinanceStudentTrackingPage = () => {
                 </table>
               </div>
             </div>
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+              <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
+                <div>
+                  <p className="text-lg font-semibold text-gray-900">Fee Structure Management</p>
+                  <p className="text-sm text-gray-500">
+                    View and manage student fee structure documents
+                  </p>
+                </div>
+                <p className="text-sm text-gray-500">
+                  Showing {filteredFeeStructureStudents.length} of {students.length} students
+                </p>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-100">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {['Student', 'Email', 'Phone', 'Fee Structure', 'Actions'].map(
+                        (header) => (
+                          <th
+                            key={header}
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                          >
+                            {header}
+                          </th>
+                        )
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-100">
+                    {filteredFeeStructureStudents.length === 0 && (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-8 text-center text-sm text-gray-500">
+                          No students found. Adjust your search or try again later.
+                        </td>
+                      </tr>
+                    )}
+                    {filteredFeeStructureStudents.map((student) => (
+                      <tr key={student._id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div>
+                            <p className="font-medium text-gray-900">{student.name}</p>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                          {student.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                          {student.phone || '—'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {student.feeStructure ? (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                              Available
+                            </span>
+                          ) : (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                              Not Generated
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {student.feeStructure ? (
+                            <div className="flex items-center gap-2">
+                              <button
+                              type="button"
+                              className="text-sm font-medium text-teal-600 hover:text-teal-800"
+                              onClick={() => openPdfModal(student.feeStructure, student.name)}
+                            >
+                              View
+                            </button>
+                            <button
+                              type="button"
+                              className="text-sm font-medium text-teal-600 hover:text-teal-800"
+                              onClick={() => handleDownloadDocument(student.feeStructure, student.name)}
+                            >
+                              Download 
+                            </button>
+                            </div>
+                            
+                            
+                          ) : (
+                            <span className="text-sm text-gray-400">—</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -450,9 +657,9 @@ const FinanceStudentTrackingPage = () => {
                           <button
                             type="button"
                             className="text-sm font-medium text-teal-600 hover:text-teal-800"
-                            onClick={() => openPaymentModal(bill)}
+                            onClick={() => handleDownloadDocument(bill.url, bill.description)}
                           >
-                            Record Payment
+                            Download Bill Receipt
                           </button>
                         </td>
                       </tr>
@@ -517,6 +724,47 @@ const FinanceStudentTrackingPage = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* PDF Viewer Modal */}
+      {pdfModal.open && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-6xl  max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <div>
+                <p className="text-lg font-semibold text-gray-900">
+                  Fee Structure - {pdfModal.studentName}
+                </p>
+                <p className="text-sm text-gray-500">PDF Document</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href={pdfModal.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-teal-600 hover:text-teal-800"
+                >
+                  Open in New Tab
+                </a>
+                <button
+                  type="button"
+                  className="text-gray-400 hover:text-gray-600"
+                  onClick={closePdfModal}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+            {console.log(pdfModal)}
+            <div className="px-6 py-4 overflow-hidden h-[calc(90vh-80px)]">
+            <img
+                  src={pdfModal.pdfUrl}
+                  alt="Fee Structure"
+                  className="max-w-full max-h-full object-contain"
+                />
+            </div>
           </div>
         </div>
       )}

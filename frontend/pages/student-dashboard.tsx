@@ -12,6 +12,8 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Dashboard from '@/components/student-dashboard/dashboard';
 import LanguageCourses from '@/components/student-dashboard/language-courses';
 import ApplicationStatus from '@/components/student-dashboard/application-status';
+import Fees from '@/components/student-dashboard/fees-structure'
+
 import { SearchIcon } from 'lucide-react';
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import Documents from '@/components/student-dashboard/documents';
@@ -41,7 +43,6 @@ interface StudentNotification {
 const StudentDashboard = () => {
   const { userData, isLoading, error, refetchUserData } = useUserData();
   const [activeTab, setActiveTab] = useState<string>('dashboard');
-  const [showFeesPopup, setShowFeesPopup] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<StudentNotification[]>([]);
   const [notificationsLoading, setNotificationsLoading] = useState<boolean>(false);
   const studentToken = (userData as any)?.token;
@@ -49,35 +50,35 @@ const StudentDashboard = () => {
   const studentNotificationsFromProfile = (userData as any)?.notifications;
 
   // Function to download PDF from Google Drive
-  const downloadFeeStructurePDF = async () => {
-    try {
-      // Convert Google Drive sharing URL to direct download URL
-      const fileId = '13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1';
-      const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+  // const downloadFeeStructurePDF = async () => {
+  //   try {
+  //     // Convert Google Drive sharing URL to direct download URL
+  //     const fileId = '13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1';
+  //     const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
       
-      // Create a temporary anchor element to trigger download
-      const link = document.createElement('a');
-      link.href = directDownloadUrl;
-      link.download = 'Fee-Structure.pdf';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-      // Fallback: open in new tab
-      window.open('https://drive.google.com/file/d/13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1/view?usp=sharing', '_blank');
-    }
-  };
+  //     // Create a temporary anchor element to trigger download
+  //     const link = document.createElement('a');
+  //     link.href = directDownloadUrl;
+  //     link.download = 'Fee-Structure.pdf';
+  //     link.target = '_blank';
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   } catch (error) {
+  //     console.error('Error downloading PDF:', error);
+  //     // Fallback: open in new tab
+  //     window.open('https://drive.google.com/file/d/13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1/view?usp=sharing', '_blank');
+  //   }
+  // };
 
   // Function to handle fee structure click
-  const handleFeeStructureClick = () => {
-    if (userData && (userData as any).feesInfo) {
-      downloadFeeStructurePDF();
-    } else {
-      setShowFeesPopup(true);
-    }
-  };
+  // const handleFeeStructureClick = () => {
+  //   if (userData && (userData as any).feesInfo) {
+  //     downloadFeeStructurePDF();
+  //   } else {
+  //     setShowFeesPopup(true);
+  //   }
+  // };
 
   const applyLocalNotifications = (source: any) => {
     if (!source || !Array.isArray(source)) {
@@ -240,7 +241,7 @@ const StudentDashboard = () => {
   return (
     <div>
         {/* Fees Info Popup */}
-        {showFeesPopup && (
+        {/* {showFeesPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-[1vw] p-[3vw] max-w-[40vw] mx-[5vw] shadow-2xl">
               <div className="text-center">
@@ -262,7 +263,7 @@ const StudentDashboard = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         
         {/* main dashboard div */}
        {userData && <div className='mx-[2vw] w-full  md:w-[90vw] md:mx-[5vw] my-[4vw] md:my-[4vw] p-[1vw] md:p-[2vw] flex flex-row gap-[3vw] rounded-[1vw] shadow-2xl '>
@@ -285,12 +286,8 @@ const StudentDashboard = () => {
                         : 'opacity-50 hover:bg-white hover:bg-opacity-10'
                     }`}
                     onClick={() => {
-                      if(item.id === 'fee-structure'){
-                        handleFeeStructureClick();
-                      }
-                      else{
+                      
                         setActiveTab(item.id);
-                      }
                       }}
                   >
                     <item.icon style={{fontSize: '1.5vw', color: '#FFFFFF' }} />
@@ -370,6 +367,7 @@ const StudentDashboard = () => {
            {activeTab === 'documents' && <Documents userData={userData} activeTab={activeTab} />}
            {activeTab === 'chat-support' && <Chat userData={userData} activeTab={activeTab} />}
            {activeTab === 'meetings' && <Meetings userData={userData} activeTab={activeTab} />}
+           {activeTab === 'fee-structure' && <Fees userData={userData} activeTab={activeTab}/>}
 
           </div>
         </div>}
