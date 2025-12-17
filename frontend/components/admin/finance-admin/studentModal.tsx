@@ -73,7 +73,6 @@ const StudentModal = ({ studentModal, closeStudentModal, openPaymentModal, handl
             </thead>
             <tbody className="bg-white divide-y divide-gray-100">
               {studentModal.bills.map((bill: any) => (
-                console.log(bill),
                 <tr key={bill._id}>
                   <td className="px-4 py-3 text-sm text-gray-900">{bill.description}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-gray-900">

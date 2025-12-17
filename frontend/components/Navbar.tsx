@@ -156,13 +156,37 @@ const Navbar = () => {
     }
   },[userType])
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
+    
     <nav
-className={`${
-router.asPath === "/" || router.asPath==="/#" || router.asPath=="/college-predictor" || router.asPath==="/testimonial" ? "absolute" : "relative"
-} px-[2vw] md:px-[4.125vw] top-[0vw] left-0 mt-[3vw] md:mt-[2vw] text md:pb-[1.5vw] bg-transparent dark:bg-transparent w-full z-50`}
->
+    className={`${
+      isScrolled ? "fixed top-0 ":  "top-0  absolute " 
+    } px-[2vw] md:px-[4.125vw] left-0 text md:pb-[.5vw] w-full z-50 transition-all duration-500 ease-out pt-[2vw] md:pt-[1vw]`}
+    style={{
+      backgroundColor: isScrolled ? '#FFFFFF' : 'transparent',
+      backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+      boxShadow: isScrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.05)' : 'none',
+    }}
+  >
       <div className="flex items-center  text-regularText text-black dark:text-white w-full">
       <div className="flex items-center justify-between w-full ">
           <div className="relative md:w-[10vw] md:ml-[-2vw]">

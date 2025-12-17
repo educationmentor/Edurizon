@@ -135,7 +135,6 @@ export default function CollgePredictor(){
             const responseData=await res.data;
             
             if(responseData.success===false){
-                console.log(responseData);
                 return;
             }
             setData(responseData);
@@ -152,7 +151,6 @@ export default function CollgePredictor(){
                 const responseData=await res.data;
                 
                 if(responseData.success===false){
-                    console.log(responseData);
                     return;
                 }
                 setData(responseData);
@@ -172,7 +170,6 @@ export default function CollgePredictor(){
     }
 
     const handleSubmit2=async(e,key)=>{
-        console.log("key is", key)
         setFormData({
             ...formData,
             "category":key,
@@ -183,8 +180,6 @@ export default function CollgePredictor(){
     
     const handleFormSubmit=()=>{
         // setSelectedState(formData['category']);
-        console.log(formData['category']);
-        console.log(selectedState);
         setSubmitTrigger(true);
         setSubmitTrigger(true);
         setForm1Appear(false);
@@ -224,7 +219,6 @@ export default function CollgePredictor(){
         const phoneNumber = "+918319216778";  // Replace with your phone number
         window.location.href = `tel:${phoneNumber}`;
     }
-    console.log(data)
     return(
         <div className=''>
         

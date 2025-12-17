@@ -16,6 +16,7 @@ interface ExcelLead {
   countryInterested: string;
   courseName: string;
   remark: string;
+  source: string;
 }
 
 const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExcelDialogProps) => {
@@ -92,7 +93,8 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
             phone: '',
             countryInterested: '',
             courseName: '',
-            remark: ''
+            remark: '',
+            source: 'Website'
           };
 
                      headers.forEach((header, colIndex) => {
@@ -112,10 +114,14 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
                lead.courseName = String(value);
              } else if (headerLower === 'remark' || headerLower === 'note' || headerLower === 'comment') {
                lead.remark = String(value);
+             } else if (headerLower === 'source' || headerLower === 'lead source') {
+               const sourceValue = String(value).trim();
+               if (sourceValue) {
+                 lead.source = sourceValue;
+               }
              }
              
-             // Debug logging to help troubleshoot column mapping
-             console.log(`Column "${header}" (${headerLower}) mapped to value: "${value}"`);
+           
            });
 
           return lead;
@@ -132,13 +138,7 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
         setLeads(validLeads);
         setError('');
         
-        // Debug logging to help troubleshoot
-        console.log('Parsed Excel data:', {
-          headers: headers,
-          totalRows: rows.length,
-          validLeads: validLeads.length,
-          sampleLead: validLeads[0]
-        });
+     
       } catch (err) {
         setError('Error parsing Excel file. Please ensure it\'s a valid Excel file.');
         console.error('Excel parsing error:', err);
@@ -184,6 +184,7 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
               countryInterested: lead.countryInterested.trim() || 'None',
               courseName: lead.courseName.trim() || 'None',
               remark: lead.remark.trim() || undefined,
+              source: (lead.source && lead.source.trim()) ? lead.source.trim() : 'Website',
               leadType: 'pending',
               callingStatus: 'pending',
               leadStatus: 'pending'
@@ -229,9 +230,9 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
 
   const downloadTemplate = () => {
     const template = [
-      ['Name', 'Email', 'Phone', 'Country Interested', 'Course Name', 'Remark'],
-      ['John Doe', 'john@example.com', '+1234567890', 'Russia', 'MBBS', 'Interested in medical studies'],
-      ['Jane Smith', 'jane@example.com', '+0987654321', 'Germany', 'B.Tech', 'Looking for engineering programs']
+      ['Name', 'Email', 'Phone', 'Country Interested', 'Course Name', 'Remark', 'Source'],
+      ['John Doe', 'john@example.com', '+1234567890', 'Russia', 'MBBS', 'Interested in medical studies', 'Website'],
+      ['Jane Smith', 'jane@example.com', '+0987654321', 'Germany', 'B.Tech', 'Looking for engineering programs', 'Referral']
     ];
 
     const ws = XLSX.utils.aoa_to_sheet(template);
@@ -348,6 +349,7 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Country</th>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Course</th>
                       <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Remark</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Source</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -359,6 +361,7 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
                         <td className="px-4 py-2 text-sm text-gray-500 border-b">{lead.countryInterested || '-'}</td>
                         <td className="px-4 py-2 text-sm text-gray-500 border-b">{lead.courseName || '-'}</td>
                         <td className="px-4 py-2 text-sm text-gray-500 border-b">{lead.remark || '-'}</td>
+                        <td className="px-4 py-2 text-sm text-gray-500 border-b">{lead.source || 'Website'}</td>
                       </tr>
                     ))}
                   </tbody>

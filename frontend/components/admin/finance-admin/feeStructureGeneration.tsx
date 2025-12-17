@@ -83,7 +83,6 @@ const FeeStructureGeneration = ({ fetchFinanceData,  students = [] }: { fetchFin
             universities: universitiesArray,
           };
           await axios.put(`${baseUrl}/api/admin/finance/students/enrollment`, enrollmentPayload, { headers });
-          console.log('Student enrollment updated successfully');
         } catch (enrollmentErr: any) {
           console.error('Failed to update student enrollment:', enrollmentErr);
           // Don't show error toast as fee structure was already generated successfully

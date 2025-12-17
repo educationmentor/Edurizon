@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
 import { useRouter } from "next/router";
 
-const categoriesMap: Record<string, string> = {viewAll:"View all", blog:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", 
+const categoriesMap: Record<string, string> = {viewAll:"View all", Destination:"Study Destinations", University:"Top MBBS Universities", 
   under25:"Under 25Lac", under35:"Budget 25Lac - 35Lac", under40:"Budget 35Lac - 40Lac",above40:"Budget Above 40Lac"};
 const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
@@ -22,11 +22,9 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
     const [selectedButton, setSelectedButton] = useState(categories.indexOf(categoryDefault));
 
     const [selectedCategory, setSelectedCategory] = useState<string>(categoryDefault);
-    console.log(selectedCategory);
     const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };
-    console.log(categoryDefault);
     const [searchTerm, setSearchTerm] = useState("");
 
   
@@ -52,12 +50,12 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
             matchesCategory = destination.category==="University";
             matchesBudget = destination.budget == 'above40'; // above 40 lakhs
           }
-          console.log(matchesCategory);
           return matchesCategory && matchesSearch && matchesBudget;
         });
   
     return (
-        <div className="mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] my-[60px] lg:my-[80px] xl:my-[120px]">
+      <div className="relative">
+        <div className="relative mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] py-[60px] lg:py-[80px] xl:py-[120px]">
             <span className="flex justify-center  font-semibold text-[16px] md:text-[18px] lg:text-[20px] "
         //  style={{ fontSize: innerWidth>768?`${0.00476*innerWidth+6.8608}px`:`${0.00763*innerWidth+6.146}px` }}
          >Blog</span>
@@ -111,8 +109,7 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
 
 
         </div>
-
-
+        </div>
 
     )
 }

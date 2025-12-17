@@ -34,11 +34,7 @@ const sendWhatsAppNotification = async (phoneNumber, message) => {
       return await sendViaTwilio(cleanPhoneNumber, message);
     }
     
-    // Fallback: Log the message (for development/testing)
-    console.log('📱 WhatsApp Message (Development Mode):');
-    console.log(`To: ${phoneNumber}`);
-    console.log(`Message: ${message}`);
-    console.log('Note: Set up WhatsApp API credentials to send actual messages');
+
     
     return {
       success: true,

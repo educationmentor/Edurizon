@@ -37,6 +37,7 @@ const CallingRecords = () => {
   const [selectedLeadForFollowUp, setSelectedLeadForFollowUp] = useState<Lead | null>(null);
   const [followUpDateInput, setFollowUpDateInput] = useState('');
   const [todayFollowUps, setTodayFollowUps] = useState<Lead[]>([]);
+  const [pastFollowUps, setPastFollowUps] = useState<Lead[]>([]);
   const [editingRemarkId, setEditingRemarkId] = useState<string | null>(null);
   const [remarkInput, setRemarkInput] = useState('');
 
@@ -117,10 +118,25 @@ const CallingRecords = () => {
     }
   }, [activeTab, leads]);
 
-  // Compute today's follow-ups whenever leads change
+  // Compute today's and past follow-ups whenever leads change
   useEffect(() => {
-    const todayDue = leads.filter((lead) => isSameDate(lead.followUpDate || undefined));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const todayDue = leads.filter((lead) => {
+      if (!lead.followUpDate) return false;
+      return isSameDate(lead.followUpDate);
+    });
     setTodayFollowUps(todayDue);
+    
+    // Also show past follow-ups (before today)
+    const pastDue = leads.filter((lead) => {
+      if (!lead.followUpDate) return false;
+      const followUpDate = new Date(lead.followUpDate);
+      followUpDate.setHours(0, 0, 0, 0);
+      return followUpDate < today;
+    });
+    setPastFollowUps(pastDue);
   }, [leads]);
 
   // Fetch admin data on component mount
@@ -620,6 +636,21 @@ const CallingRecords = () => {
                 .map((l) => l.name)
                 .join(', ')}
               {todayFollowUps.length > 5 && ' ...'}
+            </p>
+          </div>
+        )}
+        {pastFollowUps.length > 0 && (
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3">
+            <p className="text-sm font-semibold text-red-800">
+              ⚠️ You have {pastFollowUps.length} lead
+              {pastFollowUps.length > 1 ? 's' : ''} with past follow-up dates that need attention.
+            </p>
+            <p className="mt-1 text-xs text-red-700">
+              {pastFollowUps
+                .slice(0, 5)
+                .map((l) => l.name)
+                .join(', ')}
+              {pastFollowUps.length > 5 && ' ...'}
             </p>
           </div>
         )}

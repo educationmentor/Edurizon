@@ -94,18 +94,11 @@ const ScheduledMeetingsModal: React.FC<ScheduledMeetingsModalProps> = ({
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
       });
-      console.log('Full response:', response.data);
-      console.log('Response structure:', {
-        success: response.data.success,
-        data: response.data.data,
-        meetings: response.data.meetings,
-        isArray: Array.isArray(response.data.data)
-      });
+    
 
       if (response.data.success) {
         // Handle different response structures
         const meetingsData = response.data.data || response.data.meetings || response.data || [];
-        console.log('Meetings data:', meetingsData);
         setMeetings(Array.isArray(meetingsData) ? meetingsData : []);
       } else {
         setError('Failed to fetch meetings');

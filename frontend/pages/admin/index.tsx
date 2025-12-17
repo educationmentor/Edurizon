@@ -32,10 +32,7 @@ const AdminLogin = () => {
       const tokenSessionStoarge =sessionStorage.getItem('adminToken');
       const adminDataSessionStorage = sessionStorage.getItem('adminData');
 
-      console.log('LocalStorage', 'admin Data:',adminDataLocalStorage)
-      console.log('token',tokenLocalStorage);
-      console.log('Session Storage', 'adminData:',adminDataSessionStorage)
-      console.log('token',tokenSessionStoarge);
+
       if (tokenLocalStorage && adminDataLocalStorage) {
         try {
           // Validate token

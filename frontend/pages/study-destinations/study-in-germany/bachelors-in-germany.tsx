@@ -47,7 +47,7 @@ const Bachelors = () => {
 ></script>
 
     </Head>
-    <div className='flex flex-col mx-[6vw] md:mx-[12.5vw] items-center pt-[5vw] md:pt-[4vw] md:pb-[3vw] gap-[4vw] md:gap-[4vw] '>
+    <div className='flex flex-col mx-[6vw] md:mx-[12.5vw] items-center pt-[20vw]  md:pt-[8vw] md:pb-[3vw] gap-[4vw] md:gap-[4vw]  '>
         <div className='flex flex-col gap-[1vw] w-full items-center'>
         <Breadcrumbs />
         <div >

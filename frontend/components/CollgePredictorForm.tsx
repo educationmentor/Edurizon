@@ -51,7 +51,6 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
         toast.success('Thanks for the Details, Wait a min till college Details Are getting Fetched from our Server.');
         
       }
-      console.log("Done")
       onSubmit();
     } catch (error: any) {
       console.error('Consultation request error:', error);
@@ -67,7 +66,6 @@ const CollegePredictorForm: React.FC<CollegePredictorFormProps> = ({ onClose,onS
       setLoading(false);
     }
   };
-  // console.log('Form data:', formData);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50  flex items-center justify-center z-50 overflow-y-auto" >

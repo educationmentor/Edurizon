@@ -51,7 +51,6 @@ const ApplicationStatus = ({userData}: {userData: any}) => {
       'Offer Letter': 5,
       'Visa Approval': 6
     };
-    console.log("userData",userData);
     return stageMap[userData.applicationStage] || 1;
   };
 

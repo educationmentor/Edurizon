@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 const NewPage=()=>{
     return(
-        <div className="text-smallTextPhone md:text-smallText text-black">
+        <div className="text-smallTextPhone md:text-smallText text-black pt-[15vw]  md:pt-[4vw]">
             <Head>
                 <title>Study in Australia</title>
                 <meta name="description" content="Study in Australia" />

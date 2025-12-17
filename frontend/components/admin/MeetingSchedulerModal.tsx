@@ -77,7 +77,6 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
       });
-      console.log('response',response.data);
       if (response.data) {
         const sorted = [...response.data].sort((a: any, b: any) =>
           (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase())
@@ -108,7 +107,6 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
 
     try {
       setLoading(true);
-      console.log('meetingData', meetingData);
       
       const response= await axios.post(`${baseUrl}/api/meetings/create`, meetingData);
 
@@ -117,7 +115,6 @@ const MeetingSchedulerModal: React.FC<MeetingSchedulerModalProps> = ({
         onSuccess(response.data);
         onClose();
         resetMeetingForm();
-        console.log('Meeting scheduled successfully:', response.data.message);
       } else {
         alert(response.data.message || 'Failed to schedule meeting');
       }

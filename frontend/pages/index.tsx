@@ -12,7 +12,6 @@ const Universities = dynamic(() => import("../components/landingPage/Universitie
 const JourneySection = dynamic(() => import("../components/landingPage/JourneySection"), { ssr: false });
 const FAQSection = dynamic(() => import("../components/landingPage/FAQSection"), { ssr: false });
 const AssociatedUniversitiesSection = dynamic(() => import("../components/landingPage/AssociatedUniversitiesSection"), { ssr: false });
-const CTASection = dynamic(() => import("../components/landingPage/CTASection"), { ssr: false });
 
 const Home = () => {
   const [showConsultationForm, setShowConsultationForm] = useState(false);

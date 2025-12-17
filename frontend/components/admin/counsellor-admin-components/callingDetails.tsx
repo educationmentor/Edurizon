@@ -63,6 +63,7 @@ const CallingDetails= ()  => {
         "Interested Course",
         activeTab=='registered'?'Enrollment Date':'Lead Date',
         'Assigned to',
+        'Source',
       ];
       
       const csvHeader=[
@@ -71,7 +72,10 @@ const CallingDetails= ()  => {
         'Contact No.',
         'Interested Course',
         activeTab=='registered'?'Enrollment Date':'Lead Date',
+        'Current Status',
+        'Remark',
         'Assigned to',
+        'Source',
       ];
       
       const csvDataFields = [
@@ -82,7 +86,8 @@ const CallingDetails= ()  => {
         'createdAt',
         'leadStatus',
         'remark',
-        'assignedCounsellorName'
+        'assignedCounsellorName',
+        'source'
       ];
 
       const tableColumns = [
@@ -131,6 +136,12 @@ const CallingDetails= ()  => {
             key: "assigned to",
             render: (lead:any) => (
               <span className="text-sm text-gray-500">{lead.assignedCounsellorName??'None'}</span>
+            ),
+          },
+        {
+            key: "source",
+            render: (lead:any) => (
+              <span className="text-sm text-gray-500">{lead.source || 'Website'}</span>
             ),
           },
         ];

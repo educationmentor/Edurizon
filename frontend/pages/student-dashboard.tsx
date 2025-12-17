@@ -270,7 +270,11 @@ const StudentDashboard = () => {
         )} */}
         
         {/* main dashboard div */}
-       {userData && <div className='mx-[2vw] w-full  md:w-[90vw] md:mx-[5vw] my-[4vw] md:my-[4vw] p-[1vw] md:p-[2vw] flex flex-row gap-[3vw] rounded-[1vw] shadow-2xl '>
+       {userData &&
+       <div className='pt-[15vw] md:pt-[4vw]'> 
+       <div>
+        </div>
+       <div className='mx-[2vw] w-full  md:w-[90vw] md:mx-[5vw] my-[4vw] md:my-[4vw] p-[1vw] md:p-[2vw] flex flex-row gap-[3vw] rounded-[1vw] shadow-2xl '>
           
           {/* Sidebar */}
           <div className='w-[20vw] h-[60vw] rounded-[1vw] shadow-lg flex flex-col  gap-[3vw] items-center' style={{
@@ -374,6 +378,7 @@ const StudentDashboard = () => {
            {activeTab === 'fee-structure' && <Fees userData={userData} activeTab={activeTab}/>}
 
           </div>
+        </div>
         </div>}
 
     </div>

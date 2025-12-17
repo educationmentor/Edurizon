@@ -841,12 +841,7 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Debug: Log adminData structure
-    useEffect(() => {
-        console.log('AdminData received:', adminData);
-        console.log('AdminData keys:', adminData ? Object.keys(adminData) : 'No adminData');
-        console.log('DigitalMarketingVideos:', adminData?.digitalMarketingVideos);
-    }, [adminData]);
+
 
     // Fetch admin users (for resolving assignedBy names in notifications, non-super admins)
     useEffect(() => {
@@ -1100,7 +1095,6 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
                 localStorage.setItem('adminData', JSON.stringify(updatedAdminData));
             }
             
-            console.log(`${field} updated successfully`);
         } catch (error) {
             console.error('Error updating video:', error);
             // Revert local state on error
@@ -1192,7 +1186,6 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
 
             setShowEditModal(false);
             setEditingVideo(null);
-            console.log('Video updated successfully');
         } catch (error) {
             console.error('Error updating video:', error);
         } finally {
@@ -1239,7 +1232,6 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
 
             setShowDeleteModal(false);
             setVideoToDelete(null);
-            console.log('Video deleted successfully');
         } catch (error) {
             console.error('Error deleting video:', error);
         } finally {
@@ -1251,7 +1243,6 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
     const handleAdd = async () => {
         try {
             setLoading(true);
-            console.log(formData);
             const response = await axios.patch(`${baseUrl}/api/admin/addVideoData/${adminData._id}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
@@ -1287,7 +1278,6 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
                 platform: [],
                 description: ''
             });
-            console.log('Video added successfully');
         } catch (error) {
             console.error('Error adding video:', error);
         } finally {

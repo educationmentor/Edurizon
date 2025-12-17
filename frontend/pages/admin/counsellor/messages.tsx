@@ -97,7 +97,6 @@ const Messages = () => {
 
   // Polling functions for fallback when Socket.IO is not available
   const startPolling = () => {
-    console.log('Starting polling for admin messages');
     setUsePolling(true);
     
     // Poll for new messages every 2 seconds
@@ -180,11 +179,7 @@ const Messages = () => {
       const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
       
       if (token) {
-        console.log('Admin token for Socket.IO:', token);
-        console.log('Admin data:', adminData);
-        console.log('Admin role:', adminData.role);
-        console.log('Base URL:', baseUrl);
-        
+
         const newSocket = io(baseUrl, {
           auth: {
             token: token
@@ -226,7 +221,6 @@ const Messages = () => {
         });
 
         newSocket.on('receive_message', (messageData) => {
-          console.log('Received message:', messageData);
           // Only add message if it's not from the current user (to avoid duplicates)
           if (messageData.senderType !== 'counselor') {
             setChatMessages(prevMessages => [...prevMessages, messageData]);
@@ -245,7 +239,6 @@ const Messages = () => {
         });
 
         newSocket.on('message_delivered', (data) => {
-          console.log('Message delivered:', data);
           setChatMessages(prevMessages => 
             prevMessages.map(msg => 
               msg.clientMessageId === data.clientMessageId 
@@ -280,7 +273,6 @@ const Messages = () => {
         });
 
         newSocket.on('messages_read', (data) => {
-          console.log('Messages read:', data);
           setChatMessages(prevMessages => 
             prevMessages.map(msg => 
               msg.consultationRequest === data.consultationRequest && 

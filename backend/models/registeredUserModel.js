@@ -179,6 +179,11 @@ const userSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    source:{
+      type: String,
+      required: false,
+      default: 'Website'
+    },
     notifications: {
       type: [notificationSchema],
       default: [],

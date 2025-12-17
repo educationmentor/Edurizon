@@ -49,9 +49,13 @@ interface RegisteredStudent {
     status: string;
     remark: string;
   }>;
-  feesInfo: string;
+  // Can be either a legacy single URL string or an array of fee/bill entries
+  feesInfo?: any;
   enrolledCountry?: string[];
   enrolledUniversity?: string[];
+  feeStructure?: string | null;
+  feeStructureGeneratedDate?: string | null;
+  feeStructureAgreed?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -886,6 +890,30 @@ const RegisteredStudents = () => {
                       <p className="text-sm text-gray-600">{selectedStudent.scholarshipApplied}</p>
                     </div>
                   </div>
+
+                  {selectedStudent.enrolledCountry && selectedStudent.enrolledCountry.length > 0 && (
+                    <div className="flex items-center space-x-3">
+                      <LocationOnIcon className="w-5 h-5 text-gray-400" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">Enrolled Country</p>
+                        <p className="text-sm text-gray-600">
+                          {selectedStudent.enrolledCountry.join(', ')}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedStudent.enrolledUniversity && selectedStudent.enrolledUniversity.length > 0 && (
+                    <div className="flex items-center space-x-3">
+                      <SchoolIcon className="w-5 h-5 text-gray-400" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">Enrolled University</p>
+                        <p className="text-sm text-gray-600">
+                          {selectedStudent.enrolledUniversity.join(', ')}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -965,11 +993,83 @@ const RegisteredStudents = () => {
                         <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">{selectedStudent.notes}</p>
                       </div>
                     )}
-                    
-                    {selectedStudent.feesInfo && (
+
+                    {/* Fees info: handle both legacy string and new array structure */}
+                    {Array.isArray(selectedStudent.feesInfo) && selectedStudent.feesInfo.length > 0 && (
                       <div>
                         <p className="text-sm font-medium text-gray-900 mb-2">Fees Information</p>
-                        <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">{selectedStudent.feesInfo}</p>
+                        <div className="space-y-2">
+                          {selectedStudent.feesInfo.map((fee: any, index: number) => (
+                            <div
+                              key={index}
+                              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                            >
+                              <div>
+                                <p className="text-sm font-medium text-gray-900">
+                                  {fee.description || `Bill ${index + 1}`}
+                                </p>
+                                {fee.status && (
+                                  <p className="text-xs text-gray-500">
+                                    Status: {fee.status}
+                                  </p>
+                                )}
+                              </div>
+                              {fee.url && (
+                                <a
+                                  href={fee.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs text-blue-600 hover:underline"
+                                >
+                                  View Document
+                                </a>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedStudent.feesInfo && !Array.isArray(selectedStudent.feesInfo) && typeof selectedStudent.feesInfo === 'string' && (
+                      <div>
+                        <p className="text-sm font-medium text-gray-900 mb-2">Fees Information</p>
+                        <a
+                          href={selectedStudent.feesInfo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline break-all"
+                        >
+                          View Fees Document
+                        </a>
+                      </div>
+                    )}
+
+                    {selectedStudent.feeStructure && (
+                      <div>
+                        <p className="text-sm font-medium text-gray-900 mb-2">Fee Structure Document</p>
+                        <a
+                          href={selectedStudent.feeStructure}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline break-all"
+                        >
+                          View Fee Structure
+                        </a>
+                        {selectedStudent.feeStructureGeneratedDate && (
+                          <p className="text-xs text-gray-500 mt-1">
+                            Generated on:{' '}
+                            {new Date(selectedStudent.feeStructureGeneratedDate).toLocaleDateString('en-IN', {
+                              day: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric',
+                            })}
+                          </p>
+                        )}
+                        {selectedStudent.feeStructureAgreed !== undefined && (
+                          <p className="text-xs text-gray-500">
+                            Student agreement: {selectedStudent.feeStructureAgreed ? 'Agreed' : 'Not yet agreed'}
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>
@@ -1241,35 +1341,58 @@ const RegisteredStudents = () => {
                         <UploadIcon className="w-4 h-4 mr-2" />
                         {uploadingFile ? 'Uploading...' : 'Choose PDF File'}
                       </label>
-                      {editFormData.feesInfo && (
-                        <div className="flex items-center space-x-2">
-                          <span className="text-sm text-green-600">✓ File uploaded</span>
-                          <a
-                            href={editFormData.feesInfo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-blue-600 hover:underline"
-                          >
-                            View PDF
-                          </a>
-                        </div>
-                      )}
+                      {(() => {
+                        // Derive a single URL for display from either string or array form
+                        let currentFeesUrl: string | null = null;
+                        if (typeof editFormData.feesInfo === 'string') {
+                          currentFeesUrl = editFormData.feesInfo;
+                        } else if (Array.isArray(editFormData.feesInfo) && editFormData.feesInfo.length > 0) {
+                          const lastFee: any = editFormData.feesInfo[editFormData.feesInfo.length - 1];
+                          currentFeesUrl = lastFee?.url || null;
+                        }
+                        return (
+                          currentFeesUrl && (
+                            <div className="flex items-center space-x-2">
+                              <span className="text-sm text-green-600">✓ File uploaded</span>
+                              <a
+                                href={currentFeesUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm text-blue-600 hover:underline"
+                              >
+                                View PDF
+                              </a>
+                            </div>
+                          )
+                        );
+                      })()}
                     </div>
                   </div>
                   
-                  {editFormData.feesInfo && (
-                    <div className="p-3 bg-gray-50 rounded-md">
-                      <p className="text-sm text-gray-600">Current fees document:</p>
-                      <a
-                        href={editFormData.feesInfo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-600 hover:underline break-all"
-                      >
-                        {editFormData.feesInfo}
-                      </a>
-                    </div>
-                  )}
+                  {(() => {
+                    let currentFeesUrl: string | null = null;
+                    if (typeof editFormData.feesInfo === 'string') {
+                      currentFeesUrl = editFormData.feesInfo;
+                    } else if (Array.isArray(editFormData.feesInfo) && editFormData.feesInfo.length > 0) {
+                      const lastFee: any = editFormData.feesInfo[editFormData.feesInfo.length - 1];
+                      currentFeesUrl = lastFee?.url || null;
+                    }
+                    return (
+                      currentFeesUrl && (
+                        <div className="p-3 bg-gray-50 rounded-md">
+                          <p className="text-sm text-gray-600">Current fees document:</p>
+                          <a
+                            href={currentFeesUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-blue-600 hover:underline break-all"
+                          >
+                            {currentFeesUrl}
+                          </a>
+                        </div>
+                      )
+                    );
+                  })()}
                 </div>
               </div>
 

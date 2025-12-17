@@ -121,7 +121,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         },
         ];
 
-        console.log(counsellors)
         const tabs = [
             { key: "allLeads", label: "All Leads", count: leads.length},
             { key: "pending", label:'Pending', count:pending.length},
@@ -178,7 +177,6 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
         
         // Function to fetch leads data
         const fetchLeadsData = async () => {
-          console.log("adminData",adminData);
             try {
                 const token = localStorage.getItem('adminToken');
                 if (!token) {

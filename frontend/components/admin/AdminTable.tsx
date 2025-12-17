@@ -16,7 +16,7 @@ interface AdminTableProps {
   csvDataFields: string[];
 
     // Tabs
-tabs: Array<{ key: string; label: string; count: number }>;
+tabs: Array<{ key: string; label: string; count: number; stats?: { today: number; yesterday: number; lastWeek: number } }>;
 activeTab: string;
 setActiveTab: (key: string) => void;
 extraButtons?:React.ReactNode;
@@ -125,7 +125,6 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
   };
 
   const handleExportSelected = () => {
-    console.log("selectedLeads",selectedLeads);
     if (selectedLeads.length === 0) {
       toast.error('Please select leads to export');
       return;
@@ -143,17 +142,25 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
                 <div className={`flex justify-between items-center px-6 ${bgColor}`}>
                   <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
                     {tabs.map((tab) => (
-                        <button
-                        key={tab.key}
-                        onClick={() => setActiveTab(tab.key)}
-                        className={`${
-                            activeTab === tab.key
-                            ? "border-teal-500 text-teal-600"
-                            : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                        } whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium`}
-                        >
-                        {tab.label} ({tab.count})
-                        </button>
+                        <div key={tab.key} className="flex flex-col items-start">
+                            <button
+                                onClick={() => setActiveTab(tab.key)}
+                                className={`${
+                                    activeTab === tab.key
+                                    ? "border-teal-500 text-teal-600"
+                                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                } whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium`}
+                            >
+                                {tab.label} ({tab.count})
+                            </button>
+                            {tab.stats && activeTab === tab.key && (
+                                <div className="flex gap-3 text-xs text-gray-600 mt-1 px-1 pb-2">
+                                    <span>Today: <strong className="text-teal-600">{tab.stats.today}</strong></span>
+                                    <span>Yesterday: <strong className="text-teal-600">{tab.stats.yesterday}</strong></span>
+                                    <span>Last Week: <strong className="text-teal-600">{tab.stats.lastWeek}</strong></span>
+                                </div>
+                            )}
+                        </div>
                     ))}
                   </nav>
                   

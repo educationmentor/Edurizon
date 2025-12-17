@@ -177,7 +177,6 @@ const Documents = ({ activeTab, userData }: DocumentsProps) => {
                     onChange={(e) => {
                       const file = e.target.files?.[0]
                       if (file) {
-                        console.log("file",file);
                         setSelectedFile(file);
                         setSelectedDocument(document);
                         handleUpload(document.name, file);

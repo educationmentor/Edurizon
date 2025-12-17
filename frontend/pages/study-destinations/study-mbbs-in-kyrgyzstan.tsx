@@ -140,7 +140,7 @@ const eligibilityData={
 
 const NewPage = () => {
     return(
-        <div className="text-smallTextPhone md:text-smallText">
+        <div className="text-smallTextPhone md:text-smallText pt-[15vw]  md:pt-[4vw]">
             {/* Header Part */}
             <Header id={headerData.id} title1={headerData.title} title2={headerData.title2} description={headerData.description} description2={headerData.description2} />
 
@@ -195,13 +195,14 @@ const NewPage = () => {
            <h3 className="text-h5TextPhone md:text-h3Text font-bold text-center leading-[120%]">TOP MEDICAL UNIVERSITIES IN KRYGYZSTAN</h3>
            <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
                 <thead className="text-smallTextPhone md:text-regularText text-center font-bold align-top bg-linenChosen">
+                  <tr>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Name of University</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Tution Fees in USD/Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Tution Fees in INR/Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Hostel Fees in USD/Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]"> Hostel Fees in INR/Year</td>
                     <td className="border  dark:text-black dark:border-b-black dark:border-r-black border-black dark:border-borderGreyChosen px-[.75vw] py-[.625vw]">Know More</td>
-                </thead>
+                </tr></thead>
             <tbody className="text-smallTextPhone md:text-regularText align-top"> 
 
                 {universities.map((college, index) => (

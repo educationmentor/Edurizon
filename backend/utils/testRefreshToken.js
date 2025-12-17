@@ -13,10 +13,8 @@ oauth2Client.setCredentials({
 
 async function testRefreshToken() {
   try {
-    console.log('Testing refresh token...');
     const { credentials } = await oauth2Client.refreshAccessToken();
-    console.log('✅ Token refreshed successfully!');
-    console.log('Access Token:', credentials.access_token);
+
   } catch (error) {
     console.error('❌ Failed to refresh token:', error.message);
     if (error.response) {

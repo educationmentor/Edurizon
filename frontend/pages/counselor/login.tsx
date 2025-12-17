@@ -56,7 +56,6 @@ const CounselorLogin = () => {
       
       // Use direct URL to avoid baseUrl issues
       // const apiUrl = baseUrl || 'http://localhost:5001';
-      console.log('Making login request to:', `${baseUrl}/api/counselor/login`);
       
       const response = await axios.post(`${baseUrl}/api/counselor/login`, {
         username,

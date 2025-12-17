@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 
 const createRegisteredStudent = async(req, res) => {
-    const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounsellor,address, notes } = req.body;
+    const { name,gender, email, dob, password,phone, studyDestination,intendedCourse,preferedUniversity,assignedCounsellor,address, notes, source } = req.body;
 
   try {
     // Hash the password before storing
@@ -23,7 +23,8 @@ const createRegisteredStudent = async(req, res) => {
       intendedCourse,
       preferedUniversity,
       assignedCounsellor, 
-      notes 
+      notes,
+      source: source || 'Website'
     });
     
     res.status(201).json({
@@ -249,9 +250,23 @@ const updateDocumentStatus = async (req, res) => {
   const { status } = req.body;
 
   try {
+    // Build update payload: always update documentsUploadStatus,
+    // and conditionally move the student along the applicationStage.
+    const updatePayload = {
+      documentsUploadStatus: status,
+    };
+
+    if (status === 'completed') {
+      // When all documents are completed, move to Selected University Application
+      updatePayload.applicationStage = 'Selected University Application';
+    } else if (status === 'pending') {
+      // When documents are pending, keep the student in Document Upload stage
+      updatePayload.applicationStage = 'Document Upload';
+    }
+
     const updatedDocument = await RegisteredStudent.findByIdAndUpdate(
       id,
-      { documentsUploadStatus: status },
+      updatePayload,
       { new: true }
     );
 

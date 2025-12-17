@@ -19,6 +19,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
     courseName: '',
     remark: '',
     assignedCounsellor: '',
+    source: 'Website',
   });
 
   const [loading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
         courseName: '',
         remark: '',
         assignedCounsellor: '',
+        source: 'Website',
       });
       setError('');
       setShowNotification(false);
@@ -101,9 +103,14 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
 
     try {
       const token = localStorage.getItem('adminToken');
+      // Ensure source is sent, defaulting to 'Website' if empty
+      const payload = {
+        ...formData,
+        source: formData.source && formData.source.trim() ? formData.source.trim() : 'Website'
+      };
       const response = await axios.post(
         `${baseUrl}/api/leads`,
-        formData,
+        payload,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -234,6 +241,18 @@ const FormToAddLeadsManually = ({ isOpen, onClose, onSuccess }: AddLeadsManually
                   ))}
                 </select>
               </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Source</label>
+              <input
+                type="text"
+                name="source"
+                value={formData.source}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                placeholder="Enter source (e.g., Website, Referral, Social Media)"
+              />
+            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>

@@ -7,7 +7,7 @@ import AuthorizationSlider from "@/components/studyDestinationComponents/authori
 export const NewPage = () => {
 
     return(
-        <div className="text-smallTextPhone md:text-smallText text-black">
+        <div className="text-smallTextPhone md:text-smallText text-black pt-[15vw]  md:pt-[4vw]">
             <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">

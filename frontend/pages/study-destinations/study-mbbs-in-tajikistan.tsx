@@ -151,7 +151,7 @@ const universitiesData = [
 
 const NewPage=()=>{
     return(
-        <div className="text-smallTextPhone md:text-smallText">
+        <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
             <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto">
                 <div className="flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                 <div className="flex flex-col items-center gap-[4vw] md:gap-[1vw]">

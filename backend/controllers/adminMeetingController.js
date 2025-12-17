@@ -192,9 +192,7 @@ const deleteOldMeetings = async () => {
   try {
     const now = new Date();
     const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-    
-    console.log(`Current time: ${now.toISOString()}`);
-    console.log(`Looking for meetings scheduled before: ${twentyFourHoursAgo.toISOString()}`);
+  
     
     // Find meetings that are 24+ hours old based on their scheduled date and time
     const oldMeetings = await Meeting.find({
@@ -211,7 +209,7 @@ const deleteOldMeetings = async () => {
       }
     });
 
-    console.log(`Found ${oldMeetings.length} meetings scheduled more than 24 hours ago`);
+ 
 
     if (oldMeetings.length > 0) {
       const deletedMeetings = await Meeting.deleteMany({
@@ -228,7 +226,6 @@ const deleteOldMeetings = async () => {
         }
       });
 
-      console.log(`Deleted ${deletedMeetings.deletedCount} old meetings based on scheduled date/time`);
       return deletedMeetings.deletedCount;
     }
 

@@ -49,6 +49,12 @@ const CallingRecordComponent= ()  => {
     const [counsellors, setCounsellors] = useState<any[]>([]);
     const [selectedCounsellor, setSelectedCounsellor] = useState('');
     const [assigningCounsellor, setAssigningCounsellor] = useState(false);
+    
+    // Pending follow-ups states
+    const [pendingFollowUps, setPendingFollowUps] = useState<any[]>([]);
+    const [showReassignModal, setShowReassignModal] = useState(false);
+    const [selectedFollowUpLeads, setSelectedFollowUpLeads] = useState<any[]>([]);
+    const [reassigningCounsellor, setReassigningCounsellor] = useState('');
 
     const  tableHeaders = [
     "S.No",
@@ -215,6 +221,49 @@ const CallingRecordComponent= ()  => {
             count: number;
         }>>([]);
 
+        // Calculate stats for each counsellor
+        const getCounsellorStats = (counsellorId: string) => {
+            const counsellorLeads = leads.filter((lead: any) => 
+                lead.assignedCounsellor?._id === counsellorId || lead.assignedCounsellor === counsellorId
+            );
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const oneWeekAgo = new Date(today);
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+            const todayLeads = counsellorLeads.filter((lead: any) => {
+                if (!lead.callingDate) return false;
+                const callingDate = new Date(lead.callingDate);
+                callingDate.setHours(0, 0, 0, 0);
+                return callingDate.getTime() === today.getTime();
+            });
+
+            const yesterdayLeads = counsellorLeads.filter((lead: any) => {
+                if (!lead.callingDate) return false;
+                const callingDate = new Date(lead.callingDate);
+                callingDate.setHours(0, 0, 0, 0);
+                return callingDate.getTime() === yesterday.getTime();
+            });
+
+            const lastWeekLeads = counsellorLeads.filter((lead: any) => {
+                if (!lead.callingDate) return false;
+                const callingDate = new Date(lead.callingDate);
+                callingDate.setHours(0, 0, 0, 0);
+                return callingDate >= oneWeekAgo && callingDate <= today;
+            });
+
+            return {
+                today: todayLeads.length,
+                yesterday: yesterdayLeads.length,
+                lastWeek: lastWeekLeads.length
+            };
+        };
+
         // Function to create mapped data structure
         const createMappedData = (leadsData: Lead[]) => {
             const mappedData: Array<{
@@ -224,6 +273,7 @@ const CallingRecordComponent= ()  => {
                 count: number;
                 data: any[];
                 counsellorId?: string;
+                stats?: { today: number; yesterday: number; lastWeek: number };
             }> = [];
             
             // Add all leads entry
@@ -240,15 +290,18 @@ const CallingRecordComponent= ()  => {
              
             counsellors.forEach((counsellor:any)=>{
                 const counsellorLeads = leadsData.filter((lead:any)=>{
-                    return lead.assignedCounsellor?._id===counsellor._id;
+                    return lead.assignedCounsellor?._id===counsellor._id || lead.assignedCounsellor === counsellor._id;
                 });
                 if(counsellorLeads.length>0){
+                    const stats = getCounsellorStats(counsellor._id);
                     mappedData.push({
                         type: counsellor._id,
                         key: counsellor._id,
                         label: counsellor.firstName+' '+counsellor.lastName,
                         count: counsellorLeads.length,
-                        data: counsellorLeads
+                        data: counsellorLeads,
+                        counsellorId: counsellor._id,
+                        stats: stats
                     });
                 }
             });
@@ -310,14 +363,32 @@ const CallingRecordComponent= ()  => {
             }
         }, []);
 
+        // Calculate pending follow-ups (current and past dates) - Show ALL leads with followUpDate, regardless of status
+        useEffect(() => {
+            if (leads.length > 0) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                const pending = leads.filter((lead: any) => {
+                    if (!lead.followUpDate) return false;
+                    const followUpDate = new Date(lead.followUpDate);
+                    followUpDate.setHours(0, 0, 0, 0);
+                    // Include today and past dates - show ALL leads with followUpDate, not just those with 'follow-up' status
+                    return followUpDate <= today;
+                });
+                
+                setPendingFollowUps(pending);
+            }
+        }, [leads]);
+
         // Setting the data for the table
         useEffect(()=>{
             setCurrentDataForTable(leads)
         },[leads])
 
-        // Update mapped data and tabs when leads change
+        // Update mapped data and tabs when leads or counsellors change
         useEffect(() => {
-            if (leads.length > 0) {
+            if (leads.length > 0 && counsellors.length > 0) {
                 const newMappedData = createMappedData(leads);
                 setMappedData(newMappedData);
                 
@@ -325,17 +396,17 @@ const CallingRecordComponent= ()  => {
                 const newTabs = newMappedData.map(item => ({
                     key: item.key,
                     label: item.label,
-                    count: item.count
+                    count: item.count,
+                    stats: item.stats
                 }));
                 setTabs(newTabs);
 
             }
-        }, [leads]);
+        }, [leads, counsellors]);
 
 
         // selecting which data to show
         useEffect(()=>{
-            console.log('Active Tab:', activeTab);
            if(activeTab=='allLeads'){
                 setCurrentDataForTable(leads)
             }else if(activeTab=='unassigned'){
@@ -595,6 +666,82 @@ const CallingRecordComponent= ()  => {
             }
         };
 
+        // Reassign pending follow-ups
+        const reassignPendingFollowUps = async () => {
+            if (selectedFollowUpLeads.length === 0) {
+                alert('Please select leads to reassign');
+                return;
+            }
+
+            if (!reassigningCounsellor) {
+                alert('Please select a counsellor');
+                return;
+            }
+
+            const selectedCounsellorData = counsellors.find(c => c._id === reassigningCounsellor);
+            if (!selectedCounsellorData) {
+                alert('Selected counsellor not found');
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to reassign ${selectedFollowUpLeads.length} follow-up lead(s) to ${selectedCounsellorData.firstName} ${selectedCounsellorData.lastName}?`)) {
+                return;
+            }
+
+            setAssigningCounsellor(true);
+
+            try {
+                const token = localStorage.getItem('adminToken');
+                if (!token) {
+                    setError('Not authenticated. Please log in again.');
+                    return;
+                }
+
+                const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+                let successCount = 0;
+                let errorCount = 0;
+
+                for (const lead of selectedFollowUpLeads) {
+                    try {
+                        const response = await axios.put(
+                            `${baseUrl}/api/leads/${lead._id}`,
+                            {
+                                assignedCounsellor: reassigningCounsellor,
+                                assignedCounsellorName: `${selectedCounsellorData.firstName} ${selectedCounsellorData.lastName}`
+                            },
+                            {
+                                headers: { Authorization: authToken }
+                            }
+                        );
+                        
+                        if (response.data.success) {
+                            successCount++;
+                        } else {
+                            errorCount++;
+                        }
+                    } catch (err) {
+                        errorCount++;
+                        console.error('Error reassigning lead:', lead._id, err);
+                    }
+                }
+
+                if (successCount > 0) {
+                    alert(`Successfully reassigned ${successCount} lead(s)${errorCount > 0 ? `, ${errorCount} failed` : ''}`);
+                    setSelectedFollowUpLeads([]);
+                    setReassigningCounsellor('');
+                    setShowReassignModal(false);
+                    fetchLeadsData();
+                } else {
+                    setError(`Failed to reassign any leads. ${errorCount} errors occurred.`);
+                }
+            } catch (err: any) {
+                setError('Failed to reassign leads');
+                console.error('Reassign error:', err);
+            } finally {
+                setAssigningCounsellor(false);
+            }
+        };
+
         // Assign counsellor to selected leads
         const assignCounsellorToLeads = async () => {
             if (selectedLeads.length === 0) {
@@ -682,6 +829,65 @@ const CallingRecordComponent= ()  => {
    
     return (
         <div className='m-[32px] rounded-[8px] bg-white py-[16px] px-[8px] shadow-sm'>
+            {/* Pending Follow-ups Section */}
+            {pendingFollowUps.length > 0 && (
+                <div className='mb-6 mx-[32px] bg-yellow-50 border border-yellow-200 rounded-lg p-4'>
+                    <div className='flex items-center justify-between mb-3'>
+                        <div>
+                            <h5 className='text-lg font-semibold text-yellow-900'>Pending Follow-ups</h5>
+                            <p className='text-sm text-yellow-700'>
+                                {pendingFollowUps.length} follow-up(s) with current or past dates need attention
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => setShowReassignModal(true)}
+                            className='bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 text-sm font-medium'
+                        >
+                            Reassign ({selectedFollowUpLeads.length > 0 ? selectedFollowUpLeads.length : 'Select'})
+                        </button>
+                    </div>
+                    <div className='max-h-48 overflow-y-auto'>
+                        <table className='min-w-full text-sm'>
+                            <thead className='bg-yellow-100'>
+                                <tr>
+                                    <th className='px-3 py-2 text-left text-xs font-semibold text-yellow-900'>Select</th>
+                                    <th className='px-3 py-2 text-left text-xs font-semibold text-yellow-900'>Student</th>
+                                    <th className='px-3 py-2 text-left text-xs font-semibold text-yellow-900'>Assigned To</th>
+                                    <th className='px-3 py-2 text-left text-xs font-semibold text-yellow-900'>Follow-up Date</th>
+                                    <th className='px-3 py-2 text-left text-xs font-semibold text-yellow-900'>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody className='divide-y divide-yellow-200'>
+                                {pendingFollowUps.map((lead: any) => (
+                                    <tr key={lead._id} className='hover:bg-yellow-100'>
+                                        <td className='px-3 py-2'>
+                                            <input
+                                                type='checkbox'
+                                                checked={selectedFollowUpLeads.some(l => l._id === lead._id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setSelectedFollowUpLeads(prev => [...prev, lead]);
+                                                    } else {
+                                                        setSelectedFollowUpLeads(prev => prev.filter(l => l._id !== lead._id));
+                                                    }
+                                                }}
+                                                className='w-4 h-4 text-yellow-600 border-yellow-300 rounded focus:ring-yellow-500'
+                                            />
+                                        </td>
+                                        <td className='px-3 py-2 text-yellow-900 font-medium'>{lead.name}</td>
+                                        <td className='px-3 py-2 text-yellow-700'>{lead.assignedCounsellorName || 'Unassigned'}</td>
+                                        <td className='px-3 py-2 text-yellow-700'>
+                                            {lead.followUpDate ? new Date(lead.followUpDate).toLocaleDateString('en-IN') : 'N/A'}
+                                        </td>
+                                        <td className='px-3 py-2 text-yellow-700'>{lead.phone || 'N/A'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
+
             <div className='flex justify-between items-center px-[32px]'>
             <h4 className='text-h6Text font-medium font-poppins '>Calling Dashboard</h4>
             <div className='flex items-center gap-[16px] '>
@@ -876,6 +1082,77 @@ const CallingRecordComponent= ()  => {
                       Apply Filters
                     </button>
                                      </div>
+                 </div>
+               </div>
+             </div>
+           )}
+
+           {/* Reassign Follow-ups Modal */}
+           {showReassignModal && (
+             <div className="fixed inset-0 overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 flex items-center justify-center z-[100]">
+               <div className="relative bg-white rounded-lg w-[90%] max-w-md p-6 m-4">
+                 <div className="flex justify-between items-center mb-6">
+                   <h2 className="text-xl font-semibold text-gray-900">Reassign Pending Follow-ups</h2>
+                   <button onClick={() => {
+                     setShowReassignModal(false);
+                     setReassigningCounsellor('');
+                     setSelectedFollowUpLeads([]);
+                   }} className="text-gray-500 hover:text-gray-700">
+                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                     </svg>
+                   </button>
+                 </div>
+
+                 <div className="space-y-4">
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 mb-2">
+                       Select Counsellor
+                     </label>
+                     <select
+                       value={reassigningCounsellor}
+                       onChange={(e) => setReassigningCounsellor(e.target.value)}
+                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                       disabled={assigningCounsellor}
+                     >
+                       <option value="">Choose a counsellor...</option>
+                       {counsellors.map((counsellor) => (
+                         <option key={counsellor._id} value={counsellor._id}>
+                           {counsellor.firstName} {counsellor.lastName} - {counsellor.email}
+                         </option>
+                       ))}
+                     </select>
+                   </div>
+
+                   <div className="bg-blue-50 p-3 rounded-md">
+                     <p className="text-sm text-blue-700">
+                       <strong>Selected Leads:</strong> {selectedFollowUpLeads.length} lead(s)
+                     </p>
+                     <p className="text-xs text-blue-600 mt-1">
+                       {selectedFollowUpLeads.map(lead => lead.name).join(', ')}
+                     </p>
+                   </div>
+
+                   <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                     <button
+                       onClick={() => {
+                         setShowReassignModal(false);
+                         setReassigningCounsellor('');
+                         setSelectedFollowUpLeads([]);
+                       }}
+                       disabled={assigningCounsellor}
+                       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                     >
+                       Cancel
+                     </button>
+                     <button
+                       onClick={reassignPendingFollowUps}
+                       disabled={!reassigningCounsellor || assigningCounsellor}
+                       className="bg-yellow-600 text-white py-2 px-4 rounded-md shadow-sm text-sm font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                     >
+                       {assigningCounsellor ? 'Reassigning...' : 'Reassign Leads'}
+                     </button>
+                   </div>
                  </div>
                </div>
              </div>

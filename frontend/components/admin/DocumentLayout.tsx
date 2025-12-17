@@ -58,7 +58,6 @@ export default function Layout({ children, navItems, searchTerm,setSearchTerm }:
   const [urgentGeneralTasks, setUrgentGeneralTasks] = useState<AdminTask[]>([]);
   const [showUrgentModal, setShowUrgentModal] = useState(false);
   const [activeNotificationTab, setActiveNotificationTab] = useState<'Task' | 'Update'>('Task');
-  console.log("Search Term:", searchTerm);
   // Fetch Data of Admin from local Storage
   useEffect(() => {
     const storedAdmin = getAdminData<AdminData>();

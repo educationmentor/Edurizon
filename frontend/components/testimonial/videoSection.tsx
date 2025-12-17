@@ -100,7 +100,6 @@ const VideoSection = () => {
     const [selectedButton, setSelectedButton] = useState(categories.indexOf('viewAll'));
 
     const [selectedCategory, setSelectedCategory] = useState<string>("viewAll");
-    console.log(selectedCategory);
     const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };

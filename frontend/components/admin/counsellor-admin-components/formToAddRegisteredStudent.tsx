@@ -38,6 +38,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
     preferedUniversity: 'None',
     assignedCounsellor: '',
     notes: '',
+    source: 'Website',
   });
 
 
@@ -47,7 +48,6 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
   const [notificationType, setNotificationType] = useState<'success' | 'error'>('success');
   const [notificationMessage, setNotificationMessage] = useState('');
   const [counsellors, setCounsellors] = useState([]);
-  console.log('counsellor', counsellors)
 
   // Reset form when dialog opens/closes
   useEffect(() => {
@@ -64,6 +64,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
         preferedUniversity: 'None',
         assignedCounsellor: '',
         notes: '',
+        source: 'Website',
       });
      
       setError('');
@@ -128,9 +129,7 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
     setLoading(true);
     setError('');
     setShowNotification(false);
-    setTimeout(()=>{
-      console.log(formData)
-    },1000)
+   
 
     try {
       const token = localStorage.getItem('adminToken');
@@ -328,6 +327,19 @@ const FormToAddRegisteredStudent = ({ isOpen, onClose, onSuccess }: AddRegistere
                 </select>
               </div>
             </div>
+          </div>
+
+          {/* Source */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Source</label>
+            <input
+              type="text"
+              name="source"
+              value={formData.source}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+              placeholder="Enter source (e.g., Website, Referral, Social Media)"
+            />
           </div>
 
           {/* Additional Notes */}

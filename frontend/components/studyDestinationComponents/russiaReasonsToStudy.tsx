@@ -15,7 +15,6 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
     const useTheme=()=>useContext(ThemeContext);
     const { theme } = useTheme();
     const [showOverlay, setShowOverlay] = useState(false);
-    console.log(theme);
     const imageSrc =
       theme == "dark"?
       darkImg:

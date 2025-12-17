@@ -172,7 +172,6 @@ const DocumentManagement = () => {
     
   }, []);
 
-  console.log('adminData',adminData)
   useEffect(() => {
     if(adminData){fetchRegisteredStudents();
   }
@@ -250,9 +249,7 @@ const DocumentManagement = () => {
   useEffect(() => {
     setCurrentLeads(activeTab === 'allStudents' ? registeredStudents : []);
   }, [activeTab, registeredStudents]);
-          console.log('Assigned Students:', registeredStudents);
 
-  console.log('Current Leads:', currentLeads);
   return (
     <DocumentLayout navItems={navItems} searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       <Toaster />

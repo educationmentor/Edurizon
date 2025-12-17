@@ -4,7 +4,6 @@ import CallingRecordComponent from '@/components/admin/counsellor-admin-componen
 import GridViewIcon from '@mui/icons-material/GridView';
 import CallIcon from '@mui/icons-material/Call';
 import PersonIcon from '@mui/icons-material/Person';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const navItems = [
   {
     href: "/admin/counsellor-admin",
@@ -16,11 +15,6 @@ const navItems = [
       icon: <CallIcon />,
       label: "Calling Records",
   },
-  // {
-  //     href: "/admin/counsellor-admin/view-sessions",
-  //     icon: <ArrowForwardIosIcon />,
-  //     label: "View Sessions",
-  // },
   {
     href: "/admin/counsellor-admin/registered-students",
     icon: <PersonIcon />,

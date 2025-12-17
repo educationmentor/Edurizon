@@ -35,7 +35,7 @@ const AlexandriaUniversityFacultyOfMedicine = () => {
         <meta name="keywords" content="Alexandria University Faculty of Medicine, MBBS in Egypt, Medical Education Egypt, Study Medicine Alexandria" />
       </Head>
 
-      <div className="relative">
+      <div className="relative pt-[20vw]  md:pt-[8vw]">
         <div className="w-full">
           <Image
             src="/assets/Images/mbbs-in-egypt/alexandria-university-banner.webp"

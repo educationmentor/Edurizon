@@ -27,7 +27,6 @@ const EligibilityCriteria = ({ id,data,countryName }: EligibilityCriteriaProps) 
         
               {data.slice(1).map((row, i) => {
                 const width=row.length;
-                console.log(width);
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (

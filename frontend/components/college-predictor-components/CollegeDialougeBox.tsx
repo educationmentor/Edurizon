@@ -10,8 +10,6 @@ type CollegeDetailDialogProps = {
   
 
 export default function CollegeDetailDialouge({isOpen,setIsOpen,college,isGovernment,isManagement}: CollegeDetailDialogProps){
-    console.log(isManagement);
-    console.log('heei',college);
     const closeDialog = () => {
         setIsOpen(false);
       };

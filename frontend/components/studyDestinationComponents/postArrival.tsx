@@ -10,7 +10,6 @@ import ThemeContext from '@/context/themeContext'
 const PostArrival = ({ }) => {
     const useTheme=()=>useContext(ThemeContext);
     const { theme } = useTheme();
-    console.log(theme);
     const imageSrc =
       theme == "dark"
         ? ["/assets/Images/CountryBlogs/postArrival/academicSupportDark.png","/assets/Images/CountryBlogs/postArrival/culturalDark.png","/assets/Images/CountryBlogs/postArrival/termSupportDark.png"]

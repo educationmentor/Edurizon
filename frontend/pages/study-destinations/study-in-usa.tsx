@@ -151,7 +151,7 @@ const USA = () => {
   return (
     <div className=''>
        {/* Breadcumb section and about nepal */}
-       <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto">
+       <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto pt-[15vw]  md:pt-[4vw]">
                 <div className="flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                 <div className="flex flex-col items-center gap-[4vw] md:gap-[1vw]">
                     <Breadcrumbs/>

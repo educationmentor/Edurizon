@@ -268,7 +268,7 @@ const videoData=[
 
 const NewPage=()=>{
     return(
-        <div  className="text-smallTextPhone md:text-regularText">
+        <div  className="text-smallTextPhone md:text-regularText pt-[15vw] md:pt-[4vw]">
 
             {/* Breadcumb section and about nepal */}
             <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto">

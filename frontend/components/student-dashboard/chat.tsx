@@ -105,9 +105,7 @@ const Chat: React.FC<ChatProps> = ({ userData, activeTab }) => {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token'); 
       
       if (token) {
-        console.log('Student token for Socket.IO:', token);
-        console.log('Student data:', userData);
-        console.log('Consultation request ID:', userData._id);
+
         
         // Try Socket.IO connection first
         const newSocket = io(baseUrl, {

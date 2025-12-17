@@ -21,10 +21,20 @@ const AuthorizationSlider = ({ images }: AuthorizationSliderProps) => {
     arrows: true,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 1024, // tablet and below
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 768, // mobile
         settings: {
           slidesToShow: 1,
-          arrows: true,
+          slidesToScroll: 1,
+          arrows: false, // Usually better UX on mobile
+          dots: true, // Add dots for mobile navigation
         },
       },
     ],
@@ -41,13 +51,13 @@ const AuthorizationSlider = ({ images }: AuthorizationSliderProps) => {
         <Slider {...settings} className="authorization-slider">
           {images.map((image, index) => (
             <div key={index} className="px-[2vw] md:px-[1vw]">
-              <div className="relative  h-[60vw] md:h-[30vw]  overflow-hidden">
+              <div className="relative h-[60vw] md:h-[30vw] overflow-hidden">
                 <Image
                   src={image}
                   alt={`Authorization document ${index + 1}`}
                   fill
-                  className="rounded-none"
-                  sizes="(max-width: 768px) 100vw, 80vw"
+                  className="rounded-none object-contain"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
             </div>

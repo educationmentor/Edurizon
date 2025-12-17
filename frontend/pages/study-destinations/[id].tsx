@@ -105,11 +105,10 @@ const metaData={
 
 
 const NewPage = ({ id,countryData }: NewPageProps) => {
-  console.log("id",id);
   return (
     <>
       {metaData[id as keyof typeof metaData]}
-    <div className="flex flex-col gap-[10vw] md:gap-[4vw] justify-center  ">
+    <div className="flex flex-col gap-[10vw] md:gap-[4vw] justify-center pt-[15vw]  md:pt-[4vw] ">
 
       {/* Header Part */}
       <Header id={id} title1={countryData.countryTitle1} title2={countryData.countryTitle2??""} description={countryData.countryDescription} />
@@ -203,7 +202,6 @@ import AuthorizationSlider from "@/components/studyDestinationComponents/authori
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id  = context.params?.id;
-  console.log("Fetching data for:", id);
   const countryData = countryNames[id as keyof typeof countryNames];
   if (!countryData) {
     return <div>

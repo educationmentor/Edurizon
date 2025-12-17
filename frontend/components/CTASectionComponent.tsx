@@ -35,7 +35,6 @@ const CTASectionComponent = () => {
       }, [chatBotReply, questions]); // Trigger scroll when chat updates
       const handleConsultationClick = () => {
         setShowConsultationForm(true);
-        console.log('Consultation Form Opened');
         
       };
 
@@ -62,7 +61,6 @@ const CTASectionComponent = () => {
 
      const submitBotMsg=async()=>{
       try{
-        console.log(chatBotReply)
         const response = await axios.post(
           `${baseUrl}/api/chatbot/send`, 
           chatBotReply

@@ -170,16 +170,17 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         )}
 
-        <>
+        <div className="relative">
           {/* Admin routes are now fully accessible on all screen sizes */}
           {/* {!shouldExcludeLayout && <NavHeader/>} */}
+
           {!shouldExcludeLayout && <Navbar />}
           {pathname === '/' ? <Home /> : <Component {...pageProps} />}
           <GoogleAnalytics gaId="G-Z25NZ103DJ" />
           <div id="footer">
             {!shouldExcludeLayout && <CTASectionComponent />}
           </div>
-        </>
+        </div>
       </ThemeProvider>
     </>
   );

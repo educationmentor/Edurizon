@@ -58,7 +58,6 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
         };
 
         const res:any= await axios.post(`${baseUrl}/api/admin/finance/bills/generate-receipt`, receiptPayload, { headers })
-        console.log(res)
         // Create bill with receipt URL
         const payload = {
         studentId: billForm.studentId,

@@ -845,7 +845,6 @@ const DocumentPage: React.FC<DocumentPageProps> = ({ id }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id as string; // explicitly cast to string
 
-  console.log("Fetching data for:", id);
 
   return {
     props: { id }, // passed to the component as props

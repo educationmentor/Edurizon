@@ -128,7 +128,6 @@ exports.login = async (req, res) => {
           date: today
         });
         await attendance.save();
-        console.log('Attendance recorded for admin:', adminUser.email);
       }
     } catch (attendanceError) {
       console.error('Error recording attendance:', attendanceError);
@@ -361,7 +360,6 @@ exports.addVideoData=async(req,res)=>{
       uploadDate,
       description
     } = req.body;
-    console.log(id);
     // Video object to add
     const newVideo = {
       videoName,
@@ -382,7 +380,6 @@ exports.addVideoData=async(req,res)=>{
       { new: true, runValidators: true }
     );
 
-    console.log('Updated User',updatedUser);
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -634,7 +631,6 @@ exports.scheduleMeeting = async (req, res) => {
           }
         }
         
-        console.log(`📧 Zoom meeting notifications sent to ${meeting.attendees.length + 1} participants`);
       } catch (emailError) {
         console.error('Failed to send Zoom meeting notifications:', emailError);
         // Continue with response even if emails fail

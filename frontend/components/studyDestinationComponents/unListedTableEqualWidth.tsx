@@ -37,7 +37,6 @@ const UnlistedTableEqualWidth = ({ id,content,section2="" }: UnlistedTableProps)
         
               {content.data.slice(1).map((row, i) => {
                 const width=row.length;
-                console.log(width);
                 return(
                 <tr key={i}>
                   {row.map((highlight, index) => (

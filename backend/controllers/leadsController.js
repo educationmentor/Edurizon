@@ -72,6 +72,7 @@ const addLead = async (req, res) => {
       assignedCounsellorName,
       callingDate,
       followUpDate,
+      source,
     } = req.body;
 
     // Validate required fields
@@ -97,7 +98,8 @@ const addLead = async (req, res) => {
       followUpDate: followUpDate || undefined,
       remark,
       assignedCounsellor,
-      assignedCounsellorName
+      assignedCounsellorName,
+      source: (source && source.trim()) ? source.trim() : 'Website'
     });
 
     const savedLead = await newLead.save();
@@ -139,6 +141,7 @@ const modifyLead = async (req, res) => {
       assignedCounsellorName,
       callingDate,
       followUpDate,
+      source,
     } = req.body;
 
     // Find the lead first
@@ -171,6 +174,7 @@ const modifyLead = async (req, res) => {
     if (remark !== undefined) lead.remark = remark;
     if (assignedCounsellor !== undefined) lead.assignedCounsellor = assignedCounsellor;
     if (assignedCounsellorName !== undefined) lead.assignedCounsellorName=assignedCounsellorName;
+    if (source !== undefined) lead.source = source;
 
     const updatedLead = await lead.save();
     

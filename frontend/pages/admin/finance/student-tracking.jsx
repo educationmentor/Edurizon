@@ -345,6 +345,21 @@ const FinanceStudentTrackingPage = () => {
     }
   };
 
+  const formatDate = (value) =>
+    value
+      ? new Date(value).toLocaleDateString('en-IN', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })
+      : '—';
+
+  const getLastPaymentDate = (bill) => {
+    if (!bill?.paymentRecords || bill.paymentRecords.length === 0) return null;
+    const lastRecord = bill.paymentRecords[bill.paymentRecords.length - 1];
+    return lastRecord?.date || null;
+  };
+
   return (
     <DocumentLayout navItems={navItems}>
       <div className="min-h-screen bg-[#F5F7FA] px-6 py-8">
@@ -653,16 +668,23 @@ const FinanceStudentTrackingPage = () => {
                 <table className="min-w-full divide-y divide-gray-100">
                   <thead className="bg-gray-50">
                     <tr>
-                      {['Description', 'Amount Due', 'Amount Paid', 'Due Date', 'Status', 'Actions'].map(
-                        (header) => (
-                          <th
-                            key={header}
-                            className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                          >
-                            {header}
-                          </th>
-                        )
-                      )}
+                      {[
+                        'Description',
+                        'Amount Due',
+                        'Amount Paid',
+                        'Bill Date',
+                        'Last Payment',
+                        'Due Date',
+                        'Status',
+                        'Actions',
+                      ].map((header) => (
+                        <th
+                          key={header}
+                          className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                        >
+                          {header}
+                        </th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-100">
@@ -676,7 +698,13 @@ const FinanceStudentTrackingPage = () => {
                           ₹{(bill.amountPaid || 0).toLocaleString()}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-600">
-                          {bill.dueDate ? new Date(bill.dueDate).toLocaleDateString() : '—'}
+                          {formatDate(bill.issueDate || bill.createdAt)}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-600">
+                          {formatDate(getLastPaymentDate(bill))}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-600">
+                          {formatDate(bill.dueDate)}
                         </td>
                         <td className="px-4 py-3">{renderStatusBadge(bill.status)}</td>
                         <td className="px-4 py-3">
@@ -783,7 +811,6 @@ const FinanceStudentTrackingPage = () => {
                 </button>
               </div>
             </div>
-            {console.log(pdfModal)}
             <div className="px-6 py-4 overflow-hidden h-[calc(90vh-80px)]">
             <img
                   src={pdfModal.pdfUrl}

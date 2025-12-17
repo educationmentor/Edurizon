@@ -107,7 +107,7 @@ const JalalAbadStateUniversity = () => {
 
 </Head>
         <div>
-            <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center">
+            <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center pt-[20vw]  md:pt-[8vw]">
                 <div className="mx-[6vw] flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                     <Breadcrumbs/>
                 </div>

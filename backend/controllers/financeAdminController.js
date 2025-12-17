@@ -427,7 +427,19 @@ const billStructure = async (req, res) => {
        .font('Times-Bold')
        .text('Payment Acknowledgement Receipt', margin, yPosition, { align: 'center' });
 
-    yPosition += 50;
+    yPosition += 40;
+
+    // Date - Above main content (similar to fee structure)
+    const generationDate = new Date().toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    doc.fontSize(10)
+       .font('Times-Roman')
+       .text(`Date: ${generationDate}`, margin, yPosition, { align: 'right' });
+
+    yPosition += 25;
 
     // Main Content
     doc.fontSize(12)
@@ -489,7 +501,7 @@ const billStructure = async (req, res) => {
     doc.text('2. Final admission shall be strictly subject to the successful clearance of the entrance examination/interview, as and when conducted.', margin + 10, yPosition, { width: contentWidth - 10 });
 
     yPosition += 40;
-    doc.text('3. This receipt only confirms the payment made towards registration and does not guarantee final admission, which is subject to the clearance of entrance exam or interview.', margin + 10, yPosition, { width: contentWidth - 10 });
+    doc.text('3. All amounts paid are strictly non-refundable under any circumstances.', margin + 10, yPosition, { width: contentWidth - 10 });
 
     yPosition += 50;
 

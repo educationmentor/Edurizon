@@ -76,7 +76,9 @@ const ContactUs = () => {
       }
     };
   return (
-    <div className="container mt-[10vw] mb-[20vw] md:mb-[10vw] md:mt-[3vw] mx-[6vw] md:mx-[12.5vw]">
+    <div className="relative ">
+
+    <div className="container  py-[60px] lg:py-[80px] xl:py-[120px] mb-[20vw] md:mb-[10vw] mx-[6vw] md:mx-[12.5vw]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[8vw] md:gap-[2vw] items-center justify-center">
         {/* First Column - Company Information */}
         <div className="">
@@ -201,6 +203,8 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
+    </div>
+
   );
 };
 
