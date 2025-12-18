@@ -7,6 +7,11 @@ interface ImportLeadsFromExcelDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  assignedTo?: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 interface ExcelLead {
@@ -19,7 +24,7 @@ interface ExcelLead {
   source: string;
 }
 
-const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExcelDialogProps) => {
+const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess, assignedTo }: ImportLeadsFromExcelDialogProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [leads, setLeads] = useState<ExcelLead[]>([]);
   const [loading, setLoading] = useState(false);
@@ -187,7 +192,9 @@ const ImportLeadsFromExcel = ({ isOpen, onClose, onSuccess }: ImportLeadsFromExc
               source: (lead.source && lead.source.trim()) ? lead.source.trim() : 'Website',
               leadType: 'pending',
               callingStatus: 'pending',
-              leadStatus: 'pending'
+              leadStatus: 'pending',
+              assignedCounsellor: assignedTo?._id,
+              assignedCounsellorName: assignedTo ? `${assignedTo.firstName} ${assignedTo.lastName}` : undefined
             },
             {
               headers: {

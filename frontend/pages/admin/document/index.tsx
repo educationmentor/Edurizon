@@ -58,6 +58,7 @@ const DocumentManagement = () => {
   const [adminData, setAdminData] = useState<any>(null);
   const [registeredStudents, setRegisteredStudents] = useState<any[]>([]);
   const [currentLeads,setCurrentLeads] = useState<any[]>([]);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
    const router = useRouter();
 
 
@@ -256,11 +257,25 @@ const DocumentManagement = () => {
       <div>
         {}
         <div className="py-8">
-            <div className="px-4 sm:px-6 md:px-8">
+            <div className="px-4 sm:px-6 md:px-8 flex justify-between items-center">
             <h1 className="text-2xl font-semibold text-gray-900">Document Management</h1>
+            <div className='flex items-center gap-2'>
+                <span className='text-sm text-gray-500'>Show:</span>
+                <select 
+                    value={itemsPerPage}
+                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                    className='text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500'
+                >
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                    <option value={200}>200</option>
+                </select>
+            </div>
           </div>
         </div>
-        <AdminTable ITEMS_PER_PAGE={10} tableHeaders={tableHeaders} tableColumns={tableColumns} leads={currentLeads} loading={loading} error={error} csvHeader={csvHeader} csvDataFields={csvDataFields} tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <AdminTable ITEMS_PER_PAGE={itemsPerPage} tableHeaders={tableHeaders} tableColumns={tableColumns} leads={currentLeads} loading={loading} error={error} csvHeader={csvHeader} csvDataFields={csvDataFields} tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </DocumentLayout>
   );

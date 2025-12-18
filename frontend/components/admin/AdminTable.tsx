@@ -232,7 +232,7 @@ const AdminTable = ({ ITEMS_PER_PAGE, tableHeaders, tableColumns,leads, loading,
                           
                           {tableColumns.map((col) => (
                                 <td key={col.key} className="px-6 py-4 whitespace-nowrap">
-                                {col.render(lead, index)}
+                                {col.render(lead, startIndex + index)}
                                 </td>
                             ))}
                         </tr>

@@ -21,6 +21,7 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState('allLeads');
     const [currentDataForTable, setCurrentDataForTable] = useState<any[]>([]);
+    const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE || 10);
 
     // Leads and Student Data
     const [leads,setLeads] = useState<Lead[]>([]);
@@ -388,6 +389,20 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
             <div className='flex justify-between items-center px-[32px]'>
             <h4 className='text-h6Text font-medium font-poppins '>Calling Dashboard</h4>
             <div className='flex items-center gap-[16px] '>
+            <div className='flex items-center gap-2 mr-4'>
+                <span className='text-sm text-gray-500'>Show:</span>
+                <select 
+                    value={itemsPerPage}
+                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                    className='text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500'
+                >
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                    <option value={200}>200</option>
+                </select>
+            </div>
             <button 
                 onClick={() => setShowFilterModal(true)}
                 className={`text-[#344054] text-[14px] px-[4px] py-2 rounded-[8px] hover:bg-gray-100 flex items-center ${
@@ -407,7 +422,7 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
             </div>
             <div className=' m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
                 <AdminTable 
-                    ITEMS_PER_PAGE={ITEMS_PER_PAGE} 
+                    ITEMS_PER_PAGE={itemsPerPage} 
                     tableColumns={tableColumns} 
                     tableHeaders={tableHeaders} 
                     csvHeader={csvHeader} 
@@ -456,9 +471,14 @@ const CallingDetails:React.FC<{adminData:any,ITEMS_PER_PAGE:number}> = ({adminDa
           }}/>
 
           {/* Import Leads from Excel Popup */}
-          <ImportLeadsFromExcel isOpen={isImportLeadsFromExcelDialogOpen} onClose={() => setIsImportLeadsFromExcelDialogOpen(false)} onSuccess={() => {
-            fetchLeadsData();
-          }}/>
+          <ImportLeadsFromExcel 
+            isOpen={isImportLeadsFromExcelDialogOpen} 
+            onClose={() => setIsImportLeadsFromExcelDialogOpen(false)} 
+            onSuccess={() => {
+              fetchLeadsData();
+            }}
+            assignedTo={adminData}
+          />
 
           {/* Filter Modal */}
           {showFilterModal && (

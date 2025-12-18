@@ -21,6 +21,7 @@ const CallingDetails= ()  => {
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState('allLeads');
     const [currentDataForTable, setCurrentDataForTable] = useState<any[]>([]);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     // Leads and Student Data
     const [leads,setLeads] = useState<Lead[]>([]);
@@ -378,6 +379,7 @@ const CallingDetails= ()  => {
             }
 
             try {
+                setLoading(true);
                 const token = localStorage.getItem('adminToken');
                 if (!token) {
                     setError('Not authenticated. Please log in again.');
@@ -390,7 +392,7 @@ const CallingDetails= ()  => {
 
                 for (const lead of selectedLeads) {
                     try {
-                        const url=activeTab=='registered'?`${baseUrl}/api/registered-students/${lead._id}`:`${baseUrl}/api/leads/${lead._id}`;
+                        const url=activeTab=='enrolled'?`${baseUrl}/api/registered-students/${lead._id}`:`${baseUrl}/api/leads/${lead._id}`;
                         const response = await axios.delete(url, {
                             headers: { Authorization: authToken }
                         });
@@ -420,6 +422,8 @@ const CallingDetails= ()  => {
             } catch (err: any) {
                 setError('Failed to delete leads');
                 console.error('Delete error:', err);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -545,6 +549,20 @@ const CallingDetails= ()  => {
             <div className='flex justify-between items-center px-[32px]'>
             <h4 className='text-h6Text font-medium font-poppins '>Calling Dashboard</h4>
             <div className='flex items-center gap-[16px] '>
+            <div className='flex items-center gap-2 mr-4'>
+                <span className='text-sm text-gray-500'>Show:</span>
+                <select 
+                    value={itemsPerPage}
+                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                    className='text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500'
+                >
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                    <option value={200}>200</option>
+                </select>
+            </div>
             <button 
                 onClick={() => setShowFilterModal(true)}
                 className={`text-[#344054] text-[14px] px-[4px] py-2 rounded-[8px] hover:bg-gray-100 flex items-center ${
@@ -583,7 +601,7 @@ const CallingDetails= ()  => {
             </div>
             <div className=' m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
                 <AdminTable 
-                    ITEMS_PER_PAGE={5} 
+                    ITEMS_PER_PAGE={itemsPerPage} 
                     tableColumns={tableColumns} 
                     tableHeaders={tableHeaders} 
                     csvHeader={csvHeader} 
@@ -632,9 +650,13 @@ const CallingDetails= ()  => {
           }}/>
 
           {/* Import Leads from Excel Popup */}
-          <ImportLeadsFromExcel isOpen={isImportLeadsFromExcelDialogOpen} onClose={() => setIsImportLeadsFromExcelDialogOpen(false)} onSuccess={() => {
-            fetchLeadsData();
-          }}/>
+          <ImportLeadsFromExcel 
+            isOpen={isImportLeadsFromExcelDialogOpen} 
+            onClose={() => setIsImportLeadsFromExcelDialogOpen(false)} 
+            onSuccess={() => {
+              fetchLeadsData();
+            }}
+          />
 
           {/* Filter Modal */}
           {showFilterModal && (

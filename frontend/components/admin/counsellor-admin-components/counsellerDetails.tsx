@@ -14,7 +14,6 @@ const CounsellorDetails= ()  => {
         "Country",
         "Contact No.",
         "Last Login",
-        "Rating",
       ];
       
       const csvHeader=[
@@ -22,7 +21,6 @@ const CounsellorDetails= ()  => {
         'Country',
         'Contact No.',
         'Last Login',
-        'Rating',
       ];
       
       const csvDataFields = [
@@ -30,7 +28,6 @@ const CounsellorDetails= ()  => {
         'country',
         'contactNo',
         'lastLogin',
-        'rating'
       ];
 
       const tableColumns = [
@@ -63,13 +60,11 @@ const CounsellorDetails= ()  => {
           key: "lastLogin",
           render: (counsellor:any) => (
              
-            <span className="text-sm text-gray-500">{counsellor.lastLogin??'Never Loged in'}</span>
-          ),
-        },
-        {
-          key: "rating",
-          render: (counsellor:any) => (
-            <span className="text-sm text-gray-500">{counsellor.rating}</span>
+            <span className="text-sm text-gray-500">{!counsellor.lastLogin?'Never Loged in':new Date(counsellor.lastLogin).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+              })}</span>
           ),
         },
         ];

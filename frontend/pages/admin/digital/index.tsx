@@ -62,6 +62,7 @@ const SuperAdminTable: React.FC = () => {
     const [allVideos, setAllVideos] = useState<any[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [adminUsers, setAdminUsers] = useState<any[]>([]);
+    const [itemsPerPage, setItemsPerPage] = useState(15);
 
     // Modal state for creating and assigning tasks
     const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
@@ -526,6 +527,21 @@ const SuperAdminTable: React.FC = () => {
                             />
                         </svg>
                     </button>
+                    <div className='flex items-center gap-2'>
+                        <span className='text-sm text-gray-500'>Show:</span>
+                        <select 
+                            value={itemsPerPage}
+                            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                            className='text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500'
+                        >
+                            <option value={10}>10</option>
+                            <option value={15}>15</option>
+                            <option value={20}>20</option>
+                            <option value={50}>50</option>
+                            <option value={100}>100</option>
+                            <option value={200}>200</option>
+                        </select>
+                    </div>
                     <button
                         onClick={() => setIsAssignModalOpen(true)}
                         className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 text-sm font-medium"
@@ -537,7 +553,7 @@ const SuperAdminTable: React.FC = () => {
             
             <div className='m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
                 <AdminTable 
-                    ITEMS_PER_PAGE={15} 
+                    ITEMS_PER_PAGE={itemsPerPage} 
                     tableColumns={tableColumns} 
                     tableHeaders={tableHeaders} 
                     csvHeader={csvHeader} 
@@ -735,6 +751,7 @@ const MemberTable: React.FC<{adminData:any, setAdminData?: (data: any) => void}>
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [videos, setVideos] = useState<any[]>(adminData?.digitalMarketingVideos || []);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [editingVideo, setEditingVideo] = useState<any>(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -1339,6 +1356,21 @@ return (
                         </svg>
                     </button>
 
+                    <div className='flex items-center gap-2'>
+                        <span className='text-sm text-gray-500'>Show:</span>
+                        <select 
+                            value={itemsPerPage}
+                            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                            className='text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500'
+                        >
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                            <option value={50}>50</option>
+                            <option value={100}>100</option>
+                            <option value={200}>200</option>
+                        </select>
+                    </div>
+
                     <button
                         onClick={() => setShowAddModal(true)}
                         className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 flex items-center"
@@ -1436,7 +1468,7 @@ return (
             </div>
       <div className=' m-[16px] rounded-[8px] overflow-hidden shadow-sm'>
       <AdminTable 
-          ITEMS_PER_PAGE={10} 
+          ITEMS_PER_PAGE={itemsPerPage} 
           tableColumns={tableColumns} 
           tableHeaders={tableHeaders} 
           csvHeader={csvHeader} 
