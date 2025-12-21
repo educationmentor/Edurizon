@@ -20,9 +20,9 @@ const ReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }: Reas
       darkImg:
       lightImg;
     return (
-        <div className="md:m-[4vw] flex flex-col gap-[8vw] md:gap-[4vw] mx-[6vw] md:mx-[12.5vw]">
-            <h4 className="text-h4TextPhone md:text-h4Text text-center leading-[130%] ">{title1} {title2}</h4>
-            <div className="flex flex-col  md:grid md:grid-cols-3 gap-[8vw] md:gap-[4vw]">
+        <div className="md:m-[4vw] flex flex-col gap-[8vw] md:gap-[4vw] mx-[6vw] md:mx-[12.5vw] pb-[8vw] md:pb-0">
+            <h4 className="text-h4TextPhone md:text-h4Text text-center leading-[130%] font-bold">{title1} {title2}</h4>
+            <div className="flex flex-col  md:grid md:grid-cols-3 gap-[8vw] md:gap-[4vw] ">
             {content.map((reason, index) => {
                     const isExpanded = expandedIndex === index;
                     const desktopText = reason.description || "";
@@ -38,13 +38,13 @@ const ReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }: Reas
                         alt={`Reason ${index + 1}`}
                         className="w-[16vw] mx-auto md:mx-0 md:w-[4vw] h-auto"
                     />
-                    <div>
-                        <h6 className="leading-[120%] text-h6TextPhone text-center md:text-left md:text-h6Text font-bold">
+                    <div className="text-justify">
+                        <h6 className="leading-[120%] text-h6TextPhone md:text-left md:text-h6Text font-bold">
                         <span className="hidden md:inline">{reason.title}</span>
                         <span className="md:hidden">{reason.title}</span>
                         </h6>
-                        <p className={`leading-[150%] text-center md:text-left text-regularTextPhone md:text-regularText font-light ${!isExpanded ? "line-clamp-3" : ""}`}>
-                        <span className="hidden md:inline">{reason.description}</span>
+                        <p className={`leading-[150%]  md:text-left text-regularTextPhone md:text-regularText font-light ${!isExpanded ? "line-clamp-3" : ""}`}>
+                        <span className="hidden md:inline ">{reason.description}</span>
                         <span className="md:hidden">{reason.mobileDescription || reason.description}</span>
                         </p>
                         {shouldShowToggle && (

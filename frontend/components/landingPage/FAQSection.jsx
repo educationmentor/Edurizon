@@ -14,7 +14,7 @@ const FAQSection = () => {
         setSelected(i)
     }
     
-    return (<div className="my-[10vw] md:my-[8vw] mx-[6vw] md:mx-[21.875vw] flex flex-col gap-[4vw] md:gap-[5.25vw] justify-center items-center w-auto dark:text-white ">
+    return (<div className="my-[10vw] md:my-[2vw] mx-[6vw] md:mx-[21.875vw] flex flex-col gap-[4vw] md:gap-[2vw] justify-center items-center w-auto dark:text-white ">
                 <h3 className="text-h5TextPhone md:text-h3Text font-bold ">Frequently Asked Questions</h3>
                 <div>
                     <div className="w-full md:w-[56.25vw]">

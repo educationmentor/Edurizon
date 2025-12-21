@@ -11,10 +11,12 @@ import AuthorizationSlider from "@/components/studyDestinationComponents/authori
 
 const headerData={
     id:"georgia",
-    title2:"Study MBBS in Georgia - Best Medical Colleges in Georgia",
+    title1:'Study MBBS in Georgia',
+    title2:"Best Medical Colleges in Georgia",
     description:"Georgia has rapidly become one of the best country for MBBS for indian students, offering world‑class medical education.  In this comprehensive guide, you’ll discover everything you need to know about pursuing MBBS in Georgia —from affordable tuition fees, top NMC‑approved universities to the seamless admission process, eligibility criteria, documents required, student visas etc. With Edurizon by your side, you can apply now and secure a bright medical future, backed by personalized counseling.",
-    description2:"Nestled between Eastern Europe and Western Asia, Georgia spans 69,700 sq km and houses a population of 3.7 million. Bordered by the Black Sea to the west, Russia to the north, Turkey and Armenia to the south, and Azerbaijan to the southeast, its strategic crossroads location has forged a rich cultural tapestry. The capital, Tbilisi, enchants with winding cobblestone lanes, pastel‑faced balconies and a seamless blend of medieval churches and modern architecture. Since its independence on April  9, 1991, Georgia has overhauled its economy and education system to become a hub for international medical students. Today, over 5,000 Indian students’ study MBBS in Georgia, drawn by its English‑medium programs, cutting‑edge technologies & infrastructure, and globally recognized degrees. "
-}
+    description2:"Nestled between Eastern Europe and Western Asia, Georgia spans 69,700 sq km and houses a population of 3.7 million. Bordered by the Black Sea to the west, Russia to the north, Turkey and Armenia to the south, and Azerbaijan to the southeast, its strategic crossroads location has forged a rich cultural tapestry. The capital, Tbilisi, enchants with winding cobblestone lanes, pastel‑faced balconies and a seamless blend of medieval churches and modern architecture. Since its independence on April  9, 1991, Georgia has overhauled its economy and education system to become a hub for international medical students. Today, over 5,000 Indian students’ study MBBS in Georgia, drawn by its English‑medium programs, cutting‑edge technologies & infrastructure, and globally recognized degrees. ",
+    subTitle:'Why Georgia for MBBS'
+  }
 
 const descriptionData={
     id:"geogia",
@@ -245,8 +247,8 @@ const cardsData = [
     )
   },
   {
-    title: 'Universities',
-    value: '26',
+    title: 'India ✈️ Georgia',
+    value: '3240Km ~ 4 to 6 Hours',
     bgColor: '#ECE7FF',
     circleColor: '#F4F1FF',
     textColor:'#5C30FF',
@@ -256,13 +258,65 @@ const cardsData = [
   }
 ];  
 
+const services = [
+  {
+    icon: <svg className="w-8 h-8 md:w-16 md:h-16"  viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M25 60C25 51.7 31.7 45 40 45C41.5 45 43 45.2 44.4 45.7C47.3 38.3 54.5 33 63 33C73.5 33 82 41.5 82 52C82 52.7 82 53.3 81.9 54C88.2 55.1 93 60.5 93 67C93 74.7 86.7 81 79 81H35C29.5 81 25 76.5 25 71C25 67.4 26.9 64.3 29.8 62.5" fill="#BCCCDC"/>
+    <path d="M15 75H45M10 65H35M18 85H30" stroke="#8E9AAF" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  ,
+    text: "Autumn (Sep–Nov)",
+    label: "Mild & cool weather, very scenic. Light jackets suffice.",
+  },
+  {
+    icon: <svg className="w-8 h-8 md:w-16 md:h-16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55C20 46.7 26.7 40 35 40C36.5 40 38 40.2 39.4 40.7C42.3 33.3 49.5 28 58 28C68.5 28 77 36.5 77 47C77 47.7 77 48.3 76.9 49C83.2 50.1 88 55.5 88 62C88 69.7 81.7 76 74 76H30C24.5 76 20 71.5 20 66C20 62.4 21.9 59.3 24.8 57.5" fill="#E3F2FD"/>
+    <circle cx="35" cy="85" r="3" fill="#A5D8FF"/>
+    <circle cx="55" cy="88" r="3" fill="#A5D8FF"/>
+    <circle cx="75" cy="85" r="3" fill="#A5D8FF"/>
+    <path d="M55 80V96M47 88H63" stroke="#A5D8FF" stroke-width="2" stroke-linecap="round"/>
+  </svg>,
+    text: "Winter (Dec–Feb)",
+    label: "Cold winters (0°C to -5°C). Heavy winter clothing essential.",
+  },
+  {
+    icon: <svg className="w-8 h-8 md:w-16 md:h-16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="65" cy="35" r="18" fill="#FFD600"/>
+    <path d="M65 10V15M65 55V60M90 35H85M45 35H40M82.6 17.4L79 21M51 49L47.4 52.6M82.6 52.6L79 49M51 21L47.4 17.4" stroke="#FFD600" stroke-width="4" stroke-linecap="round"/>
+    <path d="M20 65C20 56.7 26.7 50 35 50C36.5 50 38 50.2 39.4 50.7C42.3 43.3 49.5 38 58 38C68.5 38 77 46.5 77 57C77 57.7 77 58.3 76.9 59C83.2 60.1 88 65.5 88 72C88 79.7 81.7 86 74 86H30C24.5 86 20 81.5 20 76C20 72.4 21.9 69.3 24.8 67.5" fill="#A5D8FF"/>
+    <path d="M35 75Q35 82 32 82Q29 82 29 75Q29 70 32 65Q35 70 35 75Z" fill="#4A90E2"/>
+    <path d="M52 78Q52 85 49 85Q46 85 46 78Q46 73 49 68Q52 73 52 78Z" fill="#4A90E2"/>
+  </svg>,
+    text: "Spring (Mar–May)",
+    label: "Pleasant weather (10°C–20°C), blooming flowers. Rain showers common.",
+  },
+  {
+    icon: <svg className="w-8 h-8 md:w-16 md:h-16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="22" fill="#FFD600"/>
+    <g stroke="#FFD600" stroke-width="6" stroke-linecap="round">
+      <line x1="50" y1="12" x2="50" y2="22"/>
+      <line x1="50" y1="78" x2="50" y2="88"/>
+      <line x1="88" y1="50" x2="78" y2="50"/>
+      <line x1="22" y1="50" x2="12" y2="50"/>
+      <line x1="76.8" y1="23.2" x2="69.8" y2="30.2"/>
+      <line x1="30.2" y1="69.8" x2="23.2" y2="76.8"/>
+      <line x1="76.8" y1="76.8" x2="69.8" y2="69.8"/>
+      <line x1="30.2" y1="30.2" x2="23.2" y2="23.2"/>
+    </g>
+  </svg>,
+    text: "Summer (Jun–Aug)",
+    label: "Warm but moderate. Temperatures can reach 30–35°C.",
+  },
+];
+
+
 const NewPage = () => {
     return(
         <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
           
 
             {/* Header Part */}
-            <Header id={headerData.id} title1={''} title2={headerData.title2} description={headerData.description} description2={headerData.description2} 
+            <Header subTitle={headerData.subTitle} id={headerData.id} title1={headerData.title1} title2={headerData.title2} description={headerData.description} description2={headerData.description2} 
             section={
               <div className="flex flex-col md:flex-row gap-4 w-full my-[2vw] md:my-[2vw]">
       {/* City Image - Left side */}
@@ -320,9 +374,9 @@ const NewPage = () => {
             content1={descriptionData.content} imageAlt={descriptionData.imageAlt} imageSrc={descriptionData.imageURL} /> */}
             {/* Academic Calander */}
             <div className="text-regularTextPhone md:text-mediumText leading-[150%] mb-[2vw]  bg-linenChosen py-[4vw]">
-                <div className="mx-[6vw] md:mx-[12.5vw]">
+                <div className="mx-[6vw] md:mx-[12.5vw] text-justify">
       
-                <h3 className="text-h5TextPhone md:text-h2Text font-bold  leading-[120%]">Why Edurizon for MBBS in Georgia?</h3>
+                <h3 className="text-h5TextPhone md:text-h2Text font-bold  leading-[120%] ">Why Edurizon for MBBS in Georgia?</h3>
                 <ul className="pt-[2vw] md:pt-[.5vw] list-outside  list-disc">
                     <li className="ml-[2vw] md:ml-[1.5vw]"><strong className="">Established Experience: </strong>Providing expert student counselling since 2009 and successfully sending students abroad since 2013.</li>
                     <li className="ml-[2vw] md:ml-[1.5vw]">
@@ -392,7 +446,7 @@ const NewPage = () => {
             </div>
 
             {/* Indian Opportunities */}
-            <div className="md:m-[4vw] flex flex-col gap-[4vw] md:gap-[2vw] mx-[6vw] md:mx-[12.5vw]">
+            {/* <div className="md:m-[4vw] flex flex-col gap-[4vw] md:gap-[2vw] mx-[6vw] md:mx-[12.5vw]">
                 <h2 className="text-h4TextPhone md:text-h2Text font-bold text-center leading-[120%]">International Opportunities</h2>
                 <div className="text-regularTextPhone md:text-mediumText leading-[150%] flex flex-col gap-[2vw] md:gap-[1.5vw] "> 
                     <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%]">Erasmus+ and Student Exchange:</h3>
@@ -400,8 +454,8 @@ const NewPage = () => {
                     <p ><strong >Erasmus+ Program:</strong> Georgia is a partner country in the European Union’s Erasmus+ program, which means Georgian universities can partake in student exchange with other European universities. As an MBBS student in Georgia, student could apply for a semester abroad in another country (like Germany, Italy, Poland, etc.) under Erasmus funding.</p>
                     <p ><strong >How to avail opportunities:</strong> The opportunities as mentioned above and others offered by the universities from time to time are usually applicable to only those students who perform well in their academics.</p>
                 </div>
-                {/* <Image src={"/assets/Images/mbbs-in-georgia/Georgia2.png"} className="w-full h-auto mt-[2vw]" width={1420} height={690  } alt="georgia3"/> */}
-            </div>
+                <Image src={"/assets/Images/mbbs-in-georgia/Georgia2.png"} className="w-full h-auto mt-[2vw]" width={1420} height={690  } alt="georgia3"/>
+            </div> */}
 
              {/* Top Government Universities */}
              <UnlistedTableEqualWidth  id={governmentUnivesitiesData.id} section2={governmentUnivesitiesData.section2} content={governmentUnivesitiesData.content}/>
@@ -424,7 +478,7 @@ const NewPage = () => {
            </div> */}
 
            {/* Geogia Fees */}
-           <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] flex flex-col gap-[2vw] md:gap-[1.5vw]">
+           <section className="mx-[6vw] md:mx-[12.5vw] pb-[6vw] md:pb-[2vw] flex flex-col gap-[4vw] md:gap-[1vw]">
            <h3 className="text-h5TextPhone md:text-h3Text font-bold text-center leading-[120%]">Fees for MBBS in Georgia</h3>
            <p className="text-center text-smallTextPhone md:text-regularText opacity-80 ">One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students</p>
            <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
@@ -506,31 +560,27 @@ const NewPage = () => {
             </section> */}
 
             {/* Climate and Weather */}
-           <div className="text-smallTextPhone md:text-regularText leading-[150%] bg-linenChosen my-[4vw] md:my-[2vw] py-[4vw] md:py-[2vw] flex flex-col gap-[3vw] md:gap-[1.5vw] px-[6vw] md:px-[12.5vw]">
-                <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%] mb-[1vw]">Climate and Weather</h3>
-                <p>Georgia’s climate is moderate and pleasant. There are four distinct seasons:</p>
-                <div className="flex flex-col md:flex-row justify-center gap-[2vw] md:gap-[1.5vw]">
-                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
-                        <div className="font-bold">i.</div>
-                        <div className="flex flex-col"><p className="font-bold">Autumn (Sep-Nov):</p><p>Weather is mild and cool. It’s very scenic. Light jackets suffice.</p></div>
-                    </div>
-                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
-                        <div className="font-bold">ii.</div>
-                        <div className="flex flex-col"><p className="font-bold">Winter (Dec-Feb):</p><p>Winters can get cold. Temperatures in Tbilisi hover around 0°C to -5°C, Good winter clothing (coat, thermals, boots) is essential. </p></div>
-                    </div>
-                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
-                        <div className="font-bold">iii.</div>
-                        <div className="flex flex-col"><p className="font-bold">Spring (Mar-May):</p><p>A beautiful season in Georgia – gradually warming, with flowers blooming. Temperature ranges 10°C to 20°C. A raincoat or umbrella is handy as spring showers are common.</p></div>
-                    </div>
-                    <div className="md:w-1/4 flex flex-row  gap-[.5vw]">
-                        <div className="font-bold">iv.</div>
-                        <div className="flex flex-col"><p className="font-bold">Summer (Jun-Aug):</p><p>Summers are warm but not extreme. Tbilisi can touch 30-35°C in peak summer.</p></div>
-                    </div>
-                </div>
+           <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[4vw] md:my-[2vw] py-[4vw] md:py-[2vw] flex flex-col gap-[3vw] md:gap-[1.5vw] px-[6vw] md:px-[12.5vw]">
+                <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%]  text-center">Climate and Weather</h3>
+                <p className="text-center">Georgia’s climate is moderate and pleasant. There are four distinct seasons:</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw] md:gap-[.75vw] items-center justify-center">
+                            {services.map((item, index) => (
+                                <div key={index} className="w-full md:w-[16.5vw] relative mx-auto shadow-[0px_.25vw_2.46875vw_rgba(0,_0,_0,_0.25)] dark:shadow-[0px_.25vw_2.46vw_rgba(255,_255,_255,_0.25)] 
+                                    rounded-[3.75vw] md:rounded-[1.875vw] bg-white overflow-hidden shrink-0 flex items-center justify-start py-[3vw] 
+                                    md:py-[1.5vw] px-[3.875vw] md:px-[1vw] box-border gap-[.5vw] text-center text-regularText text-black">
+                                    {/* <Image src={item.icon}
+                                        alt={item.label} width={64} height={64} className="w-[8.5vw] h-[8.5vw] md:w-[4.25vw] md:h-[4.25vw] relative overflow-hidden shrink-0" /> */}
+                                    <div>
+                                      {item.icon}
+                                      </div>
+                                    <p className="text-tinyTextPhone md:text-smallText text-center leading-[150%] font-bold" > {item.text} <br /><span className="font-semibold text-justify"> {item.label}</span></p>
+                                </div>
+                            ))}
+                        </div>
            </div>
 
            {/* Career Opportunity after mbbs */}
-           <div className="text-smallTextPhone md:text-regularText leading-[150%] my-[8vw] md:px-[4vw] md:my-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] mx-[6vw] md:mx-[12.5vw]">
+           <div className="text-smallTextPhone md:text-regularText leading-[150%] py-[8vw] bg-linenChosen px-[6vw] md:px-[16.5vw] md:py-[4vw] flex flex-col gap-[3vw] md:gap-[1.5vw] ">
                 <h3 className="text-h5TextPhone and md:text-h3Text font-bold leading-[120%] mb-[1vw]">Career Opportunities After MBBS</h3>
                 <div className="flex flex-col md:flex-row justify-center gap-[2vw] md:gap-[1.5vw]">
                     <div className="md:w-1/2 flex flex-row  gap-[.5vw]">
