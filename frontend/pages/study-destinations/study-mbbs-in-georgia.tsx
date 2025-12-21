@@ -127,6 +127,7 @@ const universities = [
       location: "Batumi",
       feesInUSD: 5000,
       hostelFeesInUSD: 3300,
+      href: "/study-destinations/study-mbbs-in-georgia/batumi-shota-rustaveli-state-university"
     },
     {
       id: 4,

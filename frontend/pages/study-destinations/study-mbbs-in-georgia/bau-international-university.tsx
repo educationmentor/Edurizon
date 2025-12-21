@@ -90,17 +90,7 @@ const BauInternationalUniversity = () => {
                 <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia/bau-international-university" hrefLang="en-in"/>
 
                 {/* Google tag (gtag.js) */}
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-9JDZZKPGL8');
-                        `,
-                    }}
-                />
+                
             </Head>
             <div>
             <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center pt-[20vw]  md:pt-[8vw]">
@@ -212,7 +202,7 @@ const BauInternationalUniversity = () => {
                         </ul>
                     </div>
                 </div>
-                <Image src={"/assets/Images/mbbs-in-georgia/georgia2.png"} className="ml-auto w-full md:w-[32.5vw] h-auto" width={690} height={690} alt="georgia2"/>
+                <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="ml-auto w-full md:w-[32.5vw] h-auto" width={690} height={690} alt="georgia2"/>
             </div>
 
             {/* At a glance Section */}

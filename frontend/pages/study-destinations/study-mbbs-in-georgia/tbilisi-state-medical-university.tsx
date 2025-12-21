@@ -89,17 +89,7 @@ const TbilisiStateMedicalUniversity = () => {
                 <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia/tbilisi-state-medical-university" hrefLang="en-in"/>
 
                 {/* Google tag (gtag.js) */}
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-9JDZZKPGL8');
-                        `,
-                    }}
-                />
+                
             </Head>
             <div>
             <div className="flex flex-col gap-[2vw] mb-[1vw] py-[4vw] items-center pt-[20vw]  md:pt-[8vw]">
