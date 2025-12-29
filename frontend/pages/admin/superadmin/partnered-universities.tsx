@@ -346,7 +346,7 @@ const PartneredUniversitiesPage = () => {
     <AdminLayout>
       <div className='m-[32px] rounded-[8px] bg-white py-[16px] px-[8px] shadow-sm'>
         <div className='flex justify-between items-center px-[32px]'>
-          <h4 className='text-h6Text font-medium font-poppins'>Partnered Universities</h4>
+          <h4 className='text-h6Text font-medium font-poppins'>Partner Universities</h4>
           <div className='flex items-center gap-[16px]'>
             <button 
               onClick={() => setShowFilterModal(true)}

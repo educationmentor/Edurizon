@@ -72,7 +72,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
                 </div>
           <h2 className="text-h5TextPhone md:text-h2Text   leading-[120%] dark:text-white">
             <strong>
-              Partnered with <span className="text-orangeChosen">Universities</span>
+              Partner with <span className="text-orangeChosen">Universities</span>
             </strong>{" "}
             across the globe.
           </h2>
