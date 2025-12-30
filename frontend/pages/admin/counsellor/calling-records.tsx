@@ -52,11 +52,11 @@ const CallingRecords = () => {
     icon: <CallIcon />,
     label: "Calling Records",
   },
-  {
-    href: "/admin/counsellor/messages",
-    icon: <MessageIcon />,
-    label: "Messages",
-  },
+  // {
+  //   href: "/admin/counsellor/messages",
+  //   icon: <MessageIcon />,
+  //   label: "Messages",
+  // },
   // {
   //   href: "/admin/counsellor/view-sessions",
   //   icon: <ArrowForwardIosIcon />,
@@ -297,10 +297,22 @@ const CallingRecords = () => {
               onChange={(e) => handleStatusUpdate(lead._id, 'callingStatus', e.target.value)}
               className={`text-sm border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent font-medium ${getCallingStatusColor(lead.callingStatus)}`}
             >
-              <option value="pending" className="bg-white text-yellow-600">⏳ Pending</option>
               <option value="follow-up" className="bg-white text-blue-600">📞 Follow Up</option>
               <option value="no-answer" className="bg-white text-orange-600">📵 No Answer</option>
+              <option value="expensive" className="bg-white text-pink-600">💸 Expensive</option>
               <option value="not-interested" className="bg-white text-red-600">❌ Not Interested</option>
+              <option value="switched-off" className="bg-white text-gray-600">🔇 Switched Off</option>
+              <option value="wrong-no" className="bg-white text-gray-400">🔢 Wrong no.</option>
+              <option value="already-taken" className="bg-white text-purple-600">🎓 Already Taken</option>
+              <option value="incoming-not-available" className="bg-white text-yellow-800">🚫 Incoming Not Available</option>
+              <option value="in-10th-12th" className="bg-white text-blue-700">📚 In 10th/12th</option>
+              <option value="confirmed" className="bg-white text-green-600">✅ Confirmed</option>
+              <option value="next-year" className="bg-white text-indigo-600">📅 Next Year</option>
+              <option value="after-neet" className="bg-white text-teal-600">📝 After NEET</option>
+              <option value="call-cut" className="bg-white text-orange-700">✂️ Call Cut</option>
+              <option value="line-busy" className="bg-white text-pink-700">📞 Line is Busy</option>
+              <option value="plan-changed" className="bg-white text-cyan-700">🔄 Plan Changed</option>
+              <option value="wrongly-clicked" className="bg-white text-gray-700">❗ Wrongly Clicked</option>
             </select>
           </div>
         );

@@ -96,7 +96,7 @@ const privateUniversitiesData = {
         "Provides affordable education with a good FMGE record."
       ],
       [
-        "University of Georgia",
+        "Grigol Robakidze University",
         "Well-known for modern teaching methods and international exposure."
       ]
     ]

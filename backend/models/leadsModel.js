@@ -31,8 +31,25 @@ const leadsSchema = mongoose.Schema(
     },
     callingStatus:{
         type:String,
-        enum: ['pending','follow-up','no-answer','not-interested'],
-        default: 'pending'
+        enum: [
+            'follow-up',
+            'no-answer',
+            'expensive',
+            'not-interested',
+            'switched-off',
+            'wrong-no',
+            'already-taken',
+            'incoming-not-available',
+            'in-10th-12th',
+            'confirmed',
+            'next-year',
+            'after-neet',
+            'call-cut',
+            'line-busy',
+            'plan-changed',
+            'wrongly-clicked'
+        ],
+        default: 'follow-up'
     },
     leadStatus:{
         type:String,

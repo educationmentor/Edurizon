@@ -22,11 +22,11 @@ const navItems = [
     icon: <CallIcon />,
     label: "Calling Records",
   },
-  {
-    href: "/admin/counsellor/messages",
-    icon: <MessageIcon />,
-    label: "Messages",
-  },
+  // {
+  //   href: "/admin/counsellor/messages",
+  //   icon: <MessageIcon />,
+  //   label: "Messages",
+  // },
   // {
   //   href: "/admin/counsellor/view-sessions",
   //   icon: <ArrowForwardIosIcon />,
