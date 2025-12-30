@@ -1,5 +1,6 @@
 import React from 'react'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
+import UnlistedTableEqualWidth from '@/components/studyDestinationComponents/unListedTableEqualWidth'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
 import Head from 'next/head'
@@ -142,7 +143,7 @@ const BatumShotaRustaveliStateUniversity = () => {
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw] text-black">
                     <div>
                         <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%] mb-[4vw] md:mb-[1vw]">Why Choose Batumi Shota Rustaveli State University for MBBS?</h3>
-                        <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText">
+                        <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText  text-justify">
                             <li>Globally Recognized Degree and Curriculum: The university's MBBS program is designed to meet international standards, ensuring a degree that is recognized worldwide.</li>
                             <li>The curriculum is modern and focuses on practical skills, preparing students for the demands of the medical profession.</li>
                             <li>English-Medium Instruction and Affordable Fees: The entire MBBS program is taught in English, making it easier for international students to understand and learn.</li>
@@ -159,28 +160,28 @@ const BatumShotaRustaveliStateUniversity = () => {
                 <Image src={"/assets/Images/mbbs-in-nepal/nepal2.png"} className="ml-auto w-full md:w-[32.5vw] h-auto" width={690} height={690} alt="batumi campus"/>
             </div>
             {/* At a glance Section */}
-            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Batumi Shota Rustaveli State University at a glance</h3>
-                <ul className="text-smallTextPhone ml-[3vw] md:ml-[1.5vw] text-left gap-x-[1vw] md:text-regularText md:text-justify grid grid-cols-2">
-                    <li className='font-bold'>o College name</li>
-                    <li>BATUMI SHOTA RUSTEVELI STATE UNIVERSITY</li>
-                    <li className='font-bold'>o Recognition</li>
-                    <li>WHO, NMC, WFME, FAIMER</li>
-                    <li className='font-bold'>o Medium of instruction</li>
-                    <li>English</li>
-                    <li className='font-bold'>o Course duration</li>
-                    <li>6 years</li>
-                    <li className='font-bold'>o Internship duration</li>
-                    <li>1 year</li>
-                    <li className='font-bold'>o University Country Ranking</li>
-                    <li>3rd</li>
-                    <li className='font-bold'>o NEET</li>
-                    <li>Mandatory</li>
-                    <li className='font-bold'>o Intake</li>
-                    <li>September/October</li>
-                    <li className='font-bold'>o Location</li>
-                    <li>Batumi, Georgia</li>
-                </ul>
+            <section className="">
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left mx-[6vw] md:mx-[12.5vw] font-bold">Batumi Shota Rustaveli State University at a glance</h3>
+                <UnlistedTableEqualWidth
+                  id="batumi-shota-glance"
+                  section2=""
+                  content={{
+                    title: "",
+                    subTitle: "",
+                    data: [
+                      ["Details", "Information"],
+                      ["College name", "BATUMI SHOTA RUSTEVELI STATE UNIVERSITY"],
+                      ["Recognition", "WHO, NMC, WFME, FAIMER"],
+                      ["Medium of instruction", "English"],
+                      ["Course duration", "6 years"],
+                      ["Internship duration", "1 year"],
+                      ["University Country Ranking", "3rd"],
+                      ["NEET", "Mandatory"],
+                      ["Intake", "September/October"],
+                      ["Location", "Batumi, Georgia"],
+                    ]
+                  }}
+                />
             </section>
 
             <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
@@ -238,8 +239,8 @@ const BatumShotaRustaveliStateUniversity = () => {
                 <p className="text-smallTextPhone text-left md:text-regularText ">Batumi Shota Rustaveli State University is recognized by the World Health Organization, National Medical Commission, FAIMER, WFME etc.</p>
                 </div>
 
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Medium of instruction in Batumi Shota Rustaveli State University</h3>
-                <p className="text-smallTextPhone text-left md:text-regularText">Batumi Shota Rustaveli State University offers fully English taught programs in medicine. Programs are developed in line with western standards and modern market requirements.</p>
+                {/* <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Medium of instruction in Batumi Shota Rustaveli State University</h3>
+                <p className="text-smallTextPhone text-left md:text-regularText">Batumi Shota Rustaveli State University offers fully English taught programs in medicine. Programs are developed in line with western standards and modern market requirements.</p> */}
 
                 <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Batumi Shota Rustaveli State University Fees for Indian students</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">

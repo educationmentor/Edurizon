@@ -1,5 +1,6 @@
 import React from 'react'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
+import UnlistedTableEqualWidth from '@/components/studyDestinationComponents/unListedTableEqualWidth'
 import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcumbs'
 import Head from 'next/head'
@@ -136,14 +137,12 @@ const BauInternationalUniversity = () => {
                     <li>Country is unitary semi-presidential republic.</li>
                 </ul>
 
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">About Tbilisi City</h3>
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">About Batumi City</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
-                    <li>Tbilisi City is the Mega City which is Georgia's most pleasant city.</li>
-                    <li>Tbilisi is the capital and the largest city of Georgia.</li>
-                    <li>A well-known urbanized mega city.</li>
-                    <li>Tbilisi is the first destination of tourists & students to visit.</li>
-                    <li>Tbilisi city with a panoramic view that melt hearts with its urbanized streets, modern Infrastructure, leafy squares, clean lakes, and green valleys.</li>
-                    <li>According to Ministry of Education & Science, almost all of foreign students' study in Georgia, 95% in Tbilisi, 2.2% in Kutaisi and 1.8% in Batumi respectively.</li>
+                    <li>Batumi is a coastal city on the Black Sea and Georgia's major port and tourist destination.</li>
+                    <li>Batumi is known for its seaside promenades, modern architecture and vibrant cultural life.</li>
+                    <li>Batumi is an attractive destination for students seeking a multicultural, seaside study environment.</li>
+                    <li>According to Ministry of Education & Science, almost all foreign students study in Georgia, with a portion choosing Batumi for its coastal lifestyle and universities.</li>
                 </ul>
 
                 <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">BAU International University - Mission</h3>
@@ -188,7 +187,7 @@ const BauInternationalUniversity = () => {
                 <div className="flex flex-col gap-[2vw] md:gap-[1vw] text-black">
                     <div>
                         <h3 className="font-bold text-h5TextPhone md:text-h3Text leading-[120%] mb-[4vw] md:mb-[1vw]">Why Choose BAU International University for MBBS?</h3>
-                        <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText">
+                        <ul className="list-disc list-outside pl-[2vw] md:pl-[1.5vw] text-smallTextPhone md:text-regularText text-justify">
                             <li>Globally Recognized Degree and Curriculum: The university's MBBS program is designed to meet international standards, ensuring a degree that is recognized worldwide.</li>
                             <li>The curriculum is modern and focuses on practical skills, preparing students for the demands of the medical profession.</li>
                             <li>English-Medium Instruction and Affordable Fees: The entire MBBS program is taught in English, making it easier for international students to understand and learn.</li>
@@ -206,28 +205,28 @@ const BauInternationalUniversity = () => {
             </div>
 
             {/* At a glance Section */}
-            <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">BAU International University at a glance</h3>
-                <ul className="text-smallTextPhone ml-[3vw] md:ml-[1.5vw] text-left gap-x-[1vw] md:text-regularText md:text-justify grid grid-cols-2">
-                    <li className='font-bold'>o College name</li>
-                    <li>BAU International University</li>
-                    <li className='font-bold'>o Recognition</li>
-                    <li>WHO, NMC, WFME, FAIMER</li>
-                    <li className='font-bold'>o Medium of instruction</li>
-                    <li>English</li>
-                    <li className='font-bold'>o Course duration</li>
-                    <li>6 years</li>
-                    <li className='font-bold'>o Internship duration</li>
-                    <li>1 year</li>
-                    <li className='font-bold'>o University Ranking</li>
-                    <li>33rd</li>
-                    <li className='font-bold'>o NEET</li>
-                    <li>Mandatory</li>
-                    <li className='font-bold'>o Intake</li>
-                    <li>September/October</li>
-                    <li className='font-bold'>o Location</li>
-                    <li>Batumi, Georgia</li>
-                </ul>
+            <section className="">
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left mx-[6vw] md:mx-[12.5vw] font-bold">BAU International University at a glance</h3>
+                <UnlistedTableEqualWidth
+                  id="bau-international-glance"
+                  section2=""
+                  content={{
+                    title: "",
+                    subTitle: "",
+                    data: [
+                      ["Details", "Information"],
+                      ["College name", "BAU International University"],
+                      ["Recognition", "WHO, NMC, WFME, FAIMER"],
+                      ["Medium of instruction", "English"],
+                      ["Course duration", "6 years"],
+                      ["Internship duration", "1 year"],
+                      ["University Ranking", "33rd"],
+                      ["NEET", "Mandatory"],
+                      ["Intake", "September/October"],
+                      ["Location", "Batumi, Georgia"],
+                    ]
+                  }}
+                />
             </section>
 
             {/* MBBS Program Section */}
@@ -301,7 +300,7 @@ const BauInternationalUniversity = () => {
                     <li>Support for Research: The library system supports students with research, providing access to relevant resources and workshops.</li>
                 </ul>
 
-                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Climate of Georgia/Tbilisi</h3>
+                <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">Climate of Georgia/Batumi</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
                     <li>The climate of Georgia is extremely diverse, considering the nation's small size.</li>
                     <li>An average temperature</li>
@@ -344,10 +343,10 @@ const BauInternationalUniversity = () => {
                 </ul>
                 <h3 className="text-h6TextPhone leading-[120%] md:text-h5Text text-left">How to reach BAU International University</h3>
                 <ul className="text-smallTextPhone list-disc ml-[3vw] md:ml-[1.5vw] mb-[4vw] md:mb-[1vw] text-left md:text-regularText md:text-justify">
-                    <li>Direct flight from New Delhi to Tbilisi, Georgia</li>
+                    <li>Direct flight from New Delhi to Batumi, Georgia</li>
                     <li>Maximum 5 hours air journey</li>
                     <li>Low and affordable air fare</li>
-                    <li>Maximum 30 Minutes journey to BAU International University after reaching Tbilisi airport.</li>
+                    <li>Maximum 30 Minutes journey to BAU International University after reaching Batumi airport.</li>
                 </ul>
             </section>
 
