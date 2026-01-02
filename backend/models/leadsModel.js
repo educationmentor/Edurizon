@@ -32,6 +32,7 @@ const leadsSchema = mongoose.Schema(
     callingStatus:{
         type:String,
         enum: [
+            'pending',
             'follow-up',
             'no-answer',
             'expensive',
