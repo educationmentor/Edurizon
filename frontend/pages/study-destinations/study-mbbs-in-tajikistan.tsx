@@ -4,7 +4,7 @@ import DescriptionComponent from "@/components/studyDestinationComponents/descri
 import ReasonsToStudy from "@/components/studyDestinationComponents/reasonsToStudy";
 import VideoCarousel from "@/components/videoCarousel";
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
-import Image from "next/image";
+import Head from "next/head";
 const descriptionData={
   id:"tajikistan",
   title1normal:"About Tajikistan",   
@@ -151,7 +151,90 @@ const universitiesData = [
 
 const NewPage=()=>{
     return(
-        <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
+      <>
+      <Head>
+  <title>MBBS in Tajikistan, Best Medical Colleges in Tajikistan | Edurizon</title>
+
+  <meta
+    name="keyword"
+    content="mbbs in tajikistan, study mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs abroad tajikistan, tajikistan medical universities, low cost mbbs in tajikistan, english medium mbbs in tajikistan"
+  />
+
+  <meta
+    name="description"
+    content="Study MBBS in Tajikistan for Indian students at best medical colleges in Tajikistan which offer quality education and transparent MBBS fees."
+  />
+
+  <meta name="author" content="edurizon" />
+  <meta name="robots" content="index, follow" />
+  <meta name="DC.title" content="MBBS In Tajikistan" />
+
+  <meta name="geo.region" content="IN-DL" />
+  <meta name="geo.placename" content="Dwarka" />
+  <meta name="geo.position" content="22.351115;78.667743" />
+  <meta name="ICBM" content="22.351115, 78.667743" />
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="Study MBBS in Tajikistan | Best Medical Colleges & Fees"
+  />
+  <meta
+    property="og:description"
+    content="Study MBBS in Tajikistan for Indian students at top medical colleges offering quality education with transparent and affordable MBBS fees."
+  />
+  <meta
+    property="og:url"
+    content="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan"
+  />
+  <meta
+    property="og:image"
+    content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+  />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@edurizon" />
+  <meta
+    name="twitter:title"
+    content="Study MBBS in Tajikistan | Best Medical Colleges"
+  />
+  <meta
+    name="twitter:description"
+    content="Study MBBS in Tajikistan for Indian students at best medical colleges offering quality education and transparent MBBS fees."
+  />
+  <meta
+    name="twitter:image"
+    content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+  />
+  <meta name="twitter:image:alt" content="MBBS In Tajikistan" />
+
+  {/* Canonical */}
+  <link
+    rel="canonical"
+    href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan"
+  />
+  <link
+    rel="alternate"
+    href="https://www.edurizon.in/study-destinations/study-mbbs-in-tajikistan"
+    hrefLang="en-in"
+  />
+
+  {/* Google Analytics */}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9JDZZKPGL8');
+      `,
+    }}
+  />
+</Head>
+ <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
             <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[5vw] mb-[1vw] py-[4vw] items-center md:mx-auto">
                 <div className="flex flex-col items-center gap-[2vw] md:gap-[2vw]">
                 <div className="flex flex-col items-center gap-[4vw] md:gap-[1vw]">
@@ -383,6 +466,8 @@ const NewPage=()=>{
             <VideoCarousel videoData={videoData}/>
             
         </div>
+      </>
+       
 
     )
 }

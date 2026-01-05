@@ -60,29 +60,28 @@ const Home = () => {
   }, []);
   
   return (
-    <> 
-    <Head>
-  <title>Edurizon | Your Gateway to Learning</title>
-  <meta name="description" content="Edurizon offers expert guidance, mock interviews, doubt-solving, and mentorship for every career journey." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta property="og:title" content="Edurizon" />
-  <meta property="og:description" content="Empowering students with mentorship and career guidance." />
-  <link rel="canonical" href="https://www.edurizon.in" />
-
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Edurizon",
-        "url": "https://www.edurizon.in",
-        "logo": "https://www.edurizon.in/favicon.ico",
-        "description": "Study MBBS Abroad with Edurizon – your trusted study abroad consultants in Delhi.",
-      }),
-    }}
-  />
-</Head>
+    <>
+      <Head>
+        <title>Study MBBS Abroad, MBBS Abroad for Indian Students | Edurizon</title>
+        <meta name="description" content="Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="Study MBBS Abroad, MBBS Abroad for Indian Students | Edurizon" />
+        <meta property="og:description" content="Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students." />
+        <link rel="canonical" href="https://www.edurizon.in" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Edurizon",
+              "url": "https://www.edurizon.in",
+              "logo": "https://www.edurizon.in/favicon.ico",
+              "description": "Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students.",
+            }),
+          }}
+        />
+      </Head>
 
     
       {/* ✅ Load Hero Section Immediately (Critical for LCP) */}

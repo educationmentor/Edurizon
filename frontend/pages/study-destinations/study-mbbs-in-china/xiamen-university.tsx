@@ -24,8 +24,8 @@ const NewPage = () => {
         <>
         <Head>
         <title>
-  Best Medical University in China – Eligibility & Admission for MBBS - Xiamen
-  University
+  Xiamen University in China, MBBS Fees | Edurizon
+
 </title>
 <meta
   name="keyword"
@@ -33,7 +33,8 @@ const NewPage = () => {
 />
 <meta
   name="description"
-  content="Find the best medical university in China for MBBS. Get eligibility info and admission steps at https://www.edurizon.in/study-destinations/study-mbbs-in-china/xiamen-university."
+  content="Study MBBS at Xiamen University in China with world-class medical education, English-medium programs & affordable MBBS fees.
+"
 />
 <meta name="author" content="edurizon" />
 <meta name="robots" content="index, follow" />

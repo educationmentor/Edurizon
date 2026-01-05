@@ -63,9 +63,11 @@ const NewPage=()=>{
     return(
         <>
             <Head>
-                <title>Tajik National University MBBS | Best Medical College in Tajikistan</title>
+                <title>Tajik National University in Tajikistan, MBBS Fees | Edurizon
+</title>
                 <meta name="keyword" content="mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs in tajikistan fee structure, mbbs cost in tajikistan, op medical colleges in tajikistan, Tajik National University, Avicenna Tajik State Medical University, Mbbs in tajikistan best medical college, Avicenna Tajik State Medical University fees." />
-                <meta name="description" content="Pursue MBBS at Tajik National University. Top medical college in Tajikistan with low tuition fees, scholarships & global recognition." />
+                <meta name="description" content="Edurizon offers full admission support for Tajik National University in Tajikistan with modern facilities and low cost MBBS Fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <meta name="DC.title" content="MBBS in Tajikistan" />

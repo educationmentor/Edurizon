@@ -29,9 +29,11 @@ const NewPage = () => {
   return (
     <>
     <Head>
-    <title>MBBS in China – Fee Structure, Admission & Scholarships Zhejiang University</title> 
+    <title>Zhejiang University in China, MBBS Fees | Edurizon
+</title> 
 <meta name="keyword" content="mbbs in china, Top 10 medical colleges in china, Best Medical University in china, Top Medical Universities in china, Top10 Medical Universities in china, mbbs in china fee structure, Top medical colleges in china, Best medical colleges in china, zhejiang university, zhejiang science and technology university, zhejiang university china, xi an jiaotong university, xi an jiaotong university china, nanjing university china, nanjing university, nanjing medical university china, xiamen university, china xiamen university, xiamen university xiamen." />
-<meta name="description" content="Discover affordable MBBS in China, admission process, and fee structure with scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-china/zhejiang-university." />
+<meta name="description" content="Study MBBS at Zhejiang University in China with world-class medical education, advanced facilities & affordable MBBS fees.
+" />
 <meta name="author" content="edurizon" />
 <meta name="robots" content="index, follow"/>
 <meta name="DC.title" content="MBBS in China" />

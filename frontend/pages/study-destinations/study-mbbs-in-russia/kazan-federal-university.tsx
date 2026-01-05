@@ -77,9 +77,10 @@ const eligibility=[
 const KazanFederalUniversity=()=>{
     return <>
         <Head>
-            <title>MBBS in Russia for Indian Students – Kazan Federal University</title>
+            <title>Kazan Federal University Russia for Indian Students, MBBS Fees | Edurizon
+</title>
             <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
-            <meta name="description" content="Explore affordable MBBS in Russia, low cost tuition, admission criteria, eligibility & scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university." />
+            <meta name="description" content="Edurizon offers Kazan Federal University in Russia for Indian Students for quality medical education with affordable MBBS fees and global recognition." />
             <meta name="author" content="edurizon" />
             <meta name="robots" content="index, follow"/>
             <meta name="DC.title" content="MBBS In Russia" />

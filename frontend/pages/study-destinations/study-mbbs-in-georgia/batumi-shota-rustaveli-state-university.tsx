@@ -65,9 +65,11 @@ const BatumShotaRustaveliStateUniversity = () => {
     return (
         <>
             <Head>
-                <title>Batumi Shota Rustaveli State University | MBBS Fees & Ranking</title>
+                <title>Batumi Shota Rustaveli State University in Georgia | Edurizon
+</title>
                 <meta name="keyword" content="Batumi Shota Rustaveli State University, Batumi university, batumi mbbs, batumi medical university, mbbs in batumi, mbbs in georgia" />
-                <meta name="description" content="Batumi Shota Rustaveli State University — MBBS in Batumi, Georgia. Affordable fees, internationally recognized and student-friendly campus." />
+                <meta name="description" content="Study MBBS at Batumi Shota Rustaveli State University with quality education, English medium programs, modern facilities & affordable fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia/batum-shota-rustaveli-state-university"/>

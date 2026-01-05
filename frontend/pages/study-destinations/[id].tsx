@@ -60,9 +60,9 @@ interface NewPageProps {
 
 const metaData={
   "study-mbbs-in-russia":<Head>
-    <title>Study MBBS in Russia | Top Medical Universities & Fees for 2025</title> 
+    <title>MBBS in Russia for Indian Students, Cost of MBBS in Russia | Edurizon</title> 
 <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
-<meta name="description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students." />
+<meta name="description" content="We offer affordable education for MBBS in Russia for Indian Students with low cost of MBBS in Russia and transparent MBBS Fees." />
 <meta name="author" content="edurizon" />
 <meta name="robots" content="index, follow"/>
 <meta name="DC.title" content="MBBS In Russia" />
@@ -99,6 +99,14 @@ const metaData={
 
 
 
+  </Head>,
+  "study-mbbs-in-china":<Head>
+    <title>Study MBBS in China, Top10 Medical Universities in China | Edurizon</title>
+<meta name="keyword" content="mbbs in china, mbbs in china low cost, mbbs in china for indian student, cost of mbbs in china, MBBS Abroad for Indian Students, jilin university china, jilin university mbbs fees, jilin university for indian students, shandong university china, shandong university mbbs fees, shandong university for indian students, guangzhou medical university, guangzhou medical university mbbs fees, guangzhou medical university for indian students, zhengzhou university china, zhengzhou university mbbs fees, zhengzhou university for indian students." />
+<meta name="description" content="Study MBBS in China at Top 10 medical universities or colleges which offer quality education and affordable MBBS fees." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-china"/>
   </Head>,
   
 }

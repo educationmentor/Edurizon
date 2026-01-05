@@ -30,8 +30,8 @@ const NewPage = () => {
     <>
     <Head>
     <title>
-  Top 10 Medical Colleges in China – Rankings, Admission & Fee Guide - Nanjing
-  Medical University
+  Nanjing Medical University in China, MBBS Fees | Edurizon
+
 </title>
 <meta
   name="keyword"
@@ -39,7 +39,8 @@ const NewPage = () => {
 />
 <meta
   name="description"
-  content="Explore top 10 medical colleges in China, updated rankings, fee structure & admission process for 2025 at https://www.edurizon.in/study-destinations/study-mbbs-in-china/nanjing-medical-university."
+  content="Study MBBS at Nanjing Medical University in China with quality medical education, global recognition & affordable MBBS fees.
+"
 />
 <meta name="author" content="edurizon" />
 <meta name="robots" content="index, follow" />

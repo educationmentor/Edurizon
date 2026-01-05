@@ -51,9 +51,11 @@ const KhatlonStateMedicalUniversity = () => {
     return (
         <>
             <Head>
-                <title>MBBS in Tajikistan at Khatlon State Medical University | Fees & Admission</title>
+                <title>Khatlon State Medical University in Tajikistan | Edurizon
+</title>
                 <meta name="keyword" content="mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs in tajikistan fee structure, mbbs cost in tajikistan, op medical colleges in tajikistan, Tajik National University, Avicenna Tajik State Medical University, Mbbs in tajikistan best medical college, Avicenna Tajik State Medical University fees." />
-                <meta name="description" content="Study MBBS in Tajikistan at Khatlon State Medical University. Affordable fee structure, MCI-approved medical college for Indian students" />
+                <meta name="description" content="Edurizon offers admission support for Khatlon State Medical University in Tajikistan with quality MBBS education and affordable fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <meta name="DC.title" content="MBBS in Tajikistan" />

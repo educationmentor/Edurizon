@@ -26,9 +26,11 @@ const services = [
 const NewPage=()=>{
     return <>
         <Head>
-            <title>MBBS Abroad for Indian Students – Petrozavodsk State University</title>
+            <title>Petrozavodsk State Medical University in Russia | Edurizon
+</title>
             <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
-            <meta name="description" content="Visit https://www.edurizon.in/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university for clear details on MBBS in Russia cost, admission steps, eligibility & how to get scholarships." />
+            <meta name="description" content="Edurizon offers admission to Petrozavodsk State Medical University in Russia with quality medical education and low MBBS fees.
+" />
             <meta name="author" content="edurizon" />
             <meta name="robots" content="index, follow"/>
             <meta name="DC.title" content="MBBS In Russia" />

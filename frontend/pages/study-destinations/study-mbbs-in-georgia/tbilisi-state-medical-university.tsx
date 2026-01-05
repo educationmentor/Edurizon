@@ -64,9 +64,11 @@ const TbilisiStateMedicalUniversity = () => {
     return (
         <>
             <Head>
-                <title>Tbilisi State Medical University Georgia | MBBS Fees & Ranking</title>
+                <title>Tbilisi State Medical University in Georgia, MBBS Fees | Edurizon
+</title>
                 <meta name="keyword" content="tbilisi state medical university, tbilisi state medical university georgia, tbilisi medical university, tbilisi state medical university mbbs fees, georgian national university seu, georgian national university, georgian national university seu fee structure, east european university georgia, european university georgia, east european university tbilisi georgia, new vision university georgia, new vision university tbilisi, georgia new vision university, bau international university, bau international university batumi, bau international university batumi fees, Batumi Shota Rustaveli State University, Batumi Shota Rustaveli State Georgia, georgian american university, university of georgia, georgia institute of technology, mbb in georgia, mbbs in georgia for indian students, mbb in georgia fees, top medical universities in georgia." />
-                <meta name="description" content="Enroll in MBBS at Tbilisi State Medical University, Georgia's oldest medical university. Affordable fees and top-ranked for Indian students." />
+                <meta name="description" content="Study MBBS at Tbilisi State Medical University in Georgia with globally recognized education and affordable MBBS fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <meta name="DC.title" content="MBBS in Georgia" />

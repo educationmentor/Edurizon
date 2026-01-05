@@ -64,9 +64,11 @@ const NewVisionUniversity = () => {
     return (
         <>
             <Head>
-                <title>New Vision University Georgia | MBBS in Tbilisi with Affordable Fees</title>
+                <title>New Vision University Georgia, MBBS Fees | Edurizon
+</title>
                 <meta name="keyword" content="tbilisi state medical university, tbilisi state medical university georgia, tbilisi medical university, tbilisi state medical university mbbs fees, georgian national university seu, georgian national university, georgian national university seu fee structure, east european university georgia, european university georgia, east european university tbilisi georgia, new vision university georgia, new vision university tbilisi, georgia new vision university, bau international university, bau international university batumi, bau international university batumi fees, Batumi Shota Rustaveli State University, Batumi Shota Rustaveli State Georgia, georgian american university, university of georgia, georgia institute of technology, mbb in georgia, mbbs in georgia for indian students, mbb in georgia fees, top medical universities in georgia." />
-                <meta name="description" content="Study MBBS at New Vision University, Tbilisi. Affordable fee structure, English-medium programs, and global recognition for medical graduates." />
+                <meta name="description" content="Study MBBS at New Vision University, Georgia with globally recognized education, English-medium courses & affordable MBBS fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <meta name="DC.title" content="MBBS in Georgia" />

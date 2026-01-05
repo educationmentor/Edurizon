@@ -64,9 +64,11 @@ const AvicennaTajikStateMedicalUniversity = () => {
     return (
         <>
             <Head>
-                <title>Avicenna Tajik State Medical University | MBBS Fees & Admission</title>
+                <title>Avicenna Tajik State Medical University in Tajikistan | Edurizon
+</title>
                 <meta name="keyword" content="mbbs in tajikistan, mbbs in tajikistan for indian students, best medical colleges in tajikistan, mbbs in tajikistan fee structure, mbbs cost in tajikistan, op medical colleges in tajikistan, Tajik National University, Avicenna Tajik State Medical University, Mbbs in tajikistan best medical college, Avicenna Tajik State Medical University fees." />
-                <meta name="description" content="Study MBBS at Avicenna Tajik State Medical University, one of the best medical colleges in Tajikistan. Affordable fee structure for Indian students." />
+                <meta name="description" content="Edurizon offers full admission guidance for Avicenna Tajik State Medical University in Tajikistan with low and transparent MBBS fees.
+" />
                 <meta name="author" content="edurizon" />
                 <meta name="robots" content="index, follow"/>
                 <meta name="DC.title" content="MBBS in Tajikistan" />

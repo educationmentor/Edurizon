@@ -8,6 +8,7 @@ import UnlistedTableEqualWidth from "@/components/studyDestinationComponents/unL
 import { TransitionLink } from "@/utils/TransitionLink";
 import Image from "next/image";
 import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
+import Head from "next/head";
 
 const headerData={
     id:"georgia",
@@ -313,7 +314,91 @@ const services = [
 
 const NewPage = () => {
     return(
-        <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
+      <>
+      <Head>
+  <title>Study MBBS in Georgia, Top Medical Universities in Georgia | Edurizon</title>
+
+  <meta
+    name="keyword"
+    content="mbbs in georgia, study mbbs in georgia, mbbs in georgia for indian students, top medical universities in georgia, mbbs abroad in georgia, georgia medical universities, low cost mbbs in georgia, english medium mbbs in georgia"
+  />
+
+  <meta
+    name="description"
+    content="Study MBBS in Georgia for Indian students at top medical universities in Georgia which offer quality education, English medium & low fees."
+  />
+
+  <meta name="author" content="edurizon" />
+  <meta name="robots" content="index, follow" />
+  <meta name="DC.title" content="MBBS In Georgia" />
+
+  <meta name="geo.region" content="IN-DL" />
+  <meta name="geo.placename" content="Dwarka" />
+  <meta name="geo.position" content="22.351115;78.667743" />
+  <meta name="ICBM" content="22.351115, 78.667743" />
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="Study MBBS in Georgia | Top Medical Universities & Fees"
+  />
+  <meta
+    property="og:description"
+    content="Study MBBS in Georgia for Indian students at top medical universities offering English-medium education, quality training & affordable fees."
+  />
+  <meta
+    property="og:url"
+    content="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia"
+  />
+  <meta
+    property="og:image"
+    content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+  />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@edurizon" />
+  <meta
+    name="twitter:title"
+    content="Study MBBS in Georgia | Top Medical Universities"
+  />
+  <meta
+    name="twitter:description"
+    content="Study MBBS in Georgia for Indian students at top medical universities with English-medium courses and low fees."
+  />
+  <meta
+    name="twitter:image"
+    content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+  />
+  <meta name="twitter:image:alt" content="MBBS In Georgia" />
+
+  {/* Canonical */}
+  <link
+    rel="canonical"
+    href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia"
+  />
+  <link
+    rel="alternate"
+    href="https://www.edurizon.in/study-destinations/study-mbbs-in-georgia"
+    hrefLang="en-in"
+  />
+
+  {/* Google Analytics */}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9JDZZKPGL8');
+      `,
+    }}
+  />
+</Head>
+
+      <div className="text-smallTextPhone md:text-smallText pt-[15vw] md:pt-[4vw]">
           
 
             {/* Header Part */}
@@ -644,6 +729,8 @@ const NewPage = () => {
                 </p>
             </div>
         </div>
+      </>
+        
     )
 }
 
