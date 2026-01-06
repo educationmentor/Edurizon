@@ -40,6 +40,8 @@ const why=["All 50,000 students who are studying and enjoying at the 2nd oldest 
 const feeStructure={
     title:"Fee Structure",
     subTitle:"Kazan Federal University Fees",
+    <p>Kazan Federal University is popular among international students for its quality education and transparent cost structure. Kazan Federal University MBBS Fees are affordable compared to many other countries, offering Indian students access to modern facilities, experienced faculty, and excellent clinical training.
+</p>
     data:[
         ["Expense", "Annual Cost"],
         ["Tution Fees","5,94,000 Ruble"],
