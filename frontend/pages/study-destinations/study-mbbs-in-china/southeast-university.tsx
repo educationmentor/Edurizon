@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import Head from "next/head";
 
 const services = [
     {
@@ -26,11 +27,88 @@ const services = [
 
 const NewPage = () => {
   return (
-    <div className="text-regularTextPhone md:text-regularText">
+    <>
+    <Head>
+    <title>
+  Top Medical Universities in China – MBBS Admission & Scholarship - SouthEast
+  University
+</title>
+<meta
+  name="keyword"
+  content="mbbs in china, Top 10 medical colleges in china, Best Medical University in china, Top Medical Universities in china, Top10 Medical Universities in china, mbbs in china fee structure, Top medical colleges in china, Best medical colleges in china, zhejiang university, zhejiang science and technology university, zhejiang university china, xi an jiaotong university, xi an jiaotong university china, nanjing university china, nanjing university, nanjing medical university china, xiamen university, china xiamen university, xiamen university xiamen."
+/>
+<meta
+  name="description"
+  content="View top-ranked medical universities in China for MBBS, plus admission and scholarship opportunities at https://www.edurizon.in/study-destinations/study-mbbs-in-china/southeast-university."
+/>
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow" />
+<meta name="DC.title" content="MBBS in China" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Top Medical Universities in China – MBBS Admission & Scholarship - SouthEast University"
+/>
+<meta
+  property="og:description"
+  content="View top-ranked medical universities in China for MBBS, plus admission and scholarship opportunities at https://www.edurizon.in/study-destinations/study-mbbs-in-china/southeast-university."
+/>
+<meta property="og:url" content="https://www.edurizon.in/" />
+<meta
+  property="og:image"
+  content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+/>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@edurizon" />
+<meta
+  name="twitter:title"
+  content="Top Medical Universities in China – MBBS Admission & Scholarship - SouthEast University"
+/>
+<meta
+  name="twitter:description"
+  content="View top-ranked medical universities in China for MBBS, plus admission and scholarship opportunities at https://www.edurizon.in/study-destinations/study-mbbs-in-china/southeast-university."
+/>
+<meta
+  name="twitter:image"
+  content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+/>
+<meta name="twitter:image:alt" content="MBBS in China" />
+<link
+  rel="canonical"
+  href="https://www.edurizon.in/study-destinations/study-mbbs-in-china/southeast-university"
+/>
+<link
+  rel="alternate"
+  href="https://www.edurizon.in/study-destinations/study-mbbs-in-china/southeast-university"
+  hrefLang="en-in"
+/>
+
+{/* Google tag (gtag.js) */}
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"
+/>
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JDZZKPGL8');
+    `,
+  }}
+/>
+
+        </Head>
+    <div className="text-regularTextPhone md:text-regularText text-black">
         <div className="relative h-auto w-full">
         <Image src="/assets/Images/mbbs-in-china/associated-universities/southeast-university.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
-            <div className="flex flex-col items-center gap-[2vw]">
+            <div className="flex flex-col items-center gap-[2vw] dark:text-white">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
                 <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">SouthEast University</h1>
@@ -52,7 +130,7 @@ const NewPage = () => {
         </div>
         </div>
 
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -110,7 +188,7 @@ const NewPage = () => {
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row immigrate-bg g-0">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -258,7 +336,7 @@ const NewPage = () => {
     </div>
 </section>--> */}
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -323,7 +401,7 @@ const NewPage = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -372,7 +450,7 @@ const NewPage = () => {
                                 </tr>
                                 <tr>
                                     <th scope="row">Photos in Instagram</th>
-                                    <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                                    <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">University &amp; Review videos</th>
@@ -390,7 +468,7 @@ const NewPage = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -416,6 +494,7 @@ const NewPage = () => {
 </section> 
       <div className="h-[4vw]"/>
     </div>
+    </>
   )
 }
 

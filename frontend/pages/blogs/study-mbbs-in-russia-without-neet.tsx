@@ -232,7 +232,7 @@ const StudyMbbs = () => {
       <AdmissionProcess subHeading='Your MBBS Journey to Russia Made Simple'/>
       
       {/* How Edurizon Helps Section 3x3 grid */}
-      <EdurizonProcess/>
+      <EdurizonProcess country="Russia"/>
 
       {/* Conclusion */}
       <div className='px-[6vw] md:px-[12.625vw] '>

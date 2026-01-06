@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 interface NewPageProps {
   id: string;
   countryData:  { 
@@ -52,22 +53,70 @@ interface NewPageProps {
     countryAdditionalCost:{title:string;
         subTitle:string;
         data:string[][];};
+    videoData:{id:number;title:string;channel:string;views:string;time:string;duration:string;thumbnail:string;link:string}[]
 
    };
+} 
+
+const metaData={
+  "study-mbbs-in-russia":<Head>
+    <title>MBBS in Russia for Indian Students, Cost of MBBS in Russia | Edurizon</title> 
+<meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+<meta name="description" content="We offer affordable education for MBBS in Russia for Indian Students with low cost of MBBS in Russia and transparent MBBS Fees." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<meta name="DC.title" content="MBBS In Russia" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Study MBBS in Russia | Top Medical Universities & Fees for 2025"/>
+<meta property="og:description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students."/>
+<meta property="og:url" content="https://www.edurizon.in/"/>
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@edurizon"/>
+<meta name="twitter:title" content="Study MBBS in Russia | Top Medical Universities & Fees for 2025"/>
+<meta name="twitter:description" content="Pursue MBBS in Russia at top-ranked medical universities. Affordable fees, English-medium courses, and best options for Indian students."/>
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"/>
+<meta name="twitter:image:alt" content="MBBS In Russia"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia"/>
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia" hrefLang="en-in"/>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+
+
+
+  </Head>,
+  "study-mbbs-in-china":<Head>
+    <title>Study MBBS in China, Top10 Medical Universities in China | Edurizon</title>
+<meta name="keyword" content="mbbs in china, mbbs in china low cost, mbbs in china for indian student, cost of mbbs in china, MBBS Abroad for Indian Students, jilin university china, jilin university mbbs fees, jilin university for indian students, shandong university china, shandong university mbbs fees, shandong university for indian students, guangzhou medical university, guangzhou medical university mbbs fees, guangzhou medical university for indian students, zhengzhou university china, zhengzhou university mbbs fees, zhengzhou university for indian students." />
+<meta name="description" content="Study MBBS in China at Top 10 medical universities or colleges which offer quality education and affordable MBBS fees." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-china"/>
+  </Head>,
+  
 }
 
 
 const NewPage = ({ id,countryData }: NewPageProps) => {
   return (
     <>
-    <Head>
-        <title>{countryData.metaTitle}</title>
-        <meta name="description" content={countryData.metaDescription} />
-        <meta name="keywords" content={countryData.metaKeywords} />
-        <meta name="author" content="Edurizon" />
-        <link rel="canonical" href={countryData.metaCanonical} />
-    </Head>
-    <div className="flex flex-col gap-[10vw] md:gap-[4vw] justify-center  ">
+      {metaData[id as keyof typeof metaData]}
+    <div className="flex flex-col gap-[10vw] md:gap-[4vw] justify-center pt-[15vw]  md:pt-[4vw] ">
 
       {/* Header Part */}
       <Header id={id} title1={countryData.countryTitle1} title2={countryData.countryTitle2??""} description={countryData.countryDescription} />
@@ -110,8 +159,25 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {<AdmissionProcess subHeading={countryData.admissionProcess.title}/>}
      {countryData.countryAdditionalCost && <UnlistedTable section2={"additionalCost"} id={id} content={countryData.countryAdditionalCost} />}
       
+      {/* Authorization Slider - Only for Russia */}
+      {id === 'study-mbbs-in-russia' && (
+        <AuthorizationSlider 
+          images={[
+            '/assets/Images/authorization/russia/Russia1.jpeg',
+            '/assets/Images/authorization/russia/Russia2.jpg',
+            '/assets/Images/authorization/russia/Russia3.jpeg',
+            '/assets/Images/authorization/russia/Russia4.jpg',
+            '/assets/Images/authorization/russia/Russia5.jpg',
+            '/assets/Images/authorization/russia/Russia6.jpg',
+            '/assets/Images/authorization/russia/Russia7.jpg',
+            '/assets/Images/authorization/russia/Russia8.jpg',
+            '/assets/Images/authorization/russia/Russia9.jpg',
+          ]}
+        />
+      )}
+      
       <PostArrival/>
-      <RelatedVideos/>
+     {countryData.videoData && <RelatedVideos videoData={countryData.videoData}/>}
     </div>
     </>
   );
@@ -129,9 +195,7 @@ import Section3 from "@/components/studyDestinationComponents/section3";
 import EligibilityCriteria from "@/components/studyDestinationComponents/eligibilityCriteriaTable";
 import Universities from "@/components/studyDestinationComponents/universitiesTable";
 import PostArrival from "@/components/studyDestinationComponents/postArrival";
-import CTASection from "@/components/landingPage/CTASection";
 import Header from "@/components/studyDestinationComponents/headerComponent";
-import Head from "next/head";
 import DescriptionComponent from "@/components/studyDestinationComponents/descriptionCompnent";
 import ReasonsToStudy from "../../components/studyDestinationComponents/reasonsToStudy";
 import CostTable from "@/components/studyDestinationComponents/costTable";
@@ -142,10 +206,10 @@ import UnlistedTable from "@/components/studyDestinationComponents/unListedTable
 import AdmissionProcess from "@/components/studyDestinationComponents/admissionProcess";
 import RelatedVideos from "@/components/videoSlider";
 import RussiaReasonsToStudy from "@/components/studyDestinationComponents/russiaReasonsToStudy";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 // Server-Side Rendering (SSR)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id  = context.params?.id;
-  console.log("Fetching data for:", id);
   const countryData = countryNames[id as keyof typeof countryNames];
   if (!countryData) {
     return <div>

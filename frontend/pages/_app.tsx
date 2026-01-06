@@ -24,8 +24,15 @@ import ThemeToggle from "@/components/ThemeToggle";
 import CTASection from "@/components/landingPage/CTASection";
 import ConsultationForm from "@/components/ConsultationForm";
 import { usePathname } from "next/navigation";
-import HeroSection from "@/components/landingPage/HeroSection";
+// import HeroSection from "@/components/landingPage/HeroSection";
+import CTASectionComponent from "@/components/CTASectionComponent";
 import Home from '../pages/index'
+import NavHeader from "@/components/NavHeader";
+import { setupAdminAxiosInterceptor } from "@/lib/setupAdminAxiosInterceptor";
+
+if (typeof window !== "undefined") {
+  setupAdminAxiosInterceptor();
+}
 
 const GA_TRACKING_ID = "G-Z25NZ103DJ";
 
@@ -37,68 +44,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [isMobileView, setIsMobileView] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isHidden, setIsHidden] = useState(false);
   const freeConsultationRef = useRef(null);
-  const ctaSectionRef = useRef(null);
-  const pathname=usePathname();
-  const [showChatBot, setShowChatBot] = useState(false);
-  const [showConsultationForm, setShowConsultationForm] = useState(false);
-  const [chatBotReply, setChatBotReply] = useState<string[]>([]);
-  const [userInput, setUserInput] = useState("");
-  const questions=[
-    "Which university or country you are looking for?",
-    "What is your budget? 20L-25L, 25L-30L, 30L-35L & Above.",
-    "Tell us your name?",
-    "Which city you are from?",
-    "Share Your Contact details ( Mob No) so our counselor can reach out to you.",
-    "Thank you for your interest. We will get back to you shortly.",
-  ]
-  const [disableChatBot, setDisableChatBot] = useState(false);
-
-  const chatBotScrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (chatBotScrollRef.current) {
-      chatBotScrollRef.current.scrollTop = chatBotScrollRef.current.scrollHeight;
-    }
-  }, [chatBotReply, questions]); // Trigger scroll when chat updates
-  const handleConsultationClick = () => {
-    setShowConsultationForm(true);
-    console.log('Consultation Form Opened');
-  };
-
- useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHidden(entry.isIntersecting); // Hide when intersecting, show when not
-      },
-      {
-        root: null, // Observe relative to the viewport
-        threshold: 0.1, // Trigger when at least 10% of ctaSection is visible
-      }
-    );
-
-    if (ctaSectionRef.current) {
-      observer.observe(ctaSectionRef.current);
-    }
-
-    return () => {
-      if (ctaSectionRef.current) {
-        observer.unobserve(ctaSectionRef.current);
-      }
-    };
-  }, [ctaSectionRef.current]);
-
-  useEffect(() => {
-      if (showConsultationForm) {
-        document.body.style.overflow = "hidden"; // Disable scrolling
-      } else {
-        document.body.style.overflow = "auto"; // Enable scrolling
-      }
-      return () => {
-        document.body.style.overflow = "auto"; // Cleanup on unmount
-      };
-    }, [showConsultationForm]);
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -107,32 +54,49 @@ function MyApp({ Component, pageProps }: AppProps) {
         const counselorToken = localStorage.getItem('counselorToken');
         const currentPath = router.pathname;
 
-        // Handle counselor routes
         if (currentPath.includes('/counselor/dashboard')) {
           if (!counselorToken) {
             router.push('/counselor/login');
           }
-        }
-        // Handle student routes
-        else if (currentPath.includes('/dashboard')) {
+        } else if (currentPath.includes('/dashboard') || currentPath.includes('/student-dashboard')) {
           if (!userData) {
             router.push('/login');
           } else {
-            // Verify token validity with backend
-            try {
-              const response = await axios.get(`${baseUrl}/api/auth/verify`, {
-                headers: {
-                  Authorization: `Bearer ${JSON.parse(userData).token}`
+            const user = JSON.parse(userData);
+            // Check if it's a registered student
+            if (user.role === 'registered-student') {
+              try {
+                const response = await axios.get(`${baseUrl}/api/registered-students/profile`, {
+                  headers: {
+                    Authorization: `Bearer ${user.token}`
+                  }
+                });
+                if (!response.data.success) {
+                  localStorage.removeItem('user');
+                  router.push('/login');
                 }
-              });
-              if (!response.data.valid) {
+              } catch (error) {
+                console.error('Token verification failed for registered student:', error);
                 localStorage.removeItem('user');
                 router.push('/login');
               }
-            } catch (error) {
-              console.error('Token verification failed:', error);
-              localStorage.removeItem('user');
-              router.push('/login');
+            } else {
+              // For regular users, use the existing verification
+              try {
+                const response = await axios.get(`${baseUrl}/api/auth/verify`, {
+                  headers: {
+                    Authorization: `Bearer ${user.token}`
+                  }
+                });
+                if (!response.data.valid) {
+                  localStorage.removeItem('user');
+                  router.push('/login');
+                }
+              } catch (error) {
+                console.error('Token verification failed:', error);
+                localStorage.removeItem('user');
+                router.push('/login');
+              }
             }
           }
         }
@@ -146,84 +110,70 @@ function MyApp({ Component, pageProps }: AppProps) {
     checkAuth();
   }, [router.pathname]);
 
-  
-
   useEffect(() => {
     const checkViewportWidth = () => {
       setIsMobileView(window.innerWidth < 768);
     };
 
-    checkViewportWidth(); // Check on mount
-    window.addEventListener('resize', checkViewportWidth); // Check on resize
-
-    return () => window.removeEventListener('resize', checkViewportWidth); // Cleanup
+    checkViewportWidth();
+    window.addEventListener('resize', checkViewportWidth);
+    return () => window.removeEventListener('resize', checkViewportWidth);
   }, []);
 
-  useEffect(() => {
-    if(chatBotReply.length=== 5){
-      setDisableChatBot(true);
-    }
-  }, [chatBotReply]);
+  const excludedPaths = [
+    '/login',
+    '/admin',
+    '/signup',
+    '/counselor/dashboard',
+    '/counselor/secret-register',
+    '/counselor/secret-login',
+    '/registered-student-login'
+  ];
+  const shouldExcludeLayout = excludedPaths.some(path => router.pathname.includes(path));
+  const isAdminRoute = useMemo(() => router.pathname.includes('/admin'), [router.pathname]);
 
-
-
-  const excludedPaths = ['/login', '/admin', '/signup', '/counselor/dashboard', '/counselor/secret-register', '/counselor/secret-login']; // Paths to exclude Navbar & Footer
-  const shouldExcludeLayout = excludedPaths.some((path) => router.pathname.includes(path));
-  const isAdminRoute = useMemo(() => router.pathname.includes("/admin"), [router.pathname]);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  console.log(userInput);
   return (
     <>
       <Head>
-        {/* ✅ Preload Fonts & Critical Images */}
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta name="description" content="Your Website Description Here" />
-        <title>Edurizon Private Limited</title>
+        {/* Global Meta Tags */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <style>{`
-        
-        body {
-          font-family: ${poppins.style.fontFamily}, sans-serif;
-          
-        }
 
-
-         h1, h2, h3, h4, h5, h6 {
-          font-family: ${helvetica.style.fontFamily}, sans-serif;
-          font-weight: 700;
-        }
-        `}</style>
         
+        {/* SEO Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <link rel="canonical" href="https://www.edurizon.in" />
       </Head>
-       {/* Google Analytics */}
-       <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive"/>
+
+      {/* Google Analytics */}
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', '${GA_TRACKING_ID}', {
             page_path: window.location.pathname,
           });
         `}
       </Script>
-    <ThemeProvider>
-      {isAdminRoute && isMobileView ? (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center px-4">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
-              <h1 className="text-2xl font-bold text-blue-500 mb-4">Coming Soon</h1>
-              <p className="text-gray-700">
-                This page can only be accessed from a desktop device. Please switch to a device with a larger screen (≥768px).
-              </p>
+
+      <ThemeProvider>
+        {/* Loading Overlay */}
+        {isLoading && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white text-xl font-semibold">
+            Loading...
           </div>
-        </div>
-      ) : (
-        <>
+        )}
+
+        <div className="relative">
+          {/* Admin routes are now fully accessible on all screen sizes */}
+          {/* {!shouldExcludeLayout && <NavHeader/>} */}
+
           {!shouldExcludeLayout && <Navbar />}
           {pathname === '/' ?<Home/> :
             <Component {...pageProps} />}
@@ -283,7 +233,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <div id='youtube' className=" bg-[#ff3d00] flex items-center justify-center rounded-full w-[10vw] h-[10vw] md:w-[2.5vw] md:h-[2.5vw] p-[.25vw]">
                     <a href="https://www.youtube.com/channel/UCgz4BJlEJtPVHMSLBJXbBfg">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" className="w-[6vw]  md:w-[1.5vw] h-auto" viewBox="0,0,256,256">
-                    <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" ><g transform="scale(5.33333,5.33333)"><path d="M43.2,33.9c-0.4,2.1 -2.1,3.7 -4.2,4c-3.3,0.5 -8.8,1.1 -15,1.1c-6.1,0 -11.6,-0.6 -15,-1.1c-2.1,-0.3 -3.8,-1.9 -4.2,-4c-0.4,-2.3 -0.8,-5.7 -0.8,-9.9c0,-4.2 0.4,-7.6 0.8,-9.9c0.4,-2.1 2.1,-3.7 4.2,-4c3.3,-0.5 8.8,-1.1 15,-1.1c6.2,0 11.6,0.6 15,1.1c2.1,0.3 3.8,1.9 4.2,4c0.4,2.3 0.9,5.7 0.9,9.9c-0.1,4.2 -0.5,7.6 -0.9,9.9z" fill="#ffffff"></path><path d="M20,31v-14l12,7z" fill="#ff3d00"></path></g></g>
+                    <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none"><g transform="scale(5.33333,5.33333)"><path d="M43.2,33.9c-0.4,2.1 -2.1,3.7 -4.2,4c-3.3,0.5 -8.8,1.1 -15,1.1c-6.1,0 -11.6,-0.6 -15,-1.1c-2.1,-0.3 -3.8,-1.9 -4.2,-4c-0.4,-2.3 -0.8,-5.7 -0.8,-9.9c0,-4.2 0.4,-7.6 0.8,-9.9c0.4,-2.1 2.1,-3.7 4.2,-4c3.3,-0.5 8.8,-1.1 15,-1.1c6.2,0 11.6,0.6 15,1.1c2.1,0.3 3.8,1.9 4.2,4c0.4,2.3 0.9,5.7 0.9,9.9c-0.1,4.2 -0.5,7.6 -0.9,9.9z" fill="#ffffff"></path><path d="M20,31v-14l12,7z" fill="#ff3d00"></path></g></g>
                     </svg>
                     </a>
                   </div>

@@ -14,6 +14,7 @@ const Breadcrumbs: React.FC = () => {
     products: "Products",
     aboutUs: "About Us",
     contact: "Contact Us",
+    "admin": "Admin",
     "study-destinations": "Study Destinations",
     "study-mbbs-in-russia": "Study MBBS in Russia",
     "study-mbbs-in-china": "Study MBBS in China",
@@ -44,6 +45,39 @@ const Breadcrumbs: React.FC = () => {
     "blogs":"Blogs",
     "study-mbbs-in-russia-without-neet":"Study MBBS in Russia without NEET",
     "study-mbbs-in-india":"Study MBBS in India",
+    "nepal-medical-college":"Nepal Medical College",
+    "b&c-medical-college":"B&C Medical College",
+    "birat-medical-college":"Birat Medical College",
+    "chitwan-medical-college":"Chitwan Medical College",
+    "devdaha-medical-college":"Devdaha Medical College",
+    "kathmandu-medical-college":"Kathmandu Medical College",
+    "lumbini-medical-college":"Lumbini Medical College",
+    "nobel-medical-college":"Nobel Medical College",
+    "college-of-medical-science":"College of Medical Science",
+    "kist-medical-college":"KIST Medical College",
+    "manipal-college-of-medical-science":"Manipal College of Medical Science",
+    "janaki-medical-college":"Janaki Medical College",
+    "national-medical-college":"National Medical College",
+    "nepalgunj-medical-college":"Nepalgunj Medical College",
+    "new-vision-university":"New Vision University",
+    "david-tvildiani-medical-university":"David Tvildiani Medical University",
+    "tbilisi-state-medical-university":"Tbilisi State Medical University",
+    "east-european-university":"East European University",
+    "georgian-national-university-seu":"Georgian National University SEU",
+    "international-black-sea-university":"International Black Sea University",
+    'study-mbbs-in-kyrgyzstan':'Study MBBS in Kyrgyzstan',
+    'central-asian-international-medical-university':'Central Asian International Medical University',
+    'jalal-abad-international-university':'Jalal Abad International University',
+    'avicenna-tajik-state-medical-university':'Avicenna Tajik State Medical University',
+    'medical-social-institute-of-tajikistan':'Medical Social Institute of Tajikistan',
+    'osh-state-university':'Osh State University',
+    'osh-international-state-medical-university':'Osh International State Medical University',
+    'jalal-abad-state-university':'Jalalabad State University',
+    'royal-metropolitan-university':'Royal Metropolitan University',
+    'bachelors-in-germany':'Bachelors in Germany',
+    'masters-in-germany':'Masters in Germany',
+    'md-in-germany':'MD in Germany',
+    'hotel-management-in-germany':'Hotel Management in Germany',
   };
 
   return (
@@ -55,7 +89,6 @@ const Breadcrumbs: React.FC = () => {
           </TransitionLink>
         </li>
         {pathSegments.map((segment, index) => {
-          console.log(segment);
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">

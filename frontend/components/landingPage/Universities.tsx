@@ -63,7 +63,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
       }, [emblaApi, autoScroll]);
 
     return (
-    <div className="w-full relative gradient-bg md:h-[56.25vw] flex flex-col justify-between overflow-hidden  py-[10vw] md:py-[4.75vw] px-[6.25vw] md:px-[7.5vw] box-border">
+    <div className="w-full relative gradient-bg md:h-[50.25vw] flex flex-col justify-between overflow-hidden  py-[10vw] md:py-[2vw] px-[6.25vw] md:px-[7.5vw] box-border">
       <div className="flex flex-row md:gap-[23.3125vw] items-center">
         {/* Header Section */}
         <div className="w-full md:w-[37.1875vw]">
@@ -72,7 +72,7 @@ const Universities: React.FC<PropType> = ({ autoScroll = true }) => {
                 </div>
           <h2 className="text-h5TextPhone md:text-h2Text   leading-[120%] dark:text-white">
             <strong>
-              Tied Up with <span className="text-orangeChosen">Universities</span>
+              Partner with <span className="text-orangeChosen">Universities</span>
             </strong>{" "}
             across the globe.
           </h2>

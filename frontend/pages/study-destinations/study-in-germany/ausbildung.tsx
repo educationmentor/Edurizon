@@ -6,6 +6,7 @@ import React from 'react'
 import Image from 'next/image'
 import UnlistedTable from '@/components/studyDestinationComponents/unListedTable'
 import ListedTable from '@/components/studyDestinationComponents/ListedTable'
+import Head from 'next/head'
 
 const tableData = {
   title:"Top 10 Ausbildung Courses in Germany",
@@ -86,7 +87,52 @@ const reasonsToStudy = [
 
 const Ausbildung = () => {
   return (
-    <div className='flex flex-col gap-[5vw] md:gap-[7vw] '>
+    <>
+    <Head>
+    <title>Ausbildung in Germany for Indian Students – Job-Oriented Study</title>
+<meta name="keywords" content="study in germany for free, Free education in Germany for Masters, german language course, universities in germany for international students, ausbildung courses in germany, Ausbildung in Germany for Indian Students, Top Ausbildung Courses In Germany, scholarships in germany, master degree in germany, mba in germany, MBA in Germany fees, ms in germany, masters program in germany for international students" />
+<meta name="description" content="Apply for Ausbildung in Germany with paid training, high job demand & visa support. Full details at https://www.edurizon.in/study-destinations/study-in-germany/ausbildung." />
+<meta name="author" content="edurizon" />
+<meta name="robots" content="index, follow" />
+<meta name="DC.title" content="Ausbildung in Germany for Indian Students" />
+<meta name="geo.region" content="IN-DL" />
+<meta name="geo.placename" content="Dwarka" />
+<meta name="geo.position" content="22.351115;78.667743" />
+<meta name="ICBM" content="22.351115, 78.667743" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ausbildung in Germany for Indian Students – Job-Oriented Study" />
+<meta property="og:description" content="Apply for Ausbildung in Germany with paid training, high job demand & visa support. Full details at https://www.edurizon.in/study-destinations/study-in-germany/ausbildung." />
+<meta property="og:url" content="https://www.edurizon.in/study-destinations/study-in-germany/ausbildung" />
+<meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@edurizon" />
+<meta name="twitter:title" content="Ausbildung in Germany for Indian Students – Job-Oriented Study" />
+<meta name="twitter:description" content="Apply for Ausbildung in Germany with paid training, high job demand & visa support. Full details at https://www.edurizon.in/study-destinations/study-in-germany/ausbildung." />
+<meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+<meta name="twitter:image:alt" content="Ausbildung in Germany" />
+
+<link rel="canonical" href="https://www.edurizon.in/study-destinations/study-in-germany/ausbildung" />
+<link rel="alternate" href="https://www.edurizon.in/study-destinations/study-in-germany/ausbildung" hrefLang="en-in" />
+
+{/* Google tag (gtag.js) */}
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"
+/>
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JDZZKPGL8');
+    `,
+  }}
+/>
+</Head>
+    <div className='flex flex-col gap-[5vw] md:gap-[7vw] pt-[15vw]  md:pt-[4vw] '>
       <Header title1="Ausbildung in Germany"  title2='' id='' description='Are you ready to build a successful career through a structured, hands-on training program? Germany’s dual vocational training system, Ausbildung, offers a unique blend of paid work experience and classroom learning, making it a gateway to stable and rewarding careers. Renowned for its world-class education system, Germany provides international students and professionals—especially from India and beyond—an affordable, practical pathway to career success while earning a stipend.' />
       <DescriptionComponent id='' title1normal={"What is"} title1orange={"Ausbildung in Germany?"} content1={["Ausbildung is Germany’s innovative dual vocational training system that combines classroom-based education with hands-on, on-the-job training. This structured apprenticeship program is designed to equip participants with specialized, industry-ready skills and is globally recognized for its rigorous standards and excellent career prospects. Whether you’re seeking an ausbildung program in English or traditional German, our platform offers comprehensive resources—from detailed program listings to essential requirements and benefits."]} 
       title2={""} content2={["At Edurizon, we specialize in guiding aspiring professionals every step of the way to secure an Ausbildung in Germany. Whether you are interested in IT Ausbildung programs, dual Ausbildung opportunities, or exploring other specialized fields, we provide comprehensive support tailored to your needs."]} imageAlt={"Ausbildung Image"} imageSrc={"/assets/Images/study-in-germany/ausbildungImg2.webp"}/>
@@ -120,6 +166,7 @@ const Ausbildung = () => {
       
       <div/>
     </div>
+    </>
   )
 }
 

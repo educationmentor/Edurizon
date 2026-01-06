@@ -7,7 +7,7 @@ const steps = [
       title: "Personalized Profile Evaluation",
       content:
         "Edurizon starts with a free consultation to evaluate your academic profile, budget, and career goals..",
-      contentFull:<p className='text-smallTextPhone md:text-smallText leading-[150%]'>
+      contentFull:<div className='text-smallTextPhone md:text-smallText leading-[150%]'>
         Edurizon starts with a free consultation to evaluate your academic profile, budget, and career goals. Key factors include:
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
             <li>NEET Score: Eligibility for NMC-approved universities.</li>
@@ -17,17 +17,17 @@ const steps = [
             </li>            
         </ul>
         Outcome: A curated list of universities, complete with pros, cons, and fee structures.
-      </p>
+      </div>
     },
     {
       title: "Document Submission & Verification",
-      content:<p className='text-smallTextPhone md:text-smallText leading-[150%]'>
+      content:<div className='text-smallTextPhone md:text-smallText leading-[150%]'>
             Submit the Following Documents 
             <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
                 <li>Academics: Class 10 & 12 mark sheets, NEET scorecard.</li>
             </ul>
-            </p>,
-    contentFull:<p className='text-smallTextPhone md:text-smallText leading-[150%]'>
+            </div>,
+    contentFull:<div className='text-smallTextPhone md:text-smallText leading-[150%]'>
         Submit the Following Documents 
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
             <li>Academics: Class 10 & 12 mark sheets, NEET scorecard.</li>
@@ -41,15 +41,15 @@ const steps = [
             <li>Manage MEA and embassy attestation.</li>
             <li>Submit applications within 3–5 days.</li>
         </ul>
-      </p>
+      </div>
     },
     {
       title: "Admission Letter & Entrance Exam",
       content:
-        "Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter.",
+        "Students receive admission letters within 5-7 working days’ time.",
         contentFull:<>
         <ul className='list-disc pl-[6vw] md:pl-[1.5vw] list-outside'>
-            <li>Students receive admission letters within 5-7 working days’ time Upon receipt of admission letter, student need to submit his 
+            <li>Students receive admission letters within 5-7 working days’ time, student need to submit his 
               valid NEET score card. Thereafter University conducts entrance exam of all such students who have received admission letter and
                deposited their NEET score card</li>
             <li>Fee Payment: Transfer tuition fees directly to the university account.</li>
@@ -101,7 +101,7 @@ const steps = [
         setShow(false);
     },[isActive])
     return (
-      <div className={`transition-all duration-500 relative  pl-[4vw] md:pl-[1vw] pb-[8vw] md:pb-[2vw] ${islast ? "" : "border-l-[2px] "}  ${isActive ? "border-black" : "border-[rgba(0, 0, 0, 0.5)]"}`}>
+      <div className={`transition-all duration-500 relative  pl-[4vw] md:pl-[1vw] pb-[8vw] dark:text-black md:pb-[2vw] ${islast ? "" : "border-l-[2px] "}  ${isActive ? "border-black" : "border-[rgba(0, 0, 0, 0.5)]"}`}>
         <div onClick={onClick}
           className={`cursor-pointer absolute flex items-center justify-center bg-white border-[2px] top-0 left-[-2.5vw] md:left-[-.675vw] w-[5vw] h-[5vw] md:w-[1.25vw] md:h-[1.25vw] rounded-full ${
             isActive ? "  border-black" : "  border-[rgba(0, 0, 0, 0.5)]"
@@ -127,9 +127,9 @@ const steps = [
       visible && isActive ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
     }`}
   >
-    <p className={`text-smallTextPhone md:text-smallText pr-4 ${isActive ? 'text-black' : 'text-[rgba(0,0,0,.5)]'}`}>
+    <div className={`text-smallTextPhone md:text-smallText pr-4 ${isActive ? 'text-black' : 'text-[rgba(0,0,0,.5)]'}`}>
       {content}
-    </p>
+    </div>
   </div>
 
   <div
@@ -156,7 +156,6 @@ const steps = [
   }
 
 const AdmissionProcess = ({subHeading}:AdmissionProps) => {
-    const headDescription="Attend a pre-departure webinar covering climate tips, hostel guidelines, and cultural etiquette. Upon arrival, university representatives provide airport pickup, meal services, and transport to hostels. Edurizon’s team ensures a smooth settlement, including room allocation and local SIM cards"
     const [openStep, setOpenStep] = useState<number>(-1);
     const [visible, setVisible] = useState(true);
     const [currentStep, setCurrentStep] = useState(0);
@@ -184,8 +183,8 @@ const AdmissionProcess = ({subHeading}:AdmissionProps) => {
 
     return (
     <div className='bg-linenChosen py-[10vw] md:py-[4vw] px-[6vw] md:px-[12.625vw]'>
-        <div className=' mb-[5vw] md:mb-[4vw]'>
-            <h3 className='text-h5TextPhone md:text-h3Text text-center font-bold leading-[120%] mb-[5vw] md:mb-[1.5vw]'>Admission Process</h3>
+        <div className=' mb-[5vw] md:mb-[4vw] dark:text-black'>
+            <h3 className='text-h5TextPhone md:text-h3Text text-center font-bold leading-[120%] mb-[5vw] md:mb-[1.5vw] '>Admission Process</h3>
             <h5 className='text-h6TextPhone font-bold text-left md:text-center md:text-h5Text md:font-medium leading-[140%] mb-[0vw] md:mb-[.5vw]'>{subHeading}</h5>
             {/* <p className='text-smallTextPhone md:text-regularText text-justify leading-[150%]'>{headDescription}</p> */}
         </div>

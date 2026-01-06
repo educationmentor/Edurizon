@@ -15,7 +15,6 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
     const useTheme=()=>useContext(ThemeContext);
     const { theme } = useTheme();
     const [showOverlay, setShowOverlay] = useState(false);
-    console.log(theme);
     const imageSrc =
       theme == "dark"?
       darkImg:
@@ -42,7 +41,7 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
                     <span className="md:hidden">{content[0].mobileDescription || content[0].description}</span>
                     </p>
                 </div>
-                <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                {/* <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                 </div>
                 <div className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                 <Image
@@ -62,7 +61,7 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
                     <span className="md:hidden">{content[1].mobileDescription || content[1].description}</span>
                     </p>
                 </div>
-                <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                {/* <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                 </div>
                 <div className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                 <Image
@@ -103,7 +102,7 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
                     <span className="md:hidden">{content[3].mobileDescription || content[3].description}</span>
                     </p>
                 </div>
-                <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                {/* <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                 </div>
                 <div className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                 <Image
@@ -124,7 +123,7 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
                     </p>
                 </div>
 
-                <h6  className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                {/* <h6  className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                 </div>
                 <div className="flex flex-col gap-[6vw] items-center md:items-start md:gap-[1.5vw]">
                 <Image
@@ -144,7 +143,7 @@ const RussiaReasonsToStudy = ({ id,name,content,darkImg,lightImg,title1,title2 }
                     <span className="md:hidden">{content[5].mobileDescription || content[5].description}</span>
                     </p>
                 </div>
-                <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6>
+                {/* <h6 className="text-h6TextPhone md:text-h6Text underline">Learn More</h6> */}
                 </div>
             </div>
              {/* Overlay */}

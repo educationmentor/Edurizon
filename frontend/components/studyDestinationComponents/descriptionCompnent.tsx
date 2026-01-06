@@ -1,10 +1,10 @@
 interface DescriptionComponentProps {
     id: string;
     title1normal:string;
-    title1orange:string;
-    title2:string;
+    title1orange?:string;
+    title2?:string;
     content1:string[];
-    content2:string[];
+    content2?:string[];
     imageSrc:string;
     imageAlt:string;
 }
@@ -26,7 +26,7 @@ const DescriptionComponent = ({ id,title1normal,title1orange,title2,content1,con
                     
                     </div>
                     
-                    <h4 className="text-h5TextPhone text-center md:text-left md:text-h4Text font-bold leading-[120%]">{title2}</h4>
+                    {title2 && <h4 className="text-h5TextPhone text-center md:text-left md:text-h4Text font-bold leading-[120%]">{title2}</h4>}
                     <div className="text-smallTextPhone md:text-regularText text-justify">
                     {content2 !=undefined? content2.length>1?
                     <ul className="list-disc pl-[6vw] md:pl-[1.5vw] list-outside ">
@@ -38,7 +38,7 @@ const DescriptionComponent = ({ id,title1normal,title1orange,title2,content1,con
                     </div>
                     
                   </div>
-                <Image width={500} height={500} className="w-full md:w-[32.375vw] px-[3vw] md:px-0 h-auto" src={imageSrc} alt={imageAlt} />
+                <Image width={500} height={500} className="rounded-full w-full md:w-[32.375vw] px-[3vw] md:px-0 h-auto" src={imageSrc} alt={imageAlt} />
         </div>
     );
     }

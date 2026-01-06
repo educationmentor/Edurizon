@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/Breadcumbs";
 import Image from "next/image";
+import Head from "next/head";
 const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
@@ -14,7 +15,7 @@ const services = [
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
       text: "World Rank",
-      label: "Country - 100, QS world rank - 601, World - 3901",
+      label: "Country - 100, QS world rank - 601",
     },
     {
       icon: "/assets/Images/Icons/AcademinCoursesIcon.svg",
@@ -24,8 +25,49 @@ const services = [
   ];
 const NewPage=()=>{
     return(
-        <div className="text-regularTextPhone md:text-regularText">
-            <div className="relative h-auto w-full">
+        <>
+            <Head>
+                <title>North Western State Medical University in Russia, MBBS Fees | Edurizon
+</title>
+                <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+                <meta name="description" content="Edurizon offers admission to North Western State Medical University with affordable MBBS fees and quality medical education.
+" />
+                <meta name="author" content="edurizon" />
+                <meta name="robots" content="index, follow"/>
+                <meta name="DC.title" content="MBBS In Russia" />
+                <meta name="geo.region" content="IN-DL" />
+                <meta name="geo.placename" content="Dwarka" />
+                <meta name="geo.position" content="22.351115;78.667743" />
+                <meta name="ICBM" content="22.351115, 78.667743" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Low Cost MBBS in Russia for Indian Students – North Western State Medical University" />
+                <meta property="og:description" content="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/north-western-state-medical-university helps Indian students find low cost MBBS in Russia, with info about university rankings, admission & scholarship." />
+                <meta property="og:url" content="https://www.edurizon.in/" />
+                <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@edurizon" />
+                <meta name="twitter:title" content="Low Cost MBBS in Russia for Indian Students – North Western State Medical University" />
+                <meta name="twitter:description" content="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/north-western-state-medical-university helps Indian students find low cost MBBS in Russia, with info about university rankings, admission & scholarship." />
+                <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:image:alt" content="MBBS in Russia" />
+                <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/north-western-state-medical-university"/>
+                <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/north-western-state-medical-university" hrefLang="en-in"/>
+
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+            </Head>
+            <div className="text-regularTextPhone md:text-regularText text-black">
+            <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/NorthWesternStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -52,7 +94,7 @@ const NewPage=()=>{
         </div>
 
         {/* Old Code base */}
-        <section className="inner-page-bg">
+        <section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -95,7 +137,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -156,7 +198,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -230,7 +272,7 @@ const NewPage=()=>{
                 </tr>
                 <tr>
                   <th scope="row">Photos in Instagram</th>
-                  <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                  <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                 </tr>
                 <tr>
                   <th scope="row">University &amp; Review videos</th>
@@ -245,7 +287,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -266,7 +308,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -286,7 +328,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -310,7 +352,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -333,13 +375,15 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
           <div className="heading">
             <h3 className="text-h5TextPhone md:text-h5Text">Fee Structure of North-Western State Medical University 2024-25</h3>
+              <p>North Western State Medical University is a well-known Russian medical institution offering quality education at reasonable costs. North Western State Medical University Fees are affordable and transparent, making it a preferred choice for Indian students seeking globally recognized MBBS programs with strong clinical exposure.
+</p>
             <h5>MBBS in Russia – MBBS in North-Western State Medical University</h5>
           </div>
           <div className="table-responsive">
@@ -362,7 +406,7 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -383,7 +427,7 @@ const NewPage=()=>{
   </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -407,10 +451,18 @@ const NewPage=()=>{
     </div>
   </div>
 </section>
+<section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] my-[10vw] md:my-[1vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[.5vw]   md:text-h3Text text-center font-bold">Authorization</h3>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/authorization/russia/Russia5.jpg"} className='w-full md:w-[20vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
 <div className='h-[2vw]'>
 
 </div>
-        </div>
+            </div>
+        </>
     )
 }
 

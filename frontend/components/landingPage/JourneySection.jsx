@@ -2,20 +2,20 @@
 import Image from 'next/image'
 const JounreySection =()=>{
     return (
-        <div className="my-[10vw] md:my-[4.75vw] mx-[6vw] md:mx-[4.5vw]">
-            <div className="w-full md:w-[41.125vw] mx-auto mb-[7vw] ">
-            <div className='flex flex-col justify-center bg-paleOrangeChosen mb-[6vw] md:mb-[1.5vw]  text-black text-tinyTextPhone md:text-tinyText h-[7vw] md:h-[1.75vw] w-[21vw] md:w-[6.5vw] mx-auto rounded-[11vw] md:rounded-[2.75vw]'>
-                <p className=' text-center '>Journey</p></div>
+        <div className=" mx-[6vw] md:mx-[4.5vw] md:mb-[-10vw]">
+            <div className="w-full md:w-[41.125vw] mx-auto md:mb-[-10vw]">
+            {/* <div className='flex flex-col justify-center bg-paleOrangeChosen mb-[6vw] md:mb-[1.5vw]  text-black text-tinyTextPhone md:text-tinyText h-[7vw] md:h-[1.75vw] w-[21vw] md:w-[6.5vw] mx-auto rounded-[11vw] md:rounded-[2.75vw]'>
+                <p className=' text-center '>Journey</p></div> */}
                 <div className='mb-[.5vw] text-center'>
                     <h2 className='text-h2Text  leading-[120%] dark:text-white'><strong><span className="text-h0Text">Y</span>our <span className='text-orangeChosen'>Journey</span> With Us</strong></h2>
-                    <p className='md:text-smallTextPhone text-tinyTextPhone text-black dark:text-white '>From Application to Arrival - We Guide You Every Step of the Way!</p>
+                    <p className='md:text-smallTextPhone text-smallTextPhone text-black dark:text-white '>From Application to Arrival - We Guide You Every Step of the Way!</p>
                 </div>
                 </div>
-                <div className="relative hidden md:block h-[103.875vw] mx-[1.5625vw]">
+                <div className="relative hidden md:flex md:flex-col justify-center h-[103.875vw] scale-75 " >
                 {/* Journey 1 */}
                 <div className='absolute top-[3vw] left-[0] w-[27.25vw] dark:text-white'>
-                    <h5 className='text-h5Text  font-bold leading-[140%] mb-[1vw]'>Consultation and University selection</h5>
-                    <p className='text-smallText leading-[150%] '>Confused about which university to choose? Our expert advisors help you select the best university based on your academic background, budget, and career goals.</p>
+                    <h5 className='text-h4Text  font-bold leading-[140%] mb-[1vw]'>Consultation and University selection</h5>
+                    <p className='text-regularText leading-[150%] '>Confused about which university to choose? Our expert advisors help you select the best university based on your academic background, budget, and career goals.</p>
                 </div>
                 <Image width={40} height={40} src="/assets/Images/Icons/Journey1.svg" alt="Journey1" className="absolute top-[0] left-[28.3125vw] w-[14vw] h-[14vw] object-cover" />
                 <svg className='absolute left-[31.9375vw] top-[5.625vw]' style={{ width: "22.1875vw", height: "26.25vw" }}  viewBox="0 0 355 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,8 +24,8 @@ const JounreySection =()=>{
 
                 {/* Journey 2 */}
                 <div className='absolute top-[25.25vw] right-[0] w-[25.25vw] dark:text-white'>
-                    <h5 className='text-h5Text   font-bold leading-[140%] mb-[1vw]'>Application & SOP Assistance</h5>
-                    <p className='text-smallText leading-[150%] '>Edurizon Pvt. Ltd. is one of the best abroad education consultants Company, in Delhi. We have 7 branch offices all over India. We have been experts in the field of counseling for the last 10 years.</p>
+                    <h5 className='text-h4Text   font-bold leading-[140%] mb-[1vw]'>Application & SOP Assistance</h5>
+                    <p className='text-regularText leading-[150%] '>Edurizon Pvt. Ltd. is one of the best abroad education consultants Company, in Delhi. We have 7 branch offices all over India. We have been experts in the field of counseling for the last 10 years.</p>
                 </div>
                 <Image width={40} height={40} src="/assets/Images/Icons/Journey2.svg" alt='Journey2' className='absolute left-[41.75vw] top-[23vw] w-[17.5vw] h-[11.6875vw] ' />
                     <svg className='absolute left-[44.625vw] top-[35vw]' style={{ width: "15.875vw", height: "16vw" }} width="254" height="256" viewBox="0 0 254 256" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,8 +34,8 @@ const JounreySection =()=>{
 
                 {/* Journey 3 */}
                 <div className='absolute top-[43.75vw] left-[0] w-[26.875vw] dark:text-white'>
-                    <h5 className='text-h5Text   font-bold leading-[140%] mb-[1vw]'>Pre-Departure Support</h5>
-                    <p className='text-smallText leading-[150%] '>Navigating the visa process can be daunting. We offer step-by-step assistance, from preparing documents to mock interview training, ensuring a smooth and hassle-free visa approval experience.</p>
+                    <h5 className='text-h4Text   font-bold leading-[140%] mb-[1vw]'>Pre-Departure Support</h5>
+                    <p className='text-regularText leading-[150%] '>Navigating the visa process can be daunting. We offer step-by-step assistance, from preparing documents to mock interview training, ensuring a smooth and hassle-free visa approval experience.</p>
                 </div>
                 <Image width={40} height={40} src="/assets/Images/Icons/Journey3.svg" alt='Journey3' className='absolute left-[25.9375vw] top-[45vw] w-[17.625vw] h-[13.0625vw] ' />
                 <svg className='absolute left-[16.625vw] top-[55.0625vw]' style={{width:"15.875vw", height:"20.9375vw"}} viewBox="0 0 254 335" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,8 +44,8 @@ const JounreySection =()=>{
 
                 {/* Journey 4 */}
                 <div className='absolute top-[70.125vw] left-[53.9375vw] w-[28.9375vw] dark:text-white'>
-                    <h5 className='text-h5Text   font-bold leading-[140%] mb-[1vw]'>Fly With Us</h5>
-                    <p className='text-smallText leading-[150%] '>We try our best to accompany you with your complete process and from you departure to you post arrival guidance.</p>
+                    <h5 className='text-h4Text   font-bold leading-[140%] mb-[1vw]'>Fly With Us</h5>
+                    <p className='text-regularText leading-[150%] '>We try our best to accompany you with your complete process and from you departure to you post arrival guidance.</p>
                 </div>
                 <Image width={40} height={40} src="/assets/Images/Icons/Journey4.svg" alt='Journey4' className='absolute left-[35.3125vw] top-[66.375vw] w-[14.625vw] h-[14.625vw] ' />
                 <svg className='absolute top-[79.75vw] left-[49.25vw]' style={{width:"16.1875vw", height:"19.3125vw"}} width="259" height="309" viewBox="0 0 259 309" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +54,8 @@ const JounreySection =()=>{
 
                 {/* Journey 5 */}
                 <div className='absolute top-[93.9375vw] left-[0] w-[29.25vw] dark:text-white'>
-                    <h5 className='text-h5Text   font-bold leading-[140%] mb-[1vw]'>Accommodation & Travel Guidance</h5>
-                    <p className='text-smallText leading-[150%] '>Moving to a new country is exciting but requires careful planning. We assist in booking safe and comfortable accommodation, flight tickets, and travel insurance, ensuring a seamless transition.</p>
+                    <h5 className='text-h4Text   font-bold leading-[140%] mb-[1vw]'>Accommodation & Travel Guidance</h5>
+                    <p className='text-regularText leading-[150%] '>Moving to a new country is exciting but requires careful planning. We assist in booking safe and comfortable accommodation, flight tickets, and travel insurance, ensuring a seamless transition.</p>
                 </div>
                 <Image width={40} height={40} src="/assets/Images/Icons/Journey5.svg" alt='Journey5' className='absolute left-[29.9375vw] top-[91vw] w-[19.3125vw] h-[12.875vw] ' />
 

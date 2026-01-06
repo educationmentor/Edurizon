@@ -5,6 +5,7 @@ import PostArrival from "@/components/studyDestinationComponents/postArrival";
 import ScholarshipSection from "@/components/studyDestinationComponents/scholarshipSection";
 import UnlistedTable from "@/components/studyDestinationComponents/unListedTable";
 import Image from "next/image";
+import Head from "next/head";
 
 const services = [
     {
@@ -40,8 +41,8 @@ const feeStructure={
     subTitle:"Kazan Federal University Fees",
     data:[
         ["Expense", "Annual Cost"],
-        ["Tution Fees","4,90,080 Ruble"],
-        ["Hostel Fees","14,000 Ruble"],
+        ["Tution Fees","3,70,080 Ruble"],
+        ["Hostel Fees","36,000 Ruble"],
     ]
 }
 
@@ -52,7 +53,7 @@ const facts={
         [],
         ["Established In","1909"],
         ["Recognition","NMC, WHO, ECFMG (USMLE), GMC (PLAB), AMEE"],
-        ["Fees","2,82,080 per year"],
+        ["Fees","3,70,080 per year"],
         ["Medium of Teaching","1Fully English"],
         ["Course Duration","6 Years"],
         ["Indian students","Yes"],
@@ -72,16 +73,56 @@ const eligibility=[
 
 
 const BashkirMedicalUniversity=()=>{
-    return <div className="text-regularTextPhone md:text-regularText">
+    return (
+        <>
+            <Head>
+                <title>MBBS in Russia Low Cost | Bashkir Medical University – Admission & Eligibility</title>
+                <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+                <meta name="description" content="Discover low cost MBBS in Russia for Indian students. Get complete admission & eligibility info, cost estimates, scholarships & top universities at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/bashkir-medical-university" />
+                <meta name="author" content="edurizon" />
+                <meta name="robots" content="index, follow"/>
+                <meta name="DC.title" content="MBBS In Russia" />
+                <meta name="geo.region" content="IN-DL" />
+                <meta name="geo.placename" content="Dwarka" />
+                <meta name="geo.position" content="22.351115;78.667743" />
+                <meta name="ICBM" content="22.351115, 78.667743" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="MBBS in Russia Low Cost | Bashkir Medical University – Admission & Eligibility" />
+                <meta property="og:description" content="Discover low cost MBBS in Russia for Indian students. Get complete admission & eligibility info, cost estimates, scholarships & top universities at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/bashkir-medical-university" />
+                <meta property="og:url" content="https://www.edurizon.in/" />
+                <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@edurizon" />
+                <meta name="twitter:title" content="MBBS in Russia Low Cost | Bashkir Medical University – Admission & Eligibility" />
+                <meta name="twitter:description" content="Discover low cost MBBS in Russia for Indian students. Get complete admission & eligibility info, cost estimates, scholarships & top universities at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/bashkir-medical-university" />
+                <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+                <meta name="twitter:image:alt" content="Best Divorce Lawyer in Delhi" />
+                <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/bashkir-medical-university"/>
+                <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/bashkir-medical-university" hrefLang="en-in"/>
+
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9JDZZKPGL8');
+                        `,
+                    }}
+                />
+            </Head>
+            <div className="text-regularTextPhone md:text-regularText text-black">
         <div className="relative h-auto w-full">
         <Image src="/assets/Images/universities/russia/BashkirStateMedicalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
             <div className="flex flex-col items-center gap-[1vw]">
                 <Breadcrumbs/>
-                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Bashkir Medical University</h1>
+                <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text dark:text-white">Bashkir Medical University</h1>
             </div>
-            <p className="text-regularText text-center">
+            <p className="text-regularText text-center dark:text-white">
             Established in 1932,Bashkir State Medical University located at Ufa is one of the top and leading institutions of Russia and the center of the medical and pharmaceutical sciences of the Republic of Bashkortostan.
             </p>
             </div>
@@ -98,8 +139,8 @@ const BashkirMedicalUniversity=()=>{
             </div>
         </div>
         </div>
-        <section className="inner-page-bg">
-    <div className="container">
+        <section className="inner-page-bg dark:bg-black">
+    <div className="container ">
         <div className="row g-0">
             <div className="immigrate-bg">
                 <div className="row">
@@ -145,7 +186,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section> 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row immigrate-bg g-0">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
@@ -170,7 +211,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row immigrate-bg g-0">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
@@ -207,7 +248,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -226,7 +267,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -247,7 +288,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -282,7 +323,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -302,7 +343,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -324,7 +365,7 @@ const BashkirMedicalUniversity=()=>{
                                 </tr>
                                 <tr>
                                     <th scope="row">Fees</th>
-                                    <td>Ruble 2,82,000 per year</td>
+                                    <td>Ruble 3,70,080 per year</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Medium of Teaching</th>
@@ -348,7 +389,7 @@ const BashkirMedicalUniversity=()=>{
                                 </tr>
                                 <tr>
                                     <th scope="row">Photos in Instagram</th>
-                                    <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                                    <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">University &amp; Review videos</th>
@@ -363,7 +404,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -383,11 +424,11 @@ const BashkirMedicalUniversity=()=>{
                             <tbody>
                                 <tr>
                                     <th scope="row">Tuition Fees</th>
-                                    <td>4,90,080</td> 
+                                    <td>3,70,080</td> 
                                 </tr>
                                 <tr>
                                     <th scope="row">Hostel Fees</th>
-                                    <td> 14,000</td> 
+                                    <td> 36,000</td> 
                                 </tr> 
                             </tbody>
                         </table>
@@ -412,7 +453,7 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="immigrate-bg">
         <div className="row">
@@ -453,7 +494,8 @@ const BashkirMedicalUniversity=()=>{
     </div>
     </div>
 </section>
-<section className="inner-page-bg">
+
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="immigrate-bg">
             <div className="row">
@@ -517,9 +559,18 @@ const BashkirMedicalUniversity=()=>{
         </div>
     </div>
 </section>
+<section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw] my-[10vw] md:my-[1vw]">
+              <h3 className="text-h5TextPhone leading-[120%] pb-[2vw] md:pb-[.5vw]   md:text-h3Text text-center font-bold">Authorization</h3>
+
+              <div className='relative md:flex gap-[4vw] md:gap-[1vw] justify-center'>
+                <Image src={"/assets/Images/authorization/russia/Russia7.jpg"} className='w-full md:w-[20vw] h-auto' width={1080} height={1080} alt='isbu1'/>
+              </div>
+            </section>
 <div className="h-[4vw]"/>
        
-    </div>
+            </div>
+        </>
+    )
 }
 
 export default BashkirMedicalUniversity;

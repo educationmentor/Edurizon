@@ -33,7 +33,7 @@ const WhyChoseUsSection = () => {
         <div className=' w-[87.5vw] md:w-[46.5vw] z-[2] md:pl-[7.5vw]  mt-[10vw] md:mt-[4.75vw]'>
             <div className='  z-[3] text-tinyTextPhone md:text-tinyText w-full md:w-[35.25vw]'>
                 <div className='flex flex-col justify-center bg-paleOrangeChosen mb-[6vw] md:mb-[1.5vw] text-black text-tinyTextPhone md:text-tinyText h-[7vw] md:h-[1.75vw] w-[39vw] md:w-[9.675vw] rounded-[11vw] md:rounded-[2.75vw]'>
-                <p className=' text-center'>Why Chose Us?</p></div>
+                <p className=' text-center text-smallTextPhone md:text-smallText'>Why Chose Us?</p></div>
                 <div className='w-full mb-[2vw] md:mb-[.5vw]'>
                 <h1 className='text-h4TextPhone md:text-h1Text   leading-[120%] font-bold dark:text-white  '>Hey!!<br/>We are <span className='text-orangeChosen'>Edurizon</span></h1>
                 </div>

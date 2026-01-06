@@ -64,7 +64,7 @@ const HeroSection = () => {
         </div>
 
           <div className='z-[2] flex flex-col items-center justify-center mt-[41vw] md:mt-[0vw]'>
-            <div className='flex flex-col justify-center bg-paleOrangeChosen mx-auto mb-[8vw] md:mb-[1.75vw] text-black font-light text-tinyTextPhone md:text-tinyText h-[6vw] md:h-[1.75vw] w-[60vw] md:w-[20vw] rounded-[2.75vw]'><p className=' px-[3vw] md:px-[1.5vw]'>Explore best study abroad facilities</p></div>
+            {/* <div className='flex flex-col justify-center bg-paleOrangeChosen mx-auto mb-[8vw] md:mb-[1.75vw] text-black font-light text-tinyTextPhone md:text-tinyText h-[6vw] md:h-[1.75vw] w-[60vw] md:w-[20vw] rounded-[2.75vw]'><p className=' px-[3vw] md:px-[1.5vw]'>Explore best study abroad facilities</p></div> */}
             <div className='w-[88vw] md:w-[58vw] mb-[4vw] md:mb-[1.5vw]'>
               <h1 className="text-[8vw]  sm:text-[6vw] md:text-[3.5vw] leading-[120%] dark:text-white font-bold ">Unlock Your<br className='md:hidden'/> Study Abroad Dream Get Expert <span className='text-orangeChosen'>Guidance Today!</span></h1>
           </div>
@@ -78,11 +78,11 @@ const HeroSection = () => {
               <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent3} />
               <Image className="w-[8.5vw] h-[8.5vw] md:w-[2.594vw] md:h-[2.594vw] relative rounded-[50%]  object-cover ml-[-2.75vw] md:ml-[-0.813vw]" alt="" src={DummyStudent4} />
           </div>
-            <span className='text-brownChosen dark:text-white text-smallTextPhone md:text-smallText whitespace-nowrap font-semibold'>Trusted by 5k+ Students</span>
+            <span className='text-brownChosen dark:text-white text-smallTextPhone md:text-smallText whitespace-nowrap font-semibold'>Trusted by 25k+ Students</span>
           </div>
 
 
-            <div className='flex flex-col md:flex-row w-[54vw] md:w-[27.4375vw] gap-[4vw] md:gap-[1vw]'>
+            <div className='flex flex-col md:flex-row w-[54vw] md:w-[27.4375vw] gap-[4vw] md:gap-[.5vw]'>
               <TransitionLink href='/study-destinations?category=viewAll' >
               <IconButton  btnTitle={"Explore Opportunities"} className='text-smallTextPhone md:text-smallText dark:text-white' btnHeightPhone={11} btnWidthPhone={52.5} btnRadiusPhone={17.5} paddingPhone={1.5} iconWidthPhone={8} btnHeight={3} btnWidth={13.1875} btnRadius={6.25} padding={0.375} iconWidth={1.9125} image={"/assets/Images/Icons/NorthEastIcon.svg"}/>
               </TransitionLink>

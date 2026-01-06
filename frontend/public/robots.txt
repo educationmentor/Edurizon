@@ -1,4 +1,8 @@
-User-agent:*
-Allow:/
+# START YOAST BLOCK
+# -------------------------
+User-agent: *
+Disallow:
 
-Sitemap:http://localhost:3000/api/my-sitemap
+Sitemap: https://www.edurizon.in/sitemap.xml
+# -------------------------
+# END YOAST BLOCK

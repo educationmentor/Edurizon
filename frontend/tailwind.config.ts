@@ -64,6 +64,7 @@ module.exports = {
 			adminBorderFocusedChosen:"#4B5768",
 			adminBorderChosen:"#D0D5DD",
 			adminBgChosen:"#191919",
+			adminBgChosen2:"#F4F5F7",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

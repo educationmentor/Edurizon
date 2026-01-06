@@ -74,7 +74,9 @@ const Login = () => {
                         </div>
                         <div className=' md:w-[30vw]'>
                           <p className='text-regularTextPhone md:text-regularText text-dimgrayChosen dark:text-gray-300 text-center'>
-                            Don't have an account? <TransitionLink href='/signup'><span className='text-orangeChosen'>SignUp </span></TransitionLink> | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
+                            Don't have an account? <TransitionLink href='/signup'><span className='text-orangeChosen'>SignUp </span></TransitionLink>
+                            | <TransitionLink href='/registered-student-login'><span className='text-orangeChosen'>Registered Student</span></TransitionLink>
+                             | <TransitionLink href='/'><span className='text-orangeChosen'>Home</span></TransitionLink>
                           </p>
                         </div>
                       </div>
