@@ -567,7 +567,7 @@ const NewPage = () => {
            {/* Geogia Fees */}
            <section className="mx-[6vw] md:mx-[12.5vw] pb-[6vw] md:pb-[2vw] flex flex-col gap-[4vw] md:gap-[1vw]">
            <h3 className="text-h5TextPhone md:text-h3Text font-bold text-center leading-[120%]">Fees for MBBS in Georgia</h3>
-           <p className="text-center text-smallTextPhone md:text-regularText opacity-80 ">One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students</p>
+           <p className="text-center text-smallTextPhone md:text-regularText opacity-80 ">One of the biggest attractions of Georgia is the affordable cost of MBBS in Georgia. The MBBS in Georgia fee structure is designed to be affordable & reasonable for international students. Georgia is known for its high-quality medical education and globally accepted degrees offered by reputed institutions. Top Medical Universities in Georgia provide English-medium MBBS programs, modern infrastructure, and excellent clinical exposure, attracting students from India and other countries.</p>
            <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
                 <thead className="text-smallTextPhone md:text-regularText text-center font-bold align-top bg-linenChosen">
                     <tr>
