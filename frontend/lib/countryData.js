@@ -56,36 +56,25 @@ const RussiaData={
             "Cities like Kazan and Moscow host thriving Indian student communities, celebrating festivals like Diwali and ...",
         },
         ],
-
-    // countryCostData:{
-    //     countryTuitionFee:"₹21-39 lakhs",
-    //     indiaTuitionFee:"₹90 lakhs-1.5 crore",
-    //     countryHotelFee:"₹3-3.5 lakhs",
-    //     indiaHotelFee:"₹15-20 lakhs",
-    //     countryTotal:"₹24-42.5 lakhs",
-    //     indiaTotal:"₹1.05-1.7 crore",
-    //     description:"Savings: Up to 70% lower than Indian private colleges, with no hidden donations."},
-
-
         countrySpecificSection3:{
             data:'For Indian students, choosing the right university is critical in ensuring their medical degree is recognized in India as well as abroad. Russia boasts 70+ NMC approved medical colleges in Russia, but only a handful stand out for their academic excellence, infrastructure, and Indian student - friendly policies. Below is a curated list of institutions renowned for their high FMGE/NEXT pass rates, affordable fees, and robust support systems for international students:'
         },
         // countrySpecificSection2:true,
         countryUniversities:[
-        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"5,40,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
+        {universityName:"Kazan Federal University",location:"Kazan",annualFees:"5,94,000 ",href:"/study-destinations/study-mbbs-in-russia/kazan-federal-university",highlights:["68.42% FMGE Pass Rate (2024)","200+ years of legacy; Nobel laureate alumni","Advanced AI-driven labs & 15+ hospital tie-ups","Indian mess & cultural festivals"]},
         // {universityName:"Crimea Federal University",location:"Simferopol",annualFees:"₹3.5-4.5 Lakhs", gloablRanking:"WHO-Listed",highlights:["Lowest fees in Europe","Tropical climate (5°C winters)","Focus on tropical disease research","1,500+ international students"]},
-        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"3,70,000",href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university", highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
+        {universityName:"Bashkir State Medical University",location:"Ufa",annualFees:"4,90,080",href:"/study-destinations/study-mbbs-in-russia/bashkir-medical-university", highlights:["30.88% FMGE Pass Rate (2024)","Robotic surgery center & cardiology research hub","90+ nationalities on campus","Direct flights from India"]},
         // {universityName:"Perm State Medical University",location:"Perm",annualFees:"₹4-5 Lakhs", gloablRanking:"NMC-Approved",highlights:["1:5 cadaver ratio (3D dissection labs)","Internships at Apollo Hospitals (India)","Hindi-speaking staff","Free airport pickup"]},
-        {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"$6200(with hostel)",href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university", highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
-        {universityName:"Petrozavodsk State University",location:"Petrozav",annualFees:"2,85,000",href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university",  highlights:["Petrozavodsk State University fees are low ","Infrastructure of Petrozavodsk is world class.","6 years course duration including one year of internship"]},
-        {universityName:"Immanuel Kant Baltic Federal University",location:"Kaliningrad Oblast",annualFees:"3,16,000",href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university",  highlights:["The university offers a wide range of programs, including humanities, social sciences, and natural sciences. ","It is known for its research on Baltic Sea regional studies and international relations."]},
+        {universityName:"Orenburg State Medical University",location:"Orenburg",annualFees:"USD 6000(with hostel)",href:"/study-destinations/study-mbbs-in-russia/orenburg-medical-university", highlights:["Telemedicine & rural healthcare curriculum","₹12,000/month living costs","Free Russian language classes","Safe, student-friendly city"]},
+        {universityName:"Petrozavodsk State University",location:"Petrozav",annualFees:"3,13,000 ",href:"/study-destinations/study-mbbs-in-russia/petrozavodsk-state-university",  highlights:["Petrozavodsk State University fees are low ","Infrastructure of Petrozavodsk is world class.","6 years course duration including one year of internship"]},
+        {universityName:"Immanuel Kant Baltic Federal University",location:"Kaliningrad Oblast",annualFees:"3,15,700",href:"/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university",  highlights:["The university offers a wide range of programs, including humanities, social sciences, and natural sciences. ","It is known for its research on Baltic Sea regional studies and international relations."]},
         {universityName:"Krasnoyarsk State Medical University",location:"Krasnoyarsk ",annualFees:"3,19,000",href:"/study-destinations/study-mbbs-in-russia/krasnoyarsk-state-medical-university",  highlights:["The university offers undergraduate, postgraduate, and doctoral programs in medicine and health sciences.","KSMU has a notable research focus on clinical medicine, including surgery, oncology, and internal diseases.","The university has a diverse student body, with international students from over 40 countries."]},
-        {universityName:"National Research Nuclear University, MEPHI",location:"Moscow",annualFees:"5,92,600 (Moscow Branch), 5,10,000(Obninsk branch)",href:"/study-destinations/study-mbbs-in-russia/national-research-nuclear-university", highlights:["MEPhI is renowned for its research in nuclear physics, nuclear power, and information technology.","MEPhI collaborates with major research institutions, including Rosatom, the Russian nuclear energy corporation."]},
-        {universityName:"North Western State Medical University",location:"St. Petersburg",annualFees:"4,40,000",href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university",   highlights:["It is recognized for its research in clinical medicine, public health, and medical technology ","The university has a strong focus on international cooperation and attracts students from various countries, especially for its medical and dental programs."]},
-        {universityName:"Northern State Medical University",location:"Arkhangelsk Oblast",annualFees:"$6,500(with Hostel) ",href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university",   highlights:["The university is known for its strong emphasis on clinical training, with multiple affiliated hospitals and medical centers.","It has a diverse student body, with international students from countries across the world, particularly in its medical courses."]},
-        {universityName:"Tambov State University",location:"Tambov",annualFees:"3,50,000",href:"/study-destinations/study-mbbs-in-russia/tambov-state-university",  highlights:["The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology.","The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology."]},
-        {universityName:"Ulyanovsk State University",location:"Ulyanovsk",annualFees:"3,00,000",href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university",  highlights:["USU supports a vibrant student life, offering various extracurricular activities, including cultural and sports events.","The university has modern facilities, including research labs, libraries, and state-of-the-art technologies, to enhance the educational experience."]},
-        {universityName:"Ural State Medical University",location:"Yekaterinburg",annualFees:"2,60,000",href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university", highlights:["It is one of the leading medical universities in the Ural region, offering a wide range of programs in medicine, dentistry, pharmacy, and public health.","USMU has a significant international presence, with students from many countries enrolled in its medical programs."]},
+        {universityName:"National Research Nuclear University, MEPHI",location:"Moscow",annualFees:"6,57,360",href:"/study-destinations/study-mbbs-in-russia/national-research-nuclear-university", highlights:["MEPhI is renowned for its research in nuclear physics, nuclear power, and information technology.","MEPhI collaborates with major research institutions, including Rosatom, the Russian nuclear energy corporation."]},
+        {universityName:"North Western State Medical University",location:"St. Petersburg",annualFees:"4,90,000",href:"/study-destinations/study-mbbs-in-russia/north-western-state-medical-university",   highlights:["It is recognized for its research in clinical medicine, public health, and medical technology ","The university has a strong focus on international cooperation and attracts students from various countries, especially for its medical and dental programs."]},
+        {universityName:"Northern State Medical University",location:"Arkhangelsk Oblast",annualFees:"3,66,000(with Hostel) ",href:"/study-destinations/study-mbbs-in-russia/northern-state-medical-university",   highlights:["The university is known for its strong emphasis on clinical training, with multiple affiliated hospitals and medical centers.","It has a diverse student body, with international students from countries across the world, particularly in its medical courses."]},
+        {universityName:"Tambov State University",location:"Tambov",annualFees:"3,85,000",href:"/study-destinations/study-mbbs-in-russia/tambov-state-university",  highlights:["The university has a strong focus on research, particularly in the fields of mathematics, physics, and information technology."]},
+        {universityName:"Ulyanovsk State University",location:"Ulyanovsk",annualFees:"3,50,000",href:"/study-destinations/study-mbbs-in-russia/ulyanovsk-state-university",  highlights:["USU supports a vibrant student life, offering various extracurricular activities, including cultural and sports events.","The university has modern facilities, including research labs, libraries, and state-of-the-art technologies, to enhance the educational experience."]},
+        {universityName:"Ural State Medical University",location:"Yekaterinburg",annualFees:"3,00,000",href:"/study-destinations/study-mbbs-in-russia/ural-state-medical-university", highlights:["It is one of the leading medical universities in the Ural region, offering a wide range of programs in medicine, dentistry, pharmacy, and public health.","USMU has a significant international presence, with students from many countries enrolled in its medical programs."]},
     ],
     // countryFeeStructure:{
     //     title:"Fee Structure",
@@ -105,16 +94,82 @@ const RussiaData={
         [["Required Documents"],["Class 10 & 12 Mark Sheets","NEET Scorecard .","Valid Passport","HIV Report"],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
 
-    // whyChoseUniversity:{
-    //     title:"Why Choose These Universities To Study MBBS in Russia?",
-    //     content:[["Budget-Friendly Options","> Orenburg: Ideal for students seeking fees under ₹2.5 Lakhs/year.","> Bashkir & Perm: Mid-range fees with high FMGE pass rates."],
-    //     ["Specializations","> Kazan: Research & AI-driven medical training.","> Bashkir: Cardiology & robotic surgery.","> Orenburg: Rural healthcare & telemedicine."],
-    //     ["Indian Student Support","> All universities provide 24/7 security, anti-ragging policies, and Indian student communities.","> Kazan & Bashkir offer Indian mess facilities."]],
-    //     imageURL:"/assets/Images/CountryBlogs/Russia2.webp"
-    // },
     admissionProcess:{
         title:"Your MBBS Journey to Russia Made Simple",
-    }
+    },
+    videoData:[
+        {
+          id: 1,
+          title: 'Delhi Students Review | Study MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '27K views',
+          time: '1 months ago',
+          duration: '24:45',
+          thumbnail: 'https://img.youtube.com/vi/ufv7rVtxZgI/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=ufv7rVtxZgI',
+        },
+        {
+          id: 2,
+          title: "UP Students Review about MBBS ABROAD",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/by0AhfIJ3JQ/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=by0AhfIJ3JQ',
+        },
+        {
+          id: 3,
+          title: 'Why Edurizon is best MBBS Abroad Consultant ? Bihar Students Review',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/3a6NCxM8F0M/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=3a6NCxM8F0M',
+        },
+        {
+          id: 4,
+          title: "West Bengal Students Review | Study MBBS Abroad",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/q48PbIuHhRU/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=q48PbIuHhRU',
+        },
+        {
+          id: 5,
+          title: 'West Bengal Students Review | Study MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/5Da1bRZzhXE/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=5Da1bRZzhXE',
+        },
+        {
+          id: 6,
+          title: "MBBS Abroad for Indian Students | Haryana Students Share Honest Reviews",
+          channel: 'Edurizon Pvt Ltd',
+          views: '10M views',
+          time: '3 years ago',
+          duration: '3:03',
+          thumbnail: 'https://img.youtube.com/vi/MiJMbsJ8Efg/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=MiJMbsJ8Efg',
+        },
+        {
+          id: 7,
+          title: 'Assam Students Review MBBS Abroad',
+          channel: 'Edurizon Pvt Ltd',
+          views: '44K views',
+          time: '2 months ago',
+          duration: '18:32',
+          thumbnail: 'https://img.youtube.com/vi/3hyKvhTFucg/maxresdefault.jpg',
+          link: 'https://www.youtube.com/watch?v=3hyKvhTFucg',
+          
+        },
+      ]
     
     }
 

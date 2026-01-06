@@ -31,7 +31,6 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
     const [resendTimer, setResendTimer] = useState(0);
 
     const [screenWidth, setScreenWidth] = useState<number | null>(null);
-    console.log(otp)
     useEffect(() => {
       // Set initial width
       setScreenWidth(window.innerWidth);
@@ -228,7 +227,6 @@ const OtpLogin: React.FC<OtpLoginProps> = ({ isRegistration = false, name = '', 
             setIsLoading(false);
         }
     };
-    console.log("")
 
     return (
         <div className='flex flex-col gap-[3vw] md:gap-[1.5vw]'>

@@ -2,12 +2,13 @@ import RelatedCountries from "@/components/studyDestinationComponents/relatedCou
 import React from "react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
 
 export const NewPage = () => {
 
     return(
-        <div className="text-smallTextPhone md:text-smallText">
-            <section className="country-inner-banner">
+        <div className="text-smallTextPhone md:text-smallText text-black pt-[15vw]  md:pt-[4vw]">
+            <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -22,13 +23,13 @@ export const NewPage = () => {
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
             <div className="container">
                 <div className="row g-0">
                 <div className="immigrate-bg">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="flex justify-center items-center overflow-hidden  h-[37.25vw]">
-                                    <Image alt="hi" src="/assets/Images/slider/b-5.jpeg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
+                                    <Image alt="hi" src="/assets/Images/slider/bangladesh.jpg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
                                 </div>
                     </div>
                     <div className="row">
@@ -64,7 +65,7 @@ export const NewPage = () => {
             </section>
 
 
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row"> 
@@ -109,7 +110,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">  
@@ -147,7 +148,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -206,7 +207,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -784,7 +785,7 @@ export const NewPage = () => {
   </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -829,7 +830,7 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
       <div className="row">
@@ -863,7 +864,16 @@ export const NewPage = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+      {/* Authorization Slider */}
+      <AuthorizationSlider 
+        images={[
+          '/assets/Images/authorization/bangladesh/Bangaldesh1.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh2.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh3.jpeg',
+          '/assets/Images/authorization/bangladesh/Bangaldesh4.jpg',
+        ]}
+      />
+<section className="inner-page-bg dark:bg-black">
           <div className="container">
             <div className="row g-0">
               <div className="immigrate-bg">

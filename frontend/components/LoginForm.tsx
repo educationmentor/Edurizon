@@ -37,7 +37,6 @@ const LoginForm = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log('Registering:', { name, username, email, phone });
       const response = await axios.post(`${baseUrl}/api/users/register`, {
         name,
         username,
@@ -46,7 +45,6 @@ const LoginForm = () => {
         password,
         role: 'counselor',
       });
-      console.log('Registration successful:', response.data);
       localStorage.setItem('token', response.data.token);
       toast.success('Signup successful!');
       router.push('/counselor/dashboard'); // Redirect to dashboard

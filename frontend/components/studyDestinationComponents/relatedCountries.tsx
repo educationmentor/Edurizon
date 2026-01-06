@@ -2,7 +2,7 @@ import { TransitionLink } from '@/utils/TransitionLink';
 import Image from 'next/image';
 const RelatedCountries=()=>{
     return(
-        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 overflow-hidden">
+        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 overflow-hidden ">
 
   <div className="heading">
 
@@ -18,7 +18,7 @@ const RelatedCountries=()=>{
             <Image width={100} height={100} src="/assets/Images/country-flag/indian-flag.png" className="img-fluid" alt="MBBS in India" title="MBBS in India" />
           </div>
           <h4>MBBS in India</h4>
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
         </TransitionLink>
       </div>
     </div>
@@ -30,7 +30,7 @@ const RelatedCountries=()=>{
             <Image width={100} height={100} src="/assets/Images/country-flag/russia.png" className="img-fluid" alt="MBBS in Russia" title="MBBS in Russia" />
           </div>
           <h4>MBBS in Russia</h4>
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
         </TransitionLink>
       </div>
     </div>
@@ -38,8 +38,9 @@ const RelatedCountries=()=>{
     <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 mx-[1vw]">
 
       <div className="related-countries-detail">
+        <TransitionLink href="/study-destinations/study-mbbs-in-bangladesh">
 
-        <a href="mbbs-in-bangladesh.php">
+
 
           <div className="related-countries-detail-img">
 
@@ -49,9 +50,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in Bangladesh</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -61,7 +62,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-china.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-china">
 
           <div className="related-countries-detail-img">
 
@@ -71,9 +72,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in China</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -83,7 +84,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-kazakhstan.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-kazakhstan">
 
           <div className="related-countries-detail-img">
 
@@ -93,9 +94,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in Kazakhstan</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -105,7 +106,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-georgia.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-georgia">
 
           <div className="related-countries-detail-img">
 
@@ -115,9 +116,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in Georgia</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -127,7 +128,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="https://edurizon.in/mbbs-in-uzbekistan.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-uzbekistan">
 
           <div className="related-countries-detail-img">
 
@@ -137,9 +138,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in Uzbekistan</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -149,7 +150,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="https://edurizon.in/study-in-germany.php">
+        <TransitionLink href="/study-destinations/study-in-germany">
 
           <div className="related-countries-detail-img">
 
@@ -159,9 +160,9 @@ const RelatedCountries=()=>{
 
           <h4>Study in Germany</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -171,7 +172,7 @@ const RelatedCountries=()=>{
 
       <div className="related-countries-detail">
 
-        <a href="mbbs-in-nepal.php">
+        <TransitionLink href="/study-destinations/study-mbbs-in-nepal">
 
           <div className="related-countries-detail-img">
 
@@ -181,9 +182,9 @@ const RelatedCountries=()=>{
 
           <h4>MBBS in Nepal</h4>
 
-          <p>Read More</p>
+          <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
-        </a>
+        </TransitionLink>
 
       </div>
 
@@ -204,7 +205,7 @@ const RelatedCountries=()=>{
 
     <h4>MBBS in Ukriane</h4>
 
-    <p>Read More</p>
+    <p className='dark:text-black dark:hover:text-orange-400 duration-300 transition-colors ease-in-out'>Read More</p>
 
   </TransitionLink>
 
@@ -212,11 +213,11 @@ const RelatedCountries=()=>{
 
 </div>
 
-<div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 w-[380px] mx-[1vw]">
+{/* <div className="col-xl-4 col-lg-4 col-md-6 col-6 mb-4 mb-md-4 w-[380px] mx-[1vw]">
 
 <div className="related-countries-detail">
 
-  <a href="mbbs-in-egypt.php">
+  <TransitionLink href="/study-destinations/study-mbbs-in-egypt">
 
     <div className="related-countries-detail-img">
 
@@ -232,7 +233,7 @@ const RelatedCountries=()=>{
 
 </div>
 
-</div>
+</div> */}
   </div>
 
 </div>

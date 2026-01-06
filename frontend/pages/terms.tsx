@@ -38,7 +38,7 @@ const termsAndConditions = [
 
 const TermsAndConditions = () => {
     return (
-        <div className="mx-[7.5vw] mt-[6.25vw] mb-[20vw] text-black dark:text-white">
+        <div className="mx-[7.5vw] pt-[20vw] md:pt-[7.25vw] mb-[20vw] text-black dark:text-white">
             <div className="w-full pb-[2.5vw] border-b-[.25vw] border-orangeChosen">
                 <p className="text-center text-regularText w-full leading-[150%] mb-[.625vw] inline-block ">
                 {"Home / "}

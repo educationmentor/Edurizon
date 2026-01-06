@@ -78,7 +78,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({
         if (counselorData) {
           const counselor = JSON.parse(counselorData);
           
-          console.log('Counselor data from localStorage:', counselor);
           
           const email = 
             counselor.email || 

@@ -32,6 +32,6 @@ export const TransitionLink = ({ href, children,...props }:TransitionLinkProps)=
 
 
 
-    return <Link onClick={handleTransition}
+    return <Link className="dark:text-white dark:hover:text-orange-400 transition-colors duration-300 ease-in-out" onClick={handleTransition}
      href={href} {...props}> {children} </Link>
 } 

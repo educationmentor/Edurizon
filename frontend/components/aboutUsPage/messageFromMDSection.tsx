@@ -12,7 +12,7 @@ const MessageFromMDSection = () => {
                                 <h4 className="text-h4TextPhone md:text-h4Text font-bold " >Message from the M.D. </h4>
                         </div>
                         <p className="text-smallTextPhone md:text-regularText leading-[150%]">
-                        At Edurizon Pvt Ltd, we take immense pride in guiding students toward their dreams with transparency in education consultancy and a commitment to quality. Our 17+ years of experience have taught us that success comes from a blend of personalized guidance and unwavering support.<br/>
+                        At Edurizon Pvt Ltd, we take immense pride in guiding students toward their dreams with transparency in education consultancy and a commitment to quality. Our 19+ years of experience have taught us that success comes from a blend of personalized guidance and unwavering support.<br/>
                         <br/>
                         Whether you aim to pursue MBBS in Russia, engineering, or other study-abroad programs, we ensure every step of your journey is seamless. From pre-admission counseling to post-MBBS career guidance, we are here to help you thrive. Thank you for trusting Edurizon as your trusted partner in higher education."<br/>
                         <br/>

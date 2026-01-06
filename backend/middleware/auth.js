@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const { RegisteredStudent } = require('../models/registeredUserModel');
 
 const auth = async (req, res, next) => {
   try {
@@ -24,10 +25,16 @@ const auth = async (req, res, next) => {
     try {
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log('Decoded token:', decoded);
       
-      // Get user from database
-      const user = await User.findById(decoded.id).select('-password');
+      // Get user from database - check both User and RegisteredStudent models
+      let user = await User.findById(decoded.id).select('-password');
+      let userModel = 'User';
+      
+      if (!user) {
+        user = await RegisteredStudent.findById(decoded.id).select('-password');
+        userModel = 'RegisteredStudent';
+      }
+      
       if (!user) {
         return res.status(401).json({ 
           success: false,

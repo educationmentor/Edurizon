@@ -13,7 +13,7 @@ const quickLinks = [{ name: "Home", href: "/" },
   { name: "Contact Us", href: "https://wa.me/919873381377?" },];
 const countries = [ { name: "Russia", href: "/study-destinations/study-mbbs-in-russia" },
   { name: "China", href: "/study-destinations/study-mbbs-in-china" },
-  { name: "Germany", href: "/study-destinations/study-mbbs-in-germany" },
+  { name: "Germany", href: "/study-destinations/study-in-germany" },
   { name: "Georgia", href: "/study-destinations/study-mbbs-in-georgia" },
   { name: "Kazakhstan", href: "/study-destinations/study-mbbs-in-kazakhstan" },
   { name: "Bangladesh", href: "/study-destinations/study-mbbs-in-bangladesh" },
@@ -43,7 +43,7 @@ const Footer = () => {
             <div className="flex flex-row gap-[2vw] md:gap-[1vw]">
                 <Image width={40} height={40} className='h-[5vw] md:h-[1.25vw] w-[3.5vw] md:w-[.875vw]' src="/assets/Images/Icons/locationIcon.svg" alt="Location Icon" />
                 <div className="text-smallTextPhone md:text-smallText leading-[150%]">
-              <p className="mb-2">Pocket 111, 113, 115 1st Floor, Best Arcade Market, Canara Bank, Near K.M. Chowk, Sector-12 Dwarka, New Delhi - 110075</p>
+              <p className="mb-2 dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in-out">Pocket 111, 113, 115 1st Floor, Best Arcade Market, Canara Bank, Near K.M. Chowk, Sector-12 Dwarka, New Delhi - 110075</p>
               
             </div>
             </div>

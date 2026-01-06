@@ -48,7 +48,7 @@ const VideoCarousel = ({ videoData }: { videoData: Video[] }) => {
                   />
                   </div>
                 <div className="mt-[2vw] md:mt-[1vw]">
-                  <p className="font-semibold line-clamp-1 text-smallTextPhone md:text-regularText">{video.title}</p>
+                  <p className="font-semibold line-clamp-1 text-smallTextPhone md:text-regularText dark:text-white">{video.title}</p>
                   <p className="text-gray-600 text-tinyTextPhone md:text-tinyText">{video.channel}</p>
                 </div>
               </a>

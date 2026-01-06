@@ -1,10 +1,18 @@
 import Breadcrumbs from "@/components/Breadcumbs";
 import RelatedCountries from "@/components/studyDestinationComponents/relatedCountries";
+import Head from "next/head";
 import Image from "next/image";
 const NewPage=()=>{
     return(
-        <div className="text-smallTextPhone md:text-smallText">
-            <section className="country-inner-banner">
+        <div className="text-smallTextPhone md:text-smallText text-black pt-[15vw]  md:pt-[4vw]">
+            <Head>
+                <title>Study in Australia</title>
+                <meta name="description" content="Study in Australia" />
+                <meta name="keywords" content="Study in Australia" />
+                <meta name="author" content="Edurizon" />
+                <link rel="canonical" href="https://www.edurizon.in/study-in-australia" />
+            </Head>
+            <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -19,13 +27,13 @@ const NewPage=()=>{
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
             <div className="container">
                 <div className="row g-0">
                 <div className="immigrate-bg">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="flex justify-center items-center overflow-hidden  h-[37.25vw]">
-                                    <Image alt="hi" src="/assets/Images/slider/australia-slider.jpg"  className=" overflow-hidden contain object-cover h-full w-full" width={1000} height={1000} />
+                                    <Image alt="hi" src="/assets/Images/study-in-australia/australiaHeader.jpg"  className=" overflow-hidden contain object-cover h-full w-full" width={1920} height={1080} />
                                 </div>
                     </div>
                 </div>
@@ -33,7 +41,7 @@ const NewPage=()=>{
             </div>
             </section>
 
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -123,7 +131,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -183,7 +191,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -257,7 +265,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black ">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -302,7 +310,7 @@ const NewPage=()=>{
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -380,7 +388,7 @@ const NewPage=()=>{
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -585,7 +593,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -654,7 +662,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -689,7 +697,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -729,7 +737,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -750,7 +758,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -906,7 +914,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -1052,7 +1060,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -1227,7 +1235,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -1290,7 +1298,7 @@ const NewPage=()=>{
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -1342,7 +1350,7 @@ const NewPage=()=>{
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -1390,7 +1398,7 @@ const NewPage=()=>{
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">

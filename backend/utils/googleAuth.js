@@ -19,10 +19,8 @@ const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 // Helper function to refresh token when needed
 const refreshGoogleToken = async () => {
   try {
-    console.log('[GOOGLE AUTH] Refreshing access token...');
     const { credentials } = await oauth2Client.refreshAccessToken();
     oauth2Client.setCredentials(credentials);
-    console.log('[GOOGLE AUTH] Token refreshed successfully');
     return credentials.access_token;
   } catch (error) {
     console.error('[GOOGLE AUTH] Failed to refresh token:', error.message);

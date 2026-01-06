@@ -1,12 +1,14 @@
 import React from 'react'
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import RelatedVideos from '@/components/videoSlider';
+import Head from 'next/head';
 
 const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 3,50,000 / Year",
+      label: "Ruble 3,85,000 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -15,20 +17,115 @@ const services = [
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "Country Rank",
-      label: "145",
+      text: "",
+      label: "Highest FMGE Ratio",
     },
     {
-      icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "QS World Rank",
-      label: "4844",
+      icon: "/assets/Images/Icons/TieUpsIcon.svg",
+      text: "",
+      label: "Biggest Hospital in the region",
     },
   ];
+  const videoData=[
+    {
+      id: 0,
+      title: "You won't find better university than this under 30 lakhs in Russia",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/xm14Ck8YilA/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=xm14Ck8YilA',
+    },
+    {
+      id: 1,
+      title: "Tambov State University Russia | Best Budget-Friendly MBBS Option for Indian Students",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/avYg0ak9Qms/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=avYg0ak9Qms',
+    },
+    {
+      id: 2,
+      title: "Tambov State University || The Best University Under 24 Lakhs | MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/0pfplVt8M08/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=0pfplVt8M08',
+    },
+    {
+      id: 3,
+      title: "Hostel of Tambov State University || MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/G3pOwOGY4DI/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=G3pOwOGY4DI',
+    },
+    {
+      id: 4,
+      title: "Introducing one of the leading University of Russia || Tambov State University || MBBS IN RUSSIA",
+      channel: 'Edurizon Pvt Ltd',
+      views: '44K views',
+      time: '2 months ago',
+      duration: '18:32',
+      thumbnail: 'https://img.youtube.com/vi/r_lZ1U3oIvY/maxresdefault.jpg',
+      link: 'https://www.youtube.com/watch?v=r_lZ1U3oIvY',
+    },
+  
+  ]
+
 
 const NewPage = () => {
   return (
-    <div className="text-regularTextPhone md:text-regularText">
-        <div className="relative h-auto w-full">
+    <>
+        <Head>
+            <title>Tambov State Medical University in Russia, MBBS Fees | Edurizon
+</title>
+            <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+            <meta name="description" content="Edurizon offers admission to Tambov State Medical University in Russia with quality medical education and low MBBS fees.
+" />
+            <meta name="author" content="edurizon" />
+            <meta name="robots" content="index, follow"/>
+            <meta name="DC.title" content="MBBS In Russia" />
+            <meta name="geo.region" content="IN-DL" />
+            <meta name="geo.placename" content="Dwarka" />
+            <meta name="geo.position" content="22.351115;78.667743" />
+            <meta name="ICBM" content="22.351115, 78.667743" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="Tambov State University - MBBS in Russia Low Cost – Indian Students Admission" />
+            <meta property="og:description" content="Visit https://www.edurizon.in/study-destinations/study-mbbs-in-russia/tambov-state-university for clear details on MBBS in Russia cost, admission steps, eligibility & how to get scholarships." />
+            <meta property="og:url" content="https://www.edurizon.in/" />
+            <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@edurizon" />
+            <meta name="twitter:title" content="Tambov State University - MBBS in Russia Low Cost – Indian Students Admission" />
+            <meta name="twitter:description" content="Visit https://www.edurizon.in/study-destinations/study-mbbs-in-russia/tambov-state-university for clear details on MBBS in Russia cost, admission steps, eligibility & how to get scholarships." />
+            <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+            <meta name="twitter:image:alt" content="MBBS in Russia" />
+            <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/tambov-state-university"/>
+            <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/tambov-state-university" hrefLang="en-in"/>
+
+            {/* Google tag (gtag.js) */}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-9JDZZKPGL8');
+                    `,
+                }}
+            />
+        </Head>
+        <div className="text-regularTextPhone md:text-regularText text-black">
+        <div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/TambovStateUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -53,7 +150,7 @@ const NewPage = () => {
             </div>
         </div>
         </div>
-        <section className="inner-page-bg mb-4">
+        <section className="inner-page-bg mb-4 dark:bg-black">
   <div className="container">
     <div className="row">
       <div className="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -64,21 +161,21 @@ const NewPage = () => {
                 <h4 className="text-h5TextPhone md:text-h5Text">History</h4>
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
-              <p>
+              <p className='text-black'>
                 Tambov State University named after G.R. Derzhavin with 100 years of history is a modern educational and research center based on the best practices of a traditional university. Sometimes referred to as G. R. Derzhavin State
                 University, it is named in honor of the Russian poet and statesman, Gavrila Romanovich Derzhavin, and was formed in 1994 when the Tambov State Pedagogical Institute and Tambov State Institute of Culture were merged into a
                 single institution.
               </p>
-              <p>
+              <p className='text-black'>
                 Tambov State University went through extreme progress transformations. Tambov State University attracts numerous national and international students pursuing higher education due to its progressive and accommodating nature.
                 The Tambov State University has world className infrastructure and urban lifestyle gives young students the opportunity to mix leisure with education. This includes being involved in entertaining events like festivals and sports
                 competitions. Sports Complexes and museums are always accessible to the university students to help them take their mind off of books and to experience the rich Russian culture. Tambov State University also have Volleyball,
                 football and other teams take part in inter university sports competitions across the nation.
               </p>
-              <p>
+              <p className='text-black'>
                 The Tambov state University is one of the best state University in and around the Russian federation which not only adds to the rapid development of the city but also provides high quality specialists. The Tambov State
                 University has more than 100 specialists in various fields ranging from medicine, computer science, nanotechnology to economics, arts etc.
-              </p>
+              </p >
 
               <div className="heading">
                 <h4 className="text-h5TextPhone md:text-h5Text pt-[2vw] md:pt-[1vw]">The Tambov State University structure is divided into 15 segments which comprise of:-</h4>
@@ -94,7 +191,7 @@ const NewPage = () => {
                 <h4 className="text-h5TextPhone md:text-h5Text pt-[2vw] md:pt-[1vw]">Tambov City</h4>
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
-              <p>
+              <p className='text-black'>
                 Tambov is a city and the administrative center of Tambov Oblast, central Russia, at the confluence of the Tsna and Studenents rivers, about 418 km south-southeast of Moscow. With a population of 261,803 as of 2021, Tambov is
                 the largest city, and historical center, of the Tambov Oblast as a whole.
               </p>
@@ -170,7 +267,7 @@ const NewPage = () => {
                     </tr>
                     <tr>
                       <th scope="row">Photos in Instagram</th>
-                      <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                      <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                     </tr>
                     <tr>
                       <th scope="row">University &amp; Review videos</th>
@@ -235,7 +332,7 @@ const NewPage = () => {
                 <h5>MBSS in Russia – MBBS in Tambov State University</h5>
               </div>
               <ul className="points-two">
-                <li>Tuition + Hostel + Biometric Fees – 3,50,000 Ruble.</li>
+                <li>Tuition + Hostel + Biometric Fees – 3,85,000 Ruble.</li>
                 <li>Charges for Visa renewal, medical insurance, medical checkup etc. will be nominal and taken separately by the Tambov State University</li>
               </ul>
               <div className="heading">
@@ -359,8 +456,10 @@ const NewPage = () => {
     </div>
   </div>
 </section>
+<RelatedVideos videoData={videoData}/>
 <div className='h-[4vw]'/>
-    </div>
+        </div>
+    </>
   )
 }
 

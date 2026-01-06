@@ -12,13 +12,16 @@ const {
   getConsultationsByEmail,
   scheduleMeeting,
   rejectRequest,
-  getStudentNotifications
+  getStudentNotifications,
+  updateCounsellor,
+  getStudentRequestsById
 } = require('../controllers/consultationController');
 const auth = require('../middleware/auth');
 
 // Public routes
 router.post('/request', createConsultationRequest);
 router.get('/student', auth, getStudentRequests);
+router.get('/student/:studentId', auth, getStudentRequestsById);
 router.get('/notifications', auth, getStudentNotifications);
 
 // Counselor routes (protected)
@@ -29,5 +32,6 @@ router.put('/reject/:requestId', protect, rejectRequest);
 router.put('/schedule/:requestId', protect, scheduleMeeting);
 router.get('/', protect, getConsultations);
 router.put('/:consultationId', protect, updateConsultation);
+router.put('/update-counsellor/:requestId', protect, updateCounsellor);
 
 module.exports = router;

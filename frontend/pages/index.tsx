@@ -12,79 +12,84 @@ const Universities = dynamic(() => import("../components/landingPage/Universitie
 const JourneySection = dynamic(() => import("../components/landingPage/JourneySection"), { ssr: false });
 const FAQSection = dynamic(() => import("../components/landingPage/FAQSection"), { ssr: false });
 const AssociatedUniversitiesSection = dynamic(() => import("../components/landingPage/AssociatedUniversitiesSection"), { ssr: false });
-const CTASection = dynamic(() => import("../components/landingPage/CTASection"), { ssr: false });
 
 const Home = () => {
   const [showConsultationForm, setShowConsultationForm] = useState(false);
-  const [count, setCount] = useState(0);
-  const universitiesRef = useRef(null);
+  
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Only trigger when it's intersecting AND close to the center
-        if (entry.isIntersecting) {
-          const rect = entry.boundingClientRect;
-          const centerY = window.innerHeight / 2;
-          const isInCenter =
-            rect.top < centerY && rect.bottom > centerY;
-
-            if (isInCenter && count < 3) {
-              setCount(prevCount => {
-                const newCount = prevCount + 1;
-                if (newCount < 3) {
-                  setShowConsultationForm(true);
-                }
-                return newCount;
-              });
-            }
-            
+        if (showConsultationForm) {
+          document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+          document.body.style.overflow = "auto"; // Enable scrolling
         }
-      },
-      {
-        root: null,
-        threshold: .6, // Adjust for more/less sensitivity
-      }
-    );
+        return () => {
+          document.body.style.overflow = "auto"; // Cleanup on unmount
+        };
+      }, [showConsultationForm]);
 
-    if (universitiesRef.current) {
-      observer.observe(universitiesRef.current);
-    }
-
+  useEffect(() => {
+    const timeouts: NodeJS.Timeout[] = [];
+  
+    const showFormAtIntervals = () => {
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, 10 * 1000) // After 30 seconds
+      );
+  
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, (1 * 60) * 1000) // After 5 minutes
+      );
+  
+      timeouts.push(
+        setTimeout(() => {
+          setShowConsultationForm(true);
+        }, (10 * 60) * 1000) // After 20 minutes
+      );
+    };
+  
+    showFormAtIntervals();
+  
+    // Clean up on unmount
     return () => {
-      if (universitiesRef.current) {
-        observer.unobserve(universitiesRef.current);
-      }
+      timeouts.forEach(clearTimeout);
     };
   }, []);
-
-    useEffect(() => {
-          if (showConsultationForm) {
-            document.body.style.overflow = "hidden"; // Disable scrolling
-          } else {
-            document.body.style.overflow = "auto"; // Enable scrolling
-          }
-          return () => {
-            document.body.style.overflow = "auto"; // Cleanup on unmount
-          };
-        }, [showConsultationForm]);
+  
   return (
-    <> 
-    <Head>
-        <title>Edurizon | Study Abroad Consultancy & Career Guidance for Global Success</title>
-        <meta name="description" content="Unlock your academic and career potential with Edurizon. Expert study abroad guidance, study mbbs abroad, university admissions support. Start your journey today!" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="Edurizon" />
+    <>
+      <Head>
+        <title>Study MBBS Abroad, MBBS Abroad for Indian Students | Edurizon</title>
+        <meta name="description" content="Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="Study MBBS Abroad, MBBS Abroad for Indian Students | Edurizon" />
+        <meta property="og:description" content="Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students." />
         <link rel="canonical" href="https://www.edurizon.in" />
-    </Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Edurizon",
+              "url": "https://www.edurizon.in",
+              "logo": "https://www.edurizon.in/favicon.ico",
+              "description": "Edurizon offers affordable education, global exposure & easy admission to Study MBBS Abroad for Indian Students.",
+            }),
+          }}
+        />
+      </Head>
+
     
       {/* ✅ Load Hero Section Immediately (Critical for LCP) */}
       <HeroSection />
 
       {/* ✅ Lazy Loaded Sections (Prevents Render Blocking) */}
       <WhyChoseUsSection />
-      <div ref={universitiesRef}>
-        <Universities />
-      </div>
+      <Universities />
       <JourneySection />
       <FAQSection />
       <AssociatedUniversitiesSection />

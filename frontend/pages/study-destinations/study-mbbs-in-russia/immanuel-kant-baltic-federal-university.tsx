@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcumbs";
+import Head from "next/head";
 
 const services = [
     {
       icon: "/assets/Images/Icons/feesIcon.svg",
       text: "Tution Fees",
-      label: "Ruble 303,700 / Year",
+      label: "Ruble 3,15,700 / Year",
     },
     {
       icon: "/assets/Images/Icons/TieUpsIcon.svg",
@@ -15,21 +16,60 @@ const services = [
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "Country Rank",
-      label: "5Top 100",
+      text: "Rank",
+      label: "Country Rank - 5th, QS World Rank - 801",
     },
     {
       icon: "/assets/Images/Icons/ExperienceIcon.svg",
-      text: "QS World Rank",
-      label: "801",
+      text: "",
+      label: "Best FMGE Ratio",
     },
   ];
 
 const ImmanuelKantBalticFederalUniversity = () => {
   return (
-    <div className="text-regularTextPhone md:text-regularText"> 
+    <>
+      <Head>
+        <title>Cost of MBBS in Russia | Indian Students Guide – Immanuel Kant Baltic Federal University</title>
+        <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
+        <meta name="description" content="Learn the true cost of MBBS in Russia, scholarship options and best university admission process for Indian students on https://www.edurizon.in/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university" />
+        <meta name="author" content="edurizon" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="DC.title" content="MBBS In Russia" />
+        <meta name="geo.region" content="IN-DL" />
+        <meta name="geo.placename" content="Dwarka" />
+        <meta name="geo.position" content="22.351115;78.667743" />
+        <meta name="ICBM" content="22.351115, 78.667743" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Cost of MBBS in Russia | Indian Students Guide – Immanuel Kant Baltic Federal University" />
+        <meta property="og:description" content="Learn the true cost of MBBS in Russia, scholarship options and best university admission process for Indian students on https://www.edurizon.in/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university" />
+        <meta property="og:url" content="https://www.edurizon.in/" />
+        <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@edurizon" />
+        <meta name="twitter:title" content="Cost of MBBS in Russia | Indian Students Guide – Immanuel Kant Baltic Federal University" />
+        <meta name="twitter:description" content="Learn the true cost of MBBS in Russia, scholarship options and best university admission process for Indian students on https://www.edurizon.in/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university" />
+        <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
+        <meta name="twitter:image:alt" content="MBBS in Russia" />
+        <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university"/>
+        <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/immanuel-kant-baltic-federal-university" hrefLang="en-in"/>
 
-<div className="relative h-auto w-full">
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-9JDZZKPGL8');
+            `,
+          }}
+        />
+      </Head>
+      <div className="text-regularTextPhone md:text-regularText text-black"> 
+
+<div className="relative h-auto w-full dark:text-white">
         <Image src="/assets/Images/universities/russia/ImmanuelKantBalticFederalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
             <div className="flex flex-col items-center gap-[2vw]">
@@ -54,7 +94,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
             </div>
         </div>
         </div>
-      <section className="inner-page-bg">
+      <section className="inner-page-bg dark:bg-black">
   <div className="container">
       <div className="row g-0">
           <div className="immigrate-bg">
@@ -91,7 +131,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
       </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -119,7 +159,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
   </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -134,7 +174,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -158,7 +198,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -181,7 +221,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -215,7 +255,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -233,7 +273,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -257,7 +297,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -286,7 +326,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row immigrate-bg g-0">
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -318,7 +358,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
     <div className="container">
         <div className="row g-0">
             <div className="immigrate-bg">
@@ -340,7 +380,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row" >Immanuel Kant Baltic Federal University Fees</th>
-                                  <td>3,03,700 Ruble per annum	-	2024</td> 
+                                  <td>3,15,700 Ruble per annum	-	2024</td> 
                               </tr>
                               <tr> 
                                 <td>15,000 Ruble per annum	-	2024</td>
@@ -375,7 +415,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
                               </tr>
                                 <tr>
                                     <th scope="row">Photos in Instagram</th>
-                                    <td><a href="https://www.instagram.com/edurizon/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
+                                    <td><a href="https://www.instagram.com/edurizon_pvt.ltd/" target="_blank" className="btn-custom btn-univ-detail">Click Here</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">University &amp; Review videos</th>
@@ -390,7 +430,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
         </div>
     </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="immigrate-bg">
     <div className="row">
@@ -424,7 +464,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
   </div>
 </section> 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -450,7 +490,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
                 <tbody>
                     <tr>
                         <th scope="row">Tuition Fees</th>
-                        <td>3,03,700 Ruble</td>
+                        <td>3,15,700 Ruble</td>
                     </tr>
                     <tr>
                         <th scope="row">Hostel Fees</th>
@@ -466,7 +506,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -487,7 +527,7 @@ const ImmanuelKantBalticFederalUniversity = () => {
   </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -512,7 +552,8 @@ const ImmanuelKantBalticFederalUniversity = () => {
 <div className="h-[4vw]"/>
        
 
-    </div>
+      </div>
+    </>
   )
 }
 

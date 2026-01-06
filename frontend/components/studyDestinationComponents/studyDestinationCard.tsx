@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -14,11 +15,20 @@ interface ActionAreaCardProps {
 }
 
 export default function ActionAreaCard({ category, image, title, description, href }: ActionAreaCardProps) {
+  const [innerWidth, setInnerWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setInnerWidth(window.innerWidth);
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <TransitionLink href={href}>
     <div className='shadow-[3px_4px_4px_rgba(0,_0,_0,_0.25)] md:rounded-[1.875vw] overflow-hidden dark:shadow-[2px_3px_14.3px_rgba(255,_255,_255,_0.25)]'  style={{ maxWidth:innerWidth>768? 416:300,borderRadius: innerWidth>768? '16px':'8px' }}>
       <CardActionArea className='bg-black' > 
-        <Image src={image} alt={title} width={140} height={140} layout='responsive' className='overflow-hidden' />
+        <Image src={image} alt={title} width={140} height={140} layout='responsive' className='max-h-[415px] overflow-hidden' />
           <div  className=' dark:bg-black text-black dark:text-white font-roboto pt-[12px] md:pt-[24px] pb-[8px] md:pb-[12px] px-[8px] flex flex-col gap-[8px]'>
           <span className=' font-bold text-[12px] md:text-[14px] '>
             {category}

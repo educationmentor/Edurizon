@@ -6,8 +6,8 @@ import Breadcrumbs from '../Breadcumbs'
 
 const heroSection = () => {
     return (
-        <div className="relative mx-[6vw] md:mx-[7.5vw] flex flex-col bg-white dark:bg-transparent dark:text-white">
-            <div className='flex flex-col md:flex-row gap-[8vw] md:gap-[7.5vw] my-[8vw] md:my-[4.75vw] '>
+        <div className="relative mx-[6vw] md:mx-[7.5vw] flex flex-col bg-white dark:bg-transparent dark:text-white ">
+            <div className='flex flex-col md:flex-row gap-[8vw] md:gap-[7.5vw] my-[8vw] md:my-[7.75vw] '>
                 <div className="absolute top-[calc(50%)] left-[calc(50%)] [filter:blur(40.75vw)] rounded-[50%] block dark:hidden bg-paleOrangeChosen w-[39.125vw] h-[28.625vw]" />
                     <div className='flex flex-col justify-center w-full md:w-[38.5vw] md:gap-[1.5vw] '>
                     <div className='mx-auto mb-[4vw]'>

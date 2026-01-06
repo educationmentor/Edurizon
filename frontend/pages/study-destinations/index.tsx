@@ -6,7 +6,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { TextField, InputAdornment } from '@mui/material';
 import { useRouter } from "next/router";
 
-const categoriesMap: Record<string, string> = {viewAll:"View all", blog:"Blogs", Destination:"Study Destinations", University:"Top MBBS Universities", under20:"Under 20Lac", under40:"Budget 20Lac - 40Lac", under60:"Budget 40Lac - 60Lac"};
+const categoriesMap: Record<string, string> = {viewAll:"View all", Destination:"Study Destinations", University:"Top MBBS Universities", 
+  under25:"Under 25Lac", under35:"Budget 25Lac - 35Lac", under40:"Budget 35Lac - 40Lac",above40:"Budget Above 40Lac"};
 const categories = Object.keys(categoriesMap);
 interface StudyDestinationsProps {
   categoryDefault: string;
@@ -21,24 +22,40 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
     const [selectedButton, setSelectedButton] = useState(categories.indexOf(categoryDefault));
 
     const [selectedCategory, setSelectedCategory] = useState<string>(categoryDefault);
-    console.log(selectedCategory);
     const handleCategoryChange = (category: string) => {
       setSelectedCategory(category);
     };
-    console.log(categoryDefault);
     const [searchTerm, setSearchTerm] = useState("");
 
   
-    // Filter blogs based on the selected category
+    // Filter blogs based on the selected category and budget
     const filteredBlogs = selectedCategory === "viewAll"
-  ? destinationData.filter(destination => destination.title.toLowerCase().includes(searchTerm.toLowerCase()))
-  : destinationData.filter(destination => 
-      destination.category === selectedCategory && 
-      destination.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      ? destinationData.filter(destination => destination.title.toLowerCase().includes(searchTerm.toLowerCase()))
+      : destinationData.filter(destination => {
+          let matchesCategory = destination.category === selectedCategory;
+          const matchesSearch = destination.title.toLowerCase().includes(searchTerm.toLowerCase());
+          
+          // Add budget filtering for budget categories
+          let matchesBudget = true;
+          if (selectedCategory === "under25" && destination.budget) {
+            matchesCategory = destination.category==="University";
+            matchesBudget = destination.budget == 'under25'; // 25 lakhs in rupees
+          } else if (selectedCategory === "under35" && destination.budget) {
+            matchesCategory = destination.category==="University";
+            matchesBudget = destination.budget == 'under35'; // 25-35 lakhs
+          } else if (selectedCategory === "under40" && destination.budget) {
+            matchesCategory = destination.category==="University";
+            matchesBudget = destination.budget == 'under40'; // 35-40 lakhs
+          } else if (selectedCategory === "above40" && destination.budget) {
+            matchesCategory = destination.category==="University";
+            matchesBudget = destination.budget == 'above40'; // above 40 lakhs
+          }
+          return matchesCategory && matchesSearch && matchesBudget;
+        });
   
     return (
-        <div className="mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] my-[60px] lg:my-[80px] xl:my-[120px]">
+      <div className="relative">
+        <div className="relative mx-[12px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] py-[60px] lg:py-[80px] xl:py-[120px]">
             <span className="flex justify-center  font-semibold text-[16px] md:text-[18px] lg:text-[20px] "
         //  style={{ fontSize: innerWidth>768?`${0.00476*innerWidth+6.8608}px`:`${0.00763*innerWidth+6.146}px` }}
          >Blog</span>
@@ -82,7 +99,7 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
 
         <div className="grid grid-cols-2 md:grid-cols-3 md:max-w-[1312px] max-w-[616px]  grid-flow-row justify-center mx-auto gap-[16px] md:gap-[16px] lg:gap-[24px] xl:gap-[32px] ">
       {filteredBlogs.map((blog, index) => (
-        <div   key={index}>
+        <div key={index}>
            <ActionAreaCard href={blog.href} image={blog.image} title={blog.title} category={blog.category}
       description= {blog.description}/>
 
@@ -92,8 +109,7 @@ const StudyDestinations = ({ categoryDefault="viewAll" }: StudyDestinationsProps
 
 
         </div>
-
-
+        </div>
 
     )
 }

@@ -3,8 +3,8 @@ import RelatedCountries from '@/components/studyDestinationComponents/relatedCou
 import Image from 'next/image';
 const Hungary=()=>{
     return(
-        <div className='text-smallTextPhone md:text-smallText'>
-          <section className="country-inner-banner ">
+        <div className='text-smallTextPhone md:text-smallText dark:bg-black dark:text-black pt-[15vw]  md:pt-[4vw]'>
+          <section className="country-inner-banner dark:bg-black">
                 <div className="container pt-[4vw] pb-[4vw] md:pb-0">
                     <div className="flex flex-row align-items-center ">
                     <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9 ">
@@ -14,12 +14,12 @@ const Hungary=()=>{
                         <Breadcrumbs/>
                     </div>
                     <div className="col-xl-2 md:block hidden col-lg-2 col-md-2 col-sm-3 col-3 text-end ml-auto">
-                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/hungary.png" className="img-fluid" />
+                        <Image alt="banglades flag" width={100} height={100} src="/assets/Images/country-flag/hungary.png" className="img-fluid dark:border-[2px] rounded-sm" />
                     </div>
                     </div>
                 </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
             <div className="container">
                 <div className="row g-0">
                 <div className="immigrate-bg">
@@ -32,7 +32,7 @@ const Hungary=()=>{
                 </div>
             </div>
             </section>
-            <section className="inner-page-bg">
+            <section className="inner-page-bg dark:bg-black">
                 <div className="container">
                     <div className="row g-0">
                     <div className="immigrate-bg">
@@ -79,7 +79,7 @@ const Hungary=()=>{
                     </div>
                 </div>
                 </section>
-                <section className="budget-wrape bg-[#f8fbff]">
+                <section className="budget-wrape dark:bg-black">
                 <div className="container "> 
                     <div className="grid grid-cols-3 gap-[1vw] justify-content-center">
                     <div className="col-xl-4 col-lg-4 col-md-4 col-12">
@@ -115,8 +115,8 @@ const Hungary=()=>{
                     </div>
                 </div>
                 </section>
-                <section className="inner-page-bg">
-  <div className="container">
+                <section className="inner-page-bg dark:bg-black">
+  <div className="container dark:bg-black">
     <div className="row g-0">
       <div className="immigrate-bg">
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -174,7 +174,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -208,7 +208,7 @@ const Hungary=()=>{
     </div>
 </section>
 
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -300,7 +300,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -375,7 +375,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -415,7 +415,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -469,7 +469,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -523,7 +523,7 @@ const Hungary=()=>{
     </div>
   </div>
 </section>
-<section className="inner-page-bg">
+<section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">
@@ -577,7 +577,7 @@ const Hungary=()=>{
     </div>
   </div>
     </section>
-    <section className="inner-page-bg">
+    <section className="inner-page-bg dark:bg-black">
   <div className="container">
     <div className="row g-0">
       <div className="immigrate-bg">

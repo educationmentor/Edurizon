@@ -18,22 +18,24 @@ const consultationRequestSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    homeCountry: {
-      type: String,
-      required: true,
-    },
-    interestedCourse: {
-      type: String,
-      required: true,
-    },
     status: {
       type: String,
-      enum: ['pending', 'accepted', 'scheduled', 'completed'],
+      enum: ['pending', 'assigned', 'completed'],
       default: 'pending'
     },
-    acceptedBy: {
+    counsellingStatus:{
+      type:String,
+      enum:['pending','completed'],
+      default:'pending'
+    },
+    typeofLead:{
+      type:String,
+      enum:['warm','cold','hot'],
+      default:'cold'
+    },
+    assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'AdminUser',
     },
     meetingTime: {
       type: Date,

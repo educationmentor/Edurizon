@@ -242,8 +242,6 @@ const CounselorDashboard = () => {
                       <p>Email: {request.email}</p>
                       <p>Phone: {request.phone}</p>
                       <p>Interested Country: {request.interestedCountry}</p>
-                      <p>Home Country: {request.homeCountry}</p>
-                      <p>Interested Course: {request.interestedCourse}</p>
                       <p>Requested: {new Date(request.createdAt).toLocaleString()}</p>
                     </div>
                     <button

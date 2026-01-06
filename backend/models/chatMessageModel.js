@@ -7,6 +7,14 @@ const chatMessageSchema = new mongoose.Schema(
       enum: ['student', 'counselor'],
       required: true
     },
+    senderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false
+    },
+    receiverId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false
+    },
     senderEmail: {
       type: String,
       required: true
@@ -18,7 +26,7 @@ const chatMessageSchema = new mongoose.Schema(
     consultationRequest: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'ConsultationRequest',
-      required: true
+      required: false // Made optional for user-based chat
     },
     message: {
       type: String,
@@ -42,8 +50,23 @@ const chatMessageSchema = new mongoose.Schema(
   }
 );
 
+// Custom validation to ensure either senderId/receiverId OR consultationRequest is provided
+chatMessageSchema.pre('validate', function(next) {
+  const hasUserFields = this.senderId && this.receiverId;
+  const hasConsultationField = this.consultationRequest;
+  
+  if (!hasUserFields && !hasConsultationField) {
+    return next(new Error('Either senderId/receiverId or consultationRequest must be provided'));
+  }
+  
+  next();
+});
+
 // Index for faster querying
 chatMessageSchema.index({ consultationRequest: 1, createdAt: 1 });
+chatMessageSchema.index({ senderId: 1, receiverId: 1, createdAt: 1 });
+chatMessageSchema.index({ senderId: 1, createdAt: 1 });
+chatMessageSchema.index({ receiverId: 1, createdAt: 1 });
 
 const ChatMessage = mongoose.model('ChatMessage', chatMessageSchema);
 
