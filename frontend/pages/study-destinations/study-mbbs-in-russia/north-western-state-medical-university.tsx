@@ -382,6 +382,8 @@ const NewPage=()=>{
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
           <div className="heading">
             <h3 className="text-h5TextPhone md:text-h5Text">Fee Structure of North-Western State Medical University 2024-25</h3>
+              <p>North Western State Medical University is a well-known Russian medical institution offering quality education at reasonable costs. North Western State Medical University Fees are affordable and transparent, making it a preferred choice for Indian students seeking globally recognized MBBS programs with strong clinical exposure.
+</p>
             <h5>MBBS in Russia – MBBS in North-Western State Medical University</h5>
           </div>
           <div className="table-responsive">
