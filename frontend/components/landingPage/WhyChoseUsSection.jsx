@@ -40,6 +40,9 @@ const WhyChoseUsSection = () => {
                 <p className='text-smallTextPhone md:text-smallText leading-[150%] mb-[6vw] md:mb-[3.5vw] dark:text-white '>
                     Edurizon Pvt. Ltd. is one of the best abroad education consultants Company, in Delhi. We have 7 branch offices all over India. We have been 
                     experts in the field of counseling for the last 10 years.
+                    <br/>
+                    Pursuing medical education overseas offers Indian aspirants access to globally recognized universities with affordable fees and modern facilities. For many students, Study MBBS Abroad opens doors to quality education, English-medium teaching, and international exposure, making MBBS Abroad for Indian Students a preferred career pathway.
+
                 </p>
                 <motion.div layout
                   className="grid grid-cols-2 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] md:mb-[9.375vw]">

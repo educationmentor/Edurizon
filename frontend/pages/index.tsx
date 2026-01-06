@@ -72,7 +72,7 @@ const Home = () => {
     <Head>
         <title>Edurizon | Study Abroad Consultancy & Career Guidance for Global Success</title>
         <meta name="description" content="Unlock your academic and career potential with Edurizon. Expert study abroad guidance, study mbbs abroad, university admissions support. Start your journey today!" />
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="Study MBBS Abroad, MBBS Abroad for Indian Students" />
         <meta name="author" content="Edurizon" />
         <link rel="canonical" href="https://www.edurizon.in" />
     </Head>
