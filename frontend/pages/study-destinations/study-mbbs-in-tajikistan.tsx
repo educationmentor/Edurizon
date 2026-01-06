@@ -242,7 +242,7 @@ const NewPage=()=>{
                     <h1 className="text-h4TextPhone text-center   font-bold leading-[120%] md:text-h1Text">MBBS in Tajikistan</h1>
                 </div>
                 <p className="text-smallTextPhone text-left md:text-regularText md:text-center">
-                MBBS in Tajikistan is an affordable and globally recognized option for medical education, especially for international students. With English-taught programs, modern infrastructure, and WHO and NMC-recognized universities, Tajikistan offers quality medical training. Its simple admission process and low tuition fees make it an attractive destination for aspiring doctors.
+                MBBS in Tajikistan is an affordable and globally recognized option for medical education, especially for international students. With English-taught programs, modern infrastructure, and WHO and NMC-recognized universities, Tajikistan offers quality medical training. Its simple admission process and low tuition fees make it an attractive destination for aspiring doctors. Tajikistan is gaining popularity for affordable medical education and student-friendly universities with modern facilities. MBBS in Tajikistan for Indian Students offers English-medium programs, simple admission processes, and quality clinical training, making it a suitable option for aspiring doctors from India.
                 </p>
                 </div>
                 
