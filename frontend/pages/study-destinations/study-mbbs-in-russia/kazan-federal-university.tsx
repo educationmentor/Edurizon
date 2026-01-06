@@ -125,7 +125,7 @@ const KazanFederalUniversity=()=>{
                 <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Kazan Federal University</h1>
             </div>
             <p className="text-regularTexts text-center">
-            Are you dreaming of pursuing a career in medicine and becoming a skilled doctor? Look no further than Kazan Federal University in Russia - a prestigious institution with a rich history and a renowned medical program.
+            Are you dreaming of pursuing a career in medicine and becoming a skilled doctor? Look no further than Kazan Federal University in Russia - a prestigious institution with a rich history and a renowned medical program. Kazan Federal University is one of Russia’s leading institutions known for quality education and global recognition. Kazan Federal University for Indian Students offers English-medium medical programs, modern infrastructure, and strong clinical exposure, making it a preferred choice for aspiring doctors from India.
             </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] justify-center">
