@@ -134,7 +134,7 @@ const NewPage = () => {
                 <h1 className="text-h3TextPhone font-bold leading-[120%] md:text-h1Text">Tambov State University</h1>
             </div> 
             <p className="text-regularTexts text-center">
-            Make your medical dreams a reality at Tambov State University, known for its strong medical faculty, state-of-the-art facilities, and a curriculum that shapes skilled and compassionate doctors.
+            Make your medical dreams a reality at Tambov State University, known for its strong medical faculty, state-of-the-art facilities, and a curriculum that shapes skilled and compassionate doctors. Tambov State Medical University is a reputed Russian institution known for quality medical education and international recognition. Tambov State Medical University offers English-medium MBBS programs, modern infrastructure, and strong clinical exposure, making it a suitable choice for Indian students aspiring to study medicine abroad.
             </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[2.25vw]  md:gap-[1.125vw] items-center px-[5vw] md:p-[.5vw] justify-center">
