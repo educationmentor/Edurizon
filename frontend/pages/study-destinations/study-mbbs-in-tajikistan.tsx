@@ -346,7 +346,7 @@ const NewPage=()=>{
             {/* Program Details */}
             <section className="mx-[6vw] md:mx-[12.5vw] pb-[10vw] md:pb-[4vw]">
                 <h3 className="text-h5TextPhone leading-[120%] md:text-h3Text mb-[4vw] md:mb-[2vw]">Top Medical Universities in Tajikistan</h3>
-            <p>Tajikistan offers quality medical education through government-recognized universities with affordable tuition fees. Best Medical Colleges/Universities in Tajikistan provide English-medium MBBS programs, modern infrastructure, and good clinical exposure, making them an attractive choice for international students. Medical education in Tajikistan is known for its affordability and globally accepted curriculum. Tajikistan MBBS Fees are comparatively low, making it easier for Indian students to pursue quality medical education with modern facilities and clinical exposure.
+            <p className="text-regularTexts text-center">Tajikistan offers quality medical education through government-recognized universities with affordable tuition fees. Best Medical Colleges/Universities in Tajikistan provide English-medium MBBS programs, modern infrastructure, and good clinical exposure, making them an attractive choice for international students. Medical education in Tajikistan is known for its affordability and globally accepted curriculum. Tajikistan MBBS Fees are comparatively low, making it easier for Indian students to pursue quality medical education with modern facilities and clinical exposure.
 </p>
                 <div className="overflow-x-auto">
                     <table className="w-full border-collapse border  mb-[4vw] md:mb-[2vw] border-black dark:border-borderGreyChosen ">
