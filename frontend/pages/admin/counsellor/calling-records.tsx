@@ -216,7 +216,8 @@ const CallingRecords = () => {
     "Lead Type",
     "Remark",
     "Calling Date",
-    "Follow-up Date"
+    "Follow-up Date",
+    "Source",
   ];
 
   // CSV headers
@@ -276,6 +277,7 @@ const CallingRecords = () => {
         <span className="text-sm text-gray-500">{lead.courseName || 'None'}</span>
       ),
     },
+    
     {
       key: "callingStatus",
       render: (lead: Lead) => {
@@ -524,6 +526,12 @@ const CallingRecords = () => {
           </div>
         );
       },
+    },
+    {
+      key: "source",
+      render: (lead:any) => (
+        <span className="text-sm text-gray-500">{lead.source || 'Website'}</span>
+      ),
     },
   ];
 

@@ -39,6 +39,7 @@ interface NewPageProps {
     }
     countryFeeStructure:{title:string;
         subTitle:string;
+        description?:string;
         data:string[][];
         href:string;};
     countryEligibilityStructure:string[][][];
