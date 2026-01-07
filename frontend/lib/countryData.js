@@ -6,11 +6,12 @@ const RussiaData={
     metaCanonical:"https://edurizon.in/study-destinations/study-mbbs-in-russia", 
     countryName: "Russia",
     countryTitle1:"MBBS in Russia",
-    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 70+ NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support.",
+    countryDescription:"Russia has emerged as the #1 destination for Indian students seeking quality MBBS education abroad. With 70+ NMC-approved universities, state-of-the-art infrastructure, and tuition fees 70% lower than Indian private colleges, Russia offers a seamless pathway to becoming a globally licensed doctor. At Edurizon, we specialize in simplifying your MBBS admission journey—from selecting the right university to post-arrival support. Indian students choose Russia for its affordable medical education and globally recognized universities with advanced clinical training. MBBS in Russia offers English-medium courses, modern infrastructure, and a safe learning environment, making it a popular destination for aspiring doctors.",
     countryWhyChoseSection:{
         title1normal:"BENEFITS OF STUDYING ",
         title1orange:"MBBS IN RUSSIA",
-        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 70+ NMC- approved universities offer a unique blend of affordability, world-class infrastructure, and globally valid degrees."],
+        para:"",
+        Description1:["Russia has cemented its reputation as a global hub for medical education, attracting thousands of Indian students annually. The country’s 70+ NMC- approved universities offer a unique blend of affordability, world-class infrastructure, and globally valid degrees. Russia is a preferred destination for quality medical education due to its affordable fees and internationally recognized universities. MBBS in Russia for Indian Students offers English-medium programs, modern infrastructure, and strong clinical exposure, making it an excellent choice for aspiring doctors from India."],
         ImageSrc:"/assets/Images/CountryBlogs/Russia1.webp",
         ImageAlt:"Russia Image"
     },
@@ -93,7 +94,7 @@ const RussiaData={
         [["Age Limit"],["Minimum 17 years as of December 31, 2024.","No upper age limit."],[" Class 10 documents accepted for age proof."]],
         [["Required Documents"],["Class 10 & 12 Mark Sheets","NEET Scorecard .","Valid Passport","HIV Report"],["Documents must be translated to Russian and notarized for visa processing.","Apostille/MEA attestation required for Indian students."]]
     ],
-
+    para:'Medical education in Russia is known for its affordability and high academic standards compared to many other countries. The Cost of MBBS in Russia is budget-friendly with transparent expenses, and competitive Russia MBBS Fees make it an attractive option for Indian students seeking quality education abroad.',
     admissionProcess:{
         title:"Your MBBS Journey to Russia Made Simple",
     },
@@ -182,12 +183,13 @@ const ChinaData={
     metaKeywords:"Study MBBS in China",
     metaCanonical:"https://edurizon.in/study-destinations/study-mbbs-in-china", 
     countryName: "China",
-    countryDescription:"China has solidified its position as a premier destination for Indian students seeking high-quality, affordable MBBS education. With 50+ (NMC)--approved medical universities, English-medium programs, and cutting-edge infrastructure, China offers a cost-effective pathway to a globally recognized medical degree. At Edurizon, we simplify your journey with comprehensive admission support, scholarship guidance, and post-arrival services, ensuring a seamless transition to your dream career.",
+    countryDescription:"China has solidified its position as a premier destination for Indian students seeking high-quality, affordable MBBS education. With 50+ (NMC)--approved medical universities, English-medium programs, and cutting-edge infrastructure, China offers a cost-effective pathway to a globally recognized medical degree. At Edurizon, we simplify your journey with comprehensive admission support, scholarship guidance, and post-arrival services, ensuring a seamless transition to your dream career. China has emerged as a popular destination for affordable and quality medical education with modern universities and advanced hospitals. MBBS in China offers English-medium programs, strong clinical exposure, and global recognition, making it a preferred choice for international medical aspirants.",
     countryTitle1:"Study MBBS in China",
     countryTitle2:"Affordable, Globally Recognized Medical Education",
     countryWhyChoseSection:{
         title1normal:"Top NMC-Approved",
         title1orange:"Universities in China",
+        para:"China is home to several internationally recognized medical institutions offering high-quality education and advanced clinical training. Top Medical Colleges or Universities in China provide English-medium MBBS programs, modern infrastructure, and global exposure, making them a preferred choice for Indian students pursuing medical studies abroad.",
         title2:"Other Prominent Universities",
         ImageSrc:"/assets/Images/CountryBlogs/China1.webp",
         ImageAlt:"Russia Image",
@@ -262,6 +264,7 @@ const ChinaData={
     countryFeeStructure:{
         title:"Fee Structure of Top NMC-Approved Universities",
         subTitle:"MBBS in China 2025-26: Detailed Cost Breakdown",
+        description:"The cost of MBBS in China is affordable with transparent expenses. The Tuition Fees for MBBS in China start from ₹3.5 lakhs and go up to ₹6.5 lakhs per year. The Hostel Fees for MBBS in China start from ₹1 lakh and go up to ₹2 lakh per year. The Medical Insurance Fees for MBBS in China start from ₹20,000 and go up to ₹30,000 per year. The Miscellaneous Fees for MBBS in China start from ₹10,000 and go up to ₹20,000 per year.",
         data:[["University","Tuition Fee (per year)","Hostel Fee (per year)"],
         ["Zhejiang University","₹5,13,600 Lakhs","₹72,000"],
         ["Nanjing Medical University","₹4,08,000 Lakhs","₹72,000"],

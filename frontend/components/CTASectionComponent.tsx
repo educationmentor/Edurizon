@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef,useEffect,useState } from 'react';
+import { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import CTASection from './landingPage/CTASection';
 import ThemeToggle from './ThemeToggle';
 import { IconButton } from './Buttons';
@@ -16,14 +16,17 @@ const CTASectionComponent = () => {
       const [showConsultationForm, setShowConsultationForm] = useState(false);
       const [chatBotReply, setChatBotReply] = useState<string[]>([]);
       const [userInput, setUserInput] = useState("");
-      const questions=[
-        "Which university or country you are looking for?",
-        "What is your budget? 20L-25L, 25L-30L, 30L-35L & Above.",
-        "Tell us your name?",
-        "Which city you are from?",
-        "Share Your Contact details ( Mob No) so our counselor can reach out to you.",
-        "Thank you for your interest. We will get back to you shortly.",
-      ]
+      const questions = useMemo(
+        () => [
+          "Which university or country you are looking for?",
+          "What is your budget? 20L-25L, 25L-30L, 30L-35L & Above.",
+          "Tell us your name?",
+          "Which city you are from?",
+          "Share Your Contact details ( Mob No) so our counselor can reach out to you.",
+          "Thank you for your interest. We will get back to you shortly.",
+        ],
+        []
+      );
       const [disableChatBot, setDisableChatBot] = useState(false);
     
       const chatBotScrollRef = useRef<HTMLDivElement>(null);
@@ -32,7 +35,7 @@ const CTASectionComponent = () => {
         if (chatBotScrollRef.current) {
           chatBotScrollRef.current.scrollTop = chatBotScrollRef.current.scrollHeight;
         }
-      }, [chatBotReply, questions]); // Trigger scroll when chat updates
+      }, [chatBotReply]); // Trigger scroll when chat updates
       const handleConsultationClick = () => {
         setShowConsultationForm(true);
         
@@ -51,50 +54,49 @@ const CTASectionComponent = () => {
   
 
 
-      useEffect(() => {
-        if(chatBotReply.length=== 5){
-          setDisableChatBot(true);
-          submitBotMsg();
-
+      const submitBotMsg = useCallback(async () => {
+        try {
+          const response = await axios.post(
+            `${baseUrl}/api/chatbot/send`,
+            chatBotReply
+          );
+          if (response.data.success) {
+            console.log("Data send");
+          }
+        } catch (e) {
+          console.log(e);
         }
       }, [chatBotReply]);
 
-     const submitBotMsg=async()=>{
-      try{
-        const response = await axios.post(
-          `${baseUrl}/api/chatbot/send`, 
-          chatBotReply
-        );
-        if (response.data.success) {
-          console.log("Data send");
+      useEffect(() => {
+        if (chatBotReply.length === 5) {
+          setDisableChatBot(true);
+          submitBotMsg();
         }
-      }catch(e){
-          console.log(e);
-      }
-      
-     } 
-     useEffect(() => {
-      if (!ctaSectionRef.current) return; // Don't run if no ref yet
-    
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          setIsHidden(entry.isIntersecting);
-        },
-        {
-          root: null,
-          threshold: 0,
-        }
-      );
+      }, [chatBotReply, submitBotMsg]);
 
-      
-    
-      const currentElement = ctaSectionRef.current;
-      observer.observe(currentElement);
-    
-      return () => {
-        observer.unobserve(currentElement);
-      };
-    }, [ctaSectionRef.current]); // <-- Notice the dependency here!
+      useEffect(() => {
+        if (!ctaSectionRef.current) return; // Don't run if no ref yet
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            setIsHidden(entry.isIntersecting);
+          },
+          {
+            root: null,
+            threshold: 0,
+          }
+        );
+
+        const currentElement = ctaSectionRef.current;
+        observer.observe(currentElement);
+
+        return () => {
+          if (currentElement) {
+            observer.unobserve(currentElement);
+          }
+        };
+      }, []);
   return (
     <>
               <div id="ctaSection" ref={ctaSectionRef} >

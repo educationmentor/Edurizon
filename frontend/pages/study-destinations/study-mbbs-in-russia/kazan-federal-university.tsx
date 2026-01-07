@@ -7,6 +7,7 @@ import UnlistedTable from "@/components/studyDestinationComponents/unListedTable
 import Image from "next/image";
 import Head from "next/head";
 import AuthorizationSlider from "@/components/studyDestinationComponents/authorizationSlider";
+import Script from "next/script";
 
 const services = [
     {
@@ -37,18 +38,16 @@ const why=["All 50,000 students who are studying and enjoying at the 2nd oldest 
 "More than 3000 professors are employed for providing under graduated and graduate courses. Professors are highly qualified as most of them hold either a doctorate degree or some represent powerful scientific minds in and out of Russia across the world. The whole credit goes to them as under their leadership and supervision students have excelled and become strong leaders today both in industry and studies.",
 "Kazan Federal University has developed much from the last years. It has extended itself by including more research centers across the globe, well built infrastructure, 80 teaching world class laboratories, and 17 competitive research centers."]
 
-const feeStructure={
-    title:"Fee Structure",
-    subTitle:"Kazan Federal University Fees",
-    <p>Kazan Federal University is popular among international students for its quality education and transparent cost structure. Kazan Federal University MBBS Fees are affordable compared to many other countries, offering Indian students access to modern facilities, experienced faculty, and excellent clinical training.
-</p>
-    data:[
-        ["Expense", "Annual Cost"],
-        ["Tution Fees","5,94,000 Ruble"],
-        ["Hostel Fees","24,000 Ruble"],
-        ["Miscellaneous","10,000–20,000 Ruble"],
-    ]
-}
+const feeStructure = {
+  title: "Fee Structure",
+  subTitle: "Kazan Federal University Fees",
+  data: [
+    ["Expense", "Annual Cost"],
+    ["Tution Fees", "5,94,000 Ruble"],
+    ["Hostel Fees", "24,000 Ruble"],
+    ["Miscellaneous", "10,000–20,000 Ruble"],
+  ],
+};
 
 const facts={
     title:"Quick Facts Related to Kazan Federal University",
@@ -76,48 +75,83 @@ const eligibility=[
 
 
 
-const KazanFederalUniversity=()=>{
-    return <>
-        <Head>
-            <title>Kazan Federal University Russia for Indian Students, MBBS Fees | Edurizon
-</title>
-            <meta name="keyword" content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia." />
-            <meta name="description" content="Edurizon offers Kazan Federal University in Russia for Indian Students for quality medical education with affordable MBBS fees and global recognition." />
-            <meta name="author" content="edurizon" />
-            <meta name="robots" content="index, follow"/>
-            <meta name="DC.title" content="MBBS In Russia" />
-            <meta name="geo.region" content="IN-DL" />
-            <meta name="geo.placename" content="Dwarka" />
-            <meta name="geo.position" content="22.351115;78.667743" />
-            <meta name="ICBM" content="22.351115, 78.667743" />
-            <meta property="og:type" content="website" />
-            <meta property="og:title" content="MBBS in Russia for Indian Students – Kazan Federal University" />
-            <meta property="og:description" content="Explore affordable MBBS in Russia, low cost tuition, admission criteria, eligibility & scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university." />
-            <meta property="og:url" content="https://www.edurizon.in/" />
-            <meta property="og:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:site" content="@edurizon" />
-            <meta name="twitter:title" content="MBBS in Russia for Indian Students – Kazan Federal University" />
-            <meta name="twitter:description" content="Explore affordable MBBS in Russia, low cost tuition, admission criteria, eligibility & scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university." />
-            <meta name="twitter:image" content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg" />
-            <meta name="twitter:image:alt" content="MBBS in Russia" />
-            <link rel="canonical" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university"/>
-            <link rel="alternate" href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university" hrefLang="en-in"/>
+const KazanFederalUniversity = () => {
+  return (
+    <>
+      <Head>
+        <title>
+          Kazan Federal University Russia for Indian Students, MBBS Fees | Edurizon
+        </title>
+        <meta
+          name="keyword"
+          content="mbbs in russia, mbbs in russia low cost, mbbs in russia for indian student, cost of mbbs in russia, MBBS Abroad for Indian Students, kazan federal university russia, kazan federal university, kazan federal uni, kazan federal university mbbs fees, kazan federal university for indian students, North western state medical university, North western state medical university fees, North western state medical university for indian students, tambov state university, tambov state university Russia, tambov state university mbbs fees, petrozavodsk state university, petrozavodsk state Medical University, petrozavodsk state university fees, kemerovo state university, kemerovo state medical university fees, kemerovo state medical university russia."
+        />
+        <meta
+          name="description"
+          content="Edurizon offers Kazan Federal University in Russia for Indian Students for quality medical education with affordable MBBS fees and global recognition."
+        />
+        <meta name="author" content="edurizon" />
+        <meta name="robots" content="index, follow" />
+        <meta name="DC.title" content="MBBS In Russia" />
+        <meta name="geo.region" content="IN-DL" />
+        <meta name="geo.placename" content="Dwarka" />
+        <meta name="geo.position" content="22.351115;78.667743" />
+        <meta name="ICBM" content="22.351115, 78.667743" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="MBBS in Russia for Indian Students – Kazan Federal University"
+        />
+        <meta
+          property="og:description"
+          content="Explore affordable MBBS in Russia, low cost tuition, admission criteria, eligibility & scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university."
+        />
+        <meta property="og:url" content="https://www.edurizon.in/" />
+        <meta
+          property="og:image"
+          content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@edurizon" />
+        <meta
+          name="twitter:title"
+          content="MBBS in Russia for Indian Students – Kazan Federal University"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore affordable MBBS in Russia, low cost tuition, admission criteria, eligibility & scholarship details at https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.edurizon.in/assets/Images/landingPage/WhyChoseUs2.svg"
+        />
+        <meta name="twitter:image:alt" content="MBBS in Russia" />
+        <link
+          rel="canonical"
+          href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university"
+        />
+        <link
+          rel="alternate"
+          href="https://www.edurizon.in/study-destinations/study-mbbs-in-russia/kazan-federal-university"
+          hrefLang="en-in"
+        />
+      </Head>
 
-            {/* Google tag (gtag.js) */}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"></script>
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-9JDZZKPGL8');
-                    `,
-                }}
-            />
-        </Head>
-        <div>
+      {/* Google tag (gtag.js) */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-9JDZZKPGL8"
+        strategy="afterInteractive"
+        async
+      />
+      <Script id="ga-gtag-kazan" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9JDZZKPGL8');
+        `}
+      </Script>
+      <div>
         <div className="relative h-auto w-full">
         <Image src="/assets/Images/universities/russia/KazanFederalUniversity.webp" alt="Kazan Federal University" layout="fill" objectFit="cover" className="z-[-1] opacity-50" />
         <div className="mx-[6vw] md:w-[73.125vw] flex flex-col gap-[6vw] py-[7.125vw] items-center md:mx-auto">
@@ -218,6 +252,7 @@ const KazanFederalUniversity=()=>{
         <PostArrival/>
         </div>
     </>
+  )
 }
 
 export default KazanFederalUniversity;

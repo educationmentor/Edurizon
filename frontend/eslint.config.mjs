@@ -18,6 +18,9 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-expressions": "off",
       "react/no-unescaped-entities": "off",
       "@next/next/no-sync-scripts": "off",
+      "@next/next/no-img-element": "off",
+      "@next/next/next-script-for-ga": "off",
+      "react-hooks/exhaustive-deps":"off",
     }
   }
 

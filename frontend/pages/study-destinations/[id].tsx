@@ -15,6 +15,7 @@ interface NewPageProps {
       title1normal:string;
       title1orange:string;
       title2:string;
+      para:string;
       Description1:string[];
       Description2:string[];
       ImageSrc:string;
@@ -24,6 +25,7 @@ interface NewPageProps {
     countrySpecificSection2:boolean;
     countryCostData:{[key:string]:string};
     countrySpecificSection3:{data:string};
+    para:string;
     countryUniversities:{
       universityName:string;
       location:string;
@@ -123,7 +125,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
 
 
       {/* Description Part */}
-      <DescriptionComponent id={id} title1normal={countryData.countryWhyChoseSection.title1normal} title1orange={countryData.countryWhyChoseSection.title1orange} title2={countryData.countryWhyChoseSection.title2} content1={countryData.countryWhyChoseSection.Description1} content2={countryData.countryWhyChoseSection.Description2} imageAlt={countryData.countryWhyChoseSection.ImageAlt} imageSrc={countryData.countryWhyChoseSection.ImageSrc} />
+      <DescriptionComponent id={id} title1normal={countryData.countryWhyChoseSection.title1normal} para={countryData.countryWhyChoseSection.para || ""} title1orange={countryData.countryWhyChoseSection.title1orange} title2={countryData.countryWhyChoseSection.title2} content1={countryData.countryWhyChoseSection.Description1} content2={countryData.countryWhyChoseSection.Description2} imageAlt={countryData.countryWhyChoseSection.ImageAlt} imageSrc={countryData.countryWhyChoseSection.ImageSrc} />
 
       {/* Country Reasons To Study Destination */}
       {countryData.russiaReasonsToStudySection&& <RussiaReasonsToStudy id={id} title1="Reasons to Study" title2={`MBBS in ${countryData.countryName}` } name={countryData.countryName} content={countryData.russiaReasonsToStudySection} darkImg={["1Dark","2Dark","3Dark","4Dark","5Dark","6Dark"]} lightImg={["1","2","3","4","5","6"]} />}
@@ -142,7 +144,7 @@ const NewPage = ({ id,countryData }: NewPageProps) => {
       {countryData.countrySpecificSection3 && <Section3 id={id} data={countryData.countrySpecificSection3.data}/> }
 
       {/* Country Universiteis */}
-      {countryData.countryUniversities && <Universities id={id} data={countryData.countryUniversities} countryName={countryData.countryName} />}
+      {countryData.countryUniversities && <Universities id={id} para={countryData.para} data={countryData.countryUniversities} countryName={countryData.countryName} />}
 
 
 

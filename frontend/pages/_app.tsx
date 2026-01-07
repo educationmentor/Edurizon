@@ -108,7 +108,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
 
     checkAuth();
-  }, [router.pathname]);
+  }, [router]);
 
   useEffect(() => {
     const checkViewportWidth = () => {

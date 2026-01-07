@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 import { baseUrl } from '@/lib/baseUrl';
@@ -135,13 +135,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   
   const actualReceiverName = receiverName || (userType === 'counselor' ? studentName : 'Counselor');
 
-  const getAuthToken = () => {
+  const getAuthToken = useCallback(() => {
     if (userType === 'student') {
       const userData = localStorage.getItem('user');
       if (userData) {
         const user = JSON.parse(userData);
-        return user.token && !user.token.startsWith('Bearer ') 
-          ? `Bearer ${user.token}` 
+        return user.token && !user.token.startsWith('Bearer ')
+          ? `Bearer ${user.token}`
           : user.token;
       }
     } else {
@@ -151,39 +151,46 @@ const ChatBox: React.FC<ChatBoxProps> = ({
       }
     }
     return null;
-  };
+  }, [userType]);
 
-  const fetchChatHistory = async () => {
+  const fetchChatHistory = useCallback(async () => {
     try {
       setLoading(true);
       const token = getAuthToken();
-      
+
       if (!token) {
         toast.error('Authentication token not found. Please login again.');
         onClose();
         return;
       }
-      
+
       const response = await axios.get(`${baseUrl}/api/chat/${requestId}`, {
         headers: {
-          Authorization: token
-        }
+          Authorization: token,
+        },
       });
-      
+
       if (response.data && response.data.data) {
-        const sortedMessages = response.data.data.sort((a: Message, b: Message) => 
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        const sortedMessages = response.data.data.sort(
+          (a: Message, b: Message) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
-        
-        const filteredPendingMessages = messages.filter(msg => 
-          msg.pending && !sortedMessages.some((sm: Message) => sm.clientMessageId === msg.clientMessageId)
-        );
-        
-        setMessages([...sortedMessages, ...filteredPendingMessages]);
-        
-        pendingMessagesRef.current = new Set(
-          filteredPendingMessages.map(msg => msg.clientMessageId || '')
-        );
+
+        setMessages((prevMessages) => {
+          const filteredPendingMessages = prevMessages.filter(
+            (msg) =>
+              msg.pending &&
+              !sortedMessages.some(
+                (sm: Message) => sm.clientMessageId === msg.clientMessageId
+              )
+          );
+
+          pendingMessagesRef.current = new Set(
+            filteredPendingMessages.map((msg) => msg.clientMessageId || '')
+          );
+
+          return [...sortedMessages, ...filteredPendingMessages];
+        });
       } else {
         setMessages([]);
       }
@@ -193,74 +200,74 @@ const ChatBox: React.FC<ChatBoxProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [getAuthToken, onClose, requestId]);
 
   useEffect(() => {
     const newSocket = io(baseUrl, {
       auth: { token: getAuthToken() },
       query: {
         userId: actualUserEmail,
-        userType: userType
+        userType: userType,
       },
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
-      timeout: 20000
+      timeout: 20000,
     });
-    
+
     setSocket(newSocket);
     socketRef.current = newSocket;
-    
+
     newSocket.on('connect', () => {
       console.log('Socket connected:', newSocket.id);
       setConnected(true);
       setReconnecting(false);
-      
+
       newSocket.emit('join_room', requestId);
-      
+
       fetchChatHistory();
     });
-    
+
     newSocket.on('connect_error', (err) => {
       console.error('Socket connection error:', err);
       setConnected(false);
       toast.error('Connection error. Trying to reconnect...');
     });
-    
+
     newSocket.on('reconnect_attempt', () => {
       setReconnecting(true);
     });
-    
+
     newSocket.on('reconnect_failed', () => {
       setReconnecting(false);
       toast.error('Failed to reconnect. Please refresh the page.');
     });
-    
+
     newSocket.on('disconnect', (reason) => {
       console.log('Socket disconnected:', reason);
       setConnected(false);
-      
+
       if (reason === 'io server disconnect') {
         toast.error('Disconnected from server. Please refresh the page.');
       }
     });
-    
+
     newSocket.on('joined_room', (data) => {
       console.log('Successfully joined room:', data.requestId);
-      
+
       newSocket.emit('mark_read', {
         consultationRequest: requestId,
-        userType: userType
+        userType: userType,
       });
     });
-    
+
     return () => {
       console.log('Cleaning up socket connection');
       newSocket.disconnect();
       setSocket(null);
       socketRef.current = null;
     };
-  }, [requestId, baseUrl, userType, actualUserEmail]);
+  }, [requestId, userType, actualUserEmail, getAuthToken, fetchChatHistory]);
 
   useEffect(() => {
     if (!socket) return;

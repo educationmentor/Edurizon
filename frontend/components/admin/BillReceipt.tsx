@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import Image from 'next/image';
 
 type BillReceiptProps = {
   bill: any;
@@ -50,9 +51,11 @@ const BillReceipt = forwardRef<HTMLDivElement, BillReceiptProps>(({ bill, studen
     >
       {/* Header */}
       <div style={{ marginBottom: '16px' }}>
-        <img
+        <Image
           src="/assets/bill/header.jpg"
           alt="Edurizon Header"
+          width={1200}
+          height={200}
           style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
         />
       </div>
@@ -354,9 +357,11 @@ const BillReceipt = forwardRef<HTMLDivElement, BillReceiptProps>(({ bill, studen
           bottom: 0,
         }}
       >
-        <img
+        <Image
           src="/assets/bill/bill%20format%20footer.png"
           alt="Edurizon Footer"
+          width={1200}
+          height={200}
           style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
         />
       </div>
