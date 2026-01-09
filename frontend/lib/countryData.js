@@ -264,7 +264,7 @@ const ChinaData={
     countryFeeStructure:{
         title:"Fee Structure of Top NMC-Approved Universities",
         subTitle:"MBBS in China 2025-26: Detailed Cost Breakdown",
-        description:"The cost of MBBS in China is affordable with transparent expenses. The Tuition Fees for MBBS in China start from ₹3.5 lakhs and go up to ₹6.5 lakhs per year. The Hostel Fees for MBBS in China start from ₹1 lakh and go up to ₹2 lakh per year. The Medical Insurance Fees for MBBS in China start from ₹20,000 and go up to ₹30,000 per year. The Miscellaneous Fees for MBBS in China start from ₹10,000 and go up to ₹20,000 per year.",
+        description:"Medical education in China is widely known for its affordability and high academic standards. China MBBS Fees are comparatively lower than many other countries, offering Indian students access to quality universities, modern infrastructure, and excellent clinical exposure at a reasonable cost.",
         data:[["University","Tuition Fee (per year)","Hostel Fee (per year)"],
         ["Zhejiang University","₹5,13,600 Lakhs","₹72,000"],
         ["Nanjing Medical University","₹4,08,000 Lakhs","₹72,000"],
