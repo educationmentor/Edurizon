@@ -2,6 +2,8 @@ const PDFDocument = require('pdfkit');
 const path = require('path');
 const { RegisteredStudent } = require('../models/registeredUserModel');
 const { uploadToCloudinary } = require('../utils/cloudinary');
+const { calculateRemainingProcessingBalance, roundCurrency } = require('../utils/financeHelpers');
+const FinanceBill = require('../model/FinanceBill');
 
 const feeStructure = async (req, res) => {
   try {
@@ -69,6 +71,25 @@ const feeStructure = async (req, res) => {
         student.feeStructure = cloudinaryResult.secure_url;
         student.feeStructureGeneratedDate = new Date();
         student.feeStructureAgreed = false;
+
+        // Update financeInfo with structured data
+        if (!student.financeInfo) {
+          student.financeInfo = {};
+        }
+        student.financeInfo.feeStructureLink = cloudinaryResult.secure_url;
+        student.financeInfo.totalOtcUsd = roundCurrency(Number(oneTimeCharge) || 0);
+        student.financeInfo.totalProcessingInr = Math.round((Number(processingCharge) || 0) * 100) / 100;
+        student.financeInfo.isOtcPaid = false; // OTC is not paid initially
+        student.financeInfo.inclusions = {
+          visa: visasIncluded || false,
+          flightTickets: ticketsIncluded || false,
+          firstYearPackage: firstYearPackageIncluded || false,
+        };
+        // Initialize bills array if it doesn't exist
+        if (!student.financeInfo.bills) {
+          student.financeInfo.bills = [];
+        }
+
         await student.save();
 
         // Send notification to student about fee structure generation
@@ -334,14 +355,18 @@ const billStructure = async (req, res) => {
       paymentNumber,
       studentName,
       university,
-      status
+      status,
+      currency = 'INR',
+      purpose,
+      fatherName,
+      programme
     } = req.body;
 
     // Validate required fields
-    if (!studentId || !paymentAmount || !paymentNumber || !studentName || !university) {
+    if (!studentId || !paymentAmount || !studentName) {
       return res.status(400).json({
         success: false,
-        message: 'Missing required fields: studentId, paymentAmount, paymentNumber, studentName, and university are required',
+        message: 'Missing required fields: studentId, paymentAmount, and studentName are required',
       });
     }
 
@@ -353,6 +378,27 @@ const billStructure = async (req, res) => {
         message: 'Student not found',
       });
     }
+
+    // Get finance info
+    const financeInfo = student.financeInfo || {};
+    const totalOtcUsd = financeInfo.totalOtcUsd || 0;
+    const totalProcessingInr = financeInfo.totalProcessingInr || 0;
+    const isOtcPaid = financeInfo.isOtcPaid || false;
+
+    // Calculate remaining processing balance
+    const remainingProcessing = await calculateRemainingProcessingBalance(studentId);
+
+    // Get university information from student
+    const universityList = student.enrolledUniversity || [];
+    const countryList = student.enrolledCountry || [];
+    const universityText = university || (universityList.length > 0 ? universityList[0] : 'Not specified');
+    const countryText = countryList.length > 0 ? countryList[0] : (student.studyDestination || 'Not specified');
+    
+    // Get programme from student
+    const programmeText = programme || student.intendedCourse || 'MBBS';
+    
+    // Get father's name - try to get from request or student data
+    const fatherNameText = fatherName || 'Not provided';
 
     // Create PDF document
     const doc = new PDFDocument({
@@ -422,131 +468,144 @@ const billStructure = async (req, res) => {
 
     let yPosition = 140;
 
-    // Title
-    doc.fontSize(18)
-       .font('Times-Bold')
-       .text('Payment Acknowledgement Receipt', margin, yPosition, { align: 'center' });
+    // Two Column Layout - Match image design
+    const col1Start = margin;
+    const col2Start = margin + (contentWidth / 2) + 20;
+    const colWidth = (contentWidth / 2) - 20;
+    const startY = yPosition;
 
-    yPosition += 40;
-
-    // Date - Above main content (similar to fee structure)
-    const generationDate = new Date().toLocaleDateString('en-IN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-    doc.fontSize(10)
-       .font('Times-Roman')
-       .text(`Date: ${generationDate}`, margin, yPosition, { align: 'right' });
-
-    yPosition += 25;
-
-    // Main Content
-    doc.fontSize(12)
-       .font('Times-Roman')
-       .text('Edurizon Pvt. Ltd. hereby acknowledges the receipt of Rs. ', margin, yPosition, { 
-         width: contentWidth,
-         lineGap: 6,
-         continued: true 
-       })
-       .font('Times-Bold')
-       .text(`${Number(paymentAmount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, { 
-         continued: true 
-       })
-       .font('Times-Roman')
-       .text(` (Payment No. `, { continued: true })
-       .font('Times-Bold')
-       .text(`${paymentNumber}`, { continued: true })
-       .font('Times-Roman')
-       .text(`, as per the fee structure under the "Payment Timeline" heading) from Mr./Ms. `, { continued: true })
-       .font('Times-Bold')
-       .text(`${studentName} `, { continued: true })
-       .font('Times-Roman')
-       .text(' towards registration and related charges.', { 
-         align: 'justify',
-         lineGap: 6,
-       });
-
-    yPosition += 40;
-
-    // Second paragraph
-    doc.fontSize(12)
-       .font('Times-Roman')
-       .text('The above-mentioned student has opted for MBBS admission at ', margin, yPosition, { 
-         width: contentWidth,
-         lineGap: 6,
-         continued: true 
-       })
-       .font('Times-Bold')
-       .text(`${university} `, { continued: true })
-       .font('Times-Roman')
-       .text(' University for the 2026 academic session through Edurizon Pvt. Ltd.', { 
-         align: 'justify',
-         lineGap: 6,
-       });
-
-    yPosition += 50;
-
-    // Please Note Section
-    doc.fontSize(12)
-       .font('Times-Bold')
-       .text('Please Note:', margin, yPosition);
+    // LEFT COLUMN - University Options & Charges
+    let leftY = startY;
     
-    yPosition += 25;
+    doc.fontSize(12)
+       .font('Times-Bold')
+       .text('UNIVERSITY OPTIONS', col1Start, leftY);
+    
+    leftY += 20;
     doc.fontSize(11)
        .font('Times-Roman')
-       .text('1. NEET qualification is mandatory.', margin + 10, yPosition, { width: contentWidth - 10 });
+       .text(countryText, col1Start, leftY, { width: colWidth });
     
-    yPosition += 40;
-    doc.text('2. Final admission shall be strictly subject to the successful clearance of the entrance examination/interview, as and when conducted.', margin + 10, yPosition, { width: contentWidth - 10 });
-
-    yPosition += 40;
-    doc.text('3. All amounts paid are strictly non-refundable under any circumstances.', margin + 10, yPosition, { width: contentWidth - 10 });
-
-    yPosition += 50;
-
-    // Footer Image - Position at bottom of page
-    const footerImagePath = status==='due'? path.join(__dirname, '../assets/footer2.png'): path.join(__dirname, '../assets/footer.png');
-    const footerHeight = 150;
-    const footerY = pageHeight - footerHeight;
+    leftY += 15;
+    doc.text(universityText, col1Start, leftY, { width: colWidth });
     
-    // Only add footer if there's enough space, otherwise it will be on next page
-    if (yPosition < footerY - 20) {
-      try {
-        doc.image(footerImagePath, 0, footerY, { width: pageWidth, height: footerHeight });
-      } catch (error) {
-        console.error('Error loading footer image:', error);
-        // Fallback to text footer if image fails
+    leftY += 25;
+    doc.fontSize(12)
+       .font('Times-Bold')
+       .text('Processing Charge', col1Start, leftY);
+    
+    leftY += 18;
+    const processingAmount = currency === 'INR' ? Number(paymentAmount) : totalProcessingInr;
+    doc.fontSize(11)
+       .font('Times-Roman')
+       .text(`Rs ${processingAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col1Start, leftY, { width: colWidth });
+    
+    // Show OTC USD if applicable
+    if (currency === 'USD' || totalOtcUsd > 0) {
+      leftY += 15;
+      doc.fontSize(10)
+         .font('Times-Roman')
+         .text(`OTC USD ${roundCurrency(totalOtcUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col1Start, leftY, { width: colWidth });
+    }
+    
+    leftY += 25;
+    doc.fontSize(12)
+       .font('Times-Bold')
+       .text('Pending', col1Start, leftY);
+    
+    leftY += 18;
+    const pendingAmount = currency === 'INR' ? remainingProcessing : (isOtcPaid ? 0 : totalOtcUsd);
+    if (pendingAmount > 0) {
+      doc.fontSize(11)
+         .font('Times-Roman')
+         .text(`Rs ${pendingAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col1Start, leftY, { width: colWidth });
+      
+      // Show pending OTC if applicable
+      if (currency === 'USD' && !isOtcPaid && totalOtcUsd > 0) {
+        leftY += 15;
         doc.fontSize(10)
            .font('Times-Roman')
-           .text('This is a system-generated payment acknowledgement receipt.', margin, footerY + 30, { align: 'center' });
-        
-        const currentDate = new Date().toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-        doc.text(`Generated on: ${currentDate}`, margin, footerY + 45, { align: 'center' });
+           .text(`OTC USD ${roundCurrency(totalOtcUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, col1Start, leftY, { width: colWidth });
       }
     } else {
-      // Content is too long, add footer on current position
-      try {
-        doc.image(footerImagePath, 0, yPosition, { width: pageWidth, height: footerHeight });
-      } catch (error) {
-        console.error('Error loading footer image:', error);
-        // Fallback to text footer if image fails
-        doc.fontSize(10)
-           .font('Times-Roman')
-           .text('This is a system-generated payment acknowledgement receipt.', margin, yPosition + 30, { align: 'center' });
-        
-        const currentDate = new Date().toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-        doc.text(`Generated on: ${currentDate}`, margin, yPosition + 45, { align: 'center' });
-      }
+      doc.fontSize(11)
+         .font('Times-Roman')
+         .text('Rs 0', col1Start, leftY, { width: colWidth });
     }
+
+    // RIGHT COLUMN - Student Details & Payment Acknowledgment
+    let rightY = startY;
+    
+    doc.fontSize(12)
+       .font('Times-Bold')
+       .text('STUDENT DETAILS', col2Start, rightY);
+    
+    rightY += 20;
+    doc.fontSize(11)
+       .font('Times-Roman')
+       .text(`NAME - ${studentName}`, col2Start, rightY, { width: colWidth });
+    
+    rightY += 18;
+    doc.text(`FATHER NAME - ${fatherNameText}`, col2Start, rightY, { width: colWidth });
+    
+    rightY += 18;
+    const receiptDate = new Date().toLocaleDateString('en-IN', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    doc.text(`DATE - ${receiptDate}`, col2Start, rightY, { width: colWidth });
+    
+    rightY += 18;
+    doc.text(`PROGRAMME - ${programmeText} 2026`, col2Start, rightY, { width: colWidth });
+    
+    rightY += 30;
+    
+    // Payment Acknowledgment Text
+    const paymentAmountInWords = currency === 'USD' 
+      ? `$${roundCurrency(Number(paymentAmount)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      : `Rs.${Number(paymentAmount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    
+    doc.fontSize(11)
+       .font('Times-Roman')
+       .text(`We acknowledged receipt of ${paymentAmountInWords} only mode, on account of Processing fees`, col2Start, rightY, { 
+         width: colWidth,
+         lineGap: 4
+       });
+    
+    rightY += 35;
+    
+    // Non-refundable Note
+    doc.fontSize(11)
+       .font('Times-Bold')
+       .text('NB-It may be noted that this amount is non-refundable', col2Start, rightY, { width: colWidth });
+    
+    rightY += 20;
+    
+    // Signature line
+    doc.moveTo(col2Start, rightY)
+       .lineTo(col2Start + colWidth, rightY)
+       .stroke();
+
+    // Use the maximum Y position from both columns
+    yPosition = Math.max(leftY, rightY) + 30;
+
+    // Footer Section - Company Address and Contact
+    const footerY = pageHeight - 60;
+    
+    doc.fontSize(9)
+       .font('Times-Roman')
+       .fillColor('#000000')
+       .text('EDURIZON PVT LTD. 111,113,115, 1ST FLOOR, PLOT-6, SEC-12, DWARKA, NEW DELHI-75', margin, footerY, { 
+         width: contentWidth,
+         align: 'center'
+       });
+    
+    doc.fontSize(9)
+       .text('CONTACT DETAILS- 9873381377, 9999222564', margin, footerY + 15, { 
+         width: contentWidth,
+         align: 'center'
+       });
 
     // Finalize PDF
     doc.end();

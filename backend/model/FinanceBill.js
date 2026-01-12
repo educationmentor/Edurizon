@@ -59,6 +59,23 @@ const financeBillSchema = new Schema(
       default: 0,
       min: 0,
     },
+    currency: {
+      type: String,
+      enum: ['USD', 'INR'],
+      required: true,
+      default: 'INR'
+    },
+    purpose: {
+      type: String,
+      required: false,
+      trim: true,
+      // e.g., "Partial Processing Fee", "Full OTC", "Full Processing Fee"
+    },
+    remainingProcessing: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
     status: {
       type: String,
       enum: ['Pending', 'Partial Payment', 'Paid', 'Overdue', 'Cancelled'],
@@ -84,6 +101,14 @@ const financeBillSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Pre-save middleware to ensure remainingProcessing never goes below zero
+financeBillSchema.pre('save', function(next) {
+  if (this.remainingProcessing < 0) {
+    this.remainingProcessing = 0;
+  }
+  next();
+});
 
 const FinanceBill = mongoose.model('FinanceBill', financeBillSchema);
 

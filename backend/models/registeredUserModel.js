@@ -79,6 +79,80 @@ const userSchema = mongoose.Schema(
         type: String,
         required: false,
     },
+    // Finance Information - Structured Finance Map
+    financeInfo: {
+      feeStructureLink: {
+        type: String,
+        required: false,
+        default: null
+      },
+      totalOtcUsd: {
+        type: Number,
+        required: false,
+        default: 0,
+        min: 0
+      },
+      totalProcessingInr: {
+        type: Number,
+        required: false,
+        default: 0,
+        min: 0
+      },
+      isOtcPaid: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      inclusions: {
+        visa: {
+          type: Boolean,
+          default: false
+        },
+        flightTickets: {
+          type: Boolean,
+          default: false
+        },
+        firstYearPackage: {
+          type: Boolean,
+          default: false
+        }
+      },
+      bills: [{
+        billId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'FinanceBill',
+          required: true
+        },
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        amount: {
+          type: Number,
+          required: true,
+          min: 0
+        },
+        currency: {
+          type: String,
+          enum: ['USD', 'INR'],
+          required: true
+        },
+        via: {
+          type: String,
+          required: false
+        },
+        purpose: {
+          type: String,
+          required: false
+        },
+        remainingProcessing: {
+          type: Number,
+          default: 0,
+          min: 0
+        }
+      }]
+    },
+    // Legacy fields - keeping for backward compatibility
     feesInfo:{
       type:Array,
       required:false,

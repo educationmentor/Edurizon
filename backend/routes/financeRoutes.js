@@ -34,7 +34,19 @@ const resolveBillStatus = (bill) => {
 // Route 1: Create/Generate New Bill
 router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
   try {
-    const { studentId, dueDate, description, amountDue,newBill, studentName, university,url } = req.body;
+    const { 
+      studentId, 
+      dueDate, 
+      description, 
+      amountDue,
+      newBill, 
+      studentName, 
+      university,
+      url,
+      currency = 'INR',
+      purpose,
+      remainingProcessing
+    } = req.body;
 
     if (!studentId || !dueDate || !description || amountDue === undefined) {
       return res.status(400).json({
@@ -60,13 +72,33 @@ router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
       studentName,
       university,
       url,
+      currency,
+      purpose: purpose || description,
+      remainingProcessing: remainingProcessing || 0,
     });
-    
-  
-    await RegisteredStudent.findByIdAndUpdate(studentId, {
-      $push: { feesInfo: newBill }
-    });
-    
+
+    // Update student's financeInfo.bills array if financeInfo exists
+    const student = await RegisteredStudent.findById(studentId);
+    if (student && student.financeInfo) {
+      student.financeInfo.bills.push({
+        billId: bill._id,
+        date: new Date(),
+        amount: amountDue,
+        currency: currency,
+        via: 'Manual',
+        purpose: purpose || description,
+        remainingProcessing: remainingProcessing || 0,
+      });
+      student.markModified('financeInfo.bills');
+      await student.save();
+    } else {
+      // Legacy support - update feesInfo
+      if (newBill) {
+        await RegisteredStudent.findByIdAndUpdate(studentId, {
+          $push: { feesInfo: newBill }
+        });
+      }
+    }
 
     res.status(201).json({
       success: true,

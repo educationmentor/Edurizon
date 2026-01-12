@@ -31,7 +31,6 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
     studentName: '',
   });
   const [filteredBills, setFilteredBills] = useState<FeeInfo[]>([]);
-  const [billFilter, setBillFilter] = useState<string>('due');
   const [agreeDialogOpen, setAgreeDialogOpen] = useState(false);
   const [updatingAgreement, setUpdatingAgreement] = useState(false); 
 
@@ -52,13 +51,23 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
   };
 
   useEffect(()=>{
-    if (billFilter === 'due') {
-        setFilteredBills(userData.feesInfo.filter((item:FeeInfo) => item.status === 'due'));
-      } else {
-        setFilteredBills(userData.feesInfo.filter((item:FeeInfo) => item.status === 'completed'));
-      }
-      
-  },[billFilter])
+    // Only show completed bills (receipts) - using new financeInfo.bills structure
+    if (userData?.financeInfo?.bills && Array.isArray(userData.financeInfo.bills)) {
+      // Get bills from financeInfo.bills and filter for completed ones
+      const completedBills = userData.financeInfo.bills.map((bill: any) => ({
+        status: 'completed',
+        url: bill.url || '',
+        description: bill.purpose || 'Payment Receipt',
+        date: bill.date,
+        amount: bill.amount,
+        currency: bill.currency
+      })).filter((bill: any) => bill.url); // Only show bills with URLs (completed receipts)
+      setFilteredBills(completedBills);
+    } else {
+      // Fallback: if financeInfo doesn't exist, use empty array
+      setFilteredBills([]);
+    }
+  }, [userData])
 
   useEffect(() => {
     if (userData ) {
@@ -219,25 +228,7 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
         <div>
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Bills</h2>
-        <div className="flex space-x-2">
-            {[
-              { value: 'due', label: 'Pending' },
-              { value: 'completed', label: 'Completed' },
-            ].map((filter) => (
-              <button
-                key={filter.value}
-                type="button"
-                onClick={() => setBillFilter(filter.value)}
-                className={`px-3 py-1 text-sm rounded-full transition-colors ${
-                  billFilter === filter.value
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+        <p className="text-sm text-gray-600">Payment receipts for completed transactions</p>
       </div>
 
       {/* Documents Table */}

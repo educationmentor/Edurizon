@@ -12,11 +12,11 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
     const [billForm, setBillForm] = useState({
         studentId: '',
         studentName: '',
-        amountDue: '',
-        dueDate: '',
+        amountPaid: '',
+        billDate: new Date().toISOString().split('T')[0], // Today's date as default
         description: '',
-        university: '',
-        paymentNumber: '',
+        chargeType: 'processing', // 'otc' or 'processing'
+        purpose: '',
       });
     const [studentPickerOpen, setStudentPickerOpen] = useState(false);
     const [studentPickerSearch, setStudentPickerSearch] = useState('');
@@ -38,7 +38,7 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
 
     const handleCreateBill = async (event:any) => {
     event.preventDefault();
-    if (!billForm.studentId || !billForm.amountDue || !billForm.dueDate || !billForm.description || !billForm.university || !billForm.paymentNumber) {
+    if (!billForm.studentId || !billForm.amountPaid || !billForm.billDate || !billForm.description) {
         toast.error('Please complete all required fields');
         return;
     }
@@ -47,39 +47,48 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
     try {
         const headers = authHeaders();
       
-        // Generate payment receipt PDF
+        // Determine currency based on charge type
+        const currency = billForm.chargeType === 'otc' ? 'USD' : 'INR';
+        const purpose = billForm.purpose || (billForm.chargeType === 'otc' ? 'OTC Payment' : 'Processing Fee Payment');
+
+        // Generate payment receipt PDF (receipt is generated immediately for completed payments)
         const receiptPayload = {
           studentId: billForm.studentId,
-          paymentAmount: Number(billForm.amountDue),
-          paymentNumber: billForm.paymentNumber,
+          paymentAmount: Number(billForm.amountPaid),
+          paymentNumber: 1, // Auto-increment or calculate based on existing bills
           studentName: billForm.studentName,
-          university: billForm.university,
-          status:'due'
+          university: billForm.studentId ? 'To be determined' : '', // Will be fetched from student's financeInfo
+          status:'completed', // Receipts are only for completed payments
+          currency: currency,
+          purpose: purpose,
         };
 
         const res:any= await axios.post(`${baseUrl}/api/admin/finance/bills/generate-receipt`, receiptPayload, { headers })
-        // Create bill with receipt URL
+        
+        // Create bill record with receipt URL - amountPaid equals amountDue for completed receipts
         const payload = {
         studentId: billForm.studentId,
-        amountDue: Number(billForm.amountDue),
-        dueDate: billForm.dueDate,
+        amountDue: Number(billForm.amountPaid), // For completed receipts, amountDue = amountPaid
+        amountPaid: Number(billForm.amountPaid),
+        dueDate: billForm.billDate,
         description: billForm.description,
-        newBill:{status:'due', url:res.data.url , description: billForm.description},
         studentName: billForm.studentName,
-        university: billForm.university,
-        url:res.data.url
+        url:res.data.url,
+        currency: currency,
+        purpose: purpose,
+        status: 'Paid', // Completed receipts are marked as Paid
         };
 
         await axios.post(`${baseUrl}/api/admin/finance/bills`, payload, { headers });
-        toast.success('Bill generated successfully');
+        toast.success('Payment receipt generated successfully');
         setBillForm({
         studentId: '',
         studentName: '',
-        amountDue: '',
-        dueDate: '',
+        amountPaid: '',
+        billDate: new Date().toISOString().split('T')[0],
         description: '',
-        university: '',
-        paymentNumber: '',
+        chargeType: 'processing',
+        purpose: '',
         });
         setStudentPickerSearch('');
         await fetchFinanceData();
@@ -88,7 +97,7 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
         toast.error(
         err?.response?.data?.message ||
         err?.message ||
-        'Failed to create bill'
+        'Failed to generate receipt'
         );
     } finally {
         setSubmittingBill(false);
@@ -120,9 +129,9 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
         onClick={() => setBillFormOpen(!billFormOpen)}
       >
         <div className='mx-auto'>
-          <p className="text-lg font-semibold text-gray-900">Generate New Bill</p>
+          <p className="text-lg font-semibold text-gray-900">Generate Payment Receipt</p>
           <p className="text-sm text-gray-500">
-            Create and assign a new bill to a registered student
+            Record payment and generate receipt for completed transactions
           </p>
         </div>
         <svg
@@ -203,47 +212,48 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount Due</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Charge Type *</label>
+                <select
+                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  value={billForm.chargeType}
+                  onChange={(e) => handleBillFormChange('chargeType', e.target.value)}
+                >
+                  <option value="processing">Processing Charge (INR)</option>
+                  <option value="otc">OTC - One Time Charge (USD)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Amount Paid *</label>
                 <input
                   type="number"
                   min="0"
                   step="0.01"
                   className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter amount"
-                  value={billForm.amountDue}
-                  onChange={(e) => handleBillFormChange('amountDue', e.target.value)}
+                  placeholder={billForm.chargeType === 'otc' ? 'Enter amount in USD' : 'Enter amount in INR'}
+                  value={billForm.amountPaid}
+                  onChange={(e) => handleBillFormChange('amountPaid', e.target.value)}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Bill Date *</label>
                 <input
                   type="date"
                   className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  value={billForm.dueDate}
-                  onChange={(e) => handleBillFormChange('dueDate', e.target.value)}
+                  value={billForm.billDate}
+                  onChange={(e) => handleBillFormChange('billDate', e.target.value)}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">University</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Purpose</label>
                 <input
                   type="text"
                   className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter university name"
-                  value={billForm.university}
-                  onChange={(e) => handleBillFormChange('university', e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Payment Number</label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
-                  placeholder="Enter payment number"
-                  value={billForm.paymentNumber}
-                  onChange={(e) => handleBillFormChange('paymentNumber', e.target.value)}
+                  placeholder={billForm.chargeType === 'otc' ? 'e.g., Full OTC Payment' : 'e.g., Partial Processing Fee, Full Processing Fee'}
+                  value={billForm.purpose}
+                  onChange={(e) => handleBillFormChange('purpose', e.target.value)}
                 />
               </div>
             </div>
