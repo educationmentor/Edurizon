@@ -49,36 +49,6 @@ const StudentDashboard = () => {
   const unreadCount = notifications.filter((notification) => !notification.isRead).length;
   const studentNotificationsFromProfile = (userData as any)?.notifications;
 
-  // Function to download PDF from Google Drive
-  // const downloadFeeStructurePDF = async () => {
-  //   try {
-  //     // Convert Google Drive sharing URL to direct download URL
-  //     const fileId = '13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1';
-  //     const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-      
-  //     // Create a temporary anchor element to trigger download
-  //     const link = document.createElement('a');
-  //     link.href = directDownloadUrl;
-  //     link.download = 'Fee-Structure.pdf';
-  //     link.target = '_blank';
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   } catch (error) {
-  //     console.error('Error downloading PDF:', error);
-  //     // Fallback: open in new tab
-  //     window.open('https://drive.google.com/file/d/13hY9vcZNrWSyR-JykXu9QVtu7DK3pkf1/view?usp=sharing', '_blank');
-  //   }
-  // };
-
-  // Function to handle fee structure click
-  // const handleFeeStructureClick = () => {
-  //   if (userData && (userData as any).feesInfo) {
-  //     downloadFeeStructurePDF();
-  //   } else {
-  //     setShowFeesPopup(true);
-  //   }
-  // };
 
   const applyLocalNotifications = (source: any) => {
     if (!source || !Array.isArray(source)) {

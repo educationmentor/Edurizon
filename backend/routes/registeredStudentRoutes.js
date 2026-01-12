@@ -4,6 +4,7 @@ const { createRegisteredStudent, getSingleRegisteredStudent, getAllRegisteredStu
 const { updateFeeStructureAgreement } = require('../controllers/financeAdminController');
 const { protectRegisteredStudent } = require('../middleware/registeredStudentAuth');
 const { protectAdminRoute } = require('../middleware/adminAuth');
+const FinanceBill = require('../model/FinanceBill');
 const router = express.Router();
 
 // Configure multer for file uploads
@@ -38,6 +39,44 @@ router.post('/login',loginRegisteredStudent);
 // Protected routes (authentication required)
 router.get('/profile', protectRegisteredStudent, getCurrentUserProfile);
 router.put('/fee-structure/agree', protectRegisteredStudent, updateFeeStructureAgreement);
+
+// Get student's own bills
+router.get('/bills', protectRegisteredStudent, async (req, res) => {
+  try {
+    const studentId = req.user._id;
+    
+    const bills = await FinanceBill.find({ studentId })
+      .populate({ path: 'issuedBy', select: 'name email role' })
+      .sort({ issueDate: -1 });
+
+    // Add calculated status to each bill
+    const billsWithStatus = bills.map(bill => {
+      const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+      let status = 'Pending';
+      if (outstanding <= 0) {
+        status = 'Paid';
+      } else if (bill.amountPaid > 0) {
+        status = 'Partial Payment';
+      }
+      return {
+        ...bill.toObject(),
+        status,
+        outstanding: Math.max(0, outstanding),
+      };
+    });
+
+    res.json({
+      success: true,
+      data: billsWithStatus,
+    });
+  } catch (error) {
+    console.error('Error fetching student bills:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch bills',
+    });
+  }
+});
 
 
 // Routes for document Admin

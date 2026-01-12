@@ -36,22 +36,19 @@ router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
   try {
     const { 
       studentId, 
-      dueDate, 
       description, 
       amountDue,
+      amountPaid = 0,
       newBill, 
       studentName, 
-      university,
       url,
-      currency = 'INR',
       purpose,
-      remainingProcessing
     } = req.body;
 
-    if (!studentId || !dueDate || !description || amountDue === undefined) {
+    if (!studentId || !description || amountDue === undefined || !studentName) {
       return res.status(400).json({
         success: false,
-        message: 'studentId, dueDate, description, and amountDue are required',
+        message: 'studentId, studentName, description, and amountDue are required',
       });
     }
 
@@ -63,33 +60,53 @@ router.post('/bills', ...requireFinanceAdmin, async (req, res) => {
       });
     }
 
+    // Map purpose to enum values if needed
+    let mappedPurpose = 'Processing Fee'; // default
+    if (purpose) {
+      const purposeLower = purpose.toLowerCase();
+      if (purposeLower.includes('one time') || purposeLower.includes('otc')) {
+        mappedPurpose = 'One Time Charge';
+      } else if (purposeLower.includes('processing')) {
+        mappedPurpose = 'Processing Fee';
+      } else {
+        // Try to infer from the purpose string
+        mappedPurpose = purposeLower.includes('charge') ? 'One Time Charge' : 'Processing Fee';
+      }
+    }
+
     const bill = await FinanceBill.create({
       studentId,
-      dueDate,
+      studentName,
       description,
       amountDue,
+      amountPaid: amountPaid || 0,
+      purpose: mappedPurpose,
       issuedBy,
-      studentName,
-      university,
-      url,
-      currency,
-      purpose: purpose || description,
-      remainingProcessing: remainingProcessing || 0,
+      url: url || null, // Store the receipt URL
     });
 
-    // Update student's financeInfo.bills array if financeInfo exists
+    // Update student's financeInfo to track payments
     const student = await RegisteredStudent.findById(studentId);
     if (student && student.financeInfo) {
-      student.financeInfo.bills.push({
-        billId: bill._id,
-        date: new Date(),
-        amount: amountDue,
-        currency: currency,
-        via: 'Manual',
-        purpose: purpose || description,
-        remainingProcessing: remainingProcessing || 0,
-      });
+      // Initialize bills array if it doesn't exist
+      if (!student.financeInfo.bills) {
+        student.financeInfo.bills = [];
+      }
+      // Push only the bill ObjectId (as per schema: bills is an array of ObjectIds referencing FinanceBill)
+      student.financeInfo.bills.push(bill._id);
+      
+      // Track OTC payments in oneTimeChargePaid (only for USD/OTC payments)
+      // Note: For processing fees, we calculate from bills, so no need to update a separate field
+      if (mappedPurpose === 'One Time Charge' && amountPaid > 0) {
+        const currentOtcPaid = student.financeInfo.oneTimeChargePaid || 0;
+        student.financeInfo.oneTimeChargePaid = Math.min(
+          (currentOtcPaid + amountPaid),
+          (student.financeInfo.oneTimeCharge || student.financeInfo.totalOtcUsd || 0)
+        );
+      }
+      
       student.markModified('financeInfo.bills');
+      student.markModified('financeInfo.oneTimeChargePaid');
       await student.save();
     } else {
       // Legacy support - update feesInfo
@@ -121,9 +138,25 @@ router.get('/bills/all', ...requireFinanceAdmin, async (_req, res) => {
       .populate({ path: 'issuedBy', select: 'name email role' })
       .sort({ issueDate: -1 });
 
+    // Add calculated status to each bill
+    const billsWithStatus = bills.map(bill => {
+      const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+      let status = 'Pending';
+      if (outstanding <= 0) {
+        status = 'Paid';
+      } else if (bill.amountPaid > 0) {
+        status = 'Partial Payment';
+      }
+      return {
+        ...bill.toObject(),
+        status,
+        outstanding: Math.max(0, outstanding),
+      };
+    });
+
     res.json({
       success: true,
-      data: bills,
+      data: billsWithStatus,
     });
   } catch (error) {
     console.error('Error fetching finance bills:', error);
@@ -137,15 +170,36 @@ router.get('/bills/all', ...requireFinanceAdmin, async (_req, res) => {
 // Route 3: Get Pending Bills List
 router.get('/bills/pending', ...requireFinanceAdmin, async (_req, res) => {
   try {
-    const bills = await FinanceBill.find({
-      status: { $in: ['Pending', 'Partial Payment', 'Overdue'] },
-    })
+    // Fetch all bills and filter pending ones based on amountDue and amountPaid
+    const allBills = await FinanceBill.find()
       .populate({ path: 'studentId', select: 'name email phone' })
-      .sort({ dueDate: 1 });
+      .populate({ path: 'issuedBy', select: 'name email role' })
+      .sort({ issueDate: -1 });
+
+    // Filter bills that are not fully paid
+    const pendingBills = allBills.filter(bill => {
+      const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+      return outstanding > 0;
+    });
+
+    // Add calculated status to each bill
+    const billsWithStatus = pendingBills.map(bill => {
+      const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+      let status = 'Pending';
+      if (bill.amountPaid > 0 && outstanding > 0) {
+        status = 'Partial Payment';
+      }
+      // Note: Overdue calculation would require a dueDate field, which doesn't exist in the model
+      return {
+        ...bill.toObject(),
+        status,
+        outstanding,
+      };
+    });
 
     res.json({
       success: true,
-      data: bills,
+      data: billsWithStatus,
     });
   } catch (error) {
     console.error('Error fetching pending bills:', error);
@@ -167,11 +221,29 @@ router.get('/bills/student/:studentId', ...requireFinanceAdmin, async (req, res)
       });
     }
 
-    const bills = await FinanceBill.find({ studentId }).sort({ issueDate: -1 });
+    const bills = await FinanceBill.find({ studentId })
+      .populate({ path: 'issuedBy', select: 'name email role' })
+      .sort({ issueDate: -1 });
+
+    // Add calculated status to each bill
+    const billsWithStatus = bills.map(bill => {
+      const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+      let status = 'Pending';
+      if (outstanding <= 0) {
+        status = 'Paid';
+      } else if (bill.amountPaid > 0) {
+        status = 'Partial Payment';
+      }
+      return {
+        ...bill.toObject(),
+        status,
+        outstanding: Math.max(0, outstanding),
+      };
+    });
 
     res.json({
       success: true,
-      data: bills,
+      data: billsWithStatus,
     });
   } catch (error) {
     console.error('Error fetching bills for student:', error);
@@ -210,19 +282,46 @@ router.patch('/bills/:billId/payment', ...requireFinanceAdmin, async (req, res) 
       });
     }
 
-    bill.paymentRecords.push({
-      amount,
-      method,
-    });
-
-    bill.amountPaid += amount;
-    bill.status = resolveBillStatus(bill);
+    const previousAmountPaid = bill.amountPaid || 0;
+    bill.amountPaid = (bill.amountPaid || 0) + amount;
+    const paymentIncrease = bill.amountPaid - previousAmountPaid;
 
     await bill.save();
 
+    // Update student's financeInfo.oneTimeChargePaid if this is an OTC payment
+    if (bill.purpose === 'One Time Charge') {
+      const student = await RegisteredStudent.findById(bill.studentId);
+      if (student && student.financeInfo) {
+        const currentOtcPaid = student.financeInfo.oneTimeChargePaid || 0;
+        const totalOtc = student.financeInfo.oneTimeCharge || student.financeInfo.totalOtcUsd || 0;
+        
+        // Update OTC paid amount (ensure it doesn't exceed total)
+        student.financeInfo.oneTimeChargePaid = Math.min(
+          (currentOtcPaid + paymentIncrease),
+          totalOtc
+        );
+        
+        student.markModified('financeInfo.oneTimeChargePaid');
+        await student.save();
+      }
+    }
+
+    // Calculate status for response
+    const outstanding = (bill.amountDue || 0) - (bill.amountPaid || 0);
+    let status = 'Pending';
+    if (outstanding <= 0) {
+      status = 'Paid';
+    } else if (bill.amountPaid > 0) {
+      status = 'Partial Payment';
+    }
+
     res.json({
       success: true,
-      data: bill,
+      data: {
+        ...bill.toObject(),
+        status,
+        outstanding: Math.max(0, outstanding),
+      },
     });
   } catch (error) {
     console.error('Error recording payment:', error);

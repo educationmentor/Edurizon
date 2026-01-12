@@ -289,7 +289,7 @@ const FinanceDashboard = () => {
     <div className="flex flex-wrap gap-3">
       {[
         { key: 'students', label: 'Bill Generation & Students' },
-        { key: 'pending', label: 'Pending Bills / Payments' },
+        // { key: 'pending', label: 'Pending Bills / Payments' },
       ].map((tab) => {
         const isActive = activeTab === tab.key;
         return (

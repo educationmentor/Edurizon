@@ -25,12 +25,13 @@ interface DocumentsProps {
 
 const Fees = ({ activeTab, userData }: DocumentsProps) => {
   const [loading, setLoading] = useState(true);
+  const [billsLoading, setBillsLoading] = useState(false);
+  const [bills, setBills] = useState<any[]>([]);
   const [imgModal, setImgModal] = useState({
     open: false,
     imgUrl: '',
     studentName: '',
   });
-  const [filteredBills, setFilteredBills] = useState<FeeInfo[]>([]);
   const [agreeDialogOpen, setAgreeDialogOpen] = useState(false);
   const [updatingAgreement, setUpdatingAgreement] = useState(false); 
 
@@ -50,30 +51,50 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
     });
   };
 
-  useEffect(()=>{
-    // Only show completed bills (receipts) - using new financeInfo.bills structure
-    if (userData?.financeInfo?.bills && Array.isArray(userData.financeInfo.bills)) {
-      // Get bills from financeInfo.bills and filter for completed ones
-      const completedBills = userData.financeInfo.bills.map((bill: any) => ({
-        status: 'completed',
-        url: bill.url || '',
-        description: bill.purpose || 'Payment Receipt',
-        date: bill.date,
-        amount: bill.amount,
-        currency: bill.currency
-      })).filter((bill: any) => bill.url); // Only show bills with URLs (completed receipts)
-      setFilteredBills(completedBills);
-    } else {
-      // Fallback: if financeInfo doesn't exist, use empty array
-      setFilteredBills([]);
-    }
-  }, [userData])
 
   useEffect(() => {
-    if (userData ) {
+    if (userData) {
       setLoading(false);
     }
   }, [userData]);
+
+  // Fetch bills from FinanceBill model
+  useEffect(() => {
+    const fetchBills = async () => {
+      if (!userData?._id) return;
+      
+      setBillsLoading(true);
+      try {
+        const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}').token : null;
+        
+        if (!token) {
+          console.error('Authentication required');
+          setBillsLoading(false);
+          return;
+        }
+
+        const response = await axios.get(
+          `${baseUrl}/api/registered-students/bills`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+
+        if (response.data.success) {
+          setBills(response.data.data || []);
+        }
+      } catch (error: any) {
+        console.error('Failed to fetch bills:', error);
+        toast.error(error?.response?.data?.message || 'Failed to load bills');
+      } finally {
+        setBillsLoading(false);
+      }
+    };
+
+    fetchBills();
+  }, [userData?._id]);
   
 
   const handleDownloadDocument = async (url: string, docName:string) => {
@@ -105,7 +126,7 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
   };
 
   const handleAgreementCheckbox = () => {
-    if (!userData.feeStructureAgreed) {
+    if (!userData.financeInfo.feeStructureAgreed) {
       setAgreeDialogOpen(true);
     }
   };
@@ -161,7 +182,7 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
       
       {/* Header */}
       
-      {userData && userData.feeStructure &&
+      {userData && userData.financeInfo.feeStructureLink &&
         <div className='mb-8'>
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Fees Structure</h2>
@@ -184,14 +205,14 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
             {/* Document Actions */}
             <div className="flex space-x-2 mb-4">
             <button
-                onClick={() => openImgModal(userData.feeStructure, userData.name)}
+                onClick={() => openImgModal(userData.financeInfo.feeStructureLink, userData.name)}
                 className="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium flex items-center justify-center"
             >
                 <EyeIcon className="w-4 h-4 mr-1" />
                 View
             </button>
             <button
-            onClick={() => handleDownloadDocument(userData.feeStructure, 'fees structure')}
+            onClick={() => handleDownloadDocument(userData.financeInfo.feeStructureLink, 'fees structure')}
             className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium flex items-center justify-center"
             >
             
@@ -204,18 +225,18 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
               <label className="flex items-start space-x-3 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={userData.feeStructureAgreed || false}
+                  checked={userData.financeInfo.feeStructureAgreed || false}
                   onChange={handleAgreementCheckbox}
-                  disabled={userData.feeStructureAgreed}
+                  disabled={userData.financeInfo.feeStructureAgreed}
                   className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
-                <span className={`text-sm ${userData.feeStructureAgreed ? 'text-gray-500' : 'text-gray-700'}`}>
+                <span className={`text-sm ${userData.financeInfo.feeStructureAgreed ? 'text-gray-500' : 'text-gray-700'}`}>
                   I agree with the fees, info and terms given in the fee structure
                 </span>
               </label>
-              {userData.feeStructureGeneratedDate && (
+              {userData.financeInfo.feeStructureGeneratedDate && (
                 <p className="text-xs text-gray-500 mt-2 ml-7">
-                  Generated on: {new Date(userData.feeStructureGeneratedDate).toLocaleDateString()}
+                  Generated on: {new Date(userData.financeInfo.feeStructureGeneratedDate).toLocaleDateString()}
                 </p>
               )}
             </div>
@@ -224,67 +245,103 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
       </div>
       }
 
-      {userData && userData.feeStructure &&
-        <div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Bills</h2>
-        <p className="text-sm text-gray-600">Payment receipts for completed transactions</p>
-      </div>
+      {/* Bills Section */}
+      <div>
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Bills</h2>
+          <p className="text-sm text-gray-600">Payment receipts for completed transactions</p>
+        </div>
 
-      {/* Documents Table */}
-<div className="overflow-x-auto">
-  <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-    <thead className="bg-gray-100">
-      <tr>
-        <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
-          Document
-        </th>
-        <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
-          Actions
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {/* Fees Structure Row */}
-      {filteredBills && filteredBills.map((item, idx) => {
-  return (
-    <tr key={idx} className="border-t">
-        <td className="px-6 py-4 flex items-center space-x-3">
-          <DocumentIcon className="w-6 h-6 text-blue-600" />
-          <span className="font-medium text-gray-900">{item.description}</span>
-        </td>
-
-        <td className="px-6 py-4">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => openImgModal(item.url, userData.name)}
-              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium flex items-center"
-            >
-              <EyeIcon className="w-4 h-4 mr-1" />
-              View
-            </button>
-
-            <button
-              onClick={() => handleDownloadDocument(item.url, `bill ${idx + 1}`)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium flex items-center"
-            >
-              Download
-            </button>
+        {billsLoading ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
-        </td>
-      </tr>
-  );
-})}
-
-
-      
-    </tbody>
-  </table>
-</div>
-
+        ) : bills.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 text-center">
+            <DocumentIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600">No bills available yet.</p>
+            <p className="text-sm text-gray-500 mt-2">Your payment receipts will appear here once generated.</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Description
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Amount Due
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Amount Paid
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Issue Date
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {bills.map((bill: any) => (
+                  <tr key={bill._id} className="border-t hover:bg-gray-50">
+                    <td className="px-6 py-4 flex items-center space-x-3">
+                      <DocumentIcon className="w-6 h-6 text-blue-600" />
+                      <span className="font-medium text-gray-900">{bill.description || 'Payment Receipt'}</span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      ₹{(bill.amountDue || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-teal-700 font-semibold">
+                      ₹{(bill.amountPaid || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        bill.status === 'Paid' 
+                          ? 'bg-green-100 text-green-800' 
+                          : bill.status === 'Partial Payment'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {bill.status || 'Pending'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      {bill.issueDate ? new Date(bill.issueDate).toLocaleDateString('en-IN') : '—'}
+                    </td>
+                    <td className="px-6 py-4">
+                      {bill.url ? (
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() => openImgModal(bill.url, userData.name)}
+                            className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium flex items-center"
+                          >
+                            <EyeIcon className="w-4 h-4 mr-1" />
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleDownloadDocument(bill.url, `${bill.description || 'bill'}.pdf`)}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium flex items-center"
+                          >
+                            Download
+                          </button>
+                        </div>
+                      ) : (
+                        <span className="text-sm text-gray-500">No receipt available</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
-      }
     {imgModal.open && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl shadow-xl max-w-6xl  max-h-[90vh] overflow-hidden">
@@ -314,11 +371,19 @@ const Fees = ({ activeTab, userData }: DocumentsProps) => {
               </div>
             </div>
             <div className="px-6 py-4 overflow-hidden h-[calc(90vh-80px)]">
-            <img
+              {imgModal.imgUrl && imgModal.imgUrl.toLowerCase().endsWith('.pdf') ? (
+                <iframe
+                  src={imgModal.imgUrl}
+                  className="w-full h-full border-0"
+                  title="Document Viewer"
+                />
+              ) : (
+                <img
                   src={imgModal.imgUrl || ''}
-                  alt="Fee Structure"
+                  alt="Document"
                   className="max-w-full max-h-full object-contain"
                 />
+              )}
             </div>
           </div>
         </div>

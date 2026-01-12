@@ -117,14 +117,28 @@ const FinanceStudentTrackingPage = () => {
           totalBilled: 0,
           totalPaid: 0,
           outstanding: 0,
+          totalBilledUsd: 0,
+          totalPaidUsd: 0,
+          outstandingUsd: 0,
+          hasOtcBills: false,
           status: 'Pending',
         });
       }
 
       const entry = map.get(key);
-      entry.totalBilled += bill.amountDue || 0;
-      entry.totalPaid += bill.amountPaid || 0;
+      const isOtcBill = bill.purpose === 'One Time Charge';
+      
+      if (isOtcBill) {
+        entry.hasOtcBills = true;
+        entry.totalBilledUsd += bill.amountDue || 0;
+        entry.totalPaidUsd += bill.amountPaid || 0;
+      } else {
+        entry.totalBilled += bill.amountDue || 0;
+        entry.totalPaid += bill.amountPaid || 0;
+      }
+      
       entry.outstanding = Math.max(entry.totalBilled - entry.totalPaid, 0);
+      entry.outstandingUsd = Math.max(entry.totalBilledUsd - entry.totalPaidUsd, 0);
 
       if (bill.status === 'Overdue') {
         entry.status = 'Overdue';
@@ -136,7 +150,7 @@ const FinanceStudentTrackingPage = () => {
         entry.status !== 'Partial Payment'
       ) {
         entry.status = 'Paid';
-      } else if (entry.outstanding === 0) {
+      } else if (entry.outstanding === 0 && entry.outstandingUsd === 0) {
         entry.status = 'Paid';
       }
     });
@@ -152,10 +166,14 @@ const FinanceStudentTrackingPage = () => {
           totalBilled: 0,
           totalPaid: 0,
           outstanding: 0,
+          totalBilledUsd: 0,
+          totalPaidUsd: 0,
+          outstandingUsd: 0,
+          hasOtcBills: false,
           status: 'Pending',
         };
       const overallStatus =
-        summary.outstanding <= 0
+        summary.outstanding <= 0 && summary.outstandingUsd <= 0
           ? 'Paid'
           : summary.status === 'Overdue'
           ? 'Overdue'
@@ -168,6 +186,10 @@ const FinanceStudentTrackingPage = () => {
         totalBilled: summary.totalBilled,
         totalPaid: summary.totalPaid,
         outstanding: summary.outstanding,
+        totalBilledUsd: summary.totalBilledUsd,
+        totalPaidUsd: summary.totalPaidUsd,
+        outstandingUsd: summary.outstandingUsd,
+        hasOtcBills: summary.hasOtcBills,
         overallStatus,
       };
     });
@@ -489,13 +511,31 @@ const FinanceStudentTrackingPage = () => {
                           {student.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          ₹{student.totalBilled.toLocaleString()}
+                          {student.hasOtcBills ? (
+                            <span className="text-gray-600">
+                              ₹{student.totalBilled.toLocaleString()} / ${student.totalBilledUsd?.toFixed(2) || '0.00'}
+                            </span>
+                          ) : (
+                            `₹${student.totalBilled.toLocaleString()}`
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-teal-700 font-semibold">
-                          ₹{student.totalPaid.toLocaleString()}
+                          {student.hasOtcBills ? (
+                            <span className="text-gray-600">
+                              ₹{student.totalPaid.toLocaleString()} / ${student.totalPaidUsd?.toFixed(2) || '0.00'}
+                            </span>
+                          ) : (
+                            `₹${student.totalPaid.toLocaleString()}`
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
-                          ₹{student.outstanding.toLocaleString()}
+                          {student.hasOtcBills ? (
+                            <span className="text-gray-600">
+                              ₹{student.outstanding.toLocaleString()} / ${student.outstandingUsd?.toFixed(2) || '0.00'}
+                            </span>
+                          ) : (
+                            `₹${student.outstanding.toLocaleString()}`
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           {renderStatusBadge(student.overallStatus)}
@@ -692,10 +732,18 @@ const FinanceStudentTrackingPage = () => {
                       <tr key={bill._id}>
                         <td className="px-4 py-3 text-sm text-gray-900">{bill.description}</td>
                         <td className="px-4 py-3 text-sm font-semibold text-gray-900">
-                          ₹{(bill.amountDue || 0).toLocaleString()}
+                          {bill.purpose === 'One Time Charge' ? (
+                            `$${(bill.amountDue || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                          ) : (
+                            `₹${(bill.amountDue || 0).toLocaleString()}`
+                          )}
                         </td>
                         <td className="px-4 py-3 text-sm text-teal-700 font-semibold">
-                          ₹{(bill.amountPaid || 0).toLocaleString()}
+                          {bill.purpose === 'One Time Charge' ? (
+                            `$${(bill.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                          ) : (
+                            `₹${(bill.amountPaid || 0).toLocaleString()}`
+                          )}
                         </td>
                         <td className="px-4 py-3 text-sm text-gray-600">
                           {formatDate(bill.issueDate || bill.createdAt)}

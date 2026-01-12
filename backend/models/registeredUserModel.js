@@ -86,22 +86,33 @@ const userSchema = mongoose.Schema(
         required: false,
         default: null
       },
-      totalOtcUsd: {
+      feeStructureGeneratedDate:{
+        type:Date,
+        required:false,
+        default:null
+      },
+      feeStructureAgreed:{
+        type:Boolean,
+        required:false,
+        default:false
+      },
+      oneTimeCharge: {
         type: Number,
         required: false,
         default: 0,
         min: 0
       },
-      totalProcessingInr: {
+      processingCharge: {
         type: Number,
         required: false,
         default: 0,
         min: 0
       },
-      isOtcPaid: {
-        type: Boolean,
+      oneTimeChargePaid: {
+        type: Number,
         required: false,
-        default: false
+        default: 0,
+        min: 0
       },
       inclusions: {
         visa: {
@@ -117,63 +128,14 @@ const userSchema = mongoose.Schema(
           default: false
         }
       },
-      bills: [{
-        billId: {
+      bills: [
+        {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'FinanceBill',
           required: true
-        },
-        date: {
-          type: Date,
-          default: Date.now
-        },
-        amount: {
-          type: Number,
-          required: true,
-          min: 0
-        },
-        currency: {
-          type: String,
-          enum: ['USD', 'INR'],
-          required: true
-        },
-        via: {
-          type: String,
-          required: false
-        },
-        purpose: {
-          type: String,
-          required: false
-        },
-        remainingProcessing: {
-          type: Number,
-          default: 0,
-          min: 0
         }
-      }]
+      ],
     },
-    // Legacy fields - keeping for backward compatibility
-    feesInfo:{
-      type:Array,
-      required:false,
-      default:[]
-    },
-    feeStructure:{
-      type:String,
-      required:false,
-      default:null
-    },
-    feeStructureGeneratedDate:{
-      type:Date,
-      required:false,
-      default:null
-    },
-    feeStructureAgreed:{
-      type:Boolean,
-      required:false,
-      default:false
-    },
-
     // Documents
     documents: {
       type: [documentSchema],

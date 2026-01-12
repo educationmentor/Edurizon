@@ -66,17 +66,17 @@ const BillGeneration = ({ fetchFinanceData,  students = [] }: { fetchFinanceData
         const res:any= await axios.post(`${baseUrl}/api/admin/finance/bills/generate-receipt`, receiptPayload, { headers })
         
         // Create bill record with receipt URL - amountPaid equals amountDue for completed receipts
+        // Map purpose to match FinanceBill model enum values
+        const mappedPurpose = billForm.chargeType === 'otc' ? 'One Time Charge' : 'Processing Fee';
+        
         const payload = {
         studentId: billForm.studentId,
         amountDue: Number(billForm.amountPaid), // For completed receipts, amountDue = amountPaid
         amountPaid: Number(billForm.amountPaid),
-        dueDate: billForm.billDate,
         description: billForm.description,
         studentName: billForm.studentName,
-        url:res.data.url,
-        currency: currency,
-        purpose: purpose,
-        status: 'Paid', // Completed receipts are marked as Paid
+        url: res.data.url, // Store the receipt PDF URL in FinanceBill model
+        purpose: mappedPurpose, // Must be 'Processing Fee' or 'One Time Charge'
         };
 
         await axios.post(`${baseUrl}/api/admin/finance/bills`, payload, { headers });
