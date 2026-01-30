@@ -51,7 +51,8 @@ const allowedOrigins = [
     'https://edurizon-git-noddy-updated-utkarshs-projects-467c395b.vercel.app',
     'https://edurizon-five.vercel.app',
     'https://edurizon-blsj.vercel.app',
-     "https://edurizon-git-main-educationmentor-5832s-projects.vercel.app/"
+    "https://edurizon-git-main-educationmentor-5832s-projects.vercel.app/",
+    'https://edurizon.vercel.app/'
 ];
 
 app.use(cors({
