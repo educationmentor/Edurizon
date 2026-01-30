@@ -3,16 +3,38 @@ import { baseUrl } from "@/lib/baseUrl";
 import React,{useState,useEffect} from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import axios from "axios";
-// This is a placeholder for your map link
-const mapLink = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.2553018646577!2d77.0454665!3d28.592116899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b2870491009%3A0x8b3922528c2683f6!2sEdurizon%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1746528635326!5m2!1sen!2sin";
+
+// Office locations
+const OFFICE_LOCATIONS = [
+  {
+    id: 'delhi',
+    name: 'Delhi Office',
+    city: 'New Delhi',
+    address: '111,113,115,1st floor, Best Arcade, market, beside Canara Bank, near K.M. Chowk, Sector 7 Extension, Pocket 6, Sector 12 Dwarka, Dwarka, New Delhi, Delhi, 110075',
+    phone: '+919873381377',
+    whatsapp: '919873381377',
+    mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.2553018646577!2d77.0454665!3d28.592116899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b2870491009%3A0x8b3922528c2683f6!2sEdurizon%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1746528635326!5m2!1sen!2sin',
+  },
+  {
+    id: 'kolkata',
+    name: 'Kolkata Office',
+    city: 'Kolkata',
+    address: 'Gate No. 3, Room no. GA, 18A, 7th Floor, Rabindra Sarani, Poddar Court, Kolkata, West Bengal 700001',
+    phone: '+918274149000',
+    whatsapp: '918274149000',
+    mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4590.805240932832!2d88.35307341694683!3d22.57322373677324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277a1c086f16b%3A0x2cc5ec8674d52d0!2sEdurizon%20Pvt.%20Ltd.-%20STUDY%20ABROAD!5e1!3m2!1sen!2sin!4v1769806240684!5m2!1sen!2sin',
+  },
+];
 
 const ContactUs = () => {
+    const [selectedLocation, setSelectedLocation] = useState('delhi');
+    const currentLocation = OFFICE_LOCATIONS.find(loc => loc.id === selectedLocation) || OFFICE_LOCATIONS[0];
 
     const callBtnFnc=()=>{
-        window.location.href = "tel:+919873381377"
+        window.location.href = `tel:${currentLocation.phone}`
     }
     const whatsappBtnFnc=()=>{
-        window.open('https://wa.me/919873381377?')
+        window.open(`https://wa.me/${currentLocation.whatsapp}?`)
     }
 
     const [formData, setFormData] = useState({
@@ -185,16 +207,34 @@ const ContactUs = () => {
 
         {/* Second Column - Map */}
         <div>
+          {/* Location Tabs */}
+          <div className="flex gap-[2vw] md:gap-[1vw] mb-[2vw] md:mb-[1vw]">
+            {OFFICE_LOCATIONS.map((location) => (
+              <button
+                key={location.id}
+                onClick={() => setSelectedLocation(location.id)}
+                className={`px-[4vw] md:px-[1.25vw] py-[1.5vw] md:py-[0.5vw] rounded-[12.5vw] md:rounded-[6.25vw] font-medium text-smallTextPhone md:text-smallText transition-all duration-200 ${
+                  selectedLocation === location.id
+                    ? 'bg-orangeChosen text-white'
+                    : 'bg-gray-200 text-black hover:bg-gray-300'
+                }`}
+              >
+                {location.city}
+              </button>
+            ))}
+          </div>
+
+          {/* Address and Map */}
           <div>
-            <h3 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Edurizon Private Limited</h3>
-            <p className="text-regularTextPhone md:text-regularText mb-[2vw] md:mb-[1vw]">111,113,115,1st floor, Best Arcade, market, beside Canara Bank, near K.M. Chowk, Sector 7 Extension, Pocket 6, Sector 12 Dwarka, Dwarka, New Delhi, Delhi, 110075</p>
+            <h3 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Edurizon Private Limited - {currentLocation.city}</h3>
+            <p className="text-regularTextPhone md:text-regularText mb-[2vw] md:mb-[1vw]">{currentLocation.address}</p>
           </div>
           <div className="flex flex-col md:flex-row gap-[3vw] md:gap-[.5vw] mb-[4vw] md:mb-[2vw] ">
             <button className="bg-green-500 text-white rounded-[17.5vw] md:rounded-[6.25vw] w-full md:w-[16.1875vw] h-[11vw] md:h-[3vw]" onClick={whatsappBtnFnc}>Connect with us on WhatsApp</button>
             <TitleButton btnTitle={"Call Us Now"} btnHeight={3} btnHeightPhone={11} btnWidth={16.1875} btnWidthPhone={92} btnRadius={6.25} btnRadiusPhone={17.5}  onClick={callBtnFnc}/>
           </div>
           <iframe
-            src={mapLink}
+            src={currentLocation.mapLink}
             className="rounded-lg shadow-md w-[100%] h-[300px] md:h-[30vw]"
             style={{ border: 0 }}
             allowFullScreen

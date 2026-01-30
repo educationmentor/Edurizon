@@ -4,5 +4,6 @@ User-agent: *
 Disallow:
 
 Sitemap: https://www.edurizon.in/sitemap.xml
+Sitemap: https://www.edurizon.in/api/my-sitemap
 # -------------------------
 # END YOAST BLOCK

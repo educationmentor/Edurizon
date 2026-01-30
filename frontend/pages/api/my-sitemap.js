@@ -1,7 +1,64 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 
+const WORDPRESS_BASE = 'https://srv757671.hstgr.cloud/wp-json/wp/v2';
+const RESERVED_SLUGS = new Set([
+    'admin',
+    'api',
+    'blog',
+    'blogs',
+    'study-destination',
+    'study-destinations',
+    'contact',
+    'contact-us',
+    'about',
+    'aboutUs',
+    'login',
+    'signup',
+    'registered-student-login',
+    'student-dashboard',
+    'college-predictor',
+    'counselor',
+    'terms',
+    'testimonial',
+]);
+
+const fetchAllBlogSlugs = async () => {
+    const slugs = new Set();
+    const perPage = 100;
+    const maxPages = 20;
+
+    for (let page = 1; page <= maxPages; page += 1) {
+        const res = await fetch(
+            `${WORDPRESS_BASE}/blogs?_fields=slug&per_page=${perPage}&page=${page}`
+        );
+
+        if (!res.ok) {
+            break;
+        }
+
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+            break;
+        }
+
+        data.forEach((item) => {
+            if (item?.slug && !RESERVED_SLUGS.has(item.slug)) {
+                slugs.add(item.slug);
+            }
+        });
+
+        if (data.length < perPage) {
+            break;
+        }
+    }
+
+    return Array.from(slugs);
+};
+
 const sitemap= async (req, res) => {
+
+    const blogSlugs = await fetchAllBlogSlugs();
 
     const links = [
         { url: '/', changefreq: 'daily', priority: 1 },
@@ -103,7 +160,11 @@ const sitemap= async (req, res) => {
         { url: '/study-destinations/study-mbbs-in-kyrgyzstan/royal-metropolitan-university', changefreq: 'daily', priority: 0.3 },
 
         
-        
+                ...blogSlugs.map((slug) => ({
+                    url: `/${slug}`,
+                    changefreq: 'weekly',
+                    priority: 0.7,
+                })),
     ];
 
     const stream = new SitemapStream({

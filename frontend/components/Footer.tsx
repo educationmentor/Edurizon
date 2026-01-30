@@ -43,9 +43,16 @@ const Footer = () => {
             <div className="flex flex-row gap-[2vw] md:gap-[1vw]">
                 <Image width={40} height={40} className='h-[5vw] md:h-[1.25vw] w-[3.5vw] md:w-[.875vw]' src="/assets/Images/Icons/locationIcon.svg" alt="Location Icon" />
                 <div className="text-smallTextPhone md:text-smallText leading-[150%]">
-              <p className="mb-2 dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in-out">Pocket 111, 113, 115 1st Floor, Best Arcade Market, Canara Bank, Near K.M. Chowk, Sector-12 Dwarka, New Delhi - 110075</p>
-              
+                 <p className="mb-2 dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in-out">Pocket 111, 113, 115 1st Floor, Best Arcade Market, Canara Bank, Near K.M. Chowk, Sector-12 Dwarka, New Delhi - 110075</p>          
+                </div>
             </div>
+            </a>
+            <a href="https://maps.app.goo.gl/1Rxe3ZYPJK64v66S6">
+            <div className="flex flex-row gap-[2vw] md:gap-[1vw]">
+                <Image width={40} height={40} className='h-[5vw] md:h-[1.25vw] w-[3.5vw] md:w-[.875vw]' src="/assets/Images/Icons/locationIcon.svg" alt="Location Icon" />
+                <div className="text-smallTextPhone md:text-smallText leading-[150%]">
+                 <p className="mb-2 dark:text-white dark:hover:text-orange-400 duration-300 transition-colors ease-in-out">Gate No. 3, Room no. GA, 18A, 7th Floor, Rabindra Sarani, Poddar Court, Kolkata, West Bengal 700001, Mob: 8274-14900</p>          
+                </div>
             </div>
             </a>
 

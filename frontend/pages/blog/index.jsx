@@ -5,7 +5,7 @@ import ActionAreaCard from '@/components/studyDestinationComponents/studyDestina
 
 const Blog = ({ blogs }) => {
   return (
-    <div className="container mx-auto p-8 pb-16">
+    <div className="container mx-auto p-8 pb-16 pt-[20vw] md:pt-[7.25vw]">
       <h1 className="text-h4TextPhone md:text-h4Text font-bold text-center mb-[2vw]">
         Blogs
       </h1>
@@ -13,7 +13,7 @@ const Blog = ({ blogs }) => {
       {blogs.map((blog) => (
   <ActionAreaCard
     key={blog.id}
-    href={`/blog/${blog.slug}`}
+    href={`/${blog.slug}`}
     image={blog.imageUrl || "/assets/Images/blogs/placeholder.webp"}
     title={blog.title.rendered}
     category="Blog"
