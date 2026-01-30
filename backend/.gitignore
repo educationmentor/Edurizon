@@ -19,10 +19,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 # env files (can opt-in for committing if needed)
-.env*
+.env
 # Ignore OS-specific files
 .DS_Store
-
+.env.local
 # Ignore IDE-specific files
 .vscode/
 .idea/
