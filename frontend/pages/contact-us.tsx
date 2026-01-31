@@ -20,8 +20,8 @@ const OFFICE_LOCATIONS = [
     name: 'Kolkata Office',
     city: 'Kolkata',
     address: 'Gate No. 3, Room no. GA, 18A, 7th Floor, Rabindra Sarani, Poddar Court, Kolkata, West Bengal 700001',
-    phone: '+918274149000',
-    whatsapp: '918274149000',
+    phone: '+918274014900',
+    whatsapp: '918274014900',
     mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4590.805240932832!2d88.35307341694683!3d22.57322373677324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277a1c086f16b%3A0x2cc5ec8674d52d0!2sEdurizon%20Pvt.%20Ltd.-%20STUDY%20ABROAD!5e1!3m2!1sen!2sin!4v1769806240684!5m2!1sen!2sin',
   },
 ];
@@ -228,6 +228,10 @@ const ContactUs = () => {
           <div>
             <h3 className="text-h6TextPhone md:text-h5Text mb-[2vw] md:mb-[1vw]">Edurizon Private Limited - {currentLocation.city}</h3>
             <p className="text-regularTextPhone md:text-regularText mb-[2vw] md:mb-[1vw]">{currentLocation.address}</p>
+            <div className="flex">
+            <p className="text-regularTextPhone md:text-regularText mb-[2vw] md:mb-[1vw]"><strong>Contact Number:</strong></p>
+            <p className="text-regularTextPhone md:text-regularText mb-[2vw] md:mb-[1vw]">{currentLocation.phone}</p>
+            </div>
           </div>
           <div className="flex flex-col md:flex-row gap-[3vw] md:gap-[.5vw] mb-[4vw] md:mb-[2vw] ">
             <button className="bg-green-500 text-white rounded-[17.5vw] md:rounded-[6.25vw] w-full md:w-[16.1875vw] h-[11vw] md:h-[3vw]" onClick={whatsappBtnFnc}>Connect with us on WhatsApp</button>
